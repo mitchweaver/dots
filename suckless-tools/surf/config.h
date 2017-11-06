@@ -5,6 +5,8 @@ static char *certdir        = "~/.surf/certificates/";
 static char *cachedir       = "~/.surf/cache/";
 static char *cookiefile     = "~/.surf/cookies.txt";
 
+
+static char *searchengine = "https://duckduckgo.com/html/?q="; /* default */
 static SearchEngine searchengines[] = {
         { "g",   "https://google.com/search?q=%s"   },
         { "arch", "https://wiki.archlinux.org/index.php?search=%s" },
