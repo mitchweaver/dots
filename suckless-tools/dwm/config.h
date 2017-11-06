@@ -50,6 +50,7 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *netcmd[] = { "surf", "https://duckduckgo.com/html", NULL };
 static const char *deditcmd[] = { "/home/mitch/bin/dedit", NULL };
 static const char *clipboardcmd[] = { "clipmenu", NULL };
+static const char *rangercmd[] = { "st", "-e", "ranger", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -60,6 +61,7 @@ static Key keys[] = {
     { mod1,                     XK_w,       spawn,          {.v = netcmd } },
     { mod1,                     XK_o,       spawn,          {.v = deditcmd } },
     { mod1,                     XK_c,       spawn,          {.v = clipboardcmd } },
+    { mod1,                     XK_r,       spawn,          {.v = rangercmd } },
     // ------------------------------------------------------------------- //
 
 	{ mod1,                     XK_b,       togglebar,      {0} },
