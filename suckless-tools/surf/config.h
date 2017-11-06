@@ -5,6 +5,13 @@ static char *certdir        = "~/.surf/certificates/";
 static char *cachedir       = "~/.surf/cache/";
 static char *cookiefile     = "~/.surf/cookies.txt";
 
+static SearchEngine searchengines[] = {
+        { "g",   "https://google.com/search?q=%s"   },
+        { "arch", "https://wiki.archlinux.org/index.php?search=%s" },
+        { "gentoo", "https://wiki.gentoo.org/index.php?search=%s" },
+        { "r", "https://reddit.com/r/%s" },
+};
+
 /* Highest priority value will be used.
  * Default parameters are priority 0
  * Per-uri parameters are priority 1
@@ -60,6 +67,10 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
 
 #define PROMPT_GO   "Go:"
 #define PROMPT_FIND "Find:"
+
+
+#define HOMEPAGE "https://duckduckgo.com/html"
+
 
 /* SETPROP(readprop, setprop, prompt)*/
 #define SETPROP(r, s, p) { \

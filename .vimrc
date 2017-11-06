@@ -1,5 +1,3 @@
-" Mitch Weaver
-"
 " https://github.com/MitchWeaver/dotfiles/.vimrc
 "
 "         ________ ++     ________
@@ -17,8 +15,8 @@
 "        |VVV/'++/#/+/#/ /#/ /#/
 "        'V/'  /##//##//##//###/
 "                ++
-
-" --------------- vundle ------------------------------------------------
+  
+" --------------- plugins -----------------------------------
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -27,72 +25,64 @@ Plug 'vimwiki/vimwiki'
 "Plug 'valloric/youcompleteme' " autocompletion
 Plug 'kien/ctrlp.vim' " fuzzy finder
 Plug 'tpope/vim-commentary' " comment toggler
-
 " Plug 'flazz/vim-colorschemes'
-
 "Plug 'leshill/vim-json' " json support
 "Plug 'pangloss/vim-javascript' " better javascript support
 "Plug 'tpope/vim-markdown' " markdown support
 "Plug 'kchmck/vim-coffee-script' " coffeescript support
 "Plug 'octol/vim-cpp-enhanced-highlight' " better cpp syntax
-
 Plug 'sheerun/vim-polyglot' " syntax highlight - all languages
-
 Plug 'suan/vim-instant-markdown' " instant markdown previewer
-Plug 'terryma/vim-multiple-cursors' " sublime style multiple selection
+Plug 'terryma/vim-multiple-cursors' " sublime multiple select
 Plug 'tpope/vim-surround' " quote/paren etc surrounding
-
 Plug 'altercation/vim-colors-solarized' " solarized colorschemes
 Plug 'dracula/vim'  " dracula colorscheme
-
 " Plug 'nathanaelkane/vim-indent-guides'
-
-
 Plug 'godlygeek/tabular' " text alignment
 " Plug 'dylanaraps/wal.vim'
 call plug#end()
 filetype indent plugin on
 syntax enable
-" ------------------------------------------------------------------
+" --------------------------------------------------------------
 
-" ------------- COLORSCHEME ------------------------------------------
+" ------------- COLORSCHEME ------------------------------------
 colorscheme dracula
 " colorscheme solarized
-" colorscheme wombat
+" colorscheme wombat 
 set background=dark
 " set background=light
-" --------------------------------------------------------------------
+" ---------------------------------------------------------------
 
-" -------------- Vim Specific Configs --------------------------------
+" -------------- Vim Specific Configs -------------------------
 let mapleader=","
-set mouse=a " enable mouse support
-" ---------------------------------------------------------------------
+"set mouse=a " NOTE THIS BREAKS MIDDLE CLICK PASTE WTF
+" -------------------------------------------------------------
 
-" ------------ HISTORY ------------------------------------------------
+" ------------ HISTORY ---------------------------------------
 set history=500
 set undolevels=500
 set undoreload=2000
-" --------------------------------------------------------------------
+" -----------------------------------------------------------
 
-" ---------- UI ------------------------------------------------------
+" ---------- UI ---------------------------------------------
 set number " enables line numbers on startup
 set ruler " show where you are
-" ~~~~~~~~ set relativenumber " shows line numbers relative to position
+" ~ set relativenumber " shows line numbers relative to position
 set tabpagemax=15
 set showmode
 set showmatch " show matching parens
 set cursorline " show current line
 set colorcolumn=80
 
-" ---------------------------------------------------------------------
+" ------------------------------------------------------------
 
-" ------ FORMATTING ---------------------------------------------------
+" ------ FORMATTING -----------------------------------------
 " ~~~~~~~~~  set nowrap " dont wrap lines
 set autoindent
 set encoding=utf-8
-" ----------------------------------------------------------------------
+" --------------------------------------------------------------
 
-" -------- Tabs and Spacing --------------------------------------------
+" -------- Tabs and Spacing -----------------------------------
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -101,41 +91,39 @@ set smarttab " let's tab key insert 'tab stops', and bksp deletes tabs.
 set shiftround " tab / shifting moves to closest tabstop.
 set autoindent " match indents on new lines.
 set smartindent " intellegently dedent / indent new lines based on rules
-" ----------------------------------------------------------------------
+" --------------------------------------------------------------
 
-" ---------- File Management -------------------------------------------
+" ---------- File Management -------------------------------------
 set nobackup " we have vcs, we don't need backups.
 set nowritebackup " we have vcs, we don't need backups.
 set noswapfile " they're just annoying. who likes them?
 set hidden " allow me to have buffers with unsaved changes.
 set autoread " when a file has changed on disk, just load it. don't ask.
-" ----------------------------------------------------------------------
+" -------------------------------------------------------------
 
-" ---------- Searching -------------------------------------------------
+" ---------- Searching ----------------------------------------
 set ignorecase " case insensitive search
 """set smartcase " if there are uppercase letters, become case-sensitive.
 set incsearch " live incremental searching
 set showmatch " live match highlighting
 set hlsearch " highlight matches
 set gdefault " use the `g` flag by default.
+" -------------------------------------------------------------
 
-
-" ---------------------------------------------------------------------
-
-" -------- Language Syntax Management ---------------------------------
+" -------- Language Syntax Management ---------------------------
 iab #i #include <.h>
-" ---------------------------------------------------------------------
+" --------------------------------------------------------------
 
-" -------- Key Bindings ----------------------------------------------
+" -------- Key Bindings ---------------------------------------
 inoremap <silent><c-n><c-n> <c-o>:set invnumber<cr>
-" --------------------------------------------------------------------
+" -------------------------------------------------------------
 
-" -------------- Extension Settings ----------------------------------
+" -------------- Extension Settings --------------------------
 
 " Set indent guides enabled by default
 let g:indent_guides_enable_on_vim_startup = 1
 " dont let indent_guides manage colors
-" let g:indent_guides_auto_colors = 0
+"let g:indent_guides_auto_colors = 0
 
 " map the key for toggling comments with vim-commentary
 nmap <silent><leader>c :Commentary<CR>
@@ -157,9 +145,9 @@ let g:vimwiki_list = [
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 let g:instant_markdown_autostart = 0	" disable autostart (so it only works on leader command)
 map <silent><leader>md :InstantMarkdownPreview<CR>
-" ----------------------------------------------------------------
+" --------------------------------------------------------------
 
-" -------- External Programs -------------------------------------
+" -------- External Programs ---------------------------------
 "Make calcurse notes markdown compatible:
 autocmd BufRead,BufNewFile /tmp/calcurse* set filetype=markdown
 autocmd BufRead,BufNewFile ~/.calcurse/notes/* set filetype=markdown
@@ -197,7 +185,7 @@ function! RangeChooser()
 endfunction
 command! -bar RangerChooser call RangeChooser()
 nnoremap <leader>r :<C-U>RangerChooser<CR>
-" ----------------------------------------------------------------
+" -------------------------------------------------------------
 
 " #################### END ########################################
 
@@ -205,7 +193,3 @@ nnoremap <leader>r :<C-U>RangerChooser<CR>
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " set so=10
 " set laststatus=2
-" let g:Powerline_symbols = 'fancy'
-" let g:Powerline_theme = 'solarized256'
-" let g:Powerline_theme = 'solarized256'
-" let g:Powerline_colorscheme = 'solarized256'

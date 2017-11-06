@@ -1,0 +1,74 @@
+#!/bin/bash
+
+declare -g HISTFN=~/.surf/history
+declare -g NITEMS=5
+
+urlencode() {
+	printf %s "$1" | od -t x1 -An | tr -d '\n' | tr ' ' '%'
+}
+
+trim() {
+	echo "$1" | sed 's/^[ ]*//;s/[ ]*$//'
+}
+
+addhist() {
+	[ -z "$1" ] && return
+
+	local -r u="$1"
+	local n="$(sed -n "s|^\([0-9]*\) ${u}$|\1|p" "$HISTFN")"
+
+	if [ -z "$n" ]; then
+		echo "1 ${u}" >> "$HISTFN"
+	else
+		n="$(echo $n+1|bc)"
+		un="$(echo "$u" |sed 's/&/\\&/g')"
+		sed -i "s|^\([0-9]*\) ${u}$|${n} ${un}|" "$HISTFN"
+	fi
+}
+
+geturi() {
+	local -r s="$1"
+	local -r host="$(echo "$s" | sed 's,^\(.*://\|\)\([^/:]*\).*,\2,')"
+	local -r scheme="$(echo "$s" |cut -sd: -f1)"
+	local search uri
+
+	# search only when no scheme or it's http(s)
+	if [ -z "$scheme" -o  "$scheme" = "http" -o "$scheme" = "https" ]; then
+		search="$(nc -4dw 1 "$host" 80 2> /dev/null; echo $?)"
+	else
+		search=0
+	fi
+
+	if [ "$search" -ne 0 ]; then
+		# enjoy !bangs
+		uri="https://duckduckgo.com/?q="
+		uri+="$(urlencode "$s")"
+	else
+		uri="$s"
+	fi
+	echo "$uri"
+}
+
+goto() {
+	local -r xid="$1"
+	local -r prop="$2"
+	local uri s
+
+	s="$(cat "$HISTFN" |sort -rn | cut -d' ' -f2- | dmenu -i -l "$NITEMS")"
+	s="$(trim "$s")"
+	[ -z "$s" ] && return
+
+	addhist "$s"
+	uri="$(geturi "$s")"
+
+	[ -z "$xid" -o -z "$prop" -o -z "$uri" ] && exit 1
+	xprop -id "$xid" -f "$prop" 8s -set "$prop" "$uri"
+}
+
+main() {
+	local -r cmd="$1"
+	shift
+	$cmd "$@"
+}
+
+main "$@"

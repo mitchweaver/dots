@@ -20,7 +20,7 @@ alias resize-quarter='mogrify -resize 25%x25%'
 trash() {
     mv $1 ~/.local/share/Trash/files
 }
-alias empty-trash="sh ~/bin/shred-trash.sh"
+alias empty-trash="sh ~/bin/empty-trash.sh"
 alias cdTrash="cd ~/.local/share/Trash/files"
 
 alias ncmpcpp="ncmpcpp -q"
