@@ -113,10 +113,10 @@ recomp() {
     esac
 }
 
-alias dwmconfig="vim /home/mitch/workspace/dotfiles/suckless-tools/dwm/config.h"
-alias surfconfig="vim ~/workspace/dotfiles/suckless-tools/surf/surf/config.h"
-alias tabbedconfig="vim ~/workspace/dotfiles/suckless-tools/tabbed/tabbed/config.h"
-alias dmenuconfig="vim ~/workspace/dotfiles/suckless-tools/dmenu/dmenu/config.h"
+alias dwmconf="vim /home/mitch/workspace/dotfiles/suckless-tools/dwm/config.h"
+alias surfconf="vim ~/workspace/dotfiles/suckless-tools/surf/surf/config.h"
+alias tabbedconf="vim ~/workspace/dotfiles/suckless-tools/tabbed/tabbed/config.h"
+alias dmenuconf="vim ~/workspace/dotfiles/suckless-tools/dmenu/dmenu/config.h"
 alias sf="screenfetch -D Parabola"
 
 

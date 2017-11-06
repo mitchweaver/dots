@@ -1,0 +1,30 @@
+diff -up surf-0.4.1/surf.c surf-0.4.1-history/surf.c
+--- surf-0.4.1/surf.c	2010-06-08 03:06:42.000000000 -0400
++++ surf-0.4.1-history/surf.c	2010-12-25 19:50:51.000000000 -0500
+@@ -140,6 +140,7 @@ cleanup(void) {
+ 	while(clients)
+ 		destroyclient(clients);
+ 	g_free(cookiefile);
++	g_free(historyfile);
+ 	g_free(scriptfile);
+ 	g_free(stylefile);
+ }
+@@ -396,6 +397,10 @@ loaduri(Client *c, const Arg *arg) {
+ 	}
+ 	else {
+ 		webkit_web_view_load_uri(c->view, u);
++		FILE *f;
++		f = fopen(historyfile, "a+");
++		fprintf(f, u);
++		fclose(f);
+ 		c->progress = 0;
+ 		c->title = copystr(&c->title, u);
+ 		g_free(u);
+@@ -689,6 +694,7 @@ setup(void) {
+ 
+ 	/* dirs and files */
+ 	cookiefile = buildpath(cookiefile);
++	historyfile = buildpath(historyfile);
+ 	scriptfile = buildpath(scriptfile);
+ 	stylefile = buildpath(stylefile);
+ 
