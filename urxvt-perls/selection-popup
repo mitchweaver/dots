@@ -1,0 +1,147 @@
+#! perl
+
+#:META:RESOURCE:url-launcher:string:shell command to use
+
+=head1 NAME
+
+selection-popup (enabled by default)
+
+=head1 DESCRIPTION
+
+Binds a popup menu to Ctrl-Button3 that lets you paste the X
+selections and either modify or use the internal selection text in
+various ways (such as uri unescaping, perl evaluation, web-browser
+starting etc.), depending on content.
+
+Other extensions can extend this popup menu by pushing a code reference
+onto C<< @{ $term->{selection_popup_hook} } >>, which gets called whenever
+the popup is being displayed.
+
+Its sole argument is the popup menu, which can be modified. The selection
+is in C<$_>, which can be used to decide whether to add something or not.
+It should either return nothing or a string and a code reference. The
+string will be used as button text and the code reference will be called
+when the button gets activated and should transform C<$_>.
+
+The following will add an entry C<a to b> that transforms all C<a>s in
+the selection to C<b>s, but only if the selection currently contains any
+C<a>s:
+
+   push @{ $self->{term}{selection_popup_hook} }, sub {
+      /a/ ? ("a to b" => sub { s/a/b/g }
+          : ()
+   };
+
+=cut
+
+sub msg {
+   my ($self, $msg) = @_;
+
+   my $overlay = $self->overlay (0, 0, $self->strwidth ($msg), 1);
+   $overlay->set (0, 0, $msg);
+   $self->{timer} = urxvt::timer->new->after (1)->cb (sub {
+      delete $self->{timer};
+      undef $overlay;
+   });
+}
+
+sub on_start {
+   my ($self) = @_;
+
+   $self->{browser} = $self->x_resource ("url-launcher") || "sensible-browser";
+
+   $self->grab_button (3, urxvt::ControlMask);
+
+   ()
+}
+
+sub on_button_press {
+   my ($self, $event) = @_;
+
+   if ($event->{button} == 3 && $event->{state} & urxvt::ControlMask) {
+      my $popup = $self->popup ($event)
+         or return 1;
+
+      $popup->add_title ("Selection");
+
+      my $text = $self->selection;
+
+      my $title = $text;
+      $title =~ s/[\x00-\x1f\x80-\x9f]/·/g;
+      substr $title, 40, -1, "..." if 40 < length $title;
+      $popup->add_title ($title);
+      $popup->add_separator;
+
+      my $add_button = sub {
+         my ($title, $cb) = @_;
+
+         $popup->add_button ($title => sub {
+            for ($text) {
+               my $orig = $_;
+               $cb->();
+
+               if ($orig ne $_) {
+                  $self->selection ($_);
+                  s/[\x00-\x1f\x80-\x9f]/·/g;
+                  $self->msg ($self->special_encode ($_));
+               }
+            }
+         });
+      };
+
+      for ($text) {
+         /\n/
+            and $add_button->("paste primary selection" => sub { $self->selection_request (urxvt::CurrentTime, 1) });
+
+         /./
+            and $add_button->("paste clipboard selection" => sub { $self->selection_request (urxvt::CurrentTime, 3) });
+
+         /./
+            and $add_button->("copy selection to clipboard" => sub { $self->selection ($self->selection, 1);
+								     $self->selection_grab (urxvt::CurrentTime, 1) });
+
+         /./
+            and $add_button->("newlines to spaces" => sub { y/\n/ / });
+
+         /./
+            and $add_button->("rot13" => sub { y/A-Za-z/N-ZA-Mn-za-m/ });
+
+         /./
+            and $add_button->("eval perl expression" => sub { my $self = $self; no warnings; $_ = eval $_; $_ = "$@" if $@ });
+
+         /./
+            and $add_button->((sprintf "to unicode hex index (%x)", ord) => sub { $_ = sprintf "%x", ord });
+
+         /(\S+):(\d+):?/
+            and $add_button->("vi-commands to load '$1'" => sub { s/^(\S+):(\d+):?$/\x1b:e $1\x0d:$2\x0d/ });
+
+         /%[0-9a-fA-F]{2}/ && !/%[^0-9a-fA-F]/ && !/%.[^0-9a-fA-F]/
+            and $add_button->("uri unescape" => sub { s/%([0-9a-fA-F]{2})/chr hex $1/ge });
+
+         /[\\"'\ \t|&;<>()]/
+            and $add_button->("shell quote" => sub { $_ = "\Q$_" });
+
+         /^(https?|ftp|telnet|irc|news):\//
+            and $add_button->("run $self->{browser}" => sub { $self->exec_async ($self->{browser}, $_) });
+
+         for my $hook (@{ $self->{term}{selection_popup_hook} || [] }) {
+            if (my ($title, $cb) = $hook->($popup)) {
+               $add_button->($title, $cb);
+            }
+         }
+
+         if (/^\s*((?:0x)?\d+)\s*$/) {
+            $popup->add_title (sprintf "%20s", eval $1);
+            $popup->add_title (sprintf "%20s", sprintf "0x%x", eval $1);
+            $popup->add_title (sprintf "%20s", sprintf "0%o", eval $1);
+         }
+      }
+
+      $popup->show;
+
+      return 1;
+   }
+
+   ()
+}
+

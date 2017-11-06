@@ -1,0 +1,132 @@
+#! perl
+
+#:META:RESOURCE:%.store:string:the command used to store the selection
+#:META:RESOURCE:%.fetch:string:the command used to fetch the selection
+
+=head1 NAME
+
+remote-clipboard - manage a shared and possibly remote clipboard
+
+=head1 DESCRIPTION
+
+Somewhat of a misnomer, this extension adds two menu entries to the
+selection popup that allows one to run external commands to store the
+selection somewhere and fetch it again.
+
+We use it to implement a "distributed selection mechanism", which just
+means that one command uploads the file to a remote server, and another
+reads it.
+
+The commands can be set using the C<URxvt.remote-selection.store> and
+C<URxvt.remote-selection.fetch> resources. The first should read the
+selection to store from STDIN (always in UTF-8), the second should provide
+the selection data on STDOUT (also in UTF-8).
+
+The defaults (which are likely useless to you) use rsh and cat:
+
+   URxvt.remote-selection.store: rsh ruth 'cat >/tmp/distributed-selection'
+   URxvt.remote-selection.fetch: rsh ruth 'cat /tmp/distributed-selection'
+
+=cut
+
+use Fcntl ();
+
+sub msg {
+   my ($self, $msg) = @_;
+
+   my $ov = $self->overlay (-1, 0, $self->strwidth ($msg), 1, urxvt::OVERLAY_RSTYLE, 0);
+   $ov->set (0, 0, $msg);
+
+   $self->{msg} =
+      urxvt::timer
+              ->new
+              ->after (5)
+              ->cb (sub { delete $self->{msg}; undef $ov; });
+}
+
+sub wait_pipe {
+   my ($self, $fh, $pid, $msg) = @_;
+
+   $self->msg ("waiting for selection process to finish...");
+
+   my $wait_pipe; $wait_pipe = urxvt::pw->new->start ($pid)->cb (sub {
+      my ($undef, $status) = @_;
+      undef $wait_pipe;
+      close $fh;
+      $status >>= 8;
+      $self->msg ("$msg (status $status)");
+   });
+}
+
+sub store {
+   my ($self) = @_;
+
+   my $txt = $self->selection;
+
+   local %ENV = %{ $self->env };
+   if (my $pid = open my $fh, "|-:utf8", $self->{store_cmd}) {
+      fcntl $fh, &Fcntl::F_SETFL, &Fcntl::O_NONBLOCK;
+      $self->{iow} = urxvt::iow
+                     ->new
+                     ->fd (fileno $fh)
+                     ->events (urxvt::EV_WRITE)
+                     ->start
+                     ->cb (sub {
+         if (my $len = syswrite $fh, $txt) {
+            substr $txt, 0, $len, "";
+            $self->msg ((length $txt) . " chars to go...");
+         } else {
+            delete $self->{iow};
+            $self->wait_pipe ($fh, $pid, "selection stored");
+         }
+      });
+   }
+}
+
+sub fetch {
+   my ($self) = @_;
+
+   my $txt;
+
+   local %ENV = %{ $self->env };
+   if (my $pid = open my $fh, "-|:utf8", $self->{fetch_cmd}) {
+      fcntl $fh, &Fcntl::F_SETFL, &Fcntl::O_NONBLOCK;
+      $self->{iow} = urxvt::iow
+                     ->new
+                     ->fd (fileno $fh)
+                     ->events (urxvt::EV_READ)
+                     ->start
+                     ->cb (sub {
+         if (my $len = sysread $fh, $txt, 8192, length $txt) {
+            $self->msg ((length $txt) . " chars read...");
+         } else {
+            delete $self->{iow};
+            $self->selection_clear;
+            $self->selection ($txt);
+            $self->selection_grab (urxvt::CurrentTime);
+            $self->msg ("selection fetched");
+         }
+      });
+   }
+}
+
+sub on_start {
+   my ($self) = @_;
+
+   $self->{store_cmd} = $self->x_resource ("%.store")
+                        || "rsh ruth 'cat >/tmp/distributed-selection'";
+
+   $self->{fetch_cmd} = $self->x_resource ("%.fetch")
+                        || "rsh ruth 'cat /tmp/distributed-selection'";
+
+   push @{ $self->{term}{selection_popup_hook} }, sub {
+      ("selection => remote" => sub { $self->store })
+   };
+   push @{ $self->{term}{selection_popup_hook} }, sub {
+      ("remote => selection" => sub { $self->fetch })
+   };
+
+   ()
+}
+
+

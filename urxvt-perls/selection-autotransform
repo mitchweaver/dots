@@ -1,0 +1,101 @@
+#! perl
+
+#:META:RESOURCE:%.:string:autotransform expression
+
+=head1 NAME
+
+selection-autotransform - automatically transform select text
+
+=head1 DESCRIPTION
+
+This selection allows you to do automatic transforms on a selection
+whenever a selection is made.
+
+It works by specifying perl snippets (most useful is a single C<s///>
+operator) that modify C<$_> as resources:
+
+   URxvt.selection-autotransform.0: transform
+   URxvt.selection-autotransform.1: transform
+   ...
+
+For example, the following will transform selections of the form
+C<filename:number>, often seen in compiler messages, into C<vi +$filename
+$word>:
+
+   URxvt.selection-autotransform.0: s/^([^:[:space:]]+):(\\d+):?$/vi +$2 \\Q$1\\E\\x0d/
+
+And this example matches the same,but replaces it with vi-commands you can
+paste directly into your (vi :) editor:
+
+   URxvt.selection-autotransform.0: s/^([^:[:space:]]+(\\d+):?$/:e \\Q$1\\E\\x0d:$2\\x0d/
+
+Of course, this can be modified to suit your needs and your editor :)
+
+To expand the example above to typical perl error messages ("XXX at
+FILENAME line YYY."), you need a slightly more elaborate solution:
+
+   URxvt.selection.pattern-0: ( at .*? line \\d+[,.])
+   URxvt.selection-autotransform.0: s/^ at (.*?) line (\\d+)[,.]$/:e \\Q$1\E\\x0d:$2\\x0d/
+
+The first line tells the selection code to treat the unchanging part of
+every error message as a selection pattern, and the second line transforms
+the message into vi commands to load the file.
+
+=cut
+
+sub msg {
+   my ($self, $msg) = @_;
+
+   my $overlay = $self->overlay (0, 0, $self->strwidth ($msg), 1);
+   $overlay->set (0, 0, $msg);
+   $self->{timer} = urxvt::timer->new->after (2)->cb (sub {
+      delete $self->{timer};
+      undef $overlay;
+   });
+}
+
+sub on_init {
+   my ($self) = @_;
+
+   for (my $idx = 0; defined (my $res = $self->x_resource ("%.$idx")); $idx++) {
+      $res = $self->locale_decode ($res);
+      my $transform = eval "sub { $res }";
+
+      if ($transform) {
+         push @{ $self->{transforms} }, $transform;
+      } else {
+         warn "$res: $@";
+      }
+   }
+
+   $self->{enabled} = 1;
+
+   push @{ $self->{term}{option_popup_hook} }, sub {
+      ("autotransform" => $self->{enabled}, sub { $self->{enabled} = shift })
+   };
+
+   ()
+}
+
+sub on_sel_grab {
+   my ($self) = @_;
+
+   $self->{enabled}
+      or return;
+
+   my $text = $self->selection;
+   local $_ = $text;
+
+   for my $transform (@{ $self->{transforms} }) {
+      $transform->();
+      if ($text ne $_) {
+         $self->selection ($_);
+         s/[\x00-\x1f\x80-\x9f]/·/g;
+         $self->msg ($self->special_encode ("auto-transformed to $_"));
+         last;
+      }
+   }
+
+   ()
+}
+

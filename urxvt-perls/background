@@ -1,0 +1,1211 @@
+#! perl
+
+#:META:RESOURCE:%.expr:string:background expression
+#:META:RESOURCE:%.border:boolean:respect the terminal border
+#:META:RESOURCE:%.interval:seconds:minimum time between updates
+
+=head1 NAME
+
+background - manage terminal background
+
+=head1 SYNOPSIS
+
+   urxvt --background-expr 'background expression'
+         --background-border
+         --background-interval seconds
+
+=head1 QUICK AND DIRTY CHEAT SHEET
+
+Just load a random jpeg image and tile the background with it without
+scaling or anything else:
+
+   load "/path/to/img.jpg"
+
+The same, but use mirroring/reflection instead of tiling:
+
+   mirror load "/path/to/img.jpg"
+
+Load an image and scale it to exactly fill the terminal window:
+
+   scale keep { load "/path/to/img.jpg" }
+
+Implement pseudo-transparency by using a suitably-aligned root pixmap
+as window background:
+
+   rootalign root
+
+Likewise, but keep a blurred copy:
+
+   rootalign keep { blur 10, root }
+
+=head1 DESCRIPTION
+
+This extension manages the terminal background by creating a picture that
+is behind the text, replacing the normal background colour.
+
+It does so by evaluating a Perl expression that I<calculates> the image on
+the fly, for example, by grabbing the root background or loading a file.
+
+While the full power of Perl is available, the operators have been design
+to be as simple as possible.
+
+For example, to load an image and scale it to the window size, you would
+use:
+
+   urxvt --background-expr 'scale keep { load "/path/to/mybg.png" }'
+
+Or specified as a X resource:
+
+   URxvt.background.expr: scale keep { load "/path/to/mybg.png" }
+
+=head1 THEORY OF OPERATION
+
+At startup, just before the window is mapped for the first time, the
+expression is evaluated and must yield an image. The image is then
+extended as necessary to cover the whole terminal window, and is set as a
+background pixmap.
+
+If the image contains an alpha channel, then it will be used as-is in
+visuals that support alpha channels (for example, for a compositing
+manager). In other visuals, the terminal background colour will be used to
+replace any transparency.
+
+When the expression relies, directly or indirectly, on the window size,
+position, the root pixmap, or a timer, then it will be remembered. If not,
+then it will be removed.
+
+If any of the parameters that the expression relies on changes (when the
+window is moved or resized, its position or size changes; when the root
+pixmap is replaced by another one the root background changes; or when the
+timer elapses), then the expression will be evaluated again.
+
+For example, an expression such as C<scale keep { load "$HOME/mybg.png"
+}> scales the image to the window size, so it relies on the window size
+and will be reevaluated each time it is changed, but not when it moves for
+example. That ensures that the picture always fills the terminal, even
+after its size changes.
+
+=head2 EXPRESSIONS
+
+Expressions are normal Perl expressions, in fact, they are Perl blocks -
+which means you could use multiple lines and statements:
+
+   scale keep {
+      again 3600;
+      if (localtime now)[6]) {
+         return load "$HOME/weekday.png";
+      } else {
+         return load "$HOME/sunday.png";
+      }
+   }
+
+This inner expression is evaluated once per hour (and whenever the
+terminal window is resized). It sets F<sunday.png> as background on
+Sundays, and F<weekday.png> on all other days.
+
+Fortunately, we expect that most expressions will be much simpler, with
+little Perl knowledge needed.
+
+Basically, you always start with a function that "generates" an image
+object, such as C<load>, which loads an image from disk, or C<root>, which
+returns the root window background image:
+
+   load "$HOME/mypic.png"
+
+The path is usually specified as a quoted string (the exact rules can be
+found in the L<perlop> manpage). The F<$HOME> at the beginning of the
+string is expanded to the home directory.
+
+Then you prepend one or more modifiers or filtering expressions, such as
+C<scale>:
+
+   scale load "$HOME/mypic.png"
+
+Just like a mathematical expression with functions, you should read these
+expressions from right to left, as the C<load> is evaluated first, and
+its result becomes the argument to the C<scale> function.
+
+Many operators also allow some parameters preceding the input image
+that modify its behaviour. For example, C<scale> without any additional
+arguments scales the image to size of the terminal window. If you specify
+an additional argument, it uses it as a scale factor (multiply by 100 to
+get a percentage):
+
+   scale 2, load "$HOME/mypic.png"
+
+This enlarges the image by a factor of 2 (200%). As you can see, C<scale>
+has now two arguments, the C<200> and the C<load> expression, while
+C<load> only has one argument. Arguments are separated from each other by
+commas.
+
+Scale also accepts two arguments, which are then separate factors for both
+horizontal and vertical dimensions. For example, this halves the image
+width and doubles the image height:
+
+   scale 0.5, 2, load "$HOME/mypic.png"
+
+IF you try out these expressions, you might suffer from some sluggishness,
+because each time the terminal is resized, it loads the PNG image again
+and scales it. Scaling is usually fast (and unavoidable), but loading the
+image can be quite time consuming. This is where C<keep> comes in handy:
+
+   scale 0.5, 2, keep { load "$HOME/mypic.png" }
+
+The C<keep> operator executes all the statements inside the braces only
+once, or when it thinks the outcome might change. In other cases it
+returns the last value computed by the brace block.
+
+This means that the C<load> is only executed once, which makes it much
+faster, but also means that more memory is being used, because the loaded
+image must be kept in memory at all times. In this expression, the
+trade-off is likely worth it.
+
+But back to effects: Other effects than scaling are also readily
+available, for example, you can tile the image to fill the whole window,
+instead of resizing it:
+
+   tile keep { load "$HOME/mypic.png" }
+
+In fact, images returned by C<load> are in C<tile> mode by default, so the
+C<tile> operator is kind of superfluous.
+
+Another common effect is to mirror the image, so that the same edges
+touch:
+
+   mirror keep { load "$HOME/mypic.png" }
+
+Another common background expression is:
+
+   rootalign root
+
+This one first takes a snapshot of the screen background image, and then
+moves it to the upper left corner of the screen (as opposed to the upper
+left corner of the terminal window)- the result is pseudo-transparency:
+the image seems to be static while the window is moved around.
+
+=head2 COLOUR SPECIFICATIONS
+
+Whenever an operator expects a "colour", then this can be specified in one
+of two ways: Either as string with an X11 colour specification, such as:
+
+   "red"               # named colour
+   "#f00"              # simple rgb
+   "[50]red"           # red with 50% alpha
+   "TekHVC:300/50/50"  # anything goes
+
+OR as an array reference with one, three or four components:
+
+   [0.5]               # 50% gray, 100% alpha
+   [0.5, 0, 0]         # dark red, no green or blur, 100% alpha
+   [0.5, 0, 0, 0.7]    # same with explicit 70% alpha
+
+=head2 CACHING AND SENSITIVITY
+
+Since some operations (such as C<load> and C<blur>) can take a long time,
+caching results can be very important for a smooth operation. Caching can
+also be useful to reduce memory usage, though, for example, when an image
+is cached by C<load>, it could be shared by multiple terminal windows
+running inside urxvtd.
+
+=head3 C<keep { ... }> caching
+
+The most important way to cache expensive operations is to use C<keep {
+... }>. The C<keep> operator takes a block of multiple statements enclosed
+by C<{}> and keeps the return value in memory.
+
+An expression can be "sensitive" to various external events, such as
+scaling or moving the window, root background changes and timers. Simply
+using an expression (such as C<scale> without parameters) that depends on
+certain changing values (called "variables"), or using those variables
+directly, will make an expression sensitive to these events - for example,
+using C<scale> or C<TW> will make the expression sensitive to the terminal
+size, and thus to resizing events.
+
+When such an event happens, C<keep> will automatically trigger a
+reevaluation of the whole expression with the new value of the expression.
+
+C<keep> is most useful for expensive operations, such as C<blur>:
+
+   rootalign keep { blur 20, root }
+
+This makes a blurred copy of the root background once, and on subsequent
+calls, just root-aligns it. Since C<blur> is usually quite slow and
+C<rootalign> is quite fast, this trades extra memory (for the cached
+blurred pixmap) with speed (blur only needs to be redone when root
+changes).
+
+=head3 C<load> caching
+
+The C<load> operator itself does not keep images in memory, but as long as
+the image is still in memory, C<load> will use the in-memory image instead
+of loading it freshly from disk.
+
+That means that this expression:
+
+   keep { load "$HOME/path..." }
+
+Not only caches the image in memory, other terminal instances that try to
+C<load> it can reuse that in-memory copy.
+
+=head1 REFERENCE
+
+=head2 COMMAND LINE SWITCHES
+
+=over 4
+
+=item --background-expr perl-expression
+
+Specifies the Perl expression to evaluate.
+
+=item --background-border
+
+By default, the expression creates an image that fills the full window,
+overwriting borders and any other areas, such as the scrollbar.
+
+Specifying this flag changes the behaviour, so that the image only
+replaces the background of the character area.
+
+=item --background-interval seconds
+
+Since some operations in the underlying XRender extension can effectively
+freeze your X-server for prolonged time, this extension enforces a minimum
+time between updates, which is normally about 0.1 seconds.
+
+If you want to do updates more often, you can decrease this safety
+interval with this switch.
+
+=back
+
+=cut
+
+our %_IMG_CACHE;
+our $HOME;
+our ($self, $frame);
+our ($x, $y, $w, $h, $focus);
+
+# enforce at least this interval between updates
+our $MIN_INTERVAL = 6/59.951;
+
+{
+   package urxvt::bgdsl; # background language
+
+   sub FR_PARENT() { 0 } # parent frame, if any - must be #0
+   sub FR_CACHE () { 1 } # cached values
+   sub FR_AGAIN () { 2 } # what this expr is sensitive to
+   sub FR_STATE () { 3 } # watchers etc.
+
+   use List::Util qw(min max sum shuffle);
+
+=head2 PROVIDERS/GENERATORS
+
+These functions provide an image, by loading it from disk, grabbing it
+from the root screen or by simply generating it. They are used as starting
+points to get an image you can play with.
+
+=over 4
+
+=item load $path
+
+Loads the image at the given C<$path>. The image is set to plane tiling
+mode.
+
+If the image is already in memory (e.g. because another terminal instance
+uses it), then the in-memory copy is returned instead.
+
+=item load_uc $path
+
+Load uncached - same as load, but does not cache the image, which means it
+is I<always> loaded from the filesystem again, even if another copy of it
+is in memory at the time.
+
+=cut
+
+   sub load_uc($) {
+      $self->new_img_from_file ($_[0])
+   }
+
+   sub load($) {
+      my ($path) = @_;
+
+      $_IMG_CACHE{$path} || do {
+         my $img = load_uc $path;
+         Scalar::Util::weaken ($_IMG_CACHE{$path} = $img);
+         $img
+      }
+   }
+
+=item root
+
+Returns the root window pixmap, that is, hopefully, the background image
+of your screen.
+
+This function makes your expression root sensitive, that means it will be
+reevaluated when the bg image changes.
+
+=cut
+
+   sub root() {
+      $frame->[FR_AGAIN]{rootpmap} = 1;
+      $self->new_img_from_root
+   }
+
+=item solid $colour
+
+=item solid $width, $height, $colour
+
+Creates a new image and completely fills it with the given colour. The
+image is set to tiling mode.
+
+If C<$width> and C<$height> are omitted, it creates a 1x1 image, which is
+useful for solid backgrounds or for use in filtering effects.
+
+=cut
+
+   sub solid($;$$) {
+      my $colour = pop;
+
+      my $img = $self->new_img (urxvt::PictStandardARGB32, 0, 0, $_[0] || 1, $_[1] || 1);
+      $img->fill ($colour);
+      $img
+   }
+
+=item clone $img
+
+Returns an exact copy of the image. This is useful if you want to have
+multiple copies of the same image to apply different effects to.
+
+=cut
+
+   sub clone($) {
+      $_[0]->clone
+   }
+
+=item merge $img ...
+
+Takes any number of images and merges them together, creating a single
+image containing them all. The tiling mode of the first image is used as
+the tiling mode of the resulting image.
+
+This function is called automatically when an expression returns multiple
+images.
+
+=cut
+
+   sub merge(@) {
+      return $_[0] unless $#_;
+
+      # rather annoyingly clumsy, but optimisation is for another time
+
+      my $x0 = +1e9;
+      my $y0 = +1e9;
+      my $x1 = -1e9;
+      my $y1 = -1e9;
+
+      for (@_) {
+         my ($x, $y, $w, $h) = $_->geometry;
+
+         $x0 = $x if $x0 > $x;
+         $y0 = $y if $y0 > $y;
+
+         $x += $w;
+         $y += $h;
+
+         $x1 = $x if $x1 < $x;
+         $y1 = $y if $y1 < $y;
+      }
+
+      my $base = $self->new_img (urxvt::PictStandardARGB32, $x0, $y0, $x1 - $x0, $y1 - $y0);
+      $base->repeat_mode ($_[0]->repeat_mode);
+      $base->fill ([0, 0, 0, 0]);
+
+      $base->draw ($_)
+         for @_;
+
+      $base
+   }
+
+=back
+
+=head2 TILING MODES
+
+The following operators modify the tiling mode of an image, that is, the
+way that pixels outside the image area are painted when the image is used.
+
+=over 4
+
+=item tile $img
+
+Tiles the whole plane with the image and returns this new image - or in
+other words, it returns a copy of the image in plane tiling mode.
+
+Example: load an image and tile it over the background, without
+resizing. The C<tile> call is superfluous because C<load> already defaults
+to tiling mode.
+
+   tile load "mybg.png"
+
+=item mirror $img
+
+Similar to tile, but reflects the image each time it uses a new copy, so
+that top edges always touch top edges, right edges always touch right
+edges and so on (with normal tiling, left edges always touch right edges
+and top always touch bottom edges).
+
+Example: load an image and mirror it over the background, avoiding sharp
+edges at the image borders at the expense of mirroring the image itself
+
+   mirror load "mybg.png"
+
+=item pad $img
+
+Takes an image and modifies it so that all pixels outside the image area
+become transparent. This mode is most useful when you want to place an
+image over another image or the background colour while leaving all
+background pixels outside the image unchanged.
+
+Example: load an image and display it in the upper left corner. The rest
+of the space is left "empty" (transparent or whatever your compositor does
+in alpha mode, else background colour).
+
+   pad load "mybg.png"
+
+=item extend $img
+
+Extends the image over the whole plane, using the closest pixel in the
+area outside the image. This mode is mostly useful when you use more complex
+filtering operations and want the pixels outside the image to have the
+same values as the pixels near the edge.
+
+Example: just for curiosity, how does this pixel extension stuff work?
+
+   extend move 50, 50, load "mybg.png"
+
+=cut
+
+   sub pad($) {
+      my $img = $_[0]->clone;
+      $img->repeat_mode (urxvt::RepeatNone);
+      $img
+   }
+
+   sub tile($) {
+      my $img = $_[0]->clone;
+      $img->repeat_mode (urxvt::RepeatNormal);
+      $img
+   }
+
+   sub mirror($) {
+      my $img = $_[0]->clone;
+      $img->repeat_mode (urxvt::RepeatReflect);
+      $img
+   }
+
+   sub extend($) {
+      my $img = $_[0]->clone;
+      $img->repeat_mode (urxvt::RepeatPad);
+      $img
+   }
+
+=back
+
+=head2 VARIABLE VALUES
+
+The following functions provide variable data such as the terminal window
+dimensions. They are not (Perl-) variables, they just return stuff that
+varies. Most of them make your expression sensitive to some events, for
+example using C<TW> (terminal width) means your expression is evaluated
+again when the terminal is resized.
+
+=over 4
+
+=item TX
+
+=item TY
+
+Return the X and Y coordinates of the terminal window (the terminal
+window is the full window by default, and the character area only when in
+border-respect mode).
+
+Using these functions makes your expression sensitive to window moves.
+
+These functions are mainly useful to align images to the root window.
+
+Example: load an image and align it so it looks as if anchored to the
+background (that's exactly what C<rootalign> does btw.):
+
+   move -TX, -TY, keep { load "mybg.png" }
+
+=item TW
+
+=item TH
+
+Return the width (C<TW>) and height (C<TH>) of the terminal window (the
+terminal window is the full window by default, and the character area only
+when in border-respect mode).
+
+Using these functions makes your expression sensitive to window resizes.
+
+These functions are mainly useful to scale images, or to clip images to
+the window size to conserve memory.
+
+Example: take the screen background, clip it to the window size, blur it a
+bit, align it to the window position and use it as background.
+
+   clip move -TX, -TY, keep { blur 5, root }
+
+=item FOCUS
+
+Returns a boolean indicating whether the terminal window has keyboard
+focus, in which case it returns true.
+
+Using this function makes your expression sensitive to focus changes.
+
+A common use case is to fade the background image when the terminal loses
+focus, often together with the C<-fade> command line option. In fact,
+there is a special function for just that use case: C<focus_fade>.
+
+Example: use two entirely different background images, depending on
+whether the window has focus.
+
+   FOCUS ? keep { load "has_focus.jpg" } : keep { load "no_focus.jpg" }
+
+=cut
+
+   sub TX   () { $frame->[FR_AGAIN]{position} = 1; $x     }
+   sub TY   () { $frame->[FR_AGAIN]{position} = 1; $y     }
+   sub TW   () { $frame->[FR_AGAIN]{size}     = 1; $w     }
+   sub TH   () { $frame->[FR_AGAIN]{size}     = 1; $h     }
+   sub FOCUS() { $frame->[FR_AGAIN]{focus}    = 1; $focus }
+
+=item now
+
+Returns the current time as (fractional) seconds since the epoch.
+
+Using this expression does I<not> make your expression sensitive to time,
+but the next two functions do.
+
+=item again $seconds
+
+When this function is used the expression will be reevaluated again in
+C<$seconds> seconds.
+
+Example: load some image and rotate it according to the time of day (as if it were
+the hour pointer of a clock). Update this image every minute.
+
+   again 60;
+   rotate 50, 50, (now % 86400) * -72 / 8640, scale keep { load "myclock.png" }
+
+=item counter $seconds
+
+Like C<again>, but also returns an increasing counter value, starting at
+0, which might be useful for some simple animation effects.
+
+=cut
+
+   sub now() { urxvt::NOW }
+
+   sub again($) {
+      $frame->[FR_AGAIN]{time} = $_[0];
+   }
+
+   sub counter($) {
+      $frame->[FR_AGAIN]{time} = $_[0];
+      $frame->[FR_STATE]{counter} + 0
+   }
+
+=back
+
+=head2 SHAPE CHANGING OPERATORS
+
+The following operators modify the shape, size or position of the image.
+
+=over 4
+
+=item clip $img
+
+=item clip $width, $height, $img
+
+=item clip $x, $y, $width, $height, $img
+
+Clips an image to the given rectangle. If the rectangle is outside the
+image area (e.g. when C<$x> or C<$y> are negative) or the rectangle is
+larger than the image, then the tiling mode defines how the extra pixels
+will be filled.
+
+If C<$x> and C<$y> are missing, then C<0> is assumed for both.
+
+If C<$width> and C<$height> are missing, then the window size will be
+assumed.
+
+Example: load an image, blur it, and clip it to the window size to save
+memory.
+
+   clip keep { blur 10, load "mybg.png" }
+
+=cut
+
+   sub clip($;$$;$$) {
+      my $img = pop;
+      my $h = pop || TH;
+      my $w = pop || TW;
+      $img->sub_rect ($_[0], $_[1], $w, $h)
+   }
+
+=item scale $img
+
+=item scale $size_factor, $img
+
+=item scale $width_factor, $height_factor, $img
+
+Scales the image by the given factors in horizontal
+(C<$width>) and vertical (C<$height>) direction.
+
+If only one factor is given, it is used for both directions.
+
+If no factors are given, scales the image to the window size without
+keeping aspect.
+
+=item resize $width, $height, $img
+
+Resizes the image to exactly C<$width> times C<$height> pixels.
+
+=item fit $img
+
+=item fit $width, $height, $img
+
+Fits the image into the given C<$width> and C<$height> without changing
+aspect, or the terminal size. That means it will be shrunk or grown until
+the whole image fits into the given area, possibly leaving borders.
+
+=item cover $img
+
+=item cover $width, $height, $img
+
+Similar to C<fit>, but shrinks or grows until all of the area is covered
+by the image, so instead of potentially leaving borders, it will cut off
+image data that doesn't fit.
+
+=cut
+
+   sub scale($;$;$) {
+      my $img = pop;
+
+      @_ == 2 ? $img->scale ($_[0] * $img->w, $_[1] * $img->h)
+      : @_    ? $img->scale ($_[0] * $img->w, $_[0] * $img->h)
+              : $img->scale (TW, TH)
+   }
+
+   sub resize($$$) {
+      my $img = pop;
+      $img->scale ($_[0], $_[1])
+   }
+
+   sub fit($;$$) {
+      my $img = pop;
+      my $w = ($_[0] || TW) / $img->w;
+      my $h = ($_[1] || TH) / $img->h;
+      scale +(min $w, $h), $img
+   }
+
+   sub cover($;$$) {
+      my $img = pop;
+      my $w = ($_[0] || TW) / $img->w;
+      my $h = ($_[1] || TH) / $img->h;
+      scale +(max $w, $h), $img
+   }
+
+=item move $dx, $dy, $img
+
+Moves the image by C<$dx> pixels in the horizontal, and C<$dy> pixels in
+the vertical.
+
+Example: move the image right by 20 pixels and down by 30.
+
+   move 20, 30, ...
+
+=item align $xalign, $yalign, $img
+
+Aligns the image according to a factor - C<0> means the image is moved to
+the left or top edge (for C<$xalign> or C<$yalign>), C<0.5> means it is
+exactly centered and C<1> means it touches the right or bottom edge.
+
+Example: remove any visible border around an image, center it vertically but move
+it to the right hand side.
+
+   align 1, 0.5, pad $img
+
+=item center $img
+
+=item center $width, $height, $img
+
+Centers the image, i.e. the center of the image is moved to the center of
+the terminal window (or the box specified by C<$width> and C<$height> if
+given).
+
+Example: load an image and center it.
+
+  center keep { pad load "mybg.png" }
+
+=item rootalign $img
+
+Moves the image so that it appears glued to the screen as opposed to the
+window. This gives the illusion of a larger area behind the window. It is
+exactly equivalent to C<move -TX, -TY>, that is, it moves the image to the
+top left of the screen.
+
+Example: load a background image, put it in mirror mode and root align it.
+
+   rootalign keep { mirror load "mybg.png" }
+
+Example: take the screen background and align it, giving the illusion of
+transparency as long as the window isn't in front of other windows.
+
+   rootalign root
+
+=cut
+
+   sub move($$;$) {
+      my $img = pop->clone;
+      $img->move ($_[0], $_[1]);
+      $img
+   }
+
+   sub align($;$$) {
+      my $img = pop;
+
+      move $_[0] * (TW - $img->w),
+           $_[1] * (TH - $img->h),
+           $img
+   }
+
+   sub center($;$$) {
+      my $img = pop;
+      my $w = $_[0] || TW;
+      my $h = $_[1] || TH;
+
+      move 0.5 * ($w - $img->w), 0.5 * ($h - $img->h), $img
+   }
+
+   sub rootalign($) {
+      move -TX, -TY, $_[0]
+   }
+
+=item rotate $center_x, $center_y, $degrees, $img
+
+Rotates the image clockwise by C<$degrees> degrees, around the point at
+C<$center_x> and C<$center_y> (specified as factor of image width/height).
+
+Example: rotate the image by 90 degrees around its center.
+
+   rotate 0.5, 0.5, 90, keep { load "$HOME/mybg.png" }
+
+=cut
+
+   sub rotate($$$$) {
+      my $img = pop;
+      $img->rotate (
+         $_[0] * ($img->w + $img->x),
+         $_[1] * ($img->h + $img->y),
+         $_[2] * (3.14159265 / 180),
+      )
+   }
+
+=back
+
+=head2 COLOUR MODIFICATIONS
+
+The following operators change the pixels of the image.
+
+=over 4
+
+=item tint $color, $img
+
+Tints the image in the given colour.
+
+Example: tint the image red.
+
+   tint "red", load "rgb.png"
+
+Example: the same, but specify the colour by component.
+
+   tint [1, 0, 0], load "rgb.png"
+
+=cut
+
+   sub tint($$) {
+      $_[1]->tint ($_[0])
+   }
+
+=item shade $factor, $img
+
+Shade the image by the given factor.
+
+=cut
+
+   sub shade($$) {
+      $_[1]->shade ($_[0])
+   }
+
+=item contrast $factor, $img
+
+=item contrast $r, $g, $b, $img
+
+=item contrast $r, $g, $b, $a, $img
+
+Adjusts the I<contrast> of an image.
+
+The first form applies a single C<$factor> to red, green and blue, the
+second form applies separate factors to each colour channel, and the last
+form includes the alpha channel.
+
+Values from 0 to 1 lower the contrast, values higher than 1 increase the
+contrast.
+
+Due to limitations in the underlying XRender extension, lowering contrast
+also reduces brightness, while increasing contrast currently also
+increases brightness.
+
+=item brightness $bias, $img
+
+=item brightness $r, $g, $b, $img
+
+=item brightness $r, $g, $b, $a, $img
+
+Adjusts the brightness of an image.
+
+The first form applies a single C<$bias> to red, green and blue, the
+second form applies separate biases to each colour channel, and the last
+form includes the alpha channel.
+
+Values less than 0 reduce brightness, while values larger than 0 increase
+it. Useful range is from -1 to 1 - the former results in a black, the
+latter in a white picture.
+
+Due to idiosyncrasies in the underlying XRender extension, biases less
+than zero can be I<very> slow.
+
+You can also try the experimental(!) C<muladd> operator.
+
+=cut
+
+   sub contrast($$;$$;$) {
+      my $img = pop;
+      my ($r, $g, $b, $a) = @_;
+
+      ($g, $b) = ($r, $r) if @_ < 3;
+      $a       = 1        if @_ < 4;
+
+      $img = $img->clone;
+      $img->contrast ($r, $g, $b, $a);
+      $img
+   }
+
+   sub brightness($$;$$;$) {
+      my $img = pop;
+      my ($r, $g, $b, $a) = @_;
+
+      ($g, $b) = ($r, $r) if @_ < 3;
+      $a       = 1        if @_ < 4;
+
+      $img = $img->clone;
+      $img->brightness ($r, $g, $b, $a);
+      $img
+   }
+
+=item muladd $mul, $add, $img # EXPERIMENTAL
+
+First multiplies the pixels by C<$mul>, then adds C<$add>. This can be used
+to implement brightness and contrast at the same time, with a wider value
+range than contrast and brightness operators.
+
+Due to numerous bugs in XRender implementations, it can also introduce a
+number of visual artifacts.
+
+Example: increase contrast by a factor of C<$c> without changing image
+brightness too much.
+
+   muladd $c, (1 - $c) * 0.5, $img
+
+=cut
+
+   sub muladd($$$) {
+      $_[2]->muladd ($_[0], $_[1])
+   }
+
+=item blur $radius, $img
+
+=item blur $radius_horz, $radius_vert, $img
+
+Gaussian-blurs the image with (roughly) C<$radius> pixel radius. The radii
+can also be specified separately.
+
+Blurring is often I<very> slow, at least compared or other
+operators. Larger blur radii are slower than smaller ones, too, so if you
+don't want to freeze your screen for long times, start experimenting with
+low values for radius (<5).
+
+=cut
+
+   sub blur($$;$) {
+      my $img = pop;
+      $img->blur ($_[0], @_ >= 2 ? $_[1] : $_[0])
+   }
+
+=item focus_fade $img
+
+=item focus_fade $factor, $img
+
+=item focus_fade $factor, $color, $img
+
+Fades the image by the given factor (and colour) when focus is lost (the
+same as the C<-fade>/C<-fadecolor> command line options, which also supply
+the default values for C<factor> and C<$color>. Unlike with C<-fade>, the
+C<$factor> is a real value, not a percentage value (that is, 0..1, not
+0..100).
+
+Example: do the right thing when focus fading is requested.
+
+   focus_fade load "mybg.jpg";
+
+=cut
+
+   sub focus_fade($;$$) {
+      my $img = pop;
+
+      return $img
+         if FOCUS;
+
+      my $fade   = @_ >= 1 ? $_[0] : defined $self->resource ("fade") ? $self->resource ("fade") * 0.01 : 0;
+      my $color  = @_ >= 2 ? $_[1] : $self->resource ("color+" . urxvt::Color_fade);
+
+      $img = $img->tint ($color)         if $color ne "rgb:00/00/00";
+      $img = $img->muladd (1 - $fade, 0) if $fade;
+
+      $img
+   }
+
+=back
+
+=head2 OTHER STUFF
+
+Anything that didn't fit any of the other categories, even after applying
+force and closing our eyes.
+
+=over 4
+
+=item keep { ... }
+
+This operator takes a code block as argument, that is, one or more
+statements enclosed by braces.
+
+The trick is that this code block is only evaluated when the outcome
+changes - on other calls the C<keep> simply returns the image it computed
+previously (yes, it should only be used with images). Or in other words,
+C<keep> I<caches> the result of the code block so it doesn't need to be
+computed again.
+
+This can be extremely useful to avoid redoing slow operations - for
+example, if your background expression takes the root background, blurs it
+and then root-aligns it it would have to blur the root background on every
+window move or resize.
+
+Another example is C<load>, which can be quite slow.
+
+In fact, urxvt itself encloses the whole expression in some kind of
+C<keep> block so it only is reevaluated as required.
+
+Putting the blur into a C<keep> block will make sure the blur is only done
+once, while the C<rootalign> is still done each time the window moves.
+
+   rootalign keep { blur 10, root }
+
+This leaves the question of how to force reevaluation of the block,
+in case the root background changes: If expression inside the block
+is sensitive to some event (root background changes, window geometry
+changes), then it will be reevaluated automatically as needed.
+
+=cut
+
+   sub keep(&) {
+      my $id = $_[0]+0;
+
+      local $frame = $self->{frame_cache}{$id} ||= [$frame];
+
+      unless ($frame->[FR_CACHE]) {
+         $frame->[FR_CACHE] = [ $_[0]() ];
+
+         my $self  = $self;
+         my $frame = $frame;
+         Scalar::Util::weaken $frame;
+         $self->compile_frame ($frame, sub {
+            # clear this frame cache, also for all parents
+            for (my $frame = $frame; $frame; $frame = $frame->[0]) {
+               undef $frame->[FR_CACHE];
+            }
+
+            $self->recalculate;
+         });
+      };
+
+      # in scalar context we always return the first original result, which
+      # is not quite how perl works.
+      wantarray
+         ? @{ $frame->[FR_CACHE] }
+         : $frame->[FR_CACHE][0]
+   }
+
+#   sub keep_clear() {
+#      delete $self->{frame_cache};
+#   }
+
+=back
+
+=cut
+
+}
+
+sub parse_expr {
+   my $expr = eval
+      "sub {\n"
+    . "package urxvt::bgdsl;\n"
+    . "#line 0 'background expression'\n"
+    . "$_[0]\n"
+    . "}";
+   die if $@;
+   $expr
+}
+
+# compiles a parsed expression
+sub set_expr {
+   my ($self, $expr) = @_;
+
+   $self->{root} = []; # the outermost frame
+   $self->{expr} = $expr;
+   $self->recalculate;
+}
+
+# takes a hash of sensitivity indicators and installs watchers
+sub compile_frame {
+   my ($self, $frame, $cb) = @_;
+
+   my $state = $frame->[urxvt::bgdsl::FR_STATE] ||= {};
+   my $again = $frame->[urxvt::bgdsl::FR_AGAIN];
+
+   # don't keep stuff alive
+   Scalar::Util::weaken $state;
+
+   if ($again->{nested}) {
+      $state->{nested} = 1;
+   } else {
+      delete $state->{nested};
+   }
+
+   if (my $interval = $again->{time}) {
+      $state->{time} = [$interval, urxvt::timer->new->after ($interval)->interval ($interval)]
+         if $state->{time}[0] != $interval;
+
+      # callback *might* have changed, although we could just rule that out
+      $state->{time}[1]->cb (sub {
+         ++$state->{counter};
+         $cb->();
+      });
+   } else {
+      delete $state->{time};
+   }
+
+   if ($again->{position}) {
+      $state->{position} = $self->on (position_change => $cb);
+   } else {
+      delete $state->{position};
+   }
+
+   if ($again->{size}) {
+      $state->{size}     = $self->on (size_change     => $cb);
+   } else {
+      delete $state->{size};
+   }
+
+   if ($again->{rootpmap}) {
+      $state->{rootpmap} = $self->on (rootpmap_change => $cb);
+   } else {
+      delete $state->{rootpmap};
+   }
+
+   if ($again->{focus}) {
+      $state->{focus} = $self->on (focus_in => $cb, focus_out => $cb);
+   } else {
+      delete $state->{focus};
+   }
+}
+
+# evaluate the current bg expression
+sub recalculate {
+   my ($arg_self) = @_;
+
+   # rate limit evaluation
+
+   if ($arg_self->{next_refresh} > urxvt::NOW) {
+      $arg_self->{next_refresh_timer} = urxvt::timer->new->after ($arg_self->{next_refresh} - urxvt::NOW)->cb (sub {
+         $arg_self->recalculate;
+      });
+      return;
+   }
+
+   $arg_self->{next_refresh} = urxvt::NOW + $MIN_INTERVAL;
+
+   # set environment to evaluate user expression
+
+   local $self  = $arg_self;
+   local $HOME  = $ENV{HOME};
+   local $frame = $self->{root};
+
+   ($x, $y, $w, $h) = $self->background_geometry ($self->{border});
+   $focus           = $self->focus;
+
+   # evaluate user expression
+
+   my @img = eval { $self->{expr}->() };
+   die $@ if $@;
+   die "background-expr did not return anything.\n" unless @img;
+   die "background-expr: expected image(s), got something else.\n"
+      if grep { !UNIVERSAL::isa $_, "urxvt::img" } @img;
+
+   my $img = urxvt::bgdsl::merge @img;
+
+   $frame->[FR_AGAIN]{size} = 1
+      if $img->repeat_mode != urxvt::RepeatNormal;
+
+   # if the expression is sensitive to external events, prepare reevaluation then
+   $self->compile_frame ($frame, sub { $arg_self->recalculate });
+
+   # clear stuff we no longer need
+
+#   unless (%{ $frame->[FR_STATE] }) {
+#      delete $self->{state};
+#      delete $self->{expr};
+#   }
+
+   # set background pixmap
+
+   $self->set_background ($img, $self->{border});
+   $self->scr_recolor (0);
+   $self->want_refresh;
+}
+
+sub on_start {
+   my ($self) = @_;
+
+   my $expr = $self->x_resource ("%.expr")
+      or return;
+
+   $self->has_render
+      or die "background extension needs RENDER extension 0.10 or higher, ignoring background-expr.\n";
+
+   $self->set_expr (parse_expr $expr);
+   $self->{border} = $self->x_resource_boolean ("%.border");
+
+   $MIN_INTERVAL = $self->x_resource ("%.interval");
+
+   ()
+}
+

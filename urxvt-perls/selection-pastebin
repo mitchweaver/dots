@@ -1,0 +1,136 @@
+#! perl
+
+#:META:RESOURCE:%.cmd:string:the command to run create a new pastebin
+#:META:RESOURCE:%.url:string:the url template for new pastebins
+
+=head1 NAME
+
+selection-pastebin - automatic pastebin upload
+
+=head1 EXAMPLES
+
+  URxvt.keysym.C-M-e: selection-pastebin:remote-pastebin
+
+=head1 DESCRIPTION
+
+This is a little rarely useful extension that uploads the selection as
+textfile to a remote site (or does other things). (The implementation is
+not currently secure for use in a multiuser environment as it writes to
+F</tmp> directly.).
+
+It listens to the C<selection-pastebin:remote-pastebin> action, which,
+when activated, runs a command with C<%> replaced by the name of the
+textfile. This command can be set via a resource:
+
+   URxvt.selection-pastebin.cmd: rsync -apP % ruth:/var/www/www.ta-sa.org/files/txt/.
+
+And the default is likely not useful to anybody but the few people around
+here :)
+
+The name of the textfile is the hex encoded md5 sum of the selection, so
+the same content should lead to the same filename.
+
+After a successful upload the selection will be replaced by the text given
+in the C<selection-pastebin-url> resource (again, the % is the placeholder
+for the filename):
+
+   URxvt.selection-pastebin.url: http://www.ta-sa.org/files/txt/%
+
+I<Note to xrdb users:> xrdb uses the C preprocessor, which might interpret
+the double C</> characters as comment start. Use C<\057\057> instead,
+which works regardless of whether xrdb is used to parse the resource file
+or not.
+
+=cut
+
+sub upload_paste {
+   my ($self) = @_;
+
+   require Digest::MD5;
+
+   my $txt = $self->selection;
+
+   my $filename = $txt;
+   utf8::encode $filename;
+   $filename = Digest::MD5::md5_hex ($filename) . ".txt";
+
+   my $tmpfile = "/tmp/$filename";
+
+   my $msg = "uploaded as $filename";
+
+   if (open my $o, ">:utf8", $tmpfile) {
+      chmod 0644, $tmpfile;
+      print $o $txt;
+      close $o;
+   } else {
+      $msg = "couldn't write $tmpfile: $!";
+   }
+
+   my $cmd = $self->{pastebin_cmd};
+   $cmd =~ s/%/$tmpfile/;
+
+   my $pid = $self->exec_async ($cmd);
+
+   $self->{pw} = urxvt::pw->new->start ($pid)->cb (sub {
+      my (undef, $status) = @_;
+
+      delete $self->{pw};
+
+      if ($status) {
+         $status >>= 8;
+         $msg = "ERROR: command returned status $status";
+      } else {
+         my $url = $self->{pastebin_url};
+         $url =~ s/%/$filename/;
+
+         $self->selection ($url);
+      }
+
+      unlink $tmpfile;
+
+      my $ov = $self->overlay (-1, 0, $self->strwidth ($msg), 1, urxvt::OVERLAY_RSTYLE, 0);
+      $ov->set (0, 0, $msg);
+
+      $self->{timer} =
+         urxvt::timer
+                 ->new
+                 ->after (5)
+                 ->cb (sub { delete $self->{timer}; undef $ov; });
+   });
+}
+
+sub on_start {
+   my ($self) = @_;
+
+   $self->{pastebin_cmd} = $self->x_resource ("%.cmd")
+                           || "rcp -p % ruth:/var/www/www.ta-sa.org/files/txt/";
+
+   $self->{pastebin_url} = $self->x_resource ("%.url")
+                           || "http://www.ta-sa.org/files/txt/%";
+
+   push @{ $self->{term}{selection_popup_hook} }, sub {
+      ("pastebin upload" => sub { $self->upload_paste })
+   };
+
+   ()
+}
+
+sub on_user_command {
+   my ($self, $cmd) = @_;
+
+   if ($cmd eq "selection-pastebin:remote-pastebin") {
+      $self->upload_paste;
+   }
+
+   ()
+}
+
+sub on_action {
+   my ($self, $action) = @_;
+
+   $action eq "remote-pastebin"
+      and $self->upload_paste;
+
+   ()
+}
+

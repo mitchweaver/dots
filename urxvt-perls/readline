@@ -1,0 +1,92 @@
+#! perl
+
+=head1 NAME
+
+readline - improve readline editing (enabled by default)
+
+=head1 DESCRIPTION
+
+A support package that tries to make editing with readline easier. At
+the moment, it reacts to clicking shift-left mouse button by trying to
+move the text cursor to this position. It does so by generating as many
+cursor-left or cursor-right keypresses as required (this only works
+for programs that correctly support wide characters).
+
+To avoid too many false positives, this is only done when:
+
+=over 4
+
+=item - the tty is in ICANON state.
+
+=item - the text cursor is visible.
+
+=item - the primary screen is currently being displayed.
+
+=item - the mouse is on the same (multi-row-) line as the text cursor.
+
+=back
+
+The normal selection mechanism isn't disabled, so quick successive clicks
+might interfere with selection creation in harmless ways.
+
+=cut
+
+use POSIX ();
+
+my $termios = new POSIX::Termios;
+
+sub on_init {
+   my ($self) = @_;
+
+   $self->{enabled} = 1;
+
+   push @{ $self->{term}{option_popup_hook} }, sub {
+      ("readline" => $self->{enabled}, sub { $self->{enabled} = shift })
+   };
+
+   ()
+}
+
+sub on_button_press {
+   my ($self, $event) = @_;
+
+   $self->current_screen || $self->hidden_cursor || !$self->{enabled}
+      and return;
+
+   my $mask = $self->ModLevel3Mask | $self->ModMetaMask
+            | urxvt::ShiftMask | urxvt::ControlMask;
+
+   ($event->{state} & $mask) == urxvt::ShiftMask
+      or return;
+
+   $termios->getattr ($self->pty_fd)
+      or return;
+
+   $termios->getlflag & &POSIX::ICANON
+      and return;
+
+   my ($row, $col) = $self->screen_cur;
+   my $line = $self->line ($row);
+   my $cur = $line->offset_of ($row, $col);
+   my $ofs = $line->offset_of ($event->{row}, $event->{col});
+
+   $ofs >= 0 && $ofs < $line->l
+      or return;
+
+   my $diff = $ofs - $cur;
+   my $move;
+
+   if ($diff < 0) {
+      ($ofs, $cur) = ($cur, $ofs);
+      $move = "\x1b[D";
+   } else {
+      $move = "\x1b[C";
+   }
+
+   my $skipped = substr $line->t, $cur, $ofs - $cur;
+   $skipped =~ s/\x{ffff}//g;
+
+   $self->tt_write ($move x length $skipped);
+
+   1
+}

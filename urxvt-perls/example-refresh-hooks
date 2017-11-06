@@ -1,0 +1,57 @@
+#! perl
+
+=head1 NAME
+
+example-refresh-hooks - example of how to use refresh hooks
+
+=head1 DESCRIPTION
+
+Displays a very simple digital clock in the upper right corner of the
+window. Illustrates overwriting the refresh callbacks to create your own
+overlays or changes.
+
+=cut
+
+sub on_init {
+   my ($self) = @_;
+
+   # force a refresh every second
+   $self->{digital_clock_refresh} = urxvt::timer
+                    ->new
+                    ->start (1 + int urxvt::NOW)
+                    ->interval (1)
+                    ->cb (sub { $self->want_refresh });
+
+   ()
+}
+
+# before refreshing: replace upper right with the clock display
+sub on_refresh_begin {
+   my ($self) = @_;
+
+   my $time = sprintf "%2d:%02d:%02d", (localtime urxvt::NOW)[2, 1, 0];
+   my $xpos = $self->ncol - length $time;
+
+   $xpos >= 0
+      or return;
+
+   $self->{digital_clock_rend} = $self->ROW_r (0, [(urxvt::DEFAULT_RSTYLE) x length $time], $xpos);
+   $self->{digital_clock_text} = $self->ROW_t (0, $time, $xpos);
+
+   ()
+}
+
+# after refreshing: restore previous screen contents
+sub on_refresh_end {
+   my ($self) = @_;
+
+   exists $self->{digital_clock_text}
+      or return;
+
+   $self->ROW_r (0, delete $self->{digital_clock_rend});
+   $self->ROW_t (0, delete $self->{digital_clock_text});
+
+   ()
+}
+
+

@@ -1,0 +1,85 @@
+#! perl
+
+#:META:RESOURCE:%.hotkey:string:activation hotkey keysym
+
+=head1 NAME
+
+kuake - kuake-like hotkey terminal
+
+=head1 EXAMPLES
+
+  @@RXVT_NAME@@ -kuake-hotkey F10
+
+  URxvt.kuake.hotkey: F10
+
+=head1 DESCRIPTION
+
+A very primitive quake-console-like extension. It was inspired by a
+description of how the programs C<kuake> and C<yakuake> work: Whenever the
+user presses a global accelerator key (by default C<F10>), the terminal
+will show or hide itself. Another press of the accelerator key will hide
+or show it again.
+
+Initially, the window will not be shown when using this extension.
+
+This is useful if you need a single terminal that is not using any desktop
+space most of the time but is quickly available at the press of a key.
+
+The accelerator key is grabbed regardless of any modifiers, so this
+extension will actually grab a physical key just for this function.
+
+If you want a quake-like animation, tell your window manager to do so
+(fvwm can do it).
+
+=cut
+
+sub on_start {
+   my ($self) = @_;
+
+   $self->{key} = $self->{argv}[0] || $self->x_resource ("%.hotkey") || "F10";
+
+   $self->{keysym} = $self->XStringToKeysym ($self->{key})
+      or urxvt::fatal "cannot convert requested kuake wake-up key '$self->{key}' to keysym, unable to continue.\n";
+
+   $self->{keycode} = $self->XKeysymToKeycode ($self->{keysym})
+      or urxvt::fatal "cannot convert requested kuake wake-up key '$self->{key}' to keycode, unable to continue.\n";
+
+   $self->XGrabKey ($self->{keycode}, urxvt::AnyModifier, $self->DefaultRootWindow);
+
+   $self->XUnmapWindow ($self->parent);
+
+   $self->{unmap_me} = 1;
+
+   ()
+}
+
+sub on_map_notify {
+   my ($self) = @_;
+
+   # suppress initial map event
+   $self->XUnmapWindow ($self->parent)
+      if delete $self->{unmap_me};
+
+   ()
+}
+
+sub on_root_event {
+   my ($self, $event) = @_;
+
+   return unless $event->{type} == urxvt::KeyPress && $event->{keycode} == $self->{keycode};
+
+   $self->mapped
+      ? $self->XUnmapWindow ($self->parent)
+      : $self->XMapWindow ($self->parent);
+
+   1
+}
+
+sub on_destroy {
+   my ($self) = @_;
+
+   $self->XUngrabKey ($self->XKeysymToKeycode ($self->{keysym}), 0, $self->DefaultRootWindow)
+      if $self->{keysym};
+
+   ()
+}

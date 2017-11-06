@@ -1,0 +1,76 @@
+URxvt*buffered: true
+URxvt*cursorBlink: true
+URxvt*underlineColor: yellow
+Xft.dpi: 113
+antialias:true
+Xft*hinting: Full
+
+!URxvt.font: -fn '-*-terminus-22-*-'
+!URxvt.font: xft:?:size=8
+!URxvt.letterSpace: -6
+
+URxvt.depth: 32
+
+URxvt.scrollBar: false
+URxvt.loginShell: true
+Urxvt.secondaryScroll:  true    # Enable Shift-PageUp/Down in screen
+URxvt.saveLines: 5000
+URxvt.termName: rxvt-unicode
+URxvt.matcher.button: 1
+
+URxvt.internalBorder: 7
+URxvt.borderless: true
+URxvt.transparent: true
+URxvt.shading: 35
+
+URxvt.iconFile: /home/mitch/bin/icons/terminal-icon.png
+
+!! not sure what these two do?
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! extensions
+URxvt.perl-lib: /home/mitch/workspace/dotfiles/urxvt-perls
+URxvt.perl-ext-common: default,matcher,clipboard,resize-font,keyboard-select,url-select
+URxvt.resize-font.smaller: C-minus
+URxvt.resize-font.bigger: C-equal
+URxvt.resize-font.reset: C-question
+URxvt.urlLauncher: /usr/bin/xdg-open
+URxvt.urlButton: 1
+URxvt.underlineURLs: True
+URxvt.copyCommand:  xclip -i -selection clipboard
+URxvt.pasteCommand: xclip -o -selection clipboard
+
+!! -------- PUT COLORS HERE: ------------------ !!
+
+*foreground: #00cc00
+*foreground_bold: #a8a19f
+*cursor: #a8a19f
+*background: #1b1918
+
+!! black
+*color0: #1b1918
+*color8: #766e6b
+!! red
+*color1: #f22c40
+*color9: #f22c40
+!! green
+*color2: #5ab738
+*color10: #5ab738
+!! yellow
+*color3: #d5911a
+*color11: #d5911a
+!! blue
+*color4: #407ee7
+*color12: #407ee7
+!! magenta
+*color5: #6666ea
+*color13: #6666ea
+!! cyan
+*color6: #00ad9c
+*color14: #00ad9c
+!! white
+*color7: #a8a19f
+*color15: #f1efee
+
+URxvt.colorUL:		#4682B4

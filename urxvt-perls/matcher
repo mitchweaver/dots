@@ -1,0 +1,506 @@
+#! perl
+
+# Author: Tim Pope <rxvt-unicodeNOSPAM@tpope.org>
+#         Bob Farrell <robertanthonyfarrell@gmail.com>
+#         Emanuele Giaquinta
+
+#:META:RESOURCE:%.launcher:string:default launcher command
+#:META:RESOURCE:%.button:string:the mouse button used to activate a match
+#:META:RESOURCE:%.pattern.:string:extra pattern to match
+#:META:RESOURCE:%.launcher.:string:custom launcher for pattern
+#:META:RESOURCE:%.rend.:string:custom rendition for pattern
+
+=head1 NAME
+
+matcher - match strings in terminal output and change their rendition
+
+=head1 DESCRIPTION
+
+Uses per-line display filtering (C<on_line_update>) to underline text
+matching a certain pattern and make it clickable. When clicked with the
+mouse button specified in the C<matcher.button> resource (default 2, or
+middle), the program specified in the C<matcher.launcher> resource
+(default, the C<url-launcher> resource, C<sensible-browser>) will be started
+with the matched text as first argument.  The default configuration is
+suitable for matching URLs and launching a web browser, like the
+former "mark-urls" extension.
+
+The default pattern to match URLs can be overridden with the
+C<matcher.pattern.0> resource, and additional patterns can be specified
+with numbered patterns, in a manner similar to the "selection" extension.
+The launcher can also be overridden on a per-pattern basis.
+
+It is possible to activate the most recently seen match or a list of matches
+from the keyboard.  Simply bind a keysym to "matcher:last" or
+"matcher:list" as seen in the example below.
+
+The C<matcher:select> action enables a mode in which it is possible to
+iterate over the matches using the keyboard and either activate them
+or copy them to the clipboard. While the mode is active, normal terminal
+input/output is suspended and the following bindings are recognized:
+
+=over 4
+
+=item C<Up>
+
+Search for a match upwards.
+
+=item C<Down>
+
+Search for a match downwards.
+
+=item C<Home>
+
+Jump to the topmost match.
+
+=item C<End>
+
+Jump to the bottommost match.
+
+=item C<Escape>
+
+Leave the mode and return to the point where search was started.
+
+=item C<Enter>
+
+Activate the current match.
+
+=item C<y>
+
+Copy the current match to the clipboard.
+
+=back
+
+It is also possible to cycle through the matches using a key
+combination bound to the C<matcher:select> action.
+
+Example: load and use the matcher extension with defaults.
+
+    URxvt.perl-ext:           default,matcher
+
+Example: use a custom configuration.
+
+    URxvt.url-launcher:       sensible-browser
+    URxvt.keysym.C-Delete:    matcher:last
+    URxvt.keysym.M-Delete:    matcher:list
+    URxvt.matcher.button:     1
+    URxvt.matcher.pattern.1:  \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
+    URxvt.matcher.pattern.2:  \\B(/\\S+?):(\\d+)(?=:|$)
+    URxvt.matcher.launcher.2: gvim +$2 $1
+
+=cut
+
+my $url =
+   qr{
+      (?:https?://|ftp://|news://|mailto:|file://|\bwww\.)
+      [\w\-\@;\/?:&=%\$.+!*\x27,~#]*
+      (
+         \([\w\-\@;\/?:&=%\$.+!*\x27,~#]*\)| # Allow a pair of matched parentheses
+         [\w\-\@;\/?:&=%\$+*~]  # exclude some trailing characters (heuristic)
+      )+
+   }x;
+
+sub matchlist_key_press {
+   my ($self, $event, $keysym, $octets) = @_;
+
+   delete $self->{overlay};
+   $self->disable ("key_press");
+
+   my $i = ($keysym == 96 ? 0 : $keysym - 48);
+   if ($i >= 0 && $i < @{ $self->{matches} }) {
+      my @exec = @{ $self->{matches}[$i] };
+      $self->exec_async (@exec[5 .. $#exec]);
+   }
+
+   1
+}
+
+# backwards compat
+sub on_user_command {
+   my ($self, $cmd) = @_;
+
+   if ($cmd eq "matcher:list") {
+      $self->matchlist;
+   } elsif ($cmd eq "matcher:last") {
+      $self->most_recent;
+   } elsif ($cmd eq "matcher:select") {
+      $self->select_enter;
+   } elsif ($cmd eq "matcher") {
+      # for backward compatibility
+      $self->most_recent;
+   }
+
+   ()
+}
+
+sub on_action {
+   my ($self, $action) = @_;
+
+   if ($action eq "list") {
+      $self->matchlist;
+   } elsif ($action eq "last") {
+      $self->most_recent;
+   } elsif ($action eq "select") {
+      $self->select_enter;
+   }
+
+   ()
+}
+
+sub matchlist {
+   my ($self) = @_;
+
+   $self->{matches} = [];
+   my $row = $self->nrow - 1;
+   while ($row >= 0 && @{ $self->{matches} } < 10) {
+      my $line = $self->line ($row);
+      my @matches = $self->find_matches ($row);
+
+      for (sort { $b->[0] <=> $a->[0] or $b->[1] <=> $a->[1] } @matches) {
+         push @{ $self->{matches} }, $_;
+         last if @{ $self->{matches} } == 10;
+      }
+
+      $row = $line->beg - 1;
+   }
+
+   return unless @{ $self->{matches} };
+
+   my $width = 0;
+
+   my $i = 0;
+   for my $match (@{ $self->{matches} }) {
+      my $text = $match->[4];
+      my $w = $self->strwidth ("$i-$text");
+
+      $width = $w if $w > $width;
+      $i++;
+   }
+
+   $width = $self->ncol - 2 if $width > $self->ncol - 2;
+
+   $self->{overlay} = $self->overlay (0, 0, $width, scalar (@{ $self->{matches} }), urxvt::OVERLAY_RSTYLE, 2);
+   my $i = 0;
+   for my $match (@{ $self->{matches} }) {
+      my $text = $match->[4];
+
+      $self->{overlay}->set (0, $i, "$i-$text");
+      $i++;
+   }
+
+   $self->enable (key_press => \&matchlist_key_press);
+}
+
+sub most_recent {
+   my ($self) = shift;
+   my $row = $self->nrow - 1;
+   my @exec;
+   while ($row >= $self->top_row) {
+      my $line = $self->line ($row);
+      @exec = $self->command_for($row);
+      last if(@exec);
+
+      $row = $line->beg - 1;
+   }
+   if(@exec) {
+      return $self->exec_async (@exec);
+   }
+   ()
+}
+
+sub my_resource {
+   $_[0]->x_resource ("%.$_[1]")
+}
+
+# turn a rendition spec in the resource into a sub that implements it on $_
+sub parse_rend {
+   my ($self, $str) = @_;
+   my ($mask, $fg, $bg, $failed) = $str ? urxvt::rend2mask($str)
+                                        : (urxvt::RS_Uline, undef, undef, []);
+   warn "Failed to parse rendition string: " . join(',', @$failed) if @$failed;
+   my @rend;
+   push @rend, sub { $_ |= $mask } if $mask;
+   push @rend, sub { $_ = urxvt::SET_FGCOLOR($_, $fg) } if defined $fg;
+   push @rend, sub { $_ = urxvt::SET_BGCOLOR($_, $bg) } if defined $bg;
+   sub {
+      for my $s ( @rend ) { &$s };
+   }
+}
+
+sub on_start {
+   my ($self) = @_;
+
+   $self->{launcher} = $self->my_resource ("launcher") || $self->x_resource("url-launcher") || "sensible-browser";
+
+   $self->{button}  = 2;
+   $self->{state}   = 0;
+   if($self->{argv}[0] || $self->my_resource ("button")) {
+      my @mods = split '', $self->{argv}[0] || $self->my_resource ("button");
+      for my $mod (@mods) {
+         if($mod =~ /^\d+$/) {
+            $self->{button} = $mod;
+         } elsif($mod eq "C") {
+            $self->{state} |= urxvt::ControlMask;
+         } elsif($mod eq "S") {
+            $self->{state} |= urxvt::ShiftMask;
+         } elsif($mod eq "M") {
+            $self->{state} |= $self->ModMetaMask;
+         } elsif($mod ne "-" && $mod ne " ") {
+            warn("$mod is invalid in $self->{_name}<$self->{argv}[0]>\n");
+         }
+      }
+   }
+
+   my @defaults = ($url);
+   my @matchers;
+   for (my $idx = 0; defined (my $res = $self->my_resource ("pattern.$idx") || $defaults[$idx]); $idx++) {
+      $res = $self->locale_decode ($res);
+      utf8::encode $res;
+      my $launcher = $self->my_resource ("launcher.$idx");
+      $launcher =~ s/\$&|\$\{&\}/\${0}/g if $launcher;
+      my $rend = $self->parse_rend($self->my_resource ("rend.$idx"));
+      unshift @matchers, [qr($res)x,$launcher,$rend];
+   }
+   $self->{matchers} = \@matchers;
+
+   ()
+}
+
+sub on_line_update {
+   my ($self, $row) = @_;
+
+   # fetch the line that has changed
+   my $line = $self->line ($row);
+   my $text = $line->t;
+   my $rend;
+
+   # find all urls (if any)
+   for my $matcher (@{$self->{matchers}}) {
+      while ($text =~ /$matcher->[0]/g) {
+         #print "$&\n";
+         $rend ||= $line->r;
+
+         # mark all characters as underlined. we _must_ not toggle underline,
+         # as we might get called on an already-marked url.
+         &{$matcher->[2]}
+            for @{$rend}[$-[0] .. $+[0] - 1];
+      }
+   }
+
+   $line->r ($rend) if $rend;
+
+   ()
+}
+
+sub valid_button {
+   my ($self, $event) = @_;
+   my $mask = $self->ModLevel3Mask | $self->ModMetaMask
+   | urxvt::ShiftMask | urxvt::ControlMask;
+   return ($event->{button} == $self->{button} &&
+      ($event->{state} & $mask) == $self->{state});
+}
+
+sub find_matches {
+   my ($self, $row, $col) = @_;
+   my $line = $self->line ($row);
+   my $text = $line->t;
+   my $off = $line->offset_of ($row, $col) if defined $col;
+
+   my @matches;
+   for my $matcher (@{$self->{matchers}}) {
+      my $launcher = $matcher->[1] || $self->{launcher};
+      while ($text =~ /$matcher->[0]/g) {
+         my $match = substr $text, $-[0], $+[0] - $-[0];
+         my @begin = @-;
+         my @end = @+;
+         my @exec;
+
+         if (!defined($off) || ($-[0] <= $off && $+[0] >= $off)) {
+            if ($launcher !~ /\$/) {
+               @exec = ($launcher, $match);
+            } else {
+               # It'd be nice to just access a list like ($&,$1,$2...),
+               # but alas, m//g behaves differently in list context.
+               @exec = map { s/\$(\d+)|\$\{(\d+)\}/
+                  substr $text, $begin[$1 || $2], $end[$1 || $2] - $begin[$1 || $2]
+                  /egx; $_ } split /\s+/, $launcher;
+            }
+
+            push @matches, [ $line->coord_of ($begin[0]), $line->coord_of ($end[0]), $match, @exec ];
+         }
+      }
+   }
+
+   @matches;
+}
+
+sub command_for {
+   my ($self, $row, $col) = @_;
+
+   my @matches = $self->find_matches ($row, $col);
+   if (@matches) {
+      my @match = @{ $matches[0] };
+      return @match[5 .. $#match];
+   }
+
+   ()
+}
+
+sub on_button_press {
+   my ($self, $event) = @_;
+   if($self->valid_button($event)
+      && (my @exec = $self->command_for($event->{row},$event->{col}))) {
+      $self->{row} = $event->{row};
+      $self->{col} = $event->{col};
+      $self->{cmd} = \@exec;
+      return 1;
+   } else {
+      delete $self->{row};
+      delete $self->{col};
+      delete $self->{cmd};
+   }
+
+   ()
+}
+
+sub on_button_release {
+   my ($self, $event) = @_;
+
+   my $row = delete $self->{row};
+   my $col = delete $self->{col};
+   my $cmd = delete $self->{cmd};
+
+   return if !defined $row;
+
+   if($row == $event->{row} && abs($col-$event->{col}) < 2
+      && join("\x00", @$cmd) eq join("\x00", $self->command_for($row,$col))) {
+      if($self->valid_button($event)) {
+
+         $self->exec_async (@$cmd);
+
+      }
+   }
+
+   1;
+}
+
+sub select_enter {
+   my ($self) = @_;
+
+   $self->{view_start} = $self->view_start;
+   $self->{pty_ev_events} = $self->pty_ev_events (urxvt::EV_NONE);
+   $self->{cur_row} = $self->nrow - 1;
+
+   $self->enable (
+      key_press     => \&select_key_press,
+      refresh_begin => \&select_refresh,
+      refresh_end   => \&select_refresh,
+   );
+
+   $self->{overlay} = $self->overlay (0, -1, $self->ncol, 1, urxvt::OVERLAY_RSTYLE, 0);
+   $self->{overlay}->set (0, 0, "match-select");
+}
+
+sub select_leave {
+   my ($self) = @_;
+
+   $self->disable ("key_press", "refresh_begin", "refresh_end");
+   $self->pty_ev_events ($self->{pty_ev_events});
+
+   delete $self->{overlay};
+   delete $self->{matches};
+   delete $self->{id};
+}
+
+sub select_search {
+   my ($self, $dir, $row) = @_;
+
+   while ($self->nrow > $row && $row >= $self->top_row) {
+      my $line = $self->line ($row)
+          or last;
+
+      my @matches = $self->find_matches ($row);
+      if (@matches) {
+         @matches = sort { $a->[0] <=> $b->[0] or $a->[1] <=> $b->[1] } @matches;
+         $self->{matches} = \@matches;
+         $self->{cur_row} = $row;
+         $self->{id} = $dir < 0 ? @{ $self->{matches} } - 1 : 0;
+         $self->view_start (List::Util::min 0, $row - ($self->nrow >> 1));
+         $self->want_refresh;
+         return 1;
+      }
+
+      $row = $dir < 0 ? $line->beg - 1 : $line->end + 1;
+   }
+
+   $self->scr_bell;
+
+   ()
+}
+
+sub select_refresh {
+   my ($self) = @_;
+
+   return unless $self->{matches};
+
+   my $cur = $self->{matches}[$self->{id}];
+   $self->scr_xor_span (@$cur[0 .. 3], urxvt::RS_RVid);
+
+   ()
+}
+
+sub select_key_press {
+   my ($self, $event, $keysym, $string) =  @_;
+
+   if ($keysym == 0xff0d || $keysym == 0xff8d) { # enter
+      if ($self->{matches}) {
+         my @match = @{ $self->{matches}[$self->{id}] };
+         $self->exec_async (@match[5 .. $#match]);
+      }
+      $self->select_leave;
+   } elsif ($keysym == 0x79) { # y
+      if ($self->{matches}) {
+         $self->selection ($self->{matches}[$self->{id}][4], 1);
+         $self->selection_grab (urxvt::CurrentTime, 1);
+      }
+      $self->select_leave;
+   } elsif ($keysym == 0xff1b) { # escape
+      $self->view_start ($self->{view_start});
+      $self->select_leave;
+   } elsif ($keysym == 0xff50) { # home
+      $self->select_search (+1, $self->top_row)
+   } elsif ($keysym == 0xff57) { # end
+      $self->select_search (-1, $self->nrow - 1)
+   } elsif ($keysym == 0xff52) { # up
+      if ($self->{id} > 0) {
+         $self->{id}--;
+         $self->want_refresh;
+      } else {
+         my $line = $self->line ($self->{cur_row});
+         $self->select_search (-1, $line->beg - 1)
+            if $line->beg > $self->top_row;
+      }
+   } elsif ($keysym == 0xff54) { # down
+      if ($self->{id} < @{ $self->{matches} } - 1) {
+         $self->{id}++;
+         $self->want_refresh;
+      } else {
+         my $line = $self->line ($self->{cur_row});
+         $self->select_search (+1, $line->end + 1)
+            if $line->end < $self->nrow;
+      }
+   } elsif ($self->lookup_keysym ($keysym, $event->{state}) eq "matcher:select") {
+      if ($self->{id} > 0) {
+         $self->{id}--;
+         $self->want_refresh;
+      } else {
+         my $line = $self->line ($self->{cur_row});
+         $self->select_search (-1, $self->nrow - 1)
+            unless $self->select_search (-1, $line->beg - 1);
+      }
+   }
+
+   1
+}
+
+# vim:set sw=3 sts=3 et:

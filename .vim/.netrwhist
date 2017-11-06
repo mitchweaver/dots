@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/mitch/cloud/workspace/dotfiles/.git'
+let g:netrw_dirhist_2='/home/mitch/cloud/workspace/dotfiles/.git/hooks'
+let g:netrw_dirhist_3='/home/mitch/cloud/vimwiki/vim.wiki'
+let g:netrw_dirhist_4='/home/mitch/cloud/vimwiki/linux.wiki'
+let g:netrw_dirhist_5='/home/mitch/files/vimwiki/french.wiki'
