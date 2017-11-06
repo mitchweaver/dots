@@ -120,6 +120,27 @@ static SiteSpecific styles[] = {
 	{ ".*",                 "default.css" },
 };
 
+ /* ------- BOOK MARKING ---------------- */
+#define BM_PICK { .v = (char *[]){ "/bin/sh", "-c", \
+    "xprop -id $0 -f _SURF_GO 8s -set _SURF_GO \
+    `cat ~/.surf/bookmarks | dmenu || exit 0`", \
+    winid, NULL } }
+
+#define BM_ADD { .v = (char *[]){ "/bin/sh", "-c", \
+    "(echo `xprop -id $0 _SURF_URI | cut -d '\"' -f 2` && \
+    cat ~/.surf/bookmarks) | sort -u > ~/.surf/bookmarks_new && \
+    mv ~/.surf/bookmarks_new ~/.surf/bookmarks", \
+    winid, NULL } }
+/* ----------------------------------------- */
+
+
+/* ----------- open flash videos with youtube-dl ------------ */
+#define YOUTUBEDL {.v = (char *[]){ "/bin/sh", "-c", \
+        "mpv --really-quiet $(xprop -id $0 _SURF_URI | cut -d \\\" -f 2) &", \
+        winid, NULL } }
+/* ----------------------------------------------------------------- */
+
+
 #define MODKEY GDK_CONTROL_MASK
 /* hotkeys */
 /*
@@ -134,6 +155,12 @@ static Key keys[] = {
 
 	{ 0,                     GDK_KEY_Escape, stop,       { 0 } },
 	{ MODKEY,                GDK_KEY_c,      stop,       { 0 } },
+
+
+    { MODKEY,               GDK_KEY_o,      spawn,      YOUTUBEDL },
+
+    { MODKEY,               GDK_KEY_b,      spawn,      BM_PICK },
+    { MODKEY|GDK_SHIFT_MASK,GDK_KEY_b,      spawn,      BM_ADD },
 
 	{ MODKEY,                GDK_KEY_r,      reload,     { .i = 0 } },
 
