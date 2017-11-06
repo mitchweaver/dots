@@ -56,8 +56,8 @@ syntax enable
 " ------------------------------------------------------------------
 
 " ------------- COLORSCHEME ------------------------------------------
-" colorscheme dracula
-colorscheme solarized
+colorscheme dracula
+" colorscheme solarized
 " colorscheme wombat
 set background=dark
 " set background=light
