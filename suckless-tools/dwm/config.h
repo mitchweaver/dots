@@ -35,8 +35,8 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 };
 
-#define mod1 Mod4Mask //super
-#define mod2 Mod1Mask //alt
+#define mod1 Mod1Mask 
+#define mod4 Mod4Mask //alt
 #define TAGKEYS(KEY,TAG) \
 	{ mod1,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ mod1|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -47,7 +47,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *netcmd[] = { "surf", NULL };
+static const char *netcmd[] = { "tabbed", "-c", "surf", "-e", NULL };
 static const char *deditcmd[] = { "/home/mitch/bin/dedit", NULL };
 static const char *clipboardcmd[] = { "clipmenu", NULL };
 static const char *rangercmd[] = { "st", "-e", "ranger", NULL };
@@ -73,7 +73,7 @@ static Key keys[] = {
 	{ mod1,                     XK_l,       setmfact,       {.f = +0.05} },
 	{ mod1,                     XK_Return,  zoom,           {0} },
 	{ mod1,                     XK_Tab,     view,           {0} },
-	{ mod2,                     XK_4,       killclient,     {0} },
+	{ mod1,                     XK_q,       killclient,     {0} },
 	{ mod1,                     XK_t,       setlayout,      {.v = &layouts[0]} },
 	{ mod1,                     XK_f,       setlayout,      {.v = &layouts[1]} },
 	{ mod1,                     XK_m,       setlayout,      {.v = &layouts[2]} },

@@ -1,0 +1,23 @@
+diff --git a/tabbed.c b/tabbed.c
+index 9a44795..657909e 100644
+--- a/tabbed.c
++++ b/tabbed.c
+@@ -318,6 +318,7 @@ drawbar(void)
+ 	XftColor *col;
+ 	int c, cc, fc, width;
+ 	char *name = NULL;
++	char tabtitle[256];
+ 
+ 	if (nclients == 0) {
+ 		dc.x = 0;
+@@ -359,7 +360,9 @@ drawbar(void)
+ 		} else {
+ 			col = clients[c]->urgent ? dc.urg : dc.norm;
+ 		}
+-		drawtext(clients[c]->name, col);
++		snprintf(tabtitle, sizeof(tabtitle), "%d: %s",
++		         c + 1, clients[c]->name);
++		drawtext(tabtitle, col);
+ 		dc.x += dc.w;
+ 		clients[c]->tabx = dc.x;
+ 	}

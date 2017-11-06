@@ -6,8 +6,10 @@ static char *cachedir       = "~/.surf/cache/";
 static char *cookiefile     = "~/.surf/cookies.txt";
 
 
-static char *searchengine = "https://duckduckgo.com/html/?q="; /* default */
+/* default search provider */
+static char *searchengine = "https://duckduckgo.com/html/?q="; 
 static SearchEngine searchengines[] = {
+        { "d",  "https://duckduckgo.com/html/?q=%s" },
         { "g",   "https://google.com/search?q=%s"   },
         { "arch", "https://wiki.archlinux.org/index.php?search=%s" },
         { "gentoo", "https://wiki.gentoo.org/index.php?search=%s" },
@@ -46,7 +48,7 @@ static Parameter defconfig[ParameterLast] = {
 	[PreferredLanguages]  =       { { .v = (char *[]){ NULL } }, },
 	[RunInFullscreen]     =       { { .i = 0 },     },
 	[ScrollBars]          =       { { .i = 0 },     }, // FUCK SCROLLBARS
-	[ShowIndicators]      =       { { .i = 1 },     }, // ?
+	[ShowIndicators]      =       { { .i = 0 },     }, // letters at the start
 	[SiteQuirks]          =       { { .i = 1 },     },
 	[SmoothScrolling]     =       { { .i = 1 },     }, // TESTING 
 	[SpellChecking]       =       { { .i = 0 },     }, // Who needs this, really?

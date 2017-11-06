@@ -5,7 +5,7 @@ export PS1="\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\
 
 export DISTRIB_ID="Parabola"
 export EDITOR="/usr/bin/vim"
-export BROWSER="/usr/local/bin/surf"
+export BROWSER="/usr/local/bin/tabbed -c /usr/local/bin/surf -e"
 export PYTHONPATH="/home/mitch/.local/lib64/python3.4/site-packages"
 
 ### NOTE: this may be dangerous to keep. This is just what
@@ -97,12 +97,27 @@ alias q='exit'
 
 alias make="make -j3"
 
-alias recomp="cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/dwm && sudo make -j3  && sudo make clean install && killall dwm"
+recomp() {
+    case $1 in
+        dwm)
+            cd ~/workspace/dotfiles/suckless-tools/dwm/dwm && sudo make -j3  && sudo make clean install && killall dwm;;
+        surf) 
+            cd ~/workspace/dotfiles/suckless-tools/surf/surf && sudo make -j3 && sudo make clean install && clear ;;
+        tabbed)
+            cd ~/workspace/dotfiles/suckless-tools/tabbed/tabbed && sudo make -j3 && sudo make clean install && clear ;;
+        st)
+            cd ~/workspace/dotfiles/suckless-tools/st/st && sudo make -j3 && sudo make clean install && clear ;;
+        dmenu)
+            cd ~/workspace/dotfiles/suckless-tools/dmenu/dmenu && sudo make -j3 && sudo make clean install && clear ;;
+        *)
+    esac
+}
+
 alias dwmconfig="vim /home/mitch/workspace/dotfiles/suckless-tools/dwm/config.h"
-alias surfconfig="cd /home/mitch/workspace/dotfiles/suckless-tools/surf/surf && vim config.h && make -j3 && sudo make clean install"
+alias surfconfig="vim ~/workspace/dotfiles/suckless-tools/surf/surf/config.h"
+alias tabbedconfig="vim ~/workspace/dotfiles/suckless-tools/tabbed/tabbed/config.h"
+alias dmenuconfig="vim ~/workspace/dotfiles/suckless-tools/dmenu/dmenu/config.h"
 alias sf="screenfetch -D Parabola"
-
-
 
 
 
