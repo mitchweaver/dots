@@ -47,8 +47,8 @@ syntax enable
 
 " ------------- COLORSCHEME ------------------------------------
 " colorscheme dracula
-" colorscheme solarized
-colorscheme wombat 
+colorscheme solarized
+" colorscheme wombat 
 set background=dark
 " set background=light
 " ---------------------------------------------------------------
@@ -115,7 +115,7 @@ iab #i #include <.h>
 " --------------------------------------------------------------
 
 " -------- Key Bindings ---------------------------------------
-inoremap <silent><c-n><c-n> <c-o>:set invnumber<cr>
+map <silent><leader>ln :set number!<cr>
 " -------------------------------------------------------------
 
 " -------------- Extension Settings --------------------------
