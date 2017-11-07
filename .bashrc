@@ -4,18 +4,23 @@ export PS1="\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\
 
 
 export DISTRIB_ID="Parabola"
-export EDITOR="/usr/bin/vim"
+export EDITOR="/usr/bin/nvim"
 export BROWSER="/usr/local/bin/tabbed -c /usr/local/bin/surf -e"
 export PYTHONPATH="/home/mitch/.local/lib64/python3.4/site-packages"
 
 ### NOTE: this may be dangerous to keep. This is just what
-#	  I use for my own backups.
+#         I use for my own backups.
 alias rsync='rsync -rtvuclh --progress --delete'
 
 ### IMAGE MANIPULATION ######
 alias resize-half='mogrify -resize 50%x50%'
 alias resize-quarter='mogrify -resize 25%x25%'
 #############################
+
+
+alias vim=nvim
+alias vi=nvim
+
 
 trash() {
     mv $1 ~/.local/share/Trash/files
@@ -127,3 +132,7 @@ alias sf="screenfetch -D Parabola"
 
 
 alias backup="sh ~/bin/backup.sh"
+
+
+
+stty erase '^?'
