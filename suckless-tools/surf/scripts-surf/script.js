@@ -251,11 +251,11 @@ function get_key(evt){
 // -------------------------------------------------------------
 function up() {
     if (window.scrollByLines) window.scrollByLines(-10); // gecko
-    else window.scrollBy(0, -50); // webkit
+    else window.scrollBy(0, -60); // webkit
 }
 function down() {
     if (window.scrollByLines) window.scrollByLines(10); // gecko
-    else window.scrollBy(0, 50); // webkit
+    else window.scrollBy(0, 60); // webkit
 }
 function pageup() {
     if (window.scrollByPages) window.scrollByPages(-1); // gecko

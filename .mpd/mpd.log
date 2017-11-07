@@ -34433,3 +34433,5 @@ Nov 05 22:30 : exception: Failed to decode /home/mitch/music/Wolves In The Thron
 Nov 05 22:30 : exception: nested: Failed to open /home/mitch/music/Wolves In The Throne Room/Thrice Woven - 2017/Thrice Woven - 2017.ogg/Thrice Woven - 2017.ogg/Thrice Woven - 2017.ogg: No such file or directory
 Nov 05 22:30 : player: played "Wolves In The Throne Room/Thrice Woven - 2017/Thrice Woven - 2017.ogg/Thrice Woven - 2017.ogg/Thrice Woven - 2017.ogg"
 Nov 05 22:30 : client: [0] closed
+Nov 07 16:22 : client: [0] opened from 127.0.0.1:45230
+Nov 07 16:22 : client: [0] closed

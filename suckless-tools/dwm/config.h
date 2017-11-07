@@ -49,6 +49,8 @@ static const char *netcmd[] = { "tabbed", "-c", "surf", "-e", NULL };
 static const char *deditcmd[] = { "/home/mitch/bin/dedit", NULL };
 static const char *clipboardcmd[] = { "clipmenu", NULL };
 static const char *rangercmd[] = { "tabbed", "-c", "-r", "2", "st", "-w", "-e", "ranger", NULL };
+static const char *volupcmd[] = { "amixer", "-q", "sset", "Master", "4%+", NULL };
+static const char *voldowncmd[] = { "amixer", "-q", "sset", "Master", "4%-", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -59,6 +61,8 @@ static Key keys[] = {
     { mod1,                     XK_o,       spawn,          {.v = deditcmd } },
     { mod1,                     XK_c,       spawn,          {.v = clipboardcmd } },
     { mod1,                     XK_r,       spawn,          {.v = rangercmd } },
+    { mod1,                     XK_semicolon,   spawn,          {.v = voldowncmd }},
+    { mod1,                     XK_apostrophe, spawn,       {.v = volupcmd }},
     // ------------------------------------------------------------------- //
 	{ mod1,                     XK_b,       togglebar,      {0} },
 	{ mod1,                     XK_j,       focusstack,     {.i = +1 } },

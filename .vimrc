@@ -22,14 +22,16 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call plug#begin('~/.vim/vim-plug')
 Plug 'vimwiki/vimwiki'
 "Plug 'valloric/youcompleteme' " autocompletion
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'kien/ctrlp.vim' " fuzzy finder
 Plug 'tpope/vim-commentary' " comment toggler
 " Plug 'flazz/vim-colorschemes'
-"Plug 'leshill/vim-json' " json support
-"Plug 'pangloss/vim-javascript' " better javascript support
-"Plug 'tpope/vim-markdown' " markdown support
-"Plug 'kchmck/vim-coffee-script' " coffeescript support
-"Plug 'octol/vim-cpp-enhanced-highlight' " better cpp syntax
+" Plug 'leshill/vim-json' " json support
+Plug 'pangloss/vim-javascript' " better javascript support
+" Plug 'tpope/vim-markdown' " markdown support
+" Plug 'kchmck/vim-coffee-script' " coffeescript support
+" Plug 'octol/vim-cpp-enhanced-highlight' " better cpp syntax
 Plug 'sheerun/vim-polyglot' " syntax highlight - all languages
 Plug 'suan/vim-instant-markdown' " instant markdown previewer
 Plug 'terryma/vim-multiple-cursors' " sublime multiple select
@@ -37,10 +39,8 @@ Plug 'tpope/vim-surround' " quote/paren etc surrounding
 Plug 'altercation/vim-colors-solarized' " solarized colorschemes
 Plug 'dracula/vim'  " dracula colorscheme
 " Plug 'nathanaelkane/vim-indent-guides'
-
 " is this causing problems?
 " Plug 'godlygeek/tabular' " text alignment
-
 " Plug 'dylanaraps/wal.vim'
 call plug#end()
 filetype indent plugin on
@@ -69,8 +69,8 @@ set undoreload=2000
 
 " ---------- UI ---------------------------------------------
 " Also highlight all tabs and trailing whitespace characters.
-highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-match ExtraWhitespace /\s\+$\|\t/
+" highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+" match ExtraWhitespace /\s\+$\|\t/
 
 set formatoptions+=o " continue comment marker on new lines
 set number " enables line numbers on startup
@@ -78,18 +78,19 @@ set ruler " show where you are
 set relativenumber " shows line numbers relative to position
 
 " Relative numbering
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set nornu
-    set number
-  else
-    set rnu
-  endif
-endfunc
+" function! NumberToggle()
+"   if(&relativenumber == 1)
+"     set nornu
+"     set number
+"   else
+"     set rnu
+"   endif
+" endfunc
 " Toggle between normal and relative numbering.
-nnoremap <leader>lr :call NumberToggle()<cr> :set number<cr>
+" nnoremap <leader>lr :call NumberToggle()<cr> :set number<cr>
+
 " Toggle line numbeing on/off
-map <silent><leader>ln :set number!<cr>
+map <silent><leader>ln :set number!<cr> :set relativenumber!<cr>
 
 set tabpagemax=15
 set showmode
@@ -132,7 +133,7 @@ set hlsearch " highlight matches
 set gdefault " use the `g` flag by default.
 set magic " 'magic' patterns - (extended regex)
 " Use <C-l> to clear the highlighting of :set hlsearch.
-map <silent><leader>l :nohlsearch<CR><CR>
+map <silent><leader>/ :nohlsearch<CR><CR>
 " Search and Replace
 nmap <Leader>s :%s//g<Left><Left>
 " -------------------------------------------------------------
@@ -143,7 +144,14 @@ iab #i #include <.h>
 
 " -------------- Extension Settings --------------------------
 
-" Set indent guides enabled by default
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<c->'
+let g:multi_cursor_prev_key='<c-/>'
+let g:multi_cursor_skip_key='<c-.>'
+let g:multi_cursor_quit_key='<esc>'
+
+
+" set indent guides enabled by default
 let g:indent_guides_enable_on_vim_startup = 1
 " dont let indent_guides manage colors
 "let g:indent_guides_auto_colors = 0
@@ -168,6 +176,11 @@ let g:vimwiki_list = [
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 let g:instant_markdown_autostart = 0 " disable autostart (so it only works on leader command)
 map <silent><leader>md :InstantMarkdownPreview<CR>
+
+" airline settings
+
+
+
 " --------------------------------------------------------------
 
 " -------- External Programs ---------------------------------

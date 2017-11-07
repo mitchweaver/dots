@@ -124,6 +124,7 @@ recomp() {
 
 alias dwmconf="vim /home/mitch/workspace/dotfiles/suckless-tools/dwm/config.h"
 alias surfconf="vim ~/workspace/dotfiles/suckless-tools/surf/surf/config.h"
+alias surfscript="vim ~/.surf/script.js"
 alias tabbedconf="vim ~/workspace/dotfiles/suckless-tools/tabbed/tabbed/config.h"
 alias dmenuconf="vim ~/workspace/dotfiles/suckless-tools/dmenu/dmenu/config.h"
 alias stconf="vim ~/workspace/dotfiles/suckless-tools/st/st/config.h"

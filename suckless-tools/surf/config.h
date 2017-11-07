@@ -13,6 +13,7 @@ static char *searchengine = "https://duckduckgo.com/html/?q=";
 static SearchEngine searchengines[] = {
          { "d",  "https://duckduckgo.com/html/?q=%s" },
          { "g",   "https://google.com/search?q=%s"   },
+         { "git", "https://github.com/search?utf8=&q=%s&type=" },
          { "wiki", "https://en.wikipedia.org/wiki/%s" },
          { "metal", "http://www.metal-archives.com/search?searchString=%s&type=band_name" },
          { "arch", "https://wiki.archlinux.org/index.php?search=%s" },
@@ -179,7 +180,6 @@ static Key keys[] = {
     { MODKEY,                GDK_KEY_j,      scroll,     { .i = 'd' } },
     { MODKEY,                GDK_KEY_k,      scroll,     { .i = 'u' } },
     { MODKEY,                GDK_KEY_b,      scroll,     { .i = 'U' } },
-    { MODKEY,                GDK_KEY_space,  scroll,     { .i = 'D' } },
     { MODKEY,                GDK_KEY_i,      scroll,     { .i = 'r' } },
     { MODKEY,                GDK_KEY_u,      scroll,     { .i = 'l' } },
 
@@ -187,10 +187,10 @@ static Key keys[] = {
     { MODKEY,                GDK_KEY_plus,   zoom,       { .i = +1 } },
     { MODKEY,                GDK_KEY_equal,   zoom,       { .i = +1 } },
 
-    { MODKEY,                GDK_KEY_p,      clipboard,  { .i = 1 } },
-    { MODKEY,                GDK_KEY_v,      clipboard,  { .i = 1 } },
-    { MODKEY,                GDK_KEY_y,      clipboard,  { .i = 0 } },
-    { MODKEY,                GDK_KEY_c,      clipboard,  { .i = 0 } },
+    /* { MODKEY,                GDK_KEY_p,      clipboard,  { .i = 1 } }, */
+    /* { MODKEY,                GDK_KEY_v,      clipboard,  { .i = 1 } }, */
+    /* { MODKEY,                GDK_KEY_y,      clipboard,  { .i = 0 } }, */
+    /* { MODKEY,                GDK_KEY_c,      clipboard,  { .i = 0 } }, */
 
     { GDK_SHIFT_MASK,                GDK_KEY_n,      find,       { .i = +1 } },
     { MODKEY|GDK_SHIFT_MASK,        GDK_KEY_n,      find,       { .i = -1 } },
