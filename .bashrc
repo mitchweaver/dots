@@ -52,11 +52,15 @@ alias rtrans='trans -from en -to de -b'
 
 alias ls='ls --color=always --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 alias sls='ls'
+alias l='ls'
+alias sl='ls'
 
 alias grep='grep --color=tty'
 
 alias c='clear'
 alias cls='clear;ls'
+alias cl='clear;ls'
+
 
 alias jpg="jpegoptim *.jpg --strip-all"
 alias recursive-jpg="sh /home/mitch/bin/recursive-jpg-optimizer.sh"

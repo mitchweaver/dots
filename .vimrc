@@ -25,7 +25,7 @@ Plug 'vimwiki/vimwiki'
 "Plug 'valloric/youcompleteme' " autocompletion
 Plug 'kien/ctrlp.vim' " fuzzy finder
 Plug 'tpope/vim-commentary' " comment toggler
-" Plug 'flazz/vim-colorschemes'
+Plug 'flazz/vim-colorschemes'
 "Plug 'leshill/vim-json' " json support
 "Plug 'pangloss/vim-javascript' " better javascript support
 "Plug 'tpope/vim-markdown' " markdown support
@@ -46,9 +46,9 @@ syntax enable
 " --------------------------------------------------------------
 
 " ------------- COLORSCHEME ------------------------------------
-colorscheme dracula
+" colorscheme dracula
 " colorscheme solarized
-" colorscheme wombat 
+colorscheme wombat 
 set background=dark
 " set background=light
 " ---------------------------------------------------------------
