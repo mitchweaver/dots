@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/mitch/cloud/workspace/dotfiles/.git'
-let g:netrw_dirhist_2='/home/mitch/cloud/workspace/dotfiles/.git/hooks'
-let g:netrw_dirhist_3='/home/mitch/cloud/vimwiki/vim.wiki'
-let g:netrw_dirhist_4='/home/mitch/cloud/vimwiki/linux.wiki'
-let g:netrw_dirhist_5='/home/mitch/files/vimwiki/french.wiki'
-let g:netrw_dirhist_6='/home/mitch/programs/clipmenu'
-let g:netrw_dirhist_7='/home/mitch/.surf/history.txt'

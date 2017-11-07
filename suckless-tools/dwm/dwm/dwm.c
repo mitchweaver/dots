@@ -1385,8 +1385,8 @@ run(void)
 
 void
 runAutostart(void) {
-	system("cd ~/; ./autostart_blocking.sh");
-	system("cd ~/; ./autostart.sh &");
+	system("cd ~/workspace/dotfiles/suckless-tools/dwm; ./autostart_blocking.sh");
+	system("cd ~/workspace/dotfiles/suckless-tools/dwm; ./autostart.sh &");
 }
 
 void
