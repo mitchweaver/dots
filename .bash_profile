@@ -5,7 +5,7 @@ if [ ${#X} -gt 0 ]
 		true
 		#X has already been started as it has a pid
 	else
-		exec startx
+		exec startx -q
 fi
 
 

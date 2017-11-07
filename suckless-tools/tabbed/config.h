@@ -1,4 +1,4 @@
-static const char font[]        = "xos4 Terminus:pixelsize=12:antialias=false";
+static const char font[]        = "terminus:pixelsize=12:antialias=false";
 static const char* selbgcolor  = "#ABA39F";
 static const char* selfgcolor  = "#ffffff";
 static const char* normbgcolor   = "#000000";
@@ -42,15 +42,15 @@ static Key keys[] = {
     { MODKEY|ShiftMask,     XK_h,      rotate,      { .i = -1 } },
     { MODKEY,               XK_Tab,    rotate,      { .i = +1 } },
     { MODKEY|ShiftMask,     XK_Tab,    rotate,      { .i = -1 } },
-
+    { ShiftMask,            XK_Tab,    rotate,      { .i = 0 } }, // back-&-forth
+    
     /* ------- moves a tab left or right in stack ---- */
     { MODKEY|ShiftMask,     XK_j,      movetab,     { .i = -1 } },
     { MODKEY|ShiftMask,     XK_k,      movetab,     { .i = +1 } },
 
 
-    { MODKEY,               XK_Tab,    rotate,      { .i = 0 } },
 	{ MODKEY,               XK_w,      killclient,  { 0 } },
-	/* { MODKEY,               XK_grave,  spawn,       SETPROP("_TABBED_SELECT_TAB") }, */
+	{ MODKEY,               XK_grave,  spawn,       SETPROP("_TABBED_SELECT_TAB") },
 	{ MODKEY,               XK_1,      move,        { .i = 0 } },
 	{ MODKEY,               XK_2,      move,        { .i = 1 } },
 	{ MODKEY,               XK_3,      move,        { .i = 2 } },

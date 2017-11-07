@@ -1,4 +1,4 @@
-char font[] = "xos4 Terminus:pixelsize=14:antialias=false:autohint=true";
+char font[] = "terminus:pixelsize=14:antialias=false:autohint=true";
 int borderpx = 4; /* Internal border */
 
 static char *utmp = NULL;
@@ -70,85 +70,87 @@ unsigned int alpha = 0xcc;
 // ~~~~~~~~~~~~~~~ TERMINAL COLOURS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
 // @@@@@@@@@@@@ BEGIN DRACULA @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
-const char *colorname[] = {
+/* const char *colorname[] = { */
    /* 8 normal colors */
-   [0] = "#000000", /* black   */
-   [1] = "#ff5555", /* red     */
-   [2] = "#50fa7b", /* green   */
-   [3] = "#f1fa8c", /* yellow  */
-   [4] = "#bd93f9", /* blue    */
-   [5] = "#ff79c6", /* magenta */
-   [6] = "#8be9fd", /* cyan    */
-   [7] = "#bbbbbb", /* white   */ 
+   /* [0] = "#000000", /1* black   *1/ */
+   /* [1] = "#ff5555", /1* red     *1/ */
+   /* [2] = "#50fa7b", /1* green   *1/ */
+   /* [3] = "#f1fa8c", /1* yellow  *1/ */
+   /* [4] = "#bd93f9", /1* blue    *1/ */
+   /* [5] = "#ff79c6", /1* magenta *1/ */
+   /* [6] = "#8be9fd", /1* cyan    *1/ */
+   /* [7] = "#bbbbbb", /1* white   *1/ */ 
 
    /* 8 bright colors */
-   [8]  = "#44475a", /* black   */
-   [9]  = "#ff5555", /* red     */
-   [10] = "#50fa7b", /* green   */
-   [11] = "#f1fa8c", /* yellow  */
-   [12] = "#bd93f9", /* blue    */
-   [13] = "#ff79c6", /* magenta */
-   [14] = "#8be9fd", /* cyan    */
-   [15] = "#ffffff", /* white   */
+   /* [8]  = "#44475a", /1* black   *1/ */
+   /* [9]  = "#ff5555", /1* red     *1/ */
+   /* [10] = "#50fa7b", /1* green   *1/ */
+   /* [11] = "#f1fa8c", /1* yellow  *1/ */
+   /* [12] = "#bd93f9", /1* blue    *1/ */
+   /* [13] = "#ff79c6", /1* magenta *1/ */
+   /* [14] = "#8be9fd", /1* cyan    *1/ */
+   /* [15] = "#ffffff", /1* white   *1/ */
 
    /* special colors */
-   [256] = "#282a36", /* background */
-   [257] = "#f8f8f2", /* foreground */
-}; // @@@@@@@@@@@@@@ END DRACULA @@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
+   /* [256] = "#282a36", /1* background *1/ */
+   /* [257] = "#f8f8f2", /1* foreground *1/ */
+/* }; */ 
+// @@@@@@@@@@@@@@ END DRACULA @@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
 
 // @@@@@@@@@@@@ BEGIN SOLARIZED LIGHT @@@@@@@@@@@@@@@@@@@@ //
-/* const char *colorname[] = {*/
-/* 	"#eee8d5",  //  0: black    */
-/* 	"#dc322f",  //  1: red      */
-/* 	"#859900",  //  2: green    */
-/* 	"#b58900",  //  3: yellow   */
-/* 	"#268bd2",  //  4: blue     */
-/* 	"#d33682",  //  5: magenta  */
-/* 	"#2aa198",  //  6: cyan     */
-/* 	"#073642",  //  7: white    */
-/* 	"#fdf6e3",  //  8: brblack  */
-/* 	"#cb4b16",  //  9: brred    */
-/* 	"#93a1a1",  // 10: brgreen  */
-/* 	"#839496",  // 11: bryellow */
-/* 	"#657b83",  // 12: brblue   */
-/* 	"#6c71c4",  // 13: brmagenta*/
-/* 	"#586e75",  // 14: brcyan   */
-/* 	"#002b36",  // 15: brwhite  */
-/* };*/ // @@@@@@@@@@@ END SOLARIZED LIGHT @@@@@@@@@@@@@@@@@@@@@@@ //
+const char *colorname[] = {
+	"#eee8d5",  //  0: black   
+	"#dc322f",  //  1: red     
+	"#859900",  //  2: green   
+	"#b58900",  //  3: yellow  
+	"#268bd2",  //  4: blue    
+	"#d33682",  //  5: magenta 
+	"#2aa198",  //  6: cyan    
+	"#073642",  //  7: white    
+	"#fdf6e3",  //  8: brblack  
+	"#cb4b16",  //  9: brred    
+	"#93a1a1",  // 10: brgreen  
+	"#839496",  // 11: bryellow 
+	"#657b83",  // 12: brblue   
+	"#6c71c4",  // 13: brmagenta
+	"#586e75",  // 14: brcyan   
+	"#002b36",  // 15: brwhite  
+};
+// @@@@@@@@@@@ END SOLARIZED LIGHT @@@@@@@@@@@@@@@@@@@@@@@ //
 
 // @@@@@@@@@@@@@ BEGIN SOLARIZED DARK @@@@@@@@@@@@@@@@@@@@ //
 const char *altcolorname[] = {
-	"#073642",  /*  0: black    */
-	"#dc322f",  /*  1: red      */
-	"#859900",  /*  2: green    */
-	"#b58900",  /*  3: yellow   */
-	"#268bd2",  /*  4: blue     */
-	"#d33682",  /*  5: magenta  */
-	"#2aa198",  /*  6: cyan     */
-	"#eee8d5",  /*  7: white    */
-	"#002b36",  /*  8: brblack  */
-	"#cb4b16",  /*  9: brred    */
-	"#586e75",  /* 10: brgreen  */
-	"#657b83",  /* 11: bryellow */
-	"#839496",  /* 12: brblue   */
-	"#6c71c4",  /* 13: brmagenta*/
-	"#93a1a1",  /* 14: brcyan   */
-	"#fdf6e3",  /* 15: brwhite  */
+	"#073642",
+	"#dc322f",
+    "#859900",
+	"#b58900",
+	"#268bd2",	
+    "#d33682",
+	"#2aa198",
+	"#eee8d5",
+	"#002b36",
+	"#cb4b16",
+	"#586e75",
+	"#657b83",
+	"#839496",
+	"#6c71c4",
+	"#93a1a1",
+	"#fdf6e3",
 };
 // @@@@@@@@@@@@@ END SOLARIZED DARK @@@@@@@@@@@@@@@@@@@@@@ /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
 // @@@@@@@@ dracula mouse colors @@@@@@@@@@@@@@@
-unsigned int defaultfg = 257;
-unsigned int defaultbg = 256;
-unsigned int defaultcs = 257;
-unsigned int defaultrcs = 257;
+/* unsigned int defaultfg = 257; */
+/* unsigned int defaultbg = 256; */
+/* unsigned int defaultcs = 257; */
+/* unsigned int defaultrcs = 257; */
 // @@@@@@@@ END DRACULA MOUSE COLORS @@@@@@@@@@@@
 
 // @@@@@@@@@ SOLARIZED LIGHT/DARK MOUSE COLORS @@@@@@@@@@
-/* unsigned int defaultfg = 12; */
-/* /1* unsigned int defaultbg = 8; *1/ */
-/* unsigned int defaultcs = 14; */
-/* unsigned int defaultrcs = 15; */
+unsigned int defaultfg = 12;
+unsigned int defaultbg = 8;
+unsigned int defaultcs = 14;
+unsigned int defaultrcs = 15;
 // @@@@@@@ END SOLARIZED LIGHT/DARK MOUSE COLORS @@@@@@@@@
 
 

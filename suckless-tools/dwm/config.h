@@ -1,7 +1,8 @@
+static const unsigned int gappx = 10; /* gap pixel between windows */ 
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "terminus:pixelsize=10:antialias=false" };
+static const char dmenufont[]       = "terminus:pixelsize=12:antialias=false";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -13,7 +14,7 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
-static const char *tags[] = { "1: web", "2:", "3", "4", "5", "6", "7", "8", "9" }; /* workspace names */
+static const char *tags[] = { "1: web", "2", "3", "4", "5", "6", "7", "8", "9: music" }; /* workspace names */
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -44,25 +45,32 @@ static const Layout layouts[] = {
 
 static char dmenumon[2] = "0";
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL };
-static const char *netcmd[] = { "tabbed", "-c", "surf", "-e", NULL };
-static const char *deditcmd[] = { "/home/mitch/bin/dedit", NULL };
-static const char *clipboardcmd[] = { "clipmenu", NULL };
-static const char *rangercmd[] = { "tabbed", "-c", "-r", "2", "st", "-w", "-e", "ranger", NULL };
-static const char *volupcmd[] = { "amixer", "-q", "sset", "Master", "4%+", NULL };
-static const char *voldowncmd[] = { "amixer", "-q", "sset", "Master", "4%-", NULL };
+static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL };
+static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
+static const char *dedit[] = { "/home/mitch/bin/dedit", NULL };
+static const char *clipboard[] = { "clipmenu", NULL };
+static const char *ranger[] = { "tabbed", "-c", "-r", "2", "st", "-w", "-e", "ranger", NULL };
+static const char *volup[] = { "amixer", "-q", "sset", "Master", "4%+", NULL };
+static const char *voldown[] = { "amixer", "-q", "sset", "Master", "4%-", NULL };
+static const char *volmute[] = { "amixer", "-q", "sset", "Master", "toggle" };
+static const char *slock[] = { "slock", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
     // ------------------------------------------------------------------- //
 	{ mod1,                     XK_p,       spawn,          {.v = dmenucmd } },
-	{ mod1,                     XK_Return,  spawn,          {.v = termcmd } },
-    { mod1,                     XK_w,       spawn,          {.v = netcmd } },
-    { mod1,                     XK_o,       spawn,          {.v = deditcmd } },
-    { mod1,                     XK_c,       spawn,          {.v = clipboardcmd } },
-    { mod1,                     XK_r,       spawn,          {.v = rangercmd } },
-    { mod1,                     XK_semicolon,   spawn,          {.v = voldowncmd }},
-    { mod1,                     XK_apostrophe, spawn,       {.v = volupcmd }},
+	{ mod1,                     XK_Return,  spawn,          {.v = term } },
+    { mod1,                     XK_w,       spawn,          {.v = net } },
+    { mod1,                     XK_o,       spawn,          {.v = dedit } },
+    { mod1,                     XK_c,       spawn,          {.v = clipboard } },
+    { mod1,                     XK_r,       spawn,          {.v = ranger } },
+    { mod1,                     XK_semicolon,   spawn,      {.v = voldown }},
+    { mod1,                     XK_apostrophe,  spawn,      {.v = volup }},
+    // xf86 keys must be in octal
+    { 0,                        0x1008ff12, spawn,          {.v = volmute }},
+    { 0,                        0x1008ff11, spawn,          {.v = voldown }},
+    { 0,                        0x1008ff13, spawn,          {.v = volup }},
+    { 0,                        0x1008ff2a, spawn,          {.v = slock }},
     // ------------------------------------------------------------------- //
 	{ mod1,                     XK_b,       togglebar,      {0} },
 	{ mod1,                     XK_j,       focusstack,     {.i = +1 } },
@@ -86,8 +94,7 @@ static Key keys[] = {
     // ------------------------------------------------------------------- //
 	
     TAGKEYS(XK_1,0) TAGKEYS(XK_2,1) TAGKEYS(XK_3,2) TAGKEYS(XK_4,3)
-	TAGKEYS(XK_5,4) TAGKEYS(XK_6,5) TAGKEYS(XK_7,6) TAGKEYS(XK_8,7)
-	TAGKEYS(XK_9,8)
+	TAGKEYS(XK_5,4) TAGKEYS(XK_6,5) TAGKEYS(XK_7,6) TAGKEYS(XK_8,7) TAGKEYS(XK_9,8)
 };
 
 /* click can be ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
@@ -96,7 +103,7 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,              Button2,        spawn,          {.v = term } },
 	{ ClkClientWin,         mod1,           Button1,        movemouse,      {0} },
 	{ ClkClientWin,         mod1,           Button2,        togglefloating, {0} },
 	{ ClkClientWin,         mod1,           Button3,        resizemouse,    {0} },
@@ -108,7 +115,7 @@ static Button buttons[] = {
 
 // ---------------------------------------------------------------------------- //
 /* SYSTEM STUFF - DO NOT CHANGE */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define SH(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 static const int resizehints = 0; 
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */

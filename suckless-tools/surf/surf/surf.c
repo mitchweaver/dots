@@ -551,9 +551,7 @@ loaduri(Client *c, const Arg *a)
 		url = g_strdup_printf("%s%s", searchengine, uri + 1);
 	} 
         /* -------------------------------------------------- */
-    else {
-		url = parseuri(uri);
-	}
+    else url = parseuri(uri);
 
 	setatom(c, AtomUri, url);
 
@@ -804,10 +802,8 @@ setparameter(Client *c, int refresh, ParamName p, const Arg *a)
 	case ScrollBars:
 		/* Disabled until we write some WebKitWebExtension for
 		 * manipulating the DOM directly.
-		enablescrollbars = !enablescrollbars;
-		evalscript(c, "document.documentElement.style.overflow = '%s'",
-		    enablescrollbars ? "auto" : "hidden");
-		*/
+		enablescrollbars = !enablescrollbars; */
+		/* evalscript(c, "document.documentElement.style.overflow = '%s'","hidden"); */
 		return; /* do not update */
 	case ShowIndicators:
 		break;
@@ -1462,10 +1458,8 @@ loadchanged(WebKitWebView *v, WebKitLoadEvent e, Client *c)
 	case WEBKIT_LOAD_FINISHED:
 		seturiparameters(c, uri, loadfinished);
 		/* Disabled until we write some WebKitWebExtension for
-		 * manipulating the DOM directly.
-		evalscript(c, "document.documentElement.style.overflow = '%s'",
-		    enablescrollbars ? "auto" : "hidden");
-		*/
+		 * manipulating the DOM directly.*/
+		/* evalscript(c, "document.documentElement.style.overflow = '%s'", "hidden"); */
 		runscript(c);
 		break;
 	}

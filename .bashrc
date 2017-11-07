@@ -1,26 +1,28 @@
 ########### Pretty colors ####################
-export PS1="\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W \[\e[1;37m\]"
+if [ "$USER" == 'mitch' ] ; then
+    export PS1="\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W \[\e[1;37m\]"
+else
+    export PS1="\[\e[1;35m\]root \W "
+fi
 ##############################################
 
 
-export DISTRIB_ID="Parabola"
-export EDITOR="/usr/bin/nvim"
+export DISTRIB_ID="Sabotage"
+export EDITOR="/bin/nvim"
 export BROWSER="/usr/local/bin/tabbed -c /usr/local/bin/surf -e"
-export PYTHONPATH="/home/mitch/.local/lib64/python3.4/site-packages"
 
 ### NOTE: this may be dangerous to keep. This is just what
 #         I use for my own backups.
 alias rsync='rsync -rtvuclh --progress --delete'
 
 ### IMAGE MANIPULATION ######
-alias resize-half='mogrify -resize 50%x50%'
-alias resize-quarter='mogrify -resize 25%x25%'
+alias resize-half='mogrify -resize 50%X50%'
+alias resize-quarter='mogrify -resize 25%X25%'
 #############################
 
 
 alias vim=nvim
 alias vi=nvim
-
 
 trash() {
     mv $1 ~/.local/share/Trash/files
@@ -30,6 +32,8 @@ alias cdTrash="cd ~/.local/share/Trash/files"
 
 alias ncmpcpp="ncmpcpp -q"
 alias weather="curl http://wttr.in/~Schmalkalden"
+alias weather-sd="curl http://wttr.in/~Dakota_State_University"
+alias weather-ok="curl http://wttr.in/~Claremore"
 
 ####### YOUTUBE ##############################
 alias yt="youtube-viewer -C -q --vd=high"
@@ -44,8 +48,8 @@ alias r="ranger"
     ls --color=always --group-directories-first -F
 #################################
 
-alias bashrc="vim ~/.bashrc"
-alias vimrc="vim ~/.vimrc"
+alias bashrc="nvim ~/.bashrc"
+alias vimrc="nvim ~/.vimrc"
 alias x="exit"
 
 #### TRANSLATE DE-->>>>ENG ####################
@@ -55,12 +59,12 @@ alias rtrans-shell='trans -b -from en -to de -I'
 alias rtrans='trans -from en -to de -b'
 ###############################################
 
-alias ls='ls --color=always --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias ls='ls --color=always --group-directories-first --color=auto -F'
 alias sls='ls'
 alias l='ls'
 alias sl='ls'
 
-alias grep='grep --color=tty'
+alias grep='grep'
 
 alias c='clear'
 alias cls='clear;ls'
@@ -83,17 +87,17 @@ ogg-ffmpeg() {
 alias java='/home/$USER/programs/java/jdk1.8/bin/java'
 
 ###### PATHING ###########################################
-# export PATH=$PATH:/home/home/bin
+export PATH=$PATH:/home/mitch/bin
 ##########################################################
 
 alias mv="mv -v"
 alias cp="cp -av"
 alias du="ncdu"
 alias mkdir="mkdir -p"
-alias reboot="sudo reboot"
+alias reboot=" reboot"
 alias mpv="mpv --gapless-audio"
 
-alias rtv="python3.6 -m rtv --enable-media"
+alias rtv="rtv --enable-media"
 alias wtfismyip='curl https://wtfismyip.com/text'
 
 alias parrot='terminal-parrot'
@@ -109,27 +113,31 @@ alias make="make -j3"
 recomp() {
     case $1 in
         dwm)
-            cd ~/workspace/dotfiles/suckless-tools/dwm/dwm && sudo make -j3  && sudo make clean install && killall dwm;;
+            cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/dwm &&  make -j3  &&  make install && killall dwm;;
         surf) 
-            cd ~/workspace/dotfiles/suckless-tools/surf/surf && sudo make -j3 && sudo make clean install && clear ;;
+            cd /home/mitch/workspace/dotfiles/suckless-tools/surf/surf &&  make -j3 &&  make install && clear ;;
         tabbed)
-            cd ~/workspace/dotfiles/suckless-tools/tabbed/tabbed && sudo make -j3 && sudo make clean install && clear ;;
+            cd /home/mitch/workspace/dotfiles/suckless-tools/tabbed/tabbed &&  make -j3 &&  make install && clear ;;
         st)
-            cd ~/workspace/dotfiles/suckless-tools/st/st && sudo make -j3 && sudo make clean install && clear ;;
+            cd /home/mitch/workspace/dotfiles/suckless-tools/st/st &&  make -j3 &&  make install && clear ;;
         dmenu)
-            cd ~/workspace/dotfiles/suckless-tools/dmenu/dmenu && sudo make -j3 && sudo make clean install && clear ;;
-        *)
+            cd /home/mitch/workspace/dotfiles/suckless-tools/dmenu/dmenu &&  make -j3 &&  make install && clear ;;
+        slock)
+            cd /home/mitch/workspace/dotfiles/suckless-tools/slock/slock &&  make -j3 &&  make install && clear ;;
+    
+        *)    
     esac
 }
 
-alias dwmconf="vim /home/mitch/workspace/dotfiles/suckless-tools/dwm/config.h"
-alias surfconf="vim ~/workspace/dotfiles/suckless-tools/surf/surf/config.h"
-alias surfscript="vim ~/.surf/script.js"
-alias tabbedconf="vim ~/workspace/dotfiles/suckless-tools/tabbed/tabbed/config.h"
-alias dmenuconf="vim ~/workspace/dotfiles/suckless-tools/dmenu/dmenu/config.h"
-alias stconf="vim ~/workspace/dotfiles/suckless-tools/st/st/config.h"
-alias sf="screenfetch -D Parabola"
-
+alias dwmconf="nvim /home/mitch/workspace/dotfiles/suckless-tools/dwm/config.h"
+alias surfconf="nvim ~/workspace/dotfiles/suckless-tools/surf/surf/config.h"
+alias surfscript="nvim ~/.surf/script.js"
+alias tabbedconf="nvim ~/workspace/dotfiles/suckless-tools/tabbed/tabbed/config.h"
+alias dmenuconf="nvim ~/workspace/dotfiles/suckless-tools/dmenu/dmenu/config.h"
+alias stconf="nvim ~/workspace/dotfiles/suckless-tools/st/st/config.h"
+alias sf="neofetch"
+alias nf="sf"
+alias autostart="nvim ~/workspace/dotfiles/suckless-tools/dwm/autostart.sh"
 
 
 alias backup="sh ~/bin/backup.sh"
@@ -137,3 +145,13 @@ alias backup="sh ~/bin/backup.sh"
 
 
 stty erase '^?'
+alias htpo=htop
+alias du='du -ahLd 1'
+
+
+
+
+
+alias ping='ping mitchweaver.xyz'
+
+alias irssi="irssi -n _mitch -c irc.freenode.net"

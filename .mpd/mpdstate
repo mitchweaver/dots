@@ -1,7 +1,8 @@
 sw_volume: 100
-audio_device_state:1:default detected output
-state: stop
-current: 0
+audio_device_state:1:alsa audio
+state: pause
+current: 6
+time: 0.000000
 random: 0
 repeat: 0
 single: 0

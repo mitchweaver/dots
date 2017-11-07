@@ -1,4 +1,3 @@
-static char *fulluseragent  = ""; /* Or override the whole user agent string */
 static char *scriptfile     = "~/.surf/script.js";
 static char *styledir       = "~/.surf/styles/";
 static char *certdir        = "~/.surf/certificates/";
@@ -39,9 +38,9 @@ static Parameter defconfig[ParameterLast] = {
 	[DefaultCharset]      =       { { .v = "UTF-8" }, },
 	[DiskCache]           =       { { .i = 1 },     },
 	[DNSPrefetch]         =       { { .i = 1 },     },
-	[FileURLsCrossAccess] =       { { .i = 0 },     },
+	[FileURLsCrossAccess] =       { { .i = 1 },     },
 	[FontSize]            =       { { .i = 12 },    },
-	[FrameFlattening]     =       { { .i = 0 },     },
+	[FrameFlattening]     =       { { .i = 0 },     }, // what does this do?
 	[Geolocation]         =       { { .i = 0 },     },
 	[HideBackground]      =       { { .i = 0 },     },
 	[Inspector]           =       { { .i = 0 },     },
@@ -50,13 +49,13 @@ static Parameter defconfig[ParameterLast] = {
 	[KioskMode]           =       { { .i = 0 },     },
 	[LoadImages]          =       { { .i = 1 },     },
 	[MediaManualPlay]     =       { { .i = 1 },     },
-	[Plugins]             =       { { .i = 0 },     },
+	[Plugins]             =       { { .i = 1 },     }, // what are plugins?
 	[PreferredLanguages]  =       { { .v = (char *[]){ NULL } }, },
 	[RunInFullscreen]     =       { { .i = 0 },     },
 	[ScrollBars]          =       { { .i = 0 },     }, // FUCK SCROLLBARS
 	[ShowIndicators]      =       { { .i = 0 },     }, // letters at the start
 	[SiteQuirks]          =       { { .i = 1 },     },
-	[SmoothScrolling]     =       { { .i = 1 },     }, // TESTING 
+	[SmoothScrolling]     =       { { .i = 1 },     },
 	[SpellChecking]       =       { { .i = 0 },     }, // Who needs this, really?
 	[SpellLanguages]      =       { { .v = ((char *[]){ "en_US", NULL }) }, },
 	[StrictTLS]           =       { { .i = 1 },     },
@@ -65,18 +64,9 @@ static Parameter defconfig[ParameterLast] = {
 };
 
 static UriParameters uriparams[] = {
-    { "(://|\\.)youtube\\.com(/|$)", {
-	    [JavaScript] = { { .i = 0 }, 1 },
-	}, },
-	{ "(://|\\.)facebook\\.com(/html|$)", {
-        [JavaScript] = { { .i = 0 }, 1 },
- 	}, },
-	{ "(://|\\.)twitter\\.com(/html|$)", {
-        [JavaScript] = { { .i = 0 }, 1 },
- 	}, },
-    { "(://|\\.)google.|$)", {
-        [JavaScript] = { { .i = 0 }, 1 },
-	}, },
+    /* { "(://|\\.)youtube\\.com(/|$)", { */
+	    /* [JavaScript] = { { .i = 0 }, 1 }, */
+	/* }, }, */
 };
 
 
@@ -136,7 +126,7 @@ static SiteSpecific styles[] = {
  /* ------- BOOK MARKING ---------------- */
 #define BM_PICK { .v = (char *[]){ "/bin/sh", "-c", \
     "xprop -id $0 -f _SURF_GO 8s -set _SURF_GO \
-    `cat ~/.surf/bookmarks | dmenu || exit 0`", \
+    `cat ~/.surf/bookmarks | dmenu -i -l 10 || exit 0`", \
     winid, NULL } }
 
 #define BM_ADD { .v = (char *[]){ "/bin/sh", "-c", \
@@ -160,7 +150,7 @@ static SiteSpecific styles[] = {
 static Key keys[] = {
     /* modifier              keyval          function    arg */
     { MODKEY,                GDK_KEY_g,      spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
-    { 0,                     GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
+    { MODKEY,                GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
 
     { 0,                     GDK_KEY_Escape, stop,       { 0 } },
     { MODKEY,                GDK_KEY_c,      stop,       { 0 } },
@@ -192,8 +182,8 @@ static Key keys[] = {
     /* { MODKEY,                GDK_KEY_y,      clipboard,  { .i = 0 } }, */
     /* { MODKEY,                GDK_KEY_c,      clipboard,  { .i = 0 } }, */
 
-    { GDK_SHIFT_MASK,                GDK_KEY_n,      find,       { .i = +1 } },
-    { MODKEY|GDK_SHIFT_MASK,        GDK_KEY_n,      find,       { .i = -1 } },
+    { MODKEY,                GDK_KEY_slash,      find,       { .i = +1 } },
+    { MODKEY,                GDK_KEY_comma,      find,       { .i = -1 } },
 
     { MODKEY,                GDK_KEY_p,      print,      { 0 } },
 
@@ -225,5 +215,6 @@ static Button buttons[] = {
 
 /* -------------- IGNORE ------------------------ */
 static SiteSpecific certs[] = {{"://ewioajeowidfaweoijfdsf\\.org/", "ewioajeowidfaweoijfdsf.org.crt" },};
-static int surfuseragent    = 0; /* I'd rather not have a user-agent... */
+static int surfuseragent    = 0;
 static int winsize[] = { 800, 600 }; /* irrelevant, using tiling window manager */
+static char *fulluseragent  = "";

@@ -62,8 +62,7 @@ case "$extension" in
     #    try pdftoppm -jpeg -singlefile "${FILE_PATH}" "${IMAGE_CACHE_PATH//.jpg}" && exit 6
         try pdftotext -l 10 -nopgbrk -q "$path" - && \
             { dump | trim | fmt -s -w $width; exit 0; } || exit 1;;
-    md|markdown|markd)
-        try mdless "$path" && { dump | trim; exit 5; } || exit 1;;
+    # md|markdown|markd)
     # BitTorrent Files
     torrent)
         try transmission-show "$path" && { dump | trim; exit 5; } || exit 1;;
@@ -76,7 +75,7 @@ esac
 
 case "$mimetype" in
     # Syntax highlight for text files:
-    text/* | */xml)
+    text/* | */xml | */diff)
         if [ "$(tput colors)" -ge 256 ]; then
             pygmentize_format=terminal256
             highlight_format=xterm256
@@ -88,8 +87,8 @@ case "$mimetype" in
         try safepipe pygmentize -f ${pygmentize_format} "$path" && { dump | trim; exit 5; }
         exit 2;;
     # Ascii-previews of images:
-    image/*)
-        img2txt --gamma=0.6 --width="$width" "$path" && exit 4 || exit 1;;
+    # image/*)
+        # img2txt --gamma=0.6 --width="$width" "$path" && exit 4 || exit 1;;
     # Display information about media files:
     video/* | audio/*)
         exiftool "$path" && exit 5

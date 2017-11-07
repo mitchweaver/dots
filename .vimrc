@@ -48,11 +48,11 @@ syntax enable
 " --------------------------------------------------------------
 
 " ------------- COLORSCHEME ------------------------------------
-colorscheme dracula
-" colorscheme solarized
+" colorscheme dracula
+colorscheme solarized
 " colorscheme wombat
-" set background=dark
-set background=light
+set background=dark
+" set background=light
 " ---------------------------------------------------------------
 
 " -------------- Vim Specific Configs -------------------------
@@ -145,8 +145,8 @@ iab #i #include <.h>
 " -------------- Extension Settings --------------------------
 
 let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<c->'
-let g:multi_cursor_prev_key='<c-/>'
+let g:multi_cursor_next_key='<c-/>'
+let g:multi_cursor_prev_key='<c-,>'
 let g:multi_cursor_skip_key='<c-.>'
 let g:multi_cursor_quit_key='<esc>'
 
