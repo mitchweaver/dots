@@ -150,7 +150,6 @@ unsigned int defaultrcs = 257;
 /* unsigned int defaultrcs = 15; */
 // @@@@@@@ END SOLARIZED LIGHT/DARK MOUSE COLORS @@@@@@@@@
 
-
 /* IMPORTANT: when using alpha/transparency, use this background*/
 /* unsigned int defaultbg = 257; */
 

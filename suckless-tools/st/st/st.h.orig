@@ -1,5 +1,3 @@
-/* See LICENSE for license details. */
-
 /* Arbitrary sizes */
 #define UTF_SIZ       4
 #define HISTSIZE      2000
@@ -264,7 +262,15 @@ extern unsigned int cursorthickness;
 extern unsigned int blinktimeout;
 extern char termname[];
 extern const char *colorname[];
+extern const char *altcolorname[];
 extern size_t colornamelen;
+
+// ALPHA ADDITION!
+extern unsigned int alpha;
+//---------------
+
+
+extern int usealtcolors;
 extern unsigned int defaultfg;
 extern unsigned int defaultbg;
 extern unsigned int defaultcs;

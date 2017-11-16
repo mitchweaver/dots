@@ -139,6 +139,7 @@ typedef struct {
 	int w, h; /* window width and height */
 	int ch; /* char height */
 	int cw; /* char width  */
+	int cyo; /* char y offset */
 	char state; /* focus, redraw, visible */
 	int cursor; /* cursor style */
 } TermWindow;
