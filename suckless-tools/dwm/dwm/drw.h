@@ -50,6 +50,7 @@ void drw_setfontset(Drw *drw, Fnt *set);
 void drw_setscheme(Drw *drw, Scm scm);
 
 /* Drawing functions */
+int drw_get_width(Drw *, int, const char *);
 void drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int invert);
 int drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lpad, const char *text, int invert);
 

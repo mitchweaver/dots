@@ -1,20 +1,21 @@
 static const unsigned int gappx = 10; /* gap pixel between windows */ 
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const char *fonts[]          = { "terminus:pixelsize=10:antialias=false" };
+static const char *fonts[]          = { "terminus:pixelsize=12:antialias=false" };
 static const char dmenufont[]       = "terminus:pixelsize=12:antialias=false";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
+static const char gray_purple[] = "#332a2a";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, gray_purple, "#ffbad2" },
 };
 
-static const char *tags[] = { "1: web", "2", "3", "4", "5", "6", "7", "8", "9: music" }; /* workspace names */
+static const char *tags[] = { "1: web", "2", "3", "4", "5", "6", "7", "8: irc", "9: music" }; /* workspace names */
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -32,8 +33,8 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[T]",      tile },    /* first entry is default */
 	{ "[F]",      NULL },    /* no layout function means floating behavior */
-
-    { "HHH", grid },
+    { "[HHH]", grid },
+    { "[TTT]", bstack},
     
     
     //	{ "[M]",      monocle },
@@ -50,7 +51,7 @@ static const Layout layouts[] = {
 
 static char dmenumon[2] = "0";
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-g", "60x20", "-w", "''", NULL };
+static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL };
 static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
 static const char *dedit[] = { "dedit", NULL };
 static const char *clipboard[] = { "clipmenu", NULL };
@@ -58,6 +59,9 @@ static const char *ranger[] = { "tabbed", "-c", "-r", "2", "st", "-w", "-e", "ra
 static const char *volup[] = { "amixer", "-q", "sset", "Master", "4%+", NULL };
 static const char *voldown[] = { "amixer", "-q", "sset", "Master", "4%-", NULL };
 static const char *volmute[] = { "amixer", "-q", "sset", "Master", "toggle" };
+static const char *mpdnext[] = { "mpc", "next" };
+static const char *mpdprev[] = { "mpc", "prev" };
+static const char *mpdtoggle[] = { "mpc", "toggle" };
 static const char *slock[] = { "slock", NULL };
 
 static Key keys[] = {
@@ -69,6 +73,10 @@ static Key keys[] = {
     { mod1,                     XK_o,       spawn,          {.v = dedit } },
     { mod1,                     XK_c,       spawn,          {.v = clipboard } },
     { mod1,                     XK_r,       spawn,          {.v = ranger } },
+    { mod1,                     XK_slash,   spawn,          {.v = mpdnext } },
+    { mod1,                     XK_period,   spawn,          {.v = mpdprevious } },
+    { mod1,                     XK_comma,   spawn,          {.v = mpdtoggle } },
+    
     /* { mod1,                     XK_semicolon,   spawn,      {.v = voldown }}, */
     /* { mod1,                     XK_apostrophe,  spawn,      {.v = volup }}, */
     // xf86 keys must be in octal
@@ -76,8 +84,9 @@ static Key keys[] = {
     { 0,                        0x1008ff11, spawn,          {.v = voldown }},
     { 0,                        0x1008ff13, spawn,          {.v = volup }},
     { 0,                        0x1008ff2a, spawn,          {.v = slock }},
+    { mod1,                     XK_x,       spawn,          {.v = slock }},
     // ------------------------------------------------------------------- //
-	{ mod1,                     XK_b,       togglebar,      {0} },
+	{ mod1|ShiftMask,           XK_b,       togglebar,      {0} },
 	{ mod1,                     XK_j,       focusstack,     {.i = +1 } },
 	{ mod1,                     XK_k,       focusstack,     {.i = -1 } },
 	{ mod1,                     XK_i,       incnmaster,     {.i = +1 } },
@@ -91,6 +100,7 @@ static Key keys[] = {
 	{ mod1,                     XK_t,       setlayout,      {.v = &layouts[0]} },
 	{ mod1,                     XK_f,       setlayout,      {.v = &layouts[1]} },
 	{ mod1,                     XK_g,       setlayout,      {.v = &layouts[2]} },
+	{ mod1,                     XK_b,       setlayout,      {.v = &layouts[3]} },
 	/* { mod1,                     XK_m,       setlayout,      {.v = &layouts[2]} }, */
 	{ mod1,                     XK_space,   setlayout,      {0} },
 	{ mod1|ShiftMask,           XK_space,   togglefloating, {0} },

@@ -61,7 +61,7 @@ char termname[] = "st-256color";
  *  running following command:
  *
  *	stty tabs */
-static unsigned int tabspaces = 8;
+static unsigned int tabspaces = 4;
 
 
 /* background opacity */
@@ -70,35 +70,32 @@ unsigned int alpha = 0xcc;
 // ~~~~~~~~~~~~~~~ TERMINAL COLOURS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
 // @@@@@@@@@@@@ BEGIN DRACULA @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
-/* const char *colorname[] = { */
-   /* 8 normal colors */
-   /* [0] = "#000000", /1* black   *1/ */
-   /* [1] = "#ff5555", /1* red     *1/ */
-   /* [2] = "#50fa7b", /1* green   *1/ */
-   /* [3] = "#f1fa8c", /1* yellow  *1/ */
-   /* [4] = "#bd93f9", /1* blue    *1/ */
-   /* [5] = "#ff79c6", /1* magenta *1/ */
-   /* [6] = "#8be9fd", /1* cyan    *1/ */
-   /* [7] = "#bbbbbb", /1* white   *1/ */ 
+const char *colorname[] = {
+   [0] = "#000000", /* black   */
+   [1] = "#ff5555", /* red     */
+   [2] = "#50fa7b", /* green   */
+   [3] = "#f1fa8c", /* yellow  */
+   [4] = "#bd93f9", /* blue    */
+   [5] = "#ff79c6", /* magenta */
+   [6] = "#8be9fd", /* cyan    */
+   [7] = "#bbbbbb", /* white   */ 
 
-   /* 8 bright colors */
-   /* [8]  = "#44475a", /1* black   *1/ */
-   /* [9]  = "#ff5555", /1* red     *1/ */
-   /* [10] = "#50fa7b", /1* green   *1/ */
-   /* [11] = "#f1fa8c", /1* yellow  *1/ */
-   /* [12] = "#bd93f9", /1* blue    *1/ */
-   /* [13] = "#ff79c6", /1* magenta *1/ */
-   /* [14] = "#8be9fd", /1* cyan    *1/ */
-   /* [15] = "#ffffff", /1* white   *1/ */
+   [8]  = "#44475a", /* black   */
+   [9]  = "#ff5555", /* red     */
+   [10] = "#50fa7b", /* green   */
+   [11] = "#f1fa8c", /* yellow  */
+   [12] = "#bd93f9", /* blue    */
+   [13] = "#ff79c6", /* magenta */
+   [14] = "#8be9fd", /* cyan    */
+   [15] = "#ffffff", /* white   */
 
-   /* special colors */
-   /* [256] = "#282a36", /1* background *1/ */
-   /* [257] = "#f8f8f2", /1* foreground *1/ */
-/* }; */ 
+   [256] = "#282a36", /* background */
+   [257] = "#f8f8f2", /* foreground */
+}; 
 // @@@@@@@@@@@@@@ END DRACULA @@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
 
 // @@@@@@@@@@@@ BEGIN SOLARIZED LIGHT @@@@@@@@@@@@@@@@@@@@ //
-const char *colorname[] = {
+const char *altcolorname[] = {
 	"#eee8d5",  //  0: black   
 	"#dc322f",  //  1: red     
 	"#859900",  //  2: green   
@@ -119,38 +116,38 @@ const char *colorname[] = {
 // @@@@@@@@@@@ END SOLARIZED LIGHT @@@@@@@@@@@@@@@@@@@@@@@ //
 
 // @@@@@@@@@@@@@ BEGIN SOLARIZED DARK @@@@@@@@@@@@@@@@@@@@ //
-const char *altcolorname[] = {
-	"#073642",
-	"#dc322f",
-    "#859900",
-	"#b58900",
-	"#268bd2",	
-    "#d33682",
-	"#2aa198",
-	"#eee8d5",
-	"#002b36",
-	"#cb4b16",
-	"#586e75",
-	"#657b83",
-	"#839496",
-	"#6c71c4",
-	"#93a1a1",
-	"#fdf6e3",
-};
+/* const char *altcolorname[] = { */
+/* 	"#073642", */
+/* 	"#dc322f", */
+/*     "#859900", */
+/* 	"#b58900", */
+/* 	"#268bd2", */	
+/*     "#d33682", */
+/* 	"#2aa198", */
+/* 	"#eee8d5", */
+/* 	"#002b36", */
+/* 	"#cb4b16", */
+/* 	"#586e75", */
+/* 	"#657b83", */
+/* 	"#839496", */
+/* 	"#6c71c4", */
+/* 	"#93a1a1", */
+/* 	"#fdf6e3", */
+/* }; */
 // @@@@@@@@@@@@@ END SOLARIZED DARK @@@@@@@@@@@@@@@@@@@@@@ /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
 // @@@@@@@@ dracula mouse colors @@@@@@@@@@@@@@@
-/* unsigned int defaultfg = 257; */
-/* unsigned int defaultbg = 256; */
-/* unsigned int defaultcs = 257; */
-/* unsigned int defaultrcs = 257; */
+unsigned int defaultfg = 257;
+unsigned int defaultbg = 256;
+unsigned int defaultcs = 257;
+unsigned int defaultrcs = 257;
 // @@@@@@@@ END DRACULA MOUSE COLORS @@@@@@@@@@@@
 
 // @@@@@@@@@ SOLARIZED LIGHT/DARK MOUSE COLORS @@@@@@@@@@
-unsigned int defaultfg = 12;
-unsigned int defaultbg = 8;
-unsigned int defaultcs = 14;
-unsigned int defaultrcs = 15;
+/* unsigned int defaultfg = 12; */
+/* unsigned int defaultbg = 8; */
+/* unsigned int defaultcs = 14; */
+/* unsigned int defaultrcs = 15; */
 // @@@@@@@ END SOLARIZED LIGHT/DARK MOUSE COLORS @@@@@@@@@
 
 
@@ -174,9 +171,9 @@ unsigned int defaultunderline = 7;
  * 7: Snowman ("☃") */
 unsigned int cursorshape = 2;
 
-/* Default columns and rows numbers */
-unsigned int cols = 80;
-unsigned int rows = 24;
+/* Default columns and rows numbers (defualt is 80x24) */
+unsigned int cols = 60;
+unsigned int rows = 20;
 
 /* Default colour and shape of the mouse cursor */
 unsigned int mouseshape = XC_xterm;
@@ -443,5 +440,5 @@ char ascii_printable[] =
 	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
 	"`abcdefghijklmnopqrstuvwxyz{|}~";
 
-static char shell[] = "/bin/sh";
+static char shell[] = "/bin/bash";
 unsigned int cursorthickness = 1;
