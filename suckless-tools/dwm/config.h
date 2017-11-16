@@ -69,8 +69,15 @@ static const char *mpdprev[] = { "mpc", "prev" };
 static const char *mpdtoggle[] = { "mpc", "toggle" };
 static const char *slock[] = { "slock", NULL };
 
+
+
+#include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+
+    // ------------------------------------------------------------------ //
+    { mod1|ShiftMask,           XK_j,       movestack,      {.i = +1 } },
+    { mod1|ShiftMask,           XK_k,       movestack,      {.i = -1 } },
     // ------------------------------------------------------------------- //
 	{ mod1,                     XK_p,       spawn,          {.v = dmenucmd } },
 	{ mod1,                     XK_Return,  spawn,          {.v = term } },

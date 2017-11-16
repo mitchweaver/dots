@@ -7,7 +7,7 @@
 
 /* alpha */
 #define OPAQUE 0Xff
-#define USE_ARGB (alpha != OPAQUE && opt_embed == NULL)
+#define USE_ARGB (alpha != OPAQUE)
 
 typedef XftGlyphFontSpec GlyphFontSpec;
 

@@ -1,8 +1,8 @@
-sw_volume: 100
+sw_volume: 94
 audio_device_state:1:alsa audio
-state: play
-current: 417
-time: 4.109000
+state: pause
+current: 1011
+time: 0.000000
 random: 0
 repeat: 0
 single: 1
@@ -433,4 +433,602 @@ playlist_begin
 419:Thy Art is Murder/This Hole Isn't Deep Enough for the Twelve of You - Demo/Thy Art Is Murder - ''This Hole Isn't Deep Enough For The Twelve Of You'' [FULL DEMO].ogg
 420:8bit/behemoth - Ov Fire and the Void - 8bit.ogg
 421:8bit/dunkelheit-8bit.ogg
+422:Abortion Autopsy/Deep Throat/1. Decapitating The Clitoris.ogg
+423:Abortion Autopsy/Deep Throat/2. Oral Assfixiation.ogg
+424:Abortion Autopsy/Deep Throat/3. Deep Throat.ogg
+425:Abyssal/Denouement/Abyssal - Denouement - 01 The Moss Upon Our Ruins.ogg
+426:Abyssal/Denouement/Abyssal - Denouement - 02 Celestial Dictatorship.ogg
+427:Abyssal/Denouement/Abyssal - Denouement - 03 Deus Vult.ogg
+428:Abyssal/Denouement/Abyssal - Denouement - 04 Detritivore.ogg
+429:Abyssal/Denouement/Abyssal - Denouement - 05 When Paradigms Supplant Gods.ogg
+430:Abyssal/Denouement/Abyssal - Denouement - 06 Swansong of a Dying Race.ogg
+431:Abyssal/Abyssal - Antikatastaseis (2015)/1. I Am The Alpha And The Omega.ogg
+432:Abyssal/Abyssal - Antikatastaseis (2015)/2. The Cornucopian.ogg
+433:Abyssal/Abyssal - Antikatastaseis (2015)/3. Veil Of Transcendence.ogg
+434:Abyssal/Abyssal - Antikatastaseis (2015)/4. Telomeric Erosion.ogg
+435:Akitsa/2005 - Akitsa & Thesyre - Contre Courant [Split]/01. revolution.ogg
+436:Akitsa/2005 - Akitsa & Thesyre - Contre Courant [Split]/02. regression.ogg
+437:Akitsa/2005 - Akitsa & Thesyre - Contre Courant [Split]/03. a contre courant.ogg
+438:Akitsa/2005 - Akitsa & Thesyre - Contre Courant [Split]/04. nous nous sommes.ogg
+439:Akitsa/2011 - Aupres de la mort, triumphant! [EP]/01 - La grotte des anges dechus.ogg
+440:Akitsa/2011 - Aupres de la mort, triumphant! [EP]/02 - Notre avant-guerre.ogg
+441:Akitsa/1999 - Total Servitude/01 - Au Dela Des Abimes.ogg
+442:Akitsa/1999 - Total Servitude/02 - L'eveil Des Damnes.ogg
+443:Akitsa/1999 - Total Servitude/03 - Pouvoir Desertique.ogg
+444:Akitsa/1999 - Total Servitude/04 - Les Secrets Du Desespoir.ogg
+445:Akitsa/1999 - Total Servitude/05 - L'elitisme Quebecois.ogg
+446:Akitsa/1999 - Total Servitude/06 - Le Massacre Des Puritains.ogg
+447:Akitsa/1999 - Total Servitude/07 - Exaltation Du Malefique.ogg
+448:Akitsa/1999 - Total Servitude/09 - Dvieuses Divinites.ogg
+449:Akitsa/1999 - Total Servitude/10 - Reveries Meurtrieres.ogg
+450:Akitsa/1999 - Total Servitude/11 - Guerre Eternelle.ogg
+451:Akitsa/1999 - Total Servitude/12 - Les Muveilles De Belzebuth.ogg
+452:Akitsa/1999 - Total Servitude/13 - L'apelle Du Front Misanthropique.ogg
+453:Akitsa/1999 - Total Servitude/14 - L'hymne A La Mutilation.ogg
+454:Akitsa/1999 - Total Servitude/15 - L'agonie Morose Du Pendu.ogg
+455:Akitsa/2001 - Goetie/01 - Ouverture de l'espirit.ogg
+456:Akitsa/2001 - Goetie/02 - Haine et Vengeance.ogg
+457:Akitsa/2001 - Goetie/03 - Les Opposants Bruleront.ogg
+458:Akitsa/2001 - Goetie/04 - Revanche.ogg
+459:Akitsa/2001 - Goetie/05 - Les Runies de la Modernitie.ogg
+460:Akitsa/2001 - Goetie/06 - Affront Final.ogg
+461:Akitsa/2001 - Goetie/07 - Hierarchie.ogg
+462:Akitsa/2001 - Goetie/08 - Pendaison de l'Humanitie.ogg
+463:Akitsa/2001 - Goetie/09 - Ode au Temps Passe.ogg
+464:Akitsa/2001 - Goetie/10 - Dernier Souffle.ogg
+465:Akitsa/2001 - Aube Misanthropique/01 - Akitsa - Nationalisme Misantrophique.ogg
+466:Akitsa/2001 - Aube Misanthropique/02 - Akitsa - Nature Supreme.ogg
+467:Akitsa/2001 - Aube Misanthropique/03 - Akitsa - Champ de Bataille.ogg
+468:Akitsa/2001 - Aube Misanthropique/04 - Akitsa - Outro.ogg
+469:Akitsa/2002 - Sang Nordique/01 - Introduction.ogg
+470:Akitsa/2002 - Sang Nordique/02 - Riposte.ogg
+471:Akitsa/2002 - Sang Nordique/03 - Frontiere.ogg
+472:Akitsa/2002 - Sang Nordique/04 - Sang Nordique.ogg
+473:Akitsa/2002 - Sang Nordique/05 - Au Combat.ogg
+474:Akitsa/2002 - Sang Nordique/06 - Vers La Vittoire.ogg
+475:Akitsa/2002 - Sang Nordique/07 - La Nature De Mon Pans.ogg
+476:Akitsa/2002 - Sang Nordique/08 - Fin.ogg
+477:Akitsa/2004 - Akitsa & The Shadow Order -  Guerre - Polemos (Split)/01 - Akitsa - Guerre.ogg
+478:Akitsa/2004 - Akitsa & The Shadow Order -  Guerre - Polemos (Split)/02 - Akitsa - Fils De La Liberte.ogg
+479:Akitsa/2004 - Prophetie Heretique/01 - L'Union des Coeurs Noirs.ogg
+480:Akitsa/2004 - Prophetie Heretique/02 - Prophetie Heretique.ogg
+481:Akitsa/2004 - Prophetie Heretique/03 - Goetie.ogg
+482:Akitsa/2004 - Soleil Noir/01. Hymne А La Guerre.ogg
+483:Akitsa/2004 - Soleil Noir/02. Le Soleil Noir.ogg
+484:Akitsa/2004 - Soleil Noir/03. Celui Qui Est Sans Peur.ogg
+485:Akitsa/2004 - Soleil Noir/04. Le Retour Du Soleil Noir.ogg
+486:Akitsa/2004 - Soleil Noir/05. Total Servitude.ogg
+487:Akitsa/2004 - Soleil Noir/06. Hiden Track.ogg
+488:Akitsa/2004 - Cold Wings of Noctisis  Akitsa - & Nocternity/03 - Akitsa - Sous le Signe du Destin.ogg
+489:Akitsa/2004 - Cold Wings of Noctisis  Akitsa - & Nocternity/04 - Akitsa - L'Homme de Fer.ogg
+490:Satanic Warmaster/2004 - Satanic Warmaster & Akitsa (Split)/01 - L'hyperborée Ressuscitée (Akitsa).ogg
+491:Satanic Warmaster/2004 - Satanic Warmaster & Akitsa (Split)/02 - Vengeance Viendra (Akitsa).ogg
+492:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 1/01 - Au-delа Des Abimes.ogg
+493:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 1/02 - L'eveil Des Damnes.ogg
+494:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 1/03 - Les Secrets Du Desespoir.ogg
+495:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 1/04 - Le Massacre Des Puritains.ogg
+496:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 1/05 - Exaltation Du Malefique.ogg
+497:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 1/06 - Odieuses Divinites.ogg
+498:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 1/07 - L'immensite Foirde.ogg
+499:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 1/08 - Reveries Muertrieres.ogg
+500:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 1/09 - Folie Amere.ogg
+501:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 1/10 - Les Merveilles De Belzebuth.ogg
+502:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 1/11 - L'Hymne А La Mutilation.ogg
+503:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 1/12 - Bulverisation Victorieuse.ogg
+504:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 1/13 - L'Agonie Morose Du Pendu.ogg
+505:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 1/14 - Redemption.ogg
+506:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 2/01 - Guerre Eternelle.ogg
+507:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 2/02 - L'Appelle du Font Misanthropique.ogg
+508:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 2/03 - Pouvoir Desertique.ogg
+509:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 2/04 - Desengrenage (Les Enfants de l'Illusion).ogg
+510:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 2/05 - L'elitisme Quebecois.ogg
+511:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 2/06 - Cachots de l' obscurite.ogg
+512:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 2/07 - Nouveau Regne.ogg
+513:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 2/08 - Nationalisme Misanthropique.ogg
+514:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 2/09 - Nature Supreme.ogg
+515:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 2/10 - Champ De Bataille.ogg
+516:Akitsa/2005 - Aube De La Misanthropie [best ofcompilation]/2005 - Aube de la Misanthropie CD 2/11 - Outro.ogg
+517:Akitsa/2005 - Akitsa & Prurient/01 - Akitsa - Terre Eternelle.ogg
+518:Akitsa/2005 - Akitsa & Prurient/02 - Akitsa - Goetie.ogg
+519:Akitsa/2006 - La Grande Infamie/1 - Le Rite Des Cavernes.ogg
+520:Akitsa/2006 - La Grande Infamie/2 - Magie Et Vérités.ogg
+521:Akitsa/2006 - La Grande Infamie/3 - Silence.ogg
+522:Akitsa/2006 - La Grande Infamie/4 - Cultes Vertueur.ogg
+523:Akitsa/2006 - La Grande Infamie/5 - Chthonos.ogg
+524:Akitsa/2006 - La Grande Infamie/6 - Origine Mythique.ogg
+525:Akitsa/2006 - La Grande Infamie/7 - La Grande Infamie.ogg
+526:Akitsa/2006 - La Grande Infamie/8 - Foret Disparue.ogg
+527:Akitsa/2010 - Au crepuscule de l'esperance/01. Crematorium_khaos[].ogg
+528:Akitsa/2010 - Au crepuscule de l'esperance/02. Les sentinelles.ogg
+529:Akitsa/2010 - Au crepuscule de l'esperance/03. Morsure.ogg
+530:Akitsa/2010 - Au crepuscule de l'esperance/04. Loyaute.ogg
+531:Akitsa/2010 - Au crepuscule de l'esperance/05. Cercueil national.ogg
+532:Akitsa/2010 - Au crepuscule de l'esperance/06. Au crepuscule de l'esperance.ogg
+533:Akitsa/2010 - Au crepuscule de l'esperance/07. Le dernier putsch.ogg
+534:Akitsa/2010 - Au crepuscule de l'esperance/08. Antithese.ogg
+535:Akitsa/2010 - Au crepuscule de l'esperance/09. Vers la mort.ogg
+536:Akitsa/2010 - Au crepuscule de l'esperance/10. La voix brutale.ogg
+537:Akitsa/2011 - Aupres de la mort, triumphant! [EP]/03 - Aupres de la mort, triumphant!.ogg
+538:Altarage/NIHL/01 - Drevicet.ogg
+539:Altarage/NIHL/02 - Womborous.ogg
+540:Altarage/NIHL/03 - Graehence.ogg
+541:Altarage/NIHL/04 - Baptism Nihl.ogg
+542:Altarage/NIHL/05 - Vortex Pyramid.ogg
+543:Altarage/NIHL/06 - Batherex.ogg
+544:Altarage/NIHL/07 - Altars.ogg
+545:Altarage/NIHL/08 - Cultus.ogg
+546:Ancst/ANCST - the humane condition/ANCST - the humane condition - 01 ascetic.ogg
+547:Ancst/ANCST - the humane condition/ANCST - the humane condition - 02 entropie.ogg
+548:Smutecini slavnost/Smutecni slavnost - split w- Ancst/Ancst - split w- Ancst - 01 Herzberge.ogg
+549:Smutecini slavnost/Smutecni slavnost - split w- Ancst/Ancst - split w- Ancst - 02 Condition humana.ogg
+550:Smutecini slavnost/Smutecni slavnost - split w- Ancst/Ancst - split w- Ancst - 03 Shallow.ogg
+551:Ash Borer/Ash Borer - Cold Of Ages (2012)/01 - Descended Lamentations.ogg
+552:Ash Borer/Ash Borer - Cold Of Ages (2012)/02 - Phantoms.ogg
+553:Ash Borer/Ash Borer - Cold Of Ages (2012)/03 - Convict All Flesh.ogg
+554:Ash Borer/Ash Borer - Cold Of Ages (2012)/04 - Removed Forms.ogg
+555:Ash Borer/Ash Borer - The Irrepassable Gate (2016)/01 - The Irrepassable Gate.ogg
+556:Ash Borer/Ash Borer - The Irrepassable Gate (2016)/02 - Lacerated Spirit.ogg
+557:Ash Borer/Ash Borer - The Irrepassable Gate (2016)/03 - Lustration I.ogg
+558:Ash Borer/Ash Borer - The Irrepassable Gate (2016)/04 - Grey Marrow.ogg
+559:Ash Borer/Ash Borer - The Irrepassable Gate (2016)/05 - Rotten Firmament.ogg
+560:Ash Borer/Ash Borer - The Irrepassable Gate (2016)/06 - Lustration II.ogg
+561:Ash Borer/Ash Borer - The Irrepassable Gate (2016)/01 - The Irrepassable Gate.ogg
+562:Ash Borer/Ash Borer - The Irrepassable Gate (2016)/02 - Lacerated Spirit.ogg
+563:Ash Borer/Ash Borer - The Irrepassable Gate (2016)/03 - Lustration I.ogg
+564:Ash Borer/Ash Borer - The Irrepassable Gate (2016)/04 - Grey Marrow.ogg
+565:Ash Borer/Ash Borer - The Irrepassable Gate (2016)/05 - Rotten Firmament.ogg
+566:Ash Borer/Ash Borer - The Irrepassable Gate (2016)/06 - Lustration II.ogg
+567:Au Champ Des Morts/Dans La Joie/01. Nos décombres.ogg
+568:Au Champ Des Morts/Dans La Joie/02. Après le carnage.ogg
+569:Au Champ Des Morts/Dans La Joie/03. Le sang, la mort, la chute.ogg
+570:Au Champ Des Morts/Dans La Joie/04. Contempler l'abîme.ogg
+571:Au Champ Des Morts/Dans La Joie/05. Dans la joie.ogg
+572:Au Champ Des Morts/Dans La Joie/06. L'étoile du matin.ogg
+573:Au Champ Des Morts/Dans La Joie/07. La fin du monde.ogg
+574:Aversion's Crown/2011 -Servitude/01 No Salvation.ogg
+575:Aversion's Crown/2011 -Servitude/02 Excoriate.ogg
+576:Aversion's Crown/2011 -Servitude/04 Hive Mind.ogg
+577:Aversion's Crown/2011 -Servitude/05 RePurposed-ReProgramed.ogg
+578:Aversion's Crown/2011 -Servitude/06 Solace (Instrumental).ogg
+579:Aversion's Crown/2011 -Servitude/07 Partisan Deconstruction.ogg
+580:Aversion's Crown/2011 -Servitude/08 We're Not Safe.ogg
+581:Aversion's Crown/2011 -Servitude/09 Defiler.ogg
+582:Aversion's Crown/2011 -Servitude/10 Praetorian.ogg
+583:Aversion's Crown/2011 -Servitude/11 Advocator Of Mans Genocide.ogg
+584:Aversion's Crown/2014 - Tyrant/01 Aversions Crown - Hollow Planet.ogg
+585:Aversion's Crown/2014 - Tyrant/02 Aversions Crown - The Glass Sentient.ogg
+586:Aversion's Crown/2014 - Tyrant/03 Aversions Crown - Conqueror.ogg
+587:Aversion's Crown/2014 - Tyrant/04 Aversions Crown - Vectors.ogg
+588:Aversion's Crown/2014 - Tyrant/05 Aversions Crown - Earth Steriliser.ogg
+589:Aversion's Crown/2014 - Tyrant/06 Aversions Crown - Avalanche.ogg
+590:Aversion's Crown/2014 - Tyrant/07 Aversions Crown - Xenoforms.ogg
+591:Aversion's Crown/2014 - Tyrant/08 Aversions Crown - Overseer.ogg
+592:Aversion's Crown/2014 - Tyrant/09 Aversions Crown - Controller.ogg
+593:Aversion's Crown/2014 - Tyrant/10 Aversions Crown - Faith Collapsing.ogg
+594:Aversion's Crown/2011 -Servitude/03 Imperfect Design.ogg
+595:Saor/Roots/01-saor-roots-mwnd.ogg
+596:Saor/Roots/02-saor-carved_in_stone-mwnd.ogg
+597:Saor/Roots/03-saor-saorsa-mwnd.ogg
+598:Saor/Roots/04-saor-a_highland_lament-mwnd.ogg
+599:Saor/Roots/05-saor-pictish_pride_(ainshval_cover)-mwnd.ogg
+600:Batushka/BATUSHKA - Litourgiya/01 Yekteniya 1.ogg
+601:Batushka/BATUSHKA - Litourgiya/02 Yekteniya 2.ogg
+602:Batushka/BATUSHKA - Litourgiya/03 Yekteniya 3.ogg
+603:Batushka/BATUSHKA - Litourgiya/04 Yekteniya 4.ogg
+604:Batushka/BATUSHKA - Litourgiya/05 Yekteniya 5.ogg
+605:Batushka/BATUSHKA - Litourgiya/06 Yekteniya 6.ogg
+606:Batushka/BATUSHKA - Litourgiya/07 Yekteniya 7.ogg
+607:Batushka/BATUSHKA - Litourgiya/08 Yekteniya 8.ogg
+608:Bathory/1984 - Bathory/01 Storm of Damnation.ogg
+609:Bathory/1984 - Bathory/02 Hades.ogg
+610:Bathory/1984 - Bathory/03 Reaper.ogg
+611:Bathory/1984 - Bathory/04 Necromansy.ogg
+612:Bathory/1984 - Bathory/05 Sacrifice.ogg
+613:Bathory/1984 - Bathory/06 In Conspiracy With Satan.ogg
+614:Bathory/1984 - Bathory/07 Armageddon.ogg
+615:Bathory/1984 - Bathory/08 Raise the Dead.ogg
+616:Bathory/1984 - Bathory/09 War.ogg
+617:Bathory/1984 - Bathory/10 Outro.ogg
+618:Bathory/1987 - Under the Sign of the Black Mark/01 - Nocternal Obeisance.ogg
+619:Bathory/1987 - Under the Sign of the Black Mark/02 - Massacre.ogg
+620:Bathory/1987 - Under the Sign of the Black Mark/03 - Woman Of Dark Desires.ogg
+621:Bathory/1987 - Under the Sign of the Black Mark/04 - Call From The Grave.ogg
+622:Bathory/1987 - Under the Sign of the Black Mark/05 - Equimanthorn.ogg
+623:Bathory/1987 - Under the Sign of the Black Mark/06 - Enter The Eternal Fire.ogg
+624:Bathory/1987 - Under the Sign of the Black Mark/07 - Chariots Of Fire.ogg
+625:Bathory/1987 - Under the Sign of the Black Mark/08 - 13 Candles.ogg
+626:Bathory/1987 - Under the Sign of the Black Mark/09 - Of Doom.ogg
+627:Bathory/1987 - Under the Sign of the Black Mark/10 - Outro.ogg
+628:Bathory/1988 - Blood Fire Death/01 Odens Ride Over Nordland.ogg
+629:Bathory/1988 - Blood Fire Death/02 A Fine Day To Die.ogg
+630:Bathory/1988 - Blood Fire Death/03 The Golden Walls Of Heaven.ogg
+631:Bathory/1988 - Blood Fire Death/04 Pace 'Till Death.ogg
+632:Bathory/1988 - Blood Fire Death/05 Holocaust.ogg
+633:Bathory/1988 - Blood Fire Death/06 For All Those Who Died.ogg
+634:Bathory/1988 - Blood Fire Death/07 Dies Irae.ogg
+635:Bathory/1988 - Blood Fire Death/08 Blood Fire Death.ogg
+636:Bathory/1988 - Blood Fire Death/09 Outro.ogg
+637:Bathory/Hammerheart/01 - Shores In Flames.ogg
+638:Bathory/Hammerheart/02 - Valhalla.ogg
+639:Bathory/Hammerheart/03 - Baptised In Fire And Ice.ogg
+640:Bathory/Hammerheart/04 - Father To Son.ogg
+641:Bathory/Hammerheart/05 - Song To Hall Up High.ogg
+642:Bathory/Hammerheart/06 - Home Of Once Brave.ogg
+643:Bathory/Hammerheart/07 - One Rode To Asa Bay.ogg
+644:Bathory/Hammerheart/08 - Outro.ogg
+645:Black Cilice/2011 - A Corpse, A Temple/01 - The Gate Of Sulphur.ogg
+646:Black Cilice/2011 - A Corpse, A Temple/02 - Night's Veil.ogg
+647:Black Cilice/2011 - A Corpse, A Temple/03 - Blood To Murder.ogg
+648:Black Cilice/2011 - A Corpse, A Temple/04 - The Key.ogg
+649:Black Cilice/2011 - A Corpse, A Temple/05 - Resurrection Of Dead Curses.ogg
+650:Black Cilice/2011 - A Corpse, A Temple/06 - Among Dead Rats.ogg
+651:Black Cilice/Black Cilice - Summoning the Night (2013)/01. Judgement.ogg
+652:Black Cilice/Black Cilice - Summoning the Night (2013)/02. Chaos And Evil.ogg
+653:Black Cilice/Black Cilice - Summoning the Night (2013)/03. Astral Cipher.ogg
+654:Black Cilice/Black Cilice - Summoning the Night (2013)/04. A Throne Of Human Remains.ogg
+655:Black Cilice/Black Cilice - Summoning the Night (2013)/05. The Descent.ogg
+656:Black Cilice/Black Cilice - Summoning the Night (2013)/06. Amidst Medieval Tombs.ogg
+657:Black Cilice/Black Cilice - Mysteries/01. To Become .ogg
+658:Black Cilice/Black Cilice - Mysteries/02. Into Morbid Trance .ogg
+659:Black Cilice/Black Cilice - Mysteries/03. The Truth .ogg
+660:Black Cilice/Black Cilice - Mysteries/04. Ceremonial Energy .ogg
+661:Black Cilice/Black Cilice - Mysteries/05. A Prayer From Beyond .ogg
+662:Black Cilice/Black Cilice - Mysteries/06. From The Long Forgotten Past .ogg
+663:Black Cilice/Banished From Time/01. Timeless Spectre.ogg
+664:Black Cilice/Banished From Time/02. On the Verge of Madness.ogg
+665:Black Cilice/Banished From Time/03. Possessed by Night Spirits.ogg
+666:Black Cilice/Banished From Time/04. Channeling Forgotten Energies.ogg
+667:Black Cilice/Banished From Time/05. Boiling Corpses.ogg
+668:Black Cilice/Banished From Time/01. Timeless Spectre.ogg
+669:Black Cilice/Banished From Time/02. On the Verge of Madness.ogg
+670:Black Cilice/Banished From Time/03. Possessed by Night Spirits.ogg
+671:Black Cilice/Banished From Time/04. Channeling Forgotten Energies.ogg
+672:Black Cilice/Banished From Time/05. Boiling Corpses.ogg
+673:Black Cilice/Black Cilice - Mysteries/01. To Become .ogg
+674:Black Cilice/Black Cilice - Mysteries/02. Into Morbid Trance .ogg
+675:Black Cilice/Black Cilice - Mysteries/03. The Truth .ogg
+676:Black Cilice/Black Cilice - Mysteries/04. Ceremonial Energy .ogg
+677:Black Cilice/Black Cilice - Mysteries/05. A Prayer From Beyond .ogg
+678:Black Cilice/Black Cilice - Mysteries/06. From The Long Forgotten Past .ogg
+679:Black Cilice/2011 - A Corpse, A Temple/01 - The Gate Of Sulphur.ogg
+680:Black Cilice/2011 - A Corpse, A Temple/02 - Night's Veil.ogg
+681:Black Cilice/2011 - A Corpse, A Temple/03 - Blood To Murder.ogg
+682:Black Cilice/2011 - A Corpse, A Temple/04 - The Key.ogg
+683:Black Cilice/2011 - A Corpse, A Temple/05 - Resurrection Of Dead Curses.ogg
+684:Black Cilice/2011 - A Corpse, A Temple/06 - Among Dead Rats.ogg
+685:Black Cilice/Black Cilice - Summoning the Night (2013)/01. Judgement.ogg
+686:Black Cilice/Black Cilice - Summoning the Night (2013)/02. Chaos And Evil.ogg
+687:Black Cilice/Black Cilice - Summoning the Night (2013)/03. Astral Cipher.ogg
+688:Black Cilice/Black Cilice - Summoning the Night (2013)/04. A Throne Of Human Remains.ogg
+689:Black Cilice/Black Cilice - Summoning the Night (2013)/05. The Descent.ogg
+690:Black Cilice/Black Cilice - Summoning the Night (2013)/06. Amidst Medieval Tombs.ogg
+691:Black Cilice/Black Cilice - Mysteries/01. To Become .ogg
+692:Black Cilice/Black Cilice - Mysteries/02. Into Morbid Trance .ogg
+693:Black Cilice/Black Cilice - Mysteries/03. The Truth .ogg
+694:Black Cilice/Black Cilice - Mysteries/04. Ceremonial Energy .ogg
+695:Black Cilice/Black Cilice - Mysteries/05. A Prayer From Beyond .ogg
+696:Black Cilice/Black Cilice - Mysteries/06. From The Long Forgotten Past .ogg
+697:Black Cilice/Banished From Time/01. Timeless Spectre.ogg
+698:Black Cilice/Banished From Time/02. On the Verge of Madness.ogg
+699:Black Cilice/Banished From Time/03. Possessed by Night Spirits.ogg
+700:Black Cilice/Banished From Time/04. Channeling Forgotten Energies.ogg
+701:Black Cilice/Banished From Time/05. Boiling Corpses.ogg
+702:Black Cilice/Black Cilice - Summoning the Night (2013)/01. Judgement.ogg
+703:Black Cilice/Black Cilice - Summoning the Night (2013)/02. Chaos And Evil.ogg
+704:Black Cilice/Black Cilice - Summoning the Night (2013)/03. Astral Cipher.ogg
+705:Black Cilice/Black Cilice - Summoning the Night (2013)/04. A Throne Of Human Remains.ogg
+706:Black Cilice/Black Cilice - Summoning the Night (2013)/05. The Descent.ogg
+707:Black Cilice/Black Cilice - Summoning the Night (2013)/06. Amidst Medieval Tombs.ogg
+708:Akitsa/2004 - Akitsa & Satanic Warmaster (Split)/Satanic Warmaster - 01 - March Of The Legion Werwolf.ogg
+709:Akitsa/2004 - Akitsa & Satanic Warmaster (Split)/Satanic Warmaster - 02 - Six Million Tears.ogg
+710:Akitsa/2004 - Akitsa & Satanic Warmaster (Split)/Satanic Warmaster - 03 - Taistelukenttien Karsimykset.ogg
+711:Satanic Warmaster/1999 - Bloody Ritual (Demo)/01 - From The Coffin.ogg
+712:Satanic Warmaster/1999 - Bloody Ritual (Demo)/02 - Bloody Ritual.ogg
+713:Satanic Warmaster/1999 - Bloody Ritual (Demo)/03 - Ancient Womb Of.ogg
+714:Satanic Warmaster/2008 - Satanic Warmaster & Evil (Split)/01 - Evil - In the Forest of Insanity and Sorrow.ogg
+715:Satanic Warmaster/2008 - Satanic Warmaster & Evil (Split)/02 - Satanic Warmaster - Massacre.ogg
+716:Satanic Warmaster/2003 - Opferblut/03_A Wolf Cries In Anger.ogg
+717:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/01 - Intro.ogg
+718:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/02 - Distant Blazing Eye.ogg
+719:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/03 - The Burning Eyes Of The Werewolf.ogg
+720:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/04 - Black Metal Kommando.ogg
+721:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/05 - Wolves Of Blood And Iron.ogg
+722:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/06 - Raging Winter.ogg
+723:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/07 - Macht & Ehre.ogg
+724:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/08 - The Blood Of Our Fathers.ogg
+725:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/09 - D.S.O. 2000.ogg
+726:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/10 - Fish.ogg
+727:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/11 - Paradise (Pt. II).ogg
+728:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/12 - The Seventh Oath Of Demonomancy.ogg
+729:Satanic Warmaster/1999 - Bloody Ritual (Demo)/04 - Carpathian Demons.ogg
+730:Satanic Warmaster/1999 - Bloody Ritual (Demo)/05 - Cryptic Terror.ogg
+731:Satanic Warmaster/1999 - Bloody Ritual (Demo)/06 - The Wrath Of Sathanas.ogg
+732:Satanic Warmaster/1999 - Bloody Ritual (Demo)/07 - Nacht Der Vampire.ogg
+733:Satanic Warmaster/1999 - Bloody Ritual (Demo)/08 - Book Of Human Skin.ogg
+734:Satanic Warmaster/1999 - Bloody Ritual (Demo)/09 - Vlads Castle.ogg
+735:Satanic Warmaster/2001 - Strength And Honour/Satanic Warmaster - 01 - Raging Winter.ogg
+736:Satanic Warmaster/2001 - Strength And Honour/Satanic Warmaster - 02 - A New Black Order.ogg
+737:Satanic Warmaster/2001 - Strength And Honour/Satanic Warmaster - 03 - The Burning Eyes Of The Werewolf.ogg
+738:Satanic Warmaster/2001 - Strength And Honour/Satanic Warmaster - 04 - Strength And Honour.ogg
+739:Satanic Warmaster/2001 - Strength And Honour/Satanic Warmaster - 05 - Wolves Of Blood And Iron.ogg
+740:Satanic Warmaster/2001 - Strength And Honour/Satanic Warmaster - 06 - Der Schwarze Orden.ogg
+741:Satanic Warmaster/2001 - Strength And Honour/Satanic Warmaster - 07 - Night Of Retribution.ogg
+742:Satanic Warmaster/2002 - Black Katharsis (EP)/03-...hiljaisuudesta-berc.ogg
+743:Satanic Warmaster/2002 - Black Katharsis (EP)/02-cursed_emperor-berc.ogg
+744:Satanic Warmaster/2002 - Black Katharsis (EP)/01-remembrance_of_times_forgotten-berc.ogg
+745:Satanic Warmaster/2003 - Satanic Warmaster & With Krieg (Split)/02 - Satanic Warmaster - Hold On To Your Dreams.ogg
+746:Satanic Warmaster/2003 - Opferblut/01_black_destiny-cnmc.ogg
+747:Satanic Warmaster/2003 - Opferblut/02_bound_in_lust_and_hate-cnmc.ogg
+748:Satanic Warmaster/2003 - Opferblut/04_pentagram_and_wood-cnmc.ogg
+749:Satanic Warmaster/2003 - Opferblut/05_a_ravens_song.ogg
+750:Satanic Warmaster/2003 - Opferblut/06_rain_falls-cnmc.ogg
+751:Satanic Warmaster/2003 - Opferblut/07_farewell_to_the_fallen-cnmc.ogg
+752:Satanic Warmaster/2003 - Satanic Warmaster & The True Frost (Split)/01 - Satanic Warmaster - Satan's Race.ogg
+753:Satanic Warmaster/2008 - Revelation...Of the Night (Compilation)/01 - ...Of the Night.ogg
+754:Satanic Warmaster/2008 - Revelation...Of the Night (Compilation)/02 - Chronicles of thy Astral Blood.ogg
+755:Satanic Warmaster/2004 - Satanic Warmaster & Gestapo 666 (Split)/06 - satanic warmaster - ancient womb of evil.ogg
+756:Satanic Warmaster/2004 - Satanic Warmaster & Gestapo 666 (Split)/05 - satanic warmaster - bloody ritual.ogg
+757:Satanic Warmaster/2004 - Satanic Warmaster & Gestapo 666 (Split)/07 - satanic warmaster - carpathian demons.ogg
+758:Satanic Warmaster/2004 - Satanic Warmaster & Gestapo 666 (Split)/08 - satanic warmaster - cryptic terror.ogg
+759:Satanic Warmaster/2004 - Satanic Warmaster & Gestapo 666 (Split)/04 - satanic_warmaster - form the coffins.ogg
+760:Satanic Warmaster/2004 - Satanic Warmaster & Gestapo 666 (Split)/10 - satanic_warmaster - nacht der vampir.ogg
+761:Satanic Warmaster/2004 - Satanic Warmaster & Gestapo 666 (Split)/09 - satanic warmaster - the wrath of sathanas.ogg
+762:Satanic Warmaster/2004 - Satanic Warmaster & Akitsa (Split)/03 - March of the Legion Werwolf (Satanic Warmaster).ogg
+763:Satanic Warmaster/2004 - Satanic Warmaster & Akitsa (Split)/04 - Six Million Tears (Satanic Warmaster).ogg
+764:Satanic Warmaster/2004 - Satanic Warmaster & Akitsa (Split)/05 - Taistelukenttien Kärsimykset (Satanic Warmaster).ogg
+765:Satanic Warmaster/2005 - Carelian Satanist Madness/Satanic Warmaster - 01 - The Vampiric Tyrant.ogg
+766:Satanic Warmaster/2005 - Carelian Satanist Madness/Satanic Warmaster - 02 - Carelian Satanist Madness.ogg
+767:Satanic Warmaster/2005 - Carelian Satanist Madness/Satanic Warmaster - 03 - True Blackness.ogg
+768:Satanic Warmaster/2005 - Carelian Satanist Madness/Satanic Warmaster - 04 - My Dreams Of Hitler.ogg
+769:Satanic Warmaster/2005 - Carelian Satanist Madness/Satanic Warmaster - 05 - Eaten By Rats.ogg
+770:Satanic Warmaster/2005 - Carelian Satanist Madness/Satanic Warmaster - 06 - 666.ogg
+771:Satanic Warmaster/2005 - Carelian Satanist Madness/Satanic Warmaster - 07 - My Kingdom Of Darkness.ogg
+772:Satanic Warmaster/2005 - Carelian Satanist Madness/Satanic Warmaster - 08 - Blessed Be The Grim Arts.ogg
+773:Satanic Warmaster/2006 - Satanic Warmaster & Stutthof (Split)/01 - Satanic Warmaster - A Hymn For The Black Empire.ogg
+774:Satanic Warmaster/2007 - Satanic Warmaster & Mütiilation & Drowning The Light (Split)/03 - Satanic Warmaster - Intro.ogg
+775:Satanic Warmaster/2007 - Satanic Warmaster & Mütiilation & Drowning The Light (Split)/04 - Satanic Warmaster - Nameless Sacrifice.ogg
+776:Satanic Warmaster/2007 - Satanic Warmaster & Mütiilation & Drowning The Light (Split)/05 - Satanic Warmaster - Dead Light Of A Lost Star.ogg
+777:Satanic Warmaster/2007 - Satanic Warmaster & Mütiilation & Drowning The Light (Split)/06 - Satanic Warmaster - Outro.ogg
+778:Satanic Warmaster/2008 - Revelation...Of the Night (Compilation)/03 - Wolves Of Revelation.ogg
+779:Satanic Warmaster/2008 - Revelation...Of the Night (Compilation)/04 - Sign Of Fighters' Storm.ogg
+780:Satanic Warmaster/2008 - Revelation...Of the Night (Compilation)/05 - The Sign Of The Master.ogg
+781:Satanic Warmaster/2007 - Satanic Warmaster & Aryan Blood (Split)/01-satanic_warmaster-the_chant_of_the_barbarian_wolves-gw.ogg
+782:Satanic Warmaster/2007 - Werewolf Hate Attack (Vinyl EP)/01-satanic_warmaster-the_burning_eyes_of_the_werewolf.ogg
+783:Satanic Warmaster/2007 - Werewolf Hate Attack (Vinyl EP)/02-satanic_warmaster-legion_werwolf.ogg
+784:Satanic Warmaster/2007 - Werewolf Hate Attack (Vinyl EP)/03-satanic_warmaster-szatan_(lord_evil_cover).ogg
+785:Satanic Warmaster/2008 - Satanic Warmaster & Behexen (Split)/03-satanic_warmaster-where_eternity_awaits.ogg
+786:Satanic Warmaster/2008 - Satanic Warmaster & Behexen (Split)/04-satanic_warmaster-the_burning_eyes_of_the_werewolf.ogg
+787:Satanic Warmaster/2009 - Satanic Warmaster & Totenburg (Split)/01 - Satanic Warmaster - Majesty Of Wampyric Blood.ogg
+788:Satanic Warmaster/2010 - Ondskapens Makt - Forgotten Graves (EP)/01 - Ondskapens Makt.ogg
+789:Satanic Warmaster/2010 - Ondskapens Makt - Forgotten Graves (EP)/02 - Forgotten Graves.ogg
+790:Satanic Warmaster/2010 - Nachzehrer/01-satanic_warmaster-intro.ogg
+791:Satanic Warmaster/2010 - Nachzehrer/02-satanic_warmaster-satans_werewolf.ogg
+792:Satanic Warmaster/2010 - Nachzehrer/03-satanic_warmaster-vampires.ogg
+793:Satanic Warmaster/2010 - Nachzehrer/04-satanic_warmaster-warmaster_returns.ogg
+794:Satanic Warmaster/2010 - Nachzehrer/05-satanic_warmaster-one_shining_star.ogg
+795:Satanic Warmaster/2010 - Nachzehrer/06-satanic_warmaster-bestial_darkness.ogg
+796:Satanic Warmaster/2010 - Nachzehrer/07-satanic_warmaster-rotting_ravens_blood.ogg
+797:Satanic Warmaster/2010 - Nachzehrer/08-satanic_warmaster-utug-hul.ogg
+798:Satanic Warmaster/2011 - Winter's Hunger-Torches (EP)/01. Winter's Hunger.ogg
+799:Satanic Warmaster/2011 - Winter's Hunger-Torches (EP)/02. Torches.ogg
+800:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/01 - Intro.ogg
+801:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/02 - Distant Blazing Eye.ogg
+802:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/03 - The Burning Eyes Of The Werewolf.ogg
+803:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/04 - Black Metal Kommando.ogg
+804:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/05 - Wolves Of Blood And Iron.ogg
+805:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/06 - Raging Winter.ogg
+806:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/07 - Macht & Ehre.ogg
+807:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/08 - The Blood Of Our Fathers.ogg
+808:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/09 - D.S.O. 2000.ogg
+809:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/10 - Fish.ogg
+810:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/11 - Paradise (Pt. II).ogg
+811:Satanic Warmaster/2006 - Black Metal Kommando - Gaschamber (Compilation)/12 - The Seventh Oath Of Demonomancy.ogg
+812:Satanic Warmaster/2004 - Satanic Warmaster & Clandestine Blaze (Split)/02 Satnic warmaster_Clandestine blaze - Sacrificial torments.ogg
+813:Satanic Warmaster/2004 - Satanic Warmaster & Clandestine Blaze (Split)/01 Satnic warmaster_Clandestine blaze - Intro_My Torments.ogg
+814:Satanic Warmaster/2004 - Satanic Warmaster & Clandestine Blaze (Split)/03 Satnic warmaster_Clandestine blaze - Conspiring Winds of the Abyss.ogg
+815:Satanic Warmaster/2004 - Satanic Warmaster & Clandestine Blaze (Split)/04 Satnic warmaster_Clandestine blaze - Disease.ogg
+816:Satanic Warmaster/2004 - Satanic Warmaster & Clandestine Blaze (Split)/05 Clandestine Blaze - Guided by Black Light.ogg
+817:Satanic Warmaster/2004 - Satanic Warmaster & Clandestine Blaze (Split)/06 Satanic warmaster - To The Legions.ogg
+818:Satanic Warmaster/2004 - Satanic Warmaster & Clandestine Blaze (Split)/07 Satnic warmaster_Clandestine blaze - Outro.ogg
+819:Satyricon/1993 - Dark Medieval Times/01 - Walk The Path Of Sorrow.ogg
+820:Satyricon/1993 - Dark Medieval Times/02 - Dark Medieval Times.ogg
+821:Satyricon/1993 - Dark Medieval Times/03 - Skyggedans.ogg
+822:Satyricon/1993 - Dark Medieval Times/04 - Min Hyllest Til Vinterland.ogg
+823:Satyricon/1993 - Dark Medieval Times/05 - Into The Mighty Forest.ogg
+824:Satyricon/1993 - Dark Medieval Times/06 - The Dark Castle In The Deep Forest.ogg
+825:Satyricon/1993 - Dark Medieval Times/07 - Taakeslottet.ogg
+826:Satyricon/The Shadowthrone/01 - Hvite Krists Dod.ogg
+827:Satyricon/The Shadowthrone/02 - In the Mist by the Hills.ogg
+828:Satyricon/The Shadowthrone/03 - Woods to Eternity.ogg
+829:Satyricon/The Shadowthrone/04 - Vikingland.ogg
+830:Satyricon/The Shadowthrone/05 - Dominions of Satyricon.ogg
+831:Satyricon/The Shadowthrone/06 - The King of the Shadowthrone.ogg
+832:Satyricon/The Shadowthrone/07 - I En Svart Kiste.ogg
+833:Satyricon/Nemisis Divina/01 - The Dawn Of A New Age.ogg
+834:Satyricon/Nemisis Divina/02 - Forhekset.ogg
+835:Satyricon/Nemisis Divina/03 - Mother North.ogg
+836:Satyricon/Nemisis Divina/04 - Du Som Hater Gud.ogg
+837:Satyricon/Nemisis Divina/05 - Immortality Passion.ogg
+838:Satyricon/Nemisis Divina/06 - Nemesis Divina.ogg
+839:Satyricon/Nemisis Divina/07 - Transcendental Requiem Of Slaves.ogg
+840:Sect Pig/Slave Destroyed/Slave Destroyed.ogg
+841:Sect Pig/Slave Destroyed/Master Revealed.ogg
+842:Sect Pig/Slave Destroyed/Mankind Dusted.ogg
+843:Sect Pig/Slave Destroyed/Apex Release.ogg
+844:Sect Pig/Slave Destroyed/Death Kneel.ogg
+845:Sect Pig/Slave Destroyed/Temple Escape.ogg
+846:Downfall of Nur/Downfall Of Nur - Selvans (Split) (2016)/02. Pater Surgens.ogg
+847:Downfall of Nur/Downfall Of Nur - Selvans (Split) (2016)/01. Intro- SOL.ogg
+848:Downfall of Nur/Downfall Of Nur - Selvans (Split) (2016)/04. Outro- LUNA.ogg
+849:Sequestered Keep/Ageless Winter/Sequestered Keep - Ageless Winter Silence - 01 Winterdreams of Frozen Stillness.ogg
+850:Sequestered Keep/Ageless Winter/Sequestered Keep - Ageless Winter Silence - 02 Ice Realm Starlight.ogg
+851:Sequestered Keep/Ageless Winter/Sequestered Keep - Ageless Winter Silence - 03 Horizons Lost in White.ogg
+852:Sequestered Keep/Cavernmagics/Sequestered Keep - Cavernmagics - 01 The Cave's Cold Breath Froze the Blood on My Sword.ogg
+853:Sequestered Keep/Cavernmagics/Sequestered Keep - Cavernmagics - 02 Into the Land of Fallen Battlements.ogg
+854:Sequestered Keep/Cavernmagics/Sequestered Keep - Cavernmagics - 03 A Glint of Steel in the Yawning Pitchblack.ogg
+855:Sequestered Keep/Cavernmagics/Sequestered Keep - Cavernmagics - 04 Questing in True Mythic Lore Realms (The Search for the Shining Spear).ogg
+856:Sequestered Keep/Cavernmagics/Sequestered Keep - Cavernmagics - 05 Underground Alchemy.ogg
+857:Sequestered Keep/Cavernmagics/Sequestered Keep - Cavernmagics - 06 Medieval Magic Might.ogg
+858:Sequestered Keep/Lost Halls/Sequestered Keep - Lost Halls - 01 Vastness Without End.ogg
+859:Sequestered Keep/Lost Halls/Sequestered Keep - Lost Halls - 02 Arcane Imbibement- Chugging Strange Potions.ogg
+860:Sequestered Keep/Lost Halls/Sequestered Keep - Lost Halls - 03 Donning the Moonlight Mithril.ogg
+861:Sequestered Keep/Lost Halls/Sequestered Keep - Lost Halls - 04 Cursed Nightfog.ogg
+862:Sequestered Keep/Lost Halls/Sequestered Keep - Lost Halls - 05 Clouds Impaled By Obsidianspires.ogg
+863:Sequestered Keep/Lost Halls/Sequestered Keep - Lost Halls - 06 In Death, Absorbed By the Magicks.ogg
+864:Sequestered Keep/Mournful Mystic Night/Sequestered Keep - Mournful Mystic Night - 01 The Nightwood's Spectral Silence.ogg
+865:Sequestered Keep/Mournful Mystic Night/Sequestered Keep - Mournful Mystic Night - 02 Mournful Mystic Night.ogg
+866:Sequestered Keep/Mournful Mystic Night/Sequestered Keep - Mournful Mystic Night - 03 Dying in the Glow of the Cold Moon Medieval.ogg
+867:Sequestered Keep/Mournful Mystic Night/Sequestered Keep - Mournful Mystic Night - 04 Moonlight on My Sword.ogg
+868:Sequestered Keep/Mournful Mystic Night/Sequestered Keep - Mournful Mystic Night - 05 On the Luminous Silver Path.ogg
+869:Sequestered Keep/Summit Strongholds/Sequestered Keep - Summit Strongholds - 01 At One With Dark Age Nightshadows.ogg
+870:Sequestered Keep/Summit Strongholds/Sequestered Keep - Summit Strongholds - 02 Amethyst-Twilit Waters of Hidden Lakes.ogg
+871:Sequestered Keep/Summit Strongholds/Sequestered Keep - Summit Strongholds - 03 Two Unseen Hooves Follow on the Path of Dead Leaves.ogg
+872:Sequestered Keep/Summit Strongholds/Sequestered Keep - Summit Strongholds - 04 March to the Goldenwood Garrison.ogg
+873:Sequestered Keep/Summit Strongholds/Sequestered Keep - Summit Strongholds - 05 Far-Flung Realms Within Me.ogg
+874:Sequestered Keep/Summit Strongholds/Sequestered Keep - Summit Strongholds - 06 From My Throne I Cast My Spells.ogg
+875:Sequestered Keep/Summit Strongholds/Sequestered Keep - Summit Strongholds - 07 Alone on Cliffs by Fogtendrils Enrobed.ogg
+876:Sequestered Keep/The Fortress in the Timeless Fog/Sequestered Keep - The Fortress in the Timeless Fog - 01 Wandering to Death in Forgotten Obeliskian Pathways.ogg
+877:Sequestered Keep/The Fortress in the Timeless Fog/Sequestered Keep - The Fortress in the Timeless Fog - 02 The Winds That Chill the Mountain's Stone.ogg
+878:Sequestered Keep/The Fortress in the Timeless Fog/Sequestered Keep - The Fortress in the Timeless Fog - 03 A Great Winged Shadow Hides the Moon.ogg
+879:Sequestered Keep/The Fortress in the Timeless Fog/Sequestered Keep - The Fortress in the Timeless Fog - 04 Torchlight Swallowed By Chambers Unending.ogg
+880:Sequestered Keep/The Fortress in the Timeless Fog/Sequestered Keep - The Fortress in the Timeless Fog - 05 What Keeps to the Castleshadows Black.ogg
+881:Sequestered Keep/The Fortress in the Timeless Fog/Sequestered Keep - The Fortress in the Timeless Fog - 06 The Hooded Man Who Isn't There.ogg
+882:Sequestered Keep/The Fortress in the Timeless Fog/Sequestered Keep - The Fortress in the Timeless Fog - 07 Aeon-Silent Crypt of Battle-Felled Souls- Spectral Echoes of War.ogg
+883:Sequestered Keep/The Fortress in the Timeless Fog/Sequestered Keep - The Fortress in the Timeless Fog - 08 Lost in Caverns of Dark Ensorcelling Magic.ogg
+884:Sequestered Keep/The Fortress in the Timeless Fog/Sequestered Keep - The Fortress in the Timeless Fog - 09 An Ancient Weapon Centuries Lodged in A Towering Skull.ogg
+885:Sequestered Keep/The Fortress in the Timeless Fog/Sequestered Keep - The Fortress in the Timeless Fog - 10 Distant Battlements Atop the Star-Crowned Steep.ogg
+886:Sequestered Keep/The Gift of Men/Sequestered Keep - The Gift of Men - 01 The Tyrant- The Beckoning Black (Total Corporeal Loss).ogg
+887:Sequestered Keep/The Gift of Men/Sequestered Keep - The Gift of Men - 02 The Wanderer- Numb and Stiff Beneath Winter Mountainmist.ogg
+888:Sequestered Keep/The Gift of Men/Sequestered Keep - The Gift of Men - 03 The Knight- Final Wound.ogg
+889:Sequestered Keep/The Gift of Men/Sequestered Keep - The Gift of Men - 04 The Wizard- Ultima Duritiam Incantatorum Tuorum Vehementem.ogg
+890:Sequestered Keep/The Gift of Men/Sequestered Keep - The Gift of Men - 05 The Elf- In the Halls of Mandos (The Lay of L#U00fathien, Daughter of the Starry Night).ogg
+891:Sequestered Keep/The Gift of Men/Sequestered Keep - The Gift of Men - 06 The Traitor- Between the Block and the Falling Axe.ogg
+892:Sequestered Keep/The Gift of Men/Sequestered Keep - The Gift of Men - 07 The Weary- The View Through the Noose.ogg
+893:Sequestered Keep/The Gift of Men/Sequestered Keep - The Gift of Men - 08 The Sellsword (Part I)- No Bard Will Sing.ogg
+894:Sequestered Keep/The Gift of Men/Sequestered Keep - The Gift of Men - 09 The Sellsword (Part II)- And None Will Mourn.ogg
+895:Sequestered Keep/The Gift of Men/Sequestered Keep - The Gift of Men - 10 The Astronomer- A Gateway.ogg
+896:Sequestered Keep/Dark Age Visions/Sequestered Keep - Dark Age Visions - 01 Born Beneath the Mighty Trees.ogg
+897:Sequestered Keep/Dark Age Visions/Sequestered Keep - Dark Age Visions - 02 The Old Knight's Last Breath.ogg
+898:Sequestered Keep/Dark Age Visions/Sequestered Keep - Dark Age Visions - 03 Moonlight on Cold Ashlar.ogg
+899:Sequestered Keep/Dark Age Visions/Sequestered Keep - Dark Age Visions - 04 Spires Amidst the Secret Lake.ogg
+900:Sequestered Keep/Dark Age Visions/Sequestered Keep - Dark Age Visions - 05 I Know Where Dragons Dream.ogg
+901:Sequestered Keep/Dark Age Visions/Sequestered Keep - Dark Age Visions - 06 Red Swords Under Eternal Black Skies.ogg
+902:Sequestered Keep/Dark Age Visions/Sequestered Keep - Dark Age Visions - 07 Zweih#U00e4nderworship.ogg
+903:Sequestered Keep/Dawn of Battle/Sequestered Keep - Dawn of Battle - 01 The Silent Call of Hidden Paths.ogg
+904:Sequestered Keep/Dawn of Battle/Sequestered Keep - Dawn of Battle - 02 Into A Grim Forest Battle.ogg
+905:Sequestered Keep/Dawn of Battle/Sequestered Keep - Dawn of Battle - 03 Tattered Banners Across the Fields of Thousands-Slain.ogg
+906:Sequestered Keep/Dawn of Battle/Sequestered Keep - Dawn of Battle - 04 Parapet Wizard.ogg
+907:Sequestered Keep/Dawn of Battle/Sequestered Keep - Dawn of Battle - 05 On Midnightwinds Nine Dragons Ride.ogg
+908:Sequestered Keep/Dawn of Battle/Sequestered Keep - Dawn of Battle - 06 When the Sword Was Lord.ogg
+909:Sequestered Keep/Dawn of Battle/Sequestered Keep - Dawn of Battle - 07 Secret Chambers of My Castle Soul.ogg
+910:Sequestered Keep/Dawn of Battle/Sequestered Keep - Dawn of Battle - 08 Upon Its Hilt A Shining Light.ogg
+911:Sequestered Keep/Might of An Ancient Tale/Sequestered Keep - Might of An Ancient Tale - 01 Chain Flail War Ritual.ogg
+912:Sequestered Keep/Might of An Ancient Tale/Sequestered Keep - Might of An Ancient Tale - 02 In My Medieval Dreams.ogg
+913:Sequestered Keep/Might of An Ancient Tale/Sequestered Keep - Might of An Ancient Tale - 03 Lost in Barbarian Forest.ogg
+914:Sequestered Keep/Might of An Ancient Tale/Sequestered Keep - Might of An Ancient Tale - 04 Moot of the Odd Knights.ogg
+915:Sequestered Keep/Might of An Ancient Tale/Sequestered Keep - Might of An Ancient Tale - 05 Balgruf's Lament.ogg
+916:Sequestered Keep/Might of An Ancient Tale/Sequestered Keep - Might of An Ancient Tale - 06 Empyral Flame of Mountain's Dawn.ogg
+917:Sequestered Keep/Might of An Ancient Tale/Sequestered Keep - Might of An Ancient Tale - 07 Under An Unfamiliar Moon.ogg
+918:Sequestered Keep/Might of An Ancient Tale/Sequestered Keep - Might of An Ancient Tale - 08 Roundtower Barrows.ogg
+919:Sequestered Keep/Might of An Ancient Tale/Sequestered Keep - Might of An Ancient Tale - 09 Dragons of Lore.ogg
+920:Sequestered Keep/The Land Beyond Dreams/Sequestered Keep - The Land Beyond Dreams - 01 Hidden Levers.ogg
+921:Sequestered Keep/The Land Beyond Dreams/Sequestered Keep - The Land Beyond Dreams - 02 My Sword of Secret Magic.ogg
+922:Sequestered Keep/The Land Beyond Dreams/Sequestered Keep - The Land Beyond Dreams - 03 Dark Ancient Souls.ogg
+923:Sequestered Keep/The Land Beyond Dreams/Sequestered Keep - The Land Beyond Dreams - 04 They Marched As A River of Blinding Silver Flame.ogg
+924:Sequestered Keep/The Land Beyond Dreams/Sequestered Keep - The Land Beyond Dreams - 05 Mysticdreams on Dragons Wings.ogg
+925:Sequestered Keep/The Land Beyond Dreams/Sequestered Keep - The Land Beyond Dreams - 06 Armor Charred Black.ogg
+926:Sequestered Keep/The Land Beyond Dreams/Sequestered Keep - The Land Beyond Dreams - 07 Starlightchild.ogg
+927:Sequestered Keep/The Land Beyond Dreams/Sequestered Keep - The Land Beyond Dreams - 08 Legends Told By Boreal Winds.ogg
+928:Sequestered Keep/The Land Beyond Dreams/Sequestered Keep - The Land Beyond Dreams - 09 Hills and Castles in the Pale Dusk Fog.ogg
+929:Sequestered Keep/The Land Beyond Dreams/Sequestered Keep - The Land Beyond Dreams - 10 Lairs.ogg
+930:Sequestered Keep/The Oldest Realm/Sequestered Keep - The Oldest Realm - 01 Dusty Tomes and Dim Light Cellar Visions.ogg
+931:Sequestered Keep/The Oldest Realm/Sequestered Keep - The Oldest Realm - 02 In the Forest of Eternal Hoarfrost and Neverending Paths.ogg
+932:Sequestered Keep/The Oldest Realm/Sequestered Keep - The Oldest Realm - 03 Lost Songs of the Old Kingdom.ogg
+933:Sequestered Keep/The Oldest Realm/Sequestered Keep - The Oldest Realm - 04 Of the Last Wizard's Lonely Tower.ogg
+934:Sequestered Keep/The Oldest Realm/Sequestered Keep - The Oldest Realm - 05 Far Beyond the Furthest Gates.ogg
+935:Sequestered Keep/The Oldest Realm/Sequestered Keep - The Oldest Realm - 06 The Recluse King of Longforgotten Halls.ogg
+936:Sequestered Keep/The Oldest Realm/Sequestered Keep - The Oldest Realm - 07 Where Torchlight Is the Only God.ogg
+937:Shadow Dungeon/Wandering Endlessly Through the Mountains/Shadow Dungeon - Wandering Endlessly Through the Mountains - 01 Into the Battles.ogg
+938:Shadow Dungeon/Wandering Endlessly Through the Mountains/Shadow Dungeon - Wandering Endlessly Through the Mountains - 02 Of Blooded Moon and Falling Stars.ogg
+939:Shadow Dungeon/Wandering Endlessly Through the Mountains/Shadow Dungeon - Wandering Endlessly Through the Mountains - 03 Summoning the Spirits of the Great Gods.ogg
+940:Shadow Dungeon/Wandering Endlessly Through the Mountains/Shadow Dungeon - Wandering Endlessly Through the Mountains - 04 Wandering Endlessly Through the Mountains.ogg
+941:Shadow Dungeon/Amorphous Dreams of the Past and Fire/Shadow Dungeon - Amorphous Dreams Of Past And Fire - 01 Amorphous Dreams Of Past And Fire.ogg
+942:Shadow of Intent/Shadow of Intent - Primordial (2016)/01. The Prelude to Bereavement.ogg
+943:Shadow of Intent/Shadow of Intent - Primordial (2016)/02. The Shaping Sickness.ogg
+944:Shadow of Intent/Shadow of Intent - Primordial (2016)/03. The Invoking of the Execution of Worlds.ogg
+945:Shadow of Intent/Shadow of Intent - Primordial (2016)/04. The Cosmic Inquisitor (feat. Dan Watson).ogg
+946:Shadow of Intent/Shadow of Intent - Primordial (2016)/05. The Didact's Will.ogg
+947:Shadow of Intent/Shadow of Intent - Primordial (2016)/06. The Last Bastion.ogg
+948:Shadow of Intent/Shadow of Intent - Primordial (2016)/07. The Battle of the Maginot Sphere.ogg
+949:Shadow of Intent/Shadow of Intent - Primordial (2016)/08. The Twin Revelation.ogg
+950:Shadow of Intent/Shadow of Intent - Primordial (2016)/09. The Aftermath in Jat-Krula.ogg
+951:Shadow of Intent/Shadow of Intent - Primordial (2016)/10. The Indexing.ogg
+952:Siliniez/Altar of Moss/Siliniez - Altar of Moss - 01 Ancient Realms.ogg
+953:Siliniez/Altar of Moss/Siliniez - Altar of Moss - 02 Centaurs' Dance.ogg
+954:Siliniez/Altar of Moss/Siliniez - Altar of Moss - 03 Forest Cathedral.ogg
+955:Siliniez/Altar of Moss/Siliniez - Altar of Moss - 04 Altar of Moss.ogg
+956:Siliniez/Altar of Moss/Siliniez - Altar of Moss - 05 Night Wandering.ogg
+957:Siliniez/Forest Emptiness/Siliniez - Forest Emptiness - 01 Fog of War.ogg
+958:Siliniez/Forest Emptiness/Siliniez - Forest Emptiness - 02 Water Breathing.ogg
+959:Siliniez/Forest Emptiness/Siliniez - Forest Emptiness - 03 Forest Emptiness.ogg
+960:Siliniez/Forest Emptiness/Siliniez - Forest Emptiness - 04 Stonesong.ogg
+961:Siliniez/Forest Emptiness/Siliniez - Forest Emptiness - 05 Riddles.ogg
+962:Siliniez/Final Winter/Siliniez - Final Winter - 01 Death of Sun and Moon.ogg
+963:Siliniez/Final Winter/Siliniez - Final Winter - 02 Final Winter.ogg
+964:Skinless/Trample the Weak Hurdle the Dead/01. Overlord.ogg
+965:Skinless/Trample the Weak Hurdle the Dead/02. A Unilateral Disgust.ogg
+966:Skinless/Trample the Weak Hurdle the Dead/03. Deviation Will Not Be Tolerated.ogg
+967:Skinless/Trample the Weak Hurdle the Dead/04. Trample The Weak, Hurdle The Dead.ogg
+968:Skinless/Trample the Weak Hurdle the Dead/05. Spoils Of The Sycophant.ogg
+969:Skinless/Trample the Weak Hurdle the Dead/06. Endvisioned.ogg
+970:Skinless/Trample the Weak Hurdle the Dead/07. Execution Of Reason.ogg
+971:Skinless/Trample the Weak Hurdle the Dead/08. Wicked World (Black Sabbath cover).ogg
+972:Skinless/Only The Ruthless Remain/01 - Serpenticide.ogg
+973:Skinless/Only The Ruthless Remain/02 - Only The Ruthless Remain.ogg
+974:Skinless/Only The Ruthless Remain/03 - Skinless.ogg
+975:Skinless/Only The Ruthless Remain/04 - Flamethrower.ogg
+976:Skinless/Only The Ruthless Remain/05 - The Beast Smells Blood.ogg
+977:Skinless/Only The Ruthless Remain/06 - Funeral Curse.ogg
+978:Skinless/Only The Ruthless Remain/07 - Barbaric Proclivity.ogg
+979:Skogen/I Doden (2014)/01. Vagner_[plixid.com].ogg
+980:Skogen/I Doden (2014)/02 I Doden.ogg
+981:Skogen/I Doden (2014)/03. Naor Himlen Svartnar_[plixid.com].ogg
+982:Skogen/I Doden (2014)/04. Solarvore_[plixid.com].ogg
+983:Skogen/I Doden (2014)/05. Livets Ruin_[plixid.com].ogg
+984:Skogen/I Doden (2014)/06. Griftenatt_[plixid.com].ogg
+985:Skogen/I Doden (2014)/07. Midvintergraven_[plixid.com].ogg
+986:Skogen/I Doden (2014)/08. Svartskogen_[plixid.com].ogg
+987:Skogen/I Doden (2014)/09. Sleep_[plixid.com].ogg
+988:Skyforest - Aftermath/Aftermath/Skyforest - Aftermath - 01 Aftermath.ogg
+989:Skyforest - Aftermath/Aftermath/Skyforest - Aftermath - 02 Yearning for the Past.ogg
+990:Skyforest - Aftermath/Aftermath/Skyforest - Aftermath - 03 I Wish the Dawn Would Never Come.ogg
+991:Skyforest - Aftermath/Aftermath/Skyforest - Aftermath - 04 Nothing, Worthless.ogg
+992:Skyforest - Aftermath/Aftermath/Skyforest - Aftermath - 05 Inexistence.ogg
+993:Skyforest - Aftermath/Aftermath/Skyforest - Aftermath - 06 Together in Death.ogg
+994:Skyforest - Aftermath/Aftermath/Skyforest - Aftermath - 07 Ascension.ogg
+995:Skyforest - Aftermath/Aftermath/Skyforest - Aftermath - 08 Together in Death (Acoustic).ogg
+996:Skyforest - Aftermath/Unity/Skyforest - Unity - 01 A Graceful Spirit.ogg
+997:Skyforest - Aftermath/Unity/Skyforest - Unity - 02 Cosmic Drifter.ogg
+998:Skyforest - Aftermath/Unity/Skyforest - Unity - 03 Autumnal Embrace.ogg
+999:Skyforest - Aftermath/Unity/Skyforest - Unity - 04 Fading Glow.ogg
+1000:Skyforest - Aftermath/Unity/Skyforest - Unity - 05 The Swan.ogg
+1001:Skyforest - Aftermath/Unity/Skyforest - Unity - 06 Reminiscence.ogg
+1002:Skyforest - Aftermath/Unity/Skyforest - Unity - 07 Voice of the Sea.ogg
+1003:Skyforest - Aftermath/Unity/Skyforest - Unity - 01 A Graceful Spirit.ogg
+1004:Skyforest - Aftermath/Unity/Skyforest - Unity - 02 Cosmic Drifter.ogg
+1005:Skyforest - Aftermath/Unity/Skyforest - Unity - 03 Autumnal Embrace.ogg
+1006:Skyforest - Aftermath/Unity/Skyforest - Unity - 04 Fading Glow.ogg
+1007:Skyforest - Aftermath/Unity/Skyforest - Unity - 05 The Swan.ogg
+1008:Skyforest - Aftermath/Unity/Skyforest - Unity - 06 Reminiscence.ogg
+1009:Skyforest - Aftermath/Unity/Skyforest - Unity - 07 Voice of the Sea.ogg
+1010:Skaphe/Skaphe - Skaphe/01 Every Soul Entombed.opus
+1011:Skaphe/Skaphe - Skaphe/02 Melancholic Ossuary.opus
+1012:Skaphe/Skaphe - Skaphe/03 The Obelisk Gleam.opus
+1013:Skaphe/Skaphe - Skaphe/04 Untitled.opus
+1014:Skaphe/Skaphe - Skaphe^2/01 I.opus
+1015:Skaphe/Skaphe - Skaphe^2/02 II.opus
+1016:Skaphe/Skaphe - Skaphe^2/03 III.opus
+1017:Skaphe/Skaphe - Skaphe^2/04 IV.opus
+1018:Skaphe/Skaphe - Skaphe^2/05 V.opus
+1019:Skaphe/Skaphe - Skaphe^2/06 VI.opus
 playlist_end

@@ -1,5 +1,6 @@
 #!/bin/sh
 
+compton &
 bgs -z /home/mitch/workspace/dotfiles/suckless-tools/dwm/wall &
 slstatus &
 clipmenud &

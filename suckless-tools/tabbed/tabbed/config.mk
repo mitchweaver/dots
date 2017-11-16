@@ -9,7 +9,7 @@ MANPREFIX = ${PREFIX}/share/man
 
 # includes and libs
 INCS = -I. -I/usr/include -I/usr/include/freetype2
-LIBS = -L/usr/lib -lc -lX11 -lfontconfig -lXft
+LIBS = -L/usr/lib -lc -lX11 -lfontconfig -lXft -lXrender
 
 # flags
 CPPFLAGS = -DVERSION=\"${VERSION}\" -D_DEFAULT_SOURCE
