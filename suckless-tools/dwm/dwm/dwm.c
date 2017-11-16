@@ -50,6 +50,7 @@ typedef union {
 	int i;
 	unsigned int ui;
 	float f;
+    float sf;
 	const void *v;
 } Arg;
 
@@ -94,6 +95,7 @@ typedef struct {
 struct Monitor {
 	char ltsymbol[16];
 	float mfact;
+    float smfact;
 	int nmaster;
 	int num;
 	int by;               /* bar geometry */
@@ -183,6 +185,7 @@ static void setfocus(Client *c);
 static void setfullscreen(Client *c, int fullscreen);
 static void setlayout(const Arg *arg);
 static void setmfact(const Arg *arg);
+static void setsmfact(const Arg *arg);
 static void setup(void);
 static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
@@ -217,6 +220,10 @@ static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
 static void bstack(Monitor *m);
 static void bstackhoriz(Monitor *m);
+static void centeredmaster(Monitor *m);
+static void centeredfloatingmaster(Monitor *m);
+
+
 
 /* variables */
 static const char broken[] = "broken";
@@ -633,6 +640,7 @@ createmon(void)
 	m = ecalloc(1, sizeof(Monitor));
 	m->tagset[0] = m->tagset[1] = 1;
 	m->mfact = mfact;
+    m->smfact = smfact;
 	m->nmaster = nmaster;
 	m->showbar = showbar;
 	m->topbar = topbar;
@@ -1557,6 +1565,19 @@ setmfact(const Arg *arg)
 }
 
 void
+setsmfact(const Arg *arg){
+   float sf;
+
+   if(!arg || !selmon->lt[selmon->sellt]->arrange)
+       return;
+   sf = arg->sf < 1.0 ? arg->sf + selmon->smfact : arg->sf - 1.0;
+   if(sf < 0 || sf > 0.9)
+       return;
+   selmon->smfact = sf;
+   arrange(selmon);
+}
+
+void
 setup(void)
 {
 	int i;
@@ -1703,7 +1724,7 @@ tagmon(const Arg *arg)
 void
 tile(Monitor *m)
 {
-	unsigned int i, n, h, mw, my, ty;
+	unsigned int i, n, h, smh, mw, my, ty;
 	Client *c;
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
@@ -1720,10 +1741,21 @@ tile(Monitor *m)
 			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
 			my += HEIGHT(c);
 		} else {
-			h = (m->wh - ty) / (n - i);
-			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
-			ty += HEIGHT(c);
-		}
+		
+           smh = m->mh * m->smfact;
+           if(!(nexttiled(c->next)))
+               h = (m->wh - ty) / (n - i);
+           else h = (m->wh - smh - ty) / (n - i);
+           if(h < minwsz) {
+               c->isfloating = True;
+               XRaiseWindow(dpy, c->win);
+               resize(c, m->mx + (m->mw / 2 - WIDTH(c) / 2), m->my + (m->mh / 2 - HEIGHT(c) / 2), m->ww - mw - (2*c->bw), h - (2*c->bw), False);
+               ty -= HEIGHT(c);
+           }
+           else resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), False);
+           if(!(nexttiled(c->next))) ty += HEIGHT(c) + smh;
+           else ty += HEIGHT(c);
+        }
 }
 
 void
@@ -2242,6 +2274,60 @@ bstackhoriz(Monitor *m) {
 			resize(c, tx, ty, m->ww - (2 * c->bw), th - (2 * c->bw), 0);
 			if (th != m->wh)
 				ty += HEIGHT(c);
+		}
+	}
+}
+void
+centeredmaster(Monitor *m)
+{
+	unsigned int i, n, h, mw, mx, my, oty, ety, tw;
+	Client *c;
+
+	/* count number of clients in the selected monitor */
+	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+	if (n == 0)
+		return;
+
+	/* initialize areas */
+	mw = m->ww;
+	mx = 0;
+	my = 0;
+	tw = mw;
+
+	if (n > m->nmaster) {
+		/* go mfact box in the center if more than nmaster clients */
+		mw = m->nmaster ? m->ww * m->mfact : 0;
+		tw = m->ww - mw;
+
+		if (n - m->nmaster > 1) {
+			/* only one client */
+			mx = (m->ww - mw) / 2;
+			tw = (m->ww - mw) / 2;
+		}
+	}
+
+	oty = 0;
+	ety = 0;
+	for (i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+	if (i < m->nmaster) {
+		/* nmaster clients are stacked vertically, in the center
+		 * of the screen */
+		h = (m->wh - my) / (MIN(n, m->nmaster) - i);
+		resize(c, m->wx + mx, m->wy + my, mw - (2*c->bw),
+		       h - (2*c->bw), 0);
+		my += HEIGHT(c);
+	} else {
+		/* stack clients are stacked vertically */
+		if ((i - m->nmaster) % 2 ) {
+			h = (m->wh - ety) / ( (1 + n - i) / 2);
+			resize(c, m->wx, m->wy + ety, tw - (2*c->bw),
+			       h - (2*c->bw), 0);
+			ety += HEIGHT(c);
+		} else {
+			h = (m->wh - oty) / ((1 + n - i) / 2);
+			resize(c, m->wx + mx + mw, m->wy + oty,
+			       tw - (2*c->bw), h - (2*c->bw), 0);
+			oty += HEIGHT(c);
 		}
 	}
 }

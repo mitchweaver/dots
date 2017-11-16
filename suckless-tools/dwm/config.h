@@ -1,7 +1,8 @@
 static const unsigned int gappx = 10; /* gap pixel between windows */ 
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const char *fonts[]          = { "terminus:pixelsize=12:antialias=false" };
+static const unsigned int minwsz    = 10;       /* min height for smfact */
+static const char *fonts[]        = { "terminus:pixelsize=12:antialias=false" };
 static const char dmenufont[]       = "terminus:pixelsize=12:antialias=false";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -25,19 +26,23 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 };
 
-static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
+static const float mfact  = 0.50; /* factor of master area size [0.05..0.95] */
+static const float smfact = 0.00; /* factor of tiled clients */
 static const int nmaster     = 1;    /* number of clients in master area */
 
 #include "layouts.c"
+#include "horizgrid.c"
+#include "fibonacci.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[T]",      tile },    /* first entry is default */
 	{ "[F]",      NULL },    /* no layout function means floating behavior */
-    { "[HHH]", grid },
+    { "[GGG]", grid },
     { "[TTT]", bstack},
-    
-    
-    //	{ "[M]",      monocle },
+    { "[MM]", centeredmaster },
+    { "[HHH]", horizgrid },
+    { "[FFF]", dwindle },
+    /* { "[M]",      monocle }, */
 };
 
 #define mod1 Mod1Mask 
@@ -74,7 +79,7 @@ static Key keys[] = {
     { mod1,                     XK_c,       spawn,          {.v = clipboard } },
     { mod1,                     XK_r,       spawn,          {.v = ranger } },
     { mod1,                     XK_slash,   spawn,          {.v = mpdnext } },
-    { mod1,                     XK_period,   spawn,          {.v = mpdprevious } },
+    { mod1,                     XK_period,   spawn,          {.v = mpdprev } },
     { mod1,                     XK_comma,   spawn,          {.v = mpdtoggle } },
     
     /* { mod1,                     XK_semicolon,   spawn,      {.v = voldown }}, */
@@ -93,6 +98,9 @@ static Key keys[] = {
 	{ mod1,                     XK_d,       incnmaster,     {.i = -1 } },
 	{ mod1,                     XK_h,       setmfact,       {.f = -0.05} },
 	{ mod1,                     XK_l,       setmfact,       {.f = +0.05} },
+    { mod1,                     XK_k,       setsmfact,       {.f = +0.05} },
+	{ mod1,                     XK_j,       setsmfact,       {.f = -0.05} },
+
 	/* { mod1,                     XK_Return,  zoom,           {0} }, */
 	{ mod1,                     XK_Tab,     view,           {0} },
     // ------------------------------------------------------------------- //
@@ -101,6 +109,9 @@ static Key keys[] = {
 	{ mod1,                     XK_f,       setlayout,      {.v = &layouts[1]} },
 	{ mod1,                     XK_g,       setlayout,      {.v = &layouts[2]} },
 	{ mod1,                     XK_b,       setlayout,      {.v = &layouts[3]} },
+	{ mod1,                     XK_m,       setlayout,      {.v = &layouts[4]} },
+	{ mod1,                     XK_n,       setlayout,      {.v = &layouts[5]} },
+	{ mod1,                     XK_v,       setlayout,      {.v = &layouts[6]} },
 	/* { mod1,                     XK_m,       setlayout,      {.v = &layouts[2]} }, */
 	{ mod1,                     XK_space,   setlayout,      {0} },
 	{ mod1|ShiftMask,           XK_space,   togglefloating, {0} },
