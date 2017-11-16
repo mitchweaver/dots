@@ -22,11 +22,10 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call plug#begin('~/.vim/vim-plug')
 Plug 'vimwiki/vimwiki'
 "Plug 'valloric/youcompleteme' " autocompletion
-Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kien/ctrlp.vim' " fuzzy finder
 Plug 'tpope/vim-commentary' " comment toggler
-" Plug 'flazz/vim-colorschemes'
+Plug 'flazz/vim-colorschemes'
 " Plug 'leshill/vim-json' " json support
 Plug 'pangloss/vim-javascript' " better javascript support
 " Plug 'tpope/vim-markdown' " markdown support
@@ -41,18 +40,24 @@ Plug 'dracula/vim'  " dracula colorscheme
 " Plug 'nathanaelkane/vim-indent-guides'
 " is this causing problems?
 " Plug 'godlygeek/tabular' " text alignment
+Plug 'vim-airline/vim-airline'
 " Plug 'dylanaraps/wal.vim'
+
 call plug#end()
 filetype indent plugin on
 syntax enable
 " --------------------------------------------------------------
 
 " ------------- COLORSCHEME ------------------------------------
-colorscheme dracula
-" colorscheme solarized
-" colorscheme wombat
-" set background=dark
-set background=light
+" colorscheme dracula
+colorscheme solarized
+" colorscheme zenburn
+" colorscheme gruvbox
+set background=dark
+" set background=light
+
+" when using solarized with transparency:
+let g:solarized_termtrans=1
 " ---------------------------------------------------------------
 
 " -------------- Vim Specific Configs -------------------------
@@ -106,7 +111,7 @@ set encoding=utf-8
 " --------------------------------------------------------------
 
 " -------- Tabs and Spacing -----------------------------------
-set tabstop=4
+set tabstop=8
 set shiftwidth=4
 set softtabstop=4
 set expandtab " use spaces instead of tabs.
@@ -139,6 +144,7 @@ nmap <Leader>s :%s//g<Left><Left>
 " -------------------------------------------------------------
 
 " -------- Language Syntax Management ---------------------------
+let python_highlight_all = 1
 iab #i #include <.h>
 " --------------------------------------------------------------
 
@@ -178,6 +184,7 @@ let g:instant_markdown_autostart = 0 " disable autostart (so it only works on le
 map <silent><leader>md :InstantMarkdownPreview<CR>
 
 " airline settings
+let g:airline_powerline_fonts = 1
 
 
 

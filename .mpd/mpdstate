@@ -1,7 +1,7 @@
-sw_volume: 94
+sw_volume: 96
 audio_device_state:1:alsa audio
 state: play
-current: 95
+current: 739
 time: 4.063000
 random: 0
 repeat: 0
@@ -108,4 +108,650 @@ playlist_begin
 94:Black Cilice/Black Cilice - Mysteries/04. Ceremonial Energy .ogg
 95:Black Cilice/Black Cilice - Mysteries/05. A Prayer From Beyond .ogg
 96:Black Cilice/Black Cilice - Mysteries/06. From The Long Forgotten Past .ogg
+97:Unjoy/Worthless Life End/Unjoy - Worthless Life End - 01 Worthless.ogg
+98:Unjoy/Worthless Life End/Unjoy - Worthless Life End - 02 Life.ogg
+99:Unjoy/Worthless Life End/Unjoy - Worthless Life End - 03 End.ogg
+100:Unjoy/Worthless Life End/Unjoy - Worthless Life End - 04 Gråtoner (Hypothermia Cover).ogg
+101:Urfaust/2004. Geist Ist Teufel/01. Intro.ogg
+102:Urfaust/2004. Geist Ist Teufel/02. Die Kalte Teufelsfaust.ogg
+103:Urfaust/2004. Geist Ist Teufel/03. Drundenfuß.ogg
+104:Urfaust/2004. Geist Ist Teufel/04. Auszug Aller Todlich Seinen Krafte.ogg
+105:Urfaust/2004. Geist Ist Teufel/05. Geist Ist Teufel.ogg
+106:Urfaust/2004. Geist Ist Teufel/06. Outro.ogg
+107:Urfaust/2005. Verräterischer, Nichtswürdiger Geist/01. Dunkel, Still Von Ewigkeit.ogg
+108:Urfaust/2005. Verräterischer, Nichtswürdiger Geist/02. Ragnarök Mystiker.ogg
+109:Urfaust/2005. Verräterischer, Nichtswürdiger Geist/03. Gespinnst Des Verderbens.ogg
+110:Urfaust/2005. Verräterischer, Nichtswürdiger Geist/04. Trauerhöhle.ogg
+111:Urfaust/2005. Verräterischer, Nichtswürdiger Geist/05. Verflucht Das Blenden Der Erscheinung.ogg
+112:Urfaust/2005. Verräterischer, Nichtswürdiger Geist/06. Der Gottesverächter.ogg
+113:Urfaust/2005. Verräterischer, Nichtswürdiger Geist/07. In Den Weiten Öden Räumen.ogg
+114:Urfaust/2008. Drei Rituale Jenseits Des Kosmos [EP]/01. Drei Rituale Jenseits Des Kosmos I.ogg
+115:Urfaust/2008. Drei Rituale Jenseits Des Kosmos [EP]/02. Drei Rituale Jenseits Des Kosmos II.ogg
+116:Urfaust/2008. Drei Rituale Jenseits Des Kosmos [EP]/03. Drei Rituale Jenseits Des Kosmos III.ogg
+117:Urfaust/2009. Einsiedler [EP]/01. IX - Der Einsiedler.ogg
+118:Urfaust/2009. Einsiedler [EP]/02. Verderber.ogg
+119:Urfaust/2010. Der Freiwillige Bettler/01. Vom Gesicht Und Rätsel.ogg
+120:Urfaust/2010. Der Freiwillige Bettler/02. Der Freiwillige Bettler.ogg
+121:Urfaust/2010. Der Freiwillige Bettler/03. Das Kind Mit Dem Spiegel.ogg
+122:Urfaust/2010. Der Freiwillige Bettler/04. Der Mensch, Die Kleine Narrenwelt.ogg
+123:Urfaust/2010. Der Freiwillige Bettler/05. Ein Leeres Zauberspiel.ogg
+124:Urfaust/2010. Der Freiwillige Bettler/06. Der Hässlichste Mensch.ogg
+125:Urfaust/2010. Der Freiwillige Bettler/07. Der Zauberer.ogg
+126:Urfaust/2015 - Apparitions/01 The End Of Genetic Circles.ogg
+127:Urfaust/2015 - Apparitions/02 Apparitions.ogg
+128:Urfaust/2015 - Apparitions/03 The Healer.ogg
+129:Urfaust/2015 - Apparitions/04 The River.ogg
+130:Urfaust/Urfaust - Empty Space Meditation (2016)/01 Meditatum I.ogg
+131:Urfaust/Urfaust - Empty Space Meditation (2016)/02 Meditatum II.ogg
+132:Urfaust/Urfaust - Empty Space Meditation (2016)/03 Meditatum III.ogg
+133:Urfaust/Urfaust - Empty Space Meditation (2016)/04 Meditatum IV.ogg
+134:Urfaust/Urfaust - Empty Space Meditation (2016)/05 Meditatum V.ogg
+135:Urfaust/Urfaust - Empty Space Meditation (2016)/06 Meditatum VI.ogg
+136:Utstott/Utstott - Legender Odin/01 Slaget om Odin og Fenrir.ogg
+137:Utstott/Utstott - Legender Odin/02 Fodsel av Valhalla.ogg
+138:Utstott/Utstott - Legender Odin/03 Sleipnir sin tur i Livlose osene.ogg
+139:Utstott/Utstott - Legender Odin/04 Oppstigning av Einherjar.ogg
+140:Utstott/Utstott - Hjorungavogr/01 Hjorungavog.ogg
+141:Utstott/Utstott - Hjorungavogr/02 Hagl Over Stekende Skip.ogg
+142:Utstott/Utstott - Hjorungavogr/03 Skrotter Under Bolgene.ogg
+143:Utstott/Utstott - Hjorungavogr/04 En Hedensk Dod.ogg
+144:Utstott/Utstott - Hjorungavogr/05 Etterlivet.ogg
+145:Utstott/Utstott - Hjorungavogr/06 Skjonnhet av Folkvangr.ogg
+146:Utstott/Utstott - Hjorungavogr/07 Storsalen av Eik.ogg
+147:Utstott/Utstott - Hjorungavogr/08 Klippene Over og Skogen Under.ogg
+148:Utstott/Utstott - Hjorungavogr/09 Uskadd ved Menneskeheten.ogg
+149:Utstott/Utstott - Legender Odin/01 Slaget om Odin og Fenrir.ogg
+150:Utstott/Utstott - Legender Odin/02 Fodsel av Valhalla.ogg
+151:Utstott/Utstott - Legender Odin/03 Sleipnir sin tur i Livlose osene.ogg
+152:Utstott/Utstott - Legender Odin/04 Oppstigning av Einherjar.ogg
+153:Utstott/Utstott - Hjorungavogr/01 Hjorungavog.ogg
+154:Utstott/Utstott - Hjorungavogr/02 Hagl Over Stekende Skip.ogg
+155:Utstott/Utstott - Hjorungavogr/03 Skrotter Under Bolgene.ogg
+156:Utstott/Utstott - Hjorungavogr/04 En Hedensk Dod.ogg
+157:Utstott/Utstott - Hjorungavogr/05 Etterlivet.ogg
+158:Utstott/Utstott - Hjorungavogr/06 Skjonnhet av Folkvangr.ogg
+159:Utstott/Utstott - Hjorungavogr/07 Storsalen av Eik.ogg
+160:Utstott/Utstott - Hjorungavogr/08 Klippene Over og Skogen Under.ogg
+161:Utstott/Utstott - Hjorungavogr/09 Uskadd ved Menneskeheten.ogg
+162:Veldes/Ember Breather/01 - The Roamer's Curse.ogg
+163:Veldes/Ember Breather/02 - Void Path King.ogg
+164:Veldes/Ember Breather/03 - To Ruins Of Throneless Realm.ogg
+165:Veldes/Ember Breather/04 - Dust Scatterer.ogg
+166:Veldes/Ember Breather/05 - Crowned In Oblivion.ogg
+167:Verdunkeln/2005 - Verdunkeln (Demo)/01. Intro.ogg
+168:Verdunkeln/2005 - Verdunkeln (Demo)/02. Wechselbalg.ogg
+169:Verdunkeln/2005 - Verdunkeln (Demo)/03. Blutrunst.ogg
+170:Verdunkeln/2005 - Verdunkeln (Demo)/04. Einst War Es Mal.ogg
+171:Verdunkeln/2005 - Verdunkeln (Demo)/05. Erlkönigs Tochter.ogg
+172:Verdunkeln/2005 - Verdunkeln (Demo)/06. Schwarze Fährte.ogg
+173:Verdunkeln/2005 - Verdunkeln (Demo)/07. Trümmer.ogg
+174:Verdunkeln/2005 - Verdunkeln (Demo)/08. Trolltraum.ogg
+175:Verdunkeln/2007 - Einblick In Den Qualenfall/01. In Die Irre.ogg
+176:Verdunkeln/2007 - Einblick In Den Qualenfall/02. Im Zwiespalt.ogg
+177:Verdunkeln/2007 - Einblick In Den Qualenfall/03. Der Quell.ogg
+178:Verdunkeln/2007 - Einblick In Den Qualenfall/04. Die Saat Der Klinge.ogg
+179:Verdunkeln/2007 - Einblick In Den Qualenfall/05. Der Herrscher.ogg
+180:Verdunkeln/2007 - Einblick In Den Qualenfall/06. Auf Freiem Felde.ogg
+181:Verdunkeln/2012 - Weder Licht Noch Schatten/01. Das Antlitz Des Himmels.ogg
+182:Verdunkeln/2012 - Weder Licht Noch Schatten/02. Am Ende Des Abgrunds.ogg
+183:Verdunkeln/2012 - Weder Licht Noch Schatten/03. Die Letzte Legion.ogg
+184:Verdunkeln/2012 - Weder Licht Noch Schatten/04. Unsre Richter.ogg
+185:Verdunkeln/2012 - Weder Licht Noch Schatten/05. Weder Licht Noch Schatten.ogg
+186:Verdunkeln/2007 - Einblick In Den Qualenfall/01. In Die Irre.ogg
+187:Verdunkeln/2007 - Einblick In Den Qualenfall/02. Im Zwiespalt.ogg
+188:Verdunkeln/2007 - Einblick In Den Qualenfall/03. Der Quell.ogg
+189:Verdunkeln/2007 - Einblick In Den Qualenfall/04. Die Saat Der Klinge.ogg
+190:Verdunkeln/2007 - Einblick In Den Qualenfall/05. Der Herrscher.ogg
+191:Verdunkeln/2007 - Einblick In Den Qualenfall/06. Auf Freiem Felde.ogg
+192:Verdunkeln/2005 - Verdunkeln (Demo)/01. Intro.ogg
+193:Verdunkeln/2005 - Verdunkeln (Demo)/02. Wechselbalg.ogg
+194:Verdunkeln/2005 - Verdunkeln (Demo)/03. Blutrunst.ogg
+195:Verdunkeln/2005 - Verdunkeln (Demo)/04. Einst War Es Mal.ogg
+196:Verdunkeln/2005 - Verdunkeln (Demo)/05. Erlkönigs Tochter.ogg
+197:Verdunkeln/2005 - Verdunkeln (Demo)/06. Schwarze Fährte.ogg
+198:Verdunkeln/2005 - Verdunkeln (Demo)/07. Trümmer.ogg
+199:Verdunkeln/2005 - Verdunkeln (Demo)/08. Trolltraum.ogg
+200:Paysage d'Hiver/2003 - Schnee - Das Winterreich (split)/02 - Vinterriket - Das Winterreich.ogg
+201:Vinterland/Vinterland - Welcome My Last Chapter/01-Our dawn of glory.ogg
+202:Vinterland/Vinterland - Welcome My Last Chapter/02-I'm an other in the night.ogg
+203:Vinterland/Vinterland - Welcome My Last Chapter/03-So far beyond... (The great vastforest).ogg
+204:Vinterland/Vinterland - Welcome My Last Chapter/04-A castle so crystal clear.ogg
+205:Vinterland/Vinterland - Welcome My Last Chapter/05-As I behold the dying sun.ogg
+206:Vinterland/Vinterland - Welcome My Last Chapter/06-Vinterskogen.ogg
+207:Vinterland/Vinterland - Welcome My Last Chapter/07-Still the night is awake.ogg
+208:Vinterland/Vinterland - Welcome My Last Chapter/08-A winter breeze.ogg
+209:Vinterland/Vinterland - Welcome My Last Chapter/09-Wings of sorrow.ogg
+210:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/01. Consecrated By Sacrifice.ogg
+211:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/02. Obedience To Evil.ogg
+212:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/03. All Of The Devil's Temple.ogg
+213:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/04. Rites Of The Ruminant Dead.ogg
+214:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/05. Serpent Mass Litany.ogg
+215:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/06. A Pact In Stone And Skin.ogg
+216:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/07. The Majestic Doomed Kingdom.ogg
+217:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/08. Born Of The Blighting Angel.ogg
+218:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/01 Blessed By Lycosidae (Opening Mass).ogg
+219:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/02 Utter The Tongue Of The Dead.ogg
+220:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/03 The Antichrist Prevails.ogg
+221:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/04 At The Door Of An Infernal Realm.ogg
+222:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/05 Defile And Devour.ogg
+223:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/06 Alms For The Eyeless Idol.ogg
+224:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/07 The Brimstone Hail.ogg
+225:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/08 Mould And Blood.ogg
+226:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/09 The Shores of Eternal Night.ogg
+227:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/10 Goddess Of The Waking Death.ogg
+228:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/01 Blessed By Lycosidae (Opening Mass).ogg
+229:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/02 Utter The Tongue Of The Dead.ogg
+230:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/03 The Antichrist Prevails.ogg
+231:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/04 At The Door Of An Infernal Realm.ogg
+232:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/05 Defile And Devour.ogg
+233:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/06 Alms For The Eyeless Idol.ogg
+234:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/07 The Brimstone Hail.ogg
+235:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/08 Mould And Blood.ogg
+236:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/09 The Shores of Eternal Night.ogg
+237:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/10 Goddess Of The Waking Death.ogg
+238:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/01. Festering Detatched Genitals.ogg
+239:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/02. Pusfull Hymen Liquified.ogg
+240:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/03. Depilated Cunt Twitch.ogg
+241:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/04. Masturbating with Defecated Entrails.ogg
+242:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/05. Putrescent Clitoral Fermentation.ogg
+243:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/06. Regurgitation of Menstrual Scabs.ogg
+244:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/07. Fornicate In Putrefaction.ogg
+245:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/08. Postmortal Orifice Lubrication.ogg
+246:Vulvectomy/Syphilic Dismembered Slut/Music/02- Fornicate In Putrefaction.ogg
+247:Vulvectomy/Syphilic Dismembered Slut/Music/01- Molesting Dislimbed Whore.ogg
+248:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/01 - Gangrenous Testicular Deformity.ogg
+249:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/02 - Female Stress Urinary Incontinence.ogg
+250:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/03 - Adolescent Vaginal Gourmet.ogg
+251:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/04 - Eugenic Sterilization.ogg
+252:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/05 - Charred Scrotal Fragments.ogg
+253:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/06 - Post Partum Depression Foeticide.ogg
+254:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/07 - Blunt Rectal Impalement.ogg
+255:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/08 - Drowned In Afterbirth.ogg
+256:Vulvectomy/Dismembered Beauties/1. Split-Thickened Vulvar Skin.ogg
+257:Vulvectomy/Dismembered Beauties/2. Dirty Rotten Infibulation.ogg
+258:Vulvectomy/Dismembered Beauties/3. Azoospermic Infertility.ogg
+259:Vulvectomy/Dismembered Beauties/4. Deformed Tits Collection.ogg
+260:Vulvectomy/Dismembered Beauties/5. Grotesque Prosthetic Prolapse.ogg
+261:Vulvectomy/Dismembered Beauties/6. Abdominal Ectopic Pregnancy.ogg
+262:Vulvectomy/Dismembered Beauties/7. Involuntary Manorexia.ogg
+263:Vulvectomy/Dismembered Beauties/8. Orgasmic Sensation Through Fecal Ingestion.ogg
+264:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/01 - Gangrenous Testicular Deformity.ogg
+265:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/02 - Female Stress Urinary Incontinence.ogg
+266:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/03 - Adolescent Vaginal Gourmet.ogg
+267:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/04 - Eugenic Sterilization.ogg
+268:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/05 - Charred Scrotal Fragments.ogg
+269:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/06 - Post Partum Depression Foeticide.ogg
+270:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/07 - Blunt Rectal Impalement.ogg
+271:Vulvectomy/Post-Abortion Slut Fuck/Vulvectomy - Post-Abortion Slut Fuck (2010)/08 - Drowned In Afterbirth.ogg
+272:Vulvectomy/Syphilic Dismembered Slut/Music/02- Fornicate In Putrefaction.ogg
+273:Vulvectomy/Syphilic Dismembered Slut/Music/01- Molesting Dislimbed Whore.ogg
+274:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/01. Festering Detatched Genitals.ogg
+275:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/02. Pusfull Hymen Liquified.ogg
+276:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/03. Depilated Cunt Twitch.ogg
+277:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/04. Masturbating with Defecated Entrails.ogg
+278:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/05. Putrescent Clitoral Fermentation.ogg
+279:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/06. Regurgitation of Menstrual Scabs.ogg
+280:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/07. Fornicate In Putrefaction.ogg
+281:Vulvectomy/Putrescent Clitoral Fermentation/Vulvectomy - Putrescent Clitoral Fermentation (2007)/08. Postmortal Orifice Lubrication.ogg
+282:Wolves In The Throne Room/Celestite (2014)/01Turning Ever Towards the Sun.ogg
+283:Wolves In The Throne Room/Celestite (2014)/02 Initiationat Neudeg Alm.ogg
+284:Wolves In The Throne Room/Celestite (2014)/03 Bridge of Leaves.ogg
+285:Wolves In The Throne Room/Celestite (2014)/04 Celestite Mirror.ogg
+286:Wolves In The Throne Room/Celestite (2014)/05 Sleeping Golden Storm.ogg
+287:Waldgefluster/Waldgefluster - Ruinen (2016)/01. Die Ruine Als Schmuck.ogg
+288:Waldgefluster/Waldgefluster - Ruinen (2016)/02. Weltenwanderer.ogg
+289:Waldgefluster/Waldgefluster - Ruinen (2016)/03. Trummerfestung.ogg
+290:Waldgefluster/Waldgefluster - Ruinen (2016)/04. Und Immer Wieder Schnee.ogg
+291:Waldgefluster/Waldgefluster - Ruinen (2016)/05. Ruinenfelder.ogg
+292:Waldgefluster/Waldgefluster - Ruinen (2016)/06. Graustufen Novembertage.ogg
+293:Waldgefluster/Waldgefluster - Ruinen (2016)/07. Aschephonix.ogg
+294:Waldgefluster/Waldgefluster - Ruinen (2016)/08. Susitaival.ogg
+295:Walknut/Walknut - Graveforests and Their Shadows/1 Walknut-Hrimfaxi.opus
+296:Walknut/Walknut - Graveforests and Their Shadows/2 Walknut -Motherland Ostenvegr.opus
+297:Walknut/Walknut - Graveforests and Their Shadows/3 Walknut - Come Dreadful Ygg.opus
+298:Walknut/Walknut - Graveforests and Their Shadows/4 Walknut - The Midnightforest of the Runes.opus
+299:Walknut/Walknut - Graveforests and Their Shadows/5 Walknut-Grim Woods.opus
+300:Walknut/Walknut - Graveforests and Their Shadows/6 Walknut-Skinfaxi.opus
+301:Watain/2010 - Lawless Darkness/01 - Death's Cold Dark.ogg
+302:Watain/2010 - Lawless Darkness/02 - Malfeitor.ogg
+303:Watain/2010 - Lawless Darkness/03 - Reaping Death.ogg
+304:Watain/2010 - Lawless Darkness/04 - Four Thrones.ogg
+305:Watain/2010 - Lawless Darkness/05 - Wolves Curse.ogg
+306:Watain/2010 - Lawless Darkness/06 - Lawless Darkness.ogg
+307:Watain/2010 - Lawless Darkness/07 - Total Funeral.ogg
+308:Watain/2010 - Lawless Darkness/08 - Hymn To Qayin.ogg
+309:Watain/2010 - Lawless Darkness/09 - Kiss Of Death.ogg
+310:Watain/2010 - Lawless Darkness/10 - Waters Of Ain.ogg
+311:Weakling/Dead As Dreams/01 Cut There Brains and Place Fire Therein.ogg
+312:Weakling/Dead As Dreams/02 Dead as Dreams.ogg
+313:Weakling/Dead As Dreams/03 This Entire Fucking Battlefield.ogg
+314:Weakling/Dead As Dreams/04 No One Can Be Called as a Man While He'll Die.ogg
+315:Weakling/Dead As Dreams/05 Distasters in the Sun.ogg
+316:Weekend Nachos/Apology/01 - 2015.ogg
+317:Weekend Nachos/Apology/02 - Dust.ogg
+318:Weekend Nachos/Apology/03 - Fake Political Song.ogg
+319:Weekend Nachos/Apology/04 - All.ogg
+320:Weekend Nachos/Apology/05 - Judged.ogg
+321:Weekend Nachos/Apology/06 - Dog Shit Slave.ogg
+322:Weekend Nachos/Apology/07 - Writhe.ogg
+323:Weekend Nachos/Apology/08 - N.A.R.C..ogg
+324:Weekend Nachos/Apology/09 - Pow Mia.ogg
+325:Weekend Nachos/Apology/10 - World Genocide.ogg
+326:Weekend Nachos/Apology/11 - Eulogy.ogg
+327:Weekend Nachos/Apology/12 - Night Plans.ogg
+328:Weekend Nachos/Apology/13 - Apology.ogg
+329:White Death/White Death - White Death (2017)/01. Born From the Unholy Fire.ogg
+330:White Death/White Death - White Death (2017)/02. Immortal Hunter of the Moon.ogg
+331:White Death/White Death - White Death (2017)/03. Kaste.ogg
+332:White Death/White Death - White Death (2017)/04. Goat Emperor.ogg
+333:White Death/White Death - White Death (2017)/05. Warpath.ogg
+334:White Death/White Death - White Death (2017)/06. Cunt.ogg
+335:White Death/White Death - White Death (2017)/07. Commandant.ogg
+336:White Death/White Death - White Death (2017)/08. White Death's Power.ogg
+337:Whitechapel/This Is Exile/1-01 Father Of Lies.ogg
+338:Whitechapel/This Is Exile/1-02 This Is Exile.ogg
+339:Whitechapel/This Is Exile/1-03 Possession.ogg
+340:Whitechapel/This Is Exile/1-04 To All That Are Dead.ogg
+341:Whitechapel/This Is Exile/1-05 Exalt.ogg
+342:Whitechapel/This Is Exile/1-06 Somatically Incorrect.ogg
+343:Whitechapel/This Is Exile/1-07 Death Becomes Him.ogg
+344:Whitechapel/This Is Exile/1-08 Daemon (The Procreated).ogg
+345:Whitechapel/This Is Exile/1-09 Eternal Refuge.ogg
+346:Whitechapel/This Is Exile/1-11 Messiahbolical.ogg
+347:Whitechapel/A New Era Of Corruption/01 Devolver.ogg
+348:Whitechapel/A New Era Of Corruption/02 Breeding Violence.ogg
+349:Whitechapel/A New Era Of Corruption/03 The Darkest Day Of Man.ogg
+350:Whitechapel/A New Era Of Corruption/04 Reprogrammed To Hate.ogg
+351:Whitechapel/A New Era Of Corruption/05 End Of Flesh.ogg
+352:Whitechapel/A New Era Of Corruption/07 A Future Corrupt.ogg
+353:Whitechapel/A New Era Of Corruption/08 Prayer Of Mockery.ogg
+354:Whitechapel/A New Era Of Corruption/09 Murder Sermon.ogg
+355:Whitechapel/A New Era Of Corruption/10 Necromechanical.ogg
+356:Whitechapel/A New Era Of Corruption/11 Single File to Dehumanization.ogg
+357:Whitechapel/Whitechapel - The Somatic Defilement [Remastered] (2013)/01 - Necrotizing.ogg
+358:Whitechapel/Whitechapel - The Somatic Defilement [Remastered] (2013)/02 - The Somatic Defilement.ogg
+359:Whitechapel/Whitechapel - The Somatic Defilement [Remastered] (2013)/03 - Devirgination Studies.ogg
+360:Whitechapel/Whitechapel - The Somatic Defilement [Remastered] (2013)/04 - Prostatic Fluid Asphyxiation.ogg
+361:Whitechapel/Whitechapel - The Somatic Defilement [Remastered] (2013)/05 - Fairy Fay.ogg
+362:Whitechapel/Whitechapel - The Somatic Defilement [Remastered] (2013)/06 - Ear To Ear.ogg
+363:Whitechapel/Whitechapel - The Somatic Defilement [Remastered] (2013)/07 - Alone in The Morgue.ogg
+364:Whitechapel/Whitechapel - The Somatic Defilement [Remastered] (2013)/08 - Festering Fiesta.ogg
+365:Whitechapel/Whitechapel - The Somatic Defilement [Remastered] (2013)/09 - Vicer Exciser.ogg
+366:Whitechapel/Whitechapel - The Somatic Defilement [Remastered] (2013)/10 - Articulo Mortis.ogg
+367:Whitechapel/A New Era Of Corruption/01 Devolver.ogg
+368:Whitechapel/A New Era Of Corruption/02 Breeding Violence.ogg
+369:Whitechapel/A New Era Of Corruption/03 The Darkest Day Of Man.ogg
+370:Whitechapel/A New Era Of Corruption/04 Reprogrammed To Hate.ogg
+371:Whitechapel/A New Era Of Corruption/05 End Of Flesh.ogg
+372:Whitechapel/A New Era Of Corruption/07 A Future Corrupt.ogg
+373:Whitechapel/A New Era Of Corruption/08 Prayer Of Mockery.ogg
+374:Whitechapel/A New Era Of Corruption/09 Murder Sermon.ogg
+375:Whitechapel/A New Era Of Corruption/10 Necromechanical.ogg
+376:Whitechapel/A New Era Of Corruption/11 Single File to Dehumanization.ogg
+377:Windir/Windir - 1995 - Det Gamle Riket (Demo)/05 - Windir - Krystallnatt.ogg
+378:Windir/Windir - 1994 - Sogneriket (Demo)/01 - Windir - Krigaren Si Gravferd.ogg
+379:Windir/Windir - 1994 - Sogneriket (Demo)/02 - Windir - Immortality.ogg
+380:Windir/Windir - 1994 - Sogneriket (Demo)/03 - Windir - Sogneriket.ogg
+381:Windir/Windir - 1994 - Sogneriket (Demo)/04 - Windir - Norrøn Seier.ogg
+382:Windir/Windir - 1994 - Sogneriket (Demo)/05 - Windir - Dans På Stemmehaugen.ogg
+383:Windir/Windir - 1994 - Sogneriket (Demo)/06 - Windir - Fjell Og Dalar.ogg
+384:Windir/Windir - 1994 - Sogneriket (Demo)/07 - Windir - Soge I - Reisen.ogg
+385:Windir/Windir - 1994 - Sogneriket (Demo)/08 - Windir - Soge II - Framkomsten.ogg
+386:Windir/Windir - 1995 - Det Gamle Riket (Demo)/01 - Windir - Mokrets Fyrste.ogg
+387:Windir/Windir - 1995 - Det Gamle Riket (Demo)/02 - Windir - Sognarikets Herskarinne.ogg
+388:Windir/Windir - 1995 - Det Gamle Riket (Demo)/03 - Windir - Rovhaugene.ogg
+389:Windir/Windir - 1995 - Det Gamle Riket (Demo)/04 - Windir - Krigaren Si Gravferd.ogg
+390:Windir/Windir - 1997 - Sóknardalr/01 - Windir - Sognariket Sine Krigarar.ogg
+391:Windir/Windir - 1997 - Sóknardalr/02 - Windir - Det Som Var Haukareid.ogg
+392:Windir/Windir - 1997 - Sóknardalr/03 - Windir - Morket Sin Fyrste.ogg
+393:Windir/Windir - 1997 - Sóknardalr/04 - Windir - Sognariket Si Herskarinne.ogg
+394:Windir/Windir - 1997 - Sóknardalr/05 - Windir - I Ei Krystallnatt.ogg
+395:Windir/Windir - 1997 - Sóknardalr/06 - Windir - Røvhaugane.ogg
+396:Windir/Windir - 1997 - Sóknardalr/07 - Windir - Likbør.ogg
+397:Windir/Windir - 1997 - Sóknardalr/08 - Windir - Sóknardalr.ogg
+398:Windir/Windir - 1999 - Arntor/01 - Windir - Byrjing.ogg
+399:Windir/Windir - 1999 - Arntor/02 - Windir - Arntor, Ein Windir.ogg
+400:Windir/Windir - 1999 - Arntor/03 - Windir - Kong Hydnes Haug.ogg
+401:Windir/Windir - 1999 - Arntor/04 - Windir - Svartesmeden Og Lundamyrstrollet.ogg
+402:Windir/Windir - 1999 - Arntor/05 - Windir - Kampen.ogg
+403:Windir/Windir - 1999 - Arntor/06 - Windir - Saknet.ogg
+404:Windir/Windir - 1999 - Arntor/07 - Windir - Ending.ogg
+405:Windir/Windir - 2001 - 1184/01 - Windir - Todeswalzer.ogg
+406:Windir/Windir - 2001 - 1184/02 - Windir - 1184.ogg
+407:Windir/Windir - 2001 - 1184/03 - Windir - Dance Of Mortal Lust.ogg
+408:Windir/Windir - 2001 - 1184/04 - Windir - The Spiritlord.ogg
+409:Windir/Windir - 2001 - 1184/05 - Windir - Heidra.ogg
+410:Windir/Windir - 2001 - 1184/06 - Windir - Destroy.ogg
+411:Windir/Windir - 2001 - 1184/07 - Windir - Black New Age.ogg
+412:Windir/Windir - 2001 - 1184/08 - Windir - Journey To The End.ogg
+413:Windir/Windir - 2003 - Likferd/01 - Windir - Resurrection Of The Wild.ogg
+414:Windir/Windir - 2003 - Likferd/02 - Windir - Martyrium.ogg
+415:Windir/Windir - 2003 - Likferd/03 - Windir - Despot.ogg
+416:Windir/Windir - 2003 - Likferd/04 - Windir - Blodssvik.ogg
+417:Windir/Windir - 2003 - Likferd/05 - Windir - Fagning.ogg
+418:Windir/Windir - 2003 - Likferd/06 - Windir - On The Mountain Of Goats.ogg
+419:Windir/Windir - 2003 - Likferd/07 - Windir - Dauden.ogg
+420:Windir/Windir - 2003 - Likferd/08 - Windir - Ætti Mørkna.ogg
+421:Windir/Windir - 2001 - 1184/01 - Windir - Todeswalzer.ogg
+422:Windir/Windir - 2001 - 1184/02 - Windir - 1184.ogg
+423:Windir/Windir - 2001 - 1184/03 - Windir - Dance Of Mortal Lust.ogg
+424:Windir/Windir - 2001 - 1184/04 - Windir - The Spiritlord.ogg
+425:Windir/Windir - 2001 - 1184/05 - Windir - Heidra.ogg
+426:Windir/Windir - 2001 - 1184/06 - Windir - Destroy.ogg
+427:Windir/Windir - 2001 - 1184/07 - Windir - Black New Age.ogg
+428:Windir/Windir - 2001 - 1184/08 - Windir - Journey To The End.ogg
+429:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/01 - Dia Artio.ogg
+430:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/02 - Vastness And Sorrow.ogg
+431:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/03 - Cleansing.ogg
+432:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/04 - I Will Lay Down My Bones Among The Rocks And Roots.ogg
+433:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/05 - To Reveal.ogg
+434:Wolves In The Throne Room/Black Cascade/01 Wanderer Above the Sea of Fog.ogg
+435:Wolves In The Throne Room/Black Cascade/02 Ahrimanic Trance.ogg
+436:Wolves In The Throne Room/Black Cascade/03 Ex Cathedra.ogg
+437:Wolves In The Throne Room/Black Cascade/04 Crystal Ammunition.ogg
+438:Wolves In The Throne Room/Malevolent Grain/a1-wolves_in_the_throne_room--a_looming_resonance.ogg
+439:Wolves In The Throne Room/Malevolent Grain/b1-wolves_in_the_throne_room--hate_crystal.ogg
+440:Wolves In The Throne Room/2011 - Celestial Lineage/01 - Thuja Magus Imperium.ogg
+441:Wolves In The Throne Room/2011 - Celestial Lineage/02 - Permanent Changes In Consciousness.ogg
+442:Wolves In The Throne Room/2011 - Celestial Lineage/03 - Subterranean Initiation.ogg
+443:Wolves In The Throne Room/2011 - Celestial Lineage/04 - Rainbow Illness.ogg
+444:Wolves In The Throne Room/2011 - Celestial Lineage/05 - Woodland Cathedral.ogg
+445:Wolves In The Throne Room/2011 - Celestial Lineage/06 - Astral Blood.ogg
+446:Wolves In The Throne Room/2011 - Celestial Lineage/07 - Prayer Of Transformation.ogg
+447:Woods of Desolation/Woods Of Desolation - As The Stars/01. Like Falling Leaves.ogg
+448:Woods of Desolation/Woods Of Desolation - As The Stars/02. Unfold.ogg
+449:Woods of Desolation/Woods Of Desolation - As The Stars/03. And If All The Stars Faded Away.ogg
+450:Woods of Desolation/Woods Of Desolation - As The Stars/04. This Autumn Light.ogg
+451:Woods of Desolation/Woods Of Desolation - As The Stars/05. Anamnesis.ogg
+452:Woods of Desolation/Woods Of Desolation - As The Stars/06. Withering Field.ogg
+453:Woods of Desolation/Woods Of Desolation - As The Stars/07. Ad Infinitum.ogg
+454:Wedrujacy Wiatr/O Turniach Jeziorach I Nocnych Szlakach/01. Ze Szczytów I Z Toni.ogg
+455:Wedrujacy Wiatr/O Turniach Jeziorach I Nocnych Szlakach/02. Wołanie Z Granitowych Twierdz.ogg
+456:Wedrujacy Wiatr/O Turniach Jeziorach I Nocnych Szlakach/03. Ja, Wiatr.ogg
+457:Wedrujacy Wiatr/O Turniach Jeziorach I Nocnych Szlakach/04. Gdzie Wiatr Tka Makatki Nocy.ogg
+458:Wedrujacy Wiatr/O Turniach Jeziorach I Nocnych Szlakach/05. Na Łańskam Jyziorze.ogg
+459:Wedrujacy Wiatr/O Turniach Jeziorach I Nocnych Szlakach/06. U Stóp Śniącego Króla Tatr.ogg
+460:Xasthur/eps/xasthur - 2006 - xasthur/1- instrumental.ogg
+461:Xasthur/eps/xasthur - 2006 - xasthur/2- bubonic plague.ogg
+462:Xasthur/eps/xasthur - 2006 - xasthur/3- doomed by howling winds ('05).ogg
+463:Xasthur/eps/xasthur - 2001 - a darkened winter/01 Untitled 01.ogg
+464:Xasthur/eps/xasthur - 2001 - a darkened winter/02 Doomed By The Howling Winds.ogg
+465:Xasthur/eps/xasthur - 2001 - a darkened winter/03 Untitled 03.ogg
+466:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/01 In The Hate of Battle.ogg
+467:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/02 Soul Abduction Ceremony.ogg
+468:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/03 A Gate Through Bloodstained Mirrors.ogg
+469:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/04 Black Imperial Blood (Mutiilation Cover).ogg
+470:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/05 Legion of Sin And Necromancy.ogg
+471:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/06 A Walk Beyond Utter Blackness.ogg
+472:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/07 Nocturnal Poisoning.ogg
+473:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/08 Forgotten Depths of Nowhere.ogg
+474:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/13 - Black Spell of Destruction (Burzum cover).ogg
+475:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/05 - Cursed Be the Memory of Light.ogg
+476:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/04 - Dwelling Beneath the Woods.ogg
+477:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/09 - Eternal Empire of Majety Death.ogg
+478:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/10 - A gate through bloodstained mirrors.ogg
+479:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/01 - Intro.ogg
+480:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/11 - Kingdom of Burning Crucifixion.ogg
+481:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/14 - Lost Behind Bloodstained Mirrors (Outro) .ogg
+482:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/12 - Moon Shrouded in Misery (Part 2).ogg
+483:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/02 - Moon Shrouded in Misery (Part 1).ogg
+484:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/06 - Possession of.ogg
+485:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/07 - Spell Within the Winds.ogg
+486:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/08 - Storms of Red Revenge.ogg
+487:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/03 - Suicide in Dark Serenity.ogg
+488:Xasthur/eps/xasthur - 2003 - suicide in dark serenity/01 Intro_instrumental.ogg
+489:Xasthur/eps/xasthur - 2003 - suicide in dark serenity/02 Suicide in Dark Serenity.ogg
+490:Xasthur/eps/xasthur - 2003 - suicide in dark serenity/03 With Hate Freezing My Veins.ogg
+491:Xasthur/eps/xasthur - 2003 - suicide in dark serenity/04 Storms of Red Revenge.ogg
+492:Xasthur/eps/xasthur - 2003 - suicide in dark serenity/05 Middle Ages Return.ogg
+493:Xasthur/eps/xasthur - 2003 - suicide in dark serenity/06 Nocturnal Poisoning (Rehearsal.ogg
+494:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/01 Entrance Into Nothingness.ogg
+495:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/02 Slaughtered Useless Beings In A Nihilistic Dream.ogg
+496:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/03 Abysmal Depths Are Flooded.ogg
+497:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/04 May Your Void Become As Deep As My Hate!.ogg
+498:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/05 Telepathic With The Deceased.ogg
+499:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/06 A Walk Beyond Utter Blackness.ogg
+500:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/07 Cursed Revelations.ogg
+501:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/08 Drown Into Eternal Twilight.ogg
+502:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/09 Murdered Echoes Of The Mind.ogg
+503:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/10 Exit.ogg
+504:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/01 The Awakening to the Unkown Pe.ogg
+505:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/02 Tyrant of Nightmares.ogg
+506:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/03 Intro.ogg
+507:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/04 Sigils Made of Flesh and Trees.ogg
+508:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/05 Blood from the Roots of the Fo.ogg
+509:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/06 Blood from the Roots of the Fo.ogg
+510:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/07 Intro.ogg
+511:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/08 Bleak Necrotic Paleness.ogg
+512:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/09 Reflecting Hateful Energy.ogg
+513:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/10 Tyrant of the Nightmares (Dark.ogg
+514:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/11 Outro.ogg
+515:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/12 Dwelling Beneath the Woods.ogg
+516:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/13 Dimension of the Blackest Dark.ogg
+517:Xasthur/albums/xasthur - 2004 - to violate the oblivious/01-intro.ogg
+518:Xasthur/albums/xasthur - 2004 - to violate the oblivious/02-xasthur within.ogg
+519:Xasthur/albums/xasthur - 2004 - to violate the oblivious/03-dreams blacker than death.ogg
+520:Xasthur/albums/xasthur - 2004 - to violate the oblivious/04-screaming at forgotten fears.ogg
+521:Xasthur/albums/xasthur - 2004 - to violate the oblivious/05-consumed by a dark paranoia.ogg
+522:Xasthur/albums/xasthur - 2004 - to violate the oblivious/06-marked by shadows.ogg
+523:Xasthur/albums/xasthur - 2004 - to violate the oblivious/07-apparitional void of failure.ogg
+524:Xasthur/albums/xasthur - 2004 - to violate the oblivious/08-a gate through bloodstained mirrors.ogg
+525:Xasthur/albums/xasthur - 2004 - to violate the oblivious/09-walker of dissonant worlds.ogg
+526:Xasthur/albums/xasthur - 2006 - subliminal genocide/01-xasthur-disharmonic_convergence.ogg
+527:Xasthur/albums/xasthur - 2006 - subliminal genocide/02-xasthur-the_prison_of_mirrors.ogg
+528:Xasthur/albums/xasthur - 2006 - subliminal genocide/03-xasthur-beauty_is_only_razor_deep.ogg
+529:Xasthur/albums/xasthur - 2006 - subliminal genocide/04-xasthur-trauma_will_always_linger.ogg
+530:Xasthur/albums/xasthur - 2006 - subliminal genocide/05-xasthur-pyramid_of_skulls.ogg
+531:Xasthur/albums/xasthur - 2006 - subliminal genocide/06-xasthur-arcane_and_misanthropic_projection.ogg
+532:Xasthur/albums/xasthur - 2006 - subliminal genocide/07-xasthur-victim_of_your_dreams.ogg
+533:Xasthur/albums/xasthur - 2006 - subliminal genocide/08-xasthur-through_a_trance_of_despondency.ogg
+534:Xasthur/albums/xasthur - 2006 - subliminal genocide/09-xasthur-loss_and_tuner_distortion.ogg
+535:Xasthur/albums/xasthur - 2006 - subliminal genocide/10-xasthur-subliminal_genocide.ogg
+536:Xasthur/albums/xasthur - 2006 - subliminal genocide/11-xasthur-malice_midden_in_surrealism.ogg
+537:Xasthur/albums/xasthur - 2007 - defective epitaph/01-Souless Elegy.ogg
+538:Xasthur/albums/xasthur - 2007 - defective epitaph/02-Purgatory Spiral.ogg
+539:Xasthur/albums/xasthur - 2007 - defective epitaph/03-Cemetery Of Shattered Masks.ogg
+540:Xasthur/albums/xasthur - 2007 - defective epitaph/04-Malignant Prophecy.ogg
+541:Xasthur/albums/xasthur - 2007 - defective epitaph/05-Oration Of Ruin.ogg
+542:Xasthur/albums/xasthur - 2007 - defective epitaph/06-Legacy Of Human Irrelevance.ogg
+543:Xasthur/albums/xasthur - 2007 - defective epitaph/07-Dehumanizing Procession.ogg
+544:Xasthur/albums/xasthur - 2007 - defective epitaph/08-Funerals Drenched In Apathy.ogg
+545:Xasthur/albums/xasthur - 2007 - defective epitaph/09-Warship (The War Against) Yourself.ogg
+546:Xasthur/albums/xasthur - 2007 - defective epitaph/10-Memorial To The Waste Of Life, A.ogg
+547:Xasthur/albums/xasthur - 2007 - defective epitaph/11-Only Blood That Pours Is Yours, The.ogg
+548:Xasthur/albums/xasthur - 2007 - defective epitaph/12-Unblessed Be.ogg
+549:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/01 In The Hate of Battle.ogg
+550:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/02 Soul Abduction Ceremony.ogg
+551:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/03 A Gate Through Bloodstained Mirrors.ogg
+552:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/04 Black Imperial Blood (Mutiilation Cover).ogg
+553:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/05 Legion of Sin And Necromancy.ogg
+554:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/06 A Walk Beyond Utter Blackness.ogg
+555:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/07 Nocturnal Poisoning.ogg
+556:Xasthur/albums/xasthur - 2002 - nocturnal poisoning/08 Forgotten Depths of Nowhere.ogg
+557:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/01 The Awakening to the Unkown Pe.ogg
+558:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/02 Tyrant of Nightmares.ogg
+559:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/03 Intro.ogg
+560:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/04 Sigils Made of Flesh and Trees.ogg
+561:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/05 Blood from the Roots of the Fo.ogg
+562:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/06 Blood from the Roots of the Fo.ogg
+563:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/07 Intro.ogg
+564:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/08 Bleak Necrotic Paleness.ogg
+565:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/09 Reflecting Hateful Energy.ogg
+566:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/10 Tyrant of the Nightmares (Dark.ogg
+567:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/11 Outro.ogg
+568:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/12 Dwelling Beneath the Woods.ogg
+569:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/13 Dimension of the Blackest Dark.ogg
+570:Xenophobia/Reclaiming Celtic Glory/01-Supremacy and War (Part 1).ogg
+571:Xenophobia/Reclaiming Celtic Glory/02-Triumph of Spirit.ogg
+572:Xenophobia/Reclaiming Celtic Glory/03-Silent Brotherhood.ogg
+573:Xenophobia/Reclaiming Celtic Glory/04-Anti-Semite Eternal.ogg
+574:Xenophobia/Reclaiming Celtic Glory/05-Thousand Lies.ogg
+575:Akhlys/AKHLYS - The Dreaming I (2015)/01 Breath And Levitation.opus
+576:Akhlys/AKHLYS - The Dreaming I (2015)/02 Tides Of Oneiric Darkness.opus
+577:Akhlys/AKHLYS - The Dreaming I (2015)/03 Consummation.opus
+578:Akhlys/AKHLYS - The Dreaming I (2015)/04 The Dreaming Eye.opus
+579:Akhlys/AKHLYS - The Dreaming I (2015)/05 Into The Indigo Abyss.opus
+580:Acrania/2013 - The Beginning Of The End (EP)/Acrania - The Beginning Of The End (EP) - 01 The Beginning....opus
+581:Acrania/2013 - The Beginning Of The End (EP)/Acrania - The Beginning Of The End (EP) - 02 Auctioneer Of Depravity.opus
+582:Acrania/2013 - The Beginning Of The End (EP)/Acrania - The Beginning Of The End (EP) - 03 The Depopulation Programme.opus
+583:Acrania/2013 - The Beginning Of The End (EP)/Acrania - The Beginning Of The End (EP) - 04 Dimensional Molecular Transcedance.opus
+584:Acrania/2013 - The Beginning Of The End (EP)/Acrania - The Beginning Of The End (EP) - 05 A Trophy Of Corporate Disfigurement.opus
+585:Acrania/Acrania - Totalitarian Dystopia/01 - Hollow.opus
+586:Acrania/Acrania - Totalitarian Dystopia/02 - Festering With Dishonesty.opus
+587:Acrania/Acrania - Totalitarian Dystopia/03 - Totalitarian Dystopia.opus
+588:Acrania/Acrania - Totalitarian Dystopia/04 - Servants Of Hypocrisy.opus
+589:Acrania/Acrania - Totalitarian Dystopia/05 - Survival Sequence.opus
+590:Acrania/Acrania - Totalitarian Dystopia/06 - A Gluttonous Abomination.opus
+591:Acrania/Acrania - Totalitarian Dystopia/07 - Susceptible To Retinal Reprogrammability.opus
+592:Acrania/Acrania - Totalitarian Dystopia/08 - Lobotomise, Dehumanise, Negate [LDN].opus
+593:Acrania/Acrania - Totalitarian Dystopia/09 - Messiah Of Manipulation.opus
+594:Acrania/Acrania - Totalitarian Dystopia/10 - Disillusion In A Discordant System.opus
+595:Acranius/Acranius - Dishonor (2014)/01-acranius-expulsed_to_the_worthless.ogg
+596:Acranius/Acranius - Dishonor (2014)/02-acranius-unit_731.ogg
+597:Acranius/Acranius - Dishonor (2014)/03-acranius-engelmacher.ogg
+598:Acranius/Acranius - Dishonor (2014)/04-acranius-zero_tolerance.ogg
+599:Acranius/Acranius - Dishonor (2014)/05-acranius-dishonor.ogg
+600:Acranius/Acranius - Dishonor (2014)/06-acranius-purveyors_of_barbarity.ogg
+601:Acranius/Acranius - Dishonor (2014)/07-acranius-frenetic_aggression.ogg
+602:Acranius/Acranius - Dishonor (2014)/08-acranius-dominator.ogg
+603:Acranius/Acranius - Dishonor (2014)/09-acranius-embodied_rampage.ogg
+604:Acranius/Acranius - Dishonor (2014)/10-acranius-arson.ogg
+605:Agalloch/The Mantle/Agalloch - The Mantle - 01.ogg
+606:Agalloch/The Mantle/Agalloch - The Mantle - 02.ogg
+607:Agalloch/The Mantle/Agalloch - The Mantle - 03.ogg
+608:Agalloch/The Mantle/Agalloch - The Mantle - 04.ogg
+609:Agalloch/The Mantle/Agalloch - The Mantle - 05.ogg
+610:Agalloch/The Mantle/Agalloch - The Mantle - 06.ogg
+611:Agalloch/The Mantle/Agalloch - The Mantle - 07.ogg
+612:Agalloch/The Mantle/Agalloch - The Mantle - 08.ogg
+613:Agalloch/The Mantle/Agalloch - The Mantle - 09.ogg
+614:Agalloch/Ashes Against the Grain/Agalloch - Ashes Against the Grain - 01.ogg
+615:Agalloch/Ashes Against the Grain/Agalloch - Ashes Against the Grain - 02.ogg
+616:Agalloch/Ashes Against the Grain/Agalloch - Ashes Against the Grain - 03.ogg
+617:Agalloch/Ashes Against the Grain/Agalloch - Ashes Against the Grain - 04.ogg
+618:Agalloch/Ashes Against the Grain/Agalloch - Ashes Against the Grain - 05.ogg
+619:Agalloch/Ashes Against the Grain/Agalloch - Ashes Against the Grain - 06.ogg
+620:Agalloch/Ashes Against the Grain/Agalloch - Ashes Against the Grain - 07.ogg
+621:Agalloch/Ashes Against the Grain/Agalloch - Ashes Against the Grain - 08.ogg
+622:Agalloch/Marrow Of The Spirit/01 They Escaped the Weight of Darkness.ogg
+623:Agalloch/Marrow Of The Spirit/02 Into the Painted Grey.ogg
+624:Agalloch/Marrow Of The Spirit/03 The Watcher's Monolith.ogg
+625:Agalloch/Marrow Of The Spirit/04 Black Lake Nidstng.ogg
+626:Agalloch/Marrow Of The Spirit/05 Ghosts of the Midwinter Fires.ogg
+627:Agalloch/Marrow Of The Spirit/06 To Drown.ogg
+628:Agalloch/The Serpent & The Sphere (2014)/01 Agalloch - The Serpent & The Sphere [1].ogg
+629:Agalloch/The Serpent & The Sphere (2014)/02 Agalloch - The Serpent & The Sphere [2].ogg
+630:Agalloch/The Serpent & The Sphere (2014)/03 Agalloch - The Serpent & The Sphere [3].ogg
+631:Agalloch/The Serpent & The Sphere (2014)/04 Agalloch - The Serpent & The Sphere [4].ogg
+632:Agalloch/The Serpent & The Sphere (2014)/05 Agalloch - The Serpent & The Sphere [5].ogg
+633:Agalloch/The Serpent & The Sphere (2014)/06 Agalloch - The Serpent & The Sphere [6].ogg
+634:Agalloch/The Serpent & The Sphere (2014)/07 Agalloch - The Serpent & The Sphere [7].ogg
+635:Agalloch/The Serpent & The Sphere (2014)/08 Agalloch - The Serpent & The Sphere [8].ogg
+636:Agalloch/The Serpent & The Sphere (2014)/09 Agalloch - The Serpent & The Sphere [9].ogg
+637:Akitsa/2004 - Akitsa & Satanic Warmaster (Split)/Akitsa - 04 - L'hyperboree Ressuscitee.ogg
+638:Akitsa/2004 - Akitsa & Satanic Warmaster (Split)/Akitsa - 05 - Vengeance Viendra.ogg
+639:Wolves In The Throne Room/Thrice Woven - 2017/Thrice Woven - 2017.ogg/Thrice Woven - 2017.ogg/Thrice Woven - 2017.ogg
+640:Urfaust/2012 - Ritual Music for the Truly Clochard/Urfaust - Ritual Music for the True Clochard (2012) full compilation, vinyl.ogg
+641:8bit/behemoth - Ov Fire and the Void - 8bit.ogg
+642:Thy Art is Murder/This Hole Isn't Deep Enough for the Twelve of You - Demo/Thy Art Is Murder - ''This Hole Isn't Deep Enough For The Twelve Of You'' [FULL DEMO].ogg
+643:8bit/Darkthrone - Quintessence (8 bit).ogg
+644:8bit/Behemoth - Ora Pro Nobis Lucifer (8 bit).ogg
+645:8bit/8bit-dunkelheit-2.ogg
+646:Peste Noire/Peste Noire/2012 - Les Demos (2CD)/2012 - Les Demos CD1/08. Le mort Joyeux.ogg
+647:8bit/Dissection - Night's Blood (8 bit).ogg
+648:Dusterdraussen/Where Is Your Summer Now/Düsterdraußen - Where is Your Summer Now? (Full Album).ogg
+649:Horn/Horn - Jahreszeiten [FULL ALBUM].ogg
+650:Moonknight/Ligeia - 2011/Moonknight - Ligeia [Full CS].ogg
+651:8bit/dunkelheit-8bit.ogg
+652:0/0 - Null & Void - 01 Null & Void.ogg
+653:Kreator/Kreator - Endless Pain (1985) @256K/01 - Endless Pain.ogg
+654:Kreator/Kreator - Endless Pain (1985) @256K/02 - Total Death.ogg
+655:Kreator/Kreator - Endless Pain (1985) @256K/03 - Storm Of The Beast.ogg
+656:Kreator/Kreator - Endless Pain (1985) @256K/04 - Tormentor.ogg
+657:Kreator/Kreator - Endless Pain (1985) @256K/05 - Son Of Evil.ogg
+658:Kreator/Kreator - Endless Pain (1985) @256K/06 - Flag Of Hate.ogg
+659:Kreator/Kreator - Endless Pain (1985) @256K/07 - Cry War.ogg
+660:Kreator/Kreator - Endless Pain (1985) @256K/08 - Bone Breaker.ogg
+661:Kreator/Kreator - Endless Pain (1985) @256K/09 - Living In Fear.ogg
+662:Kreator/Kreator - Endless Pain (1985) @256K/10 - Dying Victims.ogg
+663:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/01 - Choir Of The Damned.ogg
+664:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/02 - Ripping Corpse.ogg
+665:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/03 - Death Is Your Saviour.ogg
+666:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/04 - Pleasure To Kill.ogg
+667:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/05 - Riot Of Violence.ogg
+668:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/06 - The Pestilence.ogg
+669:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/07 - Carrion.ogg
+670:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/08 - Command Of The Blade.ogg
+671:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/09 - Under The Guillotine.ogg
+672:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 01 Pissprisms.ogg
+673:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 02 Throwing up all these sunny sundays.ogg
+674:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 03 Garden of magnetic words.ogg
+675:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 04 Grey birds breeding.ogg
+676:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 05 Defeated.ogg
+677:Judas Iscariot/1996 - Thy Dying Light/01-But Eternals Beheld His Vast Forests.ogg
+678:Judas Iscariot/1996 - Thy Dying Light/02-His Eternal Life, Like A Dream Was Obliterated.ogg
+679:Judas Iscariot/1996 - Thy Dying Light/03-Helpless It Lay, Like A Worm In His Frozen Track.ogg
+680:Judas Iscariot/1996 - Thy Dying Light/04-Behold, Our Race Of Unstoppable Genius.ogg
+681:Judas Iscariot/1996 - Thy Dying Light/05-From His Woven Darkness Above.ogg
+682:Judas Iscariot/1996 - Thy Dying Light/06-Writhing Upon The Wind Of Mystic Philosophy.ogg
+683:Judas Iscariot/1996 - Thy Dying Light/07-They Saw His Pale Visage Emerge From The Darkness.ogg
+684:Judas Iscariot/1996 - Thy Dying Light/08-The Dying Light And Desolate Darkness.ogg
+685:Judas Iscariot/1996 - Thy Dying Light/09-Arise, My Lord Of Infernal Wisdom.ogg
+686:Iskandr/Heilig Lang/Iskandr - Heilig Land - 01 Berg en Dal.opus
+687:Iskandr/Heilig Lang/Iskandr - Heilig Land - 02 Galgenveld.opus
+688:Iskandr/Heilig Lang/Iskandr - Heilig Land - 03 Bottendael.opus
+689:Iskandr/Heilig Lang/Iskandr - Heilig Land - 04 Wolfskuil.opus
+690:Kreator/Kreator - Endless Pain (1985) @256K/01 - Endless Pain.ogg
+691:Kreator/Kreator - Endless Pain (1985) @256K/02 - Total Death.ogg
+692:Kreator/Kreator - Endless Pain (1985) @256K/03 - Storm Of The Beast.ogg
+693:Kreator/Kreator - Endless Pain (1985) @256K/04 - Tormentor.ogg
+694:Kreator/Kreator - Endless Pain (1985) @256K/05 - Son Of Evil.ogg
+695:Kreator/Kreator - Endless Pain (1985) @256K/06 - Flag Of Hate.ogg
+696:Kreator/Kreator - Endless Pain (1985) @256K/07 - Cry War.ogg
+697:Kreator/Kreator - Endless Pain (1985) @256K/08 - Bone Breaker.ogg
+698:Kreator/Kreator - Endless Pain (1985) @256K/09 - Living In Fear.ogg
+699:Kreator/Kreator - Endless Pain (1985) @256K/10 - Dying Victims.ogg
+700:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/01 - Choir Of The Damned.ogg
+701:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/02 - Ripping Corpse.ogg
+702:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/03 - Death Is Your Saviour.ogg
+703:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/04 - Pleasure To Kill.ogg
+704:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/05 - Riot Of Violence.ogg
+705:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/06 - The Pestilence.ogg
+706:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/07 - Carrion.ogg
+707:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/08 - Command Of The Blade.ogg
+708:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/09 - Under The Guillotine.ogg
+709:Xenophobia/Reclaiming Celtic Glory/01-Supremacy and War (Part 1).ogg
+710:Xenophobia/Reclaiming Celtic Glory/02-Triumph of Spirit.ogg
+711:Xenophobia/Reclaiming Celtic Glory/03-Silent Brotherhood.ogg
+712:Xenophobia/Reclaiming Celtic Glory/04-Anti-Semite Eternal.ogg
+713:Xenophobia/Reclaiming Celtic Glory/05-Thousand Lies.ogg
+714:Utstott/Utstott - Legender Odin/01 Slaget om Odin og Fenrir.ogg
+715:Utstott/Utstott - Legender Odin/02 Fodsel av Valhalla.ogg
+716:Utstott/Utstott - Legender Odin/03 Sleipnir sin tur i Livlose osene.ogg
+717:Utstott/Utstott - Legender Odin/04 Oppstigning av Einherjar.ogg
+718:Utstott/Utstott - Hjorungavogr/01 Hjorungavog.ogg
+719:Utstott/Utstott - Hjorungavogr/02 Hagl Over Stekende Skip.ogg
+720:Utstott/Utstott - Hjorungavogr/03 Skrotter Under Bolgene.ogg
+721:Utstott/Utstott - Hjorungavogr/04 En Hedensk Dod.ogg
+722:Utstott/Utstott - Hjorungavogr/05 Etterlivet.ogg
+723:Utstott/Utstott - Hjorungavogr/06 Skjonnhet av Folkvangr.ogg
+724:Utstott/Utstott - Hjorungavogr/07 Storsalen av Eik.ogg
+725:Utstott/Utstott - Hjorungavogr/08 Klippene Over og Skogen Under.ogg
+726:Utstott/Utstott - Hjorungavogr/09 Uskadd ved Menneskeheten.ogg
+727:Osiah/Perennial Agony - Single/Osiah - Perennial Agony (Single) - 01 Perennial Agony (single).ogg
+728:Tukaaria/Tukaaria - Raw to the Rapine/Tukaaria - Raw to the Rapine - 01 Origins.opus
+729:Tukaaria/Tukaaria - Raw to the Rapine/Tukaaria - Raw to the Rapine - 02 Raw to the Rapine.opus
+730:Tukaaria/Tukaaria - Raw to the Rapine/Tukaaria - Raw to the Rapine - 03 Chasms in Creation.opus
+731:Tukaaria/Tukaaria - Raw to the Rapine/Tukaaria - Raw to the Rapine - 04 Prehistoric Silence.opus
+732:Tukaaria/Tukaaria - Raw to the Rapine/Tukaaria - Raw to the Rapine - 05 Glorifying Atrophy.opus
+733:Tukaaria/Tukaaria - Raw to the Rapine/Tukaaria - Raw to the Rapine - 06 Transfixion.opus
+734:The Ruins of Beverast/The Ruins Of Beverast - Blood Vaults/01 - Apologia.ogg
+735:The Ruins of Beverast/The Ruins Of Beverast - Blood Vaults/02 - Daemon.ogg
+736:The Ruins of Beverast/The Ruins Of Beverast - Blood Vaults/03 - Malefica.ogg
+737:The Ruins of Beverast/The Ruins Of Beverast - Blood Vaults/04 - Ornaments On Malice.ogg
+738:The Ruins of Beverast/The Ruins Of Beverast - Blood Vaults/05 - Spires, The Wailing City.ogg
+739:The Ruins of Beverast/The Ruins Of Beverast - Blood Vaults/06 - A Failed Exorcism.ogg
+740:The Ruins of Beverast/The Ruins Of Beverast - Blood Vaults/07 - Trial.ogg
+741:The Ruins of Beverast/The Ruins Of Beverast - Blood Vaults/08 - Ordeal.ogg
+742:The Ruins of Beverast/The Ruins Of Beverast - Blood Vaults/09 - Monument.ogg
 playlist_end

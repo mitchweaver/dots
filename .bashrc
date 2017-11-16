@@ -35,7 +35,7 @@ alias weather-ok="curl http://wttr.in/~Claremore"
 alias yt="youtube-viewer -C -q --vd=high"
 alias ytd="youtube-viewer -C -q --vd=high -d"
 alias ytm="youtube-viewer -n -C -q --vd=high"
-alias ytdm='youtube-viewer -q -C --vd=high -n -d --convert-to=ogg --convert-cmd="ffmpeg -loglevel -8 -i file:*IN* -vn -acodec libvorbis -ab 320k -y *OUT*"'
+alias ytdm='youtube-viewer -q -C --vd=high -n -d --convert-to=opus --convert-cmd="ffmpeg -loglevel -8 -i file:*IN* -vn -acodec libvopus -ab 128k -y *OUT*"'
 ##############################################
 
 ######## RANGER #################

@@ -5,9 +5,9 @@ static char *utmp = NULL;
 static char stty_args[] = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* disable bold, italic and roman fonts globally */
-int disablebold = 0;
-int disableitalic = 0;
-int disableroman = 0;
+int disablebold = 1;
+int disableitalic = 1;
+int disableroman = 1;
 
 /* identification sequence returned in DA and DECID */
 static char vtiden[] = "\033[?6c";
@@ -16,153 +16,51 @@ static char vtiden[] = "\033[?6c";
 float cwscale = 1.0;
 float chscale = 1.0;
 
-
-/* -------- not sure what this does, Testing ----------- */
-/* word delimiter string - example: " `'\"()[]{}"      */
-
-/* static char worddelimiters[] = " "; */
 static char worddelimiters[] = " `'\"()[]{}";
-/* --------------------------------------------------- */
-
-/* selection timeouts (in milliseconds) */
 unsigned int doubleclicktimeout = 300;
 unsigned int tripleclicktimeout = 600;
-
-
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* alt screens */
 int allowaltscreen = 0;
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~` */
-
 
 /* frames per second st should at maximum draw to the screen */
 unsigned int xfps = 60;
 unsigned int actionfps = 30;
 
-/* blinking timeout (set to 0 to disable blinking) */
 unsigned int blinktimeout = 800;
-
-
 static int bellvolume = 0;
-
-/* default TERM value */
 char termname[] = "st-256color";
-
-/* spaces per tab
- *
- * When you are changing this value, don't forget to adapt the »it« value in
- * the st.info and appropriately install the st.info in the environment where
- * you use this st version.
- *
- *	it#$tabspaces,
- *
- * Secondly make sure your kernel is not expanding tabs. When running `stty
- * -a` »tab0« should appear. You can tell the terminal to not expand tabs by
- *  running following command:
- *
- *	stty tabs */
 static unsigned int tabspaces = 4;
-
 
 /* background opacity */
 unsigned int alpha = 0xcc;
 
 // ~~~~~~~~~~~~~~~ TERMINAL COLOURS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+/* #include "dracula-theme.h" */
+#include "solarized-light.h"
+#include "solarized-dark.h"
 
-// @@@@@@@@@@@@ BEGIN DRACULA @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
-const char *colorname[] = {
-   [0] = "#000000", /* black   */
-   [1] = "#ff5555", /* red     */
-   [2] = "#50fa7b", /* green   */
-   [3] = "#f1fa8c", /* yellow  */
-   [4] = "#bd93f9", /* blue    */
-   [5] = "#ff79c6", /* magenta */
-   [6] = "#8be9fd", /* cyan    */
-   [7] = "#bbbbbb", /* white   */ 
-
-   [8]  = "#44475a", /* black   */
-   [9]  = "#ff5555", /* red     */
-   [10] = "#50fa7b", /* green   */
-   [11] = "#f1fa8c", /* yellow  */
-   [12] = "#bd93f9", /* blue    */
-   [13] = "#ff79c6", /* magenta */
-   [14] = "#8be9fd", /* cyan    */
-   [15] = "#ffffff", /* white   */
-
-   [256] = "#282a36", /* background */
-   [257] = "#f8f8f2", /* foreground */
-}; 
-// @@@@@@@@@@@@@@ END DRACULA @@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
-
-// @@@@@@@@@@@@ BEGIN SOLARIZED LIGHT @@@@@@@@@@@@@@@@@@@@ //
-const char *altcolorname[] = {
-	"#eee8d5",  //  0: black   
-	"#dc322f",  //  1: red     
-	"#859900",  //  2: green   
-	"#b58900",  //  3: yellow  
-	"#268bd2",  //  4: blue    
-	"#d33682",  //  5: magenta 
-	"#2aa198",  //  6: cyan    
-	"#073642",  //  7: white    
-	"#fdf6e3",  //  8: brblack  
-	"#cb4b16",  //  9: brred    
-	"#93a1a1",  // 10: brgreen  
-	"#839496",  // 11: bryellow 
-	"#657b83",  // 12: brblue   
-	"#6c71c4",  // 13: brmagenta
-	"#586e75",  // 14: brcyan   
-	"#002b36",  // 15: brwhite  
-};
-// @@@@@@@@@@@ END SOLARIZED LIGHT @@@@@@@@@@@@@@@@@@@@@@@ //
-
-// @@@@@@@@@@@@@ BEGIN SOLARIZED DARK @@@@@@@@@@@@@@@@@@@@ //
-/* const char *altcolorname[] = { */
-/* 	"#073642", */
-/* 	"#dc322f", */
-/*     "#859900", */
-/* 	"#b58900", */
-/* 	"#268bd2", */	
-/*     "#d33682", */
-/* 	"#2aa198", */
-/* 	"#eee8d5", */
-/* 	"#002b36", */
-/* 	"#cb4b16", */
-/* 	"#586e75", */
-/* 	"#657b83", */
-/* 	"#839496", */
-/* 	"#6c71c4", */
-/* 	"#93a1a1", */
-/* 	"#fdf6e3", */
-/* }; */
-// @@@@@@@@@@@@@ END SOLARIZED DARK @@@@@@@@@@@@@@@@@@@@@@ /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
-
-// @@@@@@@@ dracula mouse colors @@@@@@@@@@@@@@@
-unsigned int defaultfg = 257;
-unsigned int defaultbg = 256;
-unsigned int defaultcs = 257;
-unsigned int defaultrcs = 257;
-// @@@@@@@@ END DRACULA MOUSE COLORS @@@@@@@@@@@@
-
-// @@@@@@@@@ SOLARIZED LIGHT/DARK MOUSE COLORS @@@@@@@@@@
-/* unsigned int defaultfg = 12; */
+// @@@@@ solzarized @@@@@@@@ @@@@@@
+unsigned int defaultfg = 12;
+unsigned int defaultcs = 14;
+unsigned int defaultrcs = 15;
+// with no transparency
 /* unsigned int defaultbg = 8; */
-/* unsigned int defaultcs = 14; */
-/* unsigned int defaultrcs = 15; */
-// @@@@@@@ END SOLARIZED LIGHT/DARK MOUSE COLORS @@@@@@@@@
+// with transparency
+unsigned int defaultbg = 0;
+// @@@@ END SOLARIZED BG COLORS @@@@@
 
-/* IMPORTANT: when using alpha/transparency, use this background*/
+// @@@@@@@@ dracula  @@@@@@@@@@@@@@@
+/* unsigned int defaultfg = 257; */
 /* unsigned int defaultbg = 257; */
+/* unsigned int defaultcs = 257; */
+/* unsigned int defaultrcs = 257; */
+// @@@@@@@@ END DRACULA BG COLORS @@@@@@@@@@@@
 
-
-// BELOW two lines are also for dracula!
 /*
 * Colors used, when the specific fg == defaultfg. So in reverse mode this
 * will reverse too. Another logic would only make the simple feature too
-* complex.
-*/
+* complex. */
 unsigned int defaultitalic = 7;
 unsigned int defaultunderline = 7;
-
 
 /* Default shape of cursor
  * 2: Block ("█")
@@ -212,7 +110,7 @@ Shortcut shortcuts[] = {
 	{ CONTROL,              XK_l,           copyurl,        {.i =  0} },
 	{ CONTROL,              XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ CONTROL,              XK_Page_Down,   kscrolldown,    {.i = -1} },
-    { ALT,                  XK_l,           copyurl,        {.i = 0} },
+        { ALT,                  XK_l,           copyurl,        {.i = 0} },
 };
 
 /* If you want keys other than the X11 function keys (0xFD00 - 0xFFFF)

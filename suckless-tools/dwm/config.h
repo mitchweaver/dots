@@ -63,10 +63,10 @@ static const char *clipboard[] = { "clipmenu", NULL };
 static const char *ranger[] = { "tabbed", "-c", "-r", "2", "st", "-w", "-e", "ranger", NULL };
 static const char *volup[] = { "amixer", "-q", "sset", "Master", "4%+", NULL };
 static const char *voldown[] = { "amixer", "-q", "sset", "Master", "4%-", NULL };
-static const char *volmute[] = { "amixer", "-q", "sset", "Master", "toggle" };
-static const char *mpdnext[] = { "mpc", "next" };
-static const char *mpdprev[] = { "mpc", "prev" };
-static const char *mpdtoggle[] = { "mpc", "toggle" };
+static const char *volmute[] = { "amixer", "-q", "sset", "Master", "toggle", NULL};
+static const char *mpdnext[] = { "mpc", "next", NULL };
+static const char *mpdprev[] = { "mpc", "prev", NULL };
+static const char *mpdtoggle[] = { "mpc", "toggle", NULL };
 static const char *slock[] = { "slock", NULL };
 
 
