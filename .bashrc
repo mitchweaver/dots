@@ -1,9 +1,5 @@
 ########### Pretty colors ####################
-if [ "$USER" == 'mitch' ] ; then
-    export PS1="\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W \[\e[1;37m\]"
-else
-    export PS1="\[\e[1;35m\]root \W "
-fi
+export PS1="\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W \[\e[1;37m\]"
 ##############################################
 
 
@@ -20,7 +16,7 @@ alias resize-half='mogrify -resize 50%X50%'
 alias resize-quarter='mogrify -resize 25%X25%'
 #############################
 
-
+alias neovim=nvim
 alias vim=nvim
 alias vi=nvim
 
@@ -102,7 +98,6 @@ alias wtfismyip='curl https://wtfismyip.com/text'
 
 alias parrot='terminal-parrot'
 alias doge="doge --shibe doge.txt"
-alias nyancat="/home/mitch/programs/nyancat/src/nyancat"
 alias tiv='tiv -256'
 alias cc=clear
 
@@ -155,3 +150,8 @@ alias du='du -ahLd 1'
 alias ping='ping mitchweaver.xyz'
 
 alias irssi="irssi -n _mitch -c irc.freenode.net"
+
+
+
+
+alias wpa_cli="wpa_cli -i wlan0 -p /etc/service/wpa_supplicant"

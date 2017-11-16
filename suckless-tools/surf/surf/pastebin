@@ -1,0 +1,10 @@
+surf build options:
+CC -o surf
+CFLAGS   = -I/usr/X11R6/include -I/include/gtk-3.0 -I/include/cairo -I/include/pixman-1 -I/include/gdk-pixbuf-2.0 -I/include/atk-1.0 -I/include/pango-1.0  -I/include/freetype2 -I/include/libpng15 -I/include -I/include/harfbuzz -I/include/gio-unix-2.0/ -pthread -I/include/glib-2.0 -I/lib/glib-2.0/include   -DVERSION="2.0" -DWEBEXTDIR="/usr/local/lib/surf" -D_DEFAULT_SOURCE -DGCR_API_SUBJECT_TO_CHANGE 
+LDFLAGS  = -L/usr/X11R6/lib -lX11 -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -L/lib -lglib-2.0   -lgthread-2.0 
+CC       = cc
+surf build options:
+CC -o surf
+CFLAGS   = -I/usr/X11R6/include -I/include/gtk-3.0 -I/include/cairo -I/include/pixman-1 -I/include/gdk-pixbuf-2.0 -I/include/atk-1.0 -I/include/pango-1.0  -I/include/freetype2 -I/include/libpng15 -I/include -I/include/harfbuzz -I/include/gio-unix-2.0/ -pthread -I/include/glib-2.0 -I/lib/glib-2.0/include   -DVERSION="2.0" -DWEBEXTDIR="/usr/local/lib/surf" -D_DEFAULT_SOURCE -DGCR_API_SUBJECT_TO_CHANGE 
+LDFLAGS  = -L/usr/X11R6/lib -lX11 -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -L/lib -lglib-2.0   -lgthread-2.0 
+CC       = cc

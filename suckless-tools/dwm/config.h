@@ -24,14 +24,19 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 };
 
-/* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
+
+#include "layouts.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[T]",      tile },    /* first entry is default */
 	{ "[F]",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+
+    { "HHH", grid },
+    
+    
+    //	{ "[M]",      monocle },
 };
 
 #define mod1 Mod1Mask 
@@ -45,9 +50,9 @@ static const Layout layouts[] = {
 
 static char dmenumon[2] = "0";
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL };
+static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-g", "60x20", "-w", "''", NULL };
 static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
-static const char *dedit[] = { "/home/mitch/bin/dedit", NULL };
+static const char *dedit[] = { "dedit", NULL };
 static const char *clipboard[] = { "clipmenu", NULL };
 static const char *ranger[] = { "tabbed", "-c", "-r", "2", "st", "-w", "-e", "ranger", NULL };
 static const char *volup[] = { "amixer", "-q", "sset", "Master", "4%+", NULL };
@@ -64,8 +69,8 @@ static Key keys[] = {
     { mod1,                     XK_o,       spawn,          {.v = dedit } },
     { mod1,                     XK_c,       spawn,          {.v = clipboard } },
     { mod1,                     XK_r,       spawn,          {.v = ranger } },
-    { mod1,                     XK_semicolon,   spawn,      {.v = voldown }},
-    { mod1,                     XK_apostrophe,  spawn,      {.v = volup }},
+    /* { mod1,                     XK_semicolon,   spawn,      {.v = voldown }}, */
+    /* { mod1,                     XK_apostrophe,  spawn,      {.v = volup }}, */
     // xf86 keys must be in octal
     { 0,                        0x1008ff12, spawn,          {.v = volmute }},
     { 0,                        0x1008ff11, spawn,          {.v = voldown }},
@@ -85,7 +90,8 @@ static Key keys[] = {
 	{ mod1,                     XK_q,       killclient,     {0} },
 	{ mod1,                     XK_t,       setlayout,      {.v = &layouts[0]} },
 	{ mod1,                     XK_f,       setlayout,      {.v = &layouts[1]} },
-	{ mod1,                     XK_m,       setlayout,      {.v = &layouts[2]} },
+	{ mod1,                     XK_g,       setlayout,      {.v = &layouts[2]} },
+	/* { mod1,                     XK_m,       setlayout,      {.v = &layouts[2]} }, */
 	{ mod1,                     XK_space,   setlayout,      {0} },
 	{ mod1|ShiftMask,           XK_space,   togglefloating, {0} },
 	{ mod1,                     XK_0,       view,           {.ui = ~0 } },

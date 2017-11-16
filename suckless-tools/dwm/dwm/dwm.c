@@ -67,6 +67,7 @@ struct Client {
 	char name[256];
 	float mina, maxa;
 	int x, y, w, h;
+    int sfx, sfy, sfw, sfh; /* stored float geometry, used on mode revert */
 	int oldx, oldy, oldw, oldh;
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
 	int bw, oldbw;
@@ -1005,11 +1006,11 @@ manage(Window w, XWindowAttributes *wa)
 	c = ecalloc(1, sizeof(Client));
 	c->win = w;
 	/* geometry */
-	c->x = c->oldx = wa->x;
-	c->y = c->oldy = wa->y;
-	c->w = c->oldw = wa->width;
-	c->h = c->oldh = wa->height;
-	c->oldbw = wa->border_width;
+	c->sfx = c->x = c->oldx = wa->x;
+    c->sfy = c->y = c->oldy = wa->y;
+    c->sfw = c->w = c->oldw = wa->width;
+    c->sfh = c->h = c->oldh = wa->height;
+    c->oldbw = wa->border_width;
 
 	updatetitle(c);
 	if (XGetTransientForHint(dpy, w, &trans) && (t = wintoclient(trans))) {
@@ -1724,10 +1725,21 @@ togglefloating(const Arg *arg)
 	if (selmon->sel->isfullscreen) /* no support for fullscreen windows */
 		return;
 	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
-	if (selmon->sel->isfloating)
-		resize(selmon->sel, selmon->sel->x, selmon->sel->y,
-			selmon->sel->w, selmon->sel->h, 0);
-	arrange(selmon);
+        
+    if(selmon->sel->isfloating)
+    /* restore last know float dimentions */    
+        resize(selmon->sel, selmon->sel->sfx, selmon->sel->sfy,
+            selmon->sel->sfw, selmon->sel->sfh, 0);
+    else {
+        /* save last known float dimentions */
+        selmon->sel->sfx = selmon->sel->x;
+        selmon->sel->sfy = selmon->sel->y;
+        selmon->sel->sfw = selmon->sel->w;
+        selmon->sel->sfh = selmon->sel->h;
+    }
+
+    
+    arrange(selmon);
 }
 
 void
