@@ -1,13 +1,13 @@
-char font[] = "terminus:pixelsize=14:antialias=false:autohint=true";
+char font[] = "terminus:pixelsize=14:antialias=false:autohint=false";
 int borderpx = 4; /* Internal border */
 
 static char *utmp = NULL;
 static char stty_args[] = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* disable bold, italic and roman fonts globally */
-int disablebold = 1;
-int disableitalic = 1;
-int disableroman = 1;
+int disablebold = 0;
+int disableitalic = 0;
+int disableroman = 0;
 
 /* identification sequence returned in DA and DECID */
 static char vtiden[] = "\033[?6c";
@@ -37,6 +37,7 @@ unsigned int alpha = 0xcc;
 /* #include "dracula-theme.h" */
 #include "solarized-light.h"
 #include "solarized-dark.h"
+/* #include "lucius-light.h" */
 
 // @@@@@ solzarized @@@@@@@@ @@@@@@
 unsigned int defaultfg = 12;
@@ -47,6 +48,10 @@ unsigned int defaultrcs = 15;
 // with transparency
 unsigned int defaultbg = 0;
 // @@@@ END SOLARIZED BG COLORS @@@@@
+
+// lucius-light
+/* unsigned int defaultbg = 256; */
+/* unsigned int defaultfg = 257; */
 
 // @@@@@@@@ dracula  @@@@@@@@@@@@@@@
 /* unsigned int defaultfg = 257; */
@@ -61,6 +66,11 @@ unsigned int defaultbg = 0;
 * complex. */
 unsigned int defaultitalic = 7;
 unsigned int defaultunderline = 7;
+
+// mouse cursor color for lucius-light
+// *cursorColor: #5f87af
+
+
 
 /* Default shape of cursor
  * 2: Block ("█")

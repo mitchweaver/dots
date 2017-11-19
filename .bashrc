@@ -2,10 +2,9 @@
 export PS1="\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W \[\e[1;37m\]"
 ##############################################
 
-
 export DISTRIB_ID="Sabotage"
 export EDITOR="/bin/nvim"
-export BROWSER="/usr/local/bin/tabbed -c /usr/local/bin/surf -e"
+#export BROWSER="/usr/local/bin/tabbed -c /usr/local/bin/surf -e"
 
 ### NOTE: this may be dangerous to keep. This is just what
 #         I use for my own backups.
@@ -35,7 +34,7 @@ alias weather-ok="curl http://wttr.in/~Claremore"
 alias yt="youtube-viewer -C -q --vd=high"
 alias ytd="youtube-viewer -C -q --vd=high -d"
 alias ytm="youtube-viewer -n -C -q --vd=high"
-alias ytdm='youtube-viewer -q -C --vd=high -n -d --convert-to=opus --convert-cmd="ffmpeg -loglevel -8 -i file:*IN* -vn -acodec libvopus -ab 128k -y *OUT*"'
+alias ytdm='youtube-viewer -q -C --vd=high -n -d --convert-to=opus --convert-cmd="ffmpeg -loglevel -8 -i file:*IN* -vn -acodec libopus -ab 128k -y *OUT*"'
 ##############################################
 
 ######## RANGER #################
@@ -45,6 +44,8 @@ alias r="ranger"
 #################################
 
 alias bashrc="nvim ~/.bashrc"
+alias bsahrc="nvim ~/.bashrc"
+
 alias vimrc="nvim ~/.vimrc"
 alias x="exit"
 
@@ -59,13 +60,9 @@ alias ls='ls --color=always --group-directories-first --color=auto -F'
 alias sls='ls'
 alias l='ls'
 alias sl='ls'
-
-alias grep='grep'
-
 alias c='clear'
 alias cls='clear;ls'
 alias cl='clear;ls'
-
 
 alias jpg="jpegoptim *.jpg --strip-all"
 alias recursive-jpg="sh /home/mitch/bin/recursive-jpg-optimizer.sh"
@@ -75,9 +72,9 @@ gitup() {
     git add -A && git commit -m "$1" && git push -u origin master && clear && ls
 }
 
-# ffmpeg - convert to .ogg
-ogg-ffmpeg() {
-    ffmpeg -i file:"$1" -vn -acodec libvorbis -ab 320k -y -map_metadata 0 "${1%.webm}.ogg" && mv "$1" ~/.local/share/Trash/files && clear && ls
+# ffmpeg - convert to .opus
+opus-ffmpeg() {
+    ffmpeg -i file:"$1" -vn -acodec libopus -ab 128k -y -map_metadata 0 "${1%.webm}.opus" && mv "$1" ~/.local/share/Trash/files && clear && ls
 }
 
 alias java='/home/$USER/programs/java/jdk1.8/bin/java'
@@ -108,18 +105,19 @@ alias make="make -j3"
 recomp() {
     case $1 in
         dwm)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/dwm &&  make -j3  &&  make install && killall dwm;;
+            cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/dwm && make clean ; make -j3  &&  make install && killall dwm;;
         surf) 
-            cd /home/mitch/workspace/dotfiles/suckless-tools/surf/surf &&  make -j3 &&  make install && clear ;;
+            cd /home/mitch/workspace/dotfiles/suckless-tools/surf/surf && make clean ; make -j3 &&  make install && clear ;;
         tabbed)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/tabbed/tabbed &&  make -j3 &&  make install && clear ;;
+            cd /home/mitch/workspace/dotfiles/suckless-tools/tabbed/tabbed && make clean ; make -j3 &&  make install && clear ;;
         st)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/st/st &&  make -j3 &&  make install && clear ;;
+            cd /home/mitch/workspace/dotfiles/suckless-tools/st/st && make clean ; make -j3 &&  make install && clear ;;
         dmenu)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/dmenu/dmenu &&  make -j3 &&  make install && clear ;;
+            cd /home/mitch/workspace/dotfiles/suckless-tools/dmenu/dmenu && make clean ; make -j3 &&  make install && clear ;;
         slock)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/slock/slock &&  make -j3 &&  make install && clear ;;
-    
+            cd /home/mitch/workspace/dotfiles/suckless-tools/slock/slock && make clean ; make -j3 &&  make install && clear ;;
+        slstatus)
+            cd /home/mitch/workspace/dotfiles/suckless-tools/slstatus/ && make clean ; make -j3 &&  make install && clear ;;
         *)    
     esac
 }
@@ -132,26 +130,22 @@ alias dmenuconf="nvim ~/workspace/dotfiles/suckless-tools/dmenu/dmenu/config.h"
 alias stconf="nvim ~/workspace/dotfiles/suckless-tools/st/st/config.h"
 alias sf="neofetch"
 alias nf="sf"
-alias autostart="nvim ~/workspace/dotfiles/suckless-tools/dwm/autostart.sh"
-
 
 alias backup="sh ~/bin/backup.sh"
 
-
-
-stty erase '^?'
 alias htpo=htop
+alias hto=htop
 alias du='du -ahLd 1'
 
-
-
-
-
-alias ping='ping mitchweaver.xyz'
-
-alias irssi="irssi -n _mitch -c irc.freenode.net"
-
-
-
+alias pingme='ping mitchweaver.xyz'
+alias ping='ping eff.org'
 
 alias wpa_cli="wpa_cli -i wlan0 -p /etc/service/wpa_supplicant"
+
+
+
+
+
+TOKEN="MzgwODc0NjQyOTE2NjM4NzUw.DO--3A.t2o62XJir4lUQyLAsk0zAKd-r04"
+
+alias buch=butch

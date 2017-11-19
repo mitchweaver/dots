@@ -1,6 +1,6 @@
 #!/bin/sh
 
-hsetroot -cover /home/mitch/workspace/dotfiles/suckless-tools/dwm/wall &
+feh --bg-scale /home/mitch/workspace/dotfiles/suckless-tools/dwm/wall &
 compton &
 slstatus &
 clipmenud &

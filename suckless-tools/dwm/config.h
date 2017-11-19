@@ -34,15 +34,14 @@ static const int nmaster     = 1;    /* number of clients in master area */
 #include "horizgrid.c"
 #include "fibonacci.c"
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "[T]",      tile },    /* first entry is default */
-	{ "[F]",      NULL },    /* no layout function means floating behavior */
+    /* symbol     arrange function */
+    { "[T]",      tile },    /* first entry is default */
+    { "[F]",      NULL },    /* no layout function means floating behavior */
     { "[GGG]", grid },
     { "[TTT]", bstack},
-    { "[MM]", centeredmaster },
+    { "[MMM]", centeredmaster },
     { "[HHH]", horizgrid },
     { "[FFF]", dwindle },
-    /* { "[M]",      monocle }, */
 };
 
 #define mod1 Mod1Mask 
@@ -56,31 +55,28 @@ static const Layout layouts[] = {
 
 static char dmenumon[2] = "0";
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL };
-static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
+/* static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL }; */
+static const char *term[]  = { "st", NULL };
+/* static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL }; */
+static const char *net[] = { "firefox", "https://duckduckgo.com/html", NULL };
 static const char *dedit[] = { "dedit", NULL };
 static const char *clipboard[] = { "clipmenu", NULL };
-static const char *ranger[] = { "tabbed", "-c", "-r", "2", "st", "-w", "-e", "ranger", NULL };
+static const char *ranger[] = { "-r", "2", "st", "-w", "-e", "ranger", NULL };
 static const char *volup[] = { "amixer", "-q", "sset", "Master", "4%+", NULL };
 static const char *voldown[] = { "amixer", "-q", "sset", "Master", "4%-", NULL };
 static const char *volmute[] = { "amixer", "-q", "sset", "Master", "toggle", NULL};
-static const char *mpdnext[] = { "mpc", "next", NULL };
-static const char *mpdprev[] = { "mpc", "prev", NULL };
-static const char *mpdtoggle[] = { "mpc", "toggle", NULL };
+static const char *mpdnext[] = { "mpc", "-q",  "next", NULL };
+static const char *mpdprev[] = { "mpc", "-q", "prev", NULL };
+static const char *mpdtoggle[] = { "mpc", "-q",  "toggle", NULL };
 static const char *slock[] = { "slock", NULL };
-
-
 
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 
-    // ------------------------------------------------------------------ //
-    { mod1|ShiftMask,           XK_j,       movestack,      {.i = +1 } },
-    { mod1|ShiftMask,           XK_k,       movestack,      {.i = -1 } },
     // ------------------------------------------------------------------- //
-	{ mod1,                     XK_p,       spawn,          {.v = dmenucmd } },
-	{ mod1,                     XK_Return,  spawn,          {.v = term } },
+    { mod1,                     XK_p,       spawn,          {.v = dmenucmd } },
+    { mod1,                     XK_Return,  spawn,          {.v = term } },
     { mod1,                     XK_w,       spawn,          {.v = net } },
     { mod1,                     XK_o,       spawn,          {.v = dedit } },
     { mod1,                     XK_c,       spawn,          {.v = clipboard } },
@@ -89,44 +85,45 @@ static Key keys[] = {
     { mod1,                     XK_period,   spawn,          {.v = mpdprev } },
     { mod1,                     XK_comma,   spawn,          {.v = mpdtoggle } },
     
-    /* { mod1,                     XK_semicolon,   spawn,      {.v = voldown }}, */
-    /* { mod1,                     XK_apostrophe,  spawn,      {.v = volup }}, */
+    { mod1,                     XK_semicolon,   spawn,      {.v = voldown }},
+    { mod1,                     XK_apostrophe,  spawn,      {.v = volup }},
     // xf86 keys must be in octal
     { 0,                        0x1008ff12, spawn,          {.v = volmute }},
     { 0,                        0x1008ff11, spawn,          {.v = voldown }},
     { 0,                        0x1008ff13, spawn,          {.v = volup }},
     { 0,                        0x1008ff2a, spawn,          {.v = slock }},
     { mod1,                     XK_x,       spawn,          {.v = slock }},
+    // ------------------------------------------------------------------ //
+    { mod1,                     XK_j,       focusstack,     {.i = +1 } },
+    { mod1,                     XK_k,       focusstack,     {.i = -1 } },
+    { mod1,                     XK_l,       movestack,      {.i = +1 } },
+    { mod1,                     XK_h,       movestack,      {.i = -1 } },
     // ------------------------------------------------------------------- //
-	{ mod1|ShiftMask,           XK_b,       togglebar,      {0} },
-	{ mod1,                     XK_j,       focusstack,     {.i = +1 } },
-	{ mod1,                     XK_k,       focusstack,     {.i = -1 } },
-	{ mod1,                     XK_i,       incnmaster,     {.i = +1 } },
-	{ mod1,                     XK_d,       incnmaster,     {.i = -1 } },
-	{ mod1,                     XK_h,       setmfact,       {.f = -0.05} },
-	{ mod1,                     XK_l,       setmfact,       {.f = +0.05} },
-    { mod1,                     XK_k,       setsmfact,       {.f = +0.05} },
-	{ mod1,                     XK_j,       setsmfact,       {.f = -0.05} },
-
-	/* { mod1,                     XK_Return,  zoom,           {0} }, */
-	{ mod1,                     XK_Tab,     view,           {0} },
+    { mod1|ShiftMask,           XK_h,       setmfact,       {.f = -0.05} },
+    { mod1|ShiftMask,           XK_l,       setmfact,       {.f = +0.05} },
+    { mod1|ShiftMask,           XK_k,       setsmfact,      {.f = +0.05} },
+    { mod1|ShiftMask,           XK_j,       setsmfact,      {.f = -0.05} },
+    { mod1,                     XK_Tab,     view,           {0} },
     // ------------------------------------------------------------------- //
-	{ mod1,                     XK_q,       killclient,     {0} },
-	{ mod1,                     XK_t,       setlayout,      {.v = &layouts[0]} },
-	{ mod1,                     XK_f,       setlayout,      {.v = &layouts[1]} },
-	{ mod1,                     XK_g,       setlayout,      {.v = &layouts[2]} },
-	{ mod1,                     XK_b,       setlayout,      {.v = &layouts[3]} },
-	{ mod1,                     XK_m,       setlayout,      {.v = &layouts[4]} },
-	{ mod1,                     XK_n,       setlayout,      {.v = &layouts[5]} },
-	{ mod1,                     XK_v,       setlayout,      {.v = &layouts[6]} },
-	/* { mod1,                     XK_m,       setlayout,      {.v = &layouts[2]} }, */
-	{ mod1,                     XK_space,   setlayout,      {0} },
-	{ mod1|ShiftMask,           XK_space,   togglefloating, {0} },
-	{ mod1,                     XK_0,       view,           {.ui = ~0 } },
-	{ mod1|ShiftMask,           XK_0,       tag,            {.ui = ~0 } },
-	{ mod1|ShiftMask,           XK_q,      quit,            {0} },
+    { mod1,                     XK_t,       setlayout,      {.v = &layouts[0]} },
+    { mod1,                     XK_f,       setlayout,      {.v = &layouts[1]} },
+    { mod1,                     XK_g,       setlayout,      {.v = &layouts[2]} },
+    { mod1,                     XK_b,       setlayout,      {.v = &layouts[3]} },
+    { mod1,                     XK_m,       setlayout,      {.v = &layouts[4]} },
+    { mod1,                     XK_n,       setlayout,      {.v = &layouts[5]} },
+    { mod1,                     XK_v,       setlayout,      {.v = &layouts[6]} },
+    { mod1,                     XK_space,   setlayout,      {0} },
+    { mod1|ShiftMask,           XK_space,   togglefloating, {0} },
+    { mod1,                     XK_0,       view,           {.ui = ~0 } },
+    { mod1|ShiftMask,           XK_0,       tag,            {.ui = ~0 } },
+    { mod1|ShiftMask,           XK_b,       togglebar,      {0} },
+    { mod1,                     XK_q,       killclient,     {0} },
+    { mod1|ShiftMask,           XK_q,       quit,            {0} },
     // ------------------------------------------------------------------- //
-	
+    /* { mod1,                     XK_i,       incnmaster,     {.i = +1 } }, */
+    /* { mod1,                     XK_d,       incnmaster,     {.i = -1 } }, */
+    /* { mod1,                     XK_Return,  zoom,           {0} }, */
+    // ------------------------------------------------------------------- //
     TAGKEYS(XK_1,0) TAGKEYS(XK_2,1) TAGKEYS(XK_3,2) TAGKEYS(XK_4,3)
 	TAGKEYS(XK_5,4) TAGKEYS(XK_6,5) TAGKEYS(XK_7,6) TAGKEYS(XK_8,7) TAGKEYS(XK_9,8)
 };
@@ -135,16 +132,16 @@ static Key keys[] = {
 static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = term } },
 	{ ClkClientWin,         mod1,           Button1,        movemouse,      {0} },
 	{ ClkClientWin,         mod1,           Button2,        togglefloating, {0} },
 	{ ClkClientWin,         mod1,           Button3,        resizemouse,    {0} },
+        /* { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} }, */
+	/* { ClkWinTitle,          0,              Button2,        zoom,           {0} }, */
+	/* { ClkStatusText,        0,              Button2,        spawn,          {.v = term } }, */
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            mod1,           Button1,        tag,            {0} },
-	{ ClkTagBar,            mod1,           Button3,        toggletag,      {0} },
+	/* { ClkTagBar,            mod1,           Button1,        tag,            {0} }, */
+	/* { ClkTagBar,            mod1,           Button3,        toggletag,      {0} }, */
 };
 
 // ---------------------------------------------------------------------------- //

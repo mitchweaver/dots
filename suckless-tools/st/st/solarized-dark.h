@@ -1,4 +1,5 @@
 // @@@@@@@@@@@@@ BEGIN SOLARIZED DARK @@@@@@@@@@@@@
+/* const char *colorname[] = { */
 const char *altcolorname[] = {
         "#073642",
         "#dc322f",

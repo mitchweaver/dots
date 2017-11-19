@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ### THIS IS TO AUTOMATICALLY STARTX ON LOGIN #######
 X=$( pidof Xorg )
 if [ ${#X} -gt 0 ]
@@ -5,7 +7,7 @@ if [ ${#X} -gt 0 ]
 		true
 		#X has already been started as it has a pid
 	else
-		exec startx -q
+		exec startx -q &
 fi
 
 

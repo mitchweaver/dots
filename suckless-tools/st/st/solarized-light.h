@@ -1,4 +1,5 @@
 // @@@@@@@@@@@@ BEGIN SOLARIZED LIGHT @@@@@@@@@@@@@@@@@@@@ //
+/* const char *altcolorname[] = { */
 const char *colorname[] = {
         "#eee8d5",  //  0: black
         "#dc322f",  //  1: red
