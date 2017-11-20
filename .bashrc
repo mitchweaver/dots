@@ -30,12 +30,20 @@ alias weather="curl http://wttr.in/~Schmalkalden"
 alias weather-sd="curl http://wttr.in/~Dakota_State_University"
 alias weather-ok="curl http://wttr.in/~Claremore"
 
-####### YOUTUBE ##############################
+filesize(){
+    echo $(stat --printf="%s" "$1")
+}
+
+####### MUSIC / YOUTUBE STUFF ##############################
 alias yt="youtube-viewer -C -q --vd=high"
 alias ytd="youtube-viewer -C -q --vd=high -d"
 alias ytm="youtube-viewer -n -C -q --vd=high"
 alias ytdm='youtube-viewer -q -C --vd=high -n -d --convert-to=opus --convert-cmd="ffmpeg -loglevel -8 -i file:*IN* -vn -acodec libopus -ab 128k -y *OUT*"'
-##############################################
+alias bandcamp="youtube-dl --prefer-ffmpeg -x --audio-quality 0 --audio-format 'opus'"
+opus-ffmpeg() {
+    ffmpeg -i file:"$1" -vn -acodec libopus -ab 128k -y -map_metadata 0 "${1%.webm}.opus" && mv "$1" ~/.local/share/Trash/files && clear && ls
+}
+###############################################################
 
 ######## RANGER #################
 alias r="ranger"
@@ -72,10 +80,7 @@ gitup() {
     git add -A && git commit -m "$1" && git push -u origin master && clear && ls
 }
 
-# ffmpeg - convert to .opus
-opus-ffmpeg() {
-    ffmpeg -i file:"$1" -vn -acodec libopus -ab 128k -y -map_metadata 0 "${1%.webm}.opus" && mv "$1" ~/.local/share/Trash/files && clear && ls
-}
+
 
 alias java='/home/$USER/programs/java/jdk1.8/bin/java'
 
@@ -149,3 +154,7 @@ alias wpa_cli="wpa_cli -i wlan0 -p /etc/service/wpa_supplicant"
 TOKEN="MzgwODc0NjQyOTE2NjM4NzUw.DO--3A.t2o62XJir4lUQyLAsk0zAKd-r04"
 
 alias buch=butch
+
+
+# when switching between eth0 to wlan0, openvpn must be restarted
+alias restart-vpn="cd /etc/openvpn ; openvpn Switzerland.ovpn &"

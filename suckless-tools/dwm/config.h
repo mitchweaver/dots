@@ -69,6 +69,7 @@ static const char *mpdnext[] = { "mpc", "-q",  "next", NULL };
 static const char *mpdprev[] = { "mpc", "-q", "prev", NULL };
 static const char *mpdtoggle[] = { "mpc", "-q",  "toggle", NULL };
 static const char *slock[] = { "slock", NULL };
+static const char *screenshot[] = { "screenshot", NULL };
 
 #include "movestack.c"
 static Key keys[] = {
@@ -82,8 +83,9 @@ static Key keys[] = {
     { mod1,                     XK_c,       spawn,          {.v = clipboard } },
     { mod1,                     XK_r,       spawn,          {.v = ranger } },
     { mod1,                     XK_slash,   spawn,          {.v = mpdnext } },
-    { mod1,                     XK_period,   spawn,          {.v = mpdprev } },
+    { mod1,                     XK_period,  spawn,          {.v = mpdprev } },
     { mod1,                     XK_comma,   spawn,          {.v = mpdtoggle } },
+    { 0,                        XK_Print,   spawn,          {.v = screenshot} },
     
     { mod1,                     XK_semicolon,   spawn,      {.v = voldown }},
     { mod1,                     XK_apostrophe,  spawn,      {.v = volup }},
