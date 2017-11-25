@@ -34,30 +34,30 @@ static unsigned int tabspaces = 4;
 unsigned int alpha = 0xcc;
 
 // ~~~~~~~~~~~~~~~ TERMINAL COLOURS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
-/* #include "dracula-theme.h" */
-#include "solarized-light.h"
+#include "dracula-theme.h"
+/* #include "solarized-light.h" */
 #include "solarized-dark.h"
 /* #include "lucius-light.h" */
 
 // @@@@@ solzarized @@@@@@@@ @@@@@@
-unsigned int defaultfg = 12;
-unsigned int defaultcs = 14;
-unsigned int defaultrcs = 15;
+/* unsigned int defaultfg = 12; */
+/* unsigned int defaultcs = 14; */
+/* unsigned int defaultrcs = 15; */
 // with no transparency
+
+// good backgrounds
+unsigned int defaultbg = 256;
 /* unsigned int defaultbg = 8; */
-// with transparency
-unsigned int defaultbg = 0;
-// @@@@ END SOLARIZED BG COLORS @@@@@
+/* unsigned int defaultbg = 0; */
 
 // lucius-light
-/* unsigned int defaultbg = 256; */
 /* unsigned int defaultfg = 257; */
 
 // @@@@@@@@ dracula  @@@@@@@@@@@@@@@
-/* unsigned int defaultfg = 257; */
+unsigned int defaultfg = 257;
 /* unsigned int defaultbg = 257; */
-/* unsigned int defaultcs = 257; */
-/* unsigned int defaultrcs = 257; */
+unsigned int defaultcs = 257;
+unsigned int defaultrcs = 257;
 // @@@@@@@@ END DRACULA BG COLORS @@@@@@@@@@@@
 
 /*

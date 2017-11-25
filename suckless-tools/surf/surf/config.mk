@@ -11,8 +11,8 @@ LIBPREFIX = $(PREFIX)/lib/surf
 X11INC = /usr/X11R6/include
 X11LIB = /usr/X11R6/lib
 
-GTKINC = `pkg-config --cflags gtk+-3.0`
-GTKLIB = `pkg-config --libs gtk+-3.0`
+GTKINC = `pkg-config --cflags gtk+-3.0 gcr-3 webkit2gtk-4.0`
+GTKLIB = `pkg-config --libs gtk+-3.0 gcr-3 webkit2gtk-4.0`
 
 # includes and libs
 INCS = -I$(X11INC) $(GTKINC)

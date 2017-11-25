@@ -1,8 +1,9 @@
-sw_volume: 100
+sw_volume: 98
 audio_device_state:1:alsa audio
+audio_device_state:1:my_fifo
 state: play
-current: 47
-time: 4.245000
+current: 19
+time: 4.096000
 random: 0
 repeat: 1
 single: 0
@@ -153,4 +154,115 @@ playlist_begin
 139:Zweihander/Togakure Ryu-2888449324.opus
 140:Zweihander/Catacombs-1160714939.opus
 141:Zweihander/Entry to Höllental Depths-544794793.opus
+142:Animo Aeger/Ab-Fakt/und allet für den kleenen Tod-1564262861.opus
+143:Animo Aeger/Ab-Fakt/Phrasen zu Roben !-3208476824.opus
+144:Agalloch/The Mantle/Agalloch - The Mantle - 01.opus
+145:Agalloch/The Mantle/Agalloch - The Mantle - 02.opus
+146:Agalloch/The Mantle/Agalloch - The Mantle - 03.opus
+147:Agalloch/The Mantle/Agalloch - The Mantle - 04.opus
+148:Agalloch/The Mantle/Agalloch - The Mantle - 05.opus
+149:Agalloch/The Mantle/Agalloch - The Mantle - 06.opus
+150:Agalloch/The Mantle/Agalloch - The Mantle - 07.opus
+151:Agalloch/The Mantle/Agalloch - The Mantle - 08.opus
+152:Agalloch/The Mantle/Agalloch - The Mantle - 09.opus
+153:A Transylvanian Funeral/the Outsider/Syzygy-2907784904.opus
+154:A Transylvanian Funeral/the Outsider/Winter's Worm-35675757.opus
+155:A Transylvanian Funeral/the Outsider/Worship a Dead Fucking Goat-4136451106.opus
+156:A Transylvanian Funeral/the Outsider/Premonitions-324564640.opus
+157:A Transylvanian Funeral/the Outsider/Dismembered by Spirits-1816857670.opus
+158:A Transylvanian Funeral/the Outsider/A Ghoul Rising from the Grave-822653943.opus
+159:A Transylvanian Funeral/the Outsider/Creation of My Phylactery-3026582684.opus
+160:A Transylvanian Funeral/the Outsider/Going Blind-1335319348.opus
+161:A Transylvanian Funeral/the Outsider/When Sky and Ocean Are One-24776456.opus
+162:A Transylvanian Funeral/the Outsider/To Die in the Dark-3816149184.opus
+163:A Transylvanian Funeral/the Outsider/Bilocation in the Garden of Forking Paths-1228889321.opus
+164:A Transylvanian Funeral/the Outsider/the Outsider-2938292623.opus
+165:A Transylvanian Funeral/the Outsider/Syzygy-2907784904.opus
+166:A Transylvanian Funeral/the Outsider/Winter's Worm-35675757.opus
+167:A Transylvanian Funeral/the Outsider/Worship a Dead Fucking Goat-4136451106.opus
+168:A Transylvanian Funeral/the Outsider/Premonitions-324564640.opus
+169:A Transylvanian Funeral/the Outsider/Dismembered by Spirits-1816857670.opus
+170:A Transylvanian Funeral/the Outsider/A Ghoul Rising from the Grave-822653943.opus
+171:A Transylvanian Funeral/the Outsider/Creation of My Phylactery-3026582684.opus
+172:A Transylvanian Funeral/the Outsider/Going Blind-1335319348.opus
+173:A Transylvanian Funeral/the Outsider/When Sky and Ocean Are One-24776456.opus
+174:A Transylvanian Funeral/the Outsider/To Die in the Dark-3816149184.opus
+175:A Transylvanian Funeral/the Outsider/Bilocation in the Garden of Forking Paths-1228889321.opus
+176:A Transylvanian Funeral/the Outsider/the Outsider-2938292623.opus
+177:Wolves In The Throne Room/Celestite (2014)/01Turning Ever Towards the Sun.opus
+178:Wolves In The Throne Room/Celestite (2014)/02 Initiationat Neudeg Alm.opus
+179:Wolves In The Throne Room/Celestite (2014)/03 Bridge of Leaves.opus
+180:Wolves In The Throne Room/Celestite (2014)/04 Celestite Mirror.opus
+181:Wolves In The Throne Room/Celestite (2014)/05 Sleeping Golden Storm.opus
+182:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/01 - Dia Artio.opus
+183:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/02 - Vastness And Sorrow.opus
+184:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/03 - Cleansing.opus
+185:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/04 - I Will Lay Down My Bones Among The Rocks And Roots.opus
+186:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/05 - To Reveal.opus
+187:Wolves In The Throne Room/Black Cascade/01 Wanderer Above the Sea of Fog.opus
+188:Wolves In The Throne Room/Black Cascade/02 Ahrimanic Trance.opus
+189:Wolves In The Throne Room/Black Cascade/03 Ex Cathedra.opus
+190:Wolves In The Throne Room/Black Cascade/04 Crystal Ammunition.opus
+191:Wolves In The Throne Room/Malevolent Grain/a1-wolves_in_the_throne_room--a_looming_resonance.opus
+192:Wolves In The Throne Room/Malevolent Grain/b1-wolves_in_the_throne_room--hate_crystal.opus
+193:Wolves In The Throne Room/2011 - Celestial Lineage/01 - Thuja Magus Imperium.opus
+194:Wolves In The Throne Room/2011 - Celestial Lineage/02 - Permanent Changes In Consciousness.opus
+195:Wolves In The Throne Room/2011 - Celestial Lineage/03 - Subterranean Initiation.opus
+196:Wolves In The Throne Room/2011 - Celestial Lineage/04 - Rainbow Illness.opus
+197:Wolves In The Throne Room/2011 - Celestial Lineage/05 - Woodland Cathedral.opus
+198:Wolves In The Throne Room/2011 - Celestial Lineage/06 - Astral Blood.opus
+199:Wolves In The Throne Room/2011 - Celestial Lineage/07 - Prayer Of Transformation.opus
+200:Wolves In The Throne Room/Wolves In The Throne Room - Demo[HD].opus
+201:Wolves In The Throne Room/Wolves in the Throne Room - Diadem of 12 Stars (Full Album).opus
+202:A Transylvanian Funeral/the Outsider/Syzygy-2907784904.opus
+203:A Transylvanian Funeral/the Outsider/Winter's Worm-35675757.opus
+204:A Transylvanian Funeral/the Outsider/Worship a Dead Fucking Goat-4136451106.opus
+205:A Transylvanian Funeral/the Outsider/Premonitions-324564640.opus
+206:A Transylvanian Funeral/the Outsider/Dismembered by Spirits-1816857670.opus
+207:A Transylvanian Funeral/the Outsider/A Ghoul Rising from the Grave-822653943.opus
+208:A Transylvanian Funeral/the Outsider/Creation of My Phylactery-3026582684.opus
+209:A Transylvanian Funeral/the Outsider/Going Blind-1335319348.opus
+210:A Transylvanian Funeral/the Outsider/When Sky and Ocean Are One-24776456.opus
+211:A Transylvanian Funeral/the Outsider/To Die in the Dark-3816149184.opus
+212:A Transylvanian Funeral/the Outsider/Bilocation in the Garden of Forking Paths-1228889321.opus
+213:A Transylvanian Funeral/the Outsider/the Outsider-2938292623.opus
+214:Abigail/Intercourse and Lust/01 A Witch Named A Spilcuetta.opus
+215:Abigail/Intercourse and Lust/02 Confound Eternal.opus
+216:Abigail/Intercourse and Lust/03 The Crown Bearer.opus
+217:Abigail/Intercourse and Lust/04 Attack With Spell.opus
+218:Abigail/Intercourse and Lust/05 Strength Of Other World.opus
+219:Abigail/Intercourse and Lust/06 The Bonehunter.opus
+220:Abigail/Intercourse and Lust/07 Mephistopheles.opus
+221:Abigail/Intercourse and Lust/08 Intercourse & Lust.opus
+222:Abigail/Intercourse and Lust/09 Hail Yakuza.opus
+223:A Transylvanian Funeral/self-titled/Hammer of the Witch-3165971103.opus
+224:Video Game Soundtracks/Halo Combat Evolved: Original Soundtrack.opus
+225:Horn/Horn - Naturkraft (Full Album).opus
+226:Isengard/Isengard - Vinterskugge (1994)[Full Album].opus
+227:Eternal Champion/The Armor of Ire/Eternal Champion - The Armor of Ire (2016).opus
+228:Absurd/Absurd Der Fünfzehnjahrige Krieg full album.opus
+229:Walknut/Walknut - Graveforests and Their Shadows (Full Album).opus
+230:A Transylvanian Funeral/self-titled/Ways of the Magi-2497896501.opus
+231:Urfaust/2012 - Ritual Music for the Truly Clochard/Urfaust - Ritual Music for the True Clochard (2012) full compilation, vinyl.opus
+232:Job For A Cowboy/Doom/03. Job for a Cowboy - Relinquished.opus
+233:Kalmankantaja/Metsu/Kalmankantaja - Mets#U00e4kalmisto II - 01 Valtakuntani, Hautani.opus
+234:Kalmankantaja/Metsu/Kalmankantaja - Mets#U00e4kalmisto II - 02 Hallanhenki.opus
+235:Kalmankantaja/Metsu/Kalmankantaja - Mets#U00e4kalmisto II - 03 Kaamos.opus
+236:October Falls/A Collapse of Faith/October Falls - Part I A Collapse Of Faith (2010).opus
+237:October Falls/A Collapse of Faith/October Falls - Part II A Collapse Of Faith (2010).opus
+238:October Falls/A Collapse of Faith/October Falls - Part III A Collapse Of Faith (2010).opus
+239:Peturbator/The Uncanny Valley/PERTURBATOR - Neo Tokyo-4159529321.opus
+240:Peturbator/The Uncanny Valley/PERTURBATOR - Weapons For Children-4187988485.opus
+241:Peturbator/The Uncanny Valley/PERTURBATOR - Death Squad-3074084009.opus
+242:Peturbator/The Uncanny Valley/PERTURBATOR - Femme Fatale (Feat. Highway Superstar)-3998528504.opus
+243:Peturbator/The Uncanny Valley/PERTURBATOR - Venger (Feat. Greta Link)-3932006440.opus
+244:Peturbator/The Uncanny Valley/PERTURBATOR - Disco Inferno-2569625141.opus
+245:Peturbator/The Uncanny Valley/PERTURBATOR - She Moves Like A Knife-161674364.opus
+246:Peturbator/The Uncanny Valley/PERTURBATOR - Sentient (Feat. Hayley Stewart)-3557687067.opus
+247:Peturbator/The Uncanny Valley/PERTURBATOR - Diabolus Ex Machina-815858595.opus
+248:Peturbator/The Uncanny Valley/PERTURBATOR - Assault-3652215632.opus
+249:Peturbator/The Uncanny Valley/PERTURBATOR - The Cult Of 2112-1578616364.opus
+250:Peturbator/The Uncanny Valley/PERTURBATOR - Souls At Zero (Feat. Astronoid)-2900590844.opus
+251:Peturbator/The Uncanny Valley/PERTURBATOR - The Uncanny Valley-2599811840.opus
+252:Horn/Horn - Feldpost (Full Album).opus
 playlist_end

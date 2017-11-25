@@ -1,5 +1,8 @@
-static const unsigned int gappx = 10; /* gap pixel between windows */ 
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static unsigned int gappx = 10; /* gap pixel between windows */ 
+static const unsigned int gapX = 10;
+static const unsigned int gapY = 10;
+
+static unsigned int borderpx  = 0; /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int minwsz    = 10;       /* min height for smfact */
 static const char *fonts[]        = { "terminus:pixelsize=12:antialias=false" };
@@ -10,18 +13,18 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 static const char gray_purple[] = "#332a2a";
+static const char pink[] = "#ffbad2";
+static const char col_red[] = "#ee4444";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, gray_purple, "#ffbad2" },
+	[SchemeSel]  = { col_gray4, gray_purple, "pink" },
+    [SchemeUrg] =  { col_gray4, col_red, col_red },
 };
 
-static const char *tags[] = { "1: web", "2", "3", "4", "5", "6", "7", "8: irc", "9: music" }; /* workspace names */
+static const char *tags[] = { "壱", "弐", "参", "四", "五", "六", "七", "八", "九" }; /* workspace names */
 
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 };
@@ -55,13 +58,12 @@ static const Layout layouts[] = {
 
 static char dmenumon[2] = "0";
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-/* static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL }; */
-static const char *term[]  = { "st", NULL };
-/* static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL }; */
-static const char *net[] = { "firefox", "https://duckduckgo.com/html", NULL };
+static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL };
+/* static const char *term[]  = { "st", NULL }; */
+static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
 static const char *dedit[] = { "dedit", NULL };
 static const char *clipboard[] = { "clipmenu", NULL };
-static const char *ranger[] = { "-r", "2", "st", "-w", "-e", "ranger", NULL };
+static const char *ranger[] = { "st", "-w", "-e", "ranger", NULL };
 static const char *volup[] = { "amixer", "-q", "sset", "Master", "4%+", NULL };
 static const char *voldown[] = { "amixer", "-q", "sset", "Master", "4%-", NULL };
 static const char *volmute[] = { "amixer", "-q", "sset", "Master", "toggle", NULL};
@@ -70,6 +72,16 @@ static const char *mpdprev[] = { "mpc", "-q", "prev", NULL };
 static const char *mpdtoggle[] = { "mpc", "-q",  "toggle", NULL };
 static const char *slock[] = { "slock", NULL };
 static const char *screenshot[] = { "screenshot", NULL };
+
+static void toggle_gaps(){
+    if(gappx == 0){
+        gappx = gapX;
+        borderpx = 0;
+    } else {
+        gappx = 0;
+        borderpx = 1;
+    }
+}
 
 #include "movestack.c"
 static Key keys[] = {
@@ -86,7 +98,6 @@ static Key keys[] = {
     { mod1,                     XK_period,  spawn,          {.v = mpdprev } },
     { mod1,                     XK_comma,   spawn,          {.v = mpdtoggle } },
     { 0,                        XK_Print,   spawn,          {.v = screenshot} },
-    
     { mod1,                     XK_semicolon,   spawn,      {.v = voldown }},
     { mod1,                     XK_apostrophe,  spawn,      {.v = volup }},
     // xf86 keys must be in octal
@@ -106,6 +117,7 @@ static Key keys[] = {
     { mod1|ShiftMask,           XK_k,       setsmfact,      {.f = +0.05} },
     { mod1|ShiftMask,           XK_j,       setsmfact,      {.f = -0.05} },
     { mod1,                     XK_Tab,     view,           {0} },
+    { mod1|ShiftMask,           XK_g,   toggle_gaps,          {NULL } },
     // ------------------------------------------------------------------- //
     { mod1,                     XK_t,       setlayout,      {.v = &layouts[0]} },
     { mod1,                     XK_f,       setlayout,      {.v = &layouts[1]} },
@@ -124,7 +136,7 @@ static Key keys[] = {
     // ------------------------------------------------------------------- //
     /* { mod1,                     XK_i,       incnmaster,     {.i = +1 } }, */
     /* { mod1,                     XK_d,       incnmaster,     {.i = -1 } }, */
-    /* { mod1,                     XK_Return,  zoom,           {0} }, */
+    { mod1|ControlMask,                     XK_Return,  zoom,           {0} },
     // ------------------------------------------------------------------- //
     TAGKEYS(XK_1,0) TAGKEYS(XK_2,1) TAGKEYS(XK_3,2) TAGKEYS(XK_4,3)
 	TAGKEYS(XK_5,4) TAGKEYS(XK_6,5) TAGKEYS(XK_7,6) TAGKEYS(XK_8,7) TAGKEYS(XK_9,8)
@@ -137,7 +149,7 @@ static Button buttons[] = {
 	{ ClkClientWin,         mod1,           Button1,        movemouse,      {0} },
 	{ ClkClientWin,         mod1,           Button2,        togglefloating, {0} },
 	{ ClkClientWin,         mod1,           Button3,        resizemouse,    {0} },
-        /* { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} }, */
+    /* { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} }, */
 	/* { ClkWinTitle,          0,              Button2,        zoom,           {0} }, */
 	/* { ClkStatusText,        0,              Button2,        spawn,          {.v = term } }, */
 	{ ClkTagBar,            0,              Button1,        view,           {0} },

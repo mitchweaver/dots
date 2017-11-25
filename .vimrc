@@ -67,27 +67,28 @@ map <leader>pc :PlugClean<CR>
 " --------------------------------------------------------------
 
 " ------------- COLORSCHEME ------------------------------------
-" colorscheme dracula
+colorscheme dracula
 " colorscheme solarized
 " colorscheme zenburn
 " colorscheme newspaper
 " colorscheme neverland
-colorscheme lucius
+" colorscheme lucius
 
 " set background=dark
-" set background=light
+set background=light
 
 " disables background:
 " hi Normal ctermbg=NONE
 
+let g:airline_theme='dracula'
 " let g:airline_theme='papercolor'
 " let g:airline_theme='solarized'
 " let g:airline_theme='zenburn'
-let g:airline_theme='lucius'
+" let g:airline_theme='lucius'
 " ---------------------------------------------------------------
 
 " -------------- Vim Specific Configs -------------------------
-set mouse=a " NOTE THIS BREAKS MIDDLE CLICK PASTE on some terminals
+" set mouse=a " NOTE THIS BREAKS MIDDLE CLICK PASTE on some terminals
 set backspace=indent,eol,start
 set updatetime=500 " how long til vim does background calls after typing
 
@@ -244,30 +245,30 @@ autocmd BufRead,BufNewFile ~/.calcurse/notes/* set filetype=markdown
 
 
 " Use ranger as a vim file chooser!
-" function! RangerChooser()
-"     let temp = tempname()
-"     exec 'silent !ranger --choosefiles=' . shellescape(temp)
-"     if !filereadable(temp)
-"         redraw!
-"         " Nothing to read.
-"         return
-"     endif
-"     let names = readfile(temp)
-"     if empty(names)
-"         redraw!
-"         " Nothing to open.
-"         return
-"     endif
-"     " Edit the first item.
-"     exec 'edit ' . fnameescape(names[0])
-"     " Add any remaning items to the arg list/buffer list.
-"     for name in names[1:]
-"         exec 'argadd ' . fnameescape(name)
-"     endfor
-"     redraw!
-" endfunction
-" command! -bar RangerChooser call RangerChooser()
-" nnoremap <leader>r :<C-U>RangerChooser<CR>
+function! RangerChooser()
+    let temp = tempname()
+    exec 'silent !ranger --choosefiles=' . shellescape(temp)
+    if !filereadable(temp)
+        redraw!
+        " Nothing to read.
+        return
+    endif
+    let names = readfile(temp)
+    if empty(names)
+        redraw!
+        " Nothing to open.
+        return
+    endif
+    " Edit the first item.
+    exec 'edit ' . fnameescape(names[0])
+    " Add any remaning items to the arg list/buffer list.
+    for name in names[1:]
+        exec 'argadd ' . fnameescape(name)
+    endfor
+    redraw!
+endfunction
+command! -bar RangerChooser call RangerChooser()
+nnoremap <leader>r :<C-U>RangerChooser<CR>
 " -------------------------------------------------------------
 
 " #################### END ########################################

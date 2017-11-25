@@ -1,1 +1,0 @@
-../quark/config.h

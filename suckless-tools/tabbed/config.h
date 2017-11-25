@@ -38,15 +38,15 @@ static Key keys[] = {
 
 
      /* ------ shifts to next tab ------ */
-    { MODKEY|ShiftMask,     XK_l,      rotate,      { .i = +1 } },
-    { MODKEY|ShiftMask,     XK_h,      rotate,      { .i = -1 } },
+    { MODKEY|ShiftMask,     XK_k,      rotate,      { .i = +1 } },
+    { MODKEY|ShiftMask,     XK_j,      rotate,      { .i = -1 } },
     { MODKEY,               XK_Tab,    rotate,      { .i = +1 } },
     { MODKEY|ShiftMask,     XK_Tab,    rotate,      { .i = -1 } },
     { ShiftMask,            XK_Tab,    rotate,      { .i = 0 } }, // back-&-forth
     
     /* ------- moves a tab left or right in stack ---- */
-    { MODKEY|ShiftMask,     XK_j,      movetab,     { .i = -1 } },
-    { MODKEY|ShiftMask,     XK_k,      movetab,     { .i = +1 } },
+    { MODKEY|ShiftMask,     XK_h,      movetab,     { .i = -1 } },
+    { MODKEY|ShiftMask,     XK_l,      movetab,     { .i = +1 } },
 
 
 	{ MODKEY,               XK_w,      killclient,  { 0 } },

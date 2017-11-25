@@ -82,7 +82,7 @@ gitup() {
 
 
 
-alias java='/home/$USER/programs/java/jdk1.8/bin/java'
+# alias java='/home/$USER/programs/java/jdk1.8/bin/java'
 
 ###### PATHING ###########################################
 export PATH=$PATH:/home/mitch/bin

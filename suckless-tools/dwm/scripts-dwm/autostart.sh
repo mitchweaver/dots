@@ -1,5 +1,6 @@
 #!/bin/sh
 
+xmodmap ~/.Xmodmap
 feh --bg-scale /home/mitch/workspace/dotfiles/suckless-tools/dwm/wall &
 compton &
 slstatus &

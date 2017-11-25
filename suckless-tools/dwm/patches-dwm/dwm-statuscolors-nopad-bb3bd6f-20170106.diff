@@ -1,0 +1,135 @@
+/* diff --git a/config.def.h b/config.def.h */
+/* index ba9a240..2e8cbe6 100644 */
+/* --- a/config.def.h */
+/* +++ b/config.def.h */
+/* @@ -12,10 +12,12 @@ static const char col_gray2[]       = "#444444"; */
+/*  static const char col_gray3[]       = "#bbbbbb"; */
+/*  static const char col_gray4[]       = "#eeeeee"; */
+/*  static const char col_cyan[]        = "#005577"; */
+/* +static const char col_red[]         = "#ee4444"; */
+/*  static const char *colors[][3]      = { */
+/*  	/1*               fg         bg         border   *1/ */
+/*  	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 }, */
+/*  	[SchemeSel] =  { col_gray4, col_cyan,  col_cyan  }, */
+/* +	[SchemeUrg] =  { col_gray4, col_red,   col_red  }, */
+/*  }; */
+/* tagging */
+diff --git a/drw.c b/drw.c
+index 319eb6b..f096e75 100644
+--- a/drw.c
++++ b/drw.c
+@@ -222,6 +222,52 @@ drw_setscheme(Drw *drw, Scm scm)
+ 		drw->scheme = scm;
+ }
+ 
++int
++drw_get_width(Drw *drw, int numcolors, const char *text)
++{
++	int i;
++	Fnt *curfont = drw->fonts;
++	int w = drw_text(drw, 0, 0, 0, 0, 0, text, 0);
++	unsigned int ew;
++
++	drw_font_getexts(curfont, "\x01", 1,  &ew, NULL);
++
++	for (i = 0; i < strlen(text); i++) {
++		if (text[i] > 0 && text[i] <= numcolors) {
++			/* we found a color code
++			 * drw_text counted it as a normal character and added one character's width
++			 * we aren't going to render this character, so we remove one character's width */
++			w -= ew;
++
++		}
++	}
++	return w;
++}
++
++void
++drw_colored_text(Drw *drw, Scm *scheme, int numcolors, int x, int y, unsigned int w, unsigned int h, unsigned int lpad, char *text)
++{
++	if (!drw || !drw->fonts || !drw->scheme)
++		return;
++
++	char *buf = text, *ptr = buf, c = 1;
++	int i;
++
++	while (*ptr) {
++		for (i = 0; *ptr < 0 || *ptr > numcolors; i++, ptr++);
++		if (!*ptr)
++			break;
++		c = *ptr;
++		*ptr = 0;
++		if (i)
++			x = drw_text(drw, x, y, w, h, lpad, buf, 0);
++		*ptr = c;
++		drw_setscheme(drw, scheme[c-1]);
++		buf = ++ptr;
++	}
++	drw_text(drw, x, y, w, h, lpad, buf, 0);
++}
++
+ void
+ drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int invert)
+ {
+@@ -361,7 +407,7 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lp
+ 	if (d)
+ 		XftDrawDestroy(d);
+ 
+-	return x + (render ? w : 0);
++	return x;
+ }
+ 
+ void
+diff --git a/drw.h b/drw.h
+index ff4355b..fbdc65f 100644
+--- a/drw.h
++++ b/drw.h
+@@ -50,6 +50,8 @@ void drw_setfontset(Drw *drw, Fnt *set);
+ void drw_setscheme(Drw *drw, Scm scm);
+ 
+ /* Drawing functions */
++int drw_get_width(Drw *drw, int numcolors, const char *text);
++void drw_colored_text(Drw *drw, Scm *scheme, int numcolors, int x, int y, unsigned int w, unsigned int h, unsigned int lpad, char *text);
+ void drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int invert);
+ int drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lpad, const char *text, int invert);
+ 
+diff --git a/dwm.c b/dwm.c
+index d27cb67..ec7b179 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -60,7 +60,7 @@
+ 
+ /* enums */
+ enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
+-enum { SchemeNorm, SchemeSel }; /* color schemes */
++enum { SchemeNorm, SchemeSel, SchemeUrg }; /* color schemes */
+ enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
+        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
+        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
+@@ -702,8 +702,8 @@ drawbar(Monitor *m)
+ 	/* draw status first so it can be overdrawn by tags later */
+ 	if (m == selmon) { /* status is only drawn on selected monitor */
+ 		drw_setscheme(drw, scheme[SchemeNorm]);
+-		sw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
+-		drw_text(drw, m->ww - sw, 0, sw, bh, 0, stext, 0);
++		sw = drw_get_width(drw, LENGTH(colors), stext);
++		drw_colored_text(drw, scheme, LENGTH(colors), m->ww - sw, 0, sw, bh, 0, stext);
+ 	}
+ 
+ 	for (c = m->clients; c; c = c->next) {
+/* @@ -714,12 +714,12 @@ drawbar(Monitor *m) */
+/*  	x = 0; */
+/*  	for (i = 0; i < LENGTH(tags); i++) { */
+/*  		w = TEXTW(tags[i]); */
+/* -		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]); */
+/* -		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i); */
+/* +		drw_setscheme(drw, scheme[(m->tagset[m->seltags] & 1 << i) ? SchemeSel : (urg & 1 << i ? SchemeUrg : SchemeNorm)]); */
+/* +		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], 0); */
+/*  		if (occ & 1 << i) */
+/*  			drw_rect(drw, x + boxs, boxs, boxw, boxw, */
+/*  			         m == selmon && selmon->sel && selmon->sel->tags & 1 << i, */
+/* -			         urg & 1 << i); */
+/* +			         0); */
+/*  		x += w; */
+/*  	} */
+/*  	w = blw = TEXTW(m->ltsymbol); */
