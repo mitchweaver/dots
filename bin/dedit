@@ -1,0 +1,56 @@
+#!/bin/bash
+#
+# https://github.com/MitchWeaver/dedit
+#
+# dedit: Use dmenu to open and edit a file from a given list.
+
+# ------------- CONFIGURATION -------------------------- #
+# folders you wish to source
+FOLDERS="$HOME/workspace/dotfiles \
+        $HOME/workspace/dotfiles/.config \
+        $HOME/bin \
+        $HOME/downloads \
+        $HOME/tmp \
+        $HOME \
+        $HOME/workspace/dotfiles/.config/ranger \
+        $HOME/workspace/dotfiles/suckless-tools/CONFIGS"
+
+# files you dont want to see in dmenu
+IGNORE="-I *.bak \
+        -I *.temp \
+        -I *.tmp \
+        -I *.history \
+        -I *.viminfo \
+        -I .bash_history \
+        -I *.serverauth \
+        -I .Xauthority \
+        -I .lesshst \
+        -I .python_history \
+        -I .zsh_history \
+        -I .recently-used \
+        -I .wget-hsts \
+        -I .zsh-update"
+
+EDITOR='st -e nvim'
+# ------------------------------------------------------ #
+
+# default dmenu args - (notice inverted color scheme)
+DMENU='dmenu -l -i -nb #ffffff -nf #000000 -sb #000000 -sf #ffffff'
+
+# if command line args are specified, dmenu will run with those instead
+if [ $1 ] ; then
+    DMENU='dmenu "$1"'
+fi
+
+# note: the ls arguments are important, please don't break the script ;)
+SELECTION=$(ls $IGNORE -HBLap ${FOLDERS} | grep -v / | $DMENU -p 'File to edit:')
+
+# As is, this checks to see if a file exists before running the editor
+# ---- You can delete this except for the $EDITOR line in order to create new files
+if [ $SELECTION ]; then
+    for folder in $FOLDERS ; do
+        if [ -f $folder/$SELECTION ] ; then
+            $EDITOR $folder/$SELECTION ; exit
+        fi
+    done
+fi

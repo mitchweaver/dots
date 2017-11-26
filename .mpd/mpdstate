@@ -2,8 +2,8 @@ sw_volume: 98
 audio_device_state:1:alsa audio
 audio_device_state:1:my_fifo
 state: play
-current: 19
-time: 4.096000
+current: 427
+time: 4.138000
 random: 0
 repeat: 1
 single: 0
@@ -65,204 +65,379 @@ playlist_begin
 50:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "The Restless Mills".opus
 51:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "God's Ensanguined Bestiaries".opus
 52:Adrenalin O.D./Adrenalin O.D. - Let's Barbeque.opus
-53:8bit/Darkthrone - Quintessence (8 bit).opus
-54:Dusterdraussen/Where Is Your Summer Now/Düsterdraußen - Where is Your Summer Now? (Full Album).opus
-55:Wedard/Wedard - Eiskrieg II (Full EP).opus
-56:Animo Aeger/Ab-Fakt/Lämmerdynamik-3464476942.opus
-57:Necropole/Nécropole - Ostara (FULL DEMO) (2015).opus
-58:Old Tower/Old Tower - The Door (2015) (Old-School Dungeon Synth).opus
-59:Orgy of Carrion/Orgy of Carrion - Obscured Ceremonies Under Hell Moon.opus
-60:Peste Noire/Peste Noire - La Sanie Des Siècles - Panégyrique De La Dégénérescence - 2006 (Full Album).opus
-61:Vore/Progeny of the Leviathans.opus
-62:Reggie Watts/Reggie Watts: Fuck Shit Stack.opus
-63:D.o.S./Sepsis/Keimtanz-1309693811.opus
-64:Peste Noire/Peste Noire/2012 - Les Demos (2CD)/2012 - Les Demos CD1/08. Le mort Joyeux.opus
-65:8bit/8bit-dunkelheit-2.opus
-66:Arckanum/Arckanum - Fran Marder (Full Album).opus
-67:Dawn/Dawn - Nær Sólen Gar Niþer for Evogher (Full Album).opus
-68:A Transylvanian Funeral/self-titled/Chthonic Possession-1036536009.opus
-69:A Transylvanian Funeral/self-titled/Blood of Seraphim-1466245124.opus
-70:Blood Tyrant + Warden - Duvonde Skerfe (Split) 2017.opus
-71:A Transylvanian Funeral/self-titled/Black Sacrifice-3907312891.opus
-72:Black Citadel/Black Citadel - Ancestral Shadows.opus
-73:A Transylvanian Funeral/self-titled/Asmoday Unbound-415178527.opus
-74:Vetevrakh/Vetëvrakh - Demo II (2014) [Full Demo].opus
-75:Vindland/Vindland - Hanter Savet (Full Album).opus
-76:The Ruins of Beverast/Rain Upon the Impure/50 Forts Along The Rhine-1210738721.opus
-77:The Ruins of Beverast/Rain Upon the Impure/Soliloquy Of The Stigmatised Shepherd-496127281.opus
-78:The Ruins of Beverast/Rain Upon the Impure/Rapture-2471116420.opus
-79:The Ruins of Beverast/Rain Upon the Impure/Blood Vaults (I - Thy Virginal Malodour)-1872481527.opus
-80:The Ruins of Beverast/Rain Upon the Impure/Soil Of The Incestuous-3874942006.opus
-81:The Ruins of Beverast/Rain Upon the Impure/Balnaa-Kheil The Bleak-2165521841.opus
-82:The Ruins of Beverast/Rain Upon the Impure/Rain Upon The Impure-342898401.opus
-83:The Ruins of Beverast/Rain Upon the Impure/50 Forts Along The Rhine-1210738721.opus
-84:The Ruins of Beverast/Rain Upon the Impure/Soliloquy Of The Stigmatised Shepherd-496127281.opus
-85:The Ruins of Beverast/Rain Upon the Impure/Rapture-2471116420.opus
-86:The Ruins of Beverast/Rain Upon the Impure/Blood Vaults (I - Thy Virginal Malodour)-1872481527.opus
-87:The Ruins of Beverast/Rain Upon the Impure/Soil Of The Incestuous-3874942006.opus
-88:The Ruins of Beverast/Rain Upon the Impure/Balnaa-Kheil The Bleak-2165521841.opus
-89:The Ruins of Beverast/Rain Upon the Impure/Rain Upon The Impure-342898401.opus
-90:The Ruins of Beverast/Unlock the Shrine/Between Bronze Walls-109450192.opus
-91:The Ruins of Beverast/Unlock the Shrine/Skeleton Coast-37553894.opus
-92:The Ruins of Beverast/Unlock the Shrine/Euphoria When The Bombs Fell-3556875873.opus
-93:The Ruins of Beverast/Unlock the Shrine/God Sent No Sign-876088060.opus
-94:The Ruins of Beverast/Unlock the Shrine/The Clockhand's Groaning Circles-2437009126.opus
-95:The Ruins of Beverast/Unlock the Shrine/Procession Of Pawns-351339793.opus
-96:The Ruins of Beverast/Unlock the Shrine/Summer Decapitation Ritual-3918137843.opus
-97:The Ruins of Beverast/Unlock the Shrine/Cellartunes-1198844277.opus
-98:The Ruins of Beverast/Unlock the Shrine/Unlock The Shrine-4217106294.opus
-99:The Ruins of Beverast/Unlock the Shrine/Subterranean Homicide Lamentation-3424088276.opus
-100:The Ruins of Beverast/Unlock the Shrine/The Mine-4096219427.opus
-101:The Ruins of Beverast/Unlock the Shrine/White Abyss-4132881955.opus
-102:Goatmoon/Goatmoon - Voitto Tai Valhalla (2014)/05-Way Of The Holocaust Winds.opus
-103:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - A Sea Ov Blood Beneath Ebon Wings (2016).opus
-104:Zweihander/Ear Slayer/Video Games-515059066.opus
-105:Zweihander/Ear Slayer/Sneak-576533082.opus
-106:Zweihander/Ear Slayer/Inferno-2907864622.opus
-107:Zweihander/Ear Slayer/Master Blaster Master-1813162794.opus
-108:Zweihander/Ear Slayer/Hong Kong-1895962867.opus
-109:Zweihander/Ear Slayer/Earwig-1290107479.opus
-110:Zweihander/Ear Slayer/Sleuth-1232230471.opus
-111:Zweihander/Ear Slayer/Winning-2716309673.opus
-112:Zweihander/Ear Slayer/Epic-741561849.opus
-113:Zweihander/Ear Slayer/Lair-1172485702.opus
-114:Zweihander/Ear Slayer/Tin Nendo-4286341927.opus
-115:Zweihander/Ear Slayer/Destroy-3634494811.opus
-116:Zweihander/Ear Slayer/Wizard Dance-1748085490.opus
-117:Zweihander/Ear Slayer/End-2265738655.opus
-118:Zweihander/Metasleuth-4022426658.opus
-119:Zweihander/My Teeth-1459573504.opus
-120:Zweihander/Snakes Everywhere-4062514489.opus
-121:Zweihander/The Train-632741831.opus
-122:Zweihander/Sneaky Bastard-3404247299.opus
-123:Zweihander/The Escape-1886437094.opus
-124:Zweihander/The Gaze of Raccoons-1160079390.opus
-125:Zweihander/Interlude-2983061196.opus
-126:Zweihander/Satan's Shiny Shoes-3339496948.opus
-127:Zweihander/Togakure Ryu-2888449324.opus
-128:Zweihander/Catacombs-1160714939.opus
-129:Zweihander/Entry to Höllental Depths-544794793.opus
-130:Zweihander/Metasleuth-4022426658.opus
-131:Zweihander/My Teeth-1459573504.opus
-132:Zweihander/Snakes Everywhere-4062514489.opus
-133:Zweihander/The Train-632741831.opus
-134:Zweihander/Sneaky Bastard-3404247299.opus
-135:Zweihander/The Escape-1886437094.opus
-136:Zweihander/The Gaze of Raccoons-1160079390.opus
-137:Zweihander/Interlude-2983061196.opus
-138:Zweihander/Satan's Shiny Shoes-3339496948.opus
-139:Zweihander/Togakure Ryu-2888449324.opus
-140:Zweihander/Catacombs-1160714939.opus
-141:Zweihander/Entry to Höllental Depths-544794793.opus
-142:Animo Aeger/Ab-Fakt/und allet für den kleenen Tod-1564262861.opus
-143:Animo Aeger/Ab-Fakt/Phrasen zu Roben !-3208476824.opus
-144:Agalloch/The Mantle/Agalloch - The Mantle - 01.opus
-145:Agalloch/The Mantle/Agalloch - The Mantle - 02.opus
-146:Agalloch/The Mantle/Agalloch - The Mantle - 03.opus
-147:Agalloch/The Mantle/Agalloch - The Mantle - 04.opus
-148:Agalloch/The Mantle/Agalloch - The Mantle - 05.opus
-149:Agalloch/The Mantle/Agalloch - The Mantle - 06.opus
-150:Agalloch/The Mantle/Agalloch - The Mantle - 07.opus
-151:Agalloch/The Mantle/Agalloch - The Mantle - 08.opus
-152:Agalloch/The Mantle/Agalloch - The Mantle - 09.opus
-153:A Transylvanian Funeral/the Outsider/Syzygy-2907784904.opus
-154:A Transylvanian Funeral/the Outsider/Winter's Worm-35675757.opus
-155:A Transylvanian Funeral/the Outsider/Worship a Dead Fucking Goat-4136451106.opus
-156:A Transylvanian Funeral/the Outsider/Premonitions-324564640.opus
-157:A Transylvanian Funeral/the Outsider/Dismembered by Spirits-1816857670.opus
-158:A Transylvanian Funeral/the Outsider/A Ghoul Rising from the Grave-822653943.opus
-159:A Transylvanian Funeral/the Outsider/Creation of My Phylactery-3026582684.opus
-160:A Transylvanian Funeral/the Outsider/Going Blind-1335319348.opus
-161:A Transylvanian Funeral/the Outsider/When Sky and Ocean Are One-24776456.opus
-162:A Transylvanian Funeral/the Outsider/To Die in the Dark-3816149184.opus
-163:A Transylvanian Funeral/the Outsider/Bilocation in the Garden of Forking Paths-1228889321.opus
-164:A Transylvanian Funeral/the Outsider/the Outsider-2938292623.opus
-165:A Transylvanian Funeral/the Outsider/Syzygy-2907784904.opus
-166:A Transylvanian Funeral/the Outsider/Winter's Worm-35675757.opus
-167:A Transylvanian Funeral/the Outsider/Worship a Dead Fucking Goat-4136451106.opus
-168:A Transylvanian Funeral/the Outsider/Premonitions-324564640.opus
-169:A Transylvanian Funeral/the Outsider/Dismembered by Spirits-1816857670.opus
-170:A Transylvanian Funeral/the Outsider/A Ghoul Rising from the Grave-822653943.opus
-171:A Transylvanian Funeral/the Outsider/Creation of My Phylactery-3026582684.opus
-172:A Transylvanian Funeral/the Outsider/Going Blind-1335319348.opus
-173:A Transylvanian Funeral/the Outsider/When Sky and Ocean Are One-24776456.opus
-174:A Transylvanian Funeral/the Outsider/To Die in the Dark-3816149184.opus
-175:A Transylvanian Funeral/the Outsider/Bilocation in the Garden of Forking Paths-1228889321.opus
-176:A Transylvanian Funeral/the Outsider/the Outsider-2938292623.opus
-177:Wolves In The Throne Room/Celestite (2014)/01Turning Ever Towards the Sun.opus
-178:Wolves In The Throne Room/Celestite (2014)/02 Initiationat Neudeg Alm.opus
-179:Wolves In The Throne Room/Celestite (2014)/03 Bridge of Leaves.opus
-180:Wolves In The Throne Room/Celestite (2014)/04 Celestite Mirror.opus
-181:Wolves In The Throne Room/Celestite (2014)/05 Sleeping Golden Storm.opus
-182:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/01 - Dia Artio.opus
-183:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/02 - Vastness And Sorrow.opus
-184:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/03 - Cleansing.opus
-185:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/04 - I Will Lay Down My Bones Among The Rocks And Roots.opus
-186:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/05 - To Reveal.opus
-187:Wolves In The Throne Room/Black Cascade/01 Wanderer Above the Sea of Fog.opus
-188:Wolves In The Throne Room/Black Cascade/02 Ahrimanic Trance.opus
-189:Wolves In The Throne Room/Black Cascade/03 Ex Cathedra.opus
-190:Wolves In The Throne Room/Black Cascade/04 Crystal Ammunition.opus
-191:Wolves In The Throne Room/Malevolent Grain/a1-wolves_in_the_throne_room--a_looming_resonance.opus
-192:Wolves In The Throne Room/Malevolent Grain/b1-wolves_in_the_throne_room--hate_crystal.opus
-193:Wolves In The Throne Room/2011 - Celestial Lineage/01 - Thuja Magus Imperium.opus
-194:Wolves In The Throne Room/2011 - Celestial Lineage/02 - Permanent Changes In Consciousness.opus
-195:Wolves In The Throne Room/2011 - Celestial Lineage/03 - Subterranean Initiation.opus
-196:Wolves In The Throne Room/2011 - Celestial Lineage/04 - Rainbow Illness.opus
-197:Wolves In The Throne Room/2011 - Celestial Lineage/05 - Woodland Cathedral.opus
-198:Wolves In The Throne Room/2011 - Celestial Lineage/06 - Astral Blood.opus
-199:Wolves In The Throne Room/2011 - Celestial Lineage/07 - Prayer Of Transformation.opus
-200:Wolves In The Throne Room/Wolves In The Throne Room - Demo[HD].opus
-201:Wolves In The Throne Room/Wolves in the Throne Room - Diadem of 12 Stars (Full Album).opus
-202:A Transylvanian Funeral/the Outsider/Syzygy-2907784904.opus
-203:A Transylvanian Funeral/the Outsider/Winter's Worm-35675757.opus
-204:A Transylvanian Funeral/the Outsider/Worship a Dead Fucking Goat-4136451106.opus
-205:A Transylvanian Funeral/the Outsider/Premonitions-324564640.opus
-206:A Transylvanian Funeral/the Outsider/Dismembered by Spirits-1816857670.opus
-207:A Transylvanian Funeral/the Outsider/A Ghoul Rising from the Grave-822653943.opus
-208:A Transylvanian Funeral/the Outsider/Creation of My Phylactery-3026582684.opus
-209:A Transylvanian Funeral/the Outsider/Going Blind-1335319348.opus
-210:A Transylvanian Funeral/the Outsider/When Sky and Ocean Are One-24776456.opus
-211:A Transylvanian Funeral/the Outsider/To Die in the Dark-3816149184.opus
-212:A Transylvanian Funeral/the Outsider/Bilocation in the Garden of Forking Paths-1228889321.opus
-213:A Transylvanian Funeral/the Outsider/the Outsider-2938292623.opus
-214:Abigail/Intercourse and Lust/01 A Witch Named A Spilcuetta.opus
-215:Abigail/Intercourse and Lust/02 Confound Eternal.opus
-216:Abigail/Intercourse and Lust/03 The Crown Bearer.opus
-217:Abigail/Intercourse and Lust/04 Attack With Spell.opus
-218:Abigail/Intercourse and Lust/05 Strength Of Other World.opus
-219:Abigail/Intercourse and Lust/06 The Bonehunter.opus
-220:Abigail/Intercourse and Lust/07 Mephistopheles.opus
-221:Abigail/Intercourse and Lust/08 Intercourse & Lust.opus
-222:Abigail/Intercourse and Lust/09 Hail Yakuza.opus
-223:A Transylvanian Funeral/self-titled/Hammer of the Witch-3165971103.opus
-224:Video Game Soundtracks/Halo Combat Evolved: Original Soundtrack.opus
-225:Horn/Horn - Naturkraft (Full Album).opus
-226:Isengard/Isengard - Vinterskugge (1994)[Full Album].opus
-227:Eternal Champion/The Armor of Ire/Eternal Champion - The Armor of Ire (2016).opus
-228:Absurd/Absurd Der Fünfzehnjahrige Krieg full album.opus
-229:Walknut/Walknut - Graveforests and Their Shadows (Full Album).opus
-230:A Transylvanian Funeral/self-titled/Ways of the Magi-2497896501.opus
-231:Urfaust/2012 - Ritual Music for the Truly Clochard/Urfaust - Ritual Music for the True Clochard (2012) full compilation, vinyl.opus
-232:Job For A Cowboy/Doom/03. Job for a Cowboy - Relinquished.opus
-233:Kalmankantaja/Metsu/Kalmankantaja - Mets#U00e4kalmisto II - 01 Valtakuntani, Hautani.opus
-234:Kalmankantaja/Metsu/Kalmankantaja - Mets#U00e4kalmisto II - 02 Hallanhenki.opus
-235:Kalmankantaja/Metsu/Kalmankantaja - Mets#U00e4kalmisto II - 03 Kaamos.opus
-236:October Falls/A Collapse of Faith/October Falls - Part I A Collapse Of Faith (2010).opus
-237:October Falls/A Collapse of Faith/October Falls - Part II A Collapse Of Faith (2010).opus
-238:October Falls/A Collapse of Faith/October Falls - Part III A Collapse Of Faith (2010).opus
-239:Peturbator/The Uncanny Valley/PERTURBATOR - Neo Tokyo-4159529321.opus
-240:Peturbator/The Uncanny Valley/PERTURBATOR - Weapons For Children-4187988485.opus
-241:Peturbator/The Uncanny Valley/PERTURBATOR - Death Squad-3074084009.opus
-242:Peturbator/The Uncanny Valley/PERTURBATOR - Femme Fatale (Feat. Highway Superstar)-3998528504.opus
-243:Peturbator/The Uncanny Valley/PERTURBATOR - Venger (Feat. Greta Link)-3932006440.opus
-244:Peturbator/The Uncanny Valley/PERTURBATOR - Disco Inferno-2569625141.opus
-245:Peturbator/The Uncanny Valley/PERTURBATOR - She Moves Like A Knife-161674364.opus
-246:Peturbator/The Uncanny Valley/PERTURBATOR - Sentient (Feat. Hayley Stewart)-3557687067.opus
-247:Peturbator/The Uncanny Valley/PERTURBATOR - Diabolus Ex Machina-815858595.opus
-248:Peturbator/The Uncanny Valley/PERTURBATOR - Assault-3652215632.opus
-249:Peturbator/The Uncanny Valley/PERTURBATOR - The Cult Of 2112-1578616364.opus
-250:Peturbator/The Uncanny Valley/PERTURBATOR - Souls At Zero (Feat. Astronoid)-2900590844.opus
-251:Peturbator/The Uncanny Valley/PERTURBATOR - The Uncanny Valley-2599811840.opus
-252:Horn/Horn - Feldpost (Full Album).opus
+53:Dusterdraussen/Where Is Your Summer Now/Düsterdraußen - Where is Your Summer Now? (Full Album).opus
+54:Wedard/Wedard - Eiskrieg II (Full EP).opus
+55:Animo Aeger/Ab-Fakt/Lämmerdynamik-3464476942.opus
+56:Necropole/Nécropole - Ostara (FULL DEMO) (2015).opus
+57:Old Tower/Old Tower - The Door (2015) (Old-School Dungeon Synth).opus
+58:Orgy of Carrion/Orgy of Carrion - Obscured Ceremonies Under Hell Moon.opus
+59:Vore/Progeny of the Leviathans.opus
+60:Reggie Watts/Reggie Watts: Fuck Shit Stack.opus
+61:D.o.S./Sepsis/Keimtanz-1309693811.opus
+62:Peste Noire/Peste Noire/2012 - Les Demos (2CD)/2012 - Les Demos CD1/08. Le mort Joyeux.opus
+63:8bit/8bit-dunkelheit-2.opus
+64:Arckanum/Arckanum - Fran Marder (Full Album).opus
+65:Dawn/Dawn - Nær Sólen Gar Niþer for Evogher (Full Album).opus
+66:A Transylvanian Funeral/self-titled/Black Sacrifice-3907312891.opus
+67:Vetevrakh/Vetëvrakh - Demo II (2014) [Full Demo].opus
+68:The Ruins of Beverast/Rain Upon the Impure/50 Forts Along The Rhine-1210738721.opus
+69:The Ruins of Beverast/Rain Upon the Impure/Soliloquy Of The Stigmatised Shepherd-496127281.opus
+70:The Ruins of Beverast/Rain Upon the Impure/Rapture-2471116420.opus
+71:The Ruins of Beverast/Rain Upon the Impure/Blood Vaults (I - Thy Virginal Malodour)-1872481527.opus
+72:The Ruins of Beverast/Rain Upon the Impure/Soil Of The Incestuous-3874942006.opus
+73:The Ruins of Beverast/Rain Upon the Impure/Balnaa-Kheil The Bleak-2165521841.opus
+74:The Ruins of Beverast/Rain Upon the Impure/Rain Upon The Impure-342898401.opus
+75:The Ruins of Beverast/Rain Upon the Impure/50 Forts Along The Rhine-1210738721.opus
+76:The Ruins of Beverast/Rain Upon the Impure/Soliloquy Of The Stigmatised Shepherd-496127281.opus
+77:The Ruins of Beverast/Rain Upon the Impure/Rapture-2471116420.opus
+78:The Ruins of Beverast/Rain Upon the Impure/Blood Vaults (I - Thy Virginal Malodour)-1872481527.opus
+79:The Ruins of Beverast/Rain Upon the Impure/Soil Of The Incestuous-3874942006.opus
+80:The Ruins of Beverast/Rain Upon the Impure/Balnaa-Kheil The Bleak-2165521841.opus
+81:The Ruins of Beverast/Rain Upon the Impure/Rain Upon The Impure-342898401.opus
+82:The Ruins of Beverast/Unlock the Shrine/Between Bronze Walls-109450192.opus
+83:The Ruins of Beverast/Unlock the Shrine/Skeleton Coast-37553894.opus
+84:The Ruins of Beverast/Unlock the Shrine/Euphoria When The Bombs Fell-3556875873.opus
+85:The Ruins of Beverast/Unlock the Shrine/God Sent No Sign-876088060.opus
+86:The Ruins of Beverast/Unlock the Shrine/The Clockhand's Groaning Circles-2437009126.opus
+87:The Ruins of Beverast/Unlock the Shrine/Procession Of Pawns-351339793.opus
+88:The Ruins of Beverast/Unlock the Shrine/Summer Decapitation Ritual-3918137843.opus
+89:The Ruins of Beverast/Unlock the Shrine/Cellartunes-1198844277.opus
+90:The Ruins of Beverast/Unlock the Shrine/Unlock The Shrine-4217106294.opus
+91:The Ruins of Beverast/Unlock the Shrine/Subterranean Homicide Lamentation-3424088276.opus
+92:The Ruins of Beverast/Unlock the Shrine/The Mine-4096219427.opus
+93:The Ruins of Beverast/Unlock the Shrine/White Abyss-4132881955.opus
+94:Goatmoon/Goatmoon - Voitto Tai Valhalla (2014)/05-Way Of The Holocaust Winds.opus
+95:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - A Sea Ov Blood Beneath Ebon Wings (2016).opus
+96:Zweihander/Ear Slayer/Video Games-515059066.opus
+97:Zweihander/Ear Slayer/Sneak-576533082.opus
+98:Zweihander/Ear Slayer/Inferno-2907864622.opus
+99:Zweihander/Ear Slayer/Master Blaster Master-1813162794.opus
+100:Zweihander/Ear Slayer/Hong Kong-1895962867.opus
+101:Zweihander/Ear Slayer/Earwig-1290107479.opus
+102:Zweihander/Ear Slayer/Sleuth-1232230471.opus
+103:Zweihander/Ear Slayer/Winning-2716309673.opus
+104:Zweihander/Ear Slayer/Epic-741561849.opus
+105:Zweihander/Ear Slayer/Lair-1172485702.opus
+106:Zweihander/Ear Slayer/Tin Nendo-4286341927.opus
+107:Zweihander/Ear Slayer/Destroy-3634494811.opus
+108:Zweihander/Ear Slayer/Wizard Dance-1748085490.opus
+109:Zweihander/Ear Slayer/End-2265738655.opus
+110:Zweihander/Metasleuth-4022426658.opus
+111:Zweihander/My Teeth-1459573504.opus
+112:Zweihander/Snakes Everywhere-4062514489.opus
+113:Zweihander/The Train-632741831.opus
+114:Zweihander/Sneaky Bastard-3404247299.opus
+115:Zweihander/The Escape-1886437094.opus
+116:Zweihander/The Gaze of Raccoons-1160079390.opus
+117:Zweihander/Interlude-2983061196.opus
+118:Zweihander/Satan's Shiny Shoes-3339496948.opus
+119:Zweihander/Togakure Ryu-2888449324.opus
+120:Zweihander/Catacombs-1160714939.opus
+121:Zweihander/Entry to Höllental Depths-544794793.opus
+122:Zweihander/Metasleuth-4022426658.opus
+123:Zweihander/My Teeth-1459573504.opus
+124:Zweihander/Snakes Everywhere-4062514489.opus
+125:Zweihander/The Train-632741831.opus
+126:Zweihander/Sneaky Bastard-3404247299.opus
+127:Zweihander/The Escape-1886437094.opus
+128:Zweihander/The Gaze of Raccoons-1160079390.opus
+129:Zweihander/Interlude-2983061196.opus
+130:Zweihander/Satan's Shiny Shoes-3339496948.opus
+131:Zweihander/Togakure Ryu-2888449324.opus
+132:Zweihander/Catacombs-1160714939.opus
+133:Zweihander/Entry to Höllental Depths-544794793.opus
+134:Animo Aeger/Ab-Fakt/und allet für den kleenen Tod-1564262861.opus
+135:Animo Aeger/Ab-Fakt/Phrasen zu Roben !-3208476824.opus
+136:Agalloch/The Mantle/Agalloch - The Mantle - 01.opus
+137:Agalloch/The Mantle/Agalloch - The Mantle - 02.opus
+138:Agalloch/The Mantle/Agalloch - The Mantle - 03.opus
+139:Agalloch/The Mantle/Agalloch - The Mantle - 04.opus
+140:Agalloch/The Mantle/Agalloch - The Mantle - 05.opus
+141:Agalloch/The Mantle/Agalloch - The Mantle - 06.opus
+142:Agalloch/The Mantle/Agalloch - The Mantle - 07.opus
+143:Agalloch/The Mantle/Agalloch - The Mantle - 08.opus
+144:Agalloch/The Mantle/Agalloch - The Mantle - 09.opus
+145:A Transylvanian Funeral/the Outsider/Syzygy-2907784904.opus
+146:A Transylvanian Funeral/the Outsider/Winter's Worm-35675757.opus
+147:A Transylvanian Funeral/the Outsider/Worship a Dead Fucking Goat-4136451106.opus
+148:A Transylvanian Funeral/the Outsider/Premonitions-324564640.opus
+149:A Transylvanian Funeral/the Outsider/Dismembered by Spirits-1816857670.opus
+150:A Transylvanian Funeral/the Outsider/A Ghoul Rising from the Grave-822653943.opus
+151:A Transylvanian Funeral/the Outsider/Creation of My Phylactery-3026582684.opus
+152:A Transylvanian Funeral/the Outsider/Going Blind-1335319348.opus
+153:A Transylvanian Funeral/the Outsider/When Sky and Ocean Are One-24776456.opus
+154:A Transylvanian Funeral/the Outsider/To Die in the Dark-3816149184.opus
+155:A Transylvanian Funeral/the Outsider/Bilocation in the Garden of Forking Paths-1228889321.opus
+156:A Transylvanian Funeral/the Outsider/the Outsider-2938292623.opus
+157:A Transylvanian Funeral/the Outsider/Syzygy-2907784904.opus
+158:A Transylvanian Funeral/the Outsider/Winter's Worm-35675757.opus
+159:A Transylvanian Funeral/the Outsider/Worship a Dead Fucking Goat-4136451106.opus
+160:A Transylvanian Funeral/the Outsider/Premonitions-324564640.opus
+161:A Transylvanian Funeral/the Outsider/Dismembered by Spirits-1816857670.opus
+162:A Transylvanian Funeral/the Outsider/A Ghoul Rising from the Grave-822653943.opus
+163:A Transylvanian Funeral/the Outsider/Creation of My Phylactery-3026582684.opus
+164:A Transylvanian Funeral/the Outsider/Going Blind-1335319348.opus
+165:A Transylvanian Funeral/the Outsider/When Sky and Ocean Are One-24776456.opus
+166:A Transylvanian Funeral/the Outsider/To Die in the Dark-3816149184.opus
+167:A Transylvanian Funeral/the Outsider/Bilocation in the Garden of Forking Paths-1228889321.opus
+168:A Transylvanian Funeral/the Outsider/the Outsider-2938292623.opus
+169:Wolves In The Throne Room/Celestite (2014)/01Turning Ever Towards the Sun.opus
+170:Wolves In The Throne Room/Celestite (2014)/02 Initiationat Neudeg Alm.opus
+171:Wolves In The Throne Room/Celestite (2014)/03 Bridge of Leaves.opus
+172:Wolves In The Throne Room/Celestite (2014)/04 Celestite Mirror.opus
+173:Wolves In The Throne Room/Celestite (2014)/05 Sleeping Golden Storm.opus
+174:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/01 - Dia Artio.opus
+175:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/02 - Vastness And Sorrow.opus
+176:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/03 - Cleansing.opus
+177:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/04 - I Will Lay Down My Bones Among The Rocks And Roots.opus
+178:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/05 - To Reveal.opus
+179:Wolves In The Throne Room/Black Cascade/01 Wanderer Above the Sea of Fog.opus
+180:Wolves In The Throne Room/Black Cascade/02 Ahrimanic Trance.opus
+181:Wolves In The Throne Room/Black Cascade/03 Ex Cathedra.opus
+182:Wolves In The Throne Room/Black Cascade/04 Crystal Ammunition.opus
+183:Wolves In The Throne Room/Malevolent Grain/a1-wolves_in_the_throne_room--a_looming_resonance.opus
+184:Wolves In The Throne Room/Malevolent Grain/b1-wolves_in_the_throne_room--hate_crystal.opus
+185:Wolves In The Throne Room/2011 - Celestial Lineage/01 - Thuja Magus Imperium.opus
+186:Wolves In The Throne Room/2011 - Celestial Lineage/02 - Permanent Changes In Consciousness.opus
+187:Wolves In The Throne Room/2011 - Celestial Lineage/03 - Subterranean Initiation.opus
+188:Wolves In The Throne Room/2011 - Celestial Lineage/04 - Rainbow Illness.opus
+189:Wolves In The Throne Room/2011 - Celestial Lineage/05 - Woodland Cathedral.opus
+190:Wolves In The Throne Room/2011 - Celestial Lineage/06 - Astral Blood.opus
+191:Wolves In The Throne Room/2011 - Celestial Lineage/07 - Prayer Of Transformation.opus
+192:Wolves In The Throne Room/Wolves In The Throne Room - Demo[HD].opus
+193:A Transylvanian Funeral/the Outsider/Syzygy-2907784904.opus
+194:A Transylvanian Funeral/the Outsider/Winter's Worm-35675757.opus
+195:A Transylvanian Funeral/the Outsider/Worship a Dead Fucking Goat-4136451106.opus
+196:A Transylvanian Funeral/the Outsider/Premonitions-324564640.opus
+197:A Transylvanian Funeral/the Outsider/Dismembered by Spirits-1816857670.opus
+198:A Transylvanian Funeral/the Outsider/A Ghoul Rising from the Grave-822653943.opus
+199:A Transylvanian Funeral/the Outsider/Creation of My Phylactery-3026582684.opus
+200:A Transylvanian Funeral/the Outsider/Going Blind-1335319348.opus
+201:A Transylvanian Funeral/the Outsider/When Sky and Ocean Are One-24776456.opus
+202:A Transylvanian Funeral/the Outsider/To Die in the Dark-3816149184.opus
+203:A Transylvanian Funeral/the Outsider/Bilocation in the Garden of Forking Paths-1228889321.opus
+204:A Transylvanian Funeral/the Outsider/the Outsider-2938292623.opus
+205:Abigail/Intercourse and Lust/01 A Witch Named A Spilcuetta.opus
+206:Abigail/Intercourse and Lust/02 Confound Eternal.opus
+207:Abigail/Intercourse and Lust/03 The Crown Bearer.opus
+208:Abigail/Intercourse and Lust/04 Attack With Spell.opus
+209:Abigail/Intercourse and Lust/05 Strength Of Other World.opus
+210:Abigail/Intercourse and Lust/06 The Bonehunter.opus
+211:Abigail/Intercourse and Lust/07 Mephistopheles.opus
+212:Abigail/Intercourse and Lust/08 Intercourse & Lust.opus
+213:Abigail/Intercourse and Lust/09 Hail Yakuza.opus
+214:A Transylvanian Funeral/self-titled/Hammer of the Witch-3165971103.opus
+215:Video Game Soundtracks/Halo Combat Evolved: Original Soundtrack.opus
+216:Horn/Horn - Naturkraft (Full Album).opus
+217:Eternal Champion/The Armor of Ire/Eternal Champion - The Armor of Ire (2016).opus
+218:Absurd/Absurd Der Fünfzehnjahrige Krieg full album.opus
+219:A Transylvanian Funeral/self-titled/Ways of the Magi-2497896501.opus
+220:Urfaust/2012 - Ritual Music for the Truly Clochard/Urfaust - Ritual Music for the True Clochard (2012) full compilation, vinyl.opus
+221:Job For A Cowboy/Doom/03. Job for a Cowboy - Relinquished.opus
+222:Kalmankantaja/Metsu/Kalmankantaja - Mets#U00e4kalmisto II - 01 Valtakuntani, Hautani.opus
+223:Kalmankantaja/Metsu/Kalmankantaja - Mets#U00e4kalmisto II - 02 Hallanhenki.opus
+224:Kalmankantaja/Metsu/Kalmankantaja - Mets#U00e4kalmisto II - 03 Kaamos.opus
+225:October Falls/A Collapse of Faith/October Falls - Part I A Collapse Of Faith (2010).opus
+226:October Falls/A Collapse of Faith/October Falls - Part II A Collapse Of Faith (2010).opus
+227:October Falls/A Collapse of Faith/October Falls - Part III A Collapse Of Faith (2010).opus
+228:Peturbator/The Uncanny Valley/PERTURBATOR - Neo Tokyo-4159529321.opus
+229:Peturbator/The Uncanny Valley/PERTURBATOR - Weapons For Children-4187988485.opus
+230:Peturbator/The Uncanny Valley/PERTURBATOR - Death Squad-3074084009.opus
+231:Peturbator/The Uncanny Valley/PERTURBATOR - Femme Fatale (Feat. Highway Superstar)-3998528504.opus
+232:Peturbator/The Uncanny Valley/PERTURBATOR - Venger (Feat. Greta Link)-3932006440.opus
+233:Peturbator/The Uncanny Valley/PERTURBATOR - Disco Inferno-2569625141.opus
+234:Peturbator/The Uncanny Valley/PERTURBATOR - She Moves Like A Knife-161674364.opus
+235:Peturbator/The Uncanny Valley/PERTURBATOR - Sentient (Feat. Hayley Stewart)-3557687067.opus
+236:Peturbator/The Uncanny Valley/PERTURBATOR - Diabolus Ex Machina-815858595.opus
+237:Peturbator/The Uncanny Valley/PERTURBATOR - Assault-3652215632.opus
+238:Peturbator/The Uncanny Valley/PERTURBATOR - The Cult Of 2112-1578616364.opus
+239:Peturbator/The Uncanny Valley/PERTURBATOR - Souls At Zero (Feat. Astronoid)-2900590844.opus
+240:Peturbator/The Uncanny Valley/PERTURBATOR - The Uncanny Valley-2599811840.opus
+241:Horn/Horn - Feldpost (Full Album).opus
+242:Rings of Saturn/Dingir/01 Track 1.opus
+243:Rings of Saturn/Dingir/02 Track 2.opus
+244:Rings of Saturn/Dingir/03 Track 3.opus
+245:Rings of Saturn/Dingir/04 Track 4.opus
+246:Rings of Saturn/Dingir/05 Track 5.opus
+247:Rings of Saturn/Dingir/06 Track 6.opus
+248:Rings of Saturn/Dingir/07 Track 7.opus
+249:Rings of Saturn/Dingir/08 Track 8.opus
+250:Rings of Saturn/Dingir/09 Track 9.opus
+251:Rings of Saturn/Dingir/10 Track 10.opus
+252:Chronicles of Jest/Chronicles of Jest - Yeoman's Tale (Demo) - 01 Whimsy.opus
+253:Chronicles of Jest/Chronicles of Jest - Yeoman's Tale (Demo) - 02 Wiznog's Shack.opus
+254:Foolish Fire/Grief as a Passion/Foolish Fire - Grief as a Passion - 01 III- Lament.opus
+255:Foolish Fire/Grief as a Passion/Foolish Fire - Grief as a Passion - 02 IV- Prayer.opus
+256:Thy Art is Murder/This Hole Isn't Deep Enough for the Twelve of You - Demo/Thy Art Is Murder - ''This Hole Isn't Deep Enough For The Twelve Of You'' [FULL DEMO].opus
+257:Burzum/2017 - The Ways of Yore/The Ways of Yore FULL ALBUM.opus
+258:Wolves In The Throne Room/Wolves in the Throne Room - Thrice Woven [Full - HD] (2017).opus
+259:Deaf Dealer/Deaf Dealer - Journey Into Fear (2014) Full Album.opus
+260:Dawn/Dawn - Slaughtersun (Crown of the Triarchy) (Full Album) (HQ).opus
+261:Forgotten Spell/Forgotten Spell - The Necromancer (FULL DEMO).opus
+262:Forteresse/Forteresse - Récits patriotiques.opus
+263:Black Citadel/Black Citadel - Ancestral Shadows.opus
+264:A Transylvanian Funeral/self-titled/Blood of Seraphim-1466245124.opus
+265:Isengard/Isengard - Vinterskugge (1994)[Full Album].opus
+266:Xasthur - Xasthur & Leviathan (Full split).opus
+267:Urdoarmani/Njorun/Urðarmáni - Njorun - 03 A Glimpse of Elation.opus
+268:Urdoarmani/Njorun/Urðarmáni - Njorun - 03 A Glimpse of Elation.opus
+269:Urdoarmani/Njorun/Urðarmáni - Njorun - 01 Njorun.opus
+270:Veldes/Ember Breather/01 - The Roamer's Curse.opus
+271:Veldes/Ember Breather/02 - Void Path King.opus
+272:Veldes/Ember Breather/03 - To Ruins Of Throneless Realm.opus
+273:Veldes/Ember Breather/04 - Dust Scatterer.opus
+274:Veldes/Ember Breather/05 - Crowned In Oblivion.opus
+275:Burzum/Filosofem/01-dunkelheit-vic.opus
+276:Burzum/Filosofem/02-jesus_tod-vic.opus
+277:Burzum/Filosofem/03-erblicket_die_tochter_des_firmaments-vic.opus
+278:Burzum/Filosofem/04-gebrechlichkeit_i-vic.opus
+279:Burzum/Filosofem/05-rundgang_um_die_transzendentale_saule_der_singularitat-vic.opus
+280:Burzum/Filosofem/06-gebrechlichkeit_ii-vic.opus
+281:Mgla/Necrotic - Demo/04 - Demo I.opus
+282:Mgla/Necrotic - Demo/05 - Demo II.opus
+283:Mgla/Necrotic - Demo/04 - Demo I.opus
+284:Mgla/Necrotic - Demo/05 - Demo II.opus
+285:Mgla/2006 - Mdlosci [EP]/Mgla - Mdlosci I.opus
+286:Mgla/2006 - Mdlosci [EP]/Mgla - Mdlosci II.opus
+287:Mgla/2006 - Mdlosci [EP]/Mgla - Mdlosci I.opus
+288:Mgla/2006 - Mdlosci [EP]/Mgla - Mdlosci II.opus
+289:Peturbator/I Am the Night/PERTURBATOR - The New Black-6857738.opus
+290:Peturbator/I Am the Night/PERTURBATOR - Retrogenesis-2096317124.opus
+291:Peturbator/I Am the Night/PERTURBATOR - Eclipse-1930025907.opus
+292:Peturbator/I Am the Night/PERTURBATOR - I Am The Night-1923379696.opus
+293:Peturbator/I Am the Night/PERTURBATOR - Naked Tongues (Feat. Memory Ghost's Isabella Goloversic)-2309405604.opus
+294:Peturbator/I Am the Night/PERTURBATOR - Nexus Six _ Interlude-2897810097.opus
+295:Peturbator/I Am the Night/PERTURBATOR - Technoir (Feat. Noir Deco)-1164471935.opus
+296:Peturbator/I Am the Night/PERTURBATOR - Desire (Feat. Greta Link)-1946520111.opus
+297:Peturbator/I Am the Night/PERTURBATOR - Deviance (Feat. Arcade High)-2599001654.opus
+298:Peturbator/I Am the Night/PERTURBATOR - Raining Steel-3937480843.opus
+299:Peturbator/I Am the Night/PERTURBATOR - Ghost Dancers Slay Together-2170340562.opus
+300:Peturbator/I Am the Night/PERTURBATOR - The Price Of Failure-1118387515.opus
+301:Gristarar/Fragile Utopia/Gristårar - Fragile Utopia - 01 Fragile Utopia.opus
+302:Gristarar/Fragile Utopia/Gristårar - Fragile Utopia - 02 Vermin.opus
+303:Gristarar/Fragile Utopia/Gristårar - Fragile Utopia - 03 You'll never reach the sky.opus
+304:Gristarar/Fragile Utopia/Gristårar - Fragile Utopia - 04 The edaphic court.opus
+305:Gristarar/Fragile Utopia/Gristårar - Fragile Utopia - 05 Eyes of modern gods.opus
+306:Gristarar/Fragile Utopia/Gristårar - Fragile Utopia - 01 Fragile Utopia.opus
+307:Gristarar/Fragile Utopia/Gristårar - Fragile Utopia - 02 Vermin.opus
+308:Gristarar/Fragile Utopia/Gristårar - Fragile Utopia - 03 You'll never reach the sky.opus
+309:Gristarar/Fragile Utopia/Gristårar - Fragile Utopia - 04 The edaphic court.opus
+310:Gristarar/Fragile Utopia/Gristårar - Fragile Utopia - 05 Eyes of modern gods.opus
+311:The Ruins of Beverast/Rain Upon the Impure/50 Forts Along The Rhine-1210738721.opus
+312:The Ruins of Beverast/Rain Upon the Impure/Soliloquy Of The Stigmatised Shepherd-496127281.opus
+313:The Ruins of Beverast/Rain Upon the Impure/Rapture-2471116420.opus
+314:The Ruins of Beverast/Rain Upon the Impure/Blood Vaults (I - Thy Virginal Malodour)-1872481527.opus
+315:The Ruins of Beverast/Rain Upon the Impure/Soil Of The Incestuous-3874942006.opus
+316:The Ruins of Beverast/Rain Upon the Impure/Balnaa-Kheil The Bleak-2165521841.opus
+317:The Ruins of Beverast/Rain Upon the Impure/Rain Upon The Impure-342898401.opus
+318:The Ruins of Beverast/Rain Upon the Impure/50 Forts Along The Rhine-1210738721.opus
+319:The Ruins of Beverast/Rain Upon the Impure/Soliloquy Of The Stigmatised Shepherd-496127281.opus
+320:The Ruins of Beverast/Rain Upon the Impure/Rapture-2471116420.opus
+321:The Ruins of Beverast/Rain Upon the Impure/Blood Vaults (I - Thy Virginal Malodour)-1872481527.opus
+322:The Ruins of Beverast/Rain Upon the Impure/Soil Of The Incestuous-3874942006.opus
+323:The Ruins of Beverast/Rain Upon the Impure/Balnaa-Kheil The Bleak-2165521841.opus
+324:The Ruins of Beverast/Rain Upon the Impure/Rain Upon The Impure-342898401.opus
+325:Zweihander/Ear Slayer/Video Games-515059066.opus
+326:Zweihander/Ear Slayer/Sneak-576533082.opus
+327:Zweihander/Ear Slayer/Inferno-2907864622.opus
+328:Zweihander/Ear Slayer/Master Blaster Master-1813162794.opus
+329:Zweihander/Ear Slayer/Hong Kong-1895962867.opus
+330:Zweihander/Ear Slayer/Earwig-1290107479.opus
+331:Zweihander/Ear Slayer/Sleuth-1232230471.opus
+332:Zweihander/Ear Slayer/Winning-2716309673.opus
+333:Zweihander/Ear Slayer/Epic-741561849.opus
+334:Zweihander/Ear Slayer/Lair-1172485702.opus
+335:Zweihander/Ear Slayer/Tin Nendo-4286341927.opus
+336:Zweihander/Ear Slayer/Destroy-3634494811.opus
+337:Zweihander/Ear Slayer/Wizard Dance-1748085490.opus
+338:Zweihander/Ear Slayer/End-2265738655.opus
+339:Zweihander/Metasleuth-4022426658.opus
+340:Zweihander/My Teeth-1459573504.opus
+341:Zweihander/Snakes Everywhere-4062514489.opus
+342:Zweihander/The Train-632741831.opus
+343:Zweihander/Sneaky Bastard-3404247299.opus
+344:Zweihander/The Escape-1886437094.opus
+345:Zweihander/The Gaze of Raccoons-1160079390.opus
+346:Zweihander/Interlude-2983061196.opus
+347:Zweihander/Satan's Shiny Shoes-3339496948.opus
+348:Zweihander/Togakure Ryu-2888449324.opus
+349:Zweihander/Catacombs-1160714939.opus
+350:Zweihander/Entry to Höllental Depths-544794793.opus
+351:Zweihander/Hollental/Slay The Chopper-290855387.opus
+352:Zweihander/Hollental/Bite-681166293.opus
+353:Zweihander/Hollental/Dragons Must Be Lonely-3048120608.opus
+354:Zweihander/Hollental/You Missed Your Train-2786967444.opus
+355:Zweihander/Hollental/Road to Nowhere-1907470007.opus
+356:Zweihander/Hollental/Somewhen Else-2506699776.opus
+357:Zweihander/Hollental/Sorry, You're Out of Time-1850999561.opus
+358:Zweihander/Hollental/It Came From The Mountains-3118106658.opus
+359:Zweihander/Hollental/Forest Maze-2214464376.opus
+360:Zweihander/Hollental/Forest Escape-882081871.opus
+361:Zweihander/Hollental/Baphomet on the Keys-2763977041.opus
+362:Zweihander/Hollental/They Could Be Anywhere-3339100593.opus
+363:Zweihander/Hollental/Kobolds Everywhere-1984464503.opus
+364:Zweihander/Hollental/Inaction-498458357.opus
+365:Zweihander/Hollental/Hell's Valley-786974739.opus
+366:Zweihander/Ear Slayer/Video Games-515059066.opus
+367:Zweihander/Ear Slayer/Sneak-576533082.opus
+368:Zweihander/Ear Slayer/Inferno-2907864622.opus
+369:Zweihander/Ear Slayer/Master Blaster Master-1813162794.opus
+370:Zweihander/Ear Slayer/Hong Kong-1895962867.opus
+371:Zweihander/Ear Slayer/Earwig-1290107479.opus
+372:Zweihander/Ear Slayer/Sleuth-1232230471.opus
+373:Zweihander/Ear Slayer/Winning-2716309673.opus
+374:Zweihander/Ear Slayer/Epic-741561849.opus
+375:Zweihander/Ear Slayer/Lair-1172485702.opus
+376:Zweihander/Ear Slayer/Tin Nendo-4286341927.opus
+377:Zweihander/Ear Slayer/Destroy-3634494811.opus
+378:Zweihander/Ear Slayer/Wizard Dance-1748085490.opus
+379:Zweihander/Ear Slayer/End-2265738655.opus
+380:Zweihander/Metasleuth-4022426658.opus
+381:Zweihander/My Teeth-1459573504.opus
+382:Zweihander/Snakes Everywhere-4062514489.opus
+383:Zweihander/The Train-632741831.opus
+384:Zweihander/Sneaky Bastard-3404247299.opus
+385:Zweihander/The Escape-1886437094.opus
+386:Zweihander/The Gaze of Raccoons-1160079390.opus
+387:Zweihander/Interlude-2983061196.opus
+388:Zweihander/Satan's Shiny Shoes-3339496948.opus
+389:Zweihander/Togakure Ryu-2888449324.opus
+390:Zweihander/Catacombs-1160714939.opus
+391:Zweihander/Entry to Höllental Depths-544794793.opus
+392:Zweihander/Hollental/Slay The Chopper-290855387.opus
+393:Zweihander/Hollental/Bite-681166293.opus
+394:Zweihander/Hollental/Dragons Must Be Lonely-3048120608.opus
+395:Zweihander/Hollental/You Missed Your Train-2786967444.opus
+396:Zweihander/Hollental/Road to Nowhere-1907470007.opus
+397:Zweihander/Hollental/Somewhen Else-2506699776.opus
+398:Zweihander/Hollental/Sorry, You're Out of Time-1850999561.opus
+399:Zweihander/Hollental/It Came From The Mountains-3118106658.opus
+400:Zweihander/Hollental/Forest Maze-2214464376.opus
+401:Zweihander/Hollental/Forest Escape-882081871.opus
+402:Zweihander/Hollental/Baphomet on the Keys-2763977041.opus
+403:Zweihander/Hollental/They Could Be Anywhere-3339100593.opus
+404:Zweihander/Hollental/Kobolds Everywhere-1984464503.opus
+405:Zweihander/Hollental/Inaction-498458357.opus
+406:Zweihander/Hollental/Hell's Valley-786974739.opus
+407:Vore/The Cruelest Construct.opus
+408:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - Satanic Elite (2015) [Full Demo].opus
+409:Satyricon/1993 - Dark Medieval Times/01 - Walk The Path Of Sorrow.opus
+410:Satyricon/1993 - Dark Medieval Times/02 - Dark Medieval Times.opus
+411:Satyricon/1993 - Dark Medieval Times/03 - Skyggedans.opus
+412:Satyricon/1993 - Dark Medieval Times/04 - Min Hyllest Til Vinterland.opus
+413:Satyricon/1993 - Dark Medieval Times/05 - Into The Mighty Forest.opus
+414:Satyricon/1993 - Dark Medieval Times/06 - The Dark Castle In The Deep Forest.opus
+415:Satyricon/1993 - Dark Medieval Times/07 - Taakeslottet.opus
+416:Thy Darkened Shade/Liber Lvcifer/01 (Thy Darkened Shade) Holy Lvcifer.opus
+417:Thy Darkened Shade/Liber Lvcifer/02 (Thy Darkened Shade) Revival Through Arcane Skins.opus
+418:Thy Darkened Shade/Liber Lvcifer/03 (Thy Darkened Shade) Elixir Of Azazel.opus
+419:Thy Darkened Shade/Liber Lvcifer/04 (Thy Darkened Shade) Black Light Of Sitra Ahra.opus
+420:Thy Darkened Shade/Liber Lvcifer/05 (Thy Darkened Shade) Or She-Ein Bo Mahshavah.opus
+421:Thy Darkened Shade/Liber Lvcifer/06 (Thy Darkened Shade) Nox Profunda.opus
+422:Thy Darkened Shade/Liber Lvcifer/07 (Thy Darkened Shade) Drayishn-I Ahriman O Divan.opus
+423:Thy Darkened Shade/Liber Lvcifer/08 (Thy Darkened Shade) Saatet-Ta Renaissance.opus
+424:Thy Darkened Shade/Liber Lvcifer/09 (Thy Darkened Shade) Liber Lvcifer.opus
+425:Thy Darkened Shade/Liber Lvcifer/10 (Thy Darkened Shade) Deus Absconditus.opus
+426:Thy Darkened Shade/Liber Lvcifer/11 (Thy Darkened Shade) Daemon Phosphorus.opus
+427:Wyrd/Wyrd - Heathen - 2001/Heathen - 01 - Wyrd.opus
 playlist_end

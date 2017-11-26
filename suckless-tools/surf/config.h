@@ -123,10 +123,10 @@ static SiteSpecific styles[] = {
 	{ ".*",                 "default.css" },
 };
 
- /* ------- BOOK MARKING ---------------- */
+/* ------- BOOK MARKING ---------------- */
 #define BM_PICK { .v = (char *[]){ "/bin/sh", "-c", \
     "xprop -id $0 -f _SURF_GO 8s -set _SURF_GO \
-    `cat ~/.surf/bookmarks | dmenu -i -l 10 || exit 0`", \
+    `cat ~/.surf/bookmarks | dmenu -i -l 15 || exit 0`", \
     winid, NULL } }
 
 #define BM_ADD { .v = (char *[]){ "/bin/sh", "-c", \
@@ -188,10 +188,9 @@ static Key keys[] = {
     { MODKEY,                GDK_KEY_p,      print,      { 0 } },
 
     { 0,                     GDK_KEY_F11,    togglefullscreen, { 0 } },
-//  { MODKEY|GDK_SHIFT_MASK, GDK_KEY_o,      toggleinspector, { 0 } },
+    /* { 0,                     GDK_KEY_F12,      toggleinspector, { 0 } }, */
 
     { MODKEY|GDK_SHIFT_MASK, GDK_KEY_f,      toggle,     { .i = FrameFlattening } },
-//  { MODKEY|GDK_SHIFT_MASK, GDK_KEY_g,      toggle,     { .i = Geolocation } },
     { MODKEY|GDK_SHIFT_MASK, GDK_KEY_s,      toggle,     { .i = JavaScript } },
     { MODKEY, GDK_KEY_i,      toggle,     { .i = LoadImages } },
     /* { MODKEY|GDK_SHIFT_MASK, GDK_KEY_v,      toggle,     { .i = Plugins } }, */
@@ -216,5 +215,5 @@ static Button buttons[] = {
 /* -------------- IGNORE ------------------------ */
 static SiteSpecific certs[] = {{"://ewioajeowidfaweoijfdsf\\.org/", "ewioajeowidfaweoijfdsf.org.crt" },};
 static int surfuseragent    = 0;
-static int winsize[] = { 800, 600 }; /* irrelevant, using tiling window manager */
+static int winsize[] = { 1280, 800 };
 static char *fulluseragent  = "";

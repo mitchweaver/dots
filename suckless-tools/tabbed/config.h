@@ -12,11 +12,9 @@ static const int  tabwidth      = 200;
 static const Bool foreground    = True;
 static       Bool urgentswitch  = False;
 
-/*
- * Where to place a new tab when it is opened. When npisrelative is True,
+/* Where to place a new tab when it is opened. When npisrelative is True,
  * then the current position is changed + newposition. If npisrelative
- * is False, then newposition is an absolute position.
- */
+ * is False, then newposition is an absolute position.  */
 static int  newposition   = 1;
 static Bool npisrelative  = True;
 
@@ -48,9 +46,8 @@ static Key keys[] = {
     { MODKEY|ShiftMask,     XK_h,      movetab,     { .i = -1 } },
     { MODKEY|ShiftMask,     XK_l,      movetab,     { .i = +1 } },
 
-
 	{ MODKEY,               XK_w,      killclient,  { 0 } },
-	{ MODKEY,               XK_grave,  spawn,       SETPROP("_TABBED_SELECT_TAB") },
+	/* { MODKEY,               XK_m,  spawn,       SETPROP("_TABBED_SELECT_TAB") }, */ // <<--- not working atm?
 	{ MODKEY,               XK_1,      move,        { .i = 0 } },
 	{ MODKEY,               XK_2,      move,        { .i = 1 } },
 	{ MODKEY,               XK_3,      move,        { .i = 2 } },
