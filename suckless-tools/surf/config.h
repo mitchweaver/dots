@@ -5,7 +5,7 @@ static char *cachedir       = "~/.surf/cache/";
 static char *cookiefile     = "~/.surf/cookies.txt";
 static char *historyfile    = "~/.surf/history.txt";
 
-
+#define HOMEPAGE "https://start.duckduckgo.com/html"
 
 /* default search provider */
 static char *searchengine = "https://duckduckgo.com/html/?q="; 
@@ -75,10 +75,6 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
 
 #define PROMPT_GO   "Go:"
 #define PROMPT_FIND "Find:"
-
-
-#define HOMEPAGE "https://duckduckgo.com/html"
-
 
 /* SETPROP(readprop, setprop, prompt)*/
 #define SETPROP(r, s, p) { \

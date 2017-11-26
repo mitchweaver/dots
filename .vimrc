@@ -15,7 +15,9 @@
 "        |VVV/'++/#/+/#/ /#/ /#/
 "        'V/'  /##//##//##//###/
 "                ++
-nnoremap <SPACE> <Nop> " disables space for everything but as leader
+
+" disables space for everything but as leader
+nnoremap <SPACE> <Nop> 
 let mapleader=" "
 " --------------- plugins -----------------------------------
 set nocompatible
@@ -25,7 +27,7 @@ call plug#begin('~/.vim/vim-plug')
 
 " Applications
 Plug 'vimwiki/vimwiki'
-Plug 'suan/vim-instant-markdown' " instant markdown previewer
+Plug 'iamcco/markdown-preview.vim'
 Plug 'kien/ctrlp.vim' " fuzzy finder
 
 " Themes & Frippery
@@ -227,15 +229,15 @@ let g:vimwiki_list=[wiki]
 let g:vimwiki_list = [
             \{'path': '~/files/vimwiki/personal.wiki', 'syntax': 'markdown', 'ext': '.md'},
             \{'path': '~/files/vimwiki/linux.wiki', 'syntax': 'markdown', 'ext': '.md'},
+            \{'path': '~/files/vimwiki/programming.wiki', 'syntax': 'markdown', 'ext': '.md'},
+            \{'path': '~/files/vimwiki/metal.wiki', 'syntax': 'markdown', 'ext': '.md'},
             \{'path': '~/files/vimwiki/philosophy.wiki', 'syntax': 'markdown', 'ext': '.md'},
             \{'path': '~/files/vimwiki/german.wiki', 'syntax': 'markdown', 'ext': '.md'},
             \{'path': '~/files/vimwiki/french.wiki', 'syntax': 'markdown', 'ext': '.md'},
-            \{'path': '~/files/vimwiki/programming.wiki', 'syntax': 'markdown', 'ext': '.md'},
             \{'path': '~/files/vimwiki/vim.wiki', 'syntax': 'markdown', 'ext': '.md'}
             \]
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-let g:instant_markdown_autostart = 0 " disable autostart (so it only works on leader command)
-map <silent><leader>md :InstantMarkdownPreview<CR>
+map <silent><leader>md :MarkdownPreview<CR>
 " --------------------------------------------------------------
 
 " -------- External Programs ---------------------------------

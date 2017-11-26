@@ -59,9 +59,9 @@ fi
 case "$extension" in
     # PDF documents:
     pdf)
-    #    try pdftoppm -jpeg -singlefile "${FILE_PATH}" "${IMAGE_CACHE_PATH//.jpg}" && exit 6
-        try pdftotext -l 10 -nopgbrk -q "$path" - && \
-            { dump | trim | fmt -s -w $width; exit 0; } || exit 1;;
+        try pdftoppm -jpeg -singlefile "${FILE_PATH}" "${IMAGE_CACHE_PATH//.jpg}" && exit 6
+        # try pdftotext -l 10 -nopgbrk -q "$path" - && \
+        #     { dump | trim | fmt -s -w $width; exit 0; } || exit 1;;
     # md|markdown|markd)
     # BitTorrent Files
     torrent)

@@ -19,6 +19,9 @@ alias neovim=nvim
 alias vim=nvim
 alias vi=nvim
 
+
+alias less="less -Q"
+
 trash() {
     mv $1 ~/.local/share/Trash/files
 }
@@ -157,4 +160,4 @@ alias buch=butch
 
 
 # when switching between eth0 to wlan0, openvpn must be restarted
-alias restart-vpn="cd /etc/openvpn ; openvpn Switzerland.ovpn &"
+alias restart-vpn="killall openvpn ; cd /etc/openvpn ; openvpn Switzerland.ovpn &"

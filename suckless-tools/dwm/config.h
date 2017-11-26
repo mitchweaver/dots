@@ -58,8 +58,8 @@ static const Layout layouts[] = {
 
 static char dmenumon[2] = "0";
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL };
-/* static const char *term[]  = { "st", NULL }; */
+/* static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL }; */
+static const char *term[]  = { "st", NULL };
 static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
 static const char *dedit[] = { "dedit", NULL };
 static const char *clipboard[] = { "clipmenu", NULL };
@@ -70,6 +70,8 @@ static const char *volmute[] = { "amixer", "-q", "sset", "Master", "toggle", NUL
 static const char *mpdnext[] = { "mpc", "-q",  "next", NULL };
 static const char *mpdprev[] = { "mpc", "-q", "prev", NULL };
 static const char *mpdtoggle[] = { "mpc", "-q",  "toggle", NULL };
+static const char *mpdseekff[] = { "mpc", "-q", "seek", "+00:00:30", NULL };
+static const char *mpdseekrw[] = { "mpc", "-q", "seek", "-00:00:30", NULL };
 static const char *slock[] = { "slock", NULL };
 static const char *screenshot[] = { "screenshot", NULL };
 
@@ -94,16 +96,25 @@ static Key keys[] = {
     { mod1,                     XK_o,       spawn,          {.v = dedit } },
     { mod1,                     XK_c,       spawn,          {.v = clipboard } },
     { mod1,                     XK_r,       spawn,          {.v = ranger } },
-    { mod1,                     XK_slash,   spawn,          {.v = mpdnext } },
-    { mod1,                     XK_period,  spawn,          {.v = mpdprev } },
-    { mod1,                     XK_comma,   spawn,          {.v = mpdtoggle } },
+    { mod1,                     XK_slash,   spawn,          {.v = mpdtoggle } },
+    { mod1,                     XK_period,  spawn,          {.v = mpdnext } },
+    { mod1,                     XK_comma,   spawn,          {.v = mpdprev } },
     { 0,                        XK_Print,   spawn,          {.v = screenshot} },
     { mod1,                     XK_semicolon,   spawn,      {.v = voldown }},
     { mod1,                     XK_apostrophe,  spawn,      {.v = volup }},
+
+    { mod1,                     XK_bracketleft,   spawn,      {.v = mpdseekrw }},
+    { mod1,                     XK_bracketright,  spawn,      {.v = mpdseekff }},
+    
     // xf86 keys must be in octal
     { 0,                        0x1008ff12, spawn,          {.v = volmute }},
     { 0,                        0x1008ff11, spawn,          {.v = voldown }},
     { 0,                        0x1008ff13, spawn,          {.v = volup }},
+ 
+    { 0,                        0x1008ff17,   spawn,          {.v = mpdnext } },
+    { 0,                        0x1008ff16,   spawn,          {.v = mpdprev } },
+    { 0,                        0x1008ff14,   spawn,          {.v = mpdtoggle } },
+
     { 0,                        0x1008ff2a, spawn,          {.v = slock }},
     { mod1,                     XK_x,       spawn,          {.v = slock }},
     // ------------------------------------------------------------------ //
