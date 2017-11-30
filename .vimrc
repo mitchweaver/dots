@@ -119,7 +119,7 @@ set ruler " show where you are
 set relativenumber " shows line numbers relative to position
 
 " Toggle line numbeing on/off
-map <silent><leader>ln :set number!<cr> :set relativenumber!<cr>
+map <silent><leader>ln :set number! relativenumber!<cr>
 
 set tabpagemax=15 " don't allow for more than 15 tabs to be open
 set noshowmode
