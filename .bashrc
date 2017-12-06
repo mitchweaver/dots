@@ -6,7 +6,7 @@ parse_git_branch() {
 export PS1="\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W\e[0;33m\]$(parse_git_branch)\[\e[1;37m\] "
 
 cd(){
-    builtin cd $1
+    builtin cd "$1"
     export PS1="\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W\e[0;33m\]$(parse_git_branch) \[\e[1;37m\]"
 }
 # --------------------------------------------------------------------------- #
@@ -85,6 +85,7 @@ alias q='exit'
 alias cat="lolcat"
 :q(){ exit; }
 :wq(){ exit; }
+:w(){ clear; }
 alias htpo='htop'
 alias hto='htop'
 alias hpot='htop'
@@ -101,10 +102,11 @@ alias parrot='terminal-parrot'
 alias doge="doge --shibe doge.txt"
 alias tiv='tiv -256'
 alias ncmpcpp="ncmpcpp -q"
-alias ncmpc="ncmpcpp -q"
-alias ncmppcp="ncmpcpp -q"
-alias ncmpp="ncmpcpp -q"
-alias ncmpcp="ncmpcpp -q"
+alias ncmpc="ncmpcpp"
+alias ncmppcp="ncmpcpp"
+alias ncmpp="ncmpcpp"
+alias ncmpcp="ncmpcpp"
+alias ncmp="ncmpcpp"
 
 recomp() {
     case $1 in
@@ -146,10 +148,9 @@ filesize(){ echo $(stat --printf="%s" "$1") ; }
 alias sf="neofetch"
 alias nf="sf"
 
-alias ping='ping http://mitchweaver.xyz'
+alias ping='ping mitchweaver.xyz'
 
 # when switching between eth0 to wlan0, openvpn must be restarted
 alias restart-vpn="killall openvpn ; cd /etc/openvpn ; openvpn Switzerland.ovpn &"
 
-TOKEN="MzgwODc0NjQyOTE2NjM4NzUw.DO--3A.t2o62XJir4lUQyLAsk0zAKd-r04"
-alias discord="cd ~/workspace/terminal-discord ; c ; python3.6 main.py $TOKEN"
+alias discord="cd ~/workspace/terminal-discord ; c ; ./start.sh"

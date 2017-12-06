@@ -27,16 +27,16 @@ call plug#begin('~/.vim/vim-plug')
 
 " Applications
 Plug 'vimwiki/vimwiki'
-Plug 'iamcco/markdown-preview.vim'
+" Plug 'iamcco/markdown-preview.vim'
 Plug 'kien/ctrlp.vim' " fuzzy finder
 
 " Themes & Frippery
-" Plug 'vim-airline/vim-airline-themes' " powerline-inspired status bar
-" Plug 'vim-airline/vim-airline' " see above -^
-" Plug 'flazz/vim-colorschemes' " just a bunch of colorschemes
+Plug 'vim-airline/vim-airline-themes' " powerline-inspired status bar
+Plug 'vim-airline/vim-airline' " see above -^
+Plug 'flazz/vim-colorschemes' " just a bunch of colorschemes
 " Plug 'altercation/vim-colors-solarized' " solarized colorschemes
 " Plug 'dracula/vim'  " dracula colorscheme
-" Plug 'jonathanfilip/vim-lucius' " lucius colorscheme
+Plug 'jonathanfilip/vim-lucius' " lucius colorscheme
 
 " UI mods
 Plug 'HeroicEric/vim-tabline' " shows full path in tab names
@@ -74,7 +74,7 @@ map <leader>pc :PlugClean<CR>
 " colorscheme zenburn
 " colorscheme newspaper
 " colorscheme neverland
-" colorscheme lucius
+colorscheme lucius
 
 " set background=dark
 " set background=light
@@ -82,11 +82,11 @@ map <leader>pc :PlugClean<CR>
 " disables background:
 " hi Normal ctermbg=NONE
 
+let g:airline_theme='lucius'
 " let g:airline_theme='dracula'
 " let g:airline_theme='papercolor'
 " let g:airline_theme='solarized'
 " let g:airline_theme='zenburn'
-" let g:airline_theme='lucius'
 " ---------------------------------------------------------------
 
 " -------------- Vim Specific Configs -------------------------
@@ -100,6 +100,9 @@ nnoremap <silent> <CR> :noh<CR><CR>
 " Clear highlighting on escape in normal mode
 nnoremap <silent><esc> :noh<return><esc>
 nnoremap <silent><esc>^[ <esc>^[
+
+" Disable bottom status line
+set laststatus=0
 
 " makes vim yank/paste to/from the system clipboard
 set clipboard=unnamed

@@ -1,8 +1,9 @@
+static const int resizehints = 0; 
 static unsigned int gappx = 10; /* gap pixel between windows */ 
 static const unsigned int gapX = 10;
 static const unsigned int gapY = 10;
 
-static unsigned int borderpx  = 0; /* border pixel of windows */
+static unsigned int borderpx  = 1; /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int minwsz    = 10;       /* min height for smfact */
 static const char *fonts[]        = { "terminus:pixelsize=12:antialias=false" };
@@ -15,10 +16,11 @@ static const char col_cyan[]        = "#005577";
 static const char gray_purple[] = "#332a2a";
 static const char pink[] = "#ffbad2";
 static const char col_red[] = "#ee4444";
+static const char yellow[] = "#ffe863";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, gray_purple, "pink" },
+	[SchemeNorm] = { col_gray3, col_gray1, col_gray4 }, // the unfocused wins
+	[SchemeSel]  = { col_gray4, gray_purple, yellow }, // the focused win
     [SchemeUrg] =  { col_gray4, col_red, col_red },
 };
 
@@ -57,6 +59,7 @@ static const Layout layouts[] = {
 	{ mod1|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 
+#define SH(cmd) { .v = (const char*[]){ "/bin/dash", "-c", cmd, NULL } }
 static char dmenumon[2] = "0";
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 /* static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL }; */
@@ -79,10 +82,10 @@ static const char *screenshot[] = { "screenshot", NULL };
 static void toggle_gaps(){
     if(gappx == 0){
         gappx = gapX;
-        borderpx = 0;
+        borderpx = 1;
     } else {
         gappx = 0;
-        borderpx = 1;
+        borderpx = 2;
     }
 }
 
@@ -174,9 +177,5 @@ static Button buttons[] = {
 	/* { ClkTagBar,            mod1,           Button3,        toggletag,      {0} }, */
 };
 
-// ---------------------------------------------------------------------------- //
-/* SYSTEM STUFF - DO NOT CHANGE */
-#define SH(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-static const int resizehints = 0; 
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */

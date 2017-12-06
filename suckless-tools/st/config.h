@@ -35,7 +35,8 @@ unsigned int alpha = 0xcc;
 /* unsigned int alpha = 0xFF; */
 
 // ~~~~~~~~~~~~~~~ TERMINAL COLOURS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
-#include "dracula-theme.h"
+#include "temp.h"
+/* #include "dracula-theme.h" */
 /* #include "solarized-light.h" */
 #include "solarized-dark.h"
 /* #include "lucius-light.h" */
@@ -45,16 +46,16 @@ unsigned int alpha = 0xcc;
 /* unsigned int defaultrcs = 15; */
 
 // good backgrounds
-unsigned int defaultbg = 256;
+/* unsigned int defaultbg = 256; */
 /* unsigned int defaultbg = 8; */
 /* unsigned int defaultbg = 0; */
 
 // lucius-light
 /* unsigned int defaultfg = 257; */
 
-unsigned int defaultfg = 257;
+/* unsigned int defaultfg = 257; */
 /* unsigned int defaultbg = 257; */
-unsigned int defaultcs = 257;
+/* unsigned int defaultcs = 257; */
 unsigned int defaultrcs = 257;
 
 // mouse cursor color for lucius-light

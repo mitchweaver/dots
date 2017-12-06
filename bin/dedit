@@ -13,7 +13,8 @@ FOLDERS="$HOME/workspace/dotfiles \
         $HOME/tmp \
         $HOME \
         $HOME/workspace/dotfiles/.config/ranger \
-        $HOME/workspace/dotfiles/suckless-tools/CONFIGS"
+        $HOME/workspace/dotfiles/suckless-tools/CONFIGS \
+        $HOME/workspace/dotfiles/DisKvlt-Bot"
 
 # files you dont want to see in dmenu
 IGNORE="-I *.bak \

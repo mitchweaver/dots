@@ -1,9 +1,9 @@
 sw_volume: 100
 audio_device_state:1:alsa audio
 audio_device_state:1:my_fifo
-state: pause
-current: 0
-time: 214.335000
+state: play
+current: 15
+time: 4.010000
 random: 0
 repeat: 0
 single: 0
@@ -13,4 +13,472 @@ mixrampdb: 0.000000
 mixrampdelay: -1.000000
 playlist_begin
 0:Abyssic Hate - Despondency (Full) 720p.opus
+1:Dissection/Dissection-Storm_of_the_Light's_Bane-1995-320-OAS/02-Dissection-Night's_Blood-OAS.opus
+2:Dissection/1993 - The Somberlain/Dissection - The Somberlain - 01 - Black Horizons.opus
+3:Dissection/1993 - The Somberlain/Dissection - The Somberlain - 02 - The Somberlain.opus
+4:Dissection/1993 - The Somberlain/Dissection - The Somberlain - 03 - Crimson Towers.opus
+5:Dissection/1993 - The Somberlain/Dissection - The Somberlain - 04 - A Land Forlorn.opus
+6:Dissection/1993 - The Somberlain/Dissection - The Somberlain - 05 - Heaven's Damnation.opus
+7:Dissection/1993 - The Somberlain/Dissection - The Somberlain - 06 - Frozen.opus
+8:Dissection/1993 - The Somberlain/Dissection - The Somberlain - 07 - Into Infinite Obscurity.opus
+9:Dissection/1993 - The Somberlain/Dissection - The Somberlain - 08 - In The Cold Winds Of Nowhere.opus
+10:Dissection/1993 - The Somberlain/Dissection - The Somberlain - 09 - The Grief Prophecy - Shadows Over A Lost Kingdom.opus
+11:Dissection/1993 - The Somberlain/Dissection - The Somberlain - 10 - Mistress Of The Bleeding Sorrow.opus
+12:Dissection/1993 - The Somberlain/Dissection - The Somberlain - 11 - Feathers Fell.opus
+13:Dissection/Dissection-Storm_of_the_Light's_Bane-1995-320-OAS/01-Dissection-At_the_Fathomless_Depths-OAS.opus
+14:Dissection/Dissection-Storm_of_the_Light's_Bane-1995-320-OAS/02-Dissection-Night's_Blood-OAS.opus
+15:Dissection/Dissection-Storm_of_the_Light's_Bane-1995-320-OAS/03-Dissection-Unhallowed-OAS.opus
+16:Dissection/Dissection-Storm_of_the_Light's_Bane-1995-320-OAS/04-Dissection-Where_Dead_Angels_Lie-OAS.opus
+17:Dissection/Dissection-Storm_of_the_Light's_Bane-1995-320-OAS/05-Dissection-Retribution_-_Storm_of_the_Light's_Bane-OAS.opus
+18:Dissection/Dissection-Storm_of_the_Light's_Bane-1995-320-OAS/06-Dissection-Thorns_of_Crimson_Death-OAS.opus
+19:Dissection/Dissection-Storm_of_the_Light's_Bane-1995-320-OAS/07-Dissection-Soulreaper-OAS.opus
+20:Dissection/Dissection-Storm_of_the_Light's_Bane-1995-320-OAS/08-Dissection-No_Dreams_Breed_in_Breathless_Sleep-OAS.opus
+21:Devourment/Devourment ''Molesting The Decapitated'' [1999]/01 - Festering Vomitous Mass.opus
+22:Devourment/Devourment ''Molesting The Decapitated'' [1999]/02 - Postmortal Coprophagia.opus
+23:Devourment/Devourment ''Molesting The Decapitated'' [1999]/03 - Choking On Bile.opus
+24:Devourment/Devourment ''Molesting The Decapitated'' [1999]/04 - Molesting The Decapitated.opus
+25:Devourment/Devourment ''Molesting The Decapitated'' [1999]/05 - Self Disembowelment.opus
+26:Devourment/Devourment ''Molesting The Decapitated'' [1999]/06 - Fucked To Death.opus
+27:Devourment/Devourment ''Molesting The Decapitated'' [1999]/07 - Devour The Damned.opus
+28:Devourment/Devourment ''Molesting The Decapitated'' [1999]/08 - Shroud Of Encryption.opus
+29:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 01 - Butcher The Weak.opus
+30:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 02 - Masturbating At The Slab.opus
+31:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 03 - Serial Cocksucker.opus
+32:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 04 - Tomb Of Scabs.opus
+33:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 05 - Autoerotic Asphyxiation.opus
+34:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 06 - Anal Electrocution.opus
+35:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 07 - Fuck Her Head Off.opus
+36:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 08 - Babykiller.opus
+37:Devourment/2009 - Unleash The Carnivore/01-devourment-unleash_the_carnivores.opus
+38:Devourment/2009 - Unleash The Carnivore/02-devourment-abomination_unseen.opus
+39:Devourment/2009 - Unleash The Carnivore/03-devourment-fed_to_the_pigs.opus
+40:Devourment/2009 - Unleash The Carnivore/04-devourment-incitement_to_mass_murder.opus
+41:Devourment/2009 - Unleash The Carnivore/05-devourment-crucify_the_impure.opus
+42:Devourment/2009 - Unleash The Carnivore/06-devourment-deflesh_the_abducted.opus
+43:Devourment/2009 - Unleash The Carnivore/07-devourment-over_her_dead_body.opus
+44:Devourment/2009 - Unleash The Carnivore/08-devourment-field_of_the_impaled.opus
+45:Satan's Hallow/s/t/Reaching For The Night-3378343589.opus
+46:Satan's Hallow/s/t/Choir Of The Cursed-2904910818.opus
+47:Satan's Hallow/s/t/Hot Passion-3607474964.opus
+48:Satan's Hallow/s/t/Black Angel-707411937.opus
+49:Satan's Hallow/s/t/Satan's Hallow-2439668471.opus
+50:Satan's Hallow/s/t/The Horror-2779299965.opus
+51:Satan's Hallow/s/t/Moving On-544857815.opus
+52:Satan's Hallow/s/t/Still Alive-2837340839.opus
+53:Satan's Hallow/s/t/Beyond The Bells-49146168.opus
+54:Unaussprechlichen Kulten/Unaussprechlichen Kulten - Keziah Lilith Medea (Chapter X) 2017 - Iron Bonehead Prod. - full album.opus
+55:Horn/Horn - Feldpost (Full Album).opus
+56:Horn/Horn - Jahreszeiten [FULL ALBUM].opus
+57:Horn/Horn - Konflikt (Full Album).opus
+58:Horn/Horn - Turm am Hang (Full Album | Official).opus
+59:Horn/Horn - Die Kraft der Szenarien (Full Album).opus
+60:Horn/Horn - Naturkraft (Full Album).opus
+61:Wolves In The Throne Room/Malevolent Grain/b1-wolves_in_the_throne_room--hate_crystal.opus
+62:Funeral Altar % Ghaisiuan (FULL SPLIT).opus
+63:Burzum/Aske/03 - A Lost Forgotten Sad Spirit.opus
+64:Rings of Saturn/Dingir/05 Track 5.opus
+65:Mesarthim/2015 - Isolate/01. Osteopenia.opus
+66:Mesarthim/2015 - Isolate/02. Declaration.opus
+67:Mesarthim/2015 - Isolate/03. Interstellar.opus
+68:Mesarthim/2015 - Isolate/04. Abyss.opus
+69:Mesarthim/2015 - Isolate/05. Floating.opus
+70:Mesarthim/2015 - Isolate/06. Isolate.opus
+71:Maximize Bestiality/Extraterrestrial Skolexomorphic Infestation (2014)/01 Signs Of Nano-Mechanical Defibration.opus
+72:Maximize Bestiality/Extraterrestrial Skolexomorphic Infestation (2014)/02 Sodomisitic Female Degradation.opus
+73:Maximize Bestiality/Extraterrestrial Skolexomorphic Infestation (2014)/03 Caustic Unction Of Ferocity.opus
+74:Maximize Bestiality/Extraterrestrial Skolexomorphic Infestation (2014)/04 Expunged By Fatal Impulse.opus
+75:Maximize Bestiality/Extraterrestrial Skolexomorphic Infestation (2014)/05 Intraocular Parasitic Entity.opus
+76:Maximize Bestiality/Extraterrestrial Skolexomorphic Infestation (2014)/06 Disintegrated Through Ectoplasmatic Injection.opus
+77:Maximize Bestiality/Extraterrestrial Skolexomorphic Infestation (2014)/07 Visceral Breeding Of Imminent Voracity.opus
+78:Maximize Bestiality/Extraterrestrial Skolexomorphic Infestation (2014)/08 Necrotic Muscular Anomaly.opus
+79:Maximize Bestiality/Extraterrestrial Skolexomorphic Infestation (2014)/09 Aspects Of Hypergravitonic Deconstruction.opus
+80:LVTHN/LVTHN - The Grand Uncreation/LVTHN - The Grand Uncreation - 01 The Poisonous Serpent.opus
+81:LVTHN/LVTHN - The Grand Uncreation/LVTHN - The Grand Uncreation - 02 Opposed by the Nameless.opus
+82:LVTHN/LVTHN - The Grand Uncreation/LVTHN - The Grand Uncreation - 03 Nihill.opus
+83:LVTHN/LVTHN - The Grand Uncreation/LVTHN - The Grand Uncreation - 04 666 (Katharsis Cover).opus
+84:LVTHN/LVTHN - Eradication of Nescience/LVTHN - Eradication of Nescience - 01 Into Death Reborn.opus
+85:LVTHN/LVTHN - Eradication of Nescience/LVTHN - Eradication of Nescience - 02 Deus Alienus.opus
+86:LVTHN/LVTHN - Eradication of Nescience/LVTHN - Eradication of Nescience - 03 Ecstatic Liberation.opus
+87:LVTHN/LVTHN - Eradication of Nescience/LVTHN - Eradication of Nescience - 04 Ascension into the Palace of the Dark Gods.opus
+88:LVTHN/LVTHN - Eradication of Nescience/LVTHN - Eradication of Nescience - 05 My Indignation.opus
+89:LVTHN/LVTHN - Eradication of Nescience/LVTHN - Eradication of Nescience - 06 Radiant Wolf.opus
+90:LVTHN/LVTHN - Eradication of Nescience/LVTHN - Eradication of Nescience - 07 Uncreation's Dance.opus
+91:LVTHN/LVTHN - Eradication of Nescience/LVTHN - Eradication of Nescience - 08 Eradication of Nescience.opus
+92:Paysage d'Hiver/2004 - Paysage d'Hiver - Lunar Aurora (split)/03 - Lunar Aurora - A Haudiga Fluag.opus
+93:Lluvia/Lluvia - Premonicion De Guerra/Lluvia - Premonicion De Guerra - 01 I.opus
+94:Lluvia/Lluvia - Premonicion De Guerra/Lluvia - Premonicion De Guerra - 02 II.opus
+95:Leviathan/Leviathan - The Tenth Sub Level Of Suicide/01 - Leviathan - Introit.opus
+96:Leviathan/Leviathan - The Tenth Sub Level Of Suicide/02 - Leviathan - Fucking Your Ghost In Chains Of Ice.opus
+97:Leviathan/Leviathan - The Tenth Sub Level Of Suicide/03 - Leviathan - Sardoniscorn.opus
+98:Leviathan/Leviathan - The Tenth Sub Level Of Suicide/04 - Leviathan - The Bitter Emblem Of Dissolve.opus
+99:Leviathan/Leviathan - The Tenth Sub Level Of Suicide/05 - Leviathan - Scenic Solitude And Leprosy.opus
+100:Leviathan/Leviathan - The Tenth Sub Level Of Suicide/06 - Leviathan - He Whom Shadows Move Towards.opus
+101:Leviathan/Leviathan - The Tenth Sub Level Of Suicide/07 - Leviathan - Submersed.opus
+102:Leviathan/Leviathan - The Tenth Sub Level Of Suicide/08 - Leviathan - Mine Molten Armor.opus
+103:Leviathan/Leviathan - The Tenth Sub Level Of Suicide/09 - Leviathan - The Idiot Sun.opus
+104:Leviathan/Leviathan - The Tenth Sub Level Of Suicide/10 - Leviathan - At The Door To The Tenth Sub Level Of Suicide.opus
+105:Leviathan/Tentacles of Horror/01 What Fresh Hell.opus
+106:Leviathan/Tentacles of Horror/02 Heir to the Noose of Ghoul.opus
+107:Leviathan/Tentacles of Horror/03 Cut, With the Night into Mine Heart.opus
+108:Leviathan/Tentacles of Horror/04 A Bouquet of Blood for Skull.opus
+109:Leviathan/Tentacles of Horror/05 Deciphering Legend Within the Serpent's Briar.opus
+110:Leviathan/Tentacles of Horror/06 A Neccesary Mutilation.opus
+111:Leviathan/Tentacles of Horror/07 Vexed and Vomit Hexed.opus
+112:Leviathan/Tentacles of Horror/08 Tentacles of Whorror.opus
+113:Leviathan/Tentacles of Horror/09 Requiem for a Turd World.opus
+114:Leviathan/Tentacles of Horror/10 Blood Red and True, Pt. 3.opus
+115:Leviathan/Tentacles of Horror/11 Mouth Orifice Bizarre.opus
+116:Leviathan/Tentacles of Horror/12 The History of Rape.opus
+117:Leviathan/2005 - A Silhouette In Splinters/01 - Traveling Over The Ocean's Skull.opus
+118:Leviathan/2005 - A Silhouette In Splinters/02 - It Comes In Whispers (Part II).opus
+119:Leviathan/2005 - A Silhouette In Splinters/03 - Particular Dis-ease.opus
+120:Leviathan/2005 - A Silhouette In Splinters/04 - Shimmering With Horn Of Woe.opus
+121:Leviathan/2005 - A Silhouette In Splinters/05 - A Silhouette In Splinters.opus
+122:Leviathan/2005 - A Silhouette In Splinters/06 - Blood Red And True (Part II - A Spell To Vanquish Sea Serpents).opus
+123:Leviathan/Leviathan -Massive Conspiracy Against All Life/01 Vesture Dipped in the Blood of Morning.opus
+124:Leviathan/Leviathan -Massive Conspiracy Against All Life/02 Merging With Sword, Onto Them.opus
+125:Leviathan/Leviathan -Massive Conspiracy Against All Life/03 Made As the Stale Wine of Wrath.opus
+126:Leviathan/Leviathan -Massive Conspiracy Against All Life/04 VI-XI-VI.opus
+127:Leviathan/Leviathan -Massive Conspiracy Against All Life/05 Receive the World.opus
+128:Leviathan/Leviathan -Massive Conspiracy Against All Life/06 Vulgar Asceticism.opus
+129:Leviathan/Leviathan -Massive Conspiracy Against All Life/07 Noisome Ash Crown.opus
+130:Leviathan/3 Leviathan - Scar Sighted (2015)/01 -.opus
+131:Leviathan/3 Leviathan - Scar Sighted (2015)/02 The Smoke Of Their Torment.opus
+132:Leviathan/3 Leviathan - Scar Sighted (2015)/03 Dawn Vibration.opus
+133:Leviathan/3 Leviathan - Scar Sighted (2015)/04 Gardens Of Corprolite.opus
+134:Leviathan/3 Leviathan - Scar Sighted (2015)/05 Wicked Fields Of Calm.opus
+135:Leviathan/3 Leviathan - Scar Sighted (2015)/06 Within Thrall.opus
+136:Leviathan/3 Leviathan - Scar Sighted (2015)/07 A Veil Is Lifted.opus
+137:Leviathan/3 Leviathan - Scar Sighted (2015)/08 Scar Sighted.opus
+138:Leviathan/3 Leviathan - Scar Sighted (2015)/09 All Tongues Toward.opus
+139:Leviathan/Tentacles of Horror/01 What Fresh Hell.opus
+140:Leviathan/Tentacles of Horror/02 Heir to the Noose of Ghoul.opus
+141:Leviathan/Tentacles of Horror/03 Cut, With the Night into Mine Heart.opus
+142:Leviathan/Tentacles of Horror/04 A Bouquet of Blood for Skull.opus
+143:Leviathan/Tentacles of Horror/05 Deciphering Legend Within the Serpent's Briar.opus
+144:Leviathan/Tentacles of Horror/06 A Neccesary Mutilation.opus
+145:Leviathan/Tentacles of Horror/07 Vexed and Vomit Hexed.opus
+146:Leviathan/Tentacles of Horror/08 Tentacles of Whorror.opus
+147:Leviathan/Tentacles of Horror/09 Requiem for a Turd World.opus
+148:Leviathan/Tentacles of Horror/10 Blood Red and True, Pt. 3.opus
+149:Leviathan/Tentacles of Horror/11 Mouth Orifice Bizarre.opus
+150:Leviathan/Tentacles of Horror/12 The History of Rape.opus
+151:Kreator/Kreator - Endless Pain (1985) @256K/01 - Endless Pain.opus
+152:Kreator/Kreator - Endless Pain (1985) @256K/02 - Total Death.opus
+153:Kreator/Kreator - Endless Pain (1985) @256K/03 - Storm Of The Beast.opus
+154:Kreator/Kreator - Endless Pain (1985) @256K/04 - Tormentor.opus
+155:Kreator/Kreator - Endless Pain (1985) @256K/05 - Son Of Evil.opus
+156:Kreator/Kreator - Endless Pain (1985) @256K/06 - Flag Of Hate.opus
+157:Kreator/Kreator - Endless Pain (1985) @256K/07 - Cry War.opus
+158:Kreator/Kreator - Endless Pain (1985) @256K/08 - Bone Breaker.opus
+159:Kreator/Kreator - Endless Pain (1985) @256K/09 - Living In Fear.opus
+160:Kreator/Kreator - Endless Pain (1985) @256K/10 - Dying Victims.opus
+161:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/01 - Choir Of The Damned.opus
+162:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/02 - Ripping Corpse.opus
+163:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/03 - Death Is Your Saviour.opus
+164:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/04 - Pleasure To Kill.opus
+165:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/05 - Riot Of Violence.opus
+166:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/06 - The Pestilence.opus
+167:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/07 - Carrion.opus
+168:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/08 - Command Of The Blade.opus
+169:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/09 - Under The Guillotine.opus
+170:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/01 - Choir Of The Damned.opus
+171:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/02 - Ripping Corpse.opus
+172:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/03 - Death Is Your Saviour.opus
+173:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/04 - Pleasure To Kill.opus
+174:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/05 - Riot Of Violence.opus
+175:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/06 - The Pestilence.opus
+176:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/07 - Carrion.opus
+177:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/08 - Command Of The Blade.opus
+178:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/09 - Under The Guillotine.opus
+179:Isengard/Isengard - Vinterskugge (1994)[Full Album].opus
+180:Impaled Nazarene/Ugra-Karma/Impaled Nazarene - Ugra-Karma (Full Album).opus
+181:Verdunkeln/2005 - Verdunkeln (Demo)/06. Schwarze Fährte.opus
+182:Verdunkeln/2005 - Verdunkeln (Demo)/04. Einst War Es Mal.opus
+183:Verdunkeln/2005 - Verdunkeln (Demo)/02. Wechselbalg.opus
+184:Verdunkeln/2005 - Verdunkeln (Demo)/01. Intro.opus
+185:Verdunkeln/2005 - Verdunkeln (Demo)/02. Wechselbalg.opus
+186:Verdunkeln/2005 - Verdunkeln (Demo)/03. Blutrunst.opus
+187:Verdunkeln/2005 - Verdunkeln (Demo)/04. Einst War Es Mal.opus
+188:Verdunkeln/2005 - Verdunkeln (Demo)/05. Erlkönigs Tochter.opus
+189:Verdunkeln/2005 - Verdunkeln (Demo)/06. Schwarze Fährte.opus
+190:Verdunkeln/2005 - Verdunkeln (Demo)/07. Trümmer.opus
+191:Verdunkeln/2005 - Verdunkeln (Demo)/08. Trolltraum.opus
+192:Borknagar/1996 - Borknagar/01 - Vintervredets Sjelesagn.opus
+193:Borknagar/1996 - Borknagar/02 - Tanker Mot Tind (Kvelding).opus
+194:Borknagar/1996 - Borknagar/03 - Svartskogs Gilde.opus
+195:Borknagar/1996 - Borknagar/04 - Ved Steingard.opus
+196:Borknagar/1996 - Borknagar/05 - Krigsstev.opus
+197:Borknagar/1996 - Borknagar/06 - Dauden.opus
+198:Borknagar/1996 - Borknagar/07 - Grimskalle Trell.opus
+199:Borknagar/1996 - Borknagar/08 - Nord Naagauk.opus
+200:Borknagar/1996 - Borknagar/09 - Fandens Allheim.opus
+201:Borknagar/1996 - Borknagar/10 - Tanker Mot Tind (Gryning).opus
+202:Blood Incantation/Interdimensional Extinction/The 5th Tablet-4058739648.opus
+203:Blood Incantation/Interdimensional Extinction/Obfuscating the Linear Threshold-2432637157.opus
+204:Blood Incantation/Interdimensional Extinction/Hovering Lifeless-4077202704.opus
+205:Blood Incantation/Interdimensional Extinction/Subterranean Eon-686102153.opus
+206:Blank Banshee/MEGA/Blank Banshee - MEGA - 01 BIOS.opus
+207:Blank Banshee/MEGA/Blank Banshee - MEGA - 02 My Machine.opus
+208:Blank Banshee/MEGA/Blank Banshee - MEGA - 03 Frozen Flame.opus
+209:Blank Banshee/MEGA/Blank Banshee - MEGA - 04 Gunshots.opus
+210:Blank Banshee/MEGA/Blank Banshee - MEGA - 05 Megaflora.opus
+211:Blank Banshee/MEGA/Blank Banshee - MEGA - 06 Ecco Chamber.opus
+212:Blank Banshee/MEGA/Blank Banshee - MEGA - 07 Holograffiti.opus
+213:Blank Banshee/MEGA/Blank Banshee - MEGA - 08 XENOS.opus
+214:Blank Banshee/MEGA/Blank Banshee - MEGA - 09 Sandclock.opus
+215:Blank Banshee/MEGA/Blank Banshee - MEGA - 10 Hungry Ghost.opus
+216:Blank Banshee/MEGA/Blank Banshee - MEGA - 11 Web Ring.opus
+217:Blank Banshee/MEGA/Blank Banshee - MEGA - 12 Meteor Blade.opus
+218:Blank Banshee/MEGA/Blank Banshee - MEGA - 13 JUNO.opus
+219:Blank Banshee/MEGA/Blank Banshee - MEGA - 14 Cerulean.opus
+220:Blank Banshee/MEGA/Blank Banshee - MEGA - 15 EXOS.opus
+221:Judas Iscariot/1999 - Heaven in Flames/1. An Eternal Kingdom Of Fire.opus
+222:Judas Iscariot/1999 - Heaven in Flames/2. Gaze Upon Heaven In Flames.opus
+223:Judas Iscariot/1999 - Heaven in Flames/3. Eternal Bliss... Eternal Death.opus
+224:Judas Iscariot/1999 - Heaven in Flames/4. Before A Circle Of Darkness.opus
+225:Judas Iscariot/1999 - Heaven in Flames/5. From Hateful Visions.opus
+226:Judas Iscariot/1999 - Heaven in Flames/6. Spill The Blood Of The Lamb.opus
+227:Judas Iscariot/1999 - Heaven in Flames/7. An Ancient Starry Sky.opus
+228:Kreator/Kreator - Endless Pain (1985) @256K/01 - Endless Pain.opus
+229:Kreator/Kreator - Endless Pain (1985) @256K/02 - Total Death.opus
+230:Kreator/Kreator - Endless Pain (1985) @256K/03 - Storm Of The Beast.opus
+231:Kreator/Kreator - Endless Pain (1985) @256K/04 - Tormentor.opus
+232:Kreator/Kreator - Endless Pain (1985) @256K/05 - Son Of Evil.opus
+233:Kreator/Kreator - Endless Pain (1985) @256K/06 - Flag Of Hate.opus
+234:Kreator/Kreator - Endless Pain (1985) @256K/07 - Cry War.opus
+235:Kreator/Kreator - Endless Pain (1985) @256K/08 - Bone Breaker.opus
+236:Kreator/Kreator - Endless Pain (1985) @256K/09 - Living In Fear.opus
+237:Kreator/Kreator - Endless Pain (1985) @256K/10 - Dying Victims.opus
+238:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/01 - Choir Of The Damned.opus
+239:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/02 - Ripping Corpse.opus
+240:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/03 - Death Is Your Saviour.opus
+241:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/04 - Pleasure To Kill.opus
+242:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/05 - Riot Of Violence.opus
+243:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/06 - The Pestilence.opus
+244:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/07 - Carrion.opus
+245:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/08 - Command Of The Blade.opus
+246:Kreator/Kreator - 1986 - Pleasure To Kill [320kbs] ~~Renovatio~~/09 - Under The Guillotine.opus
+247:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 01 Pissprisms.opus
+248:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 02 Throwing up all these sunny sundays.opus
+249:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 03 Garden of magnetic words.opus
+250:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 04 Grey birds breeding.opus
+251:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 05 Defeated.opus
+252:Foolish Fire/Grief as a Passion/Foolish Fire - Grief as a Passion - 01 III- Lament.opus
+253:Foolish Fire/Grief as a Passion/Foolish Fire - Grief as a Passion - 02 IV- Prayer.opus
+254:Galdramme/Galdrammen - Seidhhjallr - 01 Yr.opus
+255:Galdr/Galdr - Galdr (Self Titled)/Galdr - Galdr - 01 Futhark.opus
+256:Galdr/Galdr - Galdr (Self Titled)/Galdr - Galdr - 02 Skoll's Dream.opus
+257:Galdr/Galdr - Morkergng/Galdr - Mrkergng - 01 Norrsken Over Stormen.opus
+258:Galdramme/Galdrammen - Seidhhjallr - 01 Yr.opus
+259:Galdr/Galdr - Galdr (Self Titled)/Galdr - Galdr - 01 Futhark.opus
+260:Galdr/Galdr - Galdr (Self Titled)/Galdr - Galdr - 02 Skoll's Dream.opus
+261:Galdr/Galdr - Morkergng/Galdr - Mrkergng - 01 Norrsken Over Stormen.opus
+262:Cerebral Bore/2010 - Maniacal Miscreation/01. Epileptic Strobe Entrapment.opus
+263:Cerebral Bore/2010 - Maniacal Miscreation/02. The Bald Cadaver.opus
+264:Cerebral Bore/2010 - Maniacal Miscreation/03. Open Casket Priapism.opus
+265:Cerebral Bore/2010 - Maniacal Miscreation/04. Entombed In Butchered Bodies.opus
+266:Cerebral Bore/2010 - Maniacal Miscreation/05. Mangled Post Burial.opus
+267:Cerebral Bore/2010 - Maniacal Miscreation/06. Flesh Reflects The Madness.opus
+268:Cerebral Bore/2010 - Maniacal Miscreation/07. Maniacal Miscreation.opus
+269:Cerebral Bore/2010 - Maniacal Miscreation/08. 24 Year Party Dungeon.opus
+270:Cerebral Bore/2012 - Horrendous Acts of Iniquity/02-cerebral_bore-horrendous_acts_of_iniquity.opus
+271:Celtic Frost/To Mega Therion/01 Innocence And Wrath.opus
+272:Celtic Frost/To Mega Therion/02 The Usurper.opus
+273:Celtic Frost/To Mega Therion/03 Jewel Throne.opus
+274:Celtic Frost/To Mega Therion/04 Dawn Of Megiddo.opus
+275:Celtic Frost/To Mega Therion/05 Eternal Summer.opus
+276:Celtic Frost/To Mega Therion/06 Circle Of The Tyrants.opus
+277:Celtic Frost/To Mega Therion/07 (Beyond The) North Winds.opus
+278:Celtic Frost/To Mega Therion/08 Fainted Eyes.opus
+279:Celtic Frost/To Mega Therion/09 Tears In A Prophet's Dream.opus
+280:Celtic Frost/To Mega Therion/10 Necromantical Screams.opus
+281:Celtic Frost/To Mega Therion/11 Return To The Eve (1985 Studio Jam).opus
+282:Celtic Frost/2006 - Monotheist/01 Progeny.opus
+283:Celtic Frost/2006 - Monotheist/02 Ground.opus
+284:Celtic Frost/2006 - Monotheist/03 A Dying God Coming Into Human Flesh.opus
+285:Celtic Frost/2006 - Monotheist/04 Drown In Ashes.opus
+286:Celtic Frost/2006 - Monotheist/05 Os Abysmi Vel Daath.opus
+287:Celtic Frost/2006 - Monotheist/06 Temple Of Depression.opus
+288:Celtic Frost/2006 - Monotheist/07 Obscured.opus
+289:Celtic Frost/2006 - Monotheist/08 Domain Of Decay.opus
+290:Celtic Frost/2006 - Monotheist/09 Ain Alohim.opus
+291:Celtic Frost/2006 - Monotheist/10 Triptych- Totengott.opus
+292:Celtic Frost/2006 - Monotheist/11 Triptych- Synagoga Satanae.opus
+293:Celtic Frost/2006 - Monotheist/12 Triptych- Winter (Requiem, Chapter Three- Finale).opus
+294:Burzum/1994 - Hvis Lyset Tar Oss/01 - Det Som En Gang Var.opus
+295:Burzum/1994 - Hvis Lyset Tar Oss/02 - Hvis Lyset Tar Oss.opus
+296:Burzum/1994 - Hvis Lyset Tar Oss/03 - Inn I Slottet Fra Droemmen.opus
+297:Burzum/1994 - Hvis Lyset Tar Oss/04 - Tomhet.opus
+298:Burzum/Burzum/01 - Feeble Screams From Forests Unknown.opus
+299:Burzum/Burzum/02 - Ea, Lord Of The Depths.opus
+300:Burzum/Burzum/03 - Black Spell Of Destruction.opus
+301:Burzum/Burzum/04 - Channeling The Power Of Souls Into A New God.opus
+302:Burzum/Burzum/05 - War.opus
+303:Burzum/Burzum/06 - The Crying Orc.opus
+304:Burzum/Burzum/07 - A Lost Forgotten Sad Spirit.opus
+305:Burzum/Burzum/08 - My Journey To The Stars.opus
+306:Burzum/Burzum/09 - Dungeons Of Darkness.opus
+307:Burzum/Aske/03 - A Lost Forgotten Sad Spirit.opus
+308:Burzum/Det-Som-Engang-Var/01 - Den Onde Kysten.opus
+309:Burzum/Det-Som-Engang-Var/02 - Key To The Gate.opus
+310:Burzum/Det-Som-Engang-Var/03 - En Ring Til Aa Herske.opus
+311:Burzum/Det-Som-Engang-Var/04 - Lost Wisdom.opus
+312:Burzum/Det-Som-Engang-Var/05 - Han Som Reiste.opus
+313:Burzum/Det-Som-Engang-Var/06 - Naar Himmelen Klarner.opus
+314:Burzum/Det-Som-Engang-Var/07 - Snu Mikrokosmos Tegn.opus
+315:Burzum/Det-Som-Engang-Var/08 - Svarte Troner.opus
+316:Burzum/Filosofem/01-dunkelheit-vic.opus
+317:Burzum/Filosofem/02-jesus_tod-vic.opus
+318:Burzum/Filosofem/03-erblicket_die_tochter_des_firmaments-vic.opus
+319:Burzum/Filosofem/04-gebrechlichkeit_i-vic.opus
+320:Burzum/Filosofem/05-rundgang_um_die_transzendentale_saule_der_singularitat-vic.opus
+321:Burzum/Filosofem/06-gebrechlichkeit_ii-vic.opus
+322:Burzum/Aske/01 - Stemmen Fra Taarnet.opus
+323:Burzum/Aske/02 - Dominus Sathanas.opus
+324:Burzum/2010 - Belus/a1-burzum-leukes_renkespill_(introduksjon)-berc.opus
+325:Burzum/2010 - Belus/a2-burzum-belus_doed-berc.opus
+326:Burzum/2010 - Belus/b1-burzum-glemselens_elv-berc.opus
+327:Burzum/2010 - Belus/b2-burzum-kaimadalthas_nedstigning-berc.opus
+328:Burzum/2010 - Belus/c1-burzum-sverddans-berc.opus
+329:Burzum/2010 - Belus/c2-burzum-keliohesten-berc.opus
+330:Burzum/2010 - Belus/d1-burzum-morgenroede-berc.opus
+331:Burzum/2010 - Belus/d2-burzum-belus_tilbakekomst_(konklusjon)-berc.opus
+332:Burzum/2011 - Fallen/01 - Fra Verdenstreet.opus
+333:Burzum/2011 - Fallen/02 - Jeg Faller.opus
+334:Burzum/2011 - Fallen/03 - Valen.opus
+335:Burzum/2011 - Fallen/04 - Vanvidd.opus
+336:Burzum/2011 - Fallen/05 - Enhver til Sitt.opus
+337:Burzum/2011 - Fallen/06 - Budstikken.opus
+338:Burzum/2011 - Fallen/07 - Til Hel og Tilbake Igjen.opus
+339:Burzum/2011 - From The Depths Of Darkness/01 - The Coming (Introduction).opus
+340:Burzum/2011 - From The Depths Of Darkness/02 - Feeble Screams From Forests Unknown.opus
+341:Burzum/2011 - From The Depths Of Darkness/03 - Sassu Wunnu (Introduction).opus
+342:Burzum/2011 - From The Depths Of Darkness/04 - Ea, Lord of the Depths.opus
+343:Burzum/2011 - From The Depths Of Darkness/05 - Spell of Destruction.opus
+344:Burzum/2011 - From The Depths Of Darkness/06 - A Lost Forgotten Sad Spirit.opus
+345:Burzum/2011 - From The Depths Of Darkness/07 - My Journey to the Stars.opus
+346:Burzum/2011 - From The Depths Of Darkness/08 - Call of the Siren (Introduction).opus
+347:Burzum/2011 - From The Depths Of Darkness/09 - Key to the Gate.opus
+348:Burzum/2011 - From The Depths Of Darkness/10 - Turn The Sign of the Microcosm (Snu Mikrokosmos' Tegn).opus
+349:Burzum/2011 - From The Depths Of Darkness/11 - Channeling the Power of Minds Into a New God.opus
+350:Burzum/2012 - Umskiptar/01 - Bloostokkinn.opus
+351:Burzum/2012 - Umskiptar/02 - Joln.opus
+352:Burzum/2012 - Umskiptar/03 - Alfadanz.opus
+353:Burzum/2012 - Umskiptar/04 - Hit helga Tro.opus
+354:Burzum/2012 - Umskiptar/05 - Ora.opus
+355:Burzum/2012 - Umskiptar/06 - Heior.opus
+356:Burzum/2012 - Umskiptar/07 - Valgaldr.opus
+357:Burzum/2012 - Umskiptar/08 - Galgvior.opus
+358:Burzum/2012 - Umskiptar/09 - Surtr Sunnan.opus
+359:Burzum/2012 - Umskiptar/10 - Gullaldr.opus
+360:Burzum/2012 - Umskiptar/11 - Noohogg.opus
+361:Burzum/Filosofem/01-dunkelheit-vic.opus
+362:Burzum/Filosofem/02-jesus_tod-vic.opus
+363:Burzum/Filosofem/03-erblicket_die_tochter_des_firmaments-vic.opus
+364:Burzum/Filosofem/04-gebrechlichkeit_i-vic.opus
+365:Burzum/Filosofem/05-rundgang_um_die_transzendentale_saule_der_singularitat-vic.opus
+366:Burzum/Filosofem/06-gebrechlichkeit_ii-vic.opus
+367:Carved Cross/Carved Cross - 2014Demo III/Carved Cross - Demo III/01 Only Hope Offers Disappointment.opus
+368:Carved Cross/Carved Cross - 2014Demo III/Carved Cross - Demo III/02 The Scale Of The Enormity Of It All Becomes Clear.opus
+369:Carved Cross/Carved Cross - 2014Demo III/Carved Cross - Demo III/03 Intertwined Emotions Of Joy And Grief.opus
+370:Carved Cross/Carved Cross - Carved Cross (2017)/01. Untitled.opus
+371:Carved Cross/Carved Cross - Carved Cross (2017)/02. Untitled.opus
+372:Cattle Decapitation/To Serve Man/01. Testicular Manslaughter.opus
+373:Cattle Decapitation/To Serve Man/02. I Eat Your Skin.opus
+374:Cattle Decapitation/To Serve Man/03. Writhe in Putressence.opus
+375:Cattle Decapitation/To Serve Man/04. Land of the Severed Meatus.opus
+376:Cattle Decapitation/To Serve Man/05. The Regurgitation of Corpses.opus
+377:Cattle Decapitation/To Serve Man/06. Everyone Deserves to Die.opus
+378:Cattle Decapitation/To Serve Man/07. To Serve Man.opus
+379:Cattle Decapitation/To Serve Man/08. Colonic Villus Biopsy Performed on the Gastro-Intestinally Incapable.opus
+380:Cattle Decapitation/To Serve Man/09. Pedeadstrians.opus
+381:Cattle Decapitation/To Serve Man/10. Long-Pig Chef and the Hairless Goat.opus
+382:Cattle Decapitation/To Serve Man/11. Hypogastric Combustion By C-4 Plastique.opus
+383:Cattle Decapitation/To Serve Man/12. Deadmeal.opus
+384:Cattle Decapitation/To Serve Man/13. Chunk Blower.opus
+385:Cattle Decapitation/Humanure/01. Scatology Domine (Intro).opus
+386:Cattle Decapitation/Humanure/02. Humanure.opus
+387:Cattle Decapitation/Humanure/03. Reduced to Paste.opus
+388:Cattle Decapitation/Humanure/04. Bukkake Tsunami.opus
+389:Cattle Decapitation/Humanure/05. Cloacula_ the Anthropophagic Copromantik.opus
+390:Cattle Decapitation/Humanure/06. Chummified.opus
+391:Cattle Decapitation/Humanure/07. Applied Human Defragmentation.opus
+392:Cattle Decapitation/Humanure/08. The Earthling.opus
+393:Cattle Decapitation/Humanure/09. Polyps.opus
+394:Cattle Decapitation/Humanure/10. Lips & Assholes.opus
+395:Cattle Decapitation/Humanure/11. Men Before Swine (Outro).opus
+396:Cattle Decapitation/Karma.Bloody.Karma/01. Intro.opus
+397:Cattle Decapitation/Karma.Bloody.Karma/02. Unintelligent Design.opus
+398:Cattle Decapitation/Karma.Bloody.Karma/03. Success Is... (Hanging By the Neck).opus
+399:Cattle Decapitation/Karma.Bloody.Karma/04. One Thousand Times Decapitation.opus
+400:Cattle Decapitation/Karma.Bloody.Karma/05. The Carcass Derrick.opus
+401:Cattle Decapitation/Karma.Bloody.Karma/06. Total Gore.opus
+402:Cattle Decapitation/Karma.Bloody.Karma/07. Bereavement.opus
+403:Cattle Decapitation/Karma.Bloody.Karma/08. Suspended in Coprolite.opus
+404:Cattle Decapitation/Karma.Bloody.Karma/09. Alone at the Landfill.opus
+405:Cattle Decapitation/Karma.Bloody.Karma/10. Karma. Bloody. Karma..opus
+406:Cattle Decapitation/Karma.Bloody.Karma/11. The New Dawn.opus
+407:Cattle Decapitation/Karma.Bloody.Karma/12. Of Human Pride & Flatulence.opus
+408:Cattle Decapitation/The Harvest Floor/01. The Gardeners of Eden.opus
+409:Cattle Decapitation/The Harvest Floor/02. A Body Farm.opus
+410:Cattle Decapitation/The Harvest Floor/03. We are Horrible People.opus
+411:Cattle Decapitation/The Harvest Floor/04. Tooth Enamel & Concrete.opus
+412:Cattle Decapitation/The Harvest Floor/05. The Ripe Beneath the Rind.opus
+413:Cattle Decapitation/The Harvest Floor/06. The Product Alive.opus
+414:Cattle Decapitation/The Harvest Floor/07. In Axetasy.opus
+415:Cattle Decapitation/The Harvest Floor/08. Into the Public Bath.opus
+416:Cattle Decapitation/The Harvest Floor/09. The Harvest Floor.opus
+417:Cattle Decapitation/The Harvest Floor/10. Regret & the Grave.opus
+418:Cattle Decapitation/2012 - Monolith Of Inhumanity/01. The Carbon Stampede.opus
+419:Cattle Decapitation/2012 - Monolith Of Inhumanity/02. Dead Set On Suicide.opus
+420:Cattle Decapitation/2012 - Monolith Of Inhumanity/03. A Living, Breathing Piece Of Defecating Meat.opus
+421:Cattle Decapitation/2012 - Monolith Of Inhumanity/04. Forced Gender Reassignment.opus
+422:Cattle Decapitation/2012 - Monolith Of Inhumanity/05. Gristle Licker.opus
+423:Cattle Decapitation/2012 - Monolith Of Inhumanity/06. Projectile Ovulation.opus
+424:Cattle Decapitation/2012 - Monolith Of Inhumanity/07. Lifestalker.opus
+425:Cattle Decapitation/2012 - Monolith Of Inhumanity/08. Do Not Resuscitate.opus
+426:Cattle Decapitation/2012 - Monolith Of Inhumanity/09. Your Disposal.opus
+427:Cattle Decapitation/2012 - Monolith Of Inhumanity/10. The Monolith.opus
+428:Cattle Decapitation/2012 - Monolith Of Inhumanity/11. Kingdom Of Tyrants.opus
+429:Cattle Decapitation/2015 - The Anthropocene Extinction/01. Manufactured Extinct.opus
+430:Cattle Decapitation/2015 - The Anthropocene Extinction/02. The Prophets Of Loss.opus
+431:Cattle Decapitation/2015 - The Anthropocene Extinction/03. Plagueborne.opus
+432:Cattle Decapitation/2015 - The Anthropocene Extinction/04. Clandestine Ways (Krokodil Rot).opus
+433:Cattle Decapitation/2015 - The Anthropocene Extinction/05. Circo Inhumanitas.opus
+434:Cattle Decapitation/2015 - The Anthropocene Extinction/06. The Burden Of Seven Billion.opus
+435:Cattle Decapitation/2015 - The Anthropocene Extinction/07. Mammals In Babylon.opus
+436:Cattle Decapitation/2015 - The Anthropocene Extinction/08. Mutual Assured Destruction.opus
+437:Cattle Decapitation/2015 - The Anthropocene Extinction/09. Not Suitable For Life.opus
+438:Cattle Decapitation/2015 - The Anthropocene Extinction/10. Apex Blasphemy.opus
+439:Cattle Decapitation/2015 - The Anthropocene Extinction/11. Ave Exitium.opus
+440:Cattle Decapitation/2015 - The Anthropocene Extinction/12. Pacific Grim.opus
+441:Carved Cross/Carved Cross - 2014Demo III/Carved Cross - Demo III/01 Only Hope Offers Disappointment.opus
+442:Carved Cross/Carved Cross - 2014Demo III/Carved Cross - Demo III/02 The Scale Of The Enormity Of It All Becomes Clear.opus
+443:Carved Cross/Carved Cross - 2014Demo III/Carved Cross - Demo III/03 Intertwined Emotions Of Joy And Grief.opus
+444:Carved Cross/Carved Cross - Carved Cross (2017)/01. Untitled.opus
+445:Carved Cross/Carved Cross - Carved Cross (2017)/02. Untitled.opus
+446:Carved Cross/Carved Cross - Carved Cross (2017)/01. Untitled.opus
+447:Carved Cross/Carved Cross - Carved Cross (2017)/02. Untitled.opus
+448:Peste Noire/Peste Noire/2012 - Les Demos (2CD)/2012 - Les Demos CD1/08. Le mort Joyeux.opus
+449:Grand Belials Key/Grand Belials Key - Judeobeast Assassination [FULL ALBUM].opus
+450:Master's Voice/Master's Voice - A Hermit's Longing For Dreadful Wisdom.opus
+451:Grand Belials Key/Kosherat/Grand Belial's Key - Kingdom of Poisoned Fruits-YyQhD4sH0TU.mkv.opus
+452:Grand Belials Key/Grand Belial's Key - Mocking the Philanthropist (1997) full album.opus
+453:Grand Belials Key/Kosherat/Grand Belial's Key - On a Mule Rides the Swindler-mRlFdgJKg24.mkv.opus
+454:Grand Belials Key/Kosherat/Grand Belial's Key - Son of the Black Ram-pemMC-XI18k.mp4.opus
+455:Grand Belials Key/Kosherat/Grand Belial's Key - The Bearded Hustlers-xqv1_JFSXNw.opus
+456:Grand Belials Key/Kosherat/Grand Belial's Key - The Red Heifer-Sv9gx62QfD4.mkv.opus
+457:Grand Belials Key/Kosherat/Grand Belial's Key - The Tricifixion of Swine-kDC8loxURGE.mkv.opus
+458:Grand Belials Key/Kosherat/Grand Belial's Key - Vultures Of Misfortune-pIMEmAZwV-o.opus
+459:Grand Belials Key/Kosherat/Grand Belial's Key - Immaculate Latrine (Kosherat)-uT30EkUR4oo.mp4.opus
+460:Arckanum/Arckanum - Kostogher [Full-length 1997].opus
+461:8bit/Behemoth - Ora Pro Nobis Lucifer (8 bit).opus
+462:A Transylvanian Funeral/self-titled/Circle of Disease-324068330.opus
+463:Chthe'ilist/Le Dernier Crepuscule/Chthe'ilist - Le Dernier Crépuscule (2016) (Atmospheric Death Metal).opus
+464:Blood Tyrant + Warden - Duvonde Skerfe (Split) 2017.opus
+465:Blattaria/Blattaria/Blattaria - Blattaria (2017) Fallen Empire Records - full album.opus
+466:A Transylvanian Funeral/self-titled/Black Sacrifice-3907312891.opus
+467:8bit/behemoth - Ov Fire and the Void - 8bit.opus
+468:Ygg/Ygg/Ygg - Ygg (Full Album).opus
 playlist_end
