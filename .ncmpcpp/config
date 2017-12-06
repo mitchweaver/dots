@@ -1,5 +1,61 @@
-#mpd_host = "localhost"
-#mpd_port = "6600"
-mpd_music_dir = "/home/mitch/music"
-mpd_connection_timeout = "5"
 mpd_crossfade_time = "5"
+# Visualizer
+visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_output_name = "my_fifo"
+visualizer_type = spectrum 
+visualizer_look = "+|"
+visualizer_in_stereo = "yes"
+visualizer_sync_interval = "30" 
+
+# Playlist
+song_columns_list_format = "(3f)[black]{n} (40)[default]{t|f} (25)[red]{a} (30)[blue]{b} (4f)[black]{l}"
+#"$L(9)[black]{l} (20)[red]{a} (30)[blue]{b} $L(20)[default]{t}"
+now_playing_prefix = "$b"
+now_playing_suffix = "$/b"
+playlist_display_mode = "columns" (classic/columns)
+autocenter_mode = "yes"
+centered_cursor = "no"
+cyclic_scrolling = "no"
+mouse_list_scroll_whole_page = "no"
+#song_list_format = "{$8$9}{[%l] >> }{%t }$R{%a - %b}"
+song_list_format = "$1$9%l$1$9 $1¦$9 $2%a$9 $1¦$9 $5%b$9 $R$1$9%t$1$9 $1¦$9 $1%n$9"
+# $0$8$8%l$0$8 $1¦$7 $7%a$7 $1¦$7 $6%t$1 $R $1%b$1"
+song_library_format = "{%n > }{%t}|{%f}"
+
+# Bars
+song_status_format = "{%a - }{%t - }{%b}"
+#"$8%t $1• $2%a $1•{ $5%b $1• }$7%y$1"
+#progressbar_look = "||]"
+#progressbar_look = "-? "
+#"-??"
+titles_visibility = "no"
+header_visibility = "no"
+statusbar_visibility = "no"
+#now_playing_prefix = "?"
+
+# Browser
+browser_playlist_prefix = "$2plist »$9 "
+browser_display_mode = "columns" (classic/columns)
+
+# Colors
+discard_colors_if_item_is_selected = "yes"
+header_window_color = "black"
+volume_color = "cyan"
+state_line_color = "black"
+state_flags_color = "green"
+main_window_color = "default"
+color1 = "default"
+color2 = "green"
+# main_window_highlight_color = "red"
+progressbar_color = "black"
+statusbar_color = "black"
+# active_column_color = "red"
+visualizer_color = "cyan"
+
+# Others
+song_window_title_format = "MPD: {%a > }{%t}{ [%b{ Disc %d}]}|{%f}"
+search_engine_display_mode = "columns" (classic/columns)
+follow_now_playing_lyrics = "yes"
+# display_screens_numbers_on_start = "no"
+# vim: set ts=2 sw=2 tw=0 :
+progressbar_look = "─  "
