@@ -17,6 +17,12 @@ const char *colorname[] = {
         "#6c71c4",  // 13: brmagenta
         "#586e75",  // 14: brcyan
         "#002b36",  // 15: brwhite
+        
+        
+        unsigned int defaultfg = 12;
+        unsigned int defaultcs = 14;
+        unsigned int defaultrcs = 15;
+
 };
 // @@@@@@@@@@@ END SOLARIZED LIGHT @@@@@@@@@@@@@@@@@@@@@@@ //
 

@@ -243,8 +243,15 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	[ConfigureRequest] = configurerequest,
 	[ConfigureNotify] = configurenotify,
 	[DestroyNotify] = destroynotify,
-	[EnterNotify] = enternotify,
-	[Expose] = expose,
+
+    
+    // -------- Disable Focus Follows Mouse ----------------- // 
+    /* [EnterNotify] = enternotify, */
+    // --- Comment this out ----- NOTE: may interfere with some apps ---- //
+	
+    
+    
+    [Expose] = expose,
 	[FocusIn] = focusin,
 	[KeyPress] = keypress,
 	[MappingNotify] = mappingnotify,

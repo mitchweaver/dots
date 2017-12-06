@@ -2,7 +2,6 @@ char font[] = "terminus:pixelsize=14:antialias=false:autohint=false";
 int borderpx = 4; /* Internal border */
 
 static char *utmp = NULL;
-static char stty_args[] = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* disable bold, italic and roman fonts globally */
 int disablebold = 0;
@@ -32,6 +31,8 @@ static unsigned int tabspaces = 4;
 
 /* background opacity */
 unsigned int alpha = 0xcc;
+/* NO background opacity */
+/* unsigned int alpha = 0xFF; */
 
 // ~~~~~~~~~~~~~~~ TERMINAL COLOURS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 #include "dracula-theme.h"
@@ -39,11 +40,9 @@ unsigned int alpha = 0xcc;
 #include "solarized-dark.h"
 /* #include "lucius-light.h" */
 
-// @@@@@ solzarized @@@@@@@@ @@@@@@
 /* unsigned int defaultfg = 12; */
 /* unsigned int defaultcs = 14; */
 /* unsigned int defaultrcs = 15; */
-// with no transparency
 
 // good backgrounds
 unsigned int defaultbg = 256;
@@ -53,30 +52,13 @@ unsigned int defaultbg = 256;
 // lucius-light
 /* unsigned int defaultfg = 257; */
 
-// @@@@@@@@ dracula  @@@@@@@@@@@@@@@
 unsigned int defaultfg = 257;
 /* unsigned int defaultbg = 257; */
 unsigned int defaultcs = 257;
 unsigned int defaultrcs = 257;
-// @@@@@@@@ END DRACULA BG COLORS @@@@@@@@@@@@
-
-/*
-* Colors used, when the specific fg == defaultfg. So in reverse mode this
-* will reverse too. Another logic would only make the simple feature too
-* complex. */
-unsigned int defaultitalic = 7;
-unsigned int defaultunderline = 7;
 
 // mouse cursor color for lucius-light
 // *cursorColor: #5f87af
-
-
-
-/* Default shape of cursor
- * 2: Block ("█")
- * 4: Underline ("_")
- * 7: Snowman ("☃") */
-unsigned int cursorshape = 2;
 
 /* Default columns and rows numbers (defualt is 80x24) */
 unsigned int cols = 60;
@@ -87,9 +69,6 @@ unsigned int mouseshape = XC_xterm;
 unsigned int mousefg = 7;
 unsigned int mousebg = 0;
 
-/* Color used to display font attributes when fontconfig selected a font which
- * doesn't match the ones requested. */
-unsigned int defaultattr = 11;
 
 MouseShortcut mshortcuts[] = {
  	/* button               mask            string */
@@ -101,10 +80,9 @@ MouseKey mkeys[] = {
 	{ Button5,              XK_NO_MOD,      kscrolldown,    {.i =  1} },
 };
 
-/* Internal keyboard shortcuts. */
+
 #define ALT Mod1Mask
 #define CONTROL ControlMask
-
 Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
@@ -120,7 +98,7 @@ Shortcut shortcuts[] = {
 	{ CONTROL,              XK_l,           copyurl,        {.i =  0} },
 	{ CONTROL,              XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ CONTROL,              XK_Page_Down,   kscrolldown,    {.i = -1} },
-        { ALT,                  XK_l,           copyurl,        {.i = 0} },
+    { ALT,                  XK_l,           copyurl,        {.i = 0} },
 };
 
 /* If you want keys other than the X11 function keys (0xFD00 - 0xFFFF)
@@ -349,3 +327,10 @@ char ascii_printable[] =
 
 static char shell[] = "/bin/bash";
 unsigned int cursorthickness = 1;
+static char stty_args[] = "stty raw pass8 nl -echo -iexten -cstopb 38400";
+unsigned int cursorshape = 2;
+
+/* Color used to display font attributes when fontconfig selected a font which
+ * doesn't match the ones requested. */
+unsigned int defaultattr = 11;
+

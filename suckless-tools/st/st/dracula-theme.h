@@ -20,5 +20,9 @@ const char *colorname[] = {
 
    [256] = "#282a36", /* background */
    [257] = "#f8f8f2", /* foreground */
+
+
+
+    unsigned int defaultbg = 256;
 };
 // @@@@@@@@@@@@@@ END DRACULA @@@@@@@@@@@@@@@@@@@@@@@@@@@@ //

@@ -22,7 +22,8 @@ static const char *colors[][3]      = {
     [SchemeUrg] =  { col_gray4, col_red, col_red },
 };
 
-static const char *tags[] = { "壱", "弐", "参", "四", "五", "六", "七", "八", "九" }; /* workspace names */
+static const char *tags[] = { "", "", "", "", "", "", "", "", "", \
+                                "", "", "", "" }; /* workspace names */
 
 static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
@@ -103,17 +104,17 @@ static Key keys[] = {
     { mod1,                     XK_semicolon,   spawn,      {.v = voldown }},
     { mod1,                     XK_apostrophe,  spawn,      {.v = volup }},
 
-    { mod1,                     XK_bracketleft,   spawn,      {.v = mpdseekrw }},
-    { mod1,                     XK_bracketright,  spawn,      {.v = mpdseekff }},
+    { mod1,                     XK_bracketleft,   spawn,    {.v = mpdseekrw }},
+    { mod1,                     XK_bracketright,  spawn,    {.v = mpdseekff }},
     
     // xf86 keys must be in octal
     { 0,                        0x1008ff12, spawn,          {.v = volmute }},
     { 0,                        0x1008ff11, spawn,          {.v = voldown }},
     { 0,                        0x1008ff13, spawn,          {.v = volup }},
  
-    { 0,                        0x1008ff17,   spawn,          {.v = mpdnext } },
-    { 0,                        0x1008ff16,   spawn,          {.v = mpdprev } },
-    { 0,                        0x1008ff14,   spawn,          {.v = mpdtoggle } },
+    { 0,                        0x1008ff17,   spawn,        {.v = mpdnext } },
+    { 0,                        0x1008ff16,   spawn,        {.v = mpdprev } },
+    { 0,                        0x1008ff14,   spawn,        {.v = mpdtoggle } },
 
     { 0,                        0x1008ff2a, spawn,          {.v = slock }},
     { mod1,                     XK_x,       spawn,          {.v = slock }},
@@ -127,8 +128,10 @@ static Key keys[] = {
     { mod1|ShiftMask,           XK_l,       setmfact,       {.f = +0.05} },
     { mod1|ShiftMask,           XK_k,       setsmfact,      {.f = +0.05} },
     { mod1|ShiftMask,           XK_j,       setsmfact,      {.f = -0.05} },
+    // ------------------------------------------------------------------- //
     { mod1,                     XK_Tab,     view,           {0} },
-    { mod1|ShiftMask,           XK_g,   toggle_gaps,          {NULL } },
+    { mod1|ShiftMask,           XK_g,       toggle_gaps,    {NULL } },
+    { mod1|ShiftMask,           XK_space,   togglefloating, {0} },
     // ------------------------------------------------------------------- //
     { mod1,                     XK_t,       setlayout,      {.v = &layouts[0]} },
     { mod1,                     XK_f,       setlayout,      {.v = &layouts[1]} },
@@ -138,19 +141,21 @@ static Key keys[] = {
     { mod1,                     XK_n,       setlayout,      {.v = &layouts[5]} },
     { mod1,                     XK_v,       setlayout,      {.v = &layouts[6]} },
     { mod1,                     XK_space,   setlayout,      {0} },
-    { mod1|ShiftMask,           XK_space,   togglefloating, {0} },
-    { mod1,                     XK_0,       view,           {.ui = ~0 } },
-    { mod1|ShiftMask,           XK_0,       tag,            {.ui = ~0 } },
+    // ------------------------------------------------------------------- //
     { mod1|ShiftMask,           XK_b,       togglebar,      {0} },
     { mod1,                     XK_q,       killclient,     {0} },
     { mod1|ShiftMask,           XK_q,       quit,            {0} },
     // ------------------------------------------------------------------- //
+    /* { mod1,                     XK_0,       view,           {.ui = ~0 } }, */
+    /* { mod1|ShiftMask,           XK_0,       tag,            {.ui = ~0 } }, */
     /* { mod1,                     XK_i,       incnmaster,     {.i = +1 } }, */
     /* { mod1,                     XK_d,       incnmaster,     {.i = -1 } }, */
-    { mod1|ControlMask,                     XK_Return,  zoom,           {0} },
+    /* { mod1|ControlMask,                     XK_Return,  zoom,           {0} }, */
     // ------------------------------------------------------------------- //
     TAGKEYS(XK_1,0) TAGKEYS(XK_2,1) TAGKEYS(XK_3,2) TAGKEYS(XK_4,3)
-	TAGKEYS(XK_5,4) TAGKEYS(XK_6,5) TAGKEYS(XK_7,6) TAGKEYS(XK_8,7) TAGKEYS(XK_9,8)
+	TAGKEYS(XK_5,4) TAGKEYS(XK_6,5) TAGKEYS(XK_7,6) TAGKEYS(XK_8,7)
+    TAGKEYS(XK_9,8) TAGKEYS(XK_0,9) TAGKEYS(XK_minus,10) TAGKEYS(XK_equal,11)
+    TAGKEYS(XK_BackSpace,12)
 };
 
 /* click can be ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */

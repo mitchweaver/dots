@@ -127,8 +127,19 @@ recomp() {
 }
 
 gitup() {
-    git add -A && git commit -m "$1" && git push -u origin master && clear && ls
+    git add -A && git commit -m "$@" && git push -u origin master && clear && ls
 }
+# because i have had too many disasters from doing this...
+git() {
+
+    if [ "$1" == 'reset' ]; then
+        shift
+        /usr/sbin/cp -rav . /tmp/git-reset-backup
+    fi
+    /usr/bin/git "$@"
+}
+
+
 
 filesize(){ echo $(stat --printf="%s" "$1") ; }
 
