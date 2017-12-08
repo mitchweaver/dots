@@ -2,8 +2,8 @@ sw_volume: 100
 audio_device_state:1:alsa audio
 audio_device_state:1:my_fifo
 state: play
-current: 15
-time: 4.010000
+current: 469
+time: 567.501000
 random: 0
 repeat: 0
 single: 0
@@ -478,7 +478,16 @@ playlist_begin
 463:Chthe'ilist/Le Dernier Crepuscule/Chthe'ilist - Le Dernier Crépuscule (2016) (Atmospheric Death Metal).opus
 464:Blood Tyrant + Warden - Duvonde Skerfe (Split) 2017.opus
 465:Blattaria/Blattaria/Blattaria - Blattaria (2017) Fallen Empire Records - full album.opus
-466:A Transylvanian Funeral/self-titled/Black Sacrifice-3907312891.opus
-467:8bit/behemoth - Ov Fire and the Void - 8bit.opus
-468:Ygg/Ygg/Ygg - Ygg (Full Album).opus
+466:8bit/behemoth - Ov Fire and the Void - 8bit.opus
+467:Ygg/Ygg/Ygg - Ygg (Full Album).opus
+468:A Transylvanian Funeral/self-titled/Flesh and Dust-738649056.opus
+469:Drudkh % Paysage d' Hiver - Somewhere Sadness Wanders % Schnee IV (Full Split-EP) (2017).opus
+470:Sombres Forets/Sombres Forêts - Royaume de Glace (Full Album).opus
+471:Sororocide/Sororicide - "The Entity" 1991 [Full Album].opus
+472:Syphilitic Vaginas/Syphilitic Vaginas - Alpha Antichrist (Full Album).opus
+473:TSATTHOGGUA/TSATTHOGGUA - Hosanna bizarre [1996] full album HQ.opus
+474:Unaussprechlichen Kulten/Unaussprechlichen kulten - Baphomet pan shub niggurath (Full Album).opus
+475:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - For the Sect (FULL COMPILATION).opus
+476:Urfaust/2012 - Ritual Music for the Truly Clochard/Urfaust - Ritual Music for the True Clochard (2012) full compilation, vinyl.opus
+477:Beherit/Beherit - Drawing Down The Moon (FULL ALBUM- 1993) (FULL HD).opus
 playlist_end

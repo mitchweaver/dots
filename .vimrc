@@ -39,7 +39,7 @@ Plug 'flazz/vim-colorschemes' " just a bunch of colorschemes
 Plug 'jonathanfilip/vim-lucius' " lucius colorscheme
 
 " UI mods
-Plug 'HeroicEric/vim-tabline' " shows full path in tab names
+" Plug 'HeroicEric/vim-tabline' " shows full path in tab names
 
 " Syntax Highlighting
 Plug 'sheerun/vim-polyglot' " syntax highlight - all languages
@@ -127,7 +127,6 @@ set relativenumber " shows line numbers relative to position
 " Toggle line numbeing on/off
 map <silent><leader>ln :set number! relativenumber!<cr>
 
-set tabpagemax=15 " don't allow for more than 15 tabs to be open
 set noshowmode
 set showmatch " show matching parens
 set cursorline " show current line
@@ -159,6 +158,7 @@ set autoread " when a file has changed on disk, just load it. don't ask.
 " -------------------------------------------------------------
 
 " -------- Tabs ----------------------------------------------
+" set tabpagemax=15 " don't allow for more than 15 tabs to be open
 nnoremap th  :tabfirst<CR>
 nnoremap tk  :tabnext<CR>
 nnoremap tj  :tabprev<CR>

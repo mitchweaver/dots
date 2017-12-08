@@ -129,13 +129,34 @@ recomp() {
 }
 
 gitup() {
-    git add -A && git commit -m "$@" && git push -u origin master && clear && ls
+    git add -A && git commit -m "$@" && git push -u origin master
 }
+gitmit() {
+    if [ $# -eq 0 ] ; then
+        git add -A && git commit -m "$@"
+    else
+        git add "$1" && git commit -m "${@:2}" 
+    fi
+}
+gitout() {
+    if [ $# -eq 0 ] ; then 
+        git push -u origin master
+    else
+        git push -u origin "$@"
+    fi
+}
+gitbase() {
+    if [ $# -eq 0 ] ; then
+        git rebase -i HEAD~10
+    else
+        git rebase -i HEAD~"$@"
+    fi
+}
+
 # because i have had too many disasters from doing this...
 git() {
 
     if [ "$1" == 'reset' ]; then
-        shift
         /usr/sbin/cp -rav . /tmp/git-reset-backup
     fi
     /usr/bin/git "$@"
