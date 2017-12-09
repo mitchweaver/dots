@@ -1,14 +1,30 @@
 # --------------------- PS1 -------------------------------------------------- #
+
+# \u = user
+# \j = num jobs controlled by shell
+# \w = pwd
+# \W = base name directory
+
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-export PS1="\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W\e[0;33m\]$(parse_git_branch)\[\e[1;37m\] "
+get_PS1() {
+    # Note: colorizing the git output breaks line wrapping, no idea why...
+    # echo "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W $(parse_git_branch)\[\e[1;37m\] "
+    echo "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(parse_git_branch)\[\e[1;37m\] "
+}
 
 cd(){
-    builtin cd "$1"
-    export PS1="\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W\e[0;33m\]$(parse_git_branch) \[\e[1;37m\]"
+    if [ $# -eq 0 ] ; then
+        builtin cd ~
+    else
+        builtin cd "$1"
+    fi
+    export PS1="$(get_PS1)"
 }
+
+export PS1="$(get_PS1)"
 # --------------------------------------------------------------------------- #
 
 export PATH=$PATH:/home/mitch/bin
@@ -21,8 +37,8 @@ alias resize-half='mogrify -resize 50%X50%'
 alias resize-quarter='mogrify -resize 25%X25%'
 
 # --------------------------------------------------------------------------- #
+alias vim="nvim -p"
 alias neovim=nvim
-alias vim=nvim
 alias vi=nvim
 alias bashrc="nvim ~/.bashrc"
 alias bsahrc="nvim ~/.bashrc"
@@ -135,7 +151,10 @@ gitmit() {
     if [ $# -eq 0 ] ; then
         git add -A && git commit -m "$@"
     else
-        git add "$1" && git commit -m "${@:2}" 
+        # this garble means "all but last" and then "the last"
+        foo="$@"
+        git add "${foo[@]::${#foo[@]}-1}" 2> /dev/null && git commit -m "${@:(-1)}" 
+
     fi
 }
 gitout() {
@@ -152,10 +171,8 @@ gitbase() {
         git rebase -i HEAD~"$@"
     fi
 }
-
 # because i have had too many disasters from doing this...
 git() {
-
     if [ "$1" == 'reset' ]; then
         /usr/sbin/cp -rav . /tmp/git-reset-backup
     fi

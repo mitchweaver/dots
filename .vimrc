@@ -35,7 +35,6 @@ Plug 'vim-airline/vim-airline-themes' " powerline-inspired status bar
 Plug 'vim-airline/vim-airline' " see above -^
 Plug 'flazz/vim-colorschemes' " just a bunch of colorschemes
 " Plug 'altercation/vim-colors-solarized' " solarized colorschemes
-" Plug 'dracula/vim'  " dracula colorscheme
 Plug 'jonathanfilip/vim-lucius' " lucius colorscheme
 
 " UI mods
@@ -69,12 +68,14 @@ map <leader>pc :PlugClean<CR>
 " --------------------------------------------------------------
 
 " ------------- COLORSCHEME ------------------------------------
-" colorscheme dracula
 " colorscheme solarized
 " colorscheme zenburn
 " colorscheme newspaper
 " colorscheme neverland
 colorscheme lucius
+LuciusDarkHighContrast
+" LuciusDarkLowContrast
+" LuciusLightHighContrast
 
 " set background=dark
 " set background=light
@@ -83,7 +84,6 @@ colorscheme lucius
 " hi Normal ctermbg=NONE
 
 let g:airline_theme='lucius'
-" let g:airline_theme='dracula'
 " let g:airline_theme='papercolor'
 " let g:airline_theme='solarized'
 " let g:airline_theme='zenburn'

@@ -1,4 +1,5 @@
-char font[] = "terminus:pixelsize=14:antialias=false:autohint=false";
+char font[] = "Terminus:pixelsize=14:antialias=false:autohint=false";
+/* char font[] = "DejaVuSans Mono:pixelsize=12:antialias=true:autohint=true"; */
 int borderpx = 4; /* Internal border */
 
 static char *utmp = NULL;

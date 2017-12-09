@@ -2,8 +2,8 @@ sw_volume: 100
 audio_device_state:1:alsa audio
 audio_device_state:1:my_fifo
 state: play
-current: 469
-time: 567.501000
+current: 803
+time: 4.096000
 random: 0
 repeat: 0
 single: 0
@@ -490,4 +490,342 @@ playlist_begin
 475:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - For the Sect (FULL COMPILATION).opus
 476:Urfaust/2012 - Ritual Music for the Truly Clochard/Urfaust - Ritual Music for the True Clochard (2012) full compilation, vinyl.opus
 477:Beherit/Beherit - Drawing Down The Moon (FULL ALBUM- 1993) (FULL HD).opus
+478:Vore/Doomwhore.opus
+479:Dusterdraussen/Where Is Your Summer Now/Düsterdraußen - Where is Your Summer Now? (Full Album).opus
+480:Dark Tribe/Dark Tribe - In Jeraspunta - (Full Album).opus
+481:D.o.S./Sepsis/Keimtanz-1309693811.opus
+482:Damaar/Triump Through Spears Of Sacrilege/Damaar - Desecration (Blasphemy Cover)_(song365.cc).opus
+483:Damaar/Triump Through Spears Of Sacrilege/Damaar - Intro_(song365.cc).opus
+484:Damaar/Triump Through Spears Of Sacrilege/Damaar - Preaching for Mass Suicide_(song365.cc).opus
+485:Damaar/Triump Through Spears Of Sacrilege/Damaar - Desecration (Blasphemy Cover)_(song365.cc).opus
+486:Damaar/Triump Through Spears Of Sacrilege/Damaar - Intro_(song365.cc).opus
+487:Damaar/Triump Through Spears Of Sacrilege/Damaar - Preaching for Mass Suicide_(song365.cc).opus
+488:Damaar/Triump Through Spears Of Sacrilege/Damaar - Desecration (Blasphemy Cover)_(song365.cc).opus
+489:Damaar/Triump Through Spears Of Sacrilege/Damaar - Intro_(song365.cc).opus
+490:Damaar/Triump Through Spears Of Sacrilege/Damaar - Preaching for Mass Suicide_(song365.cc).opus
+491:Goatmoon/Goatmoon - Voitto Tai Valhalla (2014)/05-Way Of The Holocaust Winds.opus
+492:Xasthur/albums/xasthur - 2004 - a gate through bloodstained mirrors (reissue)/13 - Black Spell of Destruction (Burzum cover).opus
+493:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/01 Entrance Into Nothingness.opus
+494:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/02 Slaughtered Useless Beings In A Nihilistic Dream.opus
+495:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/03 Abysmal Depths Are Flooded.opus
+496:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/04 May Your Void Become As Deep As My Hate!.opus
+497:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/05 Telepathic With The Deceased.opus
+498:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/06 A Walk Beyond Utter Blackness.opus
+499:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/07 Cursed Revelations.opus
+500:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/08 Drown Into Eternal Twilight.opus
+501:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/09 Murdered Echoes Of The Mind.opus
+502:Xasthur/albums/xasthur - 2004 - telepathic with the deceased/10 Exit.opus
+503:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/01 The Awakening to the Unkown Pe.opus
+504:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/02 Tyrant of Nightmares.opus
+505:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/03 Intro.opus
+506:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/04 Sigils Made of Flesh and Trees.opus
+507:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/05 Blood from the Roots of the Fo.opus
+508:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/06 Blood from the Roots of the Fo.opus
+509:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/07 Intro.opus
+510:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/08 Bleak Necrotic Paleness.opus
+511:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/09 Reflecting Hateful Energy.opus
+512:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/10 Tyrant of the Nightmares (Dark.opus
+513:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/11 Outro.opus
+514:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/12 Dwelling Beneath the Woods.opus
+515:Xasthur/albums/xasthur - 2003 - the funeral of being (rip from vinyl)/13 Dimension of the Blackest Dark.opus
+516:Xasthur/albums/xasthur - 2004 - to violate the oblivious/01-intro.opus
+517:Xasthur/albums/xasthur - 2004 - to violate the oblivious/02-xasthur within.opus
+518:Xasthur/albums/xasthur - 2004 - to violate the oblivious/03-dreams blacker than death.opus
+519:Xasthur/albums/xasthur - 2004 - to violate the oblivious/04-screaming at forgotten fears.opus
+520:Xasthur/albums/xasthur - 2004 - to violate the oblivious/05-consumed by a dark paranoia.opus
+521:Xasthur/albums/xasthur - 2004 - to violate the oblivious/06-marked by shadows.opus
+522:Xasthur/albums/xasthur - 2004 - to violate the oblivious/07-apparitional void of failure.opus
+523:Xasthur/albums/xasthur - 2004 - to violate the oblivious/08-a gate through bloodstained mirrors.opus
+524:Xasthur/albums/xasthur - 2004 - to violate the oblivious/09-walker of dissonant worlds.opus
+525:Xasthur/albums/xasthur - 2006 - subliminal genocide/01-xasthur-disharmonic_convergence.opus
+526:Xasthur/albums/xasthur - 2006 - subliminal genocide/02-xasthur-the_prison_of_mirrors.opus
+527:Xasthur/albums/xasthur - 2006 - subliminal genocide/03-xasthur-beauty_is_only_razor_deep.opus
+528:Xasthur/albums/xasthur - 2006 - subliminal genocide/04-xasthur-trauma_will_always_linger.opus
+529:Xasthur/albums/xasthur - 2006 - subliminal genocide/05-xasthur-pyramid_of_skulls.opus
+530:Xasthur/albums/xasthur - 2006 - subliminal genocide/06-xasthur-arcane_and_misanthropic_projection.opus
+531:Xasthur/albums/xasthur - 2006 - subliminal genocide/07-xasthur-victim_of_your_dreams.opus
+532:Xasthur/albums/xasthur - 2006 - subliminal genocide/08-xasthur-through_a_trance_of_despondency.opus
+533:Xasthur/albums/xasthur - 2006 - subliminal genocide/09-xasthur-loss_and_tuner_distortion.opus
+534:Xasthur/albums/xasthur - 2006 - subliminal genocide/10-xasthur-subliminal_genocide.opus
+535:Xasthur/albums/xasthur - 2006 - subliminal genocide/11-xasthur-malice_midden_in_surrealism.opus
+536:Woods of Desolation/Woods Of Desolation - As The Stars/01. Like Falling Leaves.opus
+537:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/04 - I Will Lay Down My Bones Among The Rocks And Roots.opus
+538:Wolves In The Throne Room/Black Cascade/04 Crystal Ammunition.opus
+539:Wolves In The Throne Room/Black Cascade/01 Wanderer Above the Sea of Fog.opus
+540:Windir/Windir - 2001 - 1184/01 - Windir - Todeswalzer.opus
+541:Windir/Windir - 2001 - 1184/02 - Windir - 1184.opus
+542:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/01. Consecrated By Sacrifice.opus
+543:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/02. Obedience To Evil.opus
+544:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/03. All Of The Devil's Temple.opus
+545:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/04. Rites Of The Ruminant Dead.opus
+546:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/05. Serpent Mass Litany.opus
+547:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/06. A Pact In Stone And Skin.opus
+548:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/07. The Majestic Doomed Kingdom.opus
+549:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/08. Born Of The Blighting Angel.opus
+550:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/01 Blessed By Lycosidae (Opening Mass).opus
+551:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/02 Utter The Tongue Of The Dead.opus
+552:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/03 The Antichrist Prevails.opus
+553:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/04 At The Door Of An Infernal Realm.opus
+554:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/05 Defile And Devour.opus
+555:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/06 Alms For The Eyeless Idol.opus
+556:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/07 The Brimstone Hail.opus
+557:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/08 Mould And Blood.opus
+558:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/09 The Shores of Eternal Night.opus
+559:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/10 Goddess Of The Waking Death.opus
+560:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/01 Blessed By Lycosidae (Opening Mass).opus
+561:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/02 Utter The Tongue Of The Dead.opus
+562:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/03 The Antichrist Prevails.opus
+563:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/04 At The Door Of An Infernal Realm.opus
+564:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/05 Defile And Devour.opus
+565:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/06 Alms For The Eyeless Idol.opus
+566:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/07 The Brimstone Hail.opus
+567:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/08 Mould And Blood.opus
+568:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/09 The Shores of Eternal Night.opus
+569:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/10 Goddess Of The Waking Death.opus
+570:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/01 Blessed By Lycosidae (Opening Mass).opus
+571:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/02 Utter The Tongue Of The Dead.opus
+572:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/03 The Antichrist Prevails.opus
+573:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/04 At The Door Of An Infernal Realm.opus
+574:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/05 Defile And Devour.opus
+575:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/06 Alms For The Eyeless Idol.opus
+576:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/07 The Brimstone Hail.opus
+577:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/08 Mould And Blood.opus
+578:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/09 The Shores of Eternal Night.opus
+579:Void Meditation Cult/Utter The Tongue Of The Dead (2016)/10 Goddess Of The Waking Death.opus
+580:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/01. Consecrated By Sacrifice.opus
+581:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/02. Obedience To Evil.opus
+582:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/03. All Of The Devil's Temple.opus
+583:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/04. Rites Of The Ruminant Dead.opus
+584:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/05. Serpent Mass Litany.opus
+585:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/06. A Pact In Stone And Skin.opus
+586:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/07. The Majestic Doomed Kingdom.opus
+587:Void Meditation Cult/Sulfurous Prayers Of Blight And Darkness (2013)/08. Born Of The Blighting Angel.opus
+588:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 01 - Invocation.opus
+589:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 02 - Angel_of_Sodomy.opus
+590:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 03 - Lord_of_the_Void.opus
+591:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 04 - Dawn_Od_the_Black_Light.opus
+592:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 05 - Luciferian_Darkness.opus
+593:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 06 - Desecration.opus
+594:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 07 - Black_Crusade.opus
+595:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 08 - Whore_of_Bethlehem.opus
+596:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 09 - Grand_Marshall_of_the_Black_Tower.opus
+597:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 10 - Hammer_of_Satan.opus
+598:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 01 - Invocation.opus
+599:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 02 - Angel_of_Sodomy.opus
+600:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 03 - Lord_of_the_Void.opus
+601:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 04 - Dawn_Od_the_Black_Light.opus
+602:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 05 - Luciferian_Darkness.opus
+603:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 06 - Desecration.opus
+604:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 07 - Black_Crusade.opus
+605:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 08 - Whore_of_Bethlehem.opus
+606:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 09 - Grand_Marshall_of_the_Black_Tower.opus
+607:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 10 - Hammer_of_Satan.opus
+608:Archgoat/The Light Devouring Darkness/01. Intro- 3rd Invocation.opus
+609:Archgoat/The Light Devouring Darkness/02. Apotheosis of Lucifer.opus
+610:Archgoat/The Light Devouring Darkness/03. Tribulation of the King of Worms.opus
+611:Archgoat/The Light Devouring Darkness/04. Goat and the Moon.opus
+612:Archgoat/The Light Devouring Darkness/05. Sodomator of the Doomed Venus.opus
+613:Archgoat/The Light Devouring Darkness/06. The Light-Devouring Darkness.opus
+614:Archgoat/The Light Devouring Darkness/07. Blessed in Beast's Blood.opus
+615:Archgoat/The Light Devouring Darkness/08. Worms Born of Martyrdom.opus
+616:Archgoat/The Light Devouring Darkness/09. Fornicated Messiah.opus
+617:Archgoat/The Light Devouring Darkness/10. The Dawn of the Antichrist.opus
+618:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/01. Intro (Left Hand Path).opus
+619:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/02. Nuns, Cunts & Darkness.opus
+620:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/03. The Apocalyptic Triumphator.opus
+621:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/04. Phallic Desecrator Of Sacred Gates.opus
+622:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/05. Grand Luciferian Theophany.opus
+623:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/06. Those Below (Who Dwell In Hell).opus
+624:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/07. Intro (Right Hand Path).opus
+625:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/08. Congregation Of Circumcised.opus
+626:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/09. Sado-Magical Portal.opus
+627:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/10. Light Of Phosphorus.opus
+628:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/11. Profanator Of The 1st Commandment.opus
+629:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/12. Funeral Pyre Of Trinity.opus
+630:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 01 - Invocation.opus
+631:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 02 - Angel_of_Sodomy.opus
+632:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 03 - Lord_of_the_Void.opus
+633:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 04 - Dawn_Od_the_Black_Light.opus
+634:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 05 - Luciferian_Darkness.opus
+635:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 06 - Desecration.opus
+636:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 07 - Black_Crusade.opus
+637:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 08 - Whore_of_Bethlehem.opus
+638:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 09 - Grand_Marshall_of_the_Black_Tower.opus
+639:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 10 - Hammer_of_Satan.opus
+640:Archgoat/The Light Devouring Darkness/01. Intro- 3rd Invocation.opus
+641:Archgoat/The Light Devouring Darkness/02. Apotheosis of Lucifer.opus
+642:Archgoat/The Light Devouring Darkness/03. Tribulation of the King of Worms.opus
+643:Archgoat/The Light Devouring Darkness/04. Goat and the Moon.opus
+644:Archgoat/The Light Devouring Darkness/05. Sodomator of the Doomed Venus.opus
+645:Archgoat/The Light Devouring Darkness/06. The Light-Devouring Darkness.opus
+646:Archgoat/The Light Devouring Darkness/07. Blessed in Beast's Blood.opus
+647:Archgoat/The Light Devouring Darkness/08. Worms Born of Martyrdom.opus
+648:Archgoat/The Light Devouring Darkness/09. Fornicated Messiah.opus
+649:Archgoat/The Light Devouring Darkness/10. The Dawn of the Antichrist.opus
+650:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/01. Intro (Left Hand Path).opus
+651:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/02. Nuns, Cunts & Darkness.opus
+652:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/03. The Apocalyptic Triumphator.opus
+653:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/04. Phallic Desecrator Of Sacred Gates.opus
+654:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/05. Grand Luciferian Theophany.opus
+655:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/06. Those Below (Who Dwell In Hell).opus
+656:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/07. Intro (Right Hand Path).opus
+657:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/08. Congregation Of Circumcised.opus
+658:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/09. Sado-Magical Portal.opus
+659:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/10. Light Of Phosphorus.opus
+660:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/11. Profanator Of The 1st Commandment.opus
+661:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/12. Funeral Pyre Of Trinity.opus
+662:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 01 - Invocation.opus
+663:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 02 - Angel_of_Sodomy.opus
+664:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 03 - Lord_of_the_Void.opus
+665:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 04 - Dawn_Od_the_Black_Light.opus
+666:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 05 - Luciferian_Darkness.opus
+667:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 06 - Desecration.opus
+668:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 07 - Black_Crusade.opus
+669:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 08 - Whore_of_Bethlehem.opus
+670:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 09 - Grand_Marshall_of_the_Black_Tower.opus
+671:Archgoat/Archgoat - Whore of Bethlehem(2006)/Archgoat - Whore of Bethlehem - 10 - Hammer_of_Satan.opus
+672:Archgoat/The Light Devouring Darkness/01. Intro- 3rd Invocation.opus
+673:Archgoat/The Light Devouring Darkness/02. Apotheosis of Lucifer.opus
+674:Archgoat/The Light Devouring Darkness/03. Tribulation of the King of Worms.opus
+675:Archgoat/The Light Devouring Darkness/04. Goat and the Moon.opus
+676:Archgoat/The Light Devouring Darkness/05. Sodomator of the Doomed Venus.opus
+677:Archgoat/The Light Devouring Darkness/06. The Light-Devouring Darkness.opus
+678:Archgoat/The Light Devouring Darkness/07. Blessed in Beast's Blood.opus
+679:Archgoat/The Light Devouring Darkness/08. Worms Born of Martyrdom.opus
+680:Archgoat/The Light Devouring Darkness/09. Fornicated Messiah.opus
+681:Archgoat/The Light Devouring Darkness/10. The Dawn of the Antichrist.opus
+682:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/01. Intro (Left Hand Path).opus
+683:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/02. Nuns, Cunts & Darkness.opus
+684:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/03. The Apocalyptic Triumphator.opus
+685:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/04. Phallic Desecrator Of Sacred Gates.opus
+686:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/05. Grand Luciferian Theophany.opus
+687:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/06. Those Below (Who Dwell In Hell).opus
+688:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/07. Intro (Right Hand Path).opus
+689:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/08. Congregation Of Circumcised.opus
+690:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/09. Sado-Magical Portal.opus
+691:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/10. Light Of Phosphorus.opus
+692:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/11. Profanator Of The 1st Commandment.opus
+693:Archgoat/Archgoat - The Apocalyptic Triumphator (2015)/12. Funeral Pyre Of Trinity.opus
+694:Soulskinner/Soulskinner - Crypts of Ancient Wisdom [Full Album].opus
+695:Vore/Uroboros.opus
+696:Basmu/Black Sorcery From Within Arcane Caverns/Bašmu - Black Sorcery From Within Arcane Caverns - 01 The Nocturnal Fires Of Quimbanda And Its Sulphurous Spellcraft.opus
+697:Basmu/Black Sorcery From Within Arcane Caverns/Bašmu - Black Sorcery From Within Arcane Caverns - 02 Black Sorcery From Within Arcane Caverns.opus
+698:Basmu/Black Sorcery From Within Arcane Caverns/Bašmu - Black Sorcery From Within Arcane Caverns - 01 The Nocturnal Fires Of Quimbanda And Its Sulphurous Spellcraft.opus
+699:Basmu/Black Sorcery From Within Arcane Caverns/Bašmu - Black Sorcery From Within Arcane Caverns - 02 Black Sorcery From Within Arcane Caverns.opus
+700:Basmu/Dissipation of Ethereal Mist/Ba#U0161mu - Dissipation Of Ethereal Mist - 01 Storm Of The Black Serpent.opus
+701:Basmu/Dissipation of Ethereal Mist/Ba#U0161mu - Dissipation Of Ethereal Mist - 02 The Cave.opus
+702:Basmu/Dissipation of Ethereal Mist/Ba#U0161mu - Dissipation Of Ethereal Mist - 03 Dissipation Of Ethereal Mist.opus
+703:Basmu/Dissipation of Ethereal Mist/Ba#U0161mu - Dissipation Of Ethereal Mist - 04 Primal Waters.opus
+704:Basmu/Dissipation of Ethereal Mist/Ba#U0161mu - Dissipation Of Ethereal Mist - 05 Temple Of Obsidian Portals.opus
+705:Basmu/Dissipation of Ethereal Mist/Ba#U0161mu - Dissipation Of Ethereal Mist - 01 Storm Of The Black Serpent.opus
+706:Basmu/Dissipation of Ethereal Mist/Ba#U0161mu - Dissipation Of Ethereal Mist - 02 The Cave.opus
+707:Basmu/Dissipation of Ethereal Mist/Ba#U0161mu - Dissipation Of Ethereal Mist - 03 Dissipation Of Ethereal Mist.opus
+708:Basmu/Dissipation of Ethereal Mist/Ba#U0161mu - Dissipation Of Ethereal Mist - 04 Primal Waters.opus
+709:Basmu/Dissipation of Ethereal Mist/Ba#U0161mu - Dissipation Of Ethereal Mist - 05 Temple Of Obsidian Portals.opus
+710:Basmu/Draped in the Obsidian Black Clock of the Abyss/Ba#U0161mu - Draped in the Obsidian Black Cloak of the Abyss - 01 Abyssal Underwater Temples of the Kulull#U00fb.opus
+711:Basmu/Draped in the Obsidian Black Clock of the Abyss/Ba#U0161mu - Draped in the Obsidian Black Cloak of the Abyss - 02 Draped in the Obsidian Black Cloak of the Abyss.opus
+712:Basmu/Draped in the Obsidian Black Clock of the Abyss/Ba#U0161mu - Draped in the Obsidian Black Cloak of the Abyss - 03 Malediction of Blood.opus
+713:Basmu/Draped in the Obsidian Black Clock of the Abyss/Ba#U0161mu - Draped in the Obsidian Black Cloak of the Abyss - 04 Black Wind.opus
+714:Basmu/Black Sorcery From Within Arcane Caverns/Bašmu - Black Sorcery From Within Arcane Caverns - 01 The Nocturnal Fires Of Quimbanda And Its Sulphurous Spellcraft.opus
+715:Basmu/Black Sorcery From Within Arcane Caverns/Bašmu - Black Sorcery From Within Arcane Caverns - 02 Black Sorcery From Within Arcane Caverns.opus
+716:Basmu/VVITCHBLOOD/Bašmu - VVITCHBLOOD - 01 VVITCHBLOOD.opus
+717:Basmu/VVITCHBLOOD/Bašmu - VVITCHBLOOD - 02 MAJESTIC SERPENTINE TEMPLES.opus
+718:Basmu/VVITCHBLOOD/Bašmu - VVITCHBLOOD - 03 CRIMSON EYES OF DJINN.opus
+719:Basmu/VVITCHBLOOD/Bašmu - VVITCHBLOOD - 04 BINDING OF SHADOW SPIRITS.opus
+720:Basmu/VVITCHBLOOD/Bašmu - VVITCHBLOOD - 05 THE CROOKED WAND OF THE OPHIDIAN CRAFT.opus
+721:Basmu/VVITCHBLOOD/Bašmu - VVITCHBLOOD - 06 THE DEMONIC OATH.opus
+722:Basmu/VVITCHBLOOD/Bašmu - VVITCHBLOOD - 07 CRYSTALLINE PRISON OF SOULS.opus
+723:Basmu/VVITCHBLOOD/Bašmu - VVITCHBLOOD - 08 DIMENSION OF AGONY.opus
+724:Bathory/Hammerheart/01 - Shores In Flames.opus
+725:Bathory/Hammerheart/02 - Valhalla.opus
+726:Bathory/Hammerheart/03 - Baptised In Fire And Ice.opus
+727:Bathory/Hammerheart/04 - Father To Son.opus
+728:Bathory/Hammerheart/05 - Song To Hall Up High.opus
+729:Bathory/Hammerheart/06 - Home Of Once Brave.opus
+730:Bathory/Hammerheart/07 - One Rode To Asa Bay.opus
+731:Bathory/Hammerheart/08 - Outro.opus
+732:Behemoth/1996 - Grom/01 Intro.opus
+733:Behemoth/1996 - Grom/02 The Dark Forest (Cast Me Your Spell).opus
+734:Behemoth/1996 - Grom/03 Spellcraft & Heathendom.opus
+735:Behemoth/1996 - Grom/05 Lasy Pomorza.opus
+736:Behemoth/1996 - Grom/06 Rising Proudly Towards the Sky.opus
+737:Behemoth/1996 - Grom/07 Thou Shalt Forever Win.opus
+738:Behemoth/1996 - Grom/08 Grom.opus
+739:Behemoth/From The Pagan Vastlands - Demo/Behemoth - ...From The Pagan Vastlands [1994]/01. From Hornedlands to Lindesfarne.opus
+740:Behemoth/From The Pagan Vastlands - Demo/Behemoth - ...From The Pagan Vastlands [1994]/02. Thy Winter Kingdom.opus
+741:Behemoth/From The Pagan Vastlands - Demo/Behemoth - ...From The Pagan Vastlands [1994]/03. Summoning (of the Ancient Ones).opus
+742:Behemoth/From The Pagan Vastlands - Demo/Behemoth - ...From The Pagan Vastlands [1994]/04. The Dance of the Pagan Flames.opus
+743:Behemoth/From The Pagan Vastlands - Demo/Behemoth - ...From The Pagan Vastlands [1994]/05. Blackvisions of the Almighty.opus
+744:Behemoth/From The Pagan Vastlands - Demo/Behemoth - ...From The Pagan Vastlands [1994]/06. Fields of Haar-Meggido.opus
+745:Behemoth/From The Pagan Vastlands - Demo/Behemoth - ...From The Pagan Vastlands [1994]/07. Deathcrush.opus
+746:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 01 Pissprisms.opus
+747:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 02 Throwing up all these sunny sundays.opus
+748:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 03 Garden of magnetic words.opus
+749:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 04 Grey birds breeding.opus
+750:Knarkaren/put uninspired title here/Knarkaren - ...put uninspired title here... - 05 Defeated.opus
+751:Nargaroth/Nargaroth-Geliebte_Des_Regens-DE-2003-AMRC/01_Nargaroth-Intro_-_Calling_the_Rain-AMRC.opus
+752:Nargaroth/Nargaroth-Geliebte_Des_Regens-DE-2003-AMRC/02_Nargaroth-Manchmal_Wenn_Sie_Schlaeft-AMRC.opus
+753:Nargaroth/Nargaroth-Geliebte_Des_Regens-DE-2003-AMRC/05_Nargaroth-Manchmal_Wenn_Sie_Schlaeft_Alternative_Version-AMRC.opus
+754:Nargaroth/Nargaroth-Geliebte_Des_Regens-DE-2003-AMRC/06_Nargaroth-Outro_-_Leb_Wohl-AMRC.opus
+755:Nargaroth/Nargaroth-Geliebte_Des_Regens-DE-2003-AMRC/04_Nargaroth-Von_Scherbengestalten_und_Regenspaziergang-AMRC.opus
+756:Nargaroth/Nargaroth-Geliebte_Des_Regens-DE-2003-AMRC/03_Nargaroth-Wenn_Regen_Liebt-AMRC.opus
+757:Nahtrunar/2016 - Existenz/01. Wohin Jedes Wasser Fließt.opus
+758:Nahtrunar/2016 - Existenz/02. Woher Ich Stamme.opus
+759:Nahtrunar/2016 - Existenz/03. Grimnir.opus
+760:Nahtrunar/2016 - Existenz/04. Nachtraunen.opus
+761:Nahtrunar/2016 - Existenz/05. Isa Meditation.opus
+762:Nahtrunar/2016 - Existenz/06. An Archia.opus
+763:Nahtrunar/2016 - Existenz/07. Ewig In Der Wiederkehr.opus
+764:Nahtrunar/2016 - Existenz/08. Ritualistik.opus
+765:Nahtrunar/2015 - Symbolismus/01. Auf Totenritt Durch Innernachte.opus
+766:Nahtrunar/2015 - Symbolismus/02. (I).opus
+767:Nahtrunar/2015 - Symbolismus/03. Wir Leichenvogel.opus
+768:Nahtrunar/2015 - Symbolismus/04. (II).opus
+769:Nahtrunar/2015 - Symbolismus/05. Gestaltenwandler.opus
+770:Nahtrunar/2015 - Symbolismus/06. (III).opus
+771:Nahtrunar/2015 - Symbolismus/07. Symbolismus.opus
+772:Nahtrunar/2015 - Symbolismus/08. (IV).opus
+773:Nahtrunar/2015 - Symbolismus/09. Nauthiz Notfeuer.opus
+774:Nahtrunar/2015 - Symbolismus/10. Wo Der Nachthimmel Sich Aufspreizt.opus
+775:Zweihander/Ear Slayer/Video Games-515059066.opus
+776:Zweihander/Ear Slayer/Sneak-576533082.opus
+777:Zweihander/Ear Slayer/Inferno-2907864622.opus
+778:Zweihander/Ear Slayer/Master Blaster Master-1813162794.opus
+779:Zweihander/Ear Slayer/Hong Kong-1895962867.opus
+780:Zweihander/Ear Slayer/Earwig-1290107479.opus
+781:Zweihander/Ear Slayer/Sleuth-1232230471.opus
+782:Zweihander/Ear Slayer/Winning-2716309673.opus
+783:Zweihander/Ear Slayer/Epic-741561849.opus
+784:Zweihander/Ear Slayer/Lair-1172485702.opus
+785:Zweihander/Ear Slayer/Tin Nendo-4286341927.opus
+786:Zweihander/Ear Slayer/Destroy-3634494811.opus
+787:Zweihander/Ear Slayer/Wizard Dance-1748085490.opus
+788:Zweihander/Ear Slayer/End-2265738655.opus
+789:Zweihander/Metasleuth-4022426658.opus
+790:Zweihander/My Teeth-1459573504.opus
+791:Zweihander/Snakes Everywhere-4062514489.opus
+792:Zweihander/The Train-632741831.opus
+793:Zweihander/Sneaky Bastard-3404247299.opus
+794:Zweihander/The Escape-1886437094.opus
+795:Zweihander/The Gaze of Raccoons-1160079390.opus
+796:Zweihander/Interlude-2983061196.opus
+797:Zweihander/Satan's Shiny Shoes-3339496948.opus
+798:Zweihander/Togakure Ryu-2888449324.opus
+799:Zweihander/Catacombs-1160714939.opus
+800:Zweihander/Entry to Höllental Depths-544794793.opus
+801:Zweihander/Hollental/Slay The Chopper-290855387.opus
+802:Zweihander/Hollental/Bite-681166293.opus
+803:Zweihander/Hollental/Dragons Must Be Lonely-3048120608.opus
+804:Zweihander/Hollental/You Missed Your Train-2786967444.opus
+805:Zweihander/Hollental/Road to Nowhere-1907470007.opus
+806:Zweihander/Hollental/Somewhen Else-2506699776.opus
+807:Zweihander/Hollental/Sorry, You're Out of Time-1850999561.opus
+808:Zweihander/Hollental/It Came From The Mountains-3118106658.opus
+809:Zweihander/Hollental/Forest Maze-2214464376.opus
+810:Zweihander/Hollental/Forest Escape-882081871.opus
+811:Zweihander/Hollental/Baphomet on the Keys-2763977041.opus
+812:Zweihander/Hollental/They Could Be Anywhere-3339100593.opus
+813:Zweihander/Hollental/Kobolds Everywhere-1984464503.opus
+814:Zweihander/Hollental/Inaction-498458357.opus
+815:Zweihander/Hollental/Hell's Valley-786974739.opus
 playlist_end
