@@ -28,7 +28,7 @@ call plug#begin('~/.vim/vim-plug')
 " Applications
 Plug 'vimwiki/vimwiki'
 " Plug 'iamcco/markdown-preview.vim'
-Plug 'kien/ctrlp.vim' " fuzzy finder
+Plug 'ctrlpvim/ctrlp.vim' " fuzzy finder
 
 " Themes & Frippery
 " Plug 'vim-airline/vim-airline-themes' " powerline-inspired status bar
@@ -199,7 +199,7 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
 let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<c-n>'
+let g:multi_cursor_next_key='<c-m>'
 let g:multi_cursor_prev_key='<c-p>'
 let g:multi_cursor_skip_key='<c-x>'
 let g:multi_cursor_quit_key='<esc>'
@@ -240,6 +240,12 @@ let g:vimwiki_list = [
             \]
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 map <silent><leader>md :MarkdownPreview<CR>
+
+
+
+" ctrlp ignores
+set wildignore+=/home/mitch/music,/home/mitch/videos,/home/mitch/books,/home/mitch/images,*.opus,*.flac,*.pdf,*.jpg,*.png,*.so,*.swp,*.zip,*.gzip,*.bz2,*.tar,*.xz,*.lrzip,*.lrz,*.mp3,*.ogg,*.mp4,*.gif,*.jpeg,*.webm
+
 " --------------------------------------------------------------
 
 " -------- External Programs ---------------------------------
