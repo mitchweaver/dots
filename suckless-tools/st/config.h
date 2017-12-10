@@ -1,6 +1,33 @@
 char font[] = "Terminus:pixelsize=14:antialias=false:autohint=false";
 /* char font[] = "DejaVuSans Mono:pixelsize=12:antialias=true:autohint=true"; */
-int borderpx = 4; /* Internal border */
+
+#include "ashes-dark-theme.h"
+/* #include "ashes-light-theme.h" */
+/* #include "mocha-dark-theme.h" */
+/* #include "mocha-light-theme.h" */
+/* #include "navy-and-ivory-theme.h" */
+/* #include "visibone-theme.h" */
+/* #include "tomorrow-dark-theme.h" */
+/* #include "ocean-dark-theme.h" */
+/* #include "hund-theme.h" */
+
+unsigned int alpha = 0xdd; // opacity
+/* unsigned int alpha = 0xcc; // opacity */
+/* unsigned int alpha = 0xFF; // no opacity --- but ignore, just kill compton */
+
+int borderpx = 6; /* Internal border */
+
+
+
+
+
+
+/* ---------------------------------------------------------------------- */
+
+
+
+
+
 
 static char *utmp = NULL;
 
@@ -8,9 +35,6 @@ static char *utmp = NULL;
 int disablebold = 0;
 int disableitalic = 0;
 int disableroman = 0;
-
-/* identification sequence returned in DA and DECID */
-static char vtiden[] = "\033[?6c";
 
 /* Kerning / character bounding-box multipliers */
 float cwscale = 1.0;
@@ -30,37 +54,10 @@ static int bellvolume = 0;
 char termname[] = "st-256color";
 static unsigned int tabspaces = 4;
 
-/* background opacity */
-unsigned int alpha = 0xcc;
-/* NO background opacity */
-/* unsigned int alpha = 0xFF; */
-
-// ~~~~~~~~~~~~~~~ TERMINAL COLOURS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
-#include "temp.h"
 /* #include "dracula-theme.h" */
 /* #include "solarized-light.h" */
 #include "solarized-dark.h"
-/* #include "lucius-light.h" */
-
-/* unsigned int defaultfg = 12; */
-/* unsigned int defaultcs = 14; */
-/* unsigned int defaultrcs = 15; */
-
-// good backgrounds
-/* unsigned int defaultbg = 256; */
-/* unsigned int defaultbg = 8; */
-/* unsigned int defaultbg = 0; */
-
-// lucius-light
-/* unsigned int defaultfg = 257; */
-
-/* unsigned int defaultfg = 257; */
-/* unsigned int defaultbg = 257; */
-/* unsigned int defaultcs = 257; */
 unsigned int defaultrcs = 257;
-
-// mouse cursor color for lucius-light
-// *cursorColor: #5f87af
 
 /* Default columns and rows numbers (defualt is 80x24) */
 unsigned int cols = 60;
@@ -85,6 +82,7 @@ MouseKey mkeys[] = {
 
 #define ALT Mod1Mask
 #define CONTROL ControlMask
+#define SHIFT ShiftMask
 Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
@@ -93,6 +91,7 @@ Shortcut shortcuts[] = {
 	{ CONTROL,              XK_Home,        zoomreset,      {.f =  0} },
 	{ CONTROL,              XK_C,           clipcopy,       {.i =  0} },
 	{ CONTROL,              XK_V,           clippaste,      {.i =  0} },
+    { SHIFT,                XK_Insert,      clippaste,      {.i =  0} },
 	{ CONTROL,              XK_Y,           selpaste,       {.i =  0} },
 	{ CONTROL,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ CONTROL,              XK_I,           iso14755,       {.i =  0} },
@@ -336,3 +335,5 @@ unsigned int cursorshape = 2;
  * doesn't match the ones requested. */
 unsigned int defaultattr = 11;
 
+/* identification sequence returned in DA and DECID */
+static char vtiden[] = "\033[?6c";

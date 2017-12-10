@@ -23,8 +23,8 @@
   [15] = "#ffffff", /* white   */
 
   /* special colors */
-  [256] = "#ffffff", /* background */
-  [257] = "#373b41", /* foreground */
+  [256] = "#1d1f21", /* background */
+  [257] = "#c5c8c6", /* foreground */
 };
 
 /*

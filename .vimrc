@@ -31,11 +31,11 @@ Plug 'vimwiki/vimwiki'
 Plug 'kien/ctrlp.vim' " fuzzy finder
 
 " Themes & Frippery
-Plug 'vim-airline/vim-airline-themes' " powerline-inspired status bar
-Plug 'vim-airline/vim-airline' " see above -^
+" Plug 'vim-airline/vim-airline-themes' " powerline-inspired status bar
+" Plug 'vim-airline/vim-airline' " see above -^
 Plug 'flazz/vim-colorschemes' " just a bunch of colorschemes
 " Plug 'altercation/vim-colors-solarized' " solarized colorschemes
-Plug 'jonathanfilip/vim-lucius' " lucius colorscheme
+" Plug 'jonathanfilip/vim-lucius' " lucius colorscheme
 
 " UI mods
 " Plug 'HeroicEric/vim-tabline' " shows full path in tab names
@@ -68,31 +68,26 @@ map <leader>pc :PlugClean<CR>
 " --------------------------------------------------------------
 
 " ------------- COLORSCHEME ------------------------------------
-" colorscheme solarized
-" colorscheme zenburn
 " colorscheme newspaper
-" colorscheme neverland
-colorscheme lucius
-LuciusDarkHighContrast
+" colorscheme lucius
+" LuciusDarkHighContrast
 " LuciusDarkLowContrast
 " LuciusLightHighContrast
 
-" set background=dark
+set background=dark
 " set background=light
 
 " disables background:
 " hi Normal ctermbg=NONE
 
-let g:airline_theme='lucius'
+" let g:airline_theme='lucius'
 " let g:airline_theme='papercolor'
-" let g:airline_theme='solarized'
-" let g:airline_theme='zenburn'
 " ---------------------------------------------------------------
 
 " -------------- Vim Specific Configs -------------------------
-" set mouse=a " NOTE THIS BREAKS MIDDLE CLICK PASTE on some terminals
+set mouse=a " NOTE THIS BREAKS MIDDLE CLICK PASTE on some terminals
 set backspace=indent,eol,start
-set updatetime=500 " how long til vim does background calls after typing
+set updatetime=750 " how long til vim does background calls after typing
 
 " Enter will now also clear the highlights from searches
 nnoremap <silent> <CR> :noh<CR><CR>
@@ -101,7 +96,7 @@ nnoremap <silent> <CR> :noh<CR><CR>
 nnoremap <silent><esc> :noh<return><esc>
 nnoremap <silent><esc>^[ <esc>^[
 
-" Disable bottom status line
+" Disable bottom status line / statusbar
 set laststatus=0
 
 " makes vim yank/paste to/from the system clipboard
@@ -120,9 +115,10 @@ set undoreload=2000
 " match ExtraWhitespace /\s\+$\|\t/
 
 set formatoptions+=o " continue comment marker on new lines
-set number " enables line numbers on startup
-set ruler " show where you are
-set relativenumber " shows line numbers relative to position
+" set number " enables line numbers on startup
+" set relativenumber " shows line numbers relative to position
+" set ruler " show where you are
+
 
 " Toggle line numbeing on/off
 map <silent><leader>ln :set number! relativenumber!<cr>
@@ -166,11 +162,11 @@ nnoremap tl  :tablast<CR>
 
 nnoremap <C-h>  :tabfirst<CR>
 nnoremap <C-k>  :tabnext<CR>
-nnoremap <C-j> :tabprev<CR>
+nnoremap <C-j>  :tabprev<CR>
 nnoremap <C-l>  :tablast<CR>
 
 nnoremap tt  :tabedit<Space>
-
+nnoremap tn  :tabnew<CR>
 nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 " ------------------------------------------------------------
@@ -183,7 +179,7 @@ set showmatch " live match highlighting
 set hlsearch " highlight matches
 set gdefault " use the `g` flag by default.
 set magic " 'magic' patterns - (extended regex)
-map <silent><leader>/ :nohlsearch<CR><CR>
+map <silent><leader>/ :nohlsearch<CR>
 " Search and Replace
 nmap <Leader>s :%s//g<Left><Left>
 " -------------------------------------------------------------
@@ -220,13 +216,13 @@ let g:ale_lint_on_enter = 0
 let b:ale_warn_about_trailing_whitespace = 0 " fucking annoying
 
 " ---------------- airline settings --------------------
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 " airline tabline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
 " airline ALE integration
-let g:airline#extensions#ale#enabled = 1
+" let g:airline#extensions#ale#enabled = 1
 " ------------ Vim Wiki ---------------------------------------
 let wiki = {}
 let g:vimwikidir = "/home/mitch/files/vimwiki"
@@ -250,7 +246,6 @@ map <silent><leader>md :MarkdownPreview<CR>
 "Make calcurse notes markdown compatible:
 autocmd BufRead,BufNewFile /tmp/calcurse* set filetype=markdown
 autocmd BufRead,BufNewFile ~/.calcurse/notes/* set filetype=markdown
-
 
 " Use ranger as a vim file chooser!
 function! RangerChooser()
@@ -279,9 +274,5 @@ command! -bar RangerChooser call RangerChooser()
 nnoremap <leader>r :<C-U>RangerChooser<CR>
 " -------------------------------------------------------------
 
-" #################### END ########################################
-
-" Not sure what these do:
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Not sure what this does:
 " set so=10
-" set laststatus=2

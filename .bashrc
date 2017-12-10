@@ -147,15 +147,19 @@ recomp() {
 gitup() {
     git add -A && git commit -m "$@" && git push -u origin master
 }
+gitadd() {
+    git add "$@"
+}
 gitmit() {
-    if [ $# -eq 0 ] ; then
-        git add -A && git commit -m "$@"
-    else
-        # this garble means "all but last" and then "the last"
-        foo="$@"
-        git add "${foo[@]::${#foo[@]}-1}" 2> /dev/null && git commit -m "${@:(-1)}" 
+    git add "$1" && git commit -m "${@:(-1)}"
+    # if [ $# -eq 0 ] ; then
+    #     git add -A && git commit -m "$@"
+    # else
+    #     # this garble means "all but last" and then "the last"
+    #     foo="$@"
+    #     git add "${foo[@]::${#foo[@]}-1}" 2> /dev/null && git commit -m "${@:(-1)}" 
 
-    fi
+    # fi
 }
 gitout() {
     if [ $# -eq 0 ] ; then 

@@ -2,8 +2,8 @@ sw_volume: 100
 audio_device_state:1:alsa audio
 audio_device_state:1:my_fifo
 state: play
-current: 803
-time: 4.096000
+current: 477
+time: 727.370000
 random: 0
 repeat: 0
 single: 0
@@ -828,4 +828,26 @@ playlist_begin
 813:Zweihander/Hollental/Kobolds Everywhere-1984464503.opus
 814:Zweihander/Hollental/Inaction-498458357.opus
 815:Zweihander/Hollental/Hell's Valley-786974739.opus
+816:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/01 - Dia Artio.opus
+817:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/02 - Vastness And Sorrow.opus
+818:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/03 - Cleansing.opus
+819:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/04 - I Will Lay Down My Bones Among The Rocks And Roots.opus
+820:Wolves In The Throne Room/Wolves in the Throne Room - Two Hunters [2007] [Vinyl@320]/05 - To Reveal.opus
+821:Wolves In The Throne Room/Black Cascade/01 Wanderer Above the Sea of Fog.opus
+822:Wolves In The Throne Room/Black Cascade/02 Ahrimanic Trance.opus
+823:Wolves In The Throne Room/Black Cascade/03 Ex Cathedra.opus
+824:Wolves In The Throne Room/Black Cascade/04 Crystal Ammunition.opus
+825:Master's Hammer/Ritual/Master's Hammer - Ritual (1991, Full Album).opus
+826:Wedard/Wedard - Eiskrieg II (Full EP).opus
+827:Walknut/Walknut - Graveforests and Their Shadows (Full Album).opus
+828:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Arcane Pharmakon Messiah".opus
+829:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Blood Vaults (II - Our Despots Cleanse the Levant)".opus
+830:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "God's Ensanguined Bestiaries".opus
+831:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "I Raised This Stone As A Ghastly Memorial".opus
+832:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Kain's Countenance Fell".opus
+833:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Mount Sinai Moloch".opus
+834:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "The Restless Mills".opus
+835:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Theriak - Baal - Theriak".opus
+836:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Transcending Saturnine Iericho Skies".opus
+837:A Transylvanian Funeral/self-titled/Asmoday Unbound-415178527.opus
 playlist_end

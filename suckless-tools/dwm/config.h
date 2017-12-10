@@ -3,7 +3,7 @@ static unsigned int gappx = 10; /* gap pixel between windows */
 static const unsigned int gapX = 10;
 static const unsigned int gapY = 10;
 
-static unsigned int borderpx  = 1; /* border pixel of windows */
+static unsigned int borderpx  = 5; /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int minwsz    = 10;       /* min height for smfact */
 static const char *fonts[]        = { "terminus:pixelsize=12:antialias=false" };
@@ -13,14 +13,19 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
+static const char bright_blue[]     = "#8DEEEE";
 static const char gray_purple[] = "#332a2a";
 static const char pink[] = "#ffbad2";
 static const char col_red[] = "#ee4444";
 static const char yellow[] = "#ffe863";
+
+/* make sure to set this to the background of st */
+static const char ST_BACKGROUND[] = "#373B41";
+
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray4 }, // the unfocused wins
-	[SchemeSel]  = { col_gray4, gray_purple, yellow }, // the focused win
+	[SchemeNorm] = { col_gray3, col_gray1, ST_BACKGROUND, NULL }, // the unfocused wins
+	[SchemeSel]  = { bright_blue, gray_purple, bright_blue, bright_blue }, // the focused win
     [SchemeUrg] =  { col_gray4, col_red, col_red },
 };
 
@@ -82,10 +87,10 @@ static const char *screenshot[] = { "screenshot", NULL };
 static void toggle_gaps(){
     if(gappx == 0){
         gappx = gapX;
-        borderpx = 1;
+        /* borderpx = 3; */
     } else {
         gappx = 0;
-        borderpx = 2;
+        /* borderpx = 3; */
     }
 }
 
