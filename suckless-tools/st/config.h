@@ -19,19 +19,11 @@ int borderpx = 6; /* Internal border */
 
 
 
-
-
-
 /* ---------------------------------------------------------------------- */
-
-
-
-
 
 
 static char *utmp = NULL;
 
-/* disable bold, italic and roman fonts globally */
 int disablebold = 0;
 int disableitalic = 0;
 int disableroman = 0;
@@ -68,7 +60,6 @@ unsigned int mouseshape = XC_xterm;
 unsigned int mousefg = 7;
 unsigned int mousebg = 0;
 
-
 MouseShortcut mshortcuts[] = {
  	/* button               mask            string */
 };
@@ -80,26 +71,27 @@ MouseKey mkeys[] = {
 };
 
 
-#define ALT Mod1Mask
 #define CONTROL ControlMask
 #define SHIFT ShiftMask
 Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
-	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
 	{ CONTROL,              XK_equal,       zoom,           {.f = +1} },
 	{ CONTROL,              XK_minus,       zoom,           {.f = -1} },
-	{ CONTROL,              XK_Home,        zoomreset,      {.f =  0} },
-	{ CONTROL,              XK_C,           clipcopy,       {.i =  0} },
-	{ CONTROL,              XK_V,           clippaste,      {.i =  0} },
+	{ CONTROL,              XK_BackSpace,   zoomreset,      {.f =  0} },
     { SHIFT,                XK_Insert,      clippaste,      {.i =  0} },
-	{ CONTROL,              XK_Y,           selpaste,       {.i =  0} },
-	{ CONTROL,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ CONTROL,              XK_I,           iso14755,       {.i =  0} },
-   	{ XK_ANY_MOD,           XK_F6,          swapcolors,     {.i =  0} },
-	{ CONTROL,              XK_l,           copyurl,        {.i =  0} },
 	{ CONTROL,              XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ CONTROL,              XK_Page_Down,   kscrolldown,    {.i = -1} },
-    { ALT,                  XK_l,           copyurl,        {.i = 0} },
+	{ CONTROL,              XK_l,           copyurl,        {.i =  0} },
+
+    // not sure what this one does:
+	/* { CONTROL,              XK_I,           iso14755,       {.i =  0} }, */
+	
+    /* { XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} }, */
+	/* { CONTROL,              XK_Num_Lock,    numlock,        {.i =  0} }, */
+   	/* { CONTROL,              XK_C,           clipcopy,       {.i =  0} }, */
+	/* { CONTROL,              XK_V,           clippaste,      {.i =  0} }, */
+	/* { CONTROL,              XK_Y,           selpaste,       {.i =  0} }, */
+    /* { XK_ANY_MOD,           XK_F6,          swapcolors,     {.i =  0} }, */
 };
 
 /* If you want keys other than the X11 function keys (0xFD00 - 0xFFFF)

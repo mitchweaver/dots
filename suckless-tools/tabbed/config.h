@@ -1,10 +1,10 @@
-static const char font[]        = "terminus:pixelsize=12:antialias=false";
-static const char* selbgcolor  = "#ABA39F";
-static const char* selfgcolor  = "#ffffff";
-static const char* normbgcolor   = "#000000";
-static const char* normfgcolor   = "#ffffff";
-static const char* urgbgcolor   = "#111111";
-static const char* urgfgcolor   = "#cc0000";
+static const char font[]        = "Terminus:pixelsize=12:antialias=false:autohint=false";
+static const char* selbgcolor  = "#5F819D";
+static const char* selfgcolor  = "#DCDFDD";
+static const char* normbgcolor   = "#373B41";
+static const char* normfgcolor   = "#DCDFDD";
+static const char* urgbgcolor   = "#CC6666";
+static const char* urgfgcolor   = "#ffffff";
 static const char before[]      = "<";
 static const char after[]       = ">";
 static const char titletrim[]   = "...";
@@ -38,6 +38,7 @@ static Key keys[] = {
      /* ------ shifts to next tab ------ */
     { MODKEY|ShiftMask,     XK_k,      rotate,      { .i = +1 } },
     { MODKEY|ShiftMask,     XK_j,      rotate,      { .i = -1 } },
+    
     { MODKEY,               XK_Tab,    rotate,      { .i = +1 } },
     { MODKEY|ShiftMask,     XK_Tab,    rotate,      { .i = -1 } },
     { ShiftMask,            XK_Tab,    rotate,      { .i = 0 } }, // back-&-forth
@@ -47,7 +48,10 @@ static Key keys[] = {
     { MODKEY|ShiftMask,     XK_l,      movetab,     { .i = +1 } },
 
 	{ MODKEY,               XK_w,      killclient,  { 0 } },
-	/* { MODKEY,               XK_m,  spawn,       SETPROP("_TABBED_SELECT_TAB") }, */ // <<--- not working atm?
+
+    /* this opens dmenu to rifle through tabs */
+	{ MODKEY,               XK_m,  spawn,       SETPROP("_TABBED_SELECT_TAB") },
+
 	{ MODKEY,               XK_1,      move,        { .i = 0 } },
 	{ MODKEY,               XK_2,      move,        { .i = 1 } },
 	{ MODKEY,               XK_3,      move,        { .i = 2 } },
@@ -58,7 +62,7 @@ static Key keys[] = {
 	{ MODKEY,               XK_8,      move,        { .i = 7 } },
 	{ MODKEY,               XK_9,      move,        { .i = 8 } },
 	{ MODKEY,               XK_0,      move,        { .i = 9 } },
-	/* { MODKEY,               XK_u,      focusurgent, { 0 } }, */
+	{ MODKEY,               XK_u,      focusurgent, { 0 } },
 	/* { MODKEY|ShiftMask,     XK_u,      toggle,      { .v = (void*) &urgentswitch } }, */
 	{ 0,                    XK_F11,    fullscreen,  { 0 } },
 };

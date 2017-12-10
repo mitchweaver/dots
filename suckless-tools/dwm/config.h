@@ -6,8 +6,8 @@ static const unsigned int gapY = 10;
 static unsigned int borderpx  = 5; /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int minwsz    = 10;       /* min height for smfact */
-static const char *fonts[]        = { "terminus:pixelsize=12:antialias=false" };
-static const char dmenufont[]       = "terminus:pixelsize=12:antialias=false";
+static const char *fonts[]        = { "Terminus:pixelsize=12:antialias=false:autohint=false" };
+static const char dmenufont[]       = "Terminus:pixelsize=12:antialias=false:autohint=false";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -67,8 +67,8 @@ static const Layout layouts[] = {
 #define SH(cmd) { .v = (const char*[]){ "/bin/dash", "-c", cmd, NULL } }
 static char dmenumon[2] = "0";
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-/* static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL }; */
-static const char *term[]  = { "st", NULL };
+static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL };
+/* static const char *term[]  = { "st", NULL }; */
 static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
 static const char *dedit[] = { "dedit", NULL };
 static const char *clipboard[] = { "clipmenu", NULL };

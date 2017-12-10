@@ -32,7 +32,8 @@ IGNORE="-I *.bak \
         -I .wget-hsts \
         -I .zsh-update"
 
-EDITOR='st -e nvim'
+# EDITOR='tabbed -c -r 2 st -w -e nvim'
+EDITOR='st -w -e nvim'
 # ------------------------------------------------------ #
 
 # default dmenu args - (notice inverted color scheme)
@@ -48,10 +49,10 @@ SELECTION=$(ls $IGNORE -HBLap ${FOLDERS} | grep -v / | $DMENU -p 'File to edit:'
 
 # As is, this checks to see if a file exists before running the editor
 # ---- You can delete this except for the $EDITOR line in order to create new files
-if [ $SELECTION ]; then
+if [ "$SELECTION" ]; then
     for folder in $FOLDERS ; do
-        if [ -f $folder/$SELECTION ] ; then
-            $EDITOR $folder/$SELECTION ; exit
+        if [ -f $folder/"$SELECTION" ] ; then
+            $EDITOR $folder/"$SELECTION" ; exit
         fi
     done
 fi
