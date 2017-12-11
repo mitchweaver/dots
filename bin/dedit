@@ -9,6 +9,7 @@
 # These are some of mine, just for examples
 FOLDERS="$HOME/workspace/dotfiles \
         $HOME/workspace/dotfiles/.config \
+        $HOME/workspace/dotfiles/.config/Discline \
         $HOME/bin \
         $HOME/downloads \
         $HOME/tmp \

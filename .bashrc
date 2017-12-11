@@ -196,4 +196,4 @@ alias ping='ping mitchweaver.xyz'
 # when switching between eth0 to wlan0, openvpn must be restarted
 alias restart-vpn="killall openvpn ; cd /etc/openvpn ; openvpn Switzerland.ovpn &"
 
-alias discord="cd ~/workspace/Discline ; c ; ./start.sh"
+alias discord="cd ~/workspace/Discline ; c ; python3.6 Discline.py"

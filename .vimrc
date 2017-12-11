@@ -90,11 +90,11 @@ set backspace=indent,eol,start
 set updatetime=750 " how long til vim does background calls after typing
 
 " Enter will now also clear the highlights from searches
-nnoremap <silent> <CR> :noh<CR><CR>
+nnoremap <silent><CR> :noh<CR><CR>
 
 " Clear highlighting on escape in normal mode
 nnoremap <silent><esc> :noh<return><esc>
-nnoremap <silent><esc>^[ <esc>^[
+nnoremap <silent><esc> ^[ <esc>^[
 
 " Disable bottom status line / statusbar
 set laststatus=0

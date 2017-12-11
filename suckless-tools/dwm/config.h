@@ -90,10 +90,10 @@ static const char *screenshot[] = { "screenshot", NULL };
 static void toggle_gaps(){
     if(gappx == 0){
         gappx = gapX;
-        /* borderpx = 3; */
+        borderpx = 5;
     } else {
         gappx = 0;
-        /* borderpx = 3; */
+        borderpx = 4;
     }
 }
 

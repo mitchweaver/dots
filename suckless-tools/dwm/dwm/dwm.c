@@ -1331,13 +1331,21 @@ resizeclient(Client *c, int x, int y, int w, int h)
 
 	wc.border_width = c->bw;
 
-    if (((nexttiled(c->mon->clients) == c && !nexttiled(c->next))
-	    || &monocle == c->mon->lt[c->mon->sellt]->arrange)
-	    && !c->isfullscreen) {
-		c->w = wc.width += c->bw * 2;
-		c->h = wc.height += c->bw * 2;
-		wc.border_width = 0;
-	}
+    // ----------------------------------------------------------- //
+    //  This is patch to hide border when only 1 window
+    //  but it doesn't hide the spacing of the border
+    //  so the window seems off-centered. If you're reading this
+    //  and know a fix, please do and submit a PR!
+    /* if (((nexttiled(c->mon->clients) == c && !nexttiled(c->next)) */
+	    /* || &monocle == c->mon->lt[c->mon->sellt]->arrange) */
+	    /* && !c->isfullscreen) { */
+		/* c->w = wc.width += c->bw * 2; */
+		/* c->h = wc.height += c->bw * 2; */
+		/* wc.border_width = 0; */
+	/* } */
+    // ----------------------------------------------------------- //
+
+
 
 	/* Get number of clients for the selected monitor */
 	for (n = 0, nbc = nexttiled(selmon->clients); nbc; nbc = nexttiled(nbc->next), n++);
