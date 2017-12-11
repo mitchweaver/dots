@@ -126,7 +126,7 @@ map <silent><leader>ln :set number! relativenumber!<cr>
 set noshowmode
 set showmatch " show matching parens
 set cursorline " show current line
-set colorcolumn=80
+" set colorcolumn=80
 " ------------------------------------------------------------
 
 " ------ FORMATTING -----------------------------------------
@@ -256,7 +256,9 @@ autocmd BufRead,BufNewFile ~/.calcurse/notes/* set filetype=markdown
 " Use ranger as a vim file chooser!
 function! RangerChooser()
     let temp = tempname()
-    exec 'silent !ranger --choosefiles=' . shellescape(temp)
+    exec 'silent !st -e ranger --choosefiles=' . shellescape(temp)
+    " can't seem to get this to work, it used to... =(
+    " exec 'silent !ranger --choosefiles=' . shellescape(temp)
     if !filereadable(temp)
         redraw!
         " Nothing to read.

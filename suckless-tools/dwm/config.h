@@ -7,7 +7,7 @@ static unsigned int borderpx  = 5; /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int minwsz    = 10;       /* min height for smfact */
 static const char *fonts[]        = { "Terminus:pixelsize=12:antialias=false:autohint=false" };
-static const char dmenufont[]       = "Terminus:pixelsize=12:antialias=false:autohint=false";
+/* static const char dmenufont[]       = "Terminus:pixelsize=12:antialias=false:autohint=false"; */
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -23,18 +23,18 @@ static const char yellow[] = "#ffe863";
 static const char ST_BACKGROUND[] = "#373B41";
 
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, ST_BACKGROUND, NULL }, // the unfocused wins
-	[SchemeSel]  = { bright_blue, gray_purple, bright_blue, bright_blue }, // the focused win
-    [SchemeUrg] =  { col_gray4, col_red, col_red },
+/*               fg         bg         border   */
+[SchemeNorm] = { col_gray3, col_gray1, ST_BACKGROUND, NULL }, // the unfocused wins
+[SchemeSel]  = { bright_blue, gray_purple, bright_blue, bright_blue }, // the focused win
+[SchemeUrg] =  { col_gray4, col_red, col_red },
 };
 
 static const char *tags[] = { "", "", "", "", "", "", "", "", "", \
-                                "", "", "", "" }; /* workspace names */
+                            "", "", "", "" }; /* workspace names */
 
 static const Rule rules[] = {
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+/* class      instance    title       tags mask     isfloating   monitor */
+{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 };
 
 static const float mfact  = 0.50; /* factor of master area size [0.05..0.95] */
@@ -45,28 +45,31 @@ static const int nmaster     = 1;    /* number of clients in master area */
 #include "horizgrid.c"
 #include "fibonacci.c"
 static const Layout layouts[] = {
-    /* symbol     arrange function */
-    { "[T]",      tile },    /* first entry is default */
-    { "[F]",      NULL },    /* no layout function means floating behavior */
-    { "[GGG]", grid },
-    { "[TTT]", bstack},
-    { "[MMM]", centeredmaster },
-    { "[HHH]", horizgrid },
-    { "[FFF]", dwindle },
+/* symbol     arrange function */
+{ "[T]",      tile },    /* first entry is default */
+{ "[F]",      NULL },    /* no layout function means floating behavior */
+{ "[GGG]", grid },
+{ "[TTT]", bstack},
+{ "[MMM]", centeredmaster },
+{ "[HHH]", horizgrid },
+{ "[FFF]", dwindle },
 };
 
 #define mod1 Mod1Mask 
 #define mod4 Mod4Mask
 #define TAGKEYS(KEY,TAG) \
-	{ mod1,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ mod1|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ mod1|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ mod1|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+{ mod1,                       KEY,      view,           {.ui = 1 << TAG} }, \
+{ mod1|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+{ mod1|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+{ mod1|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 
 #define SH(cmd) { .v = (const char*[]){ "/bin/dash", "-c", cmd, NULL } }
 static char dmenumon[2] = "0";
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+/* static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; */
+
+static const char *dmenucmd[] = { "dmenu_run" };
+
 static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL };
 /* static const char *term[]  = { "st", NULL }; */
 static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };

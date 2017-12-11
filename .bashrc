@@ -162,11 +162,12 @@ gitmit() {
     # fi
 }
 gitout() {
-    if [ $# -eq 0 ] ; then 
-        git push -u origin master
-    else
-        git push -u origin "$@"
-    fi
+    git push -u origin $(git rev-parse --abbrev-ref HEAD)
+    # if [ $# -eq 0 ] ; then 
+    #     git push -u origin master
+    # else
+    #     git push -u origin "$@"
+    # fi
 }
 gitbase() {
     if [ $# -eq 0 ] ; then
@@ -195,4 +196,4 @@ alias ping='ping mitchweaver.xyz'
 # when switching between eth0 to wlan0, openvpn must be restarted
 alias restart-vpn="killall openvpn ; cd /etc/openvpn ; openvpn Switzerland.ovpn &"
 
-alias discord="cd ~/workspace/terminal-discord ; c ; ./start.sh"
+alias discord="cd ~/workspace/Discline ; c ; ./start.sh"

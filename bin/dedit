@@ -6,6 +6,7 @@
 
 # ------------- CONFIGURATION -------------------------- #
 # folders you wish to source
+# These are some of mine, just for examples
 FOLDERS="$HOME/workspace/dotfiles \
         $HOME/workspace/dotfiles/.config \
         $HOME/bin \
@@ -14,7 +15,7 @@ FOLDERS="$HOME/workspace/dotfiles \
         $HOME \
         $HOME/workspace/dotfiles/.config/ranger \
         $HOME/workspace/dotfiles/suckless-tools/CONFIGS \
-        $HOME/workspace/dotfiles/DisKvlt-Bot"
+        $HOME/workspace/DisKvlt-Bot"
 
 # files you dont want to see in dmenu
 IGNORE="-I *.bak \
@@ -30,18 +31,22 @@ IGNORE="-I *.bak \
         -I .zsh_history \
         -I .recently-used \
         -I .wget-hsts \
-        -I .zsh-update"
+        -I .zsh-update \
+        -I .git \
+        -I .gitignore \
+        -I .gitconfig"
 
-# EDITOR='tabbed -c -r 2 st -w -e nvim'
+# change this to your editor and/or terminal emulator
 EDITOR='st -w -e nvim'
+
+# place your custom dmenu arguments here:
+DMENU="dmenu -l 10 -i"
 # ------------------------------------------------------ #
 
-# default dmenu args - (notice inverted color scheme)
-DMENU='dmenu -l -i -nb #ffffff -nf #000000 -sb #000000 -sf #ffffff'
 
 # if command line args are specified, dmenu will run with those instead
-if [ $1 ] ; then
-    DMENU='dmenu "$1"'
+if [ $# -gt 0 ] ; then
+    DMENU='dmenu "$@"'
 fi
 
 # note: the ls arguments are important, please don't break the script ;)
@@ -49,7 +54,7 @@ SELECTION=$(ls $IGNORE -HBLap ${FOLDERS} | grep -v / | $DMENU -p 'File to edit:'
 
 # As is, this checks to see if a file exists before running the editor
 # ---- You can delete this except for the $EDITOR line in order to create new files
-if [ "$SELECTION" ]; then
+if [ $SELECTION ]; then
     for folder in $FOLDERS ; do
         if [ -f $folder/"$SELECTION" ] ; then
             $EDITOR $folder/"$SELECTION" ; exit
