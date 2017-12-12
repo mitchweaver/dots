@@ -86,6 +86,7 @@ static const char *mpdseekff[] = { "mpc", "-q", "seek", "+00:00:30", NULL };
 static const char *mpdseekrw[] = { "mpc", "-q", "seek", "-00:00:30", NULL };
 static const char *slock[] = { "slock", NULL };
 static const char *screenshot[] = { "screenshot", NULL };
+static const char *xdgopen[] = { "/home/mitch/workspace/dotfiles/suckless-tools/dwm/scripts-dwm/xdgopen.sh", NULL };
 
 static void toggle_gaps(){
     if(gappx == 0){
@@ -117,6 +118,8 @@ static Key keys[] = {
 
     { mod1,                     XK_bracketleft,   spawn,    {.v = mpdseekrw }},
     { mod1,                     XK_bracketright,  spawn,    {.v = mpdseekff }},
+    
+    /* { ControlMask,         XK_l,       spawn,          {.v = xdgopen } }, */
     
     // xf86 keys must be in octal
     { 0,                        0x1008ff12, spawn,          {.v = volmute }},

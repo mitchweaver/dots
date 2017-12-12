@@ -1,4 +1,3 @@
-/* See LICENSE for license details. */
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -500,8 +499,7 @@ selnormalize(void)
 }
 
 int
-selected(int x, int y)
-{
+selected(int x, int y) {
 	if (sel.mode == SEL_EMPTY)
 		return 0;
 
@@ -515,8 +513,7 @@ selected(int x, int y)
 }
 
 void
-selsnap(int *x, int *y, int direction)
-{
+selsnap(int *x, int *y, int direction) {
 	int newx, newy, xt, yt;
 	int delim, prevdelim;
 	Glyph *gp, *prevgp;
@@ -681,8 +678,7 @@ die(const char *errstr, ...)
 }
 
 void
-execsh(void)
-{
+execsh(void) {
 	char **args, *sh, *prog;
 	const struct passwd *pw;
 
@@ -727,8 +723,7 @@ execsh(void)
 }
 
 void
-sigchld(int a)
-{
+sigchld(int a) {
 	int stat;
 	pid_t p;
 
@@ -1006,14 +1001,12 @@ tsetdirtattr(int attr)
 }
 
 void
-tfulldirt(void)
-{
+tfulldirt(void) {
 	tsetdirt(0, term.row-1);
 }
 
 void
-tcursor(int mode)
-{
+tcursor(int mode) {
 	static TCursor c[2];
 	int alt = IS_SET(MODE_ALTSCREEN);
 
@@ -1026,8 +1019,7 @@ tcursor(int mode)
 }
 
 void
-treset(void)
-{
+treset(void) {
 	uint i;
 
 	term.c = (TCursor){{
@@ -2698,22 +2690,19 @@ match(uint mask, uint state)
 }
 
 void
-numlock(const Arg *dummy)
-{
+numlock(const Arg *dummy) {
 	term.numlock ^= 1;
 }
 
 void
-swapcolors(const Arg *dummy)
-{
+swapcolors(const Arg *dummy) {
 	usealtcolors = !usealtcolors;
 	xloadcols();
 	redraw();
 }
 
 char*
-kmap(KeySym k, uint state)
-{
+kmap(KeySym k, uint state) {
 	Key *kp;
 	int i;
 
@@ -2752,8 +2741,7 @@ kmap(KeySym k, uint state)
 }
 
 void
-cresize(int width, int height)
-{
+cresize(int width, int height) {
 	int col, row;
 
 	if (width != 0)
@@ -2769,8 +2757,7 @@ cresize(int width, int height)
 }
 
 void
-usage(void)
-{
+usage(void) {
 	die("usage: %s [-aiv] [-c class] [-f font] [-g geometry]"
 	    " [-n name] [-o file]\n"
 	    "          [-T title] [-t title] [-w windowid]"
@@ -2787,13 +2774,11 @@ void selcopy(Time);
 
 /* select and copy the previous url on screen (do nothing if there's no url).
  * known bug: doesn't handle urls that span multiple lines (wontfix)
- * known bug: only finds first url on line (mightfix)
- */
+ * known bug: only finds first url on line (mightfix) */
 void
 copyurl(const Arg *arg) {
 	/* () and [] can appear in urls, but excluding them here will reduce false
-	 * positives when figuring out where a given url ends.
-	 */
+	 * positives when figuring out where a given url ends. */
 	static char URLCHARS[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 		"abcdefghijklmnopqrstuvwxyz"
 		"0123456789-._~:/?#@!$&'*+,;=%";
@@ -2841,6 +2826,8 @@ copyurl(const Arg *arg) {
 		selnormalize();
 		tsetdirt(sel.nb.y, sel.ne.y);
 		selcopy(0);
+        // note this isn't working?
+        system("xdg-open $(xclip -o) &");
 	}
 
 	free(linestr);

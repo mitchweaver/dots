@@ -60,6 +60,9 @@ unsigned int mouseshape = XC_xterm;
 unsigned int mousefg = 7;
 unsigned int mousebg = 0;
 
+
+#define CONTROL ControlMask
+#define SHIFT ShiftMask
 MouseShortcut mshortcuts[] = {
  	/* button               mask            string */
 };
@@ -70,9 +73,8 @@ MouseKey mkeys[] = {
 	{ Button5,              XK_NO_MOD,      kscrolldown,    {.i =  1} },
 };
 
+/* void xdgopen() { system("xdg-open $(xclip -o)"); } */
 
-#define CONTROL ControlMask
-#define SHIFT ShiftMask
 Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
 	{ CONTROL,              XK_equal,       zoom,           {.f = +1} },
@@ -81,11 +83,12 @@ Shortcut shortcuts[] = {
     { SHIFT,                XK_Insert,      clippaste,      {.i =  0} },
 	{ CONTROL,              XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ CONTROL,              XK_Page_Down,   kscrolldown,    {.i = -1} },
+
+    // note copyurl has been edited to also open in xdg-open
 	{ CONTROL,              XK_l,           copyurl,        {.i =  0} },
 
     // not sure what this one does:
 	/* { CONTROL,              XK_I,           iso14755,       {.i =  0} }, */
-	
     /* { XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} }, */
 	/* { CONTROL,              XK_Num_Lock,    numlock,        {.i =  0} }, */
    	/* { CONTROL,              XK_C,           clipcopy,       {.i =  0} }, */
