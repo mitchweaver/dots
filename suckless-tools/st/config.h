@@ -1,4 +1,5 @@
 char font[] = "Terminus:pixelsize=14:antialias=false:autohint=false";
+/* char font[] = "armie:pixelsize=14:antialias=false:autohint=false"; */
 /* char font[] = "DejaVuSans Mono:pixelsize=12:antialias=true:autohint=true"; */
 
 #include "ashes-dark-theme.h"
@@ -18,24 +19,18 @@ unsigned int alpha = 0xdd; // opacity
 int borderpx = 6; /* Internal border */
 
 
+/* Default columns and rows numbers (defualt is 80x24) */
+// doesn't seem to work on launching floating in dwm?
+unsigned int cols = 60;
+unsigned int rows = 20;
 
 /* ---------------------------------------------------------------------- */
 
-
 static char *utmp = NULL;
-
-int disablebold = 0;
-int disableitalic = 0;
-int disableroman = 0;
 
 /* Kerning / character bounding-box multipliers */
 float cwscale = 1.0;
 float chscale = 1.0;
-
-static char worddelimiters[] = " `'\"()[]{}";
-unsigned int doubleclicktimeout = 300;
-unsigned int tripleclicktimeout = 600;
-int allowaltscreen = 0;
 
 /* frames per second st should at maximum draw to the screen */
 unsigned int xfps = 60;
@@ -50,10 +45,6 @@ static unsigned int tabspaces = 4;
 /* #include "solarized-light.h" */
 #include "solarized-dark.h"
 unsigned int defaultrcs = 257;
-
-/* Default columns and rows numbers (defualt is 80x24) */
-unsigned int cols = 60;
-unsigned int rows = 20;
 
 /* Default colour and shape of the mouse cursor */
 unsigned int mouseshape = XC_xterm;
@@ -71,6 +62,9 @@ MouseKey mkeys[] = {
 	/* button               mask            function        argument */
 	{ Button4,              XK_NO_MOD,      kscrollup,      {.i =  1} },
 	{ Button5,              XK_NO_MOD,      kscrolldown,    {.i =  1} },
+    { Button4,              CONTROL,        zoom,           {.f =  +1} },
+	{ Button5,              CONTROL,        zoom,           {.f =  -1} },
+
 };
 
 /* void xdgopen() { system("xdg-open $(xclip -o)"); } */
@@ -305,6 +299,12 @@ static Key key[] = {
 	{ XK_F12, /* F60 */ Mod1Mask,       "\033[24;3~",    0,    0,    0},
 };
 
+static char worddelimiters[] = " `'\"()[]{}";
+unsigned int doubleclicktimeout = 300;
+unsigned int tripleclicktimeout = 600;
+int allowaltscreen = 0;
+
+
 /* Selection types' masks.
  * Use the same masks as usual.
  * Button1Mask is always unset, to make masks match between ButtonPress.
@@ -332,3 +332,7 @@ unsigned int defaultattr = 11;
 
 /* identification sequence returned in DA and DECID */
 static char vtiden[] = "\033[?6c";
+int disablebold = 0;
+int disableitalic = 0;
+int disableroman = 0;
+
