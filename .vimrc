@@ -155,10 +155,10 @@ set autoread " when a file has changed on disk, just load it. don't ask.
 
 " -------- Tabs ----------------------------------------------
 " set tabpagemax=15 " don't allow for more than 15 tabs to be open
-nnoremap th  :tabfirst<CR>
+" nnoremap th  :tabfirst<CR>
 nnoremap tk  :tabnext<CR>
 nnoremap tj  :tabprev<CR>
-nnoremap tl  :tablast<CR>
+" nnoremap tl  :tablast<CR>
 
 nnoremap <C-h>  :tabfirst<CR>
 nnoremap <C-k>  :tabnext<CR>
@@ -199,7 +199,7 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
 let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<c-m>'
+let g:multi_cursor_next_key='<c-n>'
 let g:multi_cursor_prev_key='<c-p>'
 let g:multi_cursor_skip_key='<c-x>'
 let g:multi_cursor_quit_key='<esc>'

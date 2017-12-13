@@ -74,9 +74,13 @@ alias r="ranger"
 
 # --------------------------------------------------------------------------- #
 alias trans-shell='trans -b -I'
-alias trans='trans -no-auto -b'
 alias rtrans-shell='trans -b -from en -to de -I'
-alias rtrans='trans -from en -to de -no-auto -b'
+trans(){
+    /usr/local/bin/trans -no-auto -b "$@"
+}
+rtrans(){
+    /usr/local/bin/trans -from en -to de -no-auto -b "$@"
+}
 # --------------------------------------------------------------------------- #
 
 # --------------------------------------------------------------------------- #
@@ -162,12 +166,11 @@ gitmit() {
     # fi
 }
 gitout() {
+    # pushes out to the current branch
     git push -u origin $(git rev-parse --abbrev-ref HEAD)
-    # if [ $# -eq 0 ] ; then 
-    #     git push -u origin master
-    # else
-    #     git push -u origin "$@"
-    # fi
+}
+gitdiff() {
+    git diff origin/master
 }
 gitbase() {
     if [ $# -eq 0 ] ; then

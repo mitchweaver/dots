@@ -32,3 +32,4 @@ void xresize(int, int);
 void xselpaste(void);
 unsigned long xwinid(void);
 void xsetsel(char *, Time);
+extern char winid[64];

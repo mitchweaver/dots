@@ -37,11 +37,9 @@ unsigned int xfps = 60;
 unsigned int actionfps = 30;
 
 unsigned int blinktimeout = 800;
-static int bellvolume = 0;
 char termname[] = "st-256color";
 static unsigned int tabspaces = 4;
 
-/* #include "dracula-theme.h" */
 /* #include "solarized-light.h" */
 #include "solarized-dark.h"
 unsigned int defaultrcs = 257;
@@ -64,10 +62,11 @@ MouseKey mkeys[] = {
 	{ Button5,              XK_NO_MOD,      kscrolldown,    {.i =  1} },
     { Button4,              CONTROL,        zoom,           {.f =  +1} },
 	{ Button5,              CONTROL,        zoom,           {.f =  -1} },
-
 };
 
-/* void xdgopen() { system("xdg-open $(xclip -o)"); } */
+void history(){ system("cat ~/.bash_history | dmenu -l 12 | /bin/sh"); }
+
+/* static char *historycmd[] = { "/bin/sh", "-c", "cat ~/.bash_history | dmenu -l 12", "externalpipe", NULL }; */
 
 Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -75,8 +74,9 @@ Shortcut shortcuts[] = {
 	{ CONTROL,              XK_minus,       zoom,           {.f = -1} },
 	{ CONTROL,              XK_BackSpace,   zoomreset,      {.f =  0} },
     { SHIFT,                XK_Insert,      clippaste,      {.i =  0} },
-	{ CONTROL,              XK_Page_Up,     kscrollup,      {.i = -1} },
-	{ CONTROL,              XK_Page_Down,   kscrolldown,    {.i = -1} },
+	{ CONTROL,              XK_Page_Up,     kscrollup,      {.i = 1} },
+	{ CONTROL,              XK_Page_Down,   kscrolldown,    {.i = 1} },
+	{ CONTROL,              XK_h,           history,        {.i = 0} },
 
     // note copyurl has been edited to also open in xdg-open
 	{ CONTROL,              XK_l,           copyurl,        {.i =  0} },
@@ -85,8 +85,6 @@ Shortcut shortcuts[] = {
 	/* { CONTROL,              XK_I,           iso14755,       {.i =  0} }, */
     /* { XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} }, */
 	/* { CONTROL,              XK_Num_Lock,    numlock,        {.i =  0} }, */
-   	/* { CONTROL,              XK_C,           clipcopy,       {.i =  0} }, */
-	/* { CONTROL,              XK_V,           clippaste,      {.i =  0} }, */
 	/* { CONTROL,              XK_Y,           selpaste,       {.i =  0} }, */
     /* { XK_ANY_MOD,           XK_F6,          swapcolors,     {.i =  0} }, */
 };
@@ -335,4 +333,4 @@ static char vtiden[] = "\033[?6c";
 int disablebold = 0;
 int disableitalic = 0;
 int disableroman = 0;
-
+static int bellvolume = 0;

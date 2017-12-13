@@ -287,8 +287,7 @@ struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
 
 /* function implementations */
 void
-applyrules(Client *c)
-{
+applyrules(Client *c) {
 	const char *class, *instance;
 	unsigned int i;
 	const Rule *r;
@@ -323,8 +322,7 @@ applyrules(Client *c)
 }
 
 int
-applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact)
-{
+applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact) {
 	int baseismin;
 	Monitor *m = c->mon;
 
@@ -403,23 +401,20 @@ arrange(Monitor *m)
 }
 
 void
-arrangemon(Monitor *m)
-{
+arrangemon(Monitor *m) {
 	strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
 	if (m->lt[m->sellt]->arrange)
 		m->lt[m->sellt]->arrange(m);
 }
 
 void
-attach(Client *c)
-{
+attach(Client *c) {
 	c->next = c->mon->clients;
 	c->mon->clients = c;
 }
 
 void
-attachabove(Client *c)
-{
+attachabove(Client *c) {
 	if(c->mon->sel == NULL || c->mon->sel == c->mon->clients || c->mon->sel->isfloating) {
 		attach(c);
 		return;
@@ -432,15 +427,13 @@ attachabove(Client *c)
 }
 
 void
-attachstack(Client *c)
-{
+attachstack(Client *c) {
 	c->snext = c->mon->stack;
 	c->mon->stack = c;
 }
 
 void
-buttonpress(XEvent *e)
-{
+buttonpress(XEvent *e) {
 	unsigned int i, x, click;
 	Arg arg = {0};
 	Client *c;
@@ -519,8 +512,7 @@ cleanup(void)
 }
 
 void
-cleanupmon(Monitor *mon)
-{
+cleanupmon(Monitor *mon) {
 	Monitor *m;
 
 	if (mon == mons)
@@ -554,8 +546,7 @@ clientmessage(XEvent *e)
 }
 
 void
-configure(Client *c)
-{
+configure(Client *c) {
 	XConfigureEvent ce;
 
 	ce.type = ConfigureNotify;
@@ -573,8 +564,7 @@ configure(Client *c)
 }
 
 void
-configurenotify(XEvent *e)
-{
+configurenotify(XEvent *e) {
 	Monitor *m;
 	Client *c;
 	XConfigureEvent *ev = &e->xconfigure;
@@ -601,8 +591,7 @@ configurenotify(XEvent *e)
 }
 
 void
-configurerequest(XEvent *e)
-{
+configurerequest(XEvent *e) {
 	Client *c;
 	Monitor *m;
 	XConfigureRequestEvent *ev = &e->xconfigurerequest;
@@ -653,8 +642,7 @@ configurerequest(XEvent *e)
 }
 
 Monitor *
-createmon(void)
-{
+createmon(void) {
 	Monitor *m;
 	unsigned int i;
 
@@ -686,8 +674,7 @@ createmon(void)
 }
 
 void
-destroynotify(XEvent *e)
-{
+destroynotify(XEvent *e) {
 	Client *c;
 	XDestroyWindowEvent *ev = &e->xdestroywindow;
 
@@ -1320,8 +1307,7 @@ resize(Client *c, int x, int y, int w, int h, int interact)
 		resizeclient(c, x, y, w, h);
 }
 
-void
-resizeclient(Client *c, int x, int y, int w, int h)
+void resizeclient(Client *c, int x, int y, int w, int h)
 {
 	XWindowChanges wc;
 	unsigned int n;
@@ -1331,22 +1317,6 @@ resizeclient(Client *c, int x, int y, int w, int h)
 
 	wc.border_width = c->bw;
 
-    // ----------------------------------------------------------- //
-    //  This is patch to hide border when only 1 window
-    //  but it doesn't hide the spacing of the border
-    //  so the window seems off-centered. If you're reading this
-    //  and know a fix, please do and submit a PR!
-    /* if (((nexttiled(c->mon->clients) == c && !nexttiled(c->next)) */
-	    /* || &monocle == c->mon->lt[c->mon->sellt]->arrange) */
-	    /* && !c->isfullscreen) { */
-		/* c->w = wc.width += c->bw * 2; */
-		/* c->h = wc.height += c->bw * 2; */
-		/* wc.border_width = 0; */
-	/* } */
-    // ----------------------------------------------------------- //
-
-
-
 	/* Get number of clients for the selected monitor */
 	for (n = 0, nbc = nexttiled(selmon->clients); nbc; nbc = nexttiled(nbc->next), n++);
 
@@ -1354,16 +1324,17 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	if (c->isfloating || selmon->lt[selmon->sellt]->arrange == NULL) {
 		gapincr = gapoffset = 0;
 	} else {
-		/* Remove border and gap if layout is monocle or only one client */
-		if (selmon->lt[selmon->sellt]->arrange == monocle) {
-                // || n == 1
-			gapoffset = 0;
-			gapincr = -2 * borderpx;
+        /* If is the only monitor on the workspace */
+        /* and the window is not a terminal */
+		if (n == 1 && (strcmp(c->name, "st") != 0)) {
+            /* then set no border with appropriate gaps */
 			wc.border_width = 0;
+            gapincr = gappx;
+            /* gapincr = -2 * borderpx; */
 		} else {
-			gapoffset = gappx;
-			gapincr = 2 * gappx;
-		}
+            gapincr = 2 * gappx;
+        }
+        gapoffset = gappx;
 	}
 
 	c->oldx = c->x; c->x = wc.x = x + gapoffset;

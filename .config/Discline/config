@@ -109,7 +109,11 @@ custom_roles:
   color: blue
 - name: bot
   color: yellow
-  
+- name: native
+  color: yellow
+- name: trusted
+  color: red
+
 # Channel ignore list - This stops the channel from being loaded.
 # Effectively like the "mute" + "hide" feature on the official client,
 # However with the added benefit that this means these channels won't
@@ -126,6 +130,23 @@ channel_ignore_list:
   ignores:
   - foo
   - bar
+- server_name: German Learning and Discussion
+  ignores:
+  - info
+  - announcements
+  - introductions
+  - media
+  - anderesprachen
+  - voice-chat
+  - botchannel
+  - stargazing
+  - writing
+- server_name: DisKvlt
+  ignores:
+  - musicians_talk
+  - musician_talk
+  - prog_avantgarde_djent
+  - kvlt_speak
 
 # ignore this unless you know what you're doing 
 debug: false

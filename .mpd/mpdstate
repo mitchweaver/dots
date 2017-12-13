@@ -1,8 +1,9 @@
 sw_volume: 100
 audio_device_state:1:alsa audio
 audio_device_state:1:my_fifo
-state: stop
-current: 0
+state: play
+current: 187
+time: 67.242000
 random: 0
 repeat: 0
 single: 0
@@ -41,4 +42,597 @@ playlist_begin
 27:Sorcier des Glaces/2012 - Snowland Reprise MMXII/05. My Journey In The Black Forest  Darkness Covers The Snowland.opus
 28:Sorcier des Glaces/2012 - Snowland Reprise MMXII/06. L'éternelle Majesté Des Montagnes.opus
 29:Sorcier des Glaces/2012 - Snowland Reprise MMXII/07. The (Night) Throne.opus
+30:Grand Belials Key/Grand Belial's Key - Mocking the Philanthropist (1997) full album.opus
+31:Horn/Horn - Die Kraft der Szenarien (Full Album).opus
+32:Horn/Horn - Konflikt (Full Album).opus
+33:Horn/Horn - Naturkraft (Full Album).opus
+34:Mythos/Pain Amplifier/Mythos - Pain Amplifier (Full Album) (HQ).opus
+35:Devourment/Devourment ''Molesting The Decapitated'' [1999]/01 - Festering Vomitous Mass.opus
+36:Devourment/Devourment ''Molesting The Decapitated'' [1999]/02 - Postmortal Coprophagia.opus
+37:Devourment/Devourment ''Molesting The Decapitated'' [1999]/03 - Choking On Bile.opus
+38:Devourment/Devourment ''Molesting The Decapitated'' [1999]/04 - Molesting The Decapitated.opus
+39:Devourment/Devourment ''Molesting The Decapitated'' [1999]/05 - Self Disembowelment.opus
+40:Devourment/Devourment ''Molesting The Decapitated'' [1999]/06 - Fucked To Death.opus
+41:Devourment/Devourment ''Molesting The Decapitated'' [1999]/07 - Devour The Damned.opus
+42:Devourment/Devourment ''Molesting The Decapitated'' [1999]/08 - Shroud Of Encryption.opus
+43:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 01 - Butcher The Weak.opus
+44:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 02 - Masturbating At The Slab.opus
+45:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 03 - Serial Cocksucker.opus
+46:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 04 - Tomb Of Scabs.opus
+47:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 05 - Autoerotic Asphyxiation.opus
+48:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 06 - Anal Electrocution.opus
+49:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 07 - Fuck Her Head Off.opus
+50:Devourment/2005 - Butcher The Weak/Devourment - Butcher The Weak - 08 - Babykiller.opus
+51:Devourment/2009 - Unleash The Carnivore/01-devourment-unleash_the_carnivores.opus
+52:Devourment/2009 - Unleash The Carnivore/02-devourment-abomination_unseen.opus
+53:Devourment/2009 - Unleash The Carnivore/03-devourment-fed_to_the_pigs.opus
+54:Devourment/2009 - Unleash The Carnivore/04-devourment-incitement_to_mass_murder.opus
+55:Devourment/2009 - Unleash The Carnivore/05-devourment-crucify_the_impure.opus
+56:Devourment/2009 - Unleash The Carnivore/06-devourment-deflesh_the_abducted.opus
+57:Devourment/2009 - Unleash The Carnivore/07-devourment-over_her_dead_body.opus
+58:Devourment/2009 - Unleash The Carnivore/08-devourment-field_of_the_impaled.opus
+59:Devourment/Devourment ''Molesting The Decapitated'' [1999]/01 - Festering Vomitous Mass.opus
+60:Devourment/Devourment ''Molesting The Decapitated'' [1999]/02 - Postmortal Coprophagia.opus
+61:Devourment/Devourment ''Molesting The Decapitated'' [1999]/03 - Choking On Bile.opus
+62:Devourment/Devourment ''Molesting The Decapitated'' [1999]/04 - Molesting The Decapitated.opus
+63:Devourment/Devourment ''Molesting The Decapitated'' [1999]/05 - Self Disembowelment.opus
+64:Devourment/Devourment ''Molesting The Decapitated'' [1999]/06 - Fucked To Death.opus
+65:Devourment/Devourment ''Molesting The Decapitated'' [1999]/07 - Devour The Damned.opus
+66:Devourment/Devourment ''Molesting The Decapitated'' [1999]/08 - Shroud Of Encryption.opus
+67:Gutted/Gutted - Bleed For Us To Live (1994)/01. Bleed.opus
+68:Gutted/Gutted - Bleed For Us To Live (1994)/02. Sins Of God.opus
+69:Gutted/Gutted - Bleed For Us To Live (1994)/03. Nailed To The Cross.opus
+70:Gutted/Gutted - Bleed For Us To Live (1994)/04. Cold In The Coffin.opus
+71:Gutted/Gutted - Bleed For Us To Live (1994)/05. Chopped Up At The Altar.opus
+72:Gutted/Gutted - Bleed For Us To Live (1994)/06. Death Before Dismember.opus
+73:Gutted/Gutted - Bleed For Us To Live (1994)/07. Chock Full Of Guts.opus
+74:Gutted/Gutted - Bleed For Us To Live (1994)/08. Skeletonized.opus
+75:Gutted/Gutted - Bleed For Us To Live (1994)/09. Kickin' The Corpse.opus
+76:Gutted/Gutted - Bleed For Us To Live (1994)/10. Flood Of Blood.opus
+77:Obituary/1989 - Slowly We Rot/01. Internal Bleeding.opus
+78:Obituary/1989 - Slowly We Rot/02. Godly Beings.opus
+79:Obituary/1989 - Slowly We Rot/03. 'Til Death.opus
+80:Obituary/1989 - Slowly We Rot/04. Slowly We Rot.opus
+81:Obituary/1989 - Slowly We Rot/05. Immortal Visions.opus
+82:Obituary/1989 - Slowly We Rot/06. Gates To Hell.opus
+83:Obituary/1989 - Slowly We Rot/07. Words Of Evil.opus
+84:Obituary/1989 - Slowly We Rot/08. Suffocation.opus
+85:Obituary/1989 - Slowly We Rot/09. Intoxicated.opus
+86:Obituary/1989 - Slowly We Rot/10. Deadly Intentions.opus
+87:Obituary/1989 - Slowly We Rot/11. Bloodsoaked.opus
+88:Obituary/1989 - Slowly We Rot/12. Stinkupuss.opus
+89:Obituary/Obituary - Cause Of Death [1990]/01 - Infected.opus
+90:Obituary/Obituary - Cause Of Death [1990]/02 - Body Bag.opus
+91:Obituary/Obituary - Cause Of Death [1990]/03 - Chopped in Half.opus
+92:Obituary/Obituary - Cause Of Death [1990]/04 - Circle of the Tyrants.opus
+93:Obituary/Obituary - Cause Of Death [1990]/05 - Dying.opus
+94:Obituary/Obituary - Cause Of Death [1990]/06 - Find the Arise.opus
+95:Obituary/Obituary - Cause Of Death [1990]/07 - Cause of Death.opus
+96:Obituary/Obituary - Cause Of Death [1990]/08 - Memories Remain.opus
+97:Obituary/Obituary - Cause Of Death [1990]/09 - Turned Inside Out.opus
+98:Obituary/Obituary - Cause Of Death [1990]/10 - Infected (Demo Version).opus
+99:Obituary/Obituary - Cause Of Death [1990]/11 - Memories Remain (Demo Version).opus
+100:Obituary/Obituary - Cause Of Death [1990]/12 - Chopped In Half (Demo Version).opus
+101:Dying Fetus/Dying Fetus ''Reign Supreme'' [2012]/02 - Subjected To A Beating.opus
+102:Sororocide/Sororicide - "The Entity" 1991 [Full Album].opus
+103:A Transylvanian Funeral/self-titled/Lunacy-806437657.opus
+104:Peste Noire/Peste Noire/2012 - Les Demos (2CD)/2012 - Les Demos CD1/08. Le mort Joyeux.opus
+105:8bit/8bit-dunkelheit-2.opus
+106:Absurd/Absurd Der Fünfzehnjahrige Krieg full album.opus
+107:Abyssic Hate - Despondency (Full) 720p.opus
+108:Adrenalin O.D./Adrenalin O.D. - Let's Barbeque.opus
+109:Adrenalin O.D./Adrenalin O.D. - The Wacky Hi Jinks ( FULL) 1981.opus
+110:LVTHN/The Spider Goddess - 2017/Akkawbishia-21857315.mp3.opus
+111:LVTHN/The Spider Goddess - 2017/Arachnidia-995851291.mp3.opus
+112:Arckanum/Arckanum - Fran Marder (Full Album).opus
+113:Arckanum/Arckanum - Kostogher [Full-length 1997].opus
+114:A Transylvanian Funeral/self-titled/Asmoday Unbound-415178527.opus
+115:8bit/Behemoth - Ora Pro Nobis Lucifer (8 bit).opus
+116:Beherit/Beherit - Drawing Down The Moon (FULL ALBUM- 1993) (FULL HD).opus
+117:A Transylvanian Funeral/self-titled/Beyond the Veils of Light-2009432658.opus
+118:Black Citadel/Black Citadel - Ancestral Shadows.opus
+119:A Transylvanian Funeral/self-titled/Black Sacrifice-3907312891.opus
+120:Blattaria/Blattaria/Blattaria - Blattaria (2017) Fallen Empire Records - full album.opus
+121:Blood Tyrant + Warden - Duvonde Skerfe (Split) 2017.opus
+122:A Transylvanian Funeral/self-titled/Blood of Seraphim-1466245124.opus
+123:Chthe'ilist/Le Dernier Crepuscule/Chthe'ilist - Le Dernier Crépuscule (2016) (Atmospheric Death Metal).opus
+124:A Transylvanian Funeral/self-titled/Chthonic Possession-1036536009.opus
+125:A Transylvanian Funeral/self-titled/Circle of Disease-324068330.opus
+126:ColdWorld/ColdWorld - Wolves and Sheep (EP).opus
+127:Contaminated/Final Man/Contaminated - Final Man - (Full Album).opus
+128:Zweihander/Daemon Slayer/Daemon Construct-3110885241.opus
+129:Dark Tribe/Dark Tribe - In Jeraspunta - (Full Album).opus
+130:8bit/Darkthrone - Quintessence (8 bit).opus
+131:Dawn/Dawn - Nær Sólen Gar Niþer for Evogher (Full Album).opus
+132:Dawn/Dawn - Slaughtersun (Crown of the Triarchy) (Full Album) (HQ).opus
+133:Dawn/Dawn - Slaughtersun (Crown of the Triarchy) (Full Album) (HQ).webm
+134:Deaf Dealer/Deaf Dealer - Journey Into Fear (2014) Full Album.opus
+135:8bit/Dissection - Night's Blood (8 bit).opus
+136:Vore/Doomwhore.opus
+137:Zweihander/Daemon Slayer/Drowning the Dreadnought-2884568183.opus
+138:Drudkh % Paysage d' Hiver - Somewhere Sadness Wanders % Schnee IV (Full Split-EP) (2017).opus
+139:Dusterdraussen/Where Is Your Summer Now/Düsterdraußen - Where is Your Summer Now? (Full Album).opus
+140:Eternal Champion/The Armor of Ire/Eternal Champion - The Armor of Ire (2016).opus
+141:A Transylvanian Funeral/self-titled/Eulogy of a God-3506411135.opus
+142:Zweihander/Daemon Slayer/Eye of the Hylageamon-310441994.opus
+143:A Transylvanian Funeral/self-titled/Flesh and Dust-738649056.opus
+144:Forgotten Spell/Forgotten Spell - The Necromancer (FULL DEMO).opus
+145:Forteresse/Forteresse - Récits patriotiques.opus
+146:Funeral Altar % Ghaisiuan (FULL SPLIT).opus
+147:Grand Belials Key/Kosherat/GRAND BELIAL'S KEY - Hobo of Aramaic Tongues-hpdX8po5pds.mp4.opus
+148:Zweihander/Daemon Slayer/Ghosts Beneath the Mountain-4098254750.opus
+149:Gjendod/Gjendød - Nedstigning (Full Album).opus
+150:Gorgon/Gorgon - The Lady Rides a Black Horse (Full Album) (1995).opus
+151:Grand Belials Key/Kosherat/Grand Belial's Key - Immaculate Latrine (Kosherat)-uT30EkUR4oo.mp4.opus
+152:Grand Belials Key/Kosherat/Grand Belial's Key - Kingdom of Poisoned Fruits-YyQhD4sH0TU.mkv.opus
+153:Grand Belials Key/Grand Belial's Key - Mocking the Philanthropist (1997) full album.opus
+154:Grand Belials Key/Kosherat/Grand Belial's Key - On a Mule Rides the Swindler-mRlFdgJKg24.mkv.opus
+155:Grand Belials Key/Kosherat/Grand Belial's Key - Son of the Black Ram-pemMC-XI18k.mp4.opus
+156:Grand Belials Key/Kosherat/Grand Belial's Key - The Bearded Hustlers-xqv1_JFSXNw.opus
+157:Grand Belials Key/Kosherat/Grand Belial's Key - The Red Heifer-Sv9gx62QfD4.mkv.opus
+158:Grand Belials Key/Kosherat/Grand Belial's Key - The Tricifixion of Swine-kDC8loxURGE.mkv.opus
+159:Grand Belials Key/Kosherat/Grand Belial's Key - Vultures Of Misfortune-pIMEmAZwV-o.opus
+160:Grand Belials Key/Grand Belials Key - Judeobeast Assassination [FULL ALBUM].opus
+161:Vore/Gravehammer.opus
+162:Video Game Soundtracks/Halo Combat Evolved: Original Soundtrack.opus
+163:A Transylvanian Funeral/self-titled/Hammer of the Witch-3165971103.opus
+164:Hedge Wizard/More True Than Time Thought/Hedge Wizard - More True Than Time Thought (2014) (Dungeon Synth).opus
+165:Horn/Horn - Die Kraft der Szenarien (Full Album).opus
+166:Horn/Horn - Feldpost (Full Album).opus
+167:Horn/Horn - Jahreszeiten [FULL ALBUM].opus
+168:Horn/Horn - Konflikt (Full Album).opus
+169:Horn/Horn - Naturkraft (Full Album).opus
+170:Horn/Horn - Turm am Hang (Full Album | Official).opus
+171:Impaled Nazarene/Impaled Nazarene - Tol Cormpt Norz Norz Norz.opus
+172:Impaled Nazarene/Ugra-Karma/Impaled Nazarene - Ugra-Karma (Full Album).opus
+173:Initiation/A ritual of blood, a pact of ashes/Initiation - A ritual of blood, A Pact of Ashes (full album) 2016.opus
+174:Isengard/Isengard - Vinterskugge (1994)[Full Album].opus
+175:Kalmankantaja/Kalmankantaja - Muinainen (Full Album).opus
+176:D.o.S./Sepsis/Keimtanz-1309693811.opus
+177:Knelt Rote/Knelt Rote - Trespass (2012) Full Album HQ (Blackened Grindcore%Noise).opus
+178:Kvist/Kvist - Min Lekam Er Meg Blott En Byrde.opus
+179:A Transylvanian Funeral/self-titled/Lunacy-806437657.opus
+180:Zweihander/Daemon Slayer/Lurker of the Blue Forest-3425425458.opus
+181:Animo Aeger/Ab-Fakt/Lämmerdynamik-3464476942.opus
+182:Morbid Angel/MORBID ANGEL - Blessed Are the Sick [Full Album].opus
+183:Master's Hammer/Master's Hammer - Jilemnický Okultista%The Jilemnice Occultist - 1992 - (Full Album).opus
+184:Master's Hammer/Ritual/Master's Hammer - Ritual (1991, Full Album).opus
+185:Master's Voice/Master's Voice (Bosnia and Herzegovina) - A Hermit Is Dead (Demo) 2017.opus
+186:Master's Voice/Master's Voice - A Hermit's Longing For Dreadful Wisdom.opus
+187:Mjolnir/Mjolnir - Hinweg über die Tore der Zeit (Full Album).opus
+188:Moonblood/Moonblood - ... of Lunar Passion and Sombre Blood - From Hell Boxset (Full Vinyl Rip).opus
+189:Moonblood/Moonblood - Templar's Penitence - From Hell Boxset (Full Vinyl Rip).opus
+190:Moonknight/Ligeia - 2011/Moonknight - Ligeia [Full CS].opus
+191:Mortuary Drape/Mortuary Drape - All the Witches Dance (1994) full album, vinyl.opus
+192:Mortuary Drape/Mortuary Drape - Secret Sudaria (Full Album).opus
+193:Municipal Waste/Municipal Waste "The Art of Partying" [FULL ALBUM].opus
+194:Municipal Waste/Municipal Waste - Hazardous Mutation [Full Album].opus
+195:Mythos/Pain Amplifier/Mythos - Pain Amplifier (Full Album) (HQ).opus
+196:Nocturnal Triumph/Nocturnal Triumph - Into Light's Graven Womb (FULL ALBUM).opus
+197:Nastrond/Nåstrond - Age of Fire (Full Album)1996 Black Metal Sweden.opus
+198:Necropole/Nécropole - Atavisme... (FULL DEMO) (2014).opus
+199:Necropole/Nécropole - Ostara (FULL DEMO) (2015).opus
+200:Old Tower/Old Tower & Sacred Dominions - .​.​.​From The Dark Outlands (2015) (Old-School Dungeon Synth).opus
+201:Old Tower/Old Tower - Spectral Horizons (2016) (Old-School Dungeon Synth).opus
+202:Old Tower/Old Tower - The Door (2015) (Old-School Dungeon Synth).opus
+203:Old Tower/Old Tower - The Rise Of The Specter (2017) (Old-School Dungeon Synth).opus
+204:Orgy of Carrion/Orgy of Carrion - Obscured Ceremonies Under Hell Moon.opus
+205:Peste Noire/Peste Noire - La Sanie Des Siècles - Panégyrique De La Dégénérescence - 2006 (Full Album).opus
+206:Animo Aeger/Ab-Fakt/Phrasen zu Roben !-3208476824.opus
+207:Zweihander/Daemon Slayer/Pirates of Stargazer Island-3131299383.opus
+208:Vore/Progeny of the Leviathans.opus
+209:A Transylvanian Funeral/self-titled/Pwcca-3151140128.opus
+210:Reggie Watts/Reggie Watts: Fuck Shit Stack.opus
+211:D.o.S./Sepsis/Räudepathos-68467637.opus
+212:Sabaton/Sabaton - Primo Victoria [Album% All Bonus Tracks] HD.opus
+213:Vore/Sacerdotum Tyrannis.opus
+214:Sacrilegium/Sacrilegium - Wicher (Full Album).opus
+215:Satan's Host/Virgin Sails/Satan's Host - Akoman.opus
+216:Satan's Host/Satan's Host - By the Hands of the Devil (2011) {FULL ALBUM}.opus
+217:Satan's Host/Virgin Sails/Satan's Host - Cor Malifcecus.opus
+218:Satan's Host/Virgin Sails/Satan's Host - Dichotomy.opus
+219:Satan's Host/Virgin Sails/Satan's Host - Infinite Impossibilities.opus
+220:Satan's Host/Virgin Sails/Satan's Host - Island of Giant Ants.opus
+221:Satan's Host/Virgin Sails/Satan's Host - Of Beast and Men.opus
+222:Satan's Host/Virgin Sails/Satan's Host - Reanimated Anomalies.opus
+223:Satan's Host/Virgin Sails/Satan's Host - Taromati.opus
+224:Satan's Host/Virgin Sails/Satan's Host - Vaporous of the Blood.opus
+225:Satan's Host/Virgin Sails/Satan's Host - Virgin Sails.opus
+226:Scanner/Scanner - Terminal Earth - Japanese Edition (Full Album) - 1989.opus
+227:D.o.S./Sepsis/Sepsis-3700652705.opus
+228:Sombres Forets/Sombres Forêts - Royaume de Glace (Full Album).opus
+229:Sororocide/Sororicide - "The Entity" 1991 [Full Album].opus
+230:Soulskinner/Soulskinner - Crypts of Ancient Wisdom [Full Album].opus
+231:Syphilitic Vaginas/Syphilitic Vaginas - Alpha Antichrist (Full Album).opus
+232:TSATTHOGGUA/TSATTHOGGUA - Hosanna bizarre [1996] full album HQ.opus
+233:Tetragrammacide/Tetragrammacide - Primal Incinerators of Moral Matrix (2017) Iron Bonehead Productions - full album.opus
+234:Vore/The Claw Is the Law.opus
+235:Vore/The Cruelest Construct.opus
+236:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Alu".opus
+237:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Arcane Pharmakon Messiah".opus
+238:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Blood Vaults (II - Our Despots Cleanse the Levant)".opus
+239:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "God's Ensanguined Bestiaries".opus
+240:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "I Raised This Stone As A Ghastly Memorial".opus
+241:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Kain's Countenance Fell".opus
+242:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Mount Sinai Moloch".opus
+243:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "The Restless Mills".opus
+244:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Theriak - Baal - Theriak".opus
+245:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Transcending Saturnine Iericho Skies".opus
+246:Vore/The Unseen Hand.opus
+247:Burzum/2017 - The Ways of Yore/The Ways of Yore FULL ALBUM.opus
+248:Vore/Throne to the Wolves.opus
+249:Thy Art is Murder/This Hole Isn't Deep Enough for the Twelve of You - Demo/Thy Art Is Murder - ''This Hole Isn't Deep Enough For The Twelve Of You'' [FULL DEMO].opus
+250:Tormentor/Anno Domini/Tormentor - Anno Domini [FULL ALBUM].opus
+251:Unaussprechlichen Kulten/Unaussprechlichen Kulten - Keziah Lilith Medea (Chapter X) 2017 - Iron Bonehead Prod. - full album.opus
+252:Unaussprechlichen Kulten/Unaussprechlichen kulten - Baphomet pan shub niggurath (Full Album).opus
+253:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - A Sea Ov Blood Beneath Ebon Wings (2016).opus
+254:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - Canticle Bound In Spirit - The Faith In Vampyric Blood[HD].opus
+255:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - For the Sect (FULL COMPILATION).mp4
+256:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - For the Sect (FULL COMPILATION).opus
+257:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - Satanic Elite (2015) [Full Demo].opus
+258:Urfaust/2012 - Ritual Music for the Truly Clochard/Urfaust - Ritual Music for the True Clochard (2012) full compilation, vinyl.opus
+259:Vore/Uroboros.opus
+260:Vetevrakh/Vetëvrakh - Demo I (2013) [Full Demo].opus
+261:Vetevrakh/Vetëvrakh - Demo II (2014) [Full Demo].opus
+262:Vindland/Vindland - Hanter Savet (Full Album).opus
+263:Walknut/Walknut - Graveforests and Their Shadows (Full Album).opus
+264:A Transylvanian Funeral/self-titled/Ways of the Magi-2497896501.opus
+265:A Transylvanian Funeral/self-titled/We Shun the Light-2270469907.opus
+266:Wedard/Wedard - Einsamer Winterweg (Full Album).opus
+267:Wedard/Wedard - Eiskrieg (Full Album).opus
+268:Wedard/Wedard - Eiskrieg II (Full EP).opus
+269:Xasthur - Xasthur & Leviathan (Full split).opus
+270:Yellow Eyes/Yellow Eyes - Immersion Trench Reverie(Full Album 2017).opus
+271:Ygg/Ygg/Ygg - Ygg (Full Album).opus
+272:Lifelover/[2006] Lifelover - Pulver [Full Album + HQ + DL].opus
+273:8bit/behemoth - Ov Fire and the Void - 8bit.opus
+274:8bit/dunkelheit-8bit.opus
+275:Scanner/scanner - hyper trace - full album (In conceptual order).opus
+276:Animo Aeger/Ab-Fakt/und allet für den kleenen Tod-1564262861.opus
+277:Peste Noire/Peste Noire/2012 - Les Demos (2CD)/2012 - Les Demos CD1/08. Le mort Joyeux.opus
+278:8bit/8bit-dunkelheit-2.opus
+279:Absurd/Absurd Der Fünfzehnjahrige Krieg full album.opus
+280:Abyssic Hate - Despondency (Full) 720p.opus
+281:Adrenalin O.D./Adrenalin O.D. - Let's Barbeque.opus
+282:Adrenalin O.D./Adrenalin O.D. - The Wacky Hi Jinks ( FULL) 1981.opus
+283:LVTHN/The Spider Goddess - 2017/Akkawbishia-21857315.mp3.opus
+284:LVTHN/The Spider Goddess - 2017/Arachnidia-995851291.mp3.opus
+285:Arckanum/Arckanum - Fran Marder (Full Album).opus
+286:Arckanum/Arckanum - Kostogher [Full-length 1997].opus
+287:A Transylvanian Funeral/self-titled/Asmoday Unbound-415178527.opus
+288:8bit/Behemoth - Ora Pro Nobis Lucifer (8 bit).opus
+289:Beherit/Beherit - Drawing Down The Moon (FULL ALBUM- 1993) (FULL HD).opus
+290:A Transylvanian Funeral/self-titled/Beyond the Veils of Light-2009432658.opus
+291:Black Citadel/Black Citadel - Ancestral Shadows.opus
+292:A Transylvanian Funeral/self-titled/Black Sacrifice-3907312891.opus
+293:Blattaria/Blattaria/Blattaria - Blattaria (2017) Fallen Empire Records - full album.opus
+294:Blood Tyrant + Warden - Duvonde Skerfe (Split) 2017.opus
+295:A Transylvanian Funeral/self-titled/Blood of Seraphim-1466245124.opus
+296:Chthe'ilist/Le Dernier Crepuscule/Chthe'ilist - Le Dernier Crépuscule (2016) (Atmospheric Death Metal).opus
+297:A Transylvanian Funeral/self-titled/Chthonic Possession-1036536009.opus
+298:A Transylvanian Funeral/self-titled/Circle of Disease-324068330.opus
+299:ColdWorld/ColdWorld - Wolves and Sheep (EP).opus
+300:Contaminated/Final Man/Contaminated - Final Man - (Full Album).opus
+301:Zweihander/Daemon Slayer/Daemon Construct-3110885241.opus
+302:Dark Tribe/Dark Tribe - In Jeraspunta - (Full Album).opus
+303:8bit/Darkthrone - Quintessence (8 bit).opus
+304:Dawn/Dawn - Nær Sólen Gar Niþer for Evogher (Full Album).opus
+305:Dawn/Dawn - Slaughtersun (Crown of the Triarchy) (Full Album) (HQ).opus
+306:Dawn/Dawn - Slaughtersun (Crown of the Triarchy) (Full Album) (HQ).webm
+307:Deaf Dealer/Deaf Dealer - Journey Into Fear (2014) Full Album.opus
+308:8bit/Dissection - Night's Blood (8 bit).opus
+309:Vore/Doomwhore.opus
+310:Zweihander/Daemon Slayer/Drowning the Dreadnought-2884568183.opus
+311:Drudkh % Paysage d' Hiver - Somewhere Sadness Wanders % Schnee IV (Full Split-EP) (2017).opus
+312:Dusterdraussen/Where Is Your Summer Now/Düsterdraußen - Where is Your Summer Now? (Full Album).opus
+313:Eternal Champion/The Armor of Ire/Eternal Champion - The Armor of Ire (2016).opus
+314:A Transylvanian Funeral/self-titled/Eulogy of a God-3506411135.opus
+315:Zweihander/Daemon Slayer/Eye of the Hylageamon-310441994.opus
+316:A Transylvanian Funeral/self-titled/Flesh and Dust-738649056.opus
+317:Forgotten Spell/Forgotten Spell - The Necromancer (FULL DEMO).opus
+318:Forteresse/Forteresse - Récits patriotiques.opus
+319:Funeral Altar % Ghaisiuan (FULL SPLIT).opus
+320:Grand Belials Key/Kosherat/GRAND BELIAL'S KEY - Hobo of Aramaic Tongues-hpdX8po5pds.mp4.opus
+321:Zweihander/Daemon Slayer/Ghosts Beneath the Mountain-4098254750.opus
+322:Gjendod/Gjendød - Nedstigning (Full Album).opus
+323:Gorgon/Gorgon - The Lady Rides a Black Horse (Full Album) (1995).opus
+324:Grand Belials Key/Kosherat/Grand Belial's Key - Immaculate Latrine (Kosherat)-uT30EkUR4oo.mp4.opus
+325:Grand Belials Key/Kosherat/Grand Belial's Key - Kingdom of Poisoned Fruits-YyQhD4sH0TU.mkv.opus
+326:Grand Belials Key/Grand Belial's Key - Mocking the Philanthropist (1997) full album.opus
+327:Grand Belials Key/Kosherat/Grand Belial's Key - On a Mule Rides the Swindler-mRlFdgJKg24.mkv.opus
+328:Grand Belials Key/Kosherat/Grand Belial's Key - Son of the Black Ram-pemMC-XI18k.mp4.opus
+329:Grand Belials Key/Kosherat/Grand Belial's Key - The Bearded Hustlers-xqv1_JFSXNw.opus
+330:Grand Belials Key/Kosherat/Grand Belial's Key - The Red Heifer-Sv9gx62QfD4.mkv.opus
+331:Grand Belials Key/Kosherat/Grand Belial's Key - The Tricifixion of Swine-kDC8loxURGE.mkv.opus
+332:Grand Belials Key/Kosherat/Grand Belial's Key - Vultures Of Misfortune-pIMEmAZwV-o.opus
+333:Grand Belials Key/Grand Belials Key - Judeobeast Assassination [FULL ALBUM].opus
+334:Vore/Gravehammer.opus
+335:Video Game Soundtracks/Halo Combat Evolved: Original Soundtrack.opus
+336:A Transylvanian Funeral/self-titled/Hammer of the Witch-3165971103.opus
+337:Hedge Wizard/More True Than Time Thought/Hedge Wizard - More True Than Time Thought (2014) (Dungeon Synth).opus
+338:Horn/Horn - Die Kraft der Szenarien (Full Album).opus
+339:Horn/Horn - Feldpost (Full Album).opus
+340:Horn/Horn - Jahreszeiten [FULL ALBUM].opus
+341:Horn/Horn - Konflikt (Full Album).opus
+342:Horn/Horn - Naturkraft (Full Album).opus
+343:Horn/Horn - Turm am Hang (Full Album | Official).opus
+344:Impaled Nazarene/Impaled Nazarene - Tol Cormpt Norz Norz Norz.opus
+345:Impaled Nazarene/Ugra-Karma/Impaled Nazarene - Ugra-Karma (Full Album).opus
+346:Initiation/A ritual of blood, a pact of ashes/Initiation - A ritual of blood, A Pact of Ashes (full album) 2016.opus
+347:Isengard/Isengard - Vinterskugge (1994)[Full Album].opus
+348:Kalmankantaja/Kalmankantaja - Muinainen (Full Album).opus
+349:D.o.S./Sepsis/Keimtanz-1309693811.opus
+350:Knelt Rote/Knelt Rote - Trespass (2012) Full Album HQ (Blackened Grindcore%Noise).opus
+351:Kvist/Kvist - Min Lekam Er Meg Blott En Byrde.opus
+352:A Transylvanian Funeral/self-titled/Lunacy-806437657.opus
+353:Zweihander/Daemon Slayer/Lurker of the Blue Forest-3425425458.opus
+354:Animo Aeger/Ab-Fakt/Lämmerdynamik-3464476942.opus
+355:Morbid Angel/MORBID ANGEL - Blessed Are the Sick [Full Album].opus
+356:Master's Hammer/Master's Hammer - Jilemnický Okultista%The Jilemnice Occultist - 1992 - (Full Album).opus
+357:Master's Hammer/Ritual/Master's Hammer - Ritual (1991, Full Album).opus
+358:Master's Voice/Master's Voice (Bosnia and Herzegovina) - A Hermit Is Dead (Demo) 2017.opus
+359:Master's Voice/Master's Voice - A Hermit's Longing For Dreadful Wisdom.opus
+360:Mjolnir/Mjolnir - Hinweg über die Tore der Zeit (Full Album).opus
+361:Moonblood/Moonblood - ... of Lunar Passion and Sombre Blood - From Hell Boxset (Full Vinyl Rip).opus
+362:Moonblood/Moonblood - Templar's Penitence - From Hell Boxset (Full Vinyl Rip).opus
+363:Moonknight/Ligeia - 2011/Moonknight - Ligeia [Full CS].opus
+364:Mortuary Drape/Mortuary Drape - All the Witches Dance (1994) full album, vinyl.opus
+365:Mortuary Drape/Mortuary Drape - Secret Sudaria (Full Album).opus
+366:Municipal Waste/Municipal Waste "The Art of Partying" [FULL ALBUM].opus
+367:Municipal Waste/Municipal Waste - Hazardous Mutation [Full Album].opus
+368:Mythos/Pain Amplifier/Mythos - Pain Amplifier (Full Album) (HQ).opus
+369:Nocturnal Triumph/Nocturnal Triumph - Into Light's Graven Womb (FULL ALBUM).opus
+370:Nastrond/Nåstrond - Age of Fire (Full Album)1996 Black Metal Sweden.opus
+371:Necropole/Nécropole - Atavisme... (FULL DEMO) (2014).opus
+372:Necropole/Nécropole - Ostara (FULL DEMO) (2015).opus
+373:Old Tower/Old Tower & Sacred Dominions - .​.​.​From The Dark Outlands (2015) (Old-School Dungeon Synth).opus
+374:Old Tower/Old Tower - Spectral Horizons (2016) (Old-School Dungeon Synth).opus
+375:Old Tower/Old Tower - The Door (2015) (Old-School Dungeon Synth).opus
+376:Old Tower/Old Tower - The Rise Of The Specter (2017) (Old-School Dungeon Synth).opus
+377:Orgy of Carrion/Orgy of Carrion - Obscured Ceremonies Under Hell Moon.opus
+378:Peste Noire/Peste Noire - La Sanie Des Siècles - Panégyrique De La Dégénérescence - 2006 (Full Album).opus
+379:Animo Aeger/Ab-Fakt/Phrasen zu Roben !-3208476824.opus
+380:Zweihander/Daemon Slayer/Pirates of Stargazer Island-3131299383.opus
+381:Vore/Progeny of the Leviathans.opus
+382:A Transylvanian Funeral/self-titled/Pwcca-3151140128.opus
+383:Reggie Watts/Reggie Watts: Fuck Shit Stack.opus
+384:D.o.S./Sepsis/Räudepathos-68467637.opus
+385:Sabaton/Sabaton - Primo Victoria [Album% All Bonus Tracks] HD.opus
+386:Vore/Sacerdotum Tyrannis.opus
+387:Sacrilegium/Sacrilegium - Wicher (Full Album).opus
+388:Satan's Host/Virgin Sails/Satan's Host - Akoman.opus
+389:Satan's Host/Satan's Host - By the Hands of the Devil (2011) {FULL ALBUM}.opus
+390:Satan's Host/Virgin Sails/Satan's Host - Cor Malifcecus.opus
+391:Satan's Host/Virgin Sails/Satan's Host - Dichotomy.opus
+392:Satan's Host/Virgin Sails/Satan's Host - Infinite Impossibilities.opus
+393:Satan's Host/Virgin Sails/Satan's Host - Island of Giant Ants.opus
+394:Satan's Host/Virgin Sails/Satan's Host - Of Beast and Men.opus
+395:Satan's Host/Virgin Sails/Satan's Host - Reanimated Anomalies.opus
+396:Satan's Host/Virgin Sails/Satan's Host - Taromati.opus
+397:Satan's Host/Virgin Sails/Satan's Host - Vaporous of the Blood.opus
+398:Satan's Host/Virgin Sails/Satan's Host - Virgin Sails.opus
+399:Scanner/Scanner - Terminal Earth - Japanese Edition (Full Album) - 1989.opus
+400:D.o.S./Sepsis/Sepsis-3700652705.opus
+401:Sombres Forets/Sombres Forêts - Royaume de Glace (Full Album).opus
+402:Sororocide/Sororicide - "The Entity" 1991 [Full Album].opus
+403:Soulskinner/Soulskinner - Crypts of Ancient Wisdom [Full Album].opus
+404:Syphilitic Vaginas/Syphilitic Vaginas - Alpha Antichrist (Full Album).opus
+405:TSATTHOGGUA/TSATTHOGGUA - Hosanna bizarre [1996] full album HQ.opus
+406:Tetragrammacide/Tetragrammacide - Primal Incinerators of Moral Matrix (2017) Iron Bonehead Productions - full album.opus
+407:Vore/The Claw Is the Law.opus
+408:Vore/The Cruelest Construct.opus
+409:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Alu".opus
+410:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Arcane Pharmakon Messiah".opus
+411:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Blood Vaults (II - Our Despots Cleanse the Levant)".opus
+412:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "God's Ensanguined Bestiaries".opus
+413:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "I Raised This Stone As A Ghastly Memorial".opus
+414:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Kain's Countenance Fell".opus
+415:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Mount Sinai Moloch".opus
+416:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "The Restless Mills".opus
+417:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Theriak - Baal - Theriak".opus
+418:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Transcending Saturnine Iericho Skies".opus
+419:Vore/The Unseen Hand.opus
+420:Burzum/2017 - The Ways of Yore/The Ways of Yore FULL ALBUM.opus
+421:Vore/Throne to the Wolves.opus
+422:Thy Art is Murder/This Hole Isn't Deep Enough for the Twelve of You - Demo/Thy Art Is Murder - ''This Hole Isn't Deep Enough For The Twelve Of You'' [FULL DEMO].opus
+423:Tormentor/Anno Domini/Tormentor - Anno Domini [FULL ALBUM].opus
+424:Unaussprechlichen Kulten/Unaussprechlichen Kulten - Keziah Lilith Medea (Chapter X) 2017 - Iron Bonehead Prod. - full album.opus
+425:Unaussprechlichen Kulten/Unaussprechlichen kulten - Baphomet pan shub niggurath (Full Album).opus
+426:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - A Sea Ov Blood Beneath Ebon Wings (2016).opus
+427:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - Canticle Bound In Spirit - The Faith In Vampyric Blood[HD].opus
+428:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - For the Sect (FULL COMPILATION).mp4
+429:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - For the Sect (FULL COMPILATION).opus
+430:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - Satanic Elite (2015) [Full Demo].opus
+431:Urfaust/2012 - Ritual Music for the Truly Clochard/Urfaust - Ritual Music for the True Clochard (2012) full compilation, vinyl.opus
+432:Vore/Uroboros.opus
+433:Vetevrakh/Vetëvrakh - Demo I (2013) [Full Demo].opus
+434:Vetevrakh/Vetëvrakh - Demo II (2014) [Full Demo].opus
+435:Vindland/Vindland - Hanter Savet (Full Album).opus
+436:Walknut/Walknut - Graveforests and Their Shadows (Full Album).opus
+437:A Transylvanian Funeral/self-titled/Ways of the Magi-2497896501.opus
+438:A Transylvanian Funeral/self-titled/We Shun the Light-2270469907.opus
+439:Wedard/Wedard - Einsamer Winterweg (Full Album).opus
+440:Wedard/Wedard - Eiskrieg (Full Album).opus
+441:Wedard/Wedard - Eiskrieg II (Full EP).opus
+442:Xasthur - Xasthur & Leviathan (Full split).opus
+443:Yellow Eyes/Yellow Eyes - Immersion Trench Reverie(Full Album 2017).opus
+444:Ygg/Ygg/Ygg - Ygg (Full Album).opus
+445:Lifelover/[2006] Lifelover - Pulver [Full Album + HQ + DL].opus
+446:8bit/behemoth - Ov Fire and the Void - 8bit.opus
+447:8bit/dunkelheit-8bit.opus
+448:Scanner/scanner - hyper trace - full album (In conceptual order).opus
+449:Animo Aeger/Ab-Fakt/und allet für den kleenen Tod-1564262861.opus
+450:Peste Noire/Peste Noire/2012 - Les Demos (2CD)/2012 - Les Demos CD1/08. Le mort Joyeux.opus
+451:8bit/8bit-dunkelheit-2.opus
+452:Absurd/Absurd Der Fünfzehnjahrige Krieg full album.opus
+453:Abyssic Hate - Despondency (Full) 720p.opus
+454:Adrenalin O.D./Adrenalin O.D. - Let's Barbeque.opus
+455:Adrenalin O.D./Adrenalin O.D. - The Wacky Hi Jinks ( FULL) 1981.opus
+456:LVTHN/The Spider Goddess - 2017/Akkawbishia-21857315.mp3.opus
+457:LVTHN/The Spider Goddess - 2017/Arachnidia-995851291.mp3.opus
+458:Arckanum/Arckanum - Fran Marder (Full Album).opus
+459:Arckanum/Arckanum - Kostogher [Full-length 1997].opus
+460:A Transylvanian Funeral/self-titled/Asmoday Unbound-415178527.opus
+461:8bit/Behemoth - Ora Pro Nobis Lucifer (8 bit).opus
+462:Beherit/Beherit - Drawing Down The Moon (FULL ALBUM- 1993) (FULL HD).opus
+463:A Transylvanian Funeral/self-titled/Beyond the Veils of Light-2009432658.opus
+464:Black Citadel/Black Citadel - Ancestral Shadows.opus
+465:A Transylvanian Funeral/self-titled/Black Sacrifice-3907312891.opus
+466:Blattaria/Blattaria/Blattaria - Blattaria (2017) Fallen Empire Records - full album.opus
+467:Blood Tyrant + Warden - Duvonde Skerfe (Split) 2017.opus
+468:A Transylvanian Funeral/self-titled/Blood of Seraphim-1466245124.opus
+469:Chthe'ilist/Le Dernier Crepuscule/Chthe'ilist - Le Dernier Crépuscule (2016) (Atmospheric Death Metal).opus
+470:A Transylvanian Funeral/self-titled/Chthonic Possession-1036536009.opus
+471:A Transylvanian Funeral/self-titled/Circle of Disease-324068330.opus
+472:ColdWorld/ColdWorld - Wolves and Sheep (EP).opus
+473:Contaminated/Final Man/Contaminated - Final Man - (Full Album).opus
+474:Zweihander/Daemon Slayer/Daemon Construct-3110885241.opus
+475:Dark Tribe/Dark Tribe - In Jeraspunta - (Full Album).opus
+476:8bit/Darkthrone - Quintessence (8 bit).opus
+477:Dawn/Dawn - Nær Sólen Gar Niþer for Evogher (Full Album).opus
+478:Dawn/Dawn - Slaughtersun (Crown of the Triarchy) (Full Album) (HQ).opus
+479:Dawn/Dawn - Slaughtersun (Crown of the Triarchy) (Full Album) (HQ).webm
+480:Deaf Dealer/Deaf Dealer - Journey Into Fear (2014) Full Album.opus
+481:8bit/Dissection - Night's Blood (8 bit).opus
+482:Vore/Doomwhore.opus
+483:Zweihander/Daemon Slayer/Drowning the Dreadnought-2884568183.opus
+484:Drudkh % Paysage d' Hiver - Somewhere Sadness Wanders % Schnee IV (Full Split-EP) (2017).opus
+485:Dusterdraussen/Where Is Your Summer Now/Düsterdraußen - Where is Your Summer Now? (Full Album).opus
+486:Eternal Champion/The Armor of Ire/Eternal Champion - The Armor of Ire (2016).opus
+487:A Transylvanian Funeral/self-titled/Eulogy of a God-3506411135.opus
+488:Zweihander/Daemon Slayer/Eye of the Hylageamon-310441994.opus
+489:A Transylvanian Funeral/self-titled/Flesh and Dust-738649056.opus
+490:Forgotten Spell/Forgotten Spell - The Necromancer (FULL DEMO).opus
+491:Forteresse/Forteresse - Récits patriotiques.opus
+492:Funeral Altar % Ghaisiuan (FULL SPLIT).opus
+493:Grand Belials Key/Kosherat/GRAND BELIAL'S KEY - Hobo of Aramaic Tongues-hpdX8po5pds.mp4.opus
+494:Zweihander/Daemon Slayer/Ghosts Beneath the Mountain-4098254750.opus
+495:Gjendod/Gjendød - Nedstigning (Full Album).opus
+496:Gorgon/Gorgon - The Lady Rides a Black Horse (Full Album) (1995).opus
+497:Grand Belials Key/Kosherat/Grand Belial's Key - Immaculate Latrine (Kosherat)-uT30EkUR4oo.mp4.opus
+498:Grand Belials Key/Kosherat/Grand Belial's Key - Kingdom of Poisoned Fruits-YyQhD4sH0TU.mkv.opus
+499:Grand Belials Key/Grand Belial's Key - Mocking the Philanthropist (1997) full album.opus
+500:Grand Belials Key/Kosherat/Grand Belial's Key - On a Mule Rides the Swindler-mRlFdgJKg24.mkv.opus
+501:Grand Belials Key/Kosherat/Grand Belial's Key - Son of the Black Ram-pemMC-XI18k.mp4.opus
+502:Grand Belials Key/Kosherat/Grand Belial's Key - The Bearded Hustlers-xqv1_JFSXNw.opus
+503:Grand Belials Key/Kosherat/Grand Belial's Key - The Red Heifer-Sv9gx62QfD4.mkv.opus
+504:Grand Belials Key/Kosherat/Grand Belial's Key - The Tricifixion of Swine-kDC8loxURGE.mkv.opus
+505:Grand Belials Key/Kosherat/Grand Belial's Key - Vultures Of Misfortune-pIMEmAZwV-o.opus
+506:Grand Belials Key/Grand Belials Key - Judeobeast Assassination [FULL ALBUM].opus
+507:Vore/Gravehammer.opus
+508:Video Game Soundtracks/Halo Combat Evolved: Original Soundtrack.opus
+509:A Transylvanian Funeral/self-titled/Hammer of the Witch-3165971103.opus
+510:Hedge Wizard/More True Than Time Thought/Hedge Wizard - More True Than Time Thought (2014) (Dungeon Synth).opus
+511:Horn/Horn - Die Kraft der Szenarien (Full Album).opus
+512:Horn/Horn - Feldpost (Full Album).opus
+513:Horn/Horn - Jahreszeiten [FULL ALBUM].opus
+514:Horn/Horn - Konflikt (Full Album).opus
+515:Horn/Horn - Naturkraft (Full Album).opus
+516:Horn/Horn - Turm am Hang (Full Album | Official).opus
+517:Impaled Nazarene/Impaled Nazarene - Tol Cormpt Norz Norz Norz.opus
+518:Impaled Nazarene/Ugra-Karma/Impaled Nazarene - Ugra-Karma (Full Album).opus
+519:Initiation/A ritual of blood, a pact of ashes/Initiation - A ritual of blood, A Pact of Ashes (full album) 2016.opus
+520:Isengard/Isengard - Vinterskugge (1994)[Full Album].opus
+521:Kalmankantaja/Kalmankantaja - Muinainen (Full Album).opus
+522:D.o.S./Sepsis/Keimtanz-1309693811.opus
+523:Knelt Rote/Knelt Rote - Trespass (2012) Full Album HQ (Blackened Grindcore%Noise).opus
+524:Kvist/Kvist - Min Lekam Er Meg Blott En Byrde.opus
+525:A Transylvanian Funeral/self-titled/Lunacy-806437657.opus
+526:Zweihander/Daemon Slayer/Lurker of the Blue Forest-3425425458.opus
+527:Animo Aeger/Ab-Fakt/Lämmerdynamik-3464476942.opus
+528:Morbid Angel/MORBID ANGEL - Blessed Are the Sick [Full Album].opus
+529:Master's Hammer/Master's Hammer - Jilemnický Okultista%The Jilemnice Occultist - 1992 - (Full Album).opus
+530:Master's Hammer/Ritual/Master's Hammer - Ritual (1991, Full Album).opus
+531:Master's Voice/Master's Voice (Bosnia and Herzegovina) - A Hermit Is Dead (Demo) 2017.opus
+532:Master's Voice/Master's Voice - A Hermit's Longing For Dreadful Wisdom.opus
+533:Mjolnir/Mjolnir - Hinweg über die Tore der Zeit (Full Album).opus
+534:Moonblood/Moonblood - ... of Lunar Passion and Sombre Blood - From Hell Boxset (Full Vinyl Rip).opus
+535:Moonblood/Moonblood - Templar's Penitence - From Hell Boxset (Full Vinyl Rip).opus
+536:Moonknight/Ligeia - 2011/Moonknight - Ligeia [Full CS].opus
+537:Mortuary Drape/Mortuary Drape - All the Witches Dance (1994) full album, vinyl.opus
+538:Mortuary Drape/Mortuary Drape - Secret Sudaria (Full Album).opus
+539:Municipal Waste/Municipal Waste "The Art of Partying" [FULL ALBUM].opus
+540:Municipal Waste/Municipal Waste - Hazardous Mutation [Full Album].opus
+541:Mythos/Pain Amplifier/Mythos - Pain Amplifier (Full Album) (HQ).opus
+542:Nocturnal Triumph/Nocturnal Triumph - Into Light's Graven Womb (FULL ALBUM).opus
+543:Nastrond/Nåstrond - Age of Fire (Full Album)1996 Black Metal Sweden.opus
+544:Necropole/Nécropole - Atavisme... (FULL DEMO) (2014).opus
+545:Necropole/Nécropole - Ostara (FULL DEMO) (2015).opus
+546:Old Tower/Old Tower & Sacred Dominions - .​.​.​From The Dark Outlands (2015) (Old-School Dungeon Synth).opus
+547:Old Tower/Old Tower - Spectral Horizons (2016) (Old-School Dungeon Synth).opus
+548:Old Tower/Old Tower - The Door (2015) (Old-School Dungeon Synth).opus
+549:Old Tower/Old Tower - The Rise Of The Specter (2017) (Old-School Dungeon Synth).opus
+550:Orgy of Carrion/Orgy of Carrion - Obscured Ceremonies Under Hell Moon.opus
+551:Peste Noire/Peste Noire - La Sanie Des Siècles - Panégyrique De La Dégénérescence - 2006 (Full Album).opus
+552:Animo Aeger/Ab-Fakt/Phrasen zu Roben !-3208476824.opus
+553:Zweihander/Daemon Slayer/Pirates of Stargazer Island-3131299383.opus
+554:Vore/Progeny of the Leviathans.opus
+555:A Transylvanian Funeral/self-titled/Pwcca-3151140128.opus
+556:Reggie Watts/Reggie Watts: Fuck Shit Stack.opus
+557:D.o.S./Sepsis/Räudepathos-68467637.opus
+558:Sabaton/Sabaton - Primo Victoria [Album% All Bonus Tracks] HD.opus
+559:Vore/Sacerdotum Tyrannis.opus
+560:Sacrilegium/Sacrilegium - Wicher (Full Album).opus
+561:Satan's Host/Virgin Sails/Satan's Host - Akoman.opus
+562:Satan's Host/Satan's Host - By the Hands of the Devil (2011) {FULL ALBUM}.opus
+563:Satan's Host/Virgin Sails/Satan's Host - Cor Malifcecus.opus
+564:Satan's Host/Virgin Sails/Satan's Host - Dichotomy.opus
+565:Satan's Host/Virgin Sails/Satan's Host - Infinite Impossibilities.opus
+566:Satan's Host/Virgin Sails/Satan's Host - Island of Giant Ants.opus
+567:Satan's Host/Virgin Sails/Satan's Host - Of Beast and Men.opus
+568:Satan's Host/Virgin Sails/Satan's Host - Reanimated Anomalies.opus
+569:Satan's Host/Virgin Sails/Satan's Host - Taromati.opus
+570:Satan's Host/Virgin Sails/Satan's Host - Vaporous of the Blood.opus
+571:Satan's Host/Virgin Sails/Satan's Host - Virgin Sails.opus
+572:Scanner/Scanner - Terminal Earth - Japanese Edition (Full Album) - 1989.opus
+573:D.o.S./Sepsis/Sepsis-3700652705.opus
+574:Sombres Forets/Sombres Forêts - Royaume de Glace (Full Album).opus
+575:Sororocide/Sororicide - "The Entity" 1991 [Full Album].opus
+576:Soulskinner/Soulskinner - Crypts of Ancient Wisdom [Full Album].opus
+577:Syphilitic Vaginas/Syphilitic Vaginas - Alpha Antichrist (Full Album).opus
+578:TSATTHOGGUA/TSATTHOGGUA - Hosanna bizarre [1996] full album HQ.opus
+579:Tetragrammacide/Tetragrammacide - Primal Incinerators of Moral Matrix (2017) Iron Bonehead Productions - full album.opus
+580:Vore/The Claw Is the Law.opus
+581:Vore/The Cruelest Construct.opus
+582:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Alu".opus
+583:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Arcane Pharmakon Messiah".opus
+584:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Blood Vaults (II - Our Despots Cleanse the Levant)".opus
+585:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "God's Ensanguined Bestiaries".opus
+586:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "I Raised This Stone As A Ghastly Memorial".opus
+587:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Kain's Countenance Fell".opus
+588:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Mount Sinai Moloch".opus
+589:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "The Restless Mills".opus
+590:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Theriak - Baal - Theriak".opus
+591:The Ruins of Beverast/Foulest Semen of a Sheltered Elite/The Ruins of Beverast - "Transcending Saturnine Iericho Skies".opus
+592:Vore/The Unseen Hand.opus
+593:Burzum/2017 - The Ways of Yore/The Ways of Yore FULL ALBUM.opus
+594:Vore/Throne to the Wolves.opus
+595:Thy Art is Murder/This Hole Isn't Deep Enough for the Twelve of You - Demo/Thy Art Is Murder - ''This Hole Isn't Deep Enough For The Twelve Of You'' [FULL DEMO].opus
+596:Tormentor/Anno Domini/Tormentor - Anno Domini [FULL ALBUM].opus
+597:Unaussprechlichen Kulten/Unaussprechlichen Kulten - Keziah Lilith Medea (Chapter X) 2017 - Iron Bonehead Prod. - full album.opus
+598:Unaussprechlichen Kulten/Unaussprechlichen kulten - Baphomet pan shub niggurath (Full Album).opus
+599:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - A Sea Ov Blood Beneath Ebon Wings (2016).opus
+600:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - Canticle Bound In Spirit - The Faith In Vampyric Blood[HD].opus
+601:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - For the Sect (FULL COMPILATION).mp4
+602:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - For the Sect (FULL COMPILATION).opus
+603:Unholy Vampiric Slaughter Sect/Unholy Vampyric Slaughter Sect - Satanic Elite (2015) [Full Demo].opus
+604:Urfaust/2012 - Ritual Music for the Truly Clochard/Urfaust - Ritual Music for the True Clochard (2012) full compilation, vinyl.opus
+605:Vore/Uroboros.opus
+606:Vetevrakh/Vetëvrakh - Demo I (2013) [Full Demo].opus
+607:Vetevrakh/Vetëvrakh - Demo II (2014) [Full Demo].opus
+608:Vindland/Vindland - Hanter Savet (Full Album).opus
+609:Walknut/Walknut - Graveforests and Their Shadows (Full Album).opus
+610:A Transylvanian Funeral/self-titled/Ways of the Magi-2497896501.opus
+611:A Transylvanian Funeral/self-titled/We Shun the Light-2270469907.opus
+612:Wedard/Wedard - Einsamer Winterweg (Full Album).opus
+613:Wedard/Wedard - Eiskrieg (Full Album).opus
+614:Wedard/Wedard - Eiskrieg II (Full EP).opus
+615:Xasthur - Xasthur & Leviathan (Full split).opus
+616:Yellow Eyes/Yellow Eyes - Immersion Trench Reverie(Full Album 2017).opus
+617:Ygg/Ygg/Ygg - Ygg (Full Album).opus
+618:Lifelover/[2006] Lifelover - Pulver [Full Album + HQ + DL].opus
+619:8bit/behemoth - Ov Fire and the Void - 8bit.opus
+620:8bit/dunkelheit-8bit.opus
+621:Scanner/scanner - hyper trace - full album (In conceptual order).opus
+622:Animo Aeger/Ab-Fakt/und allet für den kleenen Tod-1564262861.opus
 playlist_end

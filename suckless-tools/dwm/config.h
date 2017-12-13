@@ -9,15 +9,15 @@ static const unsigned int minwsz    = 10;       /* min height for smfact */
 static const char *fonts[]        = { "Terminus:pixelsize=12:antialias=false:autohint=false" };
 /* static const char dmenufont[]       = "Terminus:pixelsize=12:antialias=false:autohint=false"; */
 static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
+/* static const char col_gray2[]       = "#444444"; */
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+/* static const char col_cyan[]        = "#005577"; */
 static const char bright_blue[]     = "#8DEEEE";
 static const char gray_purple[] = "#332a2a";
-static const char pink[] = "#ffbad2";
+/* static const char pink[] = "#ffbad2"; */
 static const char col_red[] = "#ee4444";
-static const char yellow[] = "#ffe863";
+/* static const char yellow[] = "#ffe863"; */
 
 /* make sure to set this to the background of st */
 static const char ST_BACKGROUND[] = "#373B41";
@@ -30,7 +30,7 @@ static const char *colors[][3]      = {
 };
 
 static const char *tags[] = { "", "", "", "", "", "", "", "", "", \
-                            "", "", "", "" }; /* workspace names */
+                            "", "", "", "" };
 
 static const Rule rules[] = {
 /* class      instance    title       tags mask     isfloating   monitor */
@@ -70,8 +70,8 @@ static char dmenumon[2] = "0";
 
 static const char *dmenucmd[] = { "dmenu_run" };
 
-static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL };
-/* static const char *term[]  = { "st", NULL }; */
+/* static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL }; */
+static const char *term[]  = { "st", NULL };
 static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
 static const char *dedit[] = { "dedit", NULL };
 static const char *clipboard[] = { "clipmenu", NULL };

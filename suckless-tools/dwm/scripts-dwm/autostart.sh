@@ -1,5 +1,6 @@
 #!/bin/sh
 
+xset +fp /home/mitch/.fonts
 feh --bg-scale /home/mitch/workspace/dotfiles/suckless-tools/dwm/wall &
 xmodmap ~/.Xmodmap
 xrdb load ~/.Xresources &
