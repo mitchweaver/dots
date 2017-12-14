@@ -13,7 +13,6 @@ FOLDERS="$HOME/workspace/dotfiles \
         $HOME/bin \
         $HOME/downloads \
         $HOME/tmp \
-        $HOME \
         $HOME/workspace/dotfiles/.config/ranger \
         $HOME/workspace/dotfiles/suckless-tools/CONFIGS \
         $HOME/workspace/DisKvlt-Bot"

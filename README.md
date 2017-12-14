@@ -1,13 +1,11 @@
 # dotfiles
 my personal dotfiles
 
-
 screenshots:
 
 ![Image](https://i.imgur.com/ktMzEL7.png)
 
 ![Image](https://i.imgur.com/ylxTOKp.png)
-
 
 Feel free to fork.
 

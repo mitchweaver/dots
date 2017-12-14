@@ -1,2 +1,6 @@
 suckless-tools/surf/bookmarks
 .config/Discline/token
+.config/ranger/bookmarks
+.mpd/mpd.db
+.mpd/mpd.pid
+.mpd/mpdstate

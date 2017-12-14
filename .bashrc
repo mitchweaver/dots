@@ -1,10 +1,4 @@
 # --------------------- PS1 -------------------------------------------------- #
-
-# \u = user
-# \j = num jobs controlled by shell
-# \w = pwd
-# \W = base name directory
-
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
@@ -51,9 +45,9 @@ trash() {
 alias empty-trash="sh ~/bin/empty-trash.sh"
 alias cdTrash="cd ~/.local/share/Trash/files"
 
-alias weather="curl -s http://wttr.in/~Schmalkalden"
-alias weather-sd="curl -s http://wttr.in/~Dakota_State_University"
-alias weather-ok="curl -s http://wttr.in/~Claremore"
+alias weather="c ; curl -s http://wttr.in/~Schmalkalden"
+alias weather-sd="c ; curl -s http://wttr.in/~Dakota_State_University"
+alias weather-ok="c ; curl -s http://wttr.in/~Claremore"
 
 # --------------------------------------------------------------------------- #
 alias yt="youtube-viewer -C -q --vd=high"
@@ -67,6 +61,7 @@ opus-ffmpeg() {
 # --------------------------------------------------------------------------- #
 
 # ------------------ RANGER ------------------------------------------------- #
+alias ranger="ranger ; clear"
 alias r="ranger"
 [ -n "$RANGER_LEVEL" ] && PS1="$PS1"'(RANGER): ' && clear && \
     ls --color=always --group-directories-first -F
@@ -152,7 +147,11 @@ gitup() {
     git add -A && git commit -m "$@" && git push -u origin master
 }
 gitadd() {
-    git add "$@"
+    if [ $# -eq 0 ] ; then
+        git add -A
+    else
+        git add "$@"
+    fi
 }
 gitmit() {
     git add "$1" && git commit -m "${@:(-1)}"

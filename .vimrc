@@ -101,6 +101,10 @@ set laststatus=0
 
 " makes vim yank/paste to/from the system clipboard
 set clipboard=unnamed
+set novisualbell
+set noerrorbells
+set lazyredraw " whether to redraw screen after macros
+set mat=2 " how fast to blink matched brackets
 " -------------------------------------------------------------
 
 " ------------ HISTORY ---------------------------------------
@@ -156,8 +160,8 @@ set autoread " when a file has changed on disk, just load it. don't ask.
 " -------- Tabs ----------------------------------------------
 " set tabpagemax=15 " don't allow for more than 15 tabs to be open
 " nnoremap th  :tabfirst<CR>
-nnoremap tk  :tabnext<CR>
-nnoremap tj  :tabprev<CR>
+" nnoremap tk  :tabnext<CR>
+" nnoremap tj  :tabprev<CR>
 " nnoremap tl  :tablast<CR>
 
 nnoremap <C-h>  :tabfirst<CR>

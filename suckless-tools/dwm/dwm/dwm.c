@@ -1326,7 +1326,10 @@ void resizeclient(Client *c, int x, int y, int w, int h)
 	} else {
         /* If is the only monitor on the workspace */
         /* and the window is not a terminal */
-		if (n == 1 && (strcmp(c->name, "st") != 0)) {
+		if (n == 1 && 
+            (strcmp(c->name, "st") != 0) &&
+            (strcmp(c->name, "ranger") != 0)
+        ) {
             /* then set no border with appropriate gaps */
 			wc.border_width = 0;
             gapincr = gappx;
