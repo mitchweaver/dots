@@ -1,5 +1,3 @@
-
-/* Terminal colors (16 first used in escape sequence) */
  const char *colorname[] = {
 
   /* 8 normal colors */
@@ -27,10 +25,6 @@
   [257] = "#c7ccd1", /* foreground */
 };
 
-/*
- * Default colors (colorname index)
- * foreground, background, cursor
- */
  unsigned int defaultfg = 257;
  unsigned int defaultbg = 256;
  unsigned int defaultcs = 257;

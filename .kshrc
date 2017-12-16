@@ -1,4 +1,16 @@
-source /etc/profile
+. /etc/profile
+
+# -------------- ksh specific ------------------------------ #
+# NOTE: You need these in order for arrow keys to work.
+# Otherwise they behave *extremely* weird in ksh.
+# Don't ask me why this works, I have no idea.
+set -o emacs
+alias __A=`echo "\020"`     # up arrow = ^p = back a command
+alias __B=`echo "\016"`     # down arrow = ^n = down a command
+alias __C=`echo "\006"`     # right arrow = ^f = forward a character
+alias __D=`echo "\002"`     # left arrow = ^b = back a character
+alias __H=`echo "\001"`     # home = ^a = start of line
+alias __Y=`echo "\005"`     # end = ^e = end of line
 
 # --------------------- PS1 -------------------------------------------------- #
 parse_git_branch() {
@@ -209,3 +221,7 @@ alias discord="cd ~/workspace/Discline ; c ; python3.6 Discline.py"
 
 
 alias xztar="xz -d -c ssh-backup.tar.xz | tar xf -"
+
+
+
+
