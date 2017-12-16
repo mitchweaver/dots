@@ -234,7 +234,7 @@ let wiki.path = g:vimwikidir
 let g:vimwiki_list=[wiki]
 let g:vimwiki_list = [
             \{'path': '~/files/vimwiki/personal.wiki', 'syntax': 'markdown', 'ext': '.md'},
-            \{'path': '~/files/vimwiki/linux.wiki', 'syntax': 'markdown', 'ext': '.md'},
+            \{'path': '~/files/vimwiki/linux-BSD.wiki', 'syntax': 'markdown', 'ext': '.md'},
             \{'path': '~/files/vimwiki/programming.wiki', 'syntax': 'markdown', 'ext': '.md'},
             \{'path': '~/files/vimwiki/metal.wiki', 'syntax': 'markdown', 'ext': '.md'},
             \{'path': '~/files/vimwiki/philosophy.wiki', 'syntax': 'markdown', 'ext': '.md'},

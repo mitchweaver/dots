@@ -52,9 +52,9 @@ static const struct arg args[] = {
     /* { vol_perc, ", "/dev/sda" }, */
     { run_command, "[ %s ]", "mpc current" },
     /* { wifi_perc,    "[ %s%%", "wlan0" }, */
-    { ipv4,     "[ %s -", "wlan0" },
-    { wifi_essid, " %s ]", "wlan0" },
-    { battery_perc, "[ BAT %2s%% ]", "BAT0" },
+    //{ ipv4,     "[ %s -", "wlan0" },
+    //{ wifi_essid, " %s ]", "wlan0" },
+    //{ battery_perc, "[ BAT %2s%% ]", "BAT0" },
     { cpu_perc, "[ CPU %2s%% ]", NULL    },
     { ram_perc, "[ RAM %2s%% ]", NULL    },
     { datetime, "[ %s -", "%a %b %d" },

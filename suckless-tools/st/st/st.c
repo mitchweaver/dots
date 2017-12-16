@@ -2400,7 +2400,7 @@ eschandle(uchar ascii)
 	return 1;
 }
 
-externalpipe(const Arg *arg)
+void externalpipe(const Arg *arg)
 {
 	int to[2];
 	char buf[UTF_SIZ];

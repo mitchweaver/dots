@@ -1,0 +1,9 @@
+@@ -63,7 +63,7 @@
+ static int bellvolume = 0;
+ 
+ /* default TERM value */
+-static char termname[] = "st-256color";
++static char termname[] = "st-git-256color";
+ 
+ /*
+  * spaces per tab

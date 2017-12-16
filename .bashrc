@@ -64,7 +64,7 @@ opus-ffmpeg() {
 alias ranger="ranger ; clear"
 alias r="ranger"
 [ -n "$RANGER_LEVEL" ] && PS1="$PS1"'(RANGER): ' && clear && \
-    ls --color=always --group-directories-first -F
+    ls
 # --------------------------------------------------------------------------- #
 
 # --------------------------------------------------------------------------- #
@@ -80,7 +80,11 @@ rtrans(){
 
 # --------------------------------------------------------------------------- #
 alias less="less -Q -R"
-alias ls='ls --color=always --group-directories-first --color=auto -F'
+# NOTE: on linux:
+alias ls='ls --color=always --group-directories-first -F'
+# on BSD:
+# alias ls='ls --color=always --group-directories-first -F'
+alias ls='ls -F'
 alias sls='ls'
 alias l='ls'
 alias sl='ls'
@@ -91,7 +95,8 @@ alias cls='clear;ls'
 alias csl='clear;ls'
 alias cl='clear;ls'
 alias mv="mv -v"
-alias cp="cp -av"
+# alias cp="cp -av"
+alias cp="cp -v"
 alias mkdir="mkdir -p"
 alias du='du -ahLd 1'
 alias make="make -j3"
@@ -190,7 +195,7 @@ git() {
 
 filesize(){ echo $(stat --printf="%s" "$1") ; }
 
-alias sf="neofetch"
+alias sf="neofetch --ascii_distro openbsd_small"
 alias nf="sf"
 
 alias ping='ping mitchweaver.xyz'
@@ -199,3 +204,6 @@ alias ping='ping mitchweaver.xyz'
 alias restart-vpn="killall openvpn ; cd /etc/openvpn ; openvpn Switzerland.ovpn &"
 
 alias discord="cd ~/workspace/Discline ; c ; python3.6 Discline.py"
+
+
+alias xztar="xz -d -c ssh-backup.tar.xz | tar xf -"

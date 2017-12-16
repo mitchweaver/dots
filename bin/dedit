@@ -15,26 +15,28 @@ FOLDERS="$HOME/workspace/dotfiles \
         $HOME/tmp \
         $HOME/workspace/dotfiles/.config/ranger \
         $HOME/workspace/dotfiles/suckless-tools/CONFIGS \
-        $HOME/workspace/DisKvlt-Bot"
+        $HOME/workspace/diskvlt-bot"
 
 # files you dont want to see in dmenu
-IGNORE="-I *.bak \
-        -I *.temp \
-        -I *.tmp \
-        -I *.history \
-        -I *.viminfo \
-        -I .bash_history \
-        -I *.serverauth \
-        -I .Xauthority \
-        -I .lesshst \
-        -I .python_history \
-        -I .zsh_history \
-        -I .recently-used \
-        -I .wget-hsts \
-        -I .zsh-update \
-        -I .git \
-        -I .gitignore \
-        -I .gitconfig"
+# Doesn't work on BSD
+IGNORE=""
+# IGNORE="-I *.bak \
+#         -I *.temp \
+#         -I *.tmp \
+#         -I *.history \
+#         -I *.viminfo \
+#         -I .bash_history \
+#         -I *.serverauth \
+#         -I .Xauthority \
+#         -I .lesshst \
+#         -I .python_history \
+#         -I .zsh_history \
+#         -I .recently-used \
+#         -I .wget-hsts \
+#         -I .zsh-update \
+#         -I .git \
+#         -I .gitignore \
+#         -I .gitconfig"
 
 # change this to your editor and/or terminal emulator
 EDITOR='st -w -e nvim'
@@ -50,7 +52,10 @@ if [ $# -gt 0 ] ; then
 fi
 
 # note: the ls arguments are important, please don't break the script ;)
-SELECTION=$(ls $IGNORE -HBLap ${FOLDERS} | grep -v / | $DMENU -p 'File to edit:')
+# LINUX
+# SELECTION=$(ls $IGNORE -HBLap ${FOLDERS} | grep -v / | $DMENU -p 'File to edit:')
+# BSD
+SELECTION=$(ls $IGNORE -HLap ${FOLDERS} | grep -v / | $DMENU -p 'File to edit:')
 
 # As is, this checks to see if a file exists before running the editor
 # ---- You can delete this except for the $EDITOR line in order to create new files

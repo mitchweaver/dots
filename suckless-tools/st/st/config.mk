@@ -16,13 +16,19 @@ INCS = -I$(X11INC) \
        `pkg-config --cflags freetype2`
 
 
-# DEFAULT
+####### NOTE: ON OPENBSD, REMOVE -LRT!
+# DEFAULT (do not use)
 #LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft \
- 
-# WITH TRANSPARENCY
+
+# WITH TRANSPARENCY (LINUX)
 LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft -lXrender\
-	   `pkg-config --libs fontconfig` \
-       `pkg-config --libs freetype2`
+		   `pkg-config --libs fontconfig` \
+	       	   `pkg-config --libs freetype2`
+
+# WITH TRANSPARENCY (OPENBSD)
+LIBS = -L$(X11LIB) -lm -lX11 -lutil -lXft -lXrender\
+		   `pkg-config --libs fontconfig` \
+	       	   `pkg-config --libs freetype2`
 
 # flags
 CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600

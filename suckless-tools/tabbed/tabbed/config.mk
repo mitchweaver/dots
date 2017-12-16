@@ -1,24 +1,31 @@
-# tabbed version
-VERSION = 0.6
-
-# Customize below to fit your system
+VERSION=4.7
 
 # paths
 PREFIX = /usr/local
 MANPREFIX = ${PREFIX}/share/man
 
+X11INC = /usr/X11R6/include
+X11LIB = /usr/X11R6/lib
+
+# Xinerama, comment if you don't want it
+XINERAMALIBS  = -lXinerama
+XINERAMAFLAGS = -DXINERAMA
+
+# freetype
+FREETYPELIBS = -lfontconfig -lXft
+# LINUX (uncomment)
+#FREETYPEINC = /usr/include/freetype2
+# OpenBSD (uncomment)
+FREETYPEINC = ${X11INC}/freetype2
+
 # includes and libs
-INCS = -I. -I/usr/include -I/usr/include/freetype2
-LIBS = -L/usr/lib -lc -lX11 -lfontconfig -lXft -lXrender
+INCS = -I${X11INC} -I${FREETYPEINC}
+LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lm
 
 # flags
-CPPFLAGS = -DVERSION=\"${VERSION}\" -D_DEFAULT_SOURCE
-CFLAGS = -std=c99 -pedantic -Wall -Os ${INCS} ${CPPFLAGS}
-LDFLAGS = -s ${LIBS}
-
-# Solaris
-#CFLAGS = -fast ${INCS} -DVERSION=\"${VERSION}\"
-#LDFLAGS = ${LIBS}
+CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700 -D_POSIX_C_SOURCE=200809L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
+CFLAGS   = -std=c99 -pedantic -Wall -Os ${INCS} ${CPPFLAGS}
+LDFLAGS  = -s ${LIBS}
 
 # compiler and linker
 CC = cc
