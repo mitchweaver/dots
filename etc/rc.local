@@ -1,4 +1,4 @@
 #!/bin/sh
-/bin/chmod g+rw /dev/drm*
-cd  /etc/openvpn ; openvpn Switzerland.ovpn &
-su mitch
+/bin/chmod g+rw /dev/drm* &
+$(cd /etc/openvpn ; /usr/bin/openvpn Switzerland.ovpn > /dev/null) &
+su - mitch

@@ -1,4 +1,8 @@
-source /etc/profile
+# on openbsd, remove core dumps
+(rm -rf /home/mitch/*.core > /dev/null &)
+
+# kill ~/desktop, i hate that firefox makes this on startup
+(rm -rf /home/mitch/desktop > /dev/null &)
 
 # --------------------- PS1 -------------------------------------------------- #
 parse_git_branch() {

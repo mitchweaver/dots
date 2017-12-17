@@ -33,17 +33,18 @@ Plug 'ctrlpvim/ctrlp.vim' " fuzzy finder
 " Themes & Frippery
 " Plug 'vim-airline/vim-airline-themes' " powerline-inspired status bar
 " Plug 'vim-airline/vim-airline' " see above -^
-Plug 'flazz/vim-colorschemes' " just a bunch of colorschemes
+" Plug 'flazz/vim-colorschemes' " just a bunch of colorschemes
 " Plug 'altercation/vim-colors-solarized' " solarized colorschemes
 " Plug 'jonathanfilip/vim-lucius' " lucius colorscheme
+" Plug 'arcticicestudio/nord-vim'
 
 " UI mods
 " Plug 'HeroicEric/vim-tabline' " shows full path in tab names
 
 " Syntax Highlighting
 Plug 'sheerun/vim-polyglot' " syntax highlight - all languages
-Plug 'tpope/vim-markdown' " markdown support
-Plug 'pangloss/vim-javascript' " better javascript support
+" Plug 'tpope/vim-markdown' " markdown support
+" Plug 'pangloss/vim-javascript' " better javascript support
 Plug 'lilydjwg/colorizer' " colorizes rgb colorcodes
 
 " Code Completion

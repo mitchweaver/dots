@@ -1,9 +1,76 @@
-8
+75
 Fraktur.ttf -misc-breitkopf fraktur-medium-r-normal--0-0-0-0-p-0-iso10646-1
 Gregorian.ttf -misc-gregorianflf-medium-r-normal--0-0-0-0-p-0-iso10646-1
-ProggyClean.ttf -misc-proggycleantt-medium-r-normal--0-0-0-0-c-0-iso10646-1
-ProggyClean.ttf -misc-proggycleantt-medium-r-normal--0-0-0-0-c-0-iso8859-1
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-adobe-standard
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-adobe-symbol
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-ascii-0
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-ibm-cp437
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-ibm-cp850
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-ibm-cp852
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-ibm-cp866
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-iso10646-1
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-iso8859-1
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-iso8859-10
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-iso8859-13
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-iso8859-15
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-iso8859-16
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-iso8859-2
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-iso8859-3
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-iso8859-4
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-iso8859-5
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-iso8859-7
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-iso8859-9
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-koi8-e
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-koi8-r
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-koi8-ru
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-koi8-u
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-koi8-uni
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-microsoft-cp1252
+Symbola.ttf -misc-symbola-medium-r-semicondensed--0-0-0-0-p-0-suneu-greek
 ponderosa.ttf -macromedia-ponderosa-medium-r-normal--0-0-0-0-p-0-iso10646-1
+tengtelc.ttf -misc-tengwar telcontar-medium-r-normal--0-0-0-0-p-0-ascii-0
 tengtelc.ttf -misc-tengwar telcontar-medium-r-normal--0-0-0-0-p-0-iso10646-1
 tengtelc.ttf -misc-tengwar telcontar-medium-r-normal--0-0-0-0-p-0-iso8859-1
 tengtelc.ttf -misc-tengwar telcontar-medium-r-normal--0-0-0-0-p-0-iso8859-15
+tengtelc.ttf -misc-tengwar telcontar-medium-r-normal--0-0-0-0-p-0-microsoft-cp1252
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-adobe-standard
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-adobe-symbol
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-ascii-0
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-cns11643-1
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-cns11643-2
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-cns11643-3
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-gb18030.2000-0
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-gb2312.1980-0
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-ibm-cp437
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-ibm-cp850
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-ibm-cp852
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-ibm-cp866
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso10646-1
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-1
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-10
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-11
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-13
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-15
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-16
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-2
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-3
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-4
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-5
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-6
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-6.16
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-6.8x
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-7
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-8
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-iso8859-9
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-jisx0201.1976-0
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-jisx0208.1983-0
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-jisx0208.1990-0
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-jisx0212.1990-0
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-koi8-e
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-koi8-r
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-koi8-ru
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-koi8-u
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-koi8-uni
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-ksc5601.1987-0
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-microsoft-cp1252
+unifont.ttf -misc-unifont-medium-r-normal--0-0-0-0-p-0-suneu-greek

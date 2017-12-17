@@ -76,9 +76,9 @@ static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
 static const char *dedit[] = { "dedit", NULL };
 static const char *clipboard[] = { "clipmenu", NULL };
 static const char *ranger[] = { "st", "-w", "-e", "ranger", NULL };
-static const char *volup[] = { "amixer", "-q", "sset", "Master", "4%+", NULL };
-static const char *voldown[] = { "amixer", "-q", "sset", "Master", "4%-", NULL };
-static const char *volmute[] = { "amixer", "-q", "sset", "Master", "toggle", NULL};
+static const char *volup[] = { "BSDNixVolume.sh", "-set", "+4", NULL };
+static const char *voldown[] = { "BSDNixVolume.sh", "-set", "-4", NULL };
+/* static const char *volmute[] = { "amixer", "-q", "sset", "Master", "toggle", NULL}; */
 static const char *mpdnext[] = { "mpc", "-q",  "next", NULL };
 static const char *mpdprev[] = { "mpc", "-q", "prev", NULL };
 static const char *mpdtoggle[] = { "mpc", "-q",  "toggle", NULL };
@@ -122,7 +122,7 @@ static Key keys[] = {
     /* { ControlMask,         XK_l,       spawn,          {.v = xdgopen } }, */
     
     // xf86 keys must be in octal
-    { 0,                        0x1008ff12, spawn,          {.v = volmute }},
+    /* { 0,                        0x1008ff12, spawn,          {.v = volmute }}, */
     { 0,                        0x1008ff11, spawn,          {.v = voldown }},
     { 0,                        0x1008ff13, spawn,          {.v = volup }},
  
