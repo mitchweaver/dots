@@ -19,7 +19,8 @@
 " disables space for everything but as leader
 nnoremap <SPACE> <Nop> 
 let mapleader=" "
-" --------------- plugins -----------------------------------
+
+" ←--------------- Plugins -----------------------------------→
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -31,15 +32,12 @@ Plug 'vimwiki/vimwiki'
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy finder
 
 " Themes & Frippery
-" Plug 'vim-airline/vim-airline-themes' " powerline-inspired status bar
-" Plug 'vim-airline/vim-airline' " see above -^
 " Plug 'flazz/vim-colorschemes' " just a bunch of colorschemes
 " Plug 'altercation/vim-colors-solarized' " solarized colorschemes
 " Plug 'jonathanfilip/vim-lucius' " lucius colorscheme
 " Plug 'arcticicestudio/nord-vim'
 
 " UI mods
-" Plug 'HeroicEric/vim-tabline' " shows full path in tab names
 
 " Syntax Highlighting
 Plug 'sheerun/vim-polyglot' " syntax highlight - all languages
@@ -48,22 +46,22 @@ Plug 'sheerun/vim-polyglot' " syntax highlight - all languages
 Plug 'lilydjwg/colorizer' " colorizes rgb colorcodes
 
 " Code Completion
-Plug 'Shougo/deoplete.nvim' " heavy, parallelized code completion
+" Plug 'Shougo/deoplete.nvim' " heavy, parallelized code completion
 Plug 'ervandew/supertab' " open code completion with tab
 
 " Utils
-Plug 'w0rp/ale' " asynchronous linting in many languages
+" Plug 'w0rp/ale' " asynchronous linting in many languages
 Plug 'tpope/vim-commentary' " comment toggler
 Plug 'terryma/vim-multiple-cursors' " sublime multiple select
 Plug 'tpope/vim-surround' " quote/paren etc surrounding
-Plug 'airblade/vim-gitgutter' " git diffing and airline integration
+Plug 'airblade/vim-gitgutter' " git diffing along the left side
 Plug 'godlygeek/tabular' " tab alignment
 Plug 'AndrewRadev/splitjoin.vim' " conversion from multiline to singleline
 
 call plug#end()
 filetype indent plugin on
 syntax enable
-map <leader>pl :PlugInstall<CR>
+map <leader>pi :PlugInstall<CR>
 map <leader>pu :PlugUpdate<CR>
 map <leader>pc :PlugClean<CR>
 " --------------------------------------------------------------
@@ -78,23 +76,19 @@ map <leader>pc :PlugClean<CR>
 set background=dark
 " set background=light
 
-" disables background:
-" hi Normal ctermbg=NONE
-
-" let g:airline_theme='lucius'
-" let g:airline_theme='papercolor'
+" hi Normal ctermbg=NONE " disables background:
 " ---------------------------------------------------------------
 
 " -------------- Vim Specific Configs -------------------------
 set mouse=a " NOTE THIS BREAKS MIDDLE CLICK PASTE on some terminals
 set backspace=indent,eol,start
-set updatetime=750 " how long til vim does background calls after typing
+set updatetime=1000 " how long til vim does background calls after typing
 
 " Enter will now also clear the highlights from searches
-nnoremap <silent><CR> :noh<CR><CR>
+nnoremap <silent><CR> :noh<CR>:nohlsearch<return><CR>
 
 " Clear highlighting on escape in normal mode
-nnoremap <silent><esc> :noh<return><esc>
+nnoremap <silent><esc> :noh<return>:nohlsearch<return><esc>
 nnoremap <silent><esc> ^[ <esc>^[
 
 " Disable bottom status line / statusbar
@@ -102,41 +96,67 @@ set laststatus=0
 
 " makes vim yank/paste to/from the system clipboard
 set clipboard=unnamed
-set novisualbell
-set noerrorbells
-" set lazyredraw " whether to redraw screen after macros
+set vb " disable audible bell
+set novisualbell " kill the visual bell too
+set noerrorbells " did I mention I hate bells?
+set lazyredraw " whether to redraw screen after macros
 set mat=2 " how fast to blink matched brackets
+set ch=1 " command height --- get rid of the wasted line at the bottom
+set textwidth=0 " very annoying warning occurs with long lines
+set backspace=2 " allow backspace to go over new lines, etc
+set ttimeoutlen=100 " timeout between key presses for cmds
+" -------------------------------------------------------------
+
+" ---------------- OS Specific Configs ------------------------
+set shellslash
+set shell=ksh
+set wildmenu " makes shell completion a bit better
 " -------------------------------------------------------------
 
 " ------------ HISTORY ---------------------------------------
-set history=500
+set history=750
 set undolevels=500
 set undoreload=2000
 " -----------------------------------------------------------
 
 " ---------- UI ---------------------------------------------
-" highlight trailing whitespace:
+" highlight trailing whitespace - (annoying imo)
 " highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 " match ExtraWhitespace /\s\+$\|\t/
 
 set formatoptions+=o " continue comment marker on new lines
+
+set ruler " show where you are in the bottom right
+
+" ~~~ I prefer these two disabled at startup, see function below
 " set number " enables line numbers on startup
 " set relativenumber " shows line numbers relative to position
-" set ruler " show where you are
 
-
-" Toggle line numbeing on/off
+" Toggle line numbering on/off
 map <silent><leader>ln :set number! relativenumber!<cr>
 
-set noshowmode
+set noshowmode " don't show 'insert' or 'normal' etc on bottom left
 set showmatch " show matching parens
-set cursorline " show current line
+
+" WARNING - this is *very* slow, I have it disabled
+" set cursorline " show current line
+
+" Nice, but this can be annoying on some color schemes
 " set colorcolumn=80
+
+set scrolloff=4 " keep cursor X lines from the top/bottom when scrolling
+set mousehide " hide the mouse while typing (doesn't work on openbsd?)
+
+set fillchars=""  " extremely annoying, they serve no purpose
+
+" don't syntax highlight lines that are too long (slow)
+set synmaxcol=1024
 " ------------------------------------------------------------
 
 " ------ FORMATTING -----------------------------------------
-" set nowrap " dont wrap lines
+set nowrap " dont wrap lines
 set encoding=utf-8
+set diffopt+=iwhite " disable white space diffing
 " --------------------------------------------------------------
 
 " -------- Tabs and Spacing -----------------------------------
@@ -159,21 +179,16 @@ set autoread " when a file has changed on disk, just load it. don't ask.
 " -------------------------------------------------------------
 
 " -------- Tabs ----------------------------------------------
-" set tabpagemax=15 " don't allow for more than 15 tabs to be open
-" nnoremap th  :tabfirst<CR>
-" nnoremap tk  :tabnext<CR>
-" nnoremap tj  :tabprev<CR>
-" nnoremap tl  :tablast<CR>
+set tabpagemax=10 " dont show more than 10 tabs
+map <silent><C-h>  :tabfirst<CR>
+map <silent><C-k>  :tabnext<CR>
+map <silent><C-j>  :tabprev<CR>
+map <silent><C-l>  :tablast<CR>
 
-nnoremap <C-h>  :tabfirst<CR>
-nnoremap <C-k>  :tabnext<CR>
-nnoremap <C-j>  :tabprev<CR>
-nnoremap <C-l>  :tablast<CR>
-
-nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnew<CR>
-nnoremap tm  :tabm<Space>
-nnoremap td  :tabclose<CR>
+map <silent>tt  :tabedit<Space>
+map <silent>tn  :tabnew<CR>
+map <silent>tm  :tabm<Space>
+map <silent>td  :tabclose<CR>
 " ------------------------------------------------------------
 
 " ---------- Searching ----------------------------------------
@@ -183,6 +198,7 @@ set incsearch " live incremental searching
 set showmatch " live match highlighting
 set hlsearch " highlight matches
 set gdefault " use the `g` flag by default.
+set wrapscan " searching wraps lines
 set magic " 'magic' patterns - (extended regex)
 map <silent><leader>/ :nohlsearch<CR>
 " Search and Replace
@@ -195,7 +211,7 @@ iab #i #include <.h>
 
 " -------------- Extension Settings --------------------------
 " Use deoplete.
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 " disable all gitgutter keybinds
 let g:gitgutter_map_keys = 0
@@ -212,27 +228,20 @@ let g:multi_cursor_quit_key='<esc>'
 " map the key for toggling comments with vim-commentary
 nmap <silent><leader>c :Commentary<CR>
 
-
 " ---------- Ale settings ----------------------------
 " only lint on file save, not in background or on file open:
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_enter = 0
 " Disable warnings about trailing whitespace for Python files.
-let b:ale_warn_about_trailing_whitespace = 0 " fucking annoying
+" let b:ale_warn_about_trailing_whitespace = 0 " fucking annoying
 
-" ---------------- airline settings --------------------
-" let g:airline_powerline_fonts = 1
-" airline tabline
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
-" airline ALE integration
-" let g:airline#extensions#ale#enabled = 1
 " ------------ Vim Wiki ---------------------------------------
 let wiki = {}
 let g:vimwikidir = "/home/mitch/files/vimwiki"
 let wiki.path = g:vimwikidir
 let g:vimwiki_list=[wiki]
+let g:vimwiki_hl_headers = 1
+let g:vimwiki_hl_cb_checked = 1
 let g:vimwiki_list = [
             \{'path': '~/files/vimwiki/personal.wiki', 'syntax': 'markdown', 'ext': '.md'},
             \{'path': '~/files/vimwiki/linux-BSD.wiki', 'syntax': 'markdown', 'ext': '.md'},
@@ -246,11 +255,103 @@ let g:vimwiki_list = [
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 map <silent><leader>md :MarkdownPreview<CR>
 
-
-
 " ctrlp ignores
 set wildignore+=/home/mitch/music,/home/mitch/videos,/home/mitch/books,/home/mitch/images,*.opus,*.flac,*.pdf,*.jpg,*.png,*.so,*.swp,*.zip,*.gzip,*.bz2,*.tar,*.xz,*.lrzip,*.lrz,*.mp3,*.ogg,*.mp4,*.gif,*.jpeg,*.webm
+" --------------------------------------------------------------
 
+" ------ misc keybinds ----------------------------------
+"  Make shift-insert work
+map <silent><S-Insert> <MiddleMouse>
+map! <silent><S-Insert> <MiddleMouse>
+
+" Horizontal scrolling
+nmap <silent> <C-o> 10zl
+nmap <silent> <C-i> 10zh
+" --------------------------------------------------------------
+
+" ----------------- Symbol Printing -----------------------------
+" ~~~ NOTE: I know you can do these with default vim, ctrl-k 
+" conflicts with my own bindings. Plus, I think this way is easier. 
+
+" ~~~~~~ Greek Symbols ~~~~~ "
+" lambda
+imap <silent><C-q><C-l> λ
+" theta
+imap <silent><C-q><C-t> Θ
+" delta
+imap <silent><C-q><C-d> Δ 
+" pi
+imap <silent><C-q><C-p> π
+" mu
+imap <silent><C-q><C-u> μ
+" omega
+imap <silent><C-q><C-o> Ω
+" phi
+imap <silent><C-q><C-[> Φ
+" kappa
+imap <silent><C-q><C-k> κ
+" sigma
+imap <silent><C-q><C-s> ∑
+
+" ~~~~ Logical Symbols ~~~~~ "
+" bullet / dot operator
+imap <silent><C-q><C-b> ∙
+" therefore
+imap <silent><C-q><C-.> ∴
+" because
+imap <silent><C-q><C-,> ∵
+" member of 
+imap <silent><C-q><C-3> ∋
+" element of
+imap <silent><C-q><C-e> ∈
+" Null set
+imap <silent><C-q><C-0> ∅
+" for all
+imap <silent><C-q><C-a> ∀
+" right arrow
+imap <silent><C-q><C-Right> →
+" left arrow
+imap <silent><C-q><C-Left> ←
+" up arrow
+imap <silent><C-q><C-Up> ↑
+" down arrow
+imap <silent><C-q><C-Down> ↓
+" there exists
+imap <silent><C-q><C-E> ∃
+
+" ~~~~~~ Mathematics ~~~~~~~ "
+" sqrt
+imap <silent><C-q><C-s><C-q> √
+" infinity
+imap <silent><C-q><C-i> ∞
+" squared
+imap <silent><C-q><C-2> ²
+" plus/minus
+imap <silent><C-q><C-p> ±
+" roughly equivalent
+imap <silent><C-q><C-~> ≈
+" not equal to
+imap <silent><C-q><C-/> ≠
+" greater than/equal to
+imap <silent><C-q><C-g> ≥
+" less than/equal to
+imap <silent><C-q><C-l> ≤
+
+" ~~~~~~~~ Misc ~~~~~~~~~~~~ "
+" trademark symbol
+imap <silent><C-q><C-t><C-m> ™
+" copyright symbol
+imap <silent><C-q><C-c><C-r> ©
+" left guillemet
+imap <silent><C-q><C-]> »
+" right guillemet
+imap <silent><C-q><C-[> «
+
+" Things I don't use but might be cool:
+" (calculus) integrals: ∫∬∮
+
+" print an 80-char line separator
+inoremap <silent><C-b> -------------------------------------------------------------------------- <ESC>:Commentary<CR>o
 " --------------------------------------------------------------
 
 " -------- External Programs ---------------------------------
@@ -284,8 +385,5 @@ function! RangerChooser()
     redraw!
 endfunction
 command! -bar RangerChooser call RangerChooser()
-nnoremap <leader>r :<C-U>RangerChooser<CR>
+nnoremap <silent><leader>r :<C-U>RangerChooser<CR>
 " -------------------------------------------------------------
-
-" Not sure what this does:
-" set so=10

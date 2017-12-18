@@ -255,7 +255,10 @@ gitadd() {
     fi
 }
 gitmit() {
-    git add "$1" && git commit -m "${@:(-1)}"
+
+    git add "$1" && git commit -m "$2"
+    # git add "$1" && git commit -m "${@:(-1)}"
+
     # if [ $# -eq 0 ] ; then
     #     git add -A && git commit -m "$@"
     # else
