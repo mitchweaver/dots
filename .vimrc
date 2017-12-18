@@ -104,7 +104,7 @@ set laststatus=0
 set clipboard=unnamed
 set novisualbell
 set noerrorbells
-set lazyredraw " whether to redraw screen after macros
+" set lazyredraw " whether to redraw screen after macros
 set mat=2 " how fast to blink matched brackets
 " -------------------------------------------------------------
 

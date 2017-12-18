@@ -277,7 +277,7 @@ var bindings = {
     'j' : down,
     'g' : home,
     'G' : bottom,
-    'f' : hintMode,
+    // 'f' : hintMode,
     '^b': pageup,
     '^f': pagedown,
 }

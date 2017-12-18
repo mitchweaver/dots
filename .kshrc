@@ -36,15 +36,11 @@ export BROWSER="/usr/local/bin/tabbed -c /usr/local/bin/surf -e"
 
 alias rsync='rsync -rtvuclh --progress --delete'
 
-alias resize-half='mogrify -resize 50%X50%'
-alias resize-quarter='mogrify -resize 25%X25%'
 
 # --------------------------------------------------------------------------- #
 alias vim="nvim -p"
 alias neovim=nvim
 alias vi=nvim
-alias bashrc="nvim ~/.bashrc"
-alias bsahrc="nvim ~/.bashrc"
 alias kshrc="nvim ~/.kshrc"
 alias vimrc="nvim ~/.vimrc"
 # --------------------------------------------------------------------------- #
@@ -88,6 +84,7 @@ rtrans(){
 }
 # --------------------------------------------------------------------------- #
 
+
 # --------------------------------------------------------------------------- #
 alias less="less -Q -R"
 # NOTE: on linux:
@@ -119,6 +116,96 @@ alias htpo='htop'
 alias hto='htop'
 alias hpot='htop'
 alias hotp='htop'
+alias top='htop'
+
+# --------------------------------------------------------------------------- #
+
+# HOME
+alias gh="cd ~ ; cls"
+mh() { mv "$1" ~ ; }
+Yh() { cp -r "$1" ~ ; }
+
+# workspace
+alias gw="cd ~/workspace ; cls"
+mw() { mv "$1" ~/workspace ; }
+Yw() { cp -r "$1" ~/workspace ; }
+
+# Trash
+alias gT="cd ~/.local/share/Trash/files ; cls"
+mT() { mv "$1" ~/.local/share/Trash/files ; }
+YT() { cp -r "$1" ~/.local/share/Trash/files ; }
+
+# bin
+alias gb="cd ~/bin ; cls"
+mb() { mv "$1" ~/bin ; }
+Yb() { cp -r "$1" ~/bin ; }
+
+# backup
+alias gB="cd ~/backup ; cls"
+mB() { mv "$1" ~/backup ; }
+YB() { cp -r "$1" ~/backup ; }
+
+# files
+alias gf="cd ~/files ; cls"
+mf(){ mv "$1" ~/files ; }
+Yf(){ cp -r "$1" ~/files ; }
+
+# downloads
+alias gd="cd ~/downloads ; cls"
+md() { mv "$1" ~/downloads ; }
+Yd() { cp -r "$1" ~/downloads ; }
+
+# images
+alias gi="cd ~/images ; cls"
+mi(){ mv "$1" ~/images ; }
+Yi(){ cp -r "$1" ~/images ; }
+
+# wallpapers
+alias gW="cd ~/images/wallpapers ; cls"
+mW() { mv "$1" ~/images/wallpapers ; } 
+YW() { cp -r "$1" ~/images/wallpapers ; }
+
+# memes
+alias gM="cd ~/images/memes ; cls"
+mM(){ mv "$1" ~/images/memes ; }
+YM(){ cp -r "$1" ~/images/memes ; }
+
+# videos
+alias gV="cd ~/videos ; cls"
+mV() { mv "$1" ~/videos ; }
+YV() { cp -r "$1" ~/videos ; }
+
+# music
+alias gm="cd ~/music ; cls"
+mm() { mv "$1" ~/music ; }
+Ym() { cp -r "$1" ~/music ; }
+
+# books
+alias gB="cd ~/books ; cls"
+mB() { mv "$1" ~/books ; }
+YB() { cp -r "$1" ~/books ; } 
+
+# root
+alias gr="cd / ; cls"
+
+# var
+alias gv="cd /var ; cls"
+
+# tmp
+alias gt="cd ~/tmp ; cls"
+mt() { mv "$1" ~/tmp ; }
+Yt() { cp -r "$1" ~/tmp ; }
+
+# .config
+alias gcf="cd ~/.config ; cls"
+mcf() { mv "$1" ~/.config ; } 
+Ycf() { cp -r "$1" ~/.config ; } 
+
+# suckless
+alias gs="cd ~/workspace/dotfiles/suckless-tools ; cls"
+ms() { mv "$1" ~/workspace/dotfiles/suckless-tools ; }
+Ys() { cp -r "$1" ~/workspace/dotfiles/suckless-tools ; } 
+
 # --------------------------------------------------------------------------- #
 
 alias wtfismyip='curl https://wtfismyip.com/text'
@@ -152,7 +239,7 @@ recomp() {
         slock)
             cd /home/mitch/workspace/dotfiles/suckless-tools/slock/slock && make clean ; make -j3 &&  make install && clear ;;
         slstatus)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/slstatus/ && make clean ; make -j3 &&  make install && clear ;;
+            cd /home/mitch/workspace/dotfiles/suckless-tools/slstatus/ && make clean ; make -j3 &&  make install && killall slstatus && slstatus && clear ;;
         *)    
     esac
 }
@@ -202,13 +289,16 @@ git() {
 
 filesize(){ echo $(stat --printf="%s" "$1") ; }
 
-alias sf="neofetch --ascii_distro openbsd_small"
-alias nf="sf"
+alias nf="neofetch --ascii_distro openbsd_small"
 
 alias ping='ping mitchweaver.xyz'
 
-# when switching between eth0 to wlan0, openvpn must be restarted
-alias restart-vpn="killall openvpn ; cd /etc/openvpn ; openvpn Switzerland.ovpn &"
+vpn() {
+    pkill -9 openvpn > /dev/null; $(cd /etc/openvpn ; openvpn Switzerland.ovpn &) & clear
+}
+
+alias resize-half='mogrify -resize 50%X50%'
+alias resize-quarter='mogrify -resize 25%X25%'
 
 alias discord="cd ~/workspace/Discline ; c ; python3.6 Discline.py"
 
