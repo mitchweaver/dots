@@ -1,0 +1,292 @@
+# http://github.com/mitchweaver/dotfiles
+#
+# This is a separate ~/.aliases file to allow easy transition
+# between multiple shells. For maximum compatibility, I try
+# to keep everything in here purely POSIX.
+#
+##############################################################
+
+# ←----------------- Prompt Stuff -------------------------→ #
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+get_PS1() {
+    # Note: colorizing the git output breaks line wrapping, no idea why...
+    echo "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(parse_git_branch)\[\e[1;37m\] "
+}
+
+cd(){
+    if [ $# -eq 0 ] ; then
+        # note: not all shells have 'builtin', may be a problem
+        builtin cd ~
+    else
+        builtin cd "$1"
+    fi
+    export PS1="$(get_PS1)"
+}
+
+export PS1="$(get_PS1)"
+
+# ←------------- System Util Aliases -----------------------→ #
+if [ $(uname) == "Linux" ] ; then
+    alias ls='ls --color=always --group-directories-first -F'
+    alias grep='grep --color=auto'
+else # BSD
+    alias ls='ls -F'
+    alias killall="pkill -9"
+    alias disks="sysctl hw.disknames"
+    alias sensors="sysctl hw.sensors"
+    alias xztar="xz -d -c ssh-backup.tar.xz | tar xf -"
+fi
+
+alias shutdown='shutdown -h now'
+alias less="less -Q -R"
+alias l='ls'
+alias sls='l'
+alias sl='l'
+alias c='clear'
+alias cc='c'
+alias cll='c'
+alias cls='c;l'
+alias csl='c;l'
+alias cl='c;l'
+alias lc='c;l'
+alias mv='mv -v'
+alias cp='cp -v'
+alias mkd='mkdir -p'
+alias mkdir='mkd'
+alias mkdr='mkd'
+alias du='du -ahLd 1'
+alias make='make -j3'
+alias mkclean='make clean'
+alias x='exit'
+alias q='x'
+:q(){ x; }
+:wq(){ x; }
+:w(){ c; }
+
+alias cat="lolcat" # rainbows
+alias rsync='rsync -rtvuclh --progress --delete'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# ←--------------- Program Aliases -------------------------→ #
+alias v='nvim -p'
+alias vi='v'
+alias vim='v'
+
+alias r="ranger";[ -n "$RANGER_LEVEL" ] && PS1="$PS1"'(RANGER): ' && clear && ls -F
+
+alias h='htop'
+alias htpo='h'
+alias hto='h'
+alias hpot='h'
+alias hotp='h'
+alias top='h'
+
+alias trans-shell='trans -b -I'
+alias rtrans-shell='trans -b -from en -to de -I'
+trans(){ /usr/local/bin/trans -no-auto -b "$@" ; }
+rtrans(){ /usr/local/bin/trans -from en -to de -no-auto -b "$@" ; }
+
+alias resize-half='mogrify -resize 50%X50%'
+alias resize-quarter='mogrify -resize 25%X25%'
+
+alias nf="neofetch --ascii_distro openbsd_small"
+
+alias disc="cd ~/workspace/Discline ; c ; python3.6 Discline.py"
+alias discord='disc'
+
+alias yt="youtube-viewer -C -q --vd=high"
+alias ytd="youtube-viewer -C -q --vd=high -d"
+alias ytm="youtube-viewer -n -C -q --vd=high"
+alias ytdm='youtube-viewer -q -C --vd=high -n -d --convert-to=opus --convert-cmd="ffmpeg -loglevel -8 -i file:*IN* -vn -acodec libopus -ab 128k -y *OUT*"'
+alias bandcamp="youtube-dl --prefer-ffmpeg -x --audio-quality 0 --audio-format 'opus'"
+# opus-ffmpeg() {
+#     ffmpeg -i file:"$1" -vn -acodec libopus -ab 128k -y -map_metadata 0 "${1%.webm}.opus" && mv "$1" ~/.local/share/Trash/files && clear && ls
+# }
+
+alias jpg="jpegoptim *.jpg --strip-all"
+alias recursive-jpg="sh /home/mitch/bin/recursive-jpg-optimizer.sh"
+
+vpn() { pkill -9 openvpn > /dev/null; $(cd /etc/openvpn ; openvpn Switzerland.ovpn &) & c ; }
+
+alias mpv="mpv --gapless-audio"
+alias rtv="rtv --enable-media"
+alias parrot='terminal-parrot'
+alias doge="doge --shibe doge.txt"
+alias tiv='tiv -256'
+
+# ←---------------- Git Functions --------------------------→ #
+gitinit() { mkdir -p "$1" && git init "$1" ; }
+gitmote() { git init ; git remote add origin "$1" ; }
+gitup() { git add -A && git commit -m "$@" && git push -u origin master ; }
+gitadd() {
+    if [ $# -eq 0 ] ; then
+        git add -A
+    else
+        git add "$@"
+    fi
+}
+gitmit() { # TODO: fix this
+    git add "$1" && git commit -m "$2"
+    # git add "$1" && git commit -m "${@:(-1)}"
+
+    # if [ $# -eq 0 ] ; then
+    #     git add -A && git commit -m "$@"
+    # else
+    #     # this garble means "all but last" and then "the last"
+    #     foo="$@"
+    #     git add "${foo[@]::${#foo[@]}-1}" 2> /dev/null && git commit -m "${@:(-1)}" 
+    # fi
+}
+gitout() {
+    # pushes out to the current branch
+    if [ $# -eq 0 ] ; then
+        git push -u origin $(git rev-parse --abbrev-ref HEAD)
+    else 
+        git push -u origin $(git rev-parse --abbrev-ref HEAD) "$1"
+    fi
+}
+gitdiff() { git diff origin/master ; }
+alias gitiff='gitdiff'
+alias gitatus='git status'
+gitbase() {
+    if [ $# -eq 0 ] ; then
+        git rebase -i HEAD~10
+    else
+        git rebase -i HEAD~"$@"
+    fi
+}
+gitbort(){ git rebase --abort ; }
+# because i have had too many disasters from doing this...
+git() {
+    if [ "$1" == 'reset' ]; then
+        /usr/sbin/cp -rv . /tmp/git-reset-backup
+    fi
+    /usr/bin/git "$@"
+}
+alias gitclone='git clone'
+alias gitlog='git log'
+alias gitfetch='git fetch'
+alias gitpull='git pull'
+alias branch='git branch'
+alias checkout='git checkout'
+
+# ←--------------- Suckless Tools Stuff --------------------→ #
+recomp() {
+    case $1 in
+        dwm)
+            cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/dwm && mkclean ; make && make install && pkill -9 dwm;;
+        surf) 
+            cd /home/mitch/workspace/dotfiles/suckless-tools/surf/surf && mkclean ; make && make install && c ;;
+        tabbed)
+            cd /home/mitch/workspace/dotfiles/suckless-tools/tabbed/tabbed && mkclean ; make && make install && c ;;
+        st)
+            cd /home/mitch/workspace/dotfiles/suckless-tools/st/st && mkclean ; make && make install && c ;;
+        dmenu)
+            cd /home/mitch/workspace/dotfiles/suckless-tools/dmenu/dmenu && mkclean ; make && make install && c ;;
+        slock)
+            cd /home/mitch/workspace/dotfiles/suckless-tools/slock/slock && mkclean ; make && make install && c ;;
+        slstatus)
+            cd /home/mitch/workspace/dotfiles/suckless-tools/slstatus/ && mkclean ; make && make install && pkill -9 slstatus && slstatus && c ;;
+        *)    
+    esac
+}
+
+# ←----------------- Misc ----------------------------------→ #
+filesize(){ echo $(stat --printf="%s" "$1") ; }
+trash() { mv -v "$1" ~/.local/share/Trash/files ; }
+alias xmodmap='xset m 0 0 ; xmodmap ~/.Xmodmap'
+alias empty-trash='sh ~/bin/empty-trash.sh ; c'
+alias pingme='ping mitchweaver.xyz'
+alias wtfismyip='curl https://wtfismyip.com/text'
+alias weather="c ; curl -s http://wttr.in/~Schmalkalden"
+alias weather-sd="c ; curl -s http://wttr.in/~Dakota_State_University"
+alias weather-ok="c ; curl -s http://wttr.in/~Claremore"
+
+# ←--------------- Specific File Editing -------------------→ #
+alias aliases='v ~/.aliases'
+alias kshrc='v ~/.kshrc'
+alias vimrc='v ~/.vimrc'
+alias vrc='vimrc'
+alias bmk='v ~/.surf/bookmarks'
+alias bmks='bmk'
+alias autostart='v ~/workspace/dotfiles/suckless-tools/dwm/autostart'
+alias vssh='v ~/.ssh/config'
+alias rcf='v ~/.config/ranger/rc.conf'
+
+# ←-------------- Custom Movement Functions -----------------→ #
+# $HOME
+gh(){ cd ~ ; c ; }
+mh() { mv "$1" ~ ; }
+Yh() { cp -r "$1" ~ ; }
+# workspace
+gw(){ cd ~/workspace ; c ; }
+mw() { mv "$1" ~/workspace ; }
+Yw() { cp -r "$1" ~/workspace ; }
+# Trash
+gT(){ cd ~/.local/share/Trash/files ; c ; }
+mT() { mv "$1" ~/.local/share/Trash/files ; }
+YT() { cp -r "$1" ~/.local/share/Trash/files ; }
+# bin
+gb(){ cd ~/bin ; c ; }
+mb() { mv "$1" ~/bin ; }
+Yb() { cp -r "$1" ~/bin ; }
+# backup
+gB(){ cd ~/backup ; c ; }
+mB() { mv "$1" ~/backup ; }
+YB() { cp -r "$1" ~/backup ; }
+# files
+gf(){ cd ~/files ; c ; }
+mf(){ mv "$1" ~/files ; }
+Yf(){ cp -r "$1" ~/files ; }
+# downloads
+gd(){ cd ~/downloads ; c ; }
+md() { mv "$1" ~/downloads ; }
+Yd() { cp -r "$1" ~/downloads ; }
+# images
+gi(){ cd ~/images ; c ; }
+mi(){ mv "$1" ~/images ; }
+Yi(){ cp -r "$1" ~/images ; }
+# wallpapers
+gW(){ cd ~/images/wallpapers ; c ; }
+mW() { mv "$1" ~/images/wallpapers ; } 
+YW() { cp -r "$1" ~/images/wallpapers ; }
+# memes
+gM(){ cd ~/images/memes ; c ; }
+mM(){ mv "$1" ~/images/memes ; }
+YM(){ cp -r "$1" ~/images/memes ; }
+# videos
+gV(){ cd ~/videos ; c ; }
+mV() { mv "$1" ~/videos ; }
+YV() { cp -r "$1" ~/videos ; }
+# music
+gm(){ cd ~/music ; c ; }
+mm() { mv "$1" ~/music ; }
+Ym() { cp -r "$1" ~/music ; }
+
+# this conflicts with ~/backups
+# books
+# gB(){ cd ~/books ; c ; }
+# mB() { mv "$1" ~/books ; }
+# YB() { cp -r "$1" ~/books ; } 
+
+# root
+gr(){ cd / ; c ; }
+# var
+gv(){ cd /var ; c ; }
+# tmp
+gt(){ cd ~/tmp ; c ; }
+mt() { mv "$1" ~/tmp ; }
+Yt() { cp -r "$1" ~/tmp ; }
+# .config
+gcf() { cd ~/.config ; c ; }
+mcf() { mv "$1" ~/.config ; } 
+Ycf() { cp -r "$1" ~/.config ; } 
+# suckless
+gs() { cd ~/workspace/dotfiles/suckless-tools ; c ; }
+ms() { mv "$1" ~/workspace/dotfiles/suckless-tools ; }
+Ys() { cp -r "$1" ~/workspace/dotfiles/suckless-tools ; } 

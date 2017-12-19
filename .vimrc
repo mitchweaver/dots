@@ -16,8 +16,8 @@
 "        'V/'  /##//##//##//###/
 "                ++
 
-" disables space for everything but as leader
-nnoremap <SPACE> <Nop> 
+" disables space for everything but as leader (needs fixed)
+nnoremap <silent><SPACE> <CR>
 let mapleader=" "
 
 " ←--------------- Plugins -----------------------------------→
@@ -28,8 +28,8 @@ call plug#begin('~/.vim/vim-plug')
 
 " Applications
 Plug 'vimwiki/vimwiki'
-" Plug 'iamcco/markdown-preview.vim'
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy finder
+" Plug 'iamcco/markdown-preview.vim'
 
 " Themes & Frippery
 " Plug 'flazz/vim-colorschemes' " just a bunch of colorschemes
@@ -41,22 +41,22 @@ Plug 'ctrlpvim/ctrlp.vim' " fuzzy finder
 
 " Syntax Highlighting
 Plug 'sheerun/vim-polyglot' " syntax highlight - all languages
+Plug 'lilydjwg/colorizer' " colorizes rgb colorcodes
 " Plug 'tpope/vim-markdown' " markdown support
 " Plug 'pangloss/vim-javascript' " better javascript support
-Plug 'lilydjwg/colorizer' " colorizes rgb colorcodes
 
 " Code Completion
-" Plug 'Shougo/deoplete.nvim' " heavy, parallelized code completion
 Plug 'ervandew/supertab' " open code completion with tab
+" Plug 'Shougo/deoplete.nvim' " heavy, parallelized code completion
 
 " Utils
-" Plug 'w0rp/ale' " asynchronous linting in many languages
 Plug 'tpope/vim-commentary' " comment toggler
 Plug 'terryma/vim-multiple-cursors' " sublime multiple select
 Plug 'tpope/vim-surround' " quote/paren etc surrounding
 Plug 'airblade/vim-gitgutter' " git diffing along the left side
 Plug 'godlygeek/tabular' " tab alignment
 Plug 'AndrewRadev/splitjoin.vim' " conversion from multiline to singleline
+" Plug 'w0rp/ale' " asynchronous linting in many languages
 
 call plug#end()
 filetype indent plugin on
@@ -64,6 +64,7 @@ syntax enable
 map <leader>pi :PlugInstall<CR>
 map <leader>pu :PlugUpdate<CR>
 map <leader>pc :PlugClean<CR>
+map <silent><leader>pa :PlugClean<CR>:PlugInstall<CR>:PlugUpdate<CR>
 " --------------------------------------------------------------
 
 " ------------- COLORSCHEME ------------------------------------
@@ -75,7 +76,6 @@ map <leader>pc :PlugClean<CR>
 
 set background=dark
 " set background=light
-
 " hi Normal ctermbg=NONE " disables background:
 " ---------------------------------------------------------------
 
@@ -200,7 +200,7 @@ set hlsearch " highlight matches
 set gdefault " use the `g` flag by default.
 set wrapscan " searching wraps lines
 set magic " 'magic' patterns - (extended regex)
-map <silent><leader>/ :nohlsearch<CR>
+" map <silent><leader>/ :nohlsearch<CR>
 " Search and Replace
 nmap <Leader>s :%s//g<Left><Left>
 " -------------------------------------------------------------
@@ -259,15 +259,15 @@ map <silent><leader>md :MarkdownPreview<CR>
 set wildignore+=/home/mitch/music,/home/mitch/videos,/home/mitch/books,/home/mitch/images,*.opus,*.flac,*.pdf,*.jpg,*.png,*.so,*.swp,*.zip,*.gzip,*.bz2,*.tar,*.xz,*.lrzip,*.lrz,*.mp3,*.ogg,*.mp4,*.gif,*.jpeg,*.webm
 " --------------------------------------------------------------
 
-" ------ misc keybinds ----------------------------------
-"  Make shift-insert work
-map <silent><S-Insert> <MiddleMouse>
-map! <silent><S-Insert> <MiddleMouse>
+" ------ misc keybinds -------------------------------------------
+"  Make shift-insert work (better if you can just make your terminal do it)
+" map <silent><S-Insert> <MiddleMouse>
+" map! <silent><S-Insert> <MiddleMouse>
 
 " Horizontal scrolling
 nmap <silent> <C-o> 10zl
 nmap <silent> <C-i> 10zh
-" --------------------------------------------------------------
+" ----------------------------------------------------------------
 
 " ----------------- Symbol Printing -----------------------------
 " ~~~ NOTE: I know you can do these with default vim, ctrl-k 
@@ -351,7 +351,7 @@ imap <silent><C-q><C-[> «
 " (calculus) integrals: ∫∬∮
 
 " print an 80-char line separator
-inoremap <silent><C-b> -------------------------------------------------------------------------- <ESC>:Commentary<CR>o
+inoremap <silent><C-b> -------------------------------------------------------------------------- <ESC>:Commentary<CR>$o
 " --------------------------------------------------------------
 
 " -------- External Programs ---------------------------------
@@ -362,9 +362,12 @@ autocmd BufRead,BufNewFile ~/.calcurse/notes/* set filetype=markdown
 " Use ranger as a vim file chooser!
 function! RangerChooser()
     let temp = tempname()
+   
     exec 'silent !st -e ranger --choosefiles=' . shellescape(temp)
-    " can't seem to get this to work, it used to... =(
+
+    " ~~~ This does not work for me. I get 'Error: Must start from terminal'
     " exec 'silent !ranger --choosefiles=' . shellescape(temp)
+    
     if !filereadable(temp)
         redraw!
         " Nothing to read.
@@ -373,7 +376,6 @@ function! RangerChooser()
     let names = readfile(temp)
     if empty(names)
         redraw!
-        " Nothing to open.
         return
     endif
     " Edit the first item.

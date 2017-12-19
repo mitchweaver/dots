@@ -2,7 +2,6 @@ static const int resizehints = 0;
 static unsigned int gappx = 10; /* gap pixel between windows */ 
 static const unsigned int gapX = 10;
 static const unsigned int gapY = 10;
-
 static unsigned int borderpx  = 5; /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int minwsz    = 10;       /* min height for smfact */

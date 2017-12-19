@@ -49,8 +49,8 @@ unsigned int mouseshape = XC_xterm;
 unsigned int mousefg = 7;
 unsigned int mousebg = 0;
 
-
 #define CONTROL ControlMask
+#define SUPER Mod4Mask
 #define SHIFT ShiftMask
 MouseShortcut mshortcuts[] = {
  	/* button               mask            string */
@@ -64,9 +64,8 @@ MouseKey mkeys[] = {
 	{ Button5,              CONTROL,        zoom,           {.f =  -1} },
 };
 
-void history(){ system("cat ~/.bash_history | dmenu -l 12 | /bin/sh"); }
-
-/* static char *historycmd[] = { "/bin/sh", "-c", "cat ~/.bash_history | dmenu -l 12", "externalpipe", NULL }; */
+// i don't use bash anymore, but this was sort of neat:
+/* void history(){ system("cat ~/.bash_history | dmenu -l 12 | /bin/sh"); } */
 
 Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -76,10 +75,10 @@ Shortcut shortcuts[] = {
     { SHIFT,                XK_Insert,      clippaste,      {.i =  0} },
 	{ CONTROL,              XK_Page_Up,     kscrollup,      {.i = 1} },
 	{ CONTROL,              XK_Page_Down,   kscrolldown,    {.i = 1} },
-	{ CONTROL,              XK_h,           history,        {.i = 0} },
+	/* { CONTROL,              XK_h,           history,        {.i = 0} }, */
 
     // note copyurl has been edited to also open in xdg-open
-	{ CONTROL,              XK_l,           copyurl,        {.i =  0} },
+	{ SUPER,              XK_l,           copyurl,        {.i =  0} },
 
     // not sure what this one does:
 	/* { CONTROL,              XK_I,           iso14755,       {.i =  0} }, */

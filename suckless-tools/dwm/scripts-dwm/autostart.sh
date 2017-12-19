@@ -7,7 +7,7 @@ xrdb load ~/.Xresources &
 xset m 0 0 &
 clipmenud &
 # compton &
-slstatus &
+# slstatus &
 # xautolock -time 10 -secure -locker /usr/local/bin/slock &
-unclutter &
+# unclutter &
 # xbacklight -set 95 &
