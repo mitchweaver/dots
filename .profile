@@ -3,6 +3,7 @@ export PATH HOME TERM
 
 export PATH=$PATH:/home/mitch/bin
 export EDITOR="/bin/nvim"
+# export EDITOR="/bin/nvim"
 export BROWSER="/usr/local/bin/tabbed -c /usr/local/bin/surf -e"
 export LC_CTYPE=en_US.UTF-8
 export LESSCHARSET=utf-8

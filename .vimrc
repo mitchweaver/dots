@@ -19,7 +19,6 @@
 " disables space for everything but as leader (needs fixed)
 nnoremap <silent><SPACE> <CR>
 let mapleader=" "
-
 " ←--------------- Plugins -----------------------------------→
 set nocompatible
 filetype off
@@ -35,19 +34,17 @@ Plug 'ctrlpvim/ctrlp.vim' " fuzzy finder
 " Plug 'flazz/vim-colorschemes' " just a bunch of colorschemes
 " Plug 'altercation/vim-colors-solarized' " solarized colorschemes
 " Plug 'jonathanfilip/vim-lucius' " lucius colorscheme
-" Plug 'arcticicestudio/nord-vim'
-
-" UI mods
+" Plug 'arcticicestudio/nord-vim' " nord colorscheme
 
 " Syntax Highlighting
-Plug 'sheerun/vim-polyglot' " syntax highlight - all languages
-Plug 'lilydjwg/colorizer' " colorizes rgb colorcodes
+" Plug 'sheerun/vim-polyglot' " syntax highlight - all languages
 " Plug 'tpope/vim-markdown' " markdown support
 " Plug 'pangloss/vim-javascript' " better javascript support
+Plug 'lilydjwg/colorizer' " colorizes rgb colorcodes
 
 " Code Completion
 Plug 'ervandew/supertab' " open code completion with tab
-" Plug 'Shougo/deoplete.nvim' " heavy, parallelized code completion
+" Plug 'Shougo/deoplete.nvim' " heavy, parallelized code completion (neovim)
 
 " Utils
 Plug 'tpope/vim-commentary' " comment toggler
@@ -56,7 +53,7 @@ Plug 'tpope/vim-surround' " quote/paren etc surrounding
 Plug 'airblade/vim-gitgutter' " git diffing along the left side
 Plug 'godlygeek/tabular' " tab alignment
 Plug 'AndrewRadev/splitjoin.vim' " conversion from multiline to singleline
-" Plug 'w0rp/ale' " asynchronous linting in many languages
+" Plug 'w0rp/ale' " asynchronous linting in many languages (neovim)
 
 call plug#end()
 filetype indent plugin on
@@ -94,8 +91,7 @@ nnoremap <silent><esc> ^[ <esc>^[
 " Disable bottom status line / statusbar
 set laststatus=0
 
-" makes vim yank/paste to/from the system clipboard
-set clipboard=unnamed
+set clipboard=unnamed " yank/paste to/from system clipboard
 set vb " disable audible bell
 set novisualbell " kill the visual bell too
 set noerrorbells " did I mention I hate bells?
@@ -207,6 +203,7 @@ nmap <Leader>s :%s//g<Left><Left>
 
 " -------- Language Syntax Management ---------------------------
 iab #i #include <.h>
+let g:is_bash=1 " vim's default sh syntax highlighting is horrible
 " --------------------------------------------------------------
 
 " -------------- Extension Settings --------------------------
@@ -329,7 +326,7 @@ imap <silent><C-q><C-2> ²
 " plus/minus
 imap <silent><C-q><C-p> ±
 " roughly equivalent
-imap <silent><C-q><C-~> ≈
+imap <silent><C-q><C-q> ≈
 " not equal to
 imap <silent><C-q><C-/> ≠
 " greater than/equal to
@@ -388,4 +385,31 @@ function! RangerChooser()
 endfunction
 command! -bar RangerChooser call RangerChooser()
 nnoremap <silent><leader>r :<C-U>RangerChooser<CR>
-" -------------------------------------------------------------
+" -------------------------------------------------------------    
+
+" ----------- Page Up/Down Functionality ----------------------
+function GetNumberOfVisibleLines()
+  let cur_line = line(".")
+  let cur_col = virtcol(".")
+  normal H
+  let top_line = line(".")
+  normal L
+  let bot_line = line(".")
+  execute "normal " . cur_line . "G"
+  execute "normal " . cur_col . "|"
+  return bot_line - top_line
+endfunc
+
+function! MyPageUp()
+  let visible_lines = GetNumberOfVisibleLines()
+  execute "normal " . visible_lines . "\<C-U>:set scroll=0\r"
+endfunction
+
+function! MyPageDown()
+  let visible_lines = GetNumberOfVisibleLines()
+  execute "normal " . visible_lines . "\<C-D>:set scroll=0\r"
+endfunction
+
+noremap <silent><PageUp> :call MyPageUp()<CR>
+noremap <silent><PageDown> :call MyPageDown()<CR>
+" ---------------------------------------------------------------

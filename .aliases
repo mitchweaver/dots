@@ -35,12 +35,13 @@ if [ $(uname) == "Linux" ] ; then
 else # BSD
     alias ls='ls -F'
     alias killall="pkill -9"
+    alias xztar="xz -d -c ssh-backup.tar.xz | tar xf -"
     alias disks="sysctl hw.disknames"
     alias sensors="sysctl hw.sensors"
-    alias xztar="xz -d -c ssh-backup.tar.xz | tar xf -"
+    netstart() { sh /etc/netstart "$1" ; }
 fi
 
-alias shutdown='shutdown -h now'
+alias shutdown='shutdown now'
 alias less="less -Q -R"
 alias l='ls'
 alias sls='l'
@@ -66,7 +67,6 @@ alias q='x'
 :wq(){ x; }
 :w(){ c; }
 
-alias cat="lolcat" # rainbows
 alias rsync='rsync -rtvuclh --progress --delete'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -114,6 +114,7 @@ alias recursive-jpg="sh /home/mitch/bin/recursive-jpg-optimizer.sh"
 vpn() { pkill -9 openvpn > /dev/null; $(cd /etc/openvpn ; openvpn Switzerland.ovpn &) & c ; }
 
 alias mpv="mpv --gapless-audio"
+alias irssi="irssi -c freenode"
 alias rtv="rtv --enable-media"
 alias parrot='terminal-parrot'
 alias doge="doge --shibe doge.txt"
@@ -214,7 +215,7 @@ alias vimrc='v ~/.vimrc'
 alias vrc='vimrc'
 alias bmk='v ~/.surf/bookmarks'
 alias bmks='bmk'
-alias autostart='v ~/workspace/dotfiles/suckless-tools/dwm/autostart'
+alias autostart='v ~/workspace/dotfiles/suckless-tools/dwm/autostart.sh'
 alias vssh='v ~/.ssh/config'
 alias rcf='v ~/.config/ranger/rc.conf'
 

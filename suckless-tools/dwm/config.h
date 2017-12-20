@@ -23,7 +23,10 @@ static const char ST_BACKGROUND[] = "#373B41";
 
 static const char *colors[][3]      = {
 /*               fg         bg         border   */
-[SchemeNorm] = { col_gray3, col_gray1, ST_BACKGROUND, NULL }, // the unfocused wins
+
+/* [SchemeNorm] = { col_gray3, col_gray1, ST_BACKGROUND, NULL }, // the unfocused wins */
+[SchemeNorm] = { col_gray3, col_gray1, ST_BACKGROUND, col_red }, // the unfocused wins
+
 [SchemeSel]  = { bright_blue, gray_purple, bright_blue, bright_blue }, // the focused win
 [SchemeUrg] =  { col_gray4, col_red, col_red },
 };
