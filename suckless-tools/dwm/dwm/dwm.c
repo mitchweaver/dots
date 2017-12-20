@@ -146,31 +146,31 @@ static Monitor *createmon(void);
 static void destroynotify(XEvent *e);
 static void detach(Client *c);
 static void detachstack(Client *c);
-static Monitor *dirtomon(int dir);
+/* static Monitor *dirtomon(int dir); */
 static void drawbar(Monitor *m);
 static void drawbars(void);
-static void enternotify(XEvent *e);
+/* static void enternotify(XEvent *e); */
 static void expose(XEvent *e);
 static void focus(Client *c);
 static void focusin(XEvent *e);
-static void focusmon(const Arg *arg);
+/* static void focusmon(const Arg *arg); */
 static void focusstack(const Arg *arg);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
 static int gettextprop(Window w, Atom atom, char *text, unsigned int size);
 static void grabbuttons(Client *c, int focused);
 static void grabkeys(void);
-static void incnmaster(const Arg *arg);
+/* static void incnmaster(const Arg *arg); */
 static void keypress(XEvent *e);
 static void killclient(const Arg *arg);
 static void manage(Window w, XWindowAttributes *wa);
 static void mappingnotify(XEvent *e);
 static void maprequest(XEvent *e);
-static void monocle(Monitor *m);
+/* static void monocle(Monitor *m); */
 static void motionnotify(XEvent *e);
 static void movemouse(const Arg *arg);
 static Client *nexttiled(Client *c);
-static void pop(Client *);
+/* static void pop(Client *); */
 static void propertynotify(XEvent *e);
 static void quit(const Arg *arg);
 static Monitor *recttomon(int x, int y, int w, int h);
@@ -195,7 +195,7 @@ static void showhide(Client *c);
 static void sigchld(int unused);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
-static void tagmon(const Arg *arg);
+/* static void tagmon(const Arg *arg); */
 static void tile(Monitor *);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
@@ -220,11 +220,11 @@ static Monitor *wintomon(Window w);
 static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
-static void zoom(const Arg *arg);
+/* static void zoom(const Arg *arg); */
 static void bstack(Monitor *m);
-static void bstackhoriz(Monitor *m);
+/* static void bstackhoriz(Monitor *m); */
 static void centeredmaster(Monitor *m);
-static void centeredfloatingmaster(Monitor *m);
+/* static void centeredfloatingmaster(Monitor *m); */
 
 
 
@@ -705,24 +705,20 @@ detachstack(Client *c)
 	}
 }
 
-Monitor *
-dirtomon(int dir)
-{
-	Monitor *m = NULL;
+/* Monitor * dirtomon(int dir) { */
+/* 	Monitor *m = NULL; */
 
-	if (dir > 0) {
-		if (!(m = selmon->next))
-			m = mons;
-	} else if (selmon == mons)
-		for (m = mons; m->next; m = m->next);
-	else
-		for (m = mons; m->next != selmon; m = m->next);
-	return m;
-}
+/* 	if (dir > 0) { */
+/* 		if (!(m = selmon->next)) */
+/* 			m = mons; */
+/* 	} else if (selmon == mons) */
+/* 		for (m = mons; m->next; m = m->next); */
+/* 	else */
+/* 		for (m = mons; m->next != selmon; m = m->next); */
+/* 	return m; */
+/* } */
 
-void
-drawbar(Monitor *m)
-{
+void drawbar(Monitor *m) {
 	int x, w, sw = 0;
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
@@ -849,19 +845,17 @@ focusin(XEvent *e)
 		setfocus(selmon->sel);
 }
 
-void
-focusmon(const Arg *arg)
-{
-	Monitor *m;
+/* void focusmon(const Arg *arg) { */
+/* 	Monitor *m; */
 
-	if (!mons->next)
-		return;
-	if ((m = dirtomon(arg->i)) == selmon)
-		return;
-	unfocus(selmon->sel, 0);
-	selmon = m;
-	focus(NULL);
-}
+/* 	if (!mons->next) */
+/* 		return; */
+/* 	if ((m = dirtomon(arg->i)) == selmon) */
+/* 		return; */
+/* 	unfocus(selmon->sel, 0); */
+/* 	selmon = m; */
+/* 	focus(NULL); */
+/* } */
 
 void
 focusstack(const Arg *arg)
@@ -998,12 +992,10 @@ grabkeys(void)
 	}
 }
 
-void
-incnmaster(const Arg *arg)
-{
-	selmon->nmaster = selmon->pertag->nmasters[selmon->pertag->curtag] = MAX(selmon->nmaster + arg->i, 0);
-	arrange(selmon);
-}
+/* void incnmaster(const Arg *arg) { */
+/* 	selmon->nmaster = selmon->pertag->nmasters[selmon->pertag->curtag] = MAX(selmon->nmaster + arg->i, 0); */
+/* 	arrange(selmon); */
+/* } */
 
 #ifdef XINERAMA
 static int
@@ -1135,20 +1127,18 @@ maprequest(XEvent *e)
 		manage(ev->window, &wa);
 }
 
-void
-monocle(Monitor *m)
-{
-	unsigned int n = 0;
-	Client *c;
+/* void monocle(Monitor *m) { */
+/* 	unsigned int n = 0; */
+/* 	Client *c; */
 
-	for (c = m->clients; c; c = c->next)
-		if (ISVISIBLE(c))
-			n++;
-	if (n > 0) /* override layout symbol */
-		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
-	for (c = nexttiled(m->clients); c; c = nexttiled(c->next))
-		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
-}
+/* 	for (c = m->clients; c; c = c->next) */
+/* 		if (ISVISIBLE(c)) */
+/* 			n++; */
+/* 	if (n > 0) /1* override layout symbol *1/ */
+/* 		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n); */
+/* 	for (c = nexttiled(m->clients); c; c = nexttiled(c->next)) */
+/* 		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0); */
+/* } */
 
 void
 motionnotify(XEvent *e)
@@ -1205,11 +1195,13 @@ movemouse(const Arg *arg)
 			ny = ocy + (ev.xmotion.y - y);
 			if (abs(selmon->wx - nx) < snap)
 				nx = selmon->wx;
-			else if (abs((selmon->wx + selmon->ww) - (nx + WIDTH(c))) < snap)
+			else if ((selmon->wx + selmon->ww) - (nx + WIDTH(c)) < snap)
+			/* else if (abs((selmon->wx + selmon->ww) - (nx + WIDTH(c))) < snap) */
 				nx = selmon->wx + selmon->ww - WIDTH(c);
 			if (abs(selmon->wy - ny) < snap)
 				ny = selmon->wy;
-			else if (abs((selmon->wy + selmon->wh) - (ny + HEIGHT(c))) < snap)
+			else if ((selmon->wy + selmon->wh) - (ny + HEIGHT(c)) < snap)
+			/* else if (abs((selmon->wy + selmon->wh) - (ny + HEIGHT(c))) < snap) */
 				ny = selmon->wy + selmon->wh - HEIGHT(c);
 			if (!c->isfloating && selmon->lt[selmon->sellt]->arrange
 			&& (abs(nx - c->x) > snap || abs(ny - c->y) > snap))
@@ -1234,14 +1226,13 @@ nexttiled(Client *c)
 	return c;
 }
 
-void
-pop(Client *c)
-{
-	detach(c);
-	attach(c);
-	focus(c);
-	arrange(c->mon);
-}
+/* void pop(Client *c) */
+/* { */
+/* 	detach(c); */
+/* 	attach(c); */
+/* 	focus(c); */
+/* 	arrange(c->mon); */
+/* } */
 
 void
 propertynotify(XEvent *e)
@@ -1326,9 +1317,14 @@ void resizeclient(Client *c, int x, int y, int w, int h)
 	} else {
         /* If is the only monitor on the workspace */
         /* and the window is not a terminal */
-		if (n == 1 && 
-            (strcmp(c->name, "st") != 0) &&
-            (strcmp(c->name, "ranger") != 0)
+		if (n == 1  
+
+            // Uncomment these if you want terminals to
+            // Keep their border, regardless of whether they 
+            // are the only window on the tag or not
+            /* && (strcmp(c->name, "st") != 0) && */
+            /* (strcmp(c->name, "ranger") != 0) */
+
         ) {
             /* then set no border with appropriate gaps */
 			wc.border_width = 0;
@@ -1771,13 +1767,13 @@ tag(const Arg *arg)
 	}
 }
 
-void
-tagmon(const Arg *arg)
-{
-	if (!selmon->sel || !mons->next)
-		return;
-	sendmon(selmon->sel, dirtomon(arg->i));
-}
+/* void */
+/* tagmon(const Arg *arg) */
+/* { */
+/* 	if (!selmon->sel || !mons->next) */
+/* 		return; */
+/* 	sendmon(selmon->sel, dirtomon(arg->i)); */
+/* } */
 
 void
 tile(Monitor *m)
@@ -2289,19 +2285,19 @@ xerrorstart(Display *dpy, XErrorEvent *ee)
 	return -1;
 }
 
-void
-zoom(const Arg *arg)
-{
-	Client *c = selmon->sel;
+/* void */
+/* zoom(const Arg *arg) */
+/* { */
+/* 	Client *c = selmon->sel; */
 
-	if (!selmon->lt[selmon->sellt]->arrange
-	|| (selmon->sel && selmon->sel->isfloating))
-		return;
-	if (c == nexttiled(selmon->clients))
-		if (!c || !(c = nexttiled(c->next)))
-			return;
-	pop(c);
-}
+/* 	if (!selmon->lt[selmon->sellt]->arrange */
+/* 	|| (selmon->sel && selmon->sel->isfloating)) */
+/* 		return; */
+/* 	if (c == nexttiled(selmon->clients)) */
+/* 		if (!c || !(c = nexttiled(c->next))) */
+/* 			return; */
+/* 	pop(c); */
+/* } */
 
 int
 main(int argc, char *argv[])
@@ -2356,38 +2352,36 @@ bstack(Monitor *m) {
 	}
 }
 
-static void
-bstackhoriz(Monitor *m) {
-	int w, mh, mx, tx, ty, th;
-	unsigned int i, n;
-	Client *c;
+/* static void bstackhoriz(Monitor *m) { */
+/* 	int w, mh, mx, tx, ty, th; */
+/* 	unsigned int i, n; */
+/* 	Client *c; */
 
-	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	if (n == 0)
-		return;
-	if (n > m->nmaster) {
-		mh = m->nmaster ? m->mfact * m->wh : 0;
-		th = (m->wh - mh) / (n - m->nmaster);
-		ty = m->wy + mh;
-	} else {
-		th = mh = m->wh;
-		ty = m->wy;
-	}
-	for (i = mx = 0, tx = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
-		if (i < m->nmaster) {
-			w = (m->ww - mx) / (MIN(n, m->nmaster) - i);
-			resize(c, m->wx + mx, m->wy, w - (2 * c->bw), mh - (2 * c->bw), 0);
-			mx += WIDTH(c);
-		} else {
-			resize(c, tx, ty, m->ww - (2 * c->bw), th - (2 * c->bw), 0);
-			if (th != m->wh)
-				ty += HEIGHT(c);
-		}
-	}
-}
-void
-centeredmaster(Monitor *m)
-{
+/* 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++); */
+/* 	if (n == 0) */
+/* 		return; */
+/* 	if (n > m->nmaster) { */
+/* 		mh = m->nmaster ? m->mfact * m->wh : 0; */
+/* 		th = (m->wh - mh) / (n - m->nmaster); */
+/* 		ty = m->wy + mh; */
+/* 	} else { */
+/* 		th = mh = m->wh; */
+/* 		ty = m->wy; */
+/* 	} */
+/* 	for (i = mx = 0, tx = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) { */
+/* 		if (i < m->nmaster) { */
+/* 			w = (m->ww - mx) / (MIN(n, m->nmaster) - i); */
+/* 			resize(c, m->wx + mx, m->wy, w - (2 * c->bw), mh - (2 * c->bw), 0); */
+/* 			mx += WIDTH(c); */
+/* 		} else { */
+/* 			resize(c, tx, ty, m->ww - (2 * c->bw), th - (2 * c->bw), 0); */
+/* 			if (th != m->wh) */
+/* 				ty += HEIGHT(c); */
+/* 		} */
+/* 	} */
+/* } */
+
+void centeredmaster(Monitor *m) {
 	unsigned int i, n, h, mw, mx, my, oty, ety, tw;
 	Client *c;
 
