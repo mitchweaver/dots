@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 # get current song
-song="`mpc current 2> /dev/null`"
+song="`mpc -q current 2> /dev/null`"
 
 # if its not null
 if [ "$song" ]; then
@@ -9,7 +9,9 @@ if [ "$song" ]; then
     # chop off filename
     song=${song%".opus"}
     song=${song%".flac"}
-   
+    song=${song%".ogg"}
+    # song=${song%".mp3"}
+
     # if its too long, trim it down
     max_len=35
     if [ ${#song} -gt $max_len ] ; then

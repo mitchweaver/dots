@@ -1,9 +1,3 @@
-# This is a sample commands.py.  You can add your own commands here.
-#
-# Please refer to commands_full.py for all the default commands and a complete
-# documentation.  Do NOT add them all here, or you may end up with defunct
-# commands when upgrading ranger.
-
 # You always need to import ranger.api.commands here to get the Command class:
 from ranger.api.commands import *
 
@@ -58,7 +52,6 @@ class my_edit(Command):
         return self._tab_directory_content()
 
 
-# https://github.com/ranger/ranger/wiki/Integrating-File-Search-with-fzf
 # Now, simply bind this function to a key, by adding this to your ~/.config/ranger/rc.conf: map <C-f> fzf_select
 class fzf_select(Command):
     """
@@ -90,15 +83,6 @@ class fzf_select(Command):
                 self.fm.select_file(fzf_file)
 # fzf_locate
 class fzf_locate(Command):
-    """
-    :fzf_locate
-
-    Find a file using fzf.
-
-    With a prefix argument select only directories.
-
-    See: https://github.com/junegunn/fzf
-    """
     def execute(self):
         import subprocess
         if self.quantifier:
@@ -214,3 +198,23 @@ class extracthere(Command):
 
 
 
+# this is assuming your mpd directory
+# is located at ~/music
+class mpc_play_dir(Command):
+    def execute(self):
+        # get full path name
+        # This will be /home/$USER/music
+        PATH='"' + str(self.fm.thisdir.get_selection()[0]) + '"'
+
+        MPD_DIR = os.getenv("HOME") + '/music/'
+
+        # if we're not in the dir
+        # the user didn't mean to play use the cmd
+        if not MPD_DIR in PATH: return
+
+        # Cut off the beginning to only include
+        # The MPD database name
+        PATH = PATH.replace(MPD_DIR, "") 
+
+        os.system("mpc clear > /dev/null && mpc add " + PATH + \
+                " > /dev/null && mpc play > /dev/null")

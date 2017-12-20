@@ -402,12 +402,12 @@ endfunc
 
 function! MyPageUp()
   let visible_lines = GetNumberOfVisibleLines()
-  execute "normal " . visible_lines . "\<C-U>:set scroll=0\r"
+  execute "normal " . visible_lines . "\<C-U><silent>:set scroll=0\r"
 endfunction
 
 function! MyPageDown()
   let visible_lines = GetNumberOfVisibleLines()
-  execute "normal " . visible_lines . "\<C-D>:set scroll=0\r"
+  execute "normal " . visible_lines . "\<C-D><silent>:set scroll=0\r"
 endfunction
 
 noremap <silent><PageUp> :call MyPageUp()<CR>
