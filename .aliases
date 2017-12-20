@@ -154,18 +154,23 @@ gitout() {
 gitdiff() { git diff origin/master ; }
 alias gitiff='gitdiff'
 alias gitatus='git status'
+gitreset() { git reset --hard HEAD~"$1" ; }
 gitbase() {
     if [ $# -eq 0 ] ; then
         git rebase -i HEAD~10
     else
-        git rebase -i HEAD~"$@"
+        git rebase -i HEAD~"$1"
     fi
 }
 gitbort(){ git rebase --abort ; }
 # because i have had too many disasters from doing this...
 git() {
     if [ "$1" == 'reset' ]; then
-        /usr/sbin/cp -rv . /tmp/git-reset-backup
+        if [ $(uname) == "Linux" ] ; then
+            /usr/sbin/cp -rv . /tmp/git-reset-backup
+        else # BSD
+            /bin/cp -rv . /tmp/git-reset-backup
+        fi
     fi
     /usr/bin/git "$@"
 }
