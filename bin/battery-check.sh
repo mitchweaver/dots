@@ -16,7 +16,7 @@ else # BSD
 fi
 
 if [ $plugged -eq 1 ] ; then
-    
+
     echo "🔌 $perc%"
 elif [ $perc -gt 20 ] ; then
     echo "⚡ $perc%"

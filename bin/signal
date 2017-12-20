@@ -1,3 +1,0 @@
-#!/bin/bash
-
-/usr/lib/chromium/chromium --profile-directory=Default --app-id=bikioccmkafdpakkkcpdbppfkghcmihk

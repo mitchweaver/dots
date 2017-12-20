@@ -66,6 +66,7 @@ alias q='x'
 :q(){ x; }
 :wq(){ x; }
 :w(){ c; }
+alias wget="curl -L -O"
 
 alias rsync='rsync -rtvuclh --progress --delete'
 alias ..='cd ..'
@@ -132,11 +133,13 @@ gitadd() {
     fi
 }
 gitmit() { # TODO: fix this
-    git add "$1" && git commit -m "$2"
-    # git add "$1" && git commit -m "${@:(-1)}"
-
-    # if [ $# -eq 0 ] ; then
-    #     git add -A && git commit -m "$@"
+    if [ $# -eq 1 ] ; then
+        git add -A && git commit -m "$@"
+    else
+        git add "$1" && git commit -m "$2"
+    fi
+    
+    
     # else
     #     # this garble means "all but last" and then "the last"
     #     foo="$@"
@@ -197,7 +200,7 @@ recomp() {
         slock)
             cd /home/mitch/workspace/dotfiles/suckless-tools/slock/slock && mkclean ; make && make install && c ;;
         slstatus)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/slstatus/ && mkclean ; make && make install && pkill -9 slstatus && slstatus && c ;;
+            cd /home/mitch/workspace/dotfiles/suckless-tools/slstatus/ && mkclean ; make && make install && pkill -9 slstatus ; slstatus & c ;;
         *)    
     esac
 }

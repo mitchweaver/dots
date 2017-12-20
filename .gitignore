@@ -4,3 +4,9 @@ suckless-tools/surf/bookmarks
 .mpd/mpd.db
 .mpd/mpd.pid
 .mpd/mpdstate
+
+
+
+*.o
+*.out
+*__pycache__
