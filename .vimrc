@@ -25,28 +25,28 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call plug#begin('~/.vim/vim-plug')
 
-" Applications
+" --- Applications
 Plug 'vimwiki/vimwiki'
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy finder
 " Plug 'iamcco/markdown-preview.vim'
 
-" Themes & Frippery
+" --- Themes & Frippery
 " Plug 'flazz/vim-colorschemes' " just a bunch of colorschemes
 " Plug 'altercation/vim-colors-solarized' " solarized colorschemes
 " Plug 'jonathanfilip/vim-lucius' " lucius colorscheme
 " Plug 'arcticicestudio/nord-vim' " nord colorscheme
 
-" Syntax Highlighting
+" --- Syntax Highlighting
 " Plug 'sheerun/vim-polyglot' " syntax highlight - all languages
 " Plug 'tpope/vim-markdown' " markdown support
 " Plug 'pangloss/vim-javascript' " better javascript support
 Plug 'lilydjwg/colorizer' " colorizes rgb colorcodes
 
-" Code Completion
+" --- Code Completion
 Plug 'ervandew/supertab' " open code completion with tab
 " Plug 'Shougo/deoplete.nvim' " heavy, parallelized code completion (neovim)
 
-" Utils
+" --- Utils
 Plug 'tpope/vim-commentary' " comment toggler
 Plug 'terryma/vim-multiple-cursors' " sublime multiple select
 Plug 'tpope/vim-surround' " quote/paren etc surrounding

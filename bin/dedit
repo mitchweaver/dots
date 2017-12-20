@@ -8,14 +8,14 @@
 # folders you wish to source
 # These are some of mine, just for examples
 FOLDERS="$HOME/workspace/dotfiles \
-        $HOME/workspace/dotfiles/.config \
-        $HOME/workspace/dotfiles/.config/Discline \
-        $HOME/bin \
-        $HOME/downloads \
-        $HOME/tmp \
-        $HOME/workspace/dotfiles/.config/ranger \
-        $HOME/workspace/dotfiles/suckless-tools/CONFIGS \
-        $HOME/workspace/diskvlt-bot"
+         $HOME/workspace/dotfiles/.config \
+         $HOME/workspace/dotfiles/.config/Discline \
+         $HOME/bin \
+         $HOME/downloads \
+         $HOME/tmp \
+         $HOME/workspace/dotfiles/.config/ranger \
+         $HOME/workspace/dotfiles/suckless-tools/CONFIGS \
+         $HOME/workspace/diskvlt-bot"
 
 # files you dont want to see in dmenu
 # Doesn't work on BSD
@@ -39,7 +39,7 @@ IGNORE=""
 #         -I .gitconfig"
 
 # change this to your editor and/or terminal emulator
-EDITOR='st -w -e nvim'
+EDITOR="st -e nvim"
 
 # place your custom dmenu arguments here:
 DMENU="dmenu -l 10 -i"

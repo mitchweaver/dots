@@ -67,12 +67,13 @@ static char dmenumon[2] = "0";
 /* static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", gray1, "-nf", gray3, "-sb", cyan, "-sf", gray4, NULL }; */
 static const char *dmenucmd[] = { "dmenu_run", NULL};
 
-/* static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL }; */
-static const char *term[]  = { "st", NULL };
+static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL };
+/* static const char *term[]  = { "st", NULL }; */
 static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
 static const char *dedit[] = { "dedit", NULL };
 static const char *clipboard[] = { "clipmenu", NULL };
-static const char *ranger[] = { "st", "-w", "-e", "ranger", NULL };
+static const char *ranger[] = { "tabbed", "-c", "-r", "2", "st", "-w", "-e", "ranger", NULL };
+/* static const char *ranger[] = { "st", "-w", "-e", "ranger", NULL }; */
 static const char *volup[] = { "BSDNixVolume.sh", "-set", "+4", NULL };
 static const char *voldown[] = { "BSDNixVolume.sh", "-set", "-4", NULL };
 static const char *mpdnext[] = { "mpc", "-q",  "next", NULL };

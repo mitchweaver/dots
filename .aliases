@@ -59,6 +59,9 @@ alias cp='cp -v'
 alias mkd='mkdir -p'
 alias mkdir='mkd'
 alias mkdr='mkd'
+mkcd() { mkdir -p "$1" && cd "$1" ; }
+mvcd() { mv "$1" && cd "$1" ; }
+cpcd() { mv "$1" && cd "$1" ; }
 alias du='du -ahLd 1'
 alias make='make -j3'
 alias mkclean='make clean'

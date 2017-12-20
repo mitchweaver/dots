@@ -12,9 +12,11 @@ char font[] = "Terminus:pixelsize=14:antialias=false:autohint=false";
 /* #include "ocean-dark-theme.h" */
 /* #include "hund-theme.h" */
 
-/* unsigned int alpha = 0xdd; // opacity */
+unsigned int alpha = 0xdd; // opacity
 /* unsigned int alpha = 0xcc; // opacity */
-unsigned int alpha = 0xFF; // no opacity --- but ignore, just kill compton
+
+// NOTE: this also stops tabbed from working!
+/* unsigned int alpha = 0xFF; // no opacity --- but ignore, just kill compton */
 
 int borderpx = 6; /* Internal border */
 
