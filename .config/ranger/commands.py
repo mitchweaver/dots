@@ -201,7 +201,7 @@ class extracthere(Command):
 class mpc_play_dir(Command):
     def execute(self):
         # start mpd, if already started this will be a NOP
-        os.system("mpd > /dev/null && mpc pause > /dev/null")
+        os.system("if [ ! $(pgrep mpd) ] ; then mpd > /dev/null && mpc pause > /dev/null  ; fi")
 
         # get full path name
         # This will be /home/$USER/music
