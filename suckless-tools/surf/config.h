@@ -37,9 +37,12 @@ static Parameter defconfig[ParameterLast] = {
 	[CookiePolicies]      =       { { .v = "@Aa" }, },
 	[DefaultCharset]      =       { { .v = "UTF-8" }, },
 	[DiskCache]           =       { { .i = 1 },     },
-	[DNSPrefetch]         =       { { .i = 1 },     },
-	[FileURLsCrossAccess] =       { { .i = 1 },     },
+
+	[DNSPrefetch]         =       { { .i = 0 },     },
 	[FontSize]            =       { { .i = 12 },    },
+	[ZoomLevel]           =       { { .f = 1.2 },   },
+
+	[FileURLsCrossAccess] =       { { .i = 1 },     },
 	[FrameFlattening]     =       { { .i = 0 },     }, // what does this do?
 	[Geolocation]         =       { { .i = 0 },     },
 	[HideBackground]      =       { { .i = 0 },     },
@@ -60,15 +63,13 @@ static Parameter defconfig[ParameterLast] = {
 	[SpellLanguages]      =       { { .v = ((char *[]){ "en_US", NULL }) }, },
 	[StrictTLS]           =       { { .i = 1 },     },
 	[Style]               =       { { .i = 1 },     },
-	[ZoomLevel]           =       { { .f = 1.2 },   },
 };
 
 static UriParameters uriparams[] = {
-    /* { "(://|\\.)youtube\\.com(/|$)", { */
-	    /* [JavaScript] = { { .i = 0 }, 1 }, */
-	/* }, }, */
+    { "(://|\\.)duckduckgo\\.com(/|$)", {
+	    [JavaScript] = { { .i = 0 }, 1 },
+	}, },
 };
-
 
 static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
                                     WEBKIT_FIND_OPTIONS_WRAP_AROUND;
@@ -140,6 +141,9 @@ static SiteSpecific styles[] = {
 // The complete list of gdk key syms can be found at: http://git.gnome.org/browse/gtk+/plain/gdk/gdkkeysyms.h
 #define MODKEY GDK_CONTROL_MASK
 #define SHIFT GDK_SHIFT_MASK
+
+// function to launch arbitrary commands
+#define SH(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 static Key keys[] = {
     { MODKEY,               GDK_KEY_g,       spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
     { MODKEY,               GDK_KEY_slash,   spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
@@ -154,6 +158,7 @@ static Key keys[] = {
     { MODKEY,               GDK_KEY_o,      spawn,      YOUTUBEDL },
     { MODKEY,               GDK_KEY_b,      spawn,      BM_PICK },
     { MODKEY|SHIFT,         GDK_KEY_b,      spawn,      BM_ADD },
+    { MODKEY,               GDK_KEY_t,      spawn,      SH("tabbed -c -r 2 st -w '' -T translate -e /bin/sh -c 'xclip -o | trans -b ; ksh'") },
    
     // vim mode
     { MODKEY,               GDK_KEY_j,      scroll,     { .i = 'd' } },

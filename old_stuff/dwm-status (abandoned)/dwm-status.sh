@@ -2,21 +2,35 @@
 
 while true ; do
 
-    # DATE="[ $(sh date.sh) ]"
-    # VPN="[ $(sh vpn-check.sh) ]"
-    # BAT="[ $(sh battery-check.sh) ]"
-    # WIFI="[ $(sh wifi-check.sh iwn0) ]"
+    BAT=$(sh ~/bin/battery-check.sh)
+
+    xsetroot -name "$WIFI$BAT$VPN$DATE"
     
-    VPN=" $(sh vpn-check.sh) "
-    BAT=" $(sh battery-check.sh) "
-    WIFI=" $(sh wifi-check.sh iwn0) "
-
-
-    xsetroot -name "'$WIFI$BAT$VPN$DATE'"
-    # xsetroot -name "$VPN$DATE"
-
-    echo "$BAT"
-
-    sleep 0.1
+    sleep 3
 
 done
+
+# while true ; do
+
+#     export BAT="[ $(sh ~/bin/battery-check.sh) ]"
+
+#     sleep 10
+
+# done
+
+# while true ; do
+
+#     export WIFI="[ $(sh ~/bin/wifi-check.sh iwn0) ]"
+#     export VPN="[ $(sh ~/bin/vpn-check.sh) ]"
+
+#     sleep 3
+
+# done &
+
+# while true ; do
+
+#     export DATE="[ $(sh ~/bin/date.sh) ]"
+
+#     sleep 60
+
+# done &

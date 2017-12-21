@@ -271,8 +271,8 @@ static ParamName loadtransient[] = {
 
 static ParamName loadcommitted[] = {
 	AcceleratedCanvas,
-//	AccessMicrophone,
-//	AccessWebcam,
+	AccessMicrophone,
+	AccessWebcam,
 	CaretBrowsing,
 	DefaultCharset,
 	FontSize,
@@ -281,7 +281,7 @@ static ParamName loadcommitted[] = {
 	HideBackground,
 	Inspector,
 	Java,
-//	KioskMode,
+	KioskMode,
 	MediaManualPlay,
 	Plugins,
 	RunInFullscreen,
@@ -299,20 +299,15 @@ static ParamName loadfinished[] = {
 	ParameterLast
 };
 
-/* configuration, allows nested code to access above variables */
 #include "config.h"
 
-void
-usage(void)
-{
+void usage(void) {
 	die("usage: surf [-bBdDfFgGiIkKmMnNpPsStTvwxX]\n"
 	    "[-a cookiepolicies ] [-c cookiefile] [-C stylefile] [-e xid]\n"
 	    "[-r scriptfile] [-u useragent] [-z zoomlevel] [uri]\n");
 }
 
-void
-die(const char *errstr, ...)
-{
+void die(const char *errstr, ...) {
 	va_list ap;
 
 	va_start(ap, errstr);
@@ -321,9 +316,7 @@ die(const char *errstr, ...)
 	exit(1);
 }
 
-void
-setup(void)
-{
+void setup(void) {
 	GdkDisplay *gdpy;
 	int i, j;
 
@@ -400,18 +393,14 @@ setup(void)
 	}
 }
 
-void
-sigchld(int unused)
-{
+void sigchld(int unused) {
 	if (signal(SIGCHLD, sigchld) == SIG_ERR)
 		die("Can't install SIGCHLD handler");
 	while (waitpid(-1, NULL, WNOHANG) > 0)
 		;
 }
 
-void
-sighup(int unused)
-{
+void sighup(int unused) {
 	Arg a = { .i = 0 };
 	Client *c;
 
@@ -419,9 +408,7 @@ sighup(int unused)
 		reload(c, &a);
 }
 
-char *
-buildfile(const char *path)
-{
+char * buildfile(const char *path) {
 	char *dname, *bname, *bpath, *fpath;
 	FILE *f;
 
@@ -511,9 +498,7 @@ buildpath(const char *path)
 	return fpath;
 }
 
-Client *
-newclient(Client *rc)
-{
+Client * newclient(Client *rc) {
 	Client *c;
 
 	if (!(c = calloc(1, sizeof(Client))))
@@ -528,9 +513,7 @@ newclient(Client *rc)
 	return c;
 }
 
-void
-loaduri(Client *c, const Arg *a)
-{
+void loaduri(Client *c, const Arg *a) {
 	struct stat st;
 	char *url, *path;
 	const char *uri = a->v;
@@ -605,9 +588,7 @@ getatom(Client *c, int a)
 	return buf;
 }
 
-void
-updatetitle(Client *c)
-{
+void updatetitle(Client *c) {
 	char *title;
 	const char *name = c->overtitle ? c->overtitle :
 	                   c->title ? c->title : "";
@@ -630,9 +611,7 @@ updatetitle(Client *c)
 	}
 }
 
-void
-gettogglestats(Client *c)
-{
+void gettogglestats(Client *c) {
 	togglestats[0] = cookiepolicy_set(cookiepolicy_get());
 	togglestats[1] = curconfig[CaretBrowsing].val.i ?   'C' : 'c';
 	togglestats[2] = curconfig[Geolocation].val.i ?     'G' : 'g';
@@ -947,22 +926,16 @@ evalscript(Client *c, const char *jsstr, ...)
 	g_free(script);
 }
 
-void
-updatewinid(Client *c)
-{
+void updatewinid(Client *c) {
 	snprintf(winid, LENGTH(winid), "%lu", c->xid);
 }
 
-void
-handleplumb(Client *c, const char *uri)
-{
+void handleplumb(Client *c, const char *uri) {
 	Arg a = (Arg)PLUMB(uri);
 	spawn(c, &a);
 }
 
-void
-newwindow(Client *c, const Arg *a, int noembed)
-{
+void newwindow(Client *c, const Arg *a, int noembed) {
 	int i = 0;
 	char tmp[64];
 	const char *cmd[29], *uri;
@@ -1015,9 +988,7 @@ newwindow(Client *c, const Arg *a, int noembed)
 	spawn(c, &arg);
 }
 
-void
-spawn(Client *c, const Arg *a)
-{
+void spawn(Client *c, const Arg *a) {
 	if (fork() == 0) {
 		if (dpy)
 			close(ConnectionNumber(dpy));
@@ -1236,9 +1207,7 @@ buttonreleased(GtkWidget *w, GdkEvent *e, Client *c)
 	return FALSE;
 }
 
-GdkFilterReturn
-processx(GdkXEvent *e, GdkEvent *event, gpointer d)
-{
+GdkFilterReturn processx(GdkXEvent *e, GdkEvent *event, gpointer d) {
 	Client *c = (Client *)d;
 	XPropertyEvent *ev;
 	Arg a;
@@ -1261,9 +1230,7 @@ processx(GdkXEvent *e, GdkEvent *event, gpointer d)
 	return GDK_FILTER_CONTINUE;
 }
 
-gboolean
-winevent(GtkWidget *w, GdkEvent *e, Client *c)
-{
+gboolean winevent(GtkWidget *w, GdkEvent *e, Client *c) {
 	int i;
 
 	switch (e->type) {
@@ -1343,9 +1310,7 @@ showview(WebKitWebView *v, Client *c)
 	setatom(c, AtomUri, "about:blank");
 }
 
-GtkWidget *
-createwindow(Client *c)
-{
+GtkWidget * createwindow(Client *c) {
 	char *wmstr;
 	GtkWidget *w;
 
@@ -1380,8 +1345,7 @@ createwindow(Client *c)
 	return w;
 }
 
-gboolean
-loadfailedtls(WebKitWebView *v, gchar *uri, GTlsCertificate *cert,
+gboolean loadfailedtls(WebKitWebView *v, gchar *uri, GTlsCertificate *cert,
               GTlsCertificateFlags err, Client *c)
 {
 	GString *errmsg = g_string_new(NULL);
@@ -1609,9 +1573,7 @@ decidenewwindow(WebKitPolicyDecision *d, Client *c)
 	webkit_policy_decision_ignore(d);
 }
 
-void
-decideresource(WebKitPolicyDecision *d, Client *c)
-{
+void decideresource(WebKitPolicyDecision *d, Client *c) {
 	int i, isascii = 1;
 	WebKitResponsePolicyDecision *r = WEBKIT_RESPONSE_POLICY_DECISION(d);
 	WebKitURIResponse *res =
@@ -1664,36 +1626,27 @@ downloadstarted(WebKitWebContext *wc, WebKitDownload *d, Client *c)
 	                 G_CALLBACK(responsereceived), c);
 }
 
-void
-responsereceived(WebKitDownload *d, GParamSpec *ps, Client *c)
-{
+void responsereceived(WebKitDownload *d, GParamSpec *ps, Client *c) {
 	download(c, webkit_download_get_response(d));
 	webkit_download_cancel(d);
 }
 
-void
-download(Client *c, WebKitURIResponse *r)
-{
+void download(Client *c, WebKitURIResponse *r) {
 	Arg a = (Arg)DOWNLOAD(webkit_uri_response_get_uri(r), geturi(c));
 	spawn(c, &a);
 }
 
-void
-closeview(WebKitWebView *v, Client *c)
-{
+void closeview(WebKitWebView *v, Client *c) {
 	gtk_widget_destroy(c->win);
 }
 
-void
-destroywin(GtkWidget* w, Client *c)
-{
+void destroywin(GtkWidget* w, Client *c) {
 	destroyclient(c);
 	if (!clients)
 		gtk_main_quit();
 }
 
-gchar *
-parseuri(const gchar *uri) {
+gchar * parseuri(const gchar *uri) {
 	guint i;
 
 	for (i = 0; i < LENGTH(searchengines); i++) {
@@ -1919,73 +1872,70 @@ clickexternplayer(Client *c, const Arg *a, WebKitHitTestResult *h)
 	spawn(c, &arg);
 }
 
-int
-main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 	Arg arg;
 	Client *c;
 
 	memset(&arg, 0, sizeof(arg));
 
-	/* command line args */
 	ARGBEGIN {
-	case 'a':
-		defconfig[CookiePolicies].val.v = EARGF(usage());
-		defconfig[CookiePolicies].prio = 2;
-		break;
-	case 'b':
-		defconfig[ScrollBars].val.i = 0;
-		defconfig[ScrollBars].prio = 2;
-		break;
-	case 'B':
-		defconfig[ScrollBars].val.i = 1;
-		defconfig[ScrollBars].prio = 2;
-		break;
-	case 'c':
-		cookiefile = EARGF(usage());
-		break;
-	case 'C':
-		stylefile = EARGF(usage());
-		break;
-	case 'd':
-		defconfig[DiskCache].val.i = 0;
-		defconfig[DiskCache].prio = 2;
-		break;
-	case 'D':
-		defconfig[DiskCache].val.i = 1;
-		defconfig[DiskCache].prio = 2;
-		break;
+	/* case 'a': */
+	/* 	defconfig[CookiePolicies].val.v = EARGF(usage()); */
+	/* 	defconfig[CookiePolicies].prio = 2; */
+	/* 	break; */
+	/* case 'b': */
+	/* 	defconfig[ScrollBars].val.i = 0; */
+	/* 	defconfig[ScrollBars].prio = 2; */
+	/* 	break; */
+	/* case 'B': */
+	/* 	defconfig[ScrollBars].val.i = 1; */
+	/* 	defconfig[ScrollBars].prio = 2; */
+	/* 	break; */
+	/* case 'c': */
+	/* 	cookiefile = EARGF(usage()); */
+	/* 	break; */
+	/* case 'C': */
+	/* 	stylefile = EARGF(usage()); */
+	/* 	break; */
+	/* case 'd': */
+	/* 	defconfig[DiskCache].val.i = 0; */
+	/* 	defconfig[DiskCache].prio = 2; */
+	/* 	break; */
+	/* case 'D': */
+	/* 	defconfig[DiskCache].val.i = 1; */
+	/* 	defconfig[DiskCache].prio = 2; */
+	/* 	break; */
 	case 'e':
 		embed = strtol(EARGF(usage()), NULL, 0);
 		break;
-	case 'f':
-		defconfig[RunInFullscreen].val.i = 0;
-		defconfig[RunInFullscreen].prio = 2;
-		break;
+	/* case 'f': */
+	/* 	defconfig[RunInFullscreen].val.i = 0; */
+	/* 	defconfig[RunInFullscreen].prio = 2; */
+	/* 	break; */
 	case 'F':
 		defconfig[RunInFullscreen].val.i = 1;
 		defconfig[RunInFullscreen].prio = 2;
 		break;
-	case 'g':
-		defconfig[Geolocation].val.i = 0;
-		defconfig[Geolocation].prio = 2;
-		break;
-	case 'G':
-		defconfig[Geolocation].val.i = 1;
-		defconfig[Geolocation].prio = 2;
-		break;
+	/* case 'g': */
+	/* 	defconfig[Geolocation].val.i = 0; */
+	/* 	defconfig[Geolocation].prio = 2; */
+	/* 	break; */
+	/* case 'G': */
+	/* 	defconfig[Geolocation].val.i = 1; */
+	/* 	defconfig[Geolocation].prio = 2; */
+	/* 	break; */
 	case 'i':
 		defconfig[LoadImages].val.i = 0;
 		defconfig[LoadImages].prio = 2;
 		break;
-	case 'I':
-		defconfig[LoadImages].val.i = 1;
-		defconfig[LoadImages].prio = 2;
-		break;
-	case 'k':
-		defconfig[KioskMode].val.i = 0;
-		defconfig[KioskMode].prio = 2;
-		break;
+	/* case 'I': */
+	/* 	defconfig[LoadImages].val.i = 1; */
+	/* 	defconfig[LoadImages].prio = 2; */
+	/* 	break; */
+	/* case 'k': */
+	/* 	defconfig[KioskMode].val.i = 0; */
+	/* 	defconfig[KioskMode].prio = 2; */
+	/* 	break; */
 	case 'K':
 		defconfig[KioskMode].val.i = 1;
 		defconfig[KioskMode].prio = 2;
@@ -1998,14 +1948,14 @@ main(int argc, char *argv[])
 		defconfig[Style].val.i = 1;
 		defconfig[Style].prio = 2;
 		break;
-	case 'n':
-		defconfig[Inspector].val.i = 0;
-		defconfig[Inspector].prio = 2;
-		break;
-	case 'N':
-		defconfig[Inspector].val.i = 1;
-		defconfig[Inspector].prio = 2;
-		break;
+	/* case 'n': */
+	/* 	defconfig[Inspector].val.i = 0; */
+	/* 	defconfig[Inspector].prio = 2; */
+	/* 	break; */
+	/* case 'N': */
+	/* 	defconfig[Inspector].val.i = 1; */
+	/* 	defconfig[Inspector].prio = 2; */
+	/* 	break; */
 	case 'p':
 		defconfig[Plugins].val.i = 0;
 		defconfig[Plugins].prio = 2;
@@ -2025,14 +1975,14 @@ main(int argc, char *argv[])
 		defconfig[JavaScript].val.i = 1;
 		defconfig[JavaScript].prio = 2;
 		break;
-	case 't':
-		defconfig[StrictTLS].val.i = 0;
-		defconfig[StrictTLS].prio = 2;
-		break;
-	case 'T':
-		defconfig[StrictTLS].val.i = 1;
-		defconfig[StrictTLS].prio = 2;
-		break;
+	/* case 't': */
+	/* 	defconfig[StrictTLS].val.i = 0; */
+	/* 	defconfig[StrictTLS].prio = 2; */
+	/* 	break; */
+	/* case 'T': */
+	/* 	defconfig[StrictTLS].val.i = 1; */
+	/* 	defconfig[StrictTLS].prio = 2; */
+	/* 	break; */
 	case 'u':
 		fulluseragent = EARGF(usage());
 		break;
@@ -2041,14 +1991,14 @@ main(int argc, char *argv[])
 	case 'w':
 		showxid = 1;
 		break;
-	case 'x':
-		defconfig[Certificate].val.i = 0;
-		defconfig[Certificate].prio = 2;
-		break;
-	case 'X':
-		defconfig[Certificate].val.i = 1;
-		defconfig[Certificate].prio = 2;
-		break;
+	/* case 'x': */
+	/* 	defconfig[Certificate].val.i = 0; */
+	/* 	defconfig[Certificate].prio = 2; */
+		/* break; */
+	/* case 'X': */
+	/* 	defconfig[Certificate].val.i = 1; */
+	/* 	defconfig[Certificate].prio = 2; */
+	/* 	break; */
 	case 'z':
 		defconfig[ZoomLevel].val.f = strtof(EARGF(usage()), NULL);
 		defconfig[ZoomLevel].prio = 2;

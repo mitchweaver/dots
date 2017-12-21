@@ -1,10 +1,7 @@
 #include <time.h>
-
 #include "../util.h"
 
-const char *
-datetime(const char *fmt)
-{
+const char * datetime(const char *fmt) {
 	time_t t;
 
 	t = time(NULL);

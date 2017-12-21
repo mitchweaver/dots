@@ -1,3 +1,13 @@
+function initKeyBind(e){
+    var t = e.target;
+    if( t.nodeType == 1){
+        addKeyBind( 'C-f', 'hintMode()', e );
+        addKeyBind( 'C-c', 'removeHints()', e );
+    }
+}
+
+// --------------------------------------------------------------------------  //
+
 var hint_num_str = '';
 var hint_elems = [];
 var hint_enabled = false;
@@ -94,6 +104,7 @@ function setHints() {
             hint_elems.push(elem);
             setHighlight(elem, false);
             var span = document.createElement('span');
+            // -------------------------------------------------------------------------- //
             span.style.cssText = [ 
                 'left: ', elem_left, 'px;',
                 'top: ', elem_top, 'px;',
@@ -104,6 +115,7 @@ function setHints() {
                 'padding: 0px 1px;',
                 'z-index: 100000;'
                     ].join('');
+            // -------------------------------------------------------------------------- //
             span.innerHTML = hint_elems.length;
             div.appendChild(span);
             if (elem.tagName.toLowerCase() == 'a') {
@@ -143,14 +155,6 @@ function addKeyBind( key, func, eve ){
 }
 
 document.addEventListener( 'keydown', initKeyBind, false );
-
-function initKeyBind(e){
-    var t = e.target;
-    if( t.nodeType == 1){
-        addKeyBind( 'C-f', 'hintMode()', e );
-        addKeyBind( 'C-c', 'removeHints()', e );
-    }
-}
 
 var keyId = {
     "U+0008" : "BackSpace",
@@ -246,62 +250,3 @@ function get_key(evt){
     }
     return ctrl+meta+key;
 }
-
-
-// -------------------------------------------------------------
-function up() {
-    if (window.scrollByLines) window.scrollByLines(-10); // gecko
-    else window.scrollBy(0, -75); // webkit
-}
-function down() {
-    if (window.scrollByLines) window.scrollByLines(10); // gecko
-    else window.scrollBy(0, 75); // webkit
-}
-function pageup() {
-    if (window.scrollByPages) window.scrollByPages(-1); // gecko
-    else window.scrollBy(0, 0 - _pageScroll()); // webkit
-}
-function pagedown() {
-    if (window.scrollByPages) window.scrollByPages(1); // gecko
-    else window.scrollBy(0, _pageScroll()); // webkit
-}
-function right() { window.scrollBy(45, 0); }
-function left() { window.scrollBy(-45, 0); }
-function home() { window.scroll(0, 0); }
-function bottom() { window.scroll(document.width, document.height); }
-
-var bindings = {
-    'h' : left, 
-    'l' : right,
-    'k' : up,
-    'j' : down,
-    'g' : home,
-    'G' : bottom,
-    // 'f' : hintMode,
-    '^b': pageup,
-    '^f': pagedown,
-}
-
-function isEditable(element) {
-    if (element.nodeName.toLowerCase() == "textarea") return true;
-    if (element.nodeName.toLowerCase() == "input" && element.type == "text")
-        return true;
-    if (document.designMode == "on" || element.contentEditable == "true") 
-        return true;
-    return false;
-}
-
-function keypress(evt) {
-    var target = evt.target;
-    if (isEditable(target)) return;
-    var key = String.fromCharCode(evt.charCode);
-    if (evt.ctrlKey) key = '^' + key;
-    var fun = bindings[key];
-    if (fun) fun();
-}
-
-function _pageScroll() {
-    return window.innerHeight - Math.min(window.innerHeight / 10, 24);
-}
-
-window.addEventListener("keypress", keypress, false);
