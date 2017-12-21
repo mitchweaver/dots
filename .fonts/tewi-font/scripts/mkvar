@@ -1,0 +1,5 @@
+#!/bin/sh
+IFS='-.' read -r _ weigth size _ << EOF
+"$1"
+EOF
+scripts/merge "tewi-${weigth}-${size}.bdf" "variant/$1" > "$1"
