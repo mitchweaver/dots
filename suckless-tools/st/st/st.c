@@ -2880,7 +2880,7 @@ copyurl(const Arg *arg) {
 		tsetdirt(sel.nb.y, sel.ne.y);
 		selcopy(0);
         // note this isn't working?
-        system("xdg-open $(xclip -o) &");
+        system("xdg-open $(xclip -o) > /dev/null &");
 	}
 
 	free(linestr);

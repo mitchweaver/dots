@@ -216,7 +216,8 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
 let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<c-n>'
+" i use 'm' here because c-n is reserved for `tabbed`
+let g:multi_cursor_next_key='<c-m>'
 let g:multi_cursor_prev_key='<c-p>'
 let g:multi_cursor_skip_key='<c-x>'
 let g:multi_cursor_quit_key='<esc>'

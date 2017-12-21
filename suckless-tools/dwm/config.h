@@ -63,8 +63,6 @@ static const Layout layouts[] = {
 { mod1|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 { mod1|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
-
-#define SH(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 static char dmenumon[2] = "0";
 /* static const char dmenufont[]    = "Terminus:pixelsize=12:antialias=false:autohint=false"; */
 /* static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", gray1, "-nf", gray3, "-sb", cyan, "-sf", gray4, NULL }; */
@@ -86,7 +84,7 @@ static const char *mpdseekff[] = { "mpc", "-q", "seek", "+00:00:30", NULL };
 static const char *mpdseekrw[] = { "mpc", "-q", "seek", "-00:00:30", NULL };
 static const char *slock[] = { "slock", NULL };
 static const char *screenshot[] = { "screenshot", NULL };
-static const char *xdgopen[] = { "/home/mitch/workspace/dotfiles/suckless-tools/dwm/scripts-dwm/xdgopen.sh", NULL };
+/* static const char *xdgopen[] = { "/home/mitch/workspace/dotfiles/suckless-tools/dwm/scripts-dwm/xdgopen.sh", NULL }; */
 
 static void toggle_gaps(){
     if(gappx == 0){
@@ -99,6 +97,7 @@ static void toggle_gaps(){
 }
 
 #include "movestack.c"
+#define SH(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 

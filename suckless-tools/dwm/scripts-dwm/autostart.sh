@@ -1,11 +1,11 @@
 #!/bin/sh
 
+xmodmap ~/.Xmodmap &
 xset +fp /home/mitch/.fonts &
 feh --bg-scale /home/mitch/workspace/dotfiles/suckless-tools/dwm/wall &
-xmodmap ~/.Xmodmap &
+slstatus &
 xset m 0 0 &
 xrdb load ~/.Xresources &
-slstatus &
 
 # clipmenud &
 

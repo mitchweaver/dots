@@ -66,6 +66,7 @@ alias du='du -ahLd 1'
 alias make='make -j3'
 alias mkclean='make clean'
 alias x='exit'
+alias ex='x'
 alias q='x'
 :q(){ x; }
 :wq(){ x; }
@@ -240,6 +241,7 @@ alias weather-ok="c ; curl -s http://wttr.in/~Claremore"
 # ←--------------- Specific File Editing -------------------→ #
 alias aliases='v ~/.aliases'
 alias kshrc='v ~/.kshrc'
+alias profile='v ~/.profile'
 alias vimrc='v ~/.vimrc'
 alias vrc='vimrc'
 alias bmk='v ~/.surf/bookmarks'
