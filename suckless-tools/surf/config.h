@@ -87,16 +87,18 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
 }
 
 /* DOWNLOAD(URI, referer) */
+// This sets all the ids for the opening terminal to 'curl'.
+// This way you can set that 'curl' terminal to be opened floating
+// Which stops the annoying flashing/moving around of windows on a download.
 #define DOWNLOAD(u, r) { \
-        .v = (const char *[]){ "st", "-e", "/bin/sh", "-c",\
-             "cd /home/mitch/downloads && curl -g -L -O $1 && exit", \
+        .v = (const char *[]){ "st", "-T", "curl",  "-w", "curl", "-n", "curl", "-e", "/bin/sh", "-c", \
+             "cd ~/downloads && curl -g -L -O $@ && exit", \
              "surf-download", u, r, NULL \
         } \
 }
 
 /* This called when some URI which does not begin with "about:",
- * "http://" or "https://" should be opened.
- */
+ * "http://" or "https://" should be opened. */
 #define PLUMB(u) {\
         .v = (const char *[]){ "/bin/sh", "-c", \
              "xdg-open \"$0\"", u, NULL \
@@ -109,11 +111,8 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
         } \
 }
 
-/* styles */
-/*
- * The iteration will stop at the first match, beginning at the beginning of
- * the list.
- */
+/* ←---------------------- styles -----------------------------------→ 
+ * The iteration will stop at the first match from the beginning of list */
 static SiteSpecific styles[] = {
 	/* regexp               file in $styledir */
 	{ ".*",                 "default.css" },
@@ -132,80 +131,83 @@ static SiteSpecific styles[] = {
     winid, NULL } }
 /* ----------------------------------------- */
 
-
 /* ----------- open flash videos with youtube-dl ------------ */
 #define YOUTUBEDL {.v = (char *[]){ "/bin/sh", "-c", \
         "mpv --really-quiet $(xprop -id $0 _SURF_URI | cut -d \\\" -f 2) &", \
         winid, NULL } }
 /* ----------------------------------------------------------------- */
 
-
-
+// The complete list of gdk key syms can be found at: http://git.gnome.org/browse/gtk+/plain/gdk/gdkkeysyms.h
 #define MODKEY GDK_CONTROL_MASK
-
+#define SHIFT GDK_SHIFT_MASK
 static Key keys[] = {
-    /* modifier              keyval          function    arg */
-    { MODKEY,                GDK_KEY_g,      spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
-    { MODKEY,                GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
-
-    { 0,                     GDK_KEY_Escape, stop,       { 0 } },
-    { MODKEY,                GDK_KEY_c,      stop,       { 0 } },
-
-
+    { MODKEY,               GDK_KEY_g,       spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
+    { MODKEY,               GDK_KEY_slash,   spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
+    { MODKEY,               GDK_KEY_period,  find,       { .i = +1 } },
+    { MODKEY,               GDK_KEY_comma,   find,       { .i = -1 } },
+    { MODKEY,               GDK_KEY_r,       reload,     { .i = 0 } },
+    { 0,                    GDK_KEY_F5,      reload,     { .i = 0 } },
+    { 0,                    GDK_KEY_Escape,  stop,       { 0 } },
+    { MODKEY,               GDK_KEY_c,       stop,       { 0 } },
+    
+    /* ----------------- Custom Functions ---------------------------- */ 
     { MODKEY,               GDK_KEY_o,      spawn,      YOUTUBEDL },
-
     { MODKEY,               GDK_KEY_b,      spawn,      BM_PICK },
-    { MODKEY|GDK_SHIFT_MASK,GDK_KEY_b,      spawn,      BM_ADD },
+    { MODKEY|SHIFT,         GDK_KEY_b,      spawn,      BM_ADD },
+   
+    // vim mode
+    { MODKEY,               GDK_KEY_j,      scroll,     { .i = 'd' } },
+    { MODKEY,               GDK_KEY_k,      scroll,     { .i = 'u' } },
+    { MODKEY,               GDK_KEY_l,      scroll,     { .i = 'r' } },
+    { MODKEY,               GDK_KEY_h,      scroll,     { .i = 'l' } },
+    /* ----------------- End Custom Functions ------------------------ */ 
 
-    { MODKEY,                GDK_KEY_r,      reload,     { .i = 0 } },
-    { 0,                     GDK_KEY_F5,     reload,     { .i = 0 } },
+    /* ---------------------- History -------------------------------- */ 
+    { MODKEY,               GDK_KEY_apostrophe,  navigate,   { .i = +1 } },
+    { MODKEY,               GDK_KEY_semicolon,   navigate,   { .i = -1 } },
+    /* --------------------------------------------------------------- */ 
 
-    { MODKEY,                GDK_KEY_l,      navigate,   { .i = +1 } },
-    { MODKEY,                GDK_KEY_h,      navigate,   { .i = -1 } },
+    /* -------------------- Zooming -------------------------------------- */ 
+    { MODKEY,                GDK_KEY_minus,       zoom,       { .i = -1 } },
+    { MODKEY,                GDK_KEY_plus,        zoom,       { .i = +1 } },
+    { MODKEY,                GDK_KEY_equal,       zoom,       { .i = +1 } },
+    { MODKEY,                GDK_KEY_BackSpace,   zoom,       { .i = +0 } },
+    { 0,                     GDK_KEY_F11,         togglefullscreen, { 0 } },
+    /* ------------------------------------------------------------------- */ 
 
-    { MODKEY,                GDK_KEY_j,      scroll,     { .i = 'd' } },
-    { MODKEY,                GDK_KEY_k,      scroll,     { .i = 'u' } },
-    { MODKEY,                GDK_KEY_b,      scroll,     { .i = 'U' } },
-    { MODKEY,                GDK_KEY_i,      scroll,     { .i = 'r' } },
-    { MODKEY,                GDK_KEY_u,      scroll,     { .i = 'l' } },
+    /* --------------------- Toggles -------------------------------------- */ 
+    { MODKEY|SHIFT,          GDK_KEY_s,      toggle,     { .i = JavaScript } },
+    { MODKEY,                GDK_KEY_i,      toggle,     { .i = LoadImages } },
+    /* { MODKEY,                GDK_KEY_m,      toggle,     { .i = Style } }, */
+    // what is frame flattening exactly?
+    /* { MODKEY|SHIFT, GDK_KEY_f,      toggle,     { .i = FrameFlattening } }, */
+    // i dont have any plugins?
+    /* { MODKEY|SHIFT, GDK_KEY_v,      toggle,     { .i = Plugins } }, */
+    /* -------------------------------------------------------------------- */ 
 
-    { MODKEY,                GDK_KEY_minus,  zoom,       { .i = -1 } },
-    { MODKEY,                GDK_KEY_plus,   zoom,       { .i = +1 } },
-    { MODKEY,                GDK_KEY_equal,   zoom,       { .i = +1 } },
+    // Uncomment this if you want printing
+    /* { MODKEY,                GDK_KEY_p,      print,      { 0 } }, */
 
+    // just let your system clipboard handle it
     /* { MODKEY,                GDK_KEY_p,      clipboard,  { .i = 1 } }, */
     /* { MODKEY,                GDK_KEY_v,      clipboard,  { .i = 1 } }, */
     /* { MODKEY,                GDK_KEY_y,      clipboard,  { .i = 0 } }, */
     /* { MODKEY,                GDK_KEY_c,      clipboard,  { .i = 0 } }, */
-
-    { MODKEY,                GDK_KEY_slash,      find,       { .i = +1 } },
-    { MODKEY,                GDK_KEY_comma,      find,       { .i = -1 } },
-
-    { MODKEY,                GDK_KEY_p,      print,      { 0 } },
-
-    { 0,                     GDK_KEY_F11,    togglefullscreen, { 0 } },
+   
+    // Inspector doesn't work for me, don't know why.
     /* { 0,                     GDK_KEY_F12,      toggleinspector, { 0 } }, */
-
-    { MODKEY|GDK_SHIFT_MASK, GDK_KEY_f,      toggle,     { .i = FrameFlattening } },
-    { MODKEY|GDK_SHIFT_MASK, GDK_KEY_s,      toggle,     { .i = JavaScript } },
-    { MODKEY, GDK_KEY_i,      toggle,     { .i = LoadImages } },
-    /* { MODKEY|GDK_SHIFT_MASK, GDK_KEY_v,      toggle,     { .i = Plugins } }, */
-    { MODKEY, GDK_KEY_m,      toggle,     { .i = Style } },
 };
-
 
 /* button definitions */
 /* target can be OnDoc, OnLink, OnImg, OnMedia, OnEdit, OnBar, OnSel, OnAny */
 static Button buttons[] = {
 	/* target       event mask      button  function        argument        stop event */
-	{ OnLink,       0,              2,      clicknewwindow, { .i = 0 },     1 },
-	{ OnLink,       MODKEY,         2,      clicknewwindow, { .i = 1 },     1 },
 	{ OnLink,       MODKEY,         1,      clicknewwindow, { .i = 1 },     1 },
-	{ OnAny,        0,              8,      clicknavigate,  { .i = -1 },    1 },
-	{ OnAny,        0,              9,      clicknavigate,  { .i = +1 },    1 },
-	{ OnMedia,      MODKEY,         1,      clickexternplayer, { 0 },       1 },
+	/* { OnLink,       0,              2,      clicknewwindow, { .i = 0 },     1 }, */
+	/* { OnLink,       MODKEY,         2,      clicknewwindow, { .i = 1 },     1 }, */
+    // this is really buggy, use the ctrl-o bind instead
+	/* { OnMedia,      MODKEY,         1,      clickexternplayer, { 0 },       1 }, */
 };
-
 
 
 /* -------------- IGNORE ------------------------ */

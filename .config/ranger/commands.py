@@ -196,12 +196,13 @@ class extracthere(Command):
         obj.signal_bind('after', refresh)
         self.fm.loader.add(obj)
 
-
-
 # this is assuming your mpd directory
 # is located at ~/music
 class mpc_play_dir(Command):
     def execute(self):
+        # start mpd, if already started this will be a NOP
+        os.system("mpd > /dev/null && mpc pause > /dev/null")
+
         # get full path name
         # This will be /home/$USER/music
         PATH='"' + str(self.fm.thisdir.get_selection()[0]) + '"'
@@ -216,5 +217,5 @@ class mpc_play_dir(Command):
         # The MPD database name
         PATH = PATH.replace(MPD_DIR, "") 
 
-        os.system("mpc clear > /dev/null && mpc add " + PATH + \
+        os.system("mpc clear > /dev/null ; mpc add " + PATH + \
                 " > /dev/null && mpc play > /dev/null")

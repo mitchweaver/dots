@@ -33,6 +33,7 @@ static const char *tags[] = { "", "", "", "", "", "", "", "
 static const Rule rules[] = {
     /* class      instance    title       tags mask     isfloating   monitor */
     { "Gimp",     NULL,       NULL,       0,            1,           -1 },
+    { "st",     NULL,       "curl",     0,            1,           -1 },
 };
 
 static const float mfact  = 0.50; /* factor of master area size [0.05..0.95] */
@@ -74,8 +75,8 @@ static const char *dedit[] = { "dedit", NULL };
 static const char *clipboard[] = { "clipmenu", NULL };
 static const char *ranger[] = { "tabbed", "-c", "-r", "2", "st", "-w", "-e", "ranger", NULL };
 /* static const char *ranger[] = { "st", "-w", "-e", "ranger", NULL }; */
-static const char *volup[] = { "BSDNixVolume.sh", "-set", "+4", NULL };
-static const char *voldown[] = { "BSDNixVolume.sh", "-set", "-4", NULL };
+static const char *volup[] = { "BSDNixVolume.sh", "-set", "+5", NULL };
+static const char *voldown[] = { "BSDNixVolume.sh", "-set", "-5", NULL };
 static const char *mpdnext[] = { "mpc", "-q",  "next", NULL };
 static const char *mpdprev[] = { "mpc", "-q", "prev", NULL };
 static const char *mpdtoggle[] = { "mpc", "-q",  "toggle", NULL };

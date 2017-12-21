@@ -192,7 +192,7 @@ alias checkout='git checkout'
 recomp() {
     case $1 in
         dwm)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/dwm && mkclean ; make && make install && pkill -9 dwm;;
+            cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/dwm && mkclean ; make && make install && c ;;
         surf) 
             cd /home/mitch/workspace/dotfiles/suckless-tools/surf/surf && mkclean ; make && make install && c ;;
         tabbed)

@@ -28,7 +28,7 @@ call plug#begin('~/.vim/vim-plug')
 " --- Applications
 Plug 'vimwiki/vimwiki'
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy finder
-" Plug 'iamcco/markdown-preview.vim'
+" Plug 'iamcco/markdown-preview.vim' " doesn't work in neovim
 
 " --- Themes & Frippery
 " Plug 'flazz/vim-colorschemes' " just a bunch of colorschemes
@@ -38,7 +38,6 @@ Plug 'ctrlpvim/ctrlp.vim' " fuzzy finder
 
 " --- Syntax Highlighting
 " Plug 'sheerun/vim-polyglot' " syntax highlight - all languages
-" Plug 'tpope/vim-markdown' " markdown support
 " Plug 'pangloss/vim-javascript' " better javascript support
 Plug 'lilydjwg/colorizer' " colorizes rgb colorcodes
 
