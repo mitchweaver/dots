@@ -31,9 +31,11 @@ static const char *tags[] = { "", "", "", "", "", "", "", "
                             "", "", "", "" };
 
 static const Rule rules[] = {
-    /* class      instance    title       tags mask     isfloating   monitor */
-    { "Gimp",     NULL,       NULL,       0,            1,           -1 },
-    { "st",     NULL,       "curl",     0,            1,           -1 },
+    /* class      instance    title       tags mask  iscentered   isfloating   monitor */
+    { "Gimp",     NULL,       NULL,       0,         0,           1,           -1 },
+
+    // surf-download sets window name to 'curl'
+    { "st",       NULL,       "curl",     0,         1,           1,           -1 },
 };
 
 static const float mfact  = 0.50; /* factor of master area size [0.05..0.95] */

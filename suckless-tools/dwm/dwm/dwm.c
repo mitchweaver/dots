@@ -74,7 +74,12 @@ struct Client {
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
 	int bw, oldbw;
 	unsigned int tags;
-	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
+
+    /* -------- isfloating patch ------------------------------------------------ */
+	int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
+	/* int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen; */
+    /* -------------------------------------------------------------------------- */ 
+
 	Client *next;
 	Client *snext;
 	Monitor *mon;
@@ -123,6 +128,7 @@ typedef struct {
 	const char *title;
 	unsigned int tags;
 	int isfloating;
+    int iscentered;
 	int monitor;
 } Rule;
 
@@ -308,6 +314,11 @@ applyrules(Client *c) {
 		&& (!r->instance || strstr(instance, r->instance)))
 		{
 			c->isfloating = r->isfloating;
+			
+            /* ---------- iscentered patch ---------------------------------------------- */  
+            c->iscentered = r->iscentered;
+            /* -------------------------------------------------------------------------- */ 
+
 			c->tags |= r->tags;
 			for (m = mons; m && m->num != r->monitor; m = m->next);
 			if (m)
@@ -1075,6 +1086,13 @@ manage(Window w, XWindowAttributes *wa)
 	c->y = MAX(c->y, ((c->mon->by == c->mon->my) && (c->x + (c->w / 2) >= c->mon->wx)
 		&& (c->x + (c->w / 2) < c->mon->wx + c->mon->ww)) ? bh : c->mon->my);
 	c->bw = borderpx;
+
+    /* ------- iscentered patch ------------------------------------------------- */  
+    if(c->iscentered) {
+		c->x = (c->mon->mw - WIDTH(c)) / 2;
+		c->y = (c->mon->mh - HEIGHT(c)) / 2;
+	}
+    /* -------------------------------------------------------------------------- */ 
 
 	wc.border_width = c->bw;
 	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
