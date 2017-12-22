@@ -105,9 +105,9 @@ alias r="ranger";[ -n "$RANGER_LEVEL" ] && PS1="$PS1"'(RANGER): ' && clear && ls
 alias h='htop'
 alias htpo='h'
 alias hto='h'
+alias ht='h'
 alias hpot='h'
 alias hotp='h'
-alias top='h'
 
 alias trans-shell='trans -b -I'
 alias rtrans-shell='trans -b -from en -to de -I'

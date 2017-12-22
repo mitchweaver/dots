@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/ksh
 #
 # https://github.com/MitchWeaver/dedit
 #
@@ -52,8 +52,10 @@ if [ $# -gt 0 ] ; then
 fi
 
 # note: the ls arguments are important, please don't break the script ;)
+
 # LINUX
 # SELECTION=$(ls $IGNORE -HBLap ${FOLDERS} | grep -v / | $DMENU -p 'File to edit:')
+
 # BSD
 SELECTION=$(ls $IGNORE -HLap ${FOLDERS} | grep -v / | $DMENU -p 'File to edit:')
 

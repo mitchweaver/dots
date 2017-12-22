@@ -10,6 +10,11 @@ if [ $(uname) == "Linux" ] ; then
     fi
 else # BSD
     perc=$(apm -l)
+
+    if [ $perc -eq 99 ] ; then
+        perc=100
+    fi
+
     if [ $(apm -a) -eq 1 ] ; then
         plugged=1
     fi

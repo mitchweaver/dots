@@ -66,9 +66,9 @@ static Parameter defconfig[ParameterLast] = {
 };
 
 static UriParameters uriparams[] = {
-    { "(://|\\.)duckduckgo\\.com(/|$)", {
-	    [JavaScript] = { { .i = 0 }, 1 },
-	}, },
+    /* { "(://|\\.)duckduckgo\\.com(/|$)", { */
+	    /* [JavaScript] = { { .i = 0 }, 1 }, */
+	/* }, }, */
 };
 
 static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
@@ -92,7 +92,7 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
 // This way you can set that 'curl' terminal to be opened floating
 // Which stops the annoying flashing/moving around of windows on a download.
 #define DOWNLOAD(u, r) { \
-        .v = (const char *[]){ "st", "-T", "curl",  "-w", "curl", "-n", "curl", "-e", "/bin/sh", "-c", \
+        .v = (const char *[]){ "st", "-T", "surf-download",  "-w", "surf-download", "-n", "surf-download", "-e", "/bin/sh", "-c", \
              "cd ~/downloads && curl -g -L -O $@ && exit", \
              "surf-download", u, r, NULL \
         } \
@@ -112,8 +112,6 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
         } \
 }
 
-/* ←---------------------- styles -----------------------------------→ 
- * The iteration will stop at the first match from the beginning of list */
 static SiteSpecific styles[] = {
 	/* regexp               file in $styledir */
 	{ ".*",                 "default.css" },
@@ -158,7 +156,7 @@ static Key keys[] = {
     { MODKEY,               GDK_KEY_o,      spawn,      YOUTUBEDL },
     { MODKEY,               GDK_KEY_b,      spawn,      BM_PICK },
     { MODKEY|SHIFT,         GDK_KEY_b,      spawn,      BM_ADD },
-    { MODKEY,               GDK_KEY_t,      spawn,      SH("tabbed -c -r 2 st -w '' -T translate -e /bin/sh -c 'xclip -o | trans -b ; ksh'") },
+    { MODKEY,               GDK_KEY_t,      spawn,      SH("python ~/workspace/dotfiles/suckless-tools/surf/scripts-surf/surf-translate.py '$(xclip -o)'") },
    
     // vim mode
     { MODKEY,               GDK_KEY_j,      scroll,     { .i = 'd' } },
