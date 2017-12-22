@@ -82,7 +82,7 @@ alias ....='cd ../../..'
 patch() {
     # this assumes $1 is '-p1', and $3 is '<' and $4 is the patch file
     if [ "$2" == "--dry-run" ] || [ "$2" == "--check" ] || [ "$2" == "-C" ]; then
-    
+
         if [ $(uname) == "Linux" ] ; then
             patch "$1" --dry-run "$3" "$4"
         else # BSD
@@ -160,19 +160,19 @@ gitmit() { # TODO: fix this
     else
         git add "$1" && git commit -m "$2"
     fi
-    
-    
+
+
     # else
     #     # this garble means "all but last" and then "the last"
     #     foo="$@"
-    #     git add "${foo[@]::${#foo[@]}-1}" 2> /dev/null && git commit -m "${@:(-1)}" 
+    #     git add "${foo[@]::${#foo[@]}-1}" 2> /dev/null && git commit -m "${@:(-1)}"
     # fi
 }
 gitout() {
     # pushes out to the current branch
     if [ $# -eq 0 ] ; then
         git push -u origin $(git rev-parse --abbrev-ref HEAD)
-    else 
+    else
         git push -u origin $(git rev-parse --abbrev-ref HEAD) "$1"
     fi
 }
@@ -211,7 +211,7 @@ recomp() {
     case $1 in
         dwm)
             cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/dwm && mkclean ; make && make install && c ;;
-        surf) 
+        surf)
             cd /home/mitch/workspace/dotfiles/suckless-tools/surf/surf && mkclean ; make && make install && c ;;
         tabbed)
             cd /home/mitch/workspace/dotfiles/suckless-tools/tabbed/tabbed && mkclean ; make && make install && c ;;
@@ -223,13 +223,14 @@ recomp() {
             cd /home/mitch/workspace/dotfiles/suckless-tools/slock/slock && mkclean ; make && make install && c ;;
         slstatus)
             cd /home/mitch/workspace/dotfiles/suckless-tools/slstatus/ && mkclean ; make && make install && pkill -9 slstatus ; slstatus & c ;;
-        *)    
+        *)
     esac
 }
 
 # ←----------------- Misc ----------------------------------→ #
 filesize(){ echo $(stat --printf="%s" "$1") ; }
 trash() { mv -v "$1" ~/.local/share/Trash/files ; }
+cptrash() { cp -rv "$1" ~/.local/share/Trash/files ; }
 alias xmodmap='xset m 0 0 ; xmodmap ~/.Xmodmap'
 alias empty-trash='sh ~/bin/empty-trash.sh ; c'
 alias pingme='ping mitchweaver.xyz'
@@ -285,7 +286,7 @@ mi(){ mv "$1" ~/images ; }
 Yi(){ cp -r "$1" ~/images ; }
 # wallpapers
 gW(){ cd ~/images/wallpapers ; c ; }
-mW() { mv "$1" ~/images/wallpapers ; } 
+mW() { mv "$1" ~/images/wallpapers ; }
 YW() { cp -r "$1" ~/images/wallpapers ; }
 # memes
 gM(){ cd ~/images/memes ; c ; }
@@ -304,7 +305,7 @@ Ym() { cp -r "$1" ~/music ; }
 # books
 # gB(){ cd ~/books ; c ; }
 # mB() { mv "$1" ~/books ; }
-# YB() { cp -r "$1" ~/books ; } 
+# YB() { cp -r "$1" ~/books ; }
 
 # root
 gr(){ cd / ; c ; }
@@ -316,9 +317,9 @@ mt() { mv "$1" ~/tmp ; }
 Yt() { cp -r "$1" ~/tmp ; }
 # .config
 gcf() { cd ~/.config ; c ; }
-mcf() { mv "$1" ~/.config ; } 
-Ycf() { cp -r "$1" ~/.config ; } 
+mcf() { mv "$1" ~/.config ; }
+Ycf() { cp -r "$1" ~/.config ; }
 # suckless
 gs() { cd ~/workspace/dotfiles/suckless-tools ; c ; }
 ms() { mv "$1" ~/workspace/dotfiles/suckless-tools ; }
-Ys() { cp -r "$1" ~/workspace/dotfiles/suckless-tools ; } 
+Ys() { cp -r "$1" ~/workspace/dotfiles/suckless-tools ; }

@@ -1,11 +1,9 @@
 #!/bin/sh
 
-RUNNING=0
-
 if [ $(uname) == "Linux" ] ; then
 
     if [ $(pidof openvpn) ] ; then
-       RUNNING=1 
+       RUNNING=1
     fi
 
 else # BSD

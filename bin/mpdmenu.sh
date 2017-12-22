@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+# currently not working under BSD... need to fix
+
 DMENU=${DMENU:-dmenu}
 
 prompt="mpc:"

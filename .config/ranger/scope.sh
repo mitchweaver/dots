@@ -49,10 +49,12 @@ safepipe() { "$@"; test $? = 0 -o $? = 141; }
 if [ "$preview_images" = "True" ]; then
     case "$mimetype" in
         # Image previews for image files. w3mimgdisplay will be called for all
-        image/*)
+        video/* | image/*)
             exit 7;;
         video/*)
-            ffmpeg -loglevel quiet -i "$path" -f mjpeg -t 0.0001 -ss 0 -y "$cached" && exit 6;;
+            # ffmpeg -loglevel quiet -i "$path" -f mjpeg -t 0.0001 -ss 0 -y "$cached" && exit 6;;
+            ffmpeg -loglevel panic -y -i "$path"  -r 0.0033 -vf scale=-1:240 -vcodec png "$cached" ; exit 6;;
+            # ffmpeg -ss 3 -i "$path"-vf "select=gt(scene\,0.4)" -frames:v 5 -vsync vfr -vf fps=fps=1/600 "$cached" > /dev/null ; exit 6;;
     esac
 fi
 
@@ -64,23 +66,25 @@ case "$extension" in
         #     { dump | trim | fmt -s -w $width; exit 0; } || exit 1;;
     # md|markdown|markd)
     # BitTorrent Files
-    torrent)
-        try transmission-show "$path" && { dump | trim; exit 5; } || exit 1;;
+    # torrent)
+        # try transmission-show "$path" && { dump | trim; exit 5; } || exit 1;;
     # HTML Pages:
     # htm|html|xhtml)
         # try w3m    -dump "$path" && { dump | trim | fmt -s -w $width; exit 4; }
-        # try elinks -dump "$path" && { dump | trim | fmt -s -w $width; exit 4; }
         ;; # fall back to highlight/cat if the text browsers fail
 esac
 
 case "$mimetype" in
-    # image/* | */png | */jpg)
-    #     tiv -256 "$path" && exit 4
-    #     # img2txt --gamma=0.6 - files:
-    text/* | */xml |*/ diff)
+    text/* | */xml |*/diff | */sh | */bash | */ksh )
         if [ "$(tput colors)" -ge 256 ]; then
-            pygmentize_format=terminal256
-            highlight_format=xterm256
+            # pygmentize_format=terminal256
+            # highlight_format=xterm256
+
+
+            pygmentize_format=st-256color
+            highlight_format=st-256color
+
+
         else
             pygmentize_format=terminal
             highlight_format=ansi
@@ -89,7 +93,8 @@ case "$mimetype" in
         try safepipe pygmentize -f ${pygmentize_format} "$path" && { dump | trim; exit 5; }
         exit 2;;
     # Display information about media files:
-    video/* | audio/*)
+    # video/* | audio/*)
+    audio/*)
         # Use sed to remove spaces so the output fits into the narrow window
         try mediainfo "$path" && { dump | trim | sed 's/  \+:/: /;';  exit 5; } || exit 1;;
 esac

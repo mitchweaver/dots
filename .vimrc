@@ -90,6 +90,9 @@ nnoremap <silent><esc> ^[ <esc>^[
 " Disable bottom status line / statusbar
 set laststatus=0
 
+set timeout! " Disable keybind timeout
+set ttimeout! " Disable keybind timeout
+
 set clipboard=unnamed " yank/paste to/from system clipboard
 set vb " disable audible bell
 set novisualbell " kill the visual bell too
@@ -132,6 +135,8 @@ map <silent><leader>ln :set number! relativenumber!<cr>
 
 set noshowmode " don't show 'insert' or 'normal' etc on bottom left
 set showmatch " show matching parens
+
+set hid " hide buffer when closed
 
 " WARNING - this is *very* slow, I have it disabled
 " set cursorline " show current line
@@ -240,14 +245,14 @@ let g:vimwiki_list=[wiki]
 let g:vimwiki_hl_headers = 1
 let g:vimwiki_hl_cb_checked = 1
 let g:vimwiki_list = [
-            \{'path': '~/files/vimwiki/personal.wiki', 'syntax': 'markdown', 'ext': '.md'},
-            \{'path': '~/files/vimwiki/linux-BSD.wiki', 'syntax': 'markdown', 'ext': '.md'},
+            \{'path': '~/files/vimwiki/personal.wiki',    'syntax': 'markdown', 'ext': '.md'},
+            \{'path': '~/files/vimwiki/linux-BSD.wiki',   'syntax': 'markdown', 'ext': '.md'},
             \{'path': '~/files/vimwiki/programming.wiki', 'syntax': 'markdown', 'ext': '.md'},
-            \{'path': '~/files/vimwiki/metal.wiki', 'syntax': 'markdown', 'ext': '.md'},
-            \{'path': '~/files/vimwiki/philosophy.wiki', 'syntax': 'markdown', 'ext': '.md'},
-            \{'path': '~/files/vimwiki/german.wiki', 'syntax': 'markdown', 'ext': '.md'},
-            \{'path': '~/files/vimwiki/french.wiki', 'syntax': 'markdown', 'ext': '.md'},
-            \{'path': '~/files/vimwiki/vim.wiki', 'syntax': 'markdown', 'ext': '.md'}
+            \{'path': '~/files/vimwiki/metal.wiki',       'syntax': 'markdown', 'ext': '.md'},
+            \{'path': '~/files/vimwiki/philosophy.wiki',  'syntax': 'markdown', 'ext': '.md'},
+            \{'path': '~/files/vimwiki/german.wiki',      'syntax': 'markdown', 'ext': '.md'},
+            \{'path': '~/files/vimwiki/french.wiki',      'syntax': 'markdown', 'ext': '.md'},
+            \{'path': '~/files/vimwiki/vim.wiki',         'syntax': 'markdown', 'ext': '.md'}
             \]
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 map <silent><leader>md :MarkdownPreview<CR>
@@ -267,8 +272,8 @@ nmap <silent> <C-i> 10zh
 " ----------------------------------------------------------------
 
 " ----------------- Symbol Printing -----------------------------
-" ~~~ NOTE: I know you can do these with default vim, ctrl-k 
-" conflicts with my own bindings. Plus, I think this way is easier. 
+" ~~~ NOTE: I know you can do these with default vim, ctrl-k
+" conflicts with my own bindings. Plus, I think this way is easier.
 
 " ~~~~~~ Greek Symbols ~~~~~ "
 " lambda
@@ -276,7 +281,7 @@ imap <silent><C-q><C-l> λ
 " theta
 imap <silent><C-q><C-t> Θ
 " delta
-imap <silent><C-q><C-d> Δ 
+imap <silent><C-q><C-d> Δ
 " pi
 imap <silent><C-q><C-p> π
 " mu
@@ -297,7 +302,7 @@ imap <silent><C-q><C-b> ∙
 imap <silent><C-q><C-.> ∴
 " because
 imap <silent><C-q><C-,> ∵
-" member of 
+" member of
 imap <silent><C-q><C-3> ∋
 " element of
 imap <silent><C-q><C-e> ∈
@@ -359,12 +364,12 @@ autocmd BufRead,BufNewFile ~/.calcurse/notes/* set filetype=markdown
 " Use ranger as a vim file chooser!
 function! RangerChooser()
     let temp = tempname()
-   
+
     exec 'silent !st -e ranger --choosefiles=' . shellescape(temp)
 
     " ~~~ This does not work for me. I get 'Error: Must start from terminal'
     " exec 'silent !ranger --choosefiles=' . shellescape(temp)
-    
+
     if !filereadable(temp)
         redraw!
         " Nothing to read.
@@ -385,7 +390,7 @@ function! RangerChooser()
 endfunction
 command! -bar RangerChooser call RangerChooser()
 nnoremap <silent><leader>r :<C-U>RangerChooser<CR>
-" -------------------------------------------------------------    
+" -------------------------------------------------------------
 
 " ----------- Page Up/Down Functionality ----------------------
 function GetNumberOfVisibleLines()
@@ -413,3 +418,20 @@ endfunction
 noremap <silent><PageUp> :call MyPageUp()<CR>
 noremap <silent><PageDown> :call MyPageDown()<CR>
 " ---------------------------------------------------------------
+
+" ------------- Unbindings ---------------------------------------
+" disable Arrow keys in Escape mode
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+" disable Arrow keys in Insert mode
+imap <up> <nop>
+imap <down> <nop>
+imap <right> <nop>
+imap <left> <nop>
+" --------------------------------------------------------------------------
+
+" ------------ autocmds -----------------------------------------------
+autocmd BufWritePre * %s/\s\+$//e " delete trailing whitespace on save
+" --------------------------------------------------------------------------

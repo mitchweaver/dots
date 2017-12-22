@@ -1,7 +1,0 @@
-#!/bin/bash
-
-read -r X Y W H <<< $(slop -q -o -f '%x %y %w %h')
-
-FRAMERATE=30
-
-ffmpeg -f x11grab -s "$W"x"$H" -r $FRAMERATE -i :0.0+$X,$Y -qscale 0 "$(date +%m.%d_%H-%M-%S_%Y)".mp4

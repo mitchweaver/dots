@@ -31,7 +31,7 @@ class my_edit(Command):
             # reference to the currently selected file.
             target_filename = self.fm.thisfile.path
 
-        # This is a generic function to print text in ranger.  
+        # This is a generic function to print text in ranger.
         self.fm.notify("Let's edit the file " + target_filename + "!")
 
         # Using bad=True in fm.notify allows you to print error messages:
@@ -196,26 +196,8 @@ class extracthere(Command):
         obj.signal_bind('after', refresh)
         self.fm.loader.add(obj)
 
-# this is assuming your mpd directory
-# is located at ~/music
+# this is assuming your mpd directory is located at ~/music
 class mpc_play_dir(Command):
     def execute(self):
-        # start mpd, if already started this will be a NOP
-        os.system("if [ ! $(pgrep mpd) ] ; then mpd > /dev/null && mpc pause > /dev/null  ; fi")
-
-        # get full path name
-        # This will be /home/$USER/music
         PATH='"' + str(self.fm.thisdir.get_selection()[0]) + '"'
-
-        MPD_DIR = os.getenv("HOME") + '/music/'
-
-        # if we're not in the dir
-        # the user didn't mean to play use the cmd
-        if not MPD_DIR in PATH: return
-
-        # Cut off the beginning to only include
-        # The MPD database name
-        PATH = PATH.replace(MPD_DIR, "") 
-
-        os.system("mpc clear > /dev/null ; mpc add " + PATH + \
-                " > /dev/null && mpc play > /dev/null")
+        os.system("python3 /home/mitch/bin/mpc_play_dir.py " + PATH)
