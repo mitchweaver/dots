@@ -5,8 +5,6 @@ suckless-tools/surf/bookmarks
 .mpd/mpd.pid
 .mpd/mpdstate
 
-
-
 *.o
 *.out
 *__pycache__

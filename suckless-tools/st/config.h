@@ -13,8 +13,18 @@ char font[] = "Terminus:pixelsize=14:antialias=false:autohint=false";
 /* #include "hund-theme.h" */
 /* -------------------------------------------------------------------------- */
 
-unsigned int alpha = 0xdd; // bit darker opacity
+
+
+/* -------------------------------------------------------------------------- */
+// NOTE: Opacity breaks some things... Ranger previews flicker like mad, makes
+//       them unusable. Also, tabbed has problems with transparent clients.
+//       You must have compton running if you want to use transparency.
+/* unsigned int alpha = 0xdd; // bit darker opacity */
 /* unsigned int alpha = 0xcc; // opacity */
+unsigned int alpha = 0xFF; // no opacity (recommended)
+/* -------------------------------------------------------------------------- */
+
+
 
 unsigned int cols = 60;
 unsigned int rows = 20;
