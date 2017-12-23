@@ -1,11 +1,9 @@
 #include "surf-configh-ignore.h"
-
 #define HOMEPAGE "/home/mitch/workspace/dotfiles/startpage/index.html"
 static char *searchengine = "https://duckduckgo.com/html/?q=";
 static SearchEngine searchengines[] = {
          { "d",      "https://duckduckgo.com/html/?q=%s" },
-         { "ddg",    "https://duckduckgo.com/html/?q=%s" },
-         { "g",      "https://google.com/search?q=%s"   },
+         { "g",      "https://encrypted.google.com/search?q=%s"   },
          { "git",    "https://github.com/search?utf8=&q=%s&type=" },
          { "wiki",   "https://en.wikipedia.org/wiki/%s" },
          { "metal",  "http://www.metal-archives.com/search?searchString=%s&type=band_name" },
@@ -13,7 +11,8 @@ static SearchEngine searchengines[] = {
          { "gentoo", "https://wiki.gentoo.org/index.php?search=%s" },
          { "r",      "https://reddit.com/r/%s" },
          { "4",      "https://boards.4chan.org/%s" },
-         { "yt",      "https://youtube.com/results?search_query=%s" },
+         { "yt",     "https://youtube.com/results?search_query=%s" },
+         { "image",  "https://www.google.com/search?safe=active&tbm=isch&q=%s" },
 };
 
 static UriParameters uriparams[] = {
