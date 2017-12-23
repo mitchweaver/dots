@@ -1,4 +1,4 @@
-static const int resizehints = 0;
+#include "dwm-configh-ignore.h"
 static unsigned int gappx = 10; /* gap pixel between windows */
 static const unsigned int gapX = 10;
 static const unsigned int gapY = 10;
@@ -76,23 +76,14 @@ static void toggle_gaps(){
     }
 }
 
-static char dmenumon[2] = "0";
-/* static const char dmenufont[]    = "Terminus:pixelsize=12:antialias=false:autohint=false"; */
-/* static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", gray1, "-nf", gray3, "-sb", cyan, "-sf", gray4, NULL }; */
-static const char *dmenucmd[] = { "dmenu_run", NULL};
-
 static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
-
 /* static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL }; */
 static const char *term[]  = { "st", NULL };
-
 static const char *ranger[] = { "st", "-e", "ranger", NULL };
 static const char *vimwiki[] = { "st", "-w", "Vimwiki", "-T", "Vimwiki", "-n", "Vimwiki", "-e", "nvim", "-c VimwikiIndex", NULL };
 static const char *musicplayer[] = { "st", "-w", "music", "-T", "music", "-n", "music", "-e", "ranger", "/home/mitch/music", NULL };
-
 static const char *clipboard[] = { "clipmenu", NULL };
 static const char *dedit[] = { "dedit", NULL };
-
 static const char *volup[] = { "BSDNixVolume.sh", "-set", "+5", NULL };
 static const char *voldown[] = { "BSDNixVolume.sh", "-set", "-5", NULL };
 static const char *mpdnext[] = { "mpc", "-q",  "next", NULL };
@@ -193,6 +184,3 @@ static Button buttons[] = {
 	/* { ClkTagBar,            mod1,           Button1,        tag,            {0} }, */
 	/* { ClkTagBar,            mod1,           Button3,        toggletag,      {0} }, */
 };
-
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */

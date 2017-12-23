@@ -1,98 +1,35 @@
-static char *scriptfile     = "~/.surf/script.js";
-static char *styledir       = "~/.surf/styles/";
-static char *certdir        = "~/.surf/certificates/";
-static char *cachedir       = "~/.surf/cache/";
-static char *cookiefile     = "~/.surf/cookies.txt";
-static char *historyfile    = "~/.surf/history.txt";
+#include "surf-configh-ignore.h"
 
 #define HOMEPAGE "/home/mitch/workspace/dotfiles/startpage/index.html"
-
-/* default search provider */
 static char *searchengine = "https://duckduckgo.com/html/?q=";
 static SearchEngine searchengines[] = {
-         { "d",  "https://duckduckgo.com/html/?q=%s" },
-         { "g",   "https://google.com/search?q=%s"   },
-         { "git", "https://github.com/search?utf8=&q=%s&type=" },
-         { "wiki", "https://en.wikipedia.org/wiki/%s" },
-         { "metal", "http://www.metal-archives.com/search?searchString=%s&type=band_name" },
-         { "arch", "https://wiki.archlinux.org/index.php?search=%s" },
+         { "d",      "https://duckduckgo.com/html/?q=%s" },
+         { "ddg",    "https://duckduckgo.com/html/?q=%s" },
+         { "g",      "https://google.com/search?q=%s"   },
+         { "git",    "https://github.com/search?utf8=&q=%s&type=" },
+         { "wiki",   "https://en.wikipedia.org/wiki/%s" },
+         { "metal",  "http://www.metal-archives.com/search?searchString=%s&type=band_name" },
+         { "arch",   "https://wiki.archlinux.org/index.php?search=%s" },
          { "gentoo", "https://wiki.gentoo.org/index.php?search=%s" },
-         { "r", "https://reddit.com/r/%s" },
-         { "4", "https://boards.4chan.org/%s" },
-};
-
-/* Highest priority value will be used.
- * Default parameters are priority 0
- * Per-uri parameters are priority 1
- * Command parameters are priority 2 */
-static Parameter defconfig[ParameterLast] = {
-	/* parameter                    Arg value       priority */
-	[AcceleratedCanvas]   =       { { .i = 1 },     },
-            // -------------------------- //
-	[AccessMicrophone]    =       { { .i = 0 },     },
-	[AccessWebcam]        =       { { .i = 0 },     },
-            // -------------------------- //
-	[Certificate]         =       { { .i = 0 },     },
-	[CaretBrowsing]       =       { { .i = 0 },     },
-	[CookiePolicies]      =       { { .v = "@Aa" }, },
-	[DefaultCharset]      =       { { .v = "UTF-8" }, },
-	[DiskCache]           =       { { .i = 1 },     },
-
-	[DNSPrefetch]         =       { { .i = 0 },     },
-	[FontSize]            =       { { .i = 12 },    },
-	[ZoomLevel]           =       { { .f = 1.2 },   },
-
-	[FileURLsCrossAccess] =       { { .i = 1 },     },
-	[FrameFlattening]     =       { { .i = 0 },     }, // what does this do?
-	[Geolocation]         =       { { .i = 0 },     },
-	[HideBackground]      =       { { .i = 0 },     },
-	[Inspector]           =       { { .i = 0 },     },
-	[Java]                =       { { .i = 0 },     }, // LOLSECURITY?
-	[JavaScript]          =       { { .i = 1 },     },
-	[KioskMode]           =       { { .i = 0 },     },
-	[LoadImages]          =       { { .i = 1 },     },
-	[MediaManualPlay]     =       { { .i = 1 },     },
-	[Plugins]             =       { { .i = 1 },     }, // what are plugins?
-	[PreferredLanguages]  =       { { .v = (char *[]){ NULL } }, },
-	[RunInFullscreen]     =       { { .i = 0 },     },
-	[ScrollBars]          =       { { .i = 0 },     }, // FUCK SCROLLBARS
-	[ShowIndicators]      =       { { .i = 0 },     }, // letters at the start
-	[SiteQuirks]          =       { { .i = 1 },     },
-	[SmoothScrolling]     =       { { .i = 1 },     },
-	[SpellChecking]       =       { { .i = 0 },     }, // Who needs this, really?
-	[SpellLanguages]      =       { { .v = ((char *[]){ "en_US", NULL }) }, },
-	[StrictTLS]           =       { { .i = 1 },     },
-	[Style]               =       { { .i = 1 },     },
+         { "r",      "https://reddit.com/r/%s" },
+         { "4",      "https://boards.4chan.org/%s" },
+         { "yt",      "https://youtube.com/results?search_query=%s" },
 };
 
 static UriParameters uriparams[] = {
-    /* { "(://|\\.)duckduckgo\\.com(/|$)", { */
-	    /* [JavaScript] = { { .i = 0 }, 1 }, */
-	/* }, }, */
+    /* { "(://|\\.)duckduckgo\\.com(/|$)", { [JavaScript] = { { .i = 0 }, 1 }, }, }, */
 };
-
-static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
-                                    WEBKIT_FIND_OPTIONS_WRAP_AROUND;
 
 #define PROMPT_GO   "Go:"
 #define PROMPT_FIND "Find:"
-
-/* SETPROP(readprop, setprop, prompt)*/
-#define SETPROP(r, s, p) { \
-        .v = (const char *[]){ "/bin/sh", "-c", \
-             "prop=\"$(printf '%b' \"$(xprop -id $1 $2 " \
-             "| sed \"s/^$2(STRING) = //;s/^\\\"\\(.*\\)\\\"$/\\1/\")\" " \
-             "| dmenu -p \"$4\" -w $1)\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
-             "surf-setprop", winid, r, s, p, NULL \
-        } \
-}
 
 /* DOWNLOAD(URI, referer) */
 // This sets all the ids for the opening terminal to 'curl'.
 // This way you can set that 'curl' terminal to be opened floating
 // Which stops the annoying flashing/moving around of windows on a download.
 #define DOWNLOAD(u, r) { \
-        .v = (const char *[]){ "st", "-T", "surf-download",  "-w", "surf-download", "-n", "surf-download", "-e", "/bin/sh", "-c", \
+        .v = (const char *[]){ "st", "-T", "surf-download",  \
+            "-w", "surf-download", "-n", "surf-download", "-e", "/bin/sh", "-c", \
              "cd ~/downloads && curl -g -L -O $@ && exit", \
              "surf-download", u, r, NULL \
         } \
@@ -146,7 +83,6 @@ static SiteSpecific styles[] = {
 /* --------- function to launch arbitrary commands ---------------- */
 #define SH(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 /* -------------------------------------------------------------------------- */
-
 
 // The complete list of gdk key syms can be found at:
 // http://git.gnome.org/browse/gtk+/plain/gdk/gdkkeysyms.h
@@ -215,7 +151,6 @@ static Key keys[] = {
     /* { 0,                     GDK_KEY_F12,      toggleinspector, { 0 } }, */
 };
 
-/* button definitions */
 /* target can be OnDoc, OnLink, OnImg, OnMedia, OnEdit, OnBar, OnSel, OnAny */
 static Button buttons[] = {
 	/* target       event mask      button  function        argument        stop event */
@@ -225,10 +160,3 @@ static Button buttons[] = {
     // this is really buggy, use the ctrl-o bind instead
 	/* { OnMedia,      MODKEY,         1,      clickexternplayer, { 0 },       1 }, */
 };
-
-
-/* -------------- IGNORE ------------------------ */
-static SiteSpecific certs[] = {{"://ewioajeowidfaweoijfdsf\\.org/", "ewioajeowidfaweoijfdsf.org.crt" },};
-static int surfuseragent    = 0;
-static int winsize[] = { 1280, 800 };
-static char *fulluseragent  = "";
