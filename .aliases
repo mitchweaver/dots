@@ -216,23 +216,25 @@ alias checkout='git checkout'
 
 # ←--------------- Suckless Tools Stuff --------------------→ #
 recomp() {
-    case $1 in
-        dwm)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/dwm && mkclean ; make && make install && c ;;
-        surf)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/surf/surf && mkclean ; make && make install && c ;;
-        tabbed)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/tabbed/tabbed && mkclean ; make && make install && c ;;
-        st)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/st/st && mkclean ; make && make install && c ;;
-        dmenu)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/dmenu/dmenu && mkclean ; make && make install && c ;;
-        slock)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/slock/slock && mkclean ; make && make install && c ;;
-        slstatus)
-            cd /home/mitch/workspace/dotfiles/suckless-tools/slstatus/ && mkclean ; make && make install && pkill -9 slstatus ; slstatus & c ;;
-        *)
-    esac
+    for i in "$@" ; do
+        case $i in
+            dwm)
+                cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/dwm && mkclean ; make && make install && c ;;
+            surf)
+                cd /home/mitch/workspace/dotfiles/suckless-tools/surf/surf && mkclean ; make && make install && c ;;
+            tabbed)
+                cd /home/mitch/workspace/dotfiles/suckless-tools/tabbed/tabbed && mkclean ; make && make install && c ;;
+            st)
+                cd /home/mitch/workspace/dotfiles/suckless-tools/st/st && mkclean ; make && make install && c ;;
+            dmenu)
+                cd /home/mitch/workspace/dotfiles/suckless-tools/dmenu/dmenu && mkclean ; make && make install && c ;;
+            slock)
+                cd /home/mitch/workspace/dotfiles/suckless-tools/slock/slock && mkclean ; make && make install && c ;;
+            slstatus)
+                cd /home/mitch/workspace/dotfiles/suckless-tools/slstatus/ && mkclean ; make && make install && pkill -9 slstatus ; slstatus & c ;;
+            *)
+        esac
+    done
 }
 
 # ←----------------- Misc ----------------------------------→ #

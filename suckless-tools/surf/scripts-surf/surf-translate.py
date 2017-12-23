@@ -13,4 +13,4 @@ arg = "'" + arg + "'"
 
 print(arg)
 
-system('st -w surf-translate -T surf-translate -n surf-translate -e /bin/sh -c "trans -b ' + arg + '| less -Q -R -s --tilde"')
+system('st -T surf-translate -n surf-translate -e /bin/sh -c "trans -b ' + arg + '| less -Q -R -s --tilde"')

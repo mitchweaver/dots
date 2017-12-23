@@ -5,13 +5,13 @@ index 428111c..05e8482 100644
 @@ -5,6 +5,10 @@
  #define XK_NO_MOD     0
  #define XK_SWITCH_MOD (1<<13)
- 
+
 +/* alpha */
 +#define OPAQUE 0Xff
 +#define USE_ARGB (alpha != OPAQUE && opt_embed == NULL)
 +
  typedef XftGlyphFontSpec GlyphFontSpec;
- 
+
  void draw(void);
 diff --git a/x.c b/x.c
 index fbfd350..5d111da 100644
@@ -26,7 +26,7 @@ index fbfd350..5d111da 100644
  	int gm; /* geometry mask */
  } XWindow;
 @@ -562,7 +563,7 @@ xresize(int col, int row)
- 
+
  	XFreePixmap(xw.dpy, xw.buf);
  	xw.buf = XCreatePixmap(xw.dpy, xw.win, win.w, win.h,
 -			DefaultDepth(xw.dpy, xw.scr));
@@ -47,11 +47,11 @@ index fbfd350..5d111da 100644
 +	}
  	loaded = 1;
  }
- 
+
 @@ -640,6 +648,17 @@ xsetcolorname(int x, const char *name)
  	return 0;
  }
- 
+
 +void
 +xtermclear(int col1, int row1, int col2, int row2)
 +{
@@ -105,12 +105,12 @@ index fbfd350..5d111da 100644
 +			exit(1);
 +		}
 +	}
- 
+
  	/* font */
  	if (!FcInit())
 @@ -889,7 +941,11 @@ xinit(void)
  	xloadfonts(usedfont, 0);
- 
+
  	/* colors */
 -	xw.cmap = XDefaultColormap(xw.dpy, xw.scr);
 +	if (!USE_ARGB)
@@ -119,7 +119,7 @@ index fbfd350..5d111da 100644
 +		xw.cmap = XCreateColormap(xw.dpy, XRootWindow(xw.dpy, xw.scr),
 +				xw.vis, None);
  	xloadcols();
- 
+
  	/* adjust fixed window geometry */
 @@ -912,16 +968,15 @@ xinit(void)
  	if (!(opt_embed && (parent = strtol(opt_embed, NULL, 0))))
@@ -129,7 +129,7 @@ index fbfd350..5d111da 100644
 +			win.w, win.h, 0, xw.depth, InputOutput,
  			xw.vis, CWBackPixel | CWBorderPixel | CWBitGravity
  			| CWEventMask | CWColormap, &xw.attrs);
- 
+
  	memset(&gcvalues, 0, sizeof(gcvalues));
  	gcvalues.graphics_exposures = False;
 -	dc.gc = XCreateGC(xw.dpy, parent, GCGraphicsExposures,
@@ -137,8 +137,7 @@ index fbfd350..5d111da 100644
 -	xw.buf = XCreatePixmap(xw.dpy, xw.win, win.w, win.h,
 -			DefaultDepth(xw.dpy, xw.scr));
 +	xw.buf = XCreatePixmap(xw.dpy, xw.win, win.w, win.h, xw.depth);
-+	dc.gc = XCreateGC(xw.dpy, (USE_ARGB) ? xw.buf: parent,
-+			GCGraphicsExposures, &gcvalues);
++	dc.gc = XCreateGC(xw.dpy, (USE_ARGB) ? xw.buf: parent, GCGraphicsExposures, &gcvalues);
  	XSetForeground(xw.dpy, dc.gc, dc.col[defaultbg].pixel);
  	XFillRectangle(xw.dpy, xw.buf, dc.gc, 0, 0, win.w, win.h);
- 
+

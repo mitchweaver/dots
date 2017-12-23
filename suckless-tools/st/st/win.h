@@ -6,8 +6,8 @@
 #define XK_SWITCH_MOD (1<<13)
 
 /* alpha */
-#define OPAQUE 0Xff
-#define USE_ARGB (alpha != OPAQUE)
+/* #define OPAQUE 0Xff */
+/* #define USE_ARGB (alpha != OPAQUE) */
 
 typedef XftGlyphFontSpec GlyphFontSpec;
 

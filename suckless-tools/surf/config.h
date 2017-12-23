@@ -28,9 +28,8 @@ static UriParameters uriparams[] = {
 // This way you can set that 'curl' terminal to be opened floating
 // Which stops the annoying flashing/moving around of windows on a download.
 #define DOWNLOAD(u, r) { \
-        .v = (const char *[]){ "st", "-T", "surf-download",  \
-            "-w", "surf-download", "-n", "surf-download", "-e", "/bin/sh", "-c", \
-             "cd ~/downloads && curl -g -L -O $@ && exit", \
+        .v = (const char *[]){ "st", "-T", "surf-download", "-n", "surf-download", "-e", \
+            "/bin/sh", "-c", "cd ~/downloads && curl -g -L -O $@ && exit", \
              "surf-download", u, r, NULL \
         } \
 }
