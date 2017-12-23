@@ -13,9 +13,7 @@ char font[] = "Terminus:pixelsize=14:antialias=false:autohint=false";
 /* #include "hund-theme.h" */
 /* -------------------------------------------------------------------------- */
 
-// ----- note: to use these you must comment/uncomment all the stuff in alpha.diff
-//             Also, you must have compton running.
-/* unsigned int alpha = 0xdd; // bit darker opacity */
+unsigned int alpha = 0xdd; // bit darker opacity
 /* unsigned int alpha = 0xcc; // opacity */
 
 unsigned int cols = 60;

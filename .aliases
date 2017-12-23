@@ -207,7 +207,7 @@ git() {
     fi
     /usr/bin/git "$@"
 }
-alias gitclone='git clone'
+gitclone() { git clone https://github.com/"$1" ; }
 alias gitlog='git log'
 alias gitfetch='git fetch'
 alias gitpull='git pull'

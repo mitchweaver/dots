@@ -1,0 +1,68 @@
+// Import Colors
+@import '/home/dylan/.cache/wal/colors.scss';
+
+// Variables
+$width: 400px;
+
+html,
+body,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: $color0;
+    height: 100%;
+    width: 100%;
+}
+
+main {
+    display: block;
+    font-family: 'Noto Sans';
+    left: 50%;
+    position: absolute;
+    top: 45%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+}
+
+h1 {
+    color: $color1;
+    display: block;
+    margin: 0 auto;
+    text-align: left;
+    width: $width;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid $color6;
+    opacity: .4;
+    width: $width;
+}
+
+ul {
+    display: block;
+    margin: 0 auto;
+    width: $width;
+}
+
+li {
+    color: $color5;
+    display: inline-block;
+    font-size: 1.2em;
+    line-height: 1.5;
+    list-style: none;
+    margin: 5px;
+}
+
+a {
+    color: $color4;
+    text-decoration: none;
+    transition: .2s;
+
+    &:hover {
+        color: $color8;
+    }
+}
