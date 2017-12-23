@@ -13,6 +13,7 @@ static SearchEngine searchengines[] = {
          { "4",      "https://boards.4chan.org/%s" },
          { "yt",     "https://youtube.com/results?search_query=%s" },
          { "image",  "https://www.google.com/search?safe=active&tbm=isch&q=%s" },
+         { "reddit", "https://reddit.com/search?q=%s" },
 };
 
 static UriParameters uriparams[] = {
