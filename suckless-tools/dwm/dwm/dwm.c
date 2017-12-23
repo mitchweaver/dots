@@ -78,7 +78,7 @@ struct Client {
     /* -------- isfloating patch ------------------------------------------------ */
 	int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
 	/* int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen; */
-    /* -------------------------------------------------------------------------- */ 
+    /* -------------------------------------------------------------------------- */
 
 	Client *next;
 	Client *snext;
@@ -250,13 +250,13 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	[ConfigureNotify] = configurenotify,
 	[DestroyNotify] = destroynotify,
 
-    
-    // -------- Disable Focus Follows Mouse ----------------- // 
+
+    // -------- Disable Focus Follows Mouse ----------------- //
     /* [EnterNotify] = enternotify, */
     // --- Comment this out ----- NOTE: may interfere with some apps ---- //
-	
-    
-    
+
+
+
     [Expose] = expose,
 	[FocusIn] = focusin,
 	[KeyPress] = keypress,
@@ -314,10 +314,10 @@ applyrules(Client *c) {
 		&& (!r->instance || strstr(instance, r->instance)))
 		{
 			c->isfloating = r->isfloating;
-			
-            /* ---------- iscentered patch ---------------------------------------------- */  
+
+            /* ---------- iscentered patch ---------------------------------------------- */
             c->iscentered = r->iscentered;
-            /* -------------------------------------------------------------------------- */ 
+            /* -------------------------------------------------------------------------- */
 
 			c->tags |= r->tags;
 			for (m = mons; m && m->num != r->monitor; m = m->next);
@@ -754,7 +754,7 @@ void drawbar(Monitor *m) {
        /* do not draw vacant tags */
        /* if(!(occ & 1 << i || m->tagset[m->seltags] & 1 << i)) */
        /*     continue; */
-       
+
         w = TEXTW(tags[i]);
 		drw_setscheme(drw, scheme[(m->tagset[m->seltags] & 1 << i) ? SchemeSel : (urg & 1 << i ? SchemeUrg : SchemeNorm)]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
@@ -1087,12 +1087,12 @@ manage(Window w, XWindowAttributes *wa)
 		&& (c->x + (c->w / 2) < c->mon->wx + c->mon->ww)) ? bh : c->mon->my);
 	c->bw = borderpx;
 
-    /* ------- iscentered patch ------------------------------------------------- */  
+    /* ------- iscentered patch ------------------------------------------------- */
     if(c->iscentered) {
 		c->x = (c->mon->mw - WIDTH(c)) / 2;
 		c->y = (c->mon->mh - HEIGHT(c)) / 2;
 	}
-    /* -------------------------------------------------------------------------- */ 
+    /* -------------------------------------------------------------------------- */
 
 	wc.border_width = c->bw;
 	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
@@ -1335,10 +1335,10 @@ void resizeclient(Client *c, int x, int y, int w, int h)
 	} else {
         /* If is the only monitor on the workspace */
         /* and the window is not a terminal */
-		if (n == 1  
+		if (n == 1
 
             // Uncomment these if you want terminals to
-            // Keep their border, regardless of whether they 
+            // Keep their border, regardless of whether they
             // are the only window on the tag or not
             /* && (strcmp(c->name, "st") != 0) && */
             /* (strcmp(c->name, "ranger") != 0) */
@@ -1402,8 +1402,8 @@ resizemouse(const Arg *arg)
 	XWarpPointer (dpy, None, c->win, 0, 0, 0, 0,
 		      horizcorner ? (-c->bw) : (c->w + c->bw - 1),
 		      vertcorner ? (-c->bw) : (c->h + c->bw - 1));
-  
-//--------------------------------------------------------------  
+
+//--------------------------------------------------------------
     do {
 		XMaskEvent(dpy, MOUSEMASK|ExposureMask|SubstructureRedirectMask, &ev);
 		switch(ev.type) {
@@ -1486,7 +1486,7 @@ run(void)
 
 void
 runAutostart(void) {
-	system("cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/scripts-dwm; ./autostart_blocking.sh");
+	/* system("cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/scripts-dwm; ./autostart_blocking.sh"); */
 	system("cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/scripts-dwm; ./autostart.sh &");
 }
 
@@ -1813,7 +1813,7 @@ tile(Monitor *m)
 			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
 			my += HEIGHT(c);
 		} else {
-		
+
            smh = m->mh * m->smfact;
            if(!(nexttiled(c->next)))
                h = (m->wh - ty) / (n - i);
@@ -1847,9 +1847,9 @@ togglefloating(const Arg *arg)
 	if (selmon->sel->isfullscreen) /* no support for fullscreen windows */
 		return;
 	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
-        
+
     if(selmon->sel->isfloating)
-    /* restore last know float dimentions */    
+    /* restore last know float dimentions */
         resize(selmon->sel, selmon->sel->sfx, selmon->sel->sfy,
             selmon->sel->sfw, selmon->sel->sfh, 0);
     else {
@@ -1860,7 +1860,7 @@ togglefloating(const Arg *arg)
         selmon->sel->sfh = selmon->sel->h;
     }
 
-    
+
     arrange(selmon);
 }
 

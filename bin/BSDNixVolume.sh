@@ -31,11 +31,13 @@ elif test mixerctl ; then
         # convert back to int
         vol_val=${vol_val%.*}
 
-
         # checks if the volume is either A: below zero
         # or B: a non-number was returned
         if [ !$vol_val -gt 0 ] ; then
             vol_val=0
+            echo "yes"
+        elif [ $vol_val -gt 98 ] ; then
+            vol_val=100
         fi
 
         vol=$vol_val%
