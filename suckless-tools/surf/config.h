@@ -5,10 +5,10 @@ static char *cachedir       = "~/.surf/cache/";
 static char *cookiefile     = "~/.surf/cookies.txt";
 static char *historyfile    = "~/.surf/history.txt";
 
-#define HOMEPAGE "https://start.duckduckgo.com/html"
+#define HOMEPAGE "/home/mitch/workspace/dotfiles/startpage/index.html"
 
 /* default search provider */
-static char *searchengine = "https://duckduckgo.com/html/?q="; 
+static char *searchengine = "https://duckduckgo.com/html/?q=";
 static SearchEngine searchengines[] = {
          { "d",  "https://duckduckgo.com/html/?q=%s" },
          { "g",   "https://google.com/search?q=%s"   },
@@ -151,34 +151,40 @@ static Key keys[] = {
     { 0,                    GDK_KEY_F5,      reload,     { .i = 0 } },
     { 0,                    GDK_KEY_Escape,  stop,       { 0 } },
     { MODKEY,               GDK_KEY_c,       stop,       { 0 } },
-    
-    /* ----------------- Custom Functions ---------------------------- */ 
+    /* { MODKEY,               GDK_KEY_space,   go_home,       { 0 } }, */
+
+    /* ----------------- Custom Functions ---------------------------- */
     { MODKEY,               GDK_KEY_o,      spawn,      YOUTUBEDL },
     { MODKEY,               GDK_KEY_b,      spawn,      BM_PICK },
     { MODKEY|SHIFT,         GDK_KEY_b,      spawn,      BM_ADD },
     { MODKEY,               GDK_KEY_t,      spawn,      SH("python ~/workspace/dotfiles/suckless-tools/surf/scripts-surf/surf-translate.py '$(xclip -o)'") },
-   
+
     // vim mode
     { MODKEY,               GDK_KEY_j,      scroll,     { .i = 'd' } },
     { MODKEY,               GDK_KEY_k,      scroll,     { .i = 'u' } },
     { MODKEY,               GDK_KEY_l,      scroll,     { .i = 'r' } },
     { MODKEY,               GDK_KEY_h,      scroll,     { .i = 'l' } },
-    /* ----------------- End Custom Functions ------------------------ */ 
 
-    /* ---------------------- History -------------------------------- */ 
+    /* these conflict with other binds ---- figure out later */
+    /* { MODKEY,               GDK_KEY_f,      scroll,     { .i = 'U' } }, */
+    /* { MODKEY,               GDK_KEY_b,      scroll,     { .i = 'D' } }, */
+
+    /* ----------------- End Custom Functions ------------------------ */
+
+    /* ---------------------- History -------------------------------- */
     { MODKEY,               GDK_KEY_apostrophe,  navigate,   { .i = +1 } },
     { MODKEY,               GDK_KEY_semicolon,   navigate,   { .i = -1 } },
-    /* --------------------------------------------------------------- */ 
+    /* --------------------------------------------------------------- */
 
-    /* -------------------- Zooming -------------------------------------- */ 
+    /* -------------------- Zooming -------------------------------------- */
     { MODKEY,                GDK_KEY_minus,       zoom,       { .i = -1 } },
     { MODKEY,                GDK_KEY_plus,        zoom,       { .i = +1 } },
     { MODKEY,                GDK_KEY_equal,       zoom,       { .i = +1 } },
     { MODKEY,                GDK_KEY_BackSpace,   zoom,       { .i = +0 } },
     { 0,                     GDK_KEY_F11,         togglefullscreen, { 0 } },
-    /* ------------------------------------------------------------------- */ 
+    /* ------------------------------------------------------------------- */
 
-    /* --------------------- Toggles -------------------------------------- */ 
+    /* --------------------- Toggles -------------------------------------- */
     { MODKEY|SHIFT,          GDK_KEY_s,      toggle,     { .i = JavaScript } },
     { MODKEY,                GDK_KEY_i,      toggle,     { .i = LoadImages } },
     /* { MODKEY,                GDK_KEY_m,      toggle,     { .i = Style } }, */
@@ -186,7 +192,7 @@ static Key keys[] = {
     /* { MODKEY|SHIFT, GDK_KEY_f,      toggle,     { .i = FrameFlattening } }, */
     // i dont have any plugins?
     /* { MODKEY|SHIFT, GDK_KEY_v,      toggle,     { .i = Plugins } }, */
-    /* -------------------------------------------------------------------- */ 
+    /* -------------------------------------------------------------------- */
 
     // Uncomment this if you want printing
     /* { MODKEY,                GDK_KEY_p,      print,      { 0 } }, */
@@ -196,7 +202,7 @@ static Key keys[] = {
     /* { MODKEY,                GDK_KEY_v,      clipboard,  { .i = 1 } }, */
     /* { MODKEY,                GDK_KEY_y,      clipboard,  { .i = 0 } }, */
     /* { MODKEY,                GDK_KEY_c,      clipboard,  { .i = 0 } }, */
-   
+
     // Inspector doesn't work for me, don't know why.
     /* { 0,                     GDK_KEY_F12,      toggleinspector, { 0 } }, */
 };

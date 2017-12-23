@@ -16,9 +16,6 @@
 "        'V/'  /##//##//##//###/
 "                ++
 
-" disables space for everything but as leader (needs fixed)
-nnoremap <silent><SPACE> <CR>
-let mapleader=" "
 " ←--------------- Plugins -----------------------------------→
 set nocompatible
 filetype off
@@ -78,14 +75,7 @@ set background=dark
 " -------------- Vim Specific Configs -------------------------
 set mouse=a " NOTE THIS BREAKS MIDDLE CLICK PASTE on some terminals
 set backspace=indent,eol,start
-set updatetime=1000 " how long til vim does background calls after typing
-
-" Enter will now also clear the highlights from searches
-nnoremap <silent><CR> :noh<CR>:nohlsearch<return><CR>
-
-" Clear highlighting on escape in normal mode
-nnoremap <silent><esc> :noh<return>:nohlsearch<return><esc>
-nnoremap <silent><esc> ^[ <esc>^[
+set updatetime=750 " how long til vim does background calls after typing
 
 " Disable bottom status line / statusbar
 set laststatus=0
@@ -103,6 +93,10 @@ set ch=1 " command height --- get rid of the wasted line at the bottom
 set textwidth=0 " very annoying warning occurs with long lines
 set backspace=2 " allow backspace to go over new lines, etc
 set ttimeoutlen=100 " timeout between key presses for cmds
+
+" unbind space for everything but leader
+nnoremap <silent><SPACE> <nop>
+let mapleader=" "
 " -------------------------------------------------------------
 
 " ---------------- OS Specific Configs ------------------------
@@ -200,7 +194,9 @@ set hlsearch " highlight matches
 set gdefault " use the `g` flag by default.
 set wrapscan " searching wraps lines
 set magic " 'magic' patterns - (extended regex)
-" map <silent><leader>/ :nohlsearch<CR>
+" Clear the highlighted search -- note: does not disable, only clears.
+nnoremap <silent><leader><leader> :let @/ = ""<CR>
+
 " Search and Replace
 nmap <Leader>s :%s//g<Left><Left>
 " -------------------------------------------------------------
@@ -421,15 +417,15 @@ noremap <silent><PageDown> :call MyPageDown()<CR>
 
 " ------------- Unbindings ---------------------------------------
 " disable Arrow keys in Escape mode
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
+map <silent><up>     <nop>
+map <silent><down>   <nop>
+map <silent><left>   <nop>
+map <silent><right>  <nop>
 " disable Arrow keys in Insert mode
-imap <up> <nop>
-imap <down> <nop>
-imap <right> <nop>
-imap <left> <nop>
+imap <silent><up>    <nop>
+imap <silent><down>  <nop>
+imap <silent><right> <nop>
+imap <silent><left>  <nop>
 " --------------------------------------------------------------------------
 
 " ------------ autocmds -----------------------------------------------
