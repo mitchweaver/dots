@@ -43,6 +43,7 @@ fi
 
 alias shutdown='shutdown now'
 alias less="less -Q -R"
+alias ls='ls -L'
 alias l='ls'
 alias sls='l'
 alias sl='l'
@@ -244,9 +245,9 @@ alias xmodmap='xset m 0 0 ; xmodmap ~/.Xmodmap'
 alias empty-trash='sh ~/bin/empty-trash.sh ; c'
 alias pingme='ping mitchweaver.xyz'
 alias wtfismyip='curl https://wtfismyip.com/text'
-alias weather="c ; curl -s http://wttr.in/~Schmalkalden"
-alias weather-sd="c ; curl -s http://wttr.in/~Dakota_State_University"
-alias weather-ok="c ; curl -s http://wttr.in/~Claremore"
+alias weather="~/bin/weather.sh Schmalkalden"
+alias weather-sd="~/bin/weather.sh Dakota_State_University"
+alias weather-ok="~/bin/weather.sh Claremore"
 
 # ←--------------- Specific File Editing -------------------→ #
 alias aliases='v ~/.aliases'

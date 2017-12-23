@@ -12,10 +12,7 @@
 #include <X11/Xutil.h>
 #include <X11/XKBlib.h>
 #include <X11/Xft/Xft.h>
-
 #include "arg.h"
-
-/* XEMBED messages */
 #define XEMBED_EMBEDDED_NOTIFY          0
 #define XEMBED_WINDOW_ACTIVATE          1
 #define XEMBED_WINDOW_DEACTIVATE        2
@@ -24,19 +21,14 @@
 #define XEMBED_FOCUS_OUT                5
 #define XEMBED_FOCUS_NEXT               6
 #define XEMBED_FOCUS_PREV               7
-/* 8-9 were used for XEMBED_GRAB_KEY/XEMBED_UNGRAB_KEY */
 #define XEMBED_MODALITY_ON              10
 #define XEMBED_MODALITY_OFF             11
 #define XEMBED_REGISTER_ACCELERATOR     12
 #define XEMBED_UNREGISTER_ACCELERATOR   13
 #define XEMBED_ACTIVATE_ACCELERATOR     14
-
-/* Details for  XEMBED_FOCUS_IN: */
 #define XEMBED_FOCUS_CURRENT            0
 #define XEMBED_FOCUS_FIRST              1
 #define XEMBED_FOCUS_LAST               2
-
-/* Macros */
 #define MAX(a, b)               ((a) > (b) ? (a) : (b))
 #define MIN(a, b)               ((a) < (b) ? (a) : (b))
 #define LENGTH(x)               (sizeof((x)) / sizeof(*(x)))
@@ -281,39 +273,26 @@ void configurerequest(const XEvent *e) {
 	}
 }
 
-void
-createnotify(const XEvent *e)
-{
+void createnotify(const XEvent *e) {
 	const XCreateWindowEvent *ev = &e->xcreatewindow;
-
-	if (ev->window != win && getclient(ev->window) < 0)
-		manage(ev->window);
+	if (ev->window != win && getclient(ev->window) < 0) manage(ev->window);
 }
 
-void
-destroynotify(const XEvent *e)
-{
+void destroynotify(const XEvent *e) {
 	const XDestroyWindowEvent *ev = &e->xdestroywindow;
 	int c;
-
-	if ((c = getclient(ev->window)) > -1)
-		unmanage(c);
+	if ((c = getclient(ev->window)) > -1) unmanage(c);
 }
 
-void
-die(const char *errstr, ...)
-{
+void die(const char *errstr, ...) {
 	va_list ap;
-
 	va_start(ap, errstr);
 	vfprintf(stderr, errstr, ap);
 	va_end(ap);
 	exit(EXIT_FAILURE);
 }
 
-void
-drawbar(void)
-{
+void drawbar(void) {
 	XftColor *col;
 	int c, cc, fc, width, nbh, i;
 	char *name = NULL;
@@ -326,7 +305,6 @@ drawbar(void)
 		drawtext(name ? name : "", dc.norm);
 		XCopyArea(dpy, dc.drawable, win, dc.gc, 0, 0, ww, vbh, 0, 0);
 		XSync(dpy, False);
-
 		return;
 	}
 
@@ -336,13 +314,11 @@ drawbar(void)
 		for (i = 0; i < nclients; i++)
 			XMoveResizeWindow(dpy, clients[i]->win, 0, bh, ww, wh - bh);
 	}
-	if (bh == 0)
-		return;
+	if (bh == 0) return;
 
 	width = ww;
 	cc = ww / tabwidth;
-	if (nclients > cc)
-		cc = (ww - TEXTW(before) - TEXTW(after)) / tabwidth;
+	if (nclients > cc) cc = (ww - TEXTW(before) - TEXTW(after)) / tabwidth;
 
 	if ((fc = getfirsttab()) + cc < nclients) {
 		dc.w = TEXTW(after);
@@ -378,9 +354,7 @@ drawbar(void)
 	XSync(dpy, False);
 }
 
-void
-drawtext(const char *text, XftColor col[ColLast])
-{
+void drawtext(const char *text, XftColor col[ColLast]) {
 	int i, j, x, y, h, len, olen;
 	char buf[256];
 	XftDraw *d;
@@ -400,8 +374,7 @@ drawtext(const char *text, XftColor col[ColLast])
 	for (len = MIN(olen, sizeof(buf));
 		len && textnw(text, len) > dc.w - h; len--);
 
-	if (!len)
-		return;
+	if (!len) return;
 
 	memcpy(buf, text, len);
 	if (len < olen) {
@@ -419,9 +392,7 @@ drawtext(const char *text, XftColor col[ColLast])
 	XftDrawDestroy(d);
 }
 
-void *
-ecalloc(size_t n, size_t size)
-{
+void * ecalloc(size_t n, size_t size) {
 	void *p;
 
 	if (!(p = calloc(n, size)))
@@ -429,9 +400,7 @@ ecalloc(size_t n, size_t size)
 	return p;
 }
 
-void *
-erealloc(void *o, size_t size)
-{
+void * erealloc(void *o, size_t size) {
 	void *p;
 
 	if (!(p = realloc(o, size)))
@@ -439,18 +408,14 @@ erealloc(void *o, size_t size)
 	return p;
 }
 
-void
-expose(const XEvent *e)
-{
+void expose(const XEvent *e) {
 	const XExposeEvent *ev = &e->xexpose;
 
 	if (ev->count == 0 && win == ev->window)
 		drawbar();
 }
 
-void
-focus(int c)
-{
+void focus(int c) {
 	char buf[BUFSIZ] = "tabbed-"VERSION" ::";
 	size_t i, n;
 	XWMHints* wmh;
@@ -493,9 +458,7 @@ focus(int c)
 	XSync(dpy, False);
 }
 
-void
-focusin(const XEvent *e)
-{
+void focusin(const XEvent *e) {
 	const XFocusChangeEvent *ev = &e->xfocus;
 	int dummy;
 	Window focused;
@@ -507,19 +470,14 @@ focusin(const XEvent *e)
 	}
 }
 
-void
-focusonce(const Arg *arg)
-{
+void focusonce(const Arg *arg) {
 	nextfocus = True;
 }
 
-void
-focusurgent(const Arg *arg)
-{
+void focusurgent(const Arg *arg) {
 	int c;
 
-	if (sel < 0)
-		return;
+	if (sel < 0) return;
 
 	for (c = (sel + 1) % nclients; c != sel; c = (c + 1) % nclients) {
 		if (clients[c]->urgent) {
@@ -529,11 +487,8 @@ focusurgent(const Arg *arg)
 	}
 }
 
-void
-fullscreen(const Arg *arg)
-{
+void fullscreen(const Arg *arg) {
 	XEvent e;
-
 	e.type = ClientMessage;
 	e.xclient.window = win;
 	e.xclient.message_type = wmatom[WMState];
@@ -544,9 +499,7 @@ fullscreen(const Arg *arg)
 	XSendEvent(dpy, root, False, SubstructureNotifyMask, &e);
 }
 
-char *
-getatom(int a)
-{
+char * getatom(int a) {
 	static char buf[BUFSIZ];
 	Atom adummy;
 	int idummy;
@@ -555,18 +508,14 @@ getatom(int a)
 
 	XGetWindowProperty(dpy, win, wmatom[a], 0L, BUFSIZ, False, XA_STRING,
 	                   &adummy, &idummy, &ldummy, &ldummy, &p);
-	if (p)
-		strncpy(buf, (char *)p, LENGTH(buf)-1);
-	else
-		buf[0] = '\0';
+	if (p) strncpy(buf, (char *)p, LENGTH(buf)-1);
+	else buf[0] = '\0';
 	XFree(p);
 
 	return buf;
 }
 
-int
-getclient(Window w)
-{
+int getclient(Window w) {
 	int i;
 
 	for (i = 0; i < nclients; i++) {
@@ -590,39 +539,27 @@ getcolor(const char *colstr)
 	return color;
 }
 
-int
-getfirsttab(void)
-{
+int getfirsttab(void) {
 	int cc, ret;
-
-	if (sel < 0)
-		return 0;
-
+	if (sel < 0) return 0;
 	cc = ww / tabwidth;
 	if (nclients > cc)
 		cc = (ww - TEXTW(before) - TEXTW(after)) / tabwidth;
-
 	ret = sel - cc / 2 + (cc + 1) % 2;
 	return ret < 0 ? 0 :
 	       ret + cc > nclients ? MAX(0, nclients - cc) :
 	       ret;
 }
 
-Bool
-gettextprop(Window w, Atom atom, char *text, unsigned int size)
-{
+Bool gettextprop(Window w, Atom atom, char *text, unsigned int size) {
 	char **list = NULL;
 	int n;
 	XTextProperty name;
-
-	if (!text || size == 0)
-		return False;
-
+	if (!text || size == 0) return False;
 	text[0] = '\0';
 	XGetTextProperty(dpy, w, &name, atom);
 	if (!name.nitems)
 		return False;
-
 	if (name.encoding == XA_STRING) {
 		strncpy(text, (char *)name.value, size - 1);
 	} else if (XmbTextPropertyToTextList(dpy, &name, &list, &n) >= Success
@@ -632,29 +569,22 @@ gettextprop(Window w, Atom atom, char *text, unsigned int size)
 	}
 	text[size - 1] = '\0';
 	XFree(name.value);
-
 	return True;
 }
 
-void
-initfont(const char *fontstr)
-{
+void initfont(const char *fontstr) {
 	if (!(dc.font.xfont = XftFontOpenName(dpy, screen, fontstr))
 	    && !(dc.font.xfont = XftFontOpenName(dpy, screen, "fixed")))
 		die("error, cannot load font: '%s'\n", fontstr);
-
 	dc.font.ascent = dc.font.xfont->ascent;
 	dc.font.descent = dc.font.xfont->descent;
 	dc.font.height = dc.font.ascent + dc.font.descent;
 }
 
-Bool
-isprotodel(int c)
-{
+Bool isprotodel(int c) {
 	int i, n;
 	Atom *protocols;
 	Bool ret = False;
-
 	if (XGetWMProtocols(dpy, clients[c]->win, &protocols, &n)) {
 		for (i = 0; !ret && i < n; i++) {
 			if (protocols[i] == wmatom[WMDelete])
@@ -662,17 +592,13 @@ isprotodel(int c)
 		}
 		XFree(protocols);
 	}
-
 	return ret;
 }
 
-void
-keypress(const XEvent *e)
-{
+void keypress(const XEvent *e) {
 	const XKeyEvent *ev = &e->xkey;
 	unsigned int i;
 	KeySym keysym;
-
 	keysym = XkbKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0, 0);
 	for (i = 0; i < LENGTH(keys); i++) {
 		if (keysym == keys[i].keysym &&
@@ -682,14 +608,9 @@ keypress(const XEvent *e)
 	}
 }
 
-void
-killclient(const Arg *arg)
-{
+void killclient(const Arg *arg) {
 	XEvent ev;
-
-	if (sel < 0)
-		return;
-
+	if (sel < 0) return;
 	if (isprotodel(sel) && !clients[sel]->closed) {
 		ev.type = ClientMessage;
 		ev.xclient.window = clients[sel]->win;
@@ -699,16 +620,11 @@ killclient(const Arg *arg)
 		ev.xclient.data.l[1] = CurrentTime;
 		XSendEvent(dpy, clients[sel]->win, False, NoEventMask, &ev);
 		clients[sel]->closed = True;
-	} else {
-		XKillClient(dpy, clients[sel]->win);
-	}
+	} else XKillClient(dpy, clients[sel]->win);
 }
 
-void
-manage(Window w)
-{
-	updatenumlockmask();
-	{
+void manage(Window w) {
+	updatenumlockmask(); {
 		int i, j, nextpos;
 		unsigned int modifiers[] = { 0, LockMask, numlockmask,
 		                             numlockmask | LockMask };
@@ -718,8 +634,7 @@ manage(Window w)
 
 		XWithdrawWindow(dpy, w, 0);
 		XReparentWindow(dpy, w, win, 0, bh);
-		XSelectInput(dpy, w, PropertyChangeMask |
-		             StructureNotifyMask | EnterWindowMask);
+		XSelectInput(dpy, w, PropertyChangeMask | StructureNotifyMask | EnterWindowMask);
 		XSync(dpy, False);
 
 		for (i = 0; i < LENGTH(keys); i++) {
@@ -741,15 +656,11 @@ manage(Window w)
 		if(npisrelative) {
 			nextpos = sel + newposition;
 		} else {
-			if (newposition < 0)
-				nextpos = nclients - newposition;
-			else
-				nextpos = newposition;
+			if (newposition < 0) nextpos = nclients - newposition;
+			else nextpos = newposition;
 		}
-		if (nextpos >= nclients)
-			nextpos = nclients - 1;
-		if (nextpos < 0)
-			nextpos = 0;
+		if (nextpos >= nclients) nextpos = nclients - 1;
+		if (nextpos < 0) nextpos = 0;
 
 		if (nclients > 1 && nextpos < nclients - 1)
 			memmove(&clients[nextpos + 1], &clients[nextpos],
@@ -775,63 +686,41 @@ manage(Window w)
 		XSync(dpy, False);
 
 		/* Adjust sel before focus does set it to lastsel. */
-		if (sel >= nextpos)
-			sel++;
-		focus(nextfocus ? nextpos :
-		      sel < 0 ? 0 :
-		      sel);
+		if (sel >= nextpos) sel++;
+		focus(nextfocus ? nextpos : sel < 0 ? 0 : sel);
 		nextfocus = foreground;
 	}
 }
 
-void
-maprequest(const XEvent *e)
-{
+void maprequest(const XEvent *e) {
 	const XMapRequestEvent *ev = &e->xmaprequest;
-
-	if (getclient(ev->window) < 0)
-		manage(ev->window);
+	if (getclient(ev->window) < 0) manage(ev->window);
 }
 
-void
-move(const Arg *arg)
-{
+void move(const Arg *arg) {
 	if (arg->i >= 0 && arg->i < nclients)
 		focus(arg->i);
 }
 
-void
-movetab(const Arg *arg)
-{
+void movetab(const Arg *arg) {
 	int c;
 	Client *new;
-
-	if (sel < 0)
-		return;
-
+	if (sel < 0) return;
 	c = (sel + arg->i) % nclients;
-	if (c < 0)
-		c += nclients;
-
-	if (c == sel)
-		return;
-
+	if (c < 0) c += nclients;
+	if (c == sel) return;
 	new = clients[sel];
 	if (sel < c)
-		memmove(&clients[sel], &clients[sel+1],
-		        sizeof(Client *) * (c - sel));
+		memmove(&clients[sel], &clients[sel+1], sizeof(Client *) * (c - sel));
 	else
-		memmove(&clients[c+1], &clients[c],
-		        sizeof(Client *) * (sel - c));
+		memmove(&clients[c+1], &clients[c], sizeof(Client *) * (sel - c));
 	clients[c] = new;
 	sel = c;
 
 	drawbar();
 }
 
-void
-propertynotify(const XEvent *e)
-{
+void propertynotify(const XEvent *e) {
 	const XPropertyEvent *ev = &e->xproperty;
 	XWMHints *wmh;
 	int c;
@@ -883,12 +772,9 @@ propertynotify(const XEvent *e)
 	}
 }
 
-void
-resize(int c, int w, int h)
-{
+void resize(int c, int w, int h) {
 	XConfigureEvent ce;
 	XWindowChanges wc;
-
 	ce.x = 0;
 	ce.y = bh;
 	ce.width = wc.width = w;
@@ -900,45 +786,32 @@ resize(int c, int w, int h)
 	ce.above = None;
 	ce.override_redirect = False;
 	ce.border_width = 0;
-
 	XConfigureWindow(dpy, clients[c]->win, CWWidth | CWHeight, &wc);
 	XSendEvent(dpy, clients[c]->win, False, StructureNotifyMask,
 	           (XEvent *)&ce);
 }
 
-void
-rotate(const Arg *arg)
-{
+void rotate(const Arg *arg) {
 	int nsel = -1;
-
-	if (sel < 0)
-		return;
-
+	if (sel < 0) return;
 	if (arg->i == 0) {
 		if (lastsel > -1)
 			focus(lastsel);
 	} else if (sel > -1) {
 		/* Rotating in an arg->i step around the clients. */
 		nsel = sel + arg->i;
-		while (nsel >= nclients)
-			nsel -= nclients;
-		while (nsel < 0)
-			nsel += nclients;
+		while (nsel >= nclients) nsel -= nclients;
+		while (nsel < 0) nsel += nclients;
 		focus(nsel);
 	}
 }
 
-void
-run(void)
-{
+void run(void) {
 	XEvent ev;
-
 	/* main event loop */
 	XSync(dpy, False);
 	drawbar();
-	if (doinitspawn == True)
-		spawn(NULL);
-
+	if (doinitspawn == True) spawn(NULL);
 	while (running) {
 		XNextEvent(dpy, &ev);
 		if (handler[ev.type])
@@ -946,11 +819,8 @@ run(void)
 	}
 }
 
-void
-sendxembed(int c, long msg, long detail, long d1, long d2)
-{
+void sendxembed(int c, long msg, long detail, long d1, long d2) {
 	XEvent e = { 0 };
-
 	e.xclient.window = clients[c]->win;
 	e.xclient.type = ClientMessage;
 	e.xclient.message_type = wmatom[XEmbed];
@@ -963,80 +833,56 @@ sendxembed(int c, long msg, long detail, long d1, long d2)
 	XSendEvent(dpy, clients[c]->win, False, NoEventMask, &e);
 }
 
-void
-setcmd(int argc, char *argv[], int replace)
-{
+void setcmd(int argc, char *argv[], int replace) {
 	int i;
-
 	cmd = ecalloc(argc + 3, sizeof(*cmd));
-	if (argc == 0)
-		return;
-	for (i = 0; i < argc; i++)
-		cmd[i] = argv[i];
+	if (argc == 0) return;
+	for (i = 0; i < argc; i++) cmd[i] = argv[i];
 	cmd[replace > 0 ? replace : argc] = winid;
 	cmd_append_pos = argc + !replace;
 	cmd[cmd_append_pos] = cmd[cmd_append_pos + 1] = NULL;
 }
 
-void
-setup(void)
-{
+void setup(void) {
 	int bitm, tx, ty, tw, th, dh, dw, isfixed;
 	XWMHints *wmh;
 	XClassHint class_hint;
 	XSizeHints *size_hint;
-
 	/* clean up any zombies immediately */
 	sigchld(0);
-
 	/* init screen */
 	screen = DefaultScreen(dpy);
 	root = RootWindow(dpy, screen);
 	initfont(font);
 	vbh = dc.h = dc.font.height + 2;
-
 	/* init atoms */
 	wmatom[WMDelete] = XInternAtom(dpy, "WM_DELETE_WINDOW", False);
-	wmatom[WMFullscreen] = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN",
-	                                   False);
+	wmatom[WMFullscreen] = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
 	wmatom[WMName] = XInternAtom(dpy, "_NET_WM_NAME", False);
 	wmatom[WMProtocols] = XInternAtom(dpy, "WM_PROTOCOLS", False);
 	wmatom[WMSelectTab] = XInternAtom(dpy, "_TABBED_SELECT_TAB", False);
 	wmatom[WMState] = XInternAtom(dpy, "_NET_WM_STATE", False);
 	wmatom[XEmbed] = XInternAtom(dpy, "_XEMBED", False);
-
 	/* init appearance */
 	wx = 0;
 	wy = 0;
 	ww = 800;
 	wh = 600;
 	isfixed = 0;
-
 	if (geometry) {
 		tx = ty = tw = th = 0;
-		bitm = XParseGeometry(geometry, &tx, &ty, (unsigned *)&tw,
-		                      (unsigned *)&th);
-		if (bitm & XValue)
-			wx = tx;
-		if (bitm & YValue)
-			wy = ty;
-		if (bitm & WidthValue)
-			ww = tw;
-		if (bitm & HeightValue)
-			wh = th;
-		if (bitm & XNegative && wx == 0)
-			wx = -1;
-		if (bitm & YNegative && wy == 0)
-			wy = -1;
-		if (bitm & (HeightValue | WidthValue))
-			isfixed = 1;
-
+		bitm = XParseGeometry(geometry, &tx, &ty, (unsigned *)&tw, (unsigned *)&th);
+		if (bitm & XValue) wx = tx;
+		if (bitm & YValue) wy = ty;
+		if (bitm & WidthValue) ww = tw;
+		if (bitm & HeightValue) wh = th;
+		if (bitm & XNegative && wx == 0) wx = -1;
+		if (bitm & YNegative && wy == 0) wy = -1;
+		if (bitm & (HeightValue | WidthValue)) isfixed = 1;
 		dw = DisplayWidth(dpy, screen);
 		dh = DisplayHeight(dpy, screen);
-		if (wx < 0)
-			wx = dw + wx - ww - 1;
-		if (wy < 0)
-			wy = dh + wy - wh - 1;
+		if (wx < 0) wx = dw + wx - ww - 1;
+		if (wy < 0) wy = dh + wy - wh - 1;
 	}
 
 /* --------------- alpha patch ------------------------------------------ */
@@ -1138,21 +984,16 @@ setup(void)
 	focus(-1);
 }
 
-void
-sigchld(int unused)
-{
+void sigchld(int unused) {
 	if (signal(SIGCHLD, sigchld) == SIG_ERR)
 		die("%s: cannot install SIGCHLD handler", argv0);
 
 	while (0 < waitpid(-1, NULL, WNOHANG));
 }
 
-void
-spawn(const Arg *arg)
-{
+void spawn(const Arg *arg) {
 	if (fork() == 0) {
-		if(dpy)
-			close(ConnectionNumber(dpy));
+		if(dpy) close(ConnectionNumber(dpy));
 
 		setsid();
 		if (arg && arg->v) {
@@ -1169,31 +1010,24 @@ spawn(const Arg *arg)
 	}
 }
 
-int
-textnw(const char *text, unsigned int len)
-{
+int textnw(const char *text, unsigned int len) {
 	XGlyphInfo ext;
 	XftTextExtentsUtf8(dpy, dc.font.xfont, (XftChar8 *) text, len, &ext);
 	return ext.xOff;
 }
 
-void
-toggle(const Arg *arg)
-{
+void toggle(const Arg *arg) {
     *(Bool*) arg->v = !*(Bool*) arg->v;
 }
 
-void
-unmanage(int c)
-{
+void unmanage(int c) {
 	if (c < 0 || c >= nclients) {
 		drawbar();
 		XSync(dpy, False);
 		return;
 	}
 
-	if (!nclients)
-		return;
+	if (!nclients) return;
 
 	if (c == 0) {
 		/* First client. */
@@ -1229,10 +1063,8 @@ unmanage(int c)
 		if (c == sel && lastsel >= 0) {
 			focus(lastsel);
 		} else {
-			if (sel > c)
-				sel--;
-			if (sel >= nclients)
-				sel = nclients - 1;
+			if (sel > c) sel--;
+			if (sel >= nclients) sel = nclients - 1;
 
 			focus(sel);
 		}
@@ -1242,19 +1074,14 @@ unmanage(int c)
 	XSync(dpy, False);
 }
 
-void
-unmapnotify(const XEvent *e)
-{
+void unmapnotify(const XEvent *e) {
 	const XUnmapEvent *ev = &e->xunmap;
 	int c;
-
 	if ((c = getclient(ev->window)) > -1)
 		unmanage(c);
 }
 
-void
-updatenumlockmask(void)
-{
+void updatenumlockmask(void) {
 	unsigned int i, j;
 	XModifierKeymap *modmap;
 
@@ -1270,41 +1097,28 @@ updatenumlockmask(void)
 	XFreeModifiermap(modmap);
 }
 
-void
-updatetitle(int c)
-{
+void updatetitle(int c) {
 	if (!gettextprop(clients[c]->win, wmatom[WMName], clients[c]->name,
 	    sizeof(clients[c]->name)))
 		gettextprop(clients[c]->win, XA_WM_NAME, clients[c]->name,
 		            sizeof(clients[c]->name));
-	if (sel == c)
-		xsettitle(win, clients[c]->name);
+	if (sel == c) xsettitle(win, clients[c]->name);
 	drawbar();
 }
 
 /* There's no way to check accesses to destroyed windows, thus those cases are
  * ignored (especially on UnmapNotify's).  Other types of errors call Xlibs
  * default error handler, which may call exit.  */
-int
-xerror(Display *dpy, XErrorEvent *ee)
-{
+int xerror(Display *dpy, XErrorEvent *ee) {
 	if (ee->error_code == BadWindow
-	    || (ee->request_code == X_SetInputFocus &&
-	        ee->error_code == BadMatch)
-	    || (ee->request_code == X_PolyText8 &&
-	        ee->error_code == BadDrawable)
-	    || (ee->request_code == X_PolyFillRectangle &&
-	        ee->error_code == BadDrawable)
-	    || (ee->request_code == X_PolySegment &&
-	        ee->error_code == BadDrawable)
-	    || (ee->request_code == X_ConfigureWindow &&
-	        ee->error_code == BadMatch)
-	    || (ee->request_code == X_GrabButton &&
-	        ee->error_code == BadAccess)
-	    || (ee->request_code == X_GrabKey &&
-	        ee->error_code == BadAccess)
-	    || (ee->request_code == X_CopyArea &&
-	        ee->error_code == BadDrawable))
+	    || (ee->request_code == X_SetInputFocus && ee->error_code == BadMatch)
+	    || (ee->request_code == X_PolyText8 && ee->error_code == BadDrawable)
+	    || (ee->request_code == X_PolyFillRectangle && ee->error_code == BadDrawable)
+	    || (ee->request_code == X_PolySegment && ee->error_code == BadDrawable)
+	    || (ee->request_code == X_ConfigureWindow && ee->error_code == BadMatch)
+	    || (ee->request_code == X_GrabButton && ee->error_code == BadAccess)
+	    || (ee->request_code == X_GrabKey && ee->error_code == BadAccess)
+	    || (ee->request_code == X_CopyArea && ee->error_code == BadDrawable))
 		return 0;
 
 	fprintf(stderr, "%s: fatal error: request code=%d, error code=%d\n",
@@ -1312,9 +1126,7 @@ xerror(Display *dpy, XErrorEvent *ee)
 	return xerrorxlib(dpy, ee); /* may call exit */
 }
 
-void
-xsettitle(Window w, const char *str)
-{
+void xsettitle(Window w, const char *str) {
 	XTextProperty xtp;
 
 	if (XmbTextListToTextProperty(dpy, (char **)&str, 1,
@@ -1325,47 +1137,26 @@ xsettitle(Window w, const char *str)
 	}
 }
 
-void
-usage(void)
-{
+void usage(void) {
 	die("usage: %s [-dfksv] [-g geometry] [-n name] [-p [s+/-]pos]\n"
 	    "       [-r narg] [-o color] [-O color] [-t color] [-T color]\n"
 	    "       [-u color] [-U color] command...\n", argv0);
 }
 
-int
-main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 	Bool detach = False;
 	int replace = 0;
 	char *pstr;
 
 	ARGBEGIN {
-	case 'c':
-		closelastclient = True;
-		fillagain = False;
-		break;
-	case 'd':
-		detach = True;
-		break;
-	case 'f':
-		fillagain = True;
-		break;
-	case 'g':
-		geometry = EARGF(usage());
-		break;
-	case 'k':
-		killclientsfirst = True;
-		break;
-	case 'n':
-		wmname = EARGF(usage());
-		break;
-	case 'O':
-		normfgcolor = EARGF(usage());
-		break;
-	case 'o':
-		normbgcolor = EARGF(usage());
-		break;
+	case 'c': closelastclient = True; fillagain = False; break;
+	case 'd': detach = True; break;
+	case 'f': fillagain = True; break;
+	case 'g': geometry = EARGF(usage()); break;
+	case 'k': killclientsfirst = True; break;
+	case 'n': wmname = EARGF(usage()); break;
+	case 'O': normfgcolor = EARGF(usage()); break;
+	case 'o': normbgcolor = EARGF(usage()); break;
 	case 'p':
 		pstr = EARGF(usage());
 		if (pstr[0] == 's') {
@@ -1375,24 +1166,12 @@ main(int argc, char *argv[])
 			newposition = atoi(pstr);
 		}
 		break;
-	case 'r':
-		replace = atoi(EARGF(usage()));
-		break;
-	case 's':
-		doinitspawn = False;
-		break;
-	case 'T':
-		selfgcolor = EARGF(usage());
-		break;
-	case 't':
-		selbgcolor = EARGF(usage());
-		break;
-	case 'U':
-		urgfgcolor = EARGF(usage());
-		break;
-	case 'u':
-		urgbgcolor = EARGF(usage());
-		break;
+	case 'r': replace = atoi(EARGF(usage())); break;
+	case 's': doinitspawn = False; break;
+	case 'T': selfgcolor = EARGF(usage()); break;
+	case 't': selbgcolor = EARGF(usage()); break;
+	case 'U': urgfgcolor = EARGF(usage()); break;
+	case 'u': urgbgcolor = EARGF(usage()); break;
 	case 'v':
 		die("tabbed-"VERSION", © 2009-2016 tabbed engineers, "
 		    "see LICENSE for details.\n");
@@ -1422,8 +1201,7 @@ main(int argc, char *argv[])
 		if (fork() == 0) {
 			fclose(stdout);
 		} else {
-			if (dpy)
-				close(ConnectionNumber(dpy));
+			if (dpy) close(ConnectionNumber(dpy));
 			return EXIT_SUCCESS;
 		}
 	}
