@@ -1,4 +1,3 @@
-/* See LICENSE file for copyright and license details. */
 #include <netinet/in.h>
 #include <sys/resource.h>
 #include <sys/socket.h>
@@ -107,17 +106,13 @@ static char *status_str[] = {
 
 long long strtonum(const char *, long long, long long, const char **);
 
-static char *
-timestamp(time_t t, char buf[TIMESTAMP_LEN])
-{
+static char * timestamp(time_t t, char buf[TIMESTAMP_LEN]) {
 	strftime(buf, TIMESTAMP_LEN, "%a, %d %b %Y %T GMT", gmtime(&t));
 
 	return buf;
 }
 
-static void
-decode(char src[PATH_MAX], char dest[PATH_MAX])
-{
+static void decode(char src[PATH_MAX], char dest[PATH_MAX]) {
 	size_t i;
 	uint8_t n;
 	char *s;
@@ -135,9 +130,7 @@ decode(char src[PATH_MAX], char dest[PATH_MAX])
 	dest[i] = '\0';
 }
 
-static void
-encode(char src[PATH_MAX], char dest[PATH_MAX])
-{
+static void encode(char src[PATH_MAX], char dest[PATH_MAX]) {
 	size_t i;
 	char *s;
 
@@ -153,9 +146,7 @@ encode(char src[PATH_MAX], char dest[PATH_MAX])
 	dest[i] = '\0';
 }
 
-static enum status
-sendstatus(int fd, enum status s)
-{
+static enum status sendstatus(int fd, enum status s) {
 	static char t[TIMESTAMP_LEN];
 
 	if (dprintf(fd,
@@ -320,9 +311,7 @@ getrequest(int fd, struct request *r)
 	return 0;
 }
 
-static int
-compareent(const struct dirent **d1, const struct dirent **d2)
-{
+static int compareent(const struct dirent **d1, const struct dirent **d2) {
 	int v;
 
 	v = ((*d2)->d_type == DT_DIR ? 1 : -1) -
@@ -334,9 +323,7 @@ compareent(const struct dirent **d1, const struct dirent **d2)
 	return strcmp((*d1)->d_name, (*d2)->d_name);
 }
 
-static char *
-suffix(int t)
-{
+static char * suffix(int t) {
 	switch (t) {
 	case DT_FIFO: return "|";
 	case DT_DIR:  return "/";
@@ -347,9 +334,7 @@ suffix(int t)
 	return "";
 }
 
-static enum status
-senddir(int fd, char *name, struct request *r)
-{
+static enum status senddir(int fd, char *name, struct request *r) {
 	struct dirent **e;
 	size_t i;
 	int dirlen, s;
@@ -410,18 +395,13 @@ senddir(int fd, char *name, struct request *r)
 	s = S_OK;
 
 cleanup:
-	while (dirlen--) {
-		free(e[dirlen]);
-	}
+	while (dirlen--) free(e[dirlen]);
 	free(e);
 
 	return s;
 }
 
-static enum status
-responsefile(int fd, char *name, struct request *r, struct stat *st, char *mime,
-         off_t lower, off_t upper)
-{
+static enum status responsefile(int fd, char *name, struct request *r, struct stat *st, char *mime, off_t lower, off_t upper) {
 	FILE *fp;
 	enum status s;
 	ssize_t bread, bwritten;
@@ -551,9 +531,7 @@ squash:
 	return 0;
 }
 
-static enum status
-sendresponse(int fd, struct request *r)
-{
+static enum status sendresponse(int fd, struct request *r) {
 	struct in6_addr res;
 	struct stat st;
 	struct tm tm;
@@ -758,9 +736,7 @@ sendresponse(int fd, struct request *r)
 	return responsefile(fd, RELPATH(realtarget), r, &st, mime, lower, upper);
 }
 
-static void
-serve(int insock)
-{
+static void serve(int insock) {
 	struct request r;
 	struct sockaddr_storage in_sa;
 	struct timeval tv;
@@ -784,8 +760,7 @@ serve(int insock)
 		/* fork and handle */
 		switch ((p = fork())) {
 		case -1:
-			fprintf(stderr, "%s: fork: %s\n", argv0,
-			        strerror(errno));
+			fprintf(stderr, "%s: fork: %s\n", argv0, strerror(errno));
 			break;
 		case 0:
 			close(insock);
@@ -838,9 +813,7 @@ serve(int insock)
 	}
 }
 
-static void
-die(const char *errstr, ...)
-{
+static void die(const char *errstr, ...) {
 	va_list ap;
 
 	va_start(ap, errstr);
@@ -850,9 +823,7 @@ die(const char *errstr, ...)
 	exit(1);
 }
 
-static int
-getipsock(void)
-{
+static int getipsock(void) {
 	struct addrinfo hints, *ai, *p;
 	int ret, insock = 0, yes;
 
@@ -861,9 +832,8 @@ getipsock(void)
 	hints.ai_family = AF_UNSPEC;
 	hints.ai_socktype = SOCK_STREAM;
 
-	if ((ret = getaddrinfo(host, port, &hints, &ai))) {
+	if ((ret = getaddrinfo(host, port, &hints, &ai)))
 		die("%s: getaddrinfo: %s\n", argv0, gai_strerror(ret));
-	}
 
 	for (yes = 1, p = ai; p; p = p->ai_next) {
 		if ((insock = socket(p->ai_family, p->ai_socktype,
@@ -881,35 +851,24 @@ getipsock(void)
 		break;
 	}
 	freeaddrinfo(ai);
-	if (!p) {
-		die("%s: failed to bind\n", argv0);
-	}
+	if (!p)  die("%s: failed to bind\n", argv0);
 
-	if (listen(insock, SOMAXCONN) < 0) {
-		die("%s: listen: %s\n", argv0, strerror(errno));
-	}
+	if (listen(insock, SOMAXCONN) < 0) die("%s: listen: %s\n", argv0, strerror(errno));
 
 	return insock;
 }
 
-static void
-cleanup(void)
-{
-	if (udsname)
-		 unlink(udsname);
+static void cleanup(void) {
+	if (udsname) unlink(udsname);
 }
 
-static void
-sigcleanup(int sig)
-{
+static void sigcleanup(int sig) {
 	cleanup();
 	kill(0, sig);
 	_exit(1);
 }
 
-static void
-handlesignals(void(*hdl)(int))
-{
+static void handlesignals(void(*hdl)(int)) {
 	struct sigaction sa;
 
 	memset(&sa, 0, sizeof(sa));
@@ -922,28 +881,23 @@ handlesignals(void(*hdl)(int))
 	sigaction(SIGQUIT, &sa, NULL);
 }
 
-static int
-getusock(char *udsname, uid_t uid, gid_t gid)
-{
+static int getusock(char *udsname, uid_t uid, gid_t gid) {
 	struct sockaddr_un addr;
 	size_t udsnamelen;
 	int insock, sockmode = S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH;
 
-	if ((insock = socket(AF_UNIX, SOCK_STREAM, 0)) < 0) {
+	if ((insock = socket(AF_UNIX, SOCK_STREAM, 0)) < 0)
 		die("%s: socket: %s\n", argv0, strerror(errno));
-	}
 
 	memset(&addr, 0, sizeof(addr));
 	addr.sun_family = AF_UNIX;
 
-	if ((udsnamelen = strlen(udsname)) > sizeof(addr.sun_path) - 1) {
+	if ((udsnamelen = strlen(udsname)) > sizeof(addr.sun_path) - 1)
 		die("%s: UNIX-domain socket name truncated\n", argv0);
-	}
 	memcpy(addr.sun_path, udsname, udsnamelen + 1);
 
-	if (bind(insock, (const struct sockaddr *)&addr, sizeof(addr)) < 0) {
+	if (bind(insock, (const struct sockaddr *)&addr, sizeof(addr)) < 0)
 		die("%s: bind %s: %s\n", argv0, udsname, strerror(errno));
-	}
 
 	if (listen(insock, SOMAXCONN) < 0) {
 		cleanup();
@@ -963,16 +917,12 @@ getusock(char *udsname, uid_t uid, gid_t gid)
 	return insock;
 }
 
-static void
-usage(void)
-{
+static void usage(void) {
 	die("usage: %s [-l | -L] [-v | -V] [[[-h host] [-p port]] | [-U sockfile]] "
 	    "[-d dir] [-u user] [-g group]\n", argv0);
 }
 
-int
-main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 	struct passwd *pwd = NULL;
 	struct group *grp = NULL;
 	struct rlimit rlim;
@@ -1014,13 +964,10 @@ main(int argc, char *argv[])
 		usage();
 	} ARGEND
 
-	if (argc) {
-		usage();
-	}
+	if (argc) usage();
 
 	if (udsname && (!access(udsname, F_OK) || errno != ENOENT)) {
-		die("%s: socket file: %s\n",
-		    argv0, errno ? strerror(errno) : "file exists");
+		die("%s: socket file: %s\n", argv0, errno ? strerror(errno) : "file exists");
 	}
 
 	/* compile and check the supplied vhost regexes */
@@ -1028,33 +975,25 @@ main(int argc, char *argv[])
 		for (i = 0; i < LEN(vhost); i++) {
 			if (regcomp(&vhost[i].re, vhost[i].regex,
 			            REG_EXTENDED | REG_ICASE | REG_NOSUB)) {
-				die("%s: regcomp '%s': invalid regex\n", argv0,
-				    vhost[i].regex);
+				die("%s: regcomp '%s': invalid regex\n", argv0, vhost[i].regex);
 			}
 		}
 	}
 
 	/* raise the process limit */
 	rlim.rlim_cur = rlim.rlim_max = maxnprocs;
-	if (setrlimit(RLIMIT_NPROC, &rlim) < 0) {
-		die("%s: setrlimit RLIMIT_NPROC: %s\n", argv0, strerror(errno));
-	}
+	if (setrlimit(RLIMIT_NPROC, &rlim) < 0) die("%s: setrlimit RLIMIT_NPROC: %s\n", argv0, strerror(errno));
 
 	/* validate user and group */
 	errno = 0;
-	if (user && !(pwd = getpwnam(user))) {
-		die("%s: invalid user %s\n", argv0, user);
-	}
+	if (user && !(pwd = getpwnam(user))) die("%s: invalid user %s\n", argv0, user);
 	errno = 0;
-	if (group && !(grp = getgrnam(group))) {
-		die("%s: invalid group %s\n", argv0, group);
-	}
+	if (group && !(grp = getgrnam(group))) die("%s: invalid group %s\n", argv0, group);
 
 	handlesignals(sigcleanup);
 
 	/* bind socket */
-	insock = udsname ? getusock(udsname, pwd->pw_uid, grp->gr_gid) :
-	                   getipsock();
+	insock = udsname ? getusock(udsname, pwd->pw_uid, grp->gr_gid) : getipsock();
 
 	switch (cpid = fork()) {
 	case -1:
@@ -1071,65 +1010,30 @@ main(int argc, char *argv[])
 		}
 
 		/* chroot */
-		if (chdir(servedir) < 0) {
-			die("%s: chdir %s: %s\n", argv0, servedir, strerror(errno));
-		}
-		if (chroot(".") < 0) {
-			die("%s: chroot .: %s\n", argv0, strerror(errno));
-		}
+		if (chdir(servedir) < 0) die("%s: chdir %s: %s\n", argv0, servedir, strerror(errno));
+		if (chroot(".") < 0) die("%s: chroot .: %s\n", argv0, strerror(errno));
 
 		/* drop root */
-		if (grp && setgroups(1, &(grp->gr_gid)) < 0) {
-			die("%s: setgroups: %s\n", argv0, strerror(errno));
-		}
-		if (grp && setgid(grp->gr_gid) < 0) {
-			die("%s: setgid: %s\n", argv0, strerror(errno));
-		}
-		if (pwd && setuid(pwd->pw_uid) < 0) {
-			die("%s: setuid: %s\n", argv0, strerror(errno));
-		}
-		if (getuid() == 0) {
-			die("%s: won't run as root user\n", argv0);
-		}
-		if (getgid() == 0) {
-			die("%s: won't run as root group\n", argv0);
-		}
+		if (grp && setgroups(1, &(grp->gr_gid)) < 0) die("%s: setgroups: %s\n", argv0, strerror(errno));
+		if (grp && setgid(grp->gr_gid) < 0) die("%s: setgid: %s\n", argv0, strerror(errno));
+		if (pwd && setuid(pwd->pw_uid) < 0) die("%s: setuid: %s\n", argv0, strerror(errno));
+		if (getuid() == 0) die("%s: won't run as root user\n", argv0);
+		if (getgid() == 0) die("%s: won't run as root group\n", argv0);
 
 		serve(insock);
 		exit(0);
-	default:
-		while ((wpid = wait(&status)) > 0)
-			;
+	default: while ((wpid = wait(&status)) > 0) ;
 	}
 
 	cleanup();
 	return status;
 }
 
-/*
- * Copyright (c) 2004 Ted Unangst and Todd Miller
- * All rights reserved.
- *
- * Permission to use, copy, modify, and distribute this software for any
- * purpose with or without fee is hereby granted, provided that the above
- * copyright notice and this permission notice appear in all copies.
- *
- * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
- * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
- * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
- * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
- * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
- * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- */
 #define	INVALID		1
 #define	TOOSMALL	2
 #define	TOOLARGE	3
 
-long long
-strtonum(const char *numstr, long long minval, long long maxval,
-         const char **errstrp)
-{
+long long strtonum(const char *numstr, long long minval, long long maxval, const char **errstrp) {
 	long long ll = 0;
 	int error = 0;
 	char *ep;
@@ -1145,22 +1049,16 @@ strtonum(const char *numstr, long long minval, long long maxval,
 
 	ev[0].err = errno;
 	errno = 0;
-	if (minval > maxval) {
-		error = INVALID;
-	} else {
+	if (minval > maxval) error = INVALID;
+	else {
 		ll = strtoll(numstr, &ep, 10);
-		if (numstr == ep || *ep != '\0')
-			error = INVALID;
-		else if ((ll == LLONG_MIN && errno == ERANGE) || ll < minval)
-			error = TOOSMALL;
-		else if ((ll == LLONG_MAX && errno == ERANGE) || ll > maxval)
-			error = TOOLARGE;
+		if (numstr == ep || *ep != '\0') error = INVALID;
+		else if ((ll == LLONG_MIN && errno == ERANGE) || ll < minval) error = TOOSMALL;
+		else if ((ll == LLONG_MAX && errno == ERANGE) || ll > maxval) error = TOOLARGE;
 	}
-	if (errstrp != NULL)
-		*errstrp = ev[error].errstr;
+	if (errstrp != NULL) *errstrp = ev[error].errstr;
 	errno = ev[error].err;
-	if (error)
-		ll = 0;
+	if (error) ll = 0;
 
 	return (ll);
 }

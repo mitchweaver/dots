@@ -1,7 +1,7 @@
 char font[] = "Terminus:pixelsize=14:antialias=false:autohint=false";
 /* char font[] = "DejaVuSans Mono:pixelsize=12:antialias=true:autohint=true"; */
 
-/* ----------------- Themes ------------------------------------------------- */ 
+/* ----------------- Themes ------------------------------------------------- */
 #include "ashes-dark-theme.h"
 /* #include "ashes-light-theme.h" */
 /* #include "mocha-dark-theme.h" */
@@ -11,7 +11,7 @@ char font[] = "Terminus:pixelsize=14:antialias=false:autohint=false";
 /* #include "tomorrow-dark-theme.h" */
 /* #include "ocean-dark-theme.h" */
 /* #include "hund-theme.h" */
-/* -------------------------------------------------------------------------- */ 
+/* -------------------------------------------------------------------------- */
 
 unsigned int alpha = 0xdd; // bit darker opacity
 /* unsigned int alpha = 0xcc; // opacity */
@@ -60,12 +60,12 @@ Shortcut shortcuts[] = {
     { SHIFT,                XK_Insert,      clippaste,      {.i =  0} },
 	{ CONTROL,              XK_Page_Up,     kscrollup,      {.i = 2} },
 	{ CONTROL,              XK_Page_Down,   kscrolldown,    {.i = 2} },
-	
-    /* -------------- Custom Funcs ---------------------------------------------- */ 
+
+    /* -------------- Custom Funcs ---------------------------------------------- */
     /* { CONTROL,              XK_h,           history,        {.i = 0} }, */
     // note copyurl has been edited to also open in xdg-open
 	{ CONTROL,              XK_l,           copyurl,        {.i =  0} },
-    /* -------------------------------------------------------------------------- */ 
+    /* -------------------------------------------------------------------------- */
 
     // not sure what this one does:
 	/* { CONTROL,              XK_I,           iso14755,       {.i =  0} }, */
