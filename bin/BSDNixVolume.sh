@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ $(uname) == "Linux" ] ; then
-   
+
     if [ "$1" == "-set" ] ; then
         amixer -q sset Master "$2"%+
         exit
@@ -30,6 +30,14 @@ elif test mixerctl ; then
         vol_val=$(echo $vol_val \* 0.392 | bc)
         # convert back to int
         vol_val=${vol_val%.*}
+
+
+        # checks if the volume is either A: below zero
+        # or B: a non-number was returned
+        if [ !$vol_val -gt 0 ] ; then
+            vol_val=0
+        fi
+
         vol=$vol_val%
 
     fi
@@ -41,13 +49,14 @@ fi
 # (if we didn't exit above, because the argument was -set)
 if [ $vol_val -gt 65 ] ; then
     echo "🔊 $vol"
-    
-elif [ $vol_val -gt 40 ] ; then
+
+elif [ $vol_val -gt 35 ] ; then
     echo "🔉 $vol"
 
-elif [ $vol_val -gt 10 ] ; then
+elif [ $vol_val -gt 0 ] ; then
     echo "🔈 $vol"
 
 elif [ $vol_val -eq 0 ] ; then
     echo "🔇 $vol"
+
 fi

@@ -81,15 +81,17 @@ static char dmenumon[2] = "0";
 /* static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", gray1, "-nf", gray3, "-sb", cyan, "-sf", gray4, NULL }; */
 static const char *dmenucmd[] = { "dmenu_run", NULL};
 
+static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
+
 static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL };
 /* static const char *term[]  = { "st", NULL }; */
-static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
-static const char *dedit[] = { "dedit", NULL };
-static const char *clipboard[] = { "clipmenu", NULL };
+
 static const char *ranger[] = { "tabbed", "-c", "-r", "2", "st", "-w", "-e", "ranger", NULL };
-/* static const char *ranger[] = { "st", "-w", "-e", "ranger", NULL }; */
-static const char *vim[] = { "tabbed", "-c", "-r", "2", "st", "-w", "-e", "nvim", NULL };
-static const char *musicplayer[] = { "st", "-e", "ranger", "/home/mitch/music", NULL };
+static const char *vimwiki[] = { "st", "-w", "Vimwiki", "-T", "Vimwiki", "-n", "Vimwiki", "-e", "nvim", "-c VimwikiIndex", NULL };
+static const char *musicplayer[] = { "st", "-w", "music", "-T", "music", "-n", "music", "-e", "ranger", "/home/mitch/music", NULL };
+
+static const char *clipboard[] = { "clipmenu", NULL };
+static const char *dedit[] = { "dedit", NULL };
 
 static const char *volup[] = { "BSDNixVolume.sh", "-set", "+5", NULL };
 static const char *voldown[] = { "BSDNixVolume.sh", "-set", "-5", NULL };
@@ -114,7 +116,7 @@ static Key keys[] = {
     { mod1,                     XK_c,             spawn,    {.v = clipboard } },
     { mod1,                     XK_r,             spawn,    {.v = ranger } },
 
-    { mod1,                     XK_e,             spawn,    {.v = vim } },
+    { mod1,                     XK_e,             spawn,    {.v = vimwiki } },
     { mod1,                     XK_a,             spawn,    {.v = musicplayer } },
 
     { mod1,                     XK_slash,         spawn,    {.v = mpdtoggle } },

@@ -96,7 +96,15 @@ patch() {
 }
 
 # ←--------------- Program Aliases -------------------------→ #
-alias v='nvim -p'
+# If files to edit are provided, edit them. Otherwise open my Vimwiki
+nvim() {
+    if [ $# -eq 0 ] ; then
+        /usr/local/bin/nvim -c VimwikiIndex
+    else
+        /usr/local/bin/nvim -p "$@"
+    fi
+}
+alias v='nvim'
 alias vi='v'
 alias vim='v'
 

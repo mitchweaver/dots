@@ -1,3 +1,0 @@
-:VimwikiIndex
-
-source ~/.vimrc
