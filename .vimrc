@@ -253,7 +253,7 @@ let g:vimwiki_list = [
             \{'path': '~/files/vimwiki/german.wiki',      'syntax': 'markdown', 'ext': '.md'},
             \{'path': '~/files/vimwiki/french.wiki',      'syntax': 'markdown', 'ext': '.md'},
             \{'path': '~/files/vimwiki/vim.wiki',         'syntax': 'markdown', 'ext': '.md'}
-            \]
+\]
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 map <silent><leader>md :MarkdownPreview<CR>
 
