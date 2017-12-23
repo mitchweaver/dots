@@ -79,21 +79,21 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 # Linux/BSD have different --dry-run flags
-# patch() {
-#     # this assumes $1 is '-p1', and $3 is '<' and $4 is the patch file
-#     if [ "$2" == "--dry-run" ] || [ "$2" == "--check" ] || [ "$2" == "-C" ]; then
+patch() {
+    # this assumes $1 is '-p1', and $3 is '<' and $4 is the patch file
+    if [ "$2" == "--dry-run" ] || [ "$2" == "--check" ] || [ "$2" == "-C" ]; then
 
-#         if [ $(uname) == "Linux" ] ; then
-#             patch "$1" --dry-run "$3" "$4"
-#         else # BSD
-#             patch "$1" --check "$3" "$4"
-#         fi
-#     else
-#         patch "$@"
+        if [ $(uname) == "Linux" ] ; then
+            /usr/bin/patch "$1" --dry-run "$3" "$4"
+        else # BSD
+            /usr/bin/patch "$1" --check "$3" "$4"
+        fi
+    else
+        /usr/bin/patch "$@"
 
-#     fi
+    fi
 
-# }
+}
 
 # ←--------------- Program Aliases -------------------------→ #
 # If files to edit are provided, edit them. Otherwise open my Vimwiki

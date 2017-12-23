@@ -1,7 +1,3 @@
-/*
- * See LICENSE file for copyright and license details.
- */
-
 #include <sys/wait.h>
 #include <locale.h>
 #include <signal.h>
@@ -170,8 +166,10 @@ static char **cmd;
 static char *wmname = "tabbed";
 static const char *geometry;
 
-static Colormap cmap;
-static Visual *visual = NULL;
+/* ----------------- alpha patch -------------------------------------------- */
+/* static Colormap cmap; */
+/* static Visual *visual = NULL; */
+/* -------------------------------------------------------------------------- */
 
 char *argv0;
 
@@ -248,26 +246,25 @@ clientmessage(const XEvent *e)
 	}
 }
 
-void
-configurenotify(const XEvent *e)
-{
+void configurenotify(const XEvent *e) {
 	const XConfigureEvent *ev = &e->xconfigure;
 
 	if (ev->window == win && (ev->width != ww || ev->height != wh)) {
 		ww = ev->width;
 		wh = ev->height;
 		XFreePixmap(dpy, dc.drawable);
-		dc.drawable = XCreatePixmap(dpy, win, ww, wh,
-		              32);
-		if (sel > -1)
-			resize(sel, ww, wh - bh);
+/* ------- alpha patch (the top is the original) --------------------------- */
+		dc.drawable = XCreatePixmap(dpy, root, ww, wh, DefaultDepth(dpy, screen));
+		/* dc.drawable = XCreatePixmap(dpy, win, ww, wh, 32); */
+/* -------------------------------------------------------------------------- */
+
+
+		if (sel > -1) resize(sel, ww, wh - bh);
 		XSync(dpy, False);
 	}
 }
 
-void
-configurerequest(const XEvent *e)
-{
+void configurerequest(const XEvent *e) {
 	const XConfigureRequestEvent *ev = &e->xconfigurerequest;
 	XWindowChanges wc;
 	int c;
@@ -412,8 +409,12 @@ drawtext(const char *text, XftColor col[ColLast])
 		     buf[--i] = titletrim[--j])
 			;
 	}
+/* ------ alpha patch (top is original) ------------------------------------- */
+	d = XftDrawCreate(dpy, dc.drawable, DefaultVisual(dpy, screen), DefaultColormap(dpy, screen));
+	/* d = XftDrawCreate(dpy, dc.drawable, visual, cmap); */
+/* -------------------------------------------------------------------------- */
 
-	d = XftDrawCreate(dpy, dc.drawable, visual, cmap);
+
 	XftDrawStringUtf8(d, &col[ColFG], dc.font.xfont, x, y, (XftChar8 *) buf, len);
 	XftDrawDestroy(d);
 }
@@ -580,9 +581,11 @@ XftColor
 getcolor(const char *colstr)
 {
 	XftColor color;
-
-  if (!XftColorAllocName(dpy, visual, cmap, colstr, &color))
+/* -------------- alpha patch (above is original) -------------------------- */
+  if (!XftColorAllocName(dpy, DefaultVisual(dpy, screen), DefaultColormap(dpy, screen), colstr, &color))
+  /* if (!XftColorAllocName(dpy, visual, cmap, colstr, &color)) */
 		die("%s: cannot allocate color '%s'\n", argv0, colstr);
+/* -------------------------------------------------------------------------- */
 
 	return color;
 }
@@ -1036,59 +1039,69 @@ setup(void)
 			wy = dh + wy - wh - 1;
 	}
 
-	XVisualInfo *vis;
-	XRenderPictFormat *fmt;
-	int nvi;
-	int i;
+/* --------------- alpha patch ------------------------------------------ */
+	/* XVisualInfo *vis; */
+	/* XRenderPictFormat *fmt; */
+	/* int nvi; */
+	/* int i; */
 
-	XVisualInfo tpl = {
-		.screen = screen,
-		.depth = 32,
-		.class = TrueColor
-	};
+	/* XVisualInfo tpl = { */
+	/* 	.screen = screen, */
+	/* 	.depth = 32, */
+	/* 	.class = TrueColor */
+	/* }; */
 
-	vis = XGetVisualInfo(dpy, VisualScreenMask | VisualDepthMask | VisualClassMask, &tpl, &nvi);
-	for(i = 0; i < nvi; i ++) {
-		fmt = XRenderFindVisualFormat(dpy, vis[i].visual);
-		if (fmt->type == PictTypeDirect && fmt->direct.alphaMask) {
-			visual = vis[i].visual;
-			break;
-		}
-	}
+	/* vis = XGetVisualInfo(dpy, VisualScreenMask | VisualDepthMask | VisualClassMask, &tpl, &nvi); */
+	/* for(i = 0; i < nvi; i ++) { */
+	/* 	fmt = XRenderFindVisualFormat(dpy, vis[i].visual); */
+	/* 	if (fmt->type == PictTypeDirect && fmt->direct.alphaMask) { */
+	/* 		visual = vis[i].visual; */
+	/* 		break; */
+	/* 	} */
+	/* } */
 
-	XFree(vis);
+	/* XFree(vis); */
 
-	if (! visual) {
-		fprintf(stderr, "Couldn't find ARGB visual.\n");
-		exit(1);
-	}
+	/* if (! visual) { */
+	/* 	fprintf(stderr, "Couldn't find ARGB visual.\n"); */
+	/* 	exit(1); */
+	/* } */
 
-	cmap = XCreateColormap( dpy, root, visual, None);
+	/* cmap = XCreateColormap( dpy, root, visual, None); */
+/* -------------------------------------------------------------------------- */
 	dc.norm[ColBG] = getcolor(normbgcolor);
 	dc.norm[ColFG] = getcolor(normfgcolor);
 	dc.sel[ColBG] = getcolor(selbgcolor);
 	dc.sel[ColFG] = getcolor(selfgcolor);
 	dc.urg[ColBG] = getcolor(urgbgcolor);
 	dc.urg[ColFG] = getcolor(urgfgcolor);
+/* --------------- alpha patch (comment this out if using it) --------------- */
+	dc.drawable = XCreatePixmap(dpy, root, ww, wh, DefaultDepth(dpy, screen));
+	dc.gc = XCreateGC(dpy, root, 0, 0);
+	win = XCreateSimpleWindow(dpy, root, wx, wy, ww, wh, 0, dc.norm[ColFG].pixel, dc.norm[ColBG].pixel);
+/* -------------------------------------------------------------------------- */
 
-	XSetWindowAttributes attrs;
-	attrs.background_pixel = dc.norm[ColBG].pixel;
-	attrs.border_pixel = dc.norm[ColFG].pixel;
-	attrs.bit_gravity = NorthWestGravity;
-	attrs.event_mask = FocusChangeMask | KeyPressMask
-		| ExposureMask | VisibilityChangeMask | StructureNotifyMask
-		| ButtonMotionMask | ButtonPressMask | ButtonReleaseMask;
-	attrs.background_pixmap = None ;
-	attrs.colormap = cmap;
+/* ----------- alpha patch (uncomment this if using it) --------------------- */
+	/* XSetWindowAttributes attrs; */
+	/* attrs.background_pixel = dc.norm[ColBG].pixel; */
+	/* attrs.border_pixel = dc.norm[ColFG].pixel; */
+	/* attrs.bit_gravity = NorthWestGravity; */
+	/* attrs.event_mask = FocusChangeMask | KeyPressMask */
+	/* 	| ExposureMask | VisibilityChangeMask | StructureNotifyMask */
+	/* 	| ButtonMotionMask | ButtonPressMask | ButtonReleaseMask; */
+	/* attrs.background_pixmap = None ; */
+	/* attrs.colormap = cmap; */
 
-	win = XCreateWindow(dpy, root, wx, wy,
-	ww, wh, 0, 32, InputOutput,
-	visual, CWBackPixmap | CWBorderPixel | CWBitGravity
-	| CWEventMask | CWColormap, &attrs);
+	/* win = XCreateWindow(dpy, root, wx, wy, */
+	/* ww, wh, 0, 32, InputOutput, */
+	/* visual, CWBackPixmap | CWBorderPixel | CWBitGravity */
+	/* | CWEventMask | CWColormap, &attrs); */
 
-	dc.drawable = XCreatePixmap(dpy, win, ww, wh,
-	                            32);
-	dc.gc = XCreateGC(dpy, dc.drawable, 0, 0);
+	/* dc.drawable = XCreatePixmap(dpy, win, ww, wh, */
+	/*                             32); */
+	/* dc.gc = XCreateGC(dpy, dc.drawable, 0, 0); */
+/* -------------------------------------------------------------------------- */
+
 
 	XMapRaised(dpy, win);
 	XSelectInput(dpy, win, SubstructureNotifyMask | FocusChangeMask |

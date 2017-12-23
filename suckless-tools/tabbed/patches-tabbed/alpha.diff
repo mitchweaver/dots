@@ -3,12 +3,12 @@ index 3a71529..095cead 100644
 --- a/config.mk
 +++ b/config.mk
 @@ -9,7 +9,7 @@ MANPREFIX = ${PREFIX}/share/man
- 
+
  # includes and libs
  INCS = -I. -I/usr/include -I/usr/include/freetype2
 -LIBS = -L/usr/lib -lc -lX11 -lfontconfig -lXft
 +LIBS = -L/usr/lib -lc -lX11 -lfontconfig -lXft -lXrender
- 
+
  # flags
  CPPFLAGS = -DVERSION=\"${VERSION}\" -D_DEFAULT_SOURCE
 diff --git a/tabbed.c b/tabbed.c
@@ -18,19 +18,18 @@ index 9a44795..b4d47d1 100644
 @@ -170,6 +170,9 @@ static char **cmd;
  static char *wmname = "tabbed";
  static const char *geometry;
- 
+
 +static Colormap cmap;
 +static Visual *visual = NULL;
 +
  char *argv0;
- 
+
  /* configuration, allows nested code to access above variables */
 @@ -255,8 +258,8 @@ configurenotify(const XEvent *e)
  		ww = ev->width;
  		wh = ev->height;
  		XFreePixmap(dpy, dc.drawable);
--		dc.drawable = XCreatePixmap(dpy, root, ww, wh,
--		              DefaultDepth(dpy, screen));
+-		dc.drawable = XCreatePixmap(dpy, root, ww, wh, DefaultDepth(dpy, screen));
 +		dc.drawable = XCreatePixmap(dpy, win, ww, wh,
 +		              32);
  		if (sel > -1)
@@ -39,7 +38,7 @@ index 9a44795..b4d47d1 100644
 @@ -399,7 +402,7 @@ drawtext(const char *text, XftColor col[ColLast])
  			;
  	}
- 
+
 -	d = XftDrawCreate(dpy, dc.drawable, DefaultVisual(dpy, screen), DefaultColormap(dpy, screen));
 +	d = XftDrawCreate(dpy, dc.drawable, visual, cmap);
  	XftDrawStringUtf8(d, &col[ColFG], dc.font.xfont, x, y, (XftChar8 *) buf, len);
@@ -48,16 +47,16 @@ index 9a44795..b4d47d1 100644
 @@ -564,7 +567,7 @@ getcolor(const char *colstr)
  {
  	XftColor color;
- 
+
 -	if (!XftColorAllocName(dpy, DefaultVisual(dpy, screen), DefaultColormap(dpy, screen), colstr, &color))
 +  if (!XftColorAllocName(dpy, visual, cmap, colstr, &color))
  		die("%s: cannot allocate color '%s'\n", argv0, colstr);
- 
+
  	return color;
 @@ -1016,18 +1019,60 @@ setup(void)
  			wy = dh + wy - wh - 1;
  	}
- 
+
 +	XVisualInfo *vis;
 +	XRenderPictFormat *fmt;
 +	int nvi;
@@ -95,7 +94,7 @@ index 9a44795..b4d47d1 100644
 -	dc.drawable = XCreatePixmap(dpy, root, ww, wh,
 -	                            DefaultDepth(dpy, screen));
 -	dc.gc = XCreateGC(dpy, root, 0, 0);
- 
+
 -	win = XCreateSimpleWindow(dpy, root, wx, wy, ww, wh, 0,
 -	                          dc.norm[ColFG].pixel, dc.norm[ColBG].pixel);
 +	XSetWindowAttributes attrs;

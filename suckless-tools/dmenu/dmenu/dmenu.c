@@ -1,4 +1,3 @@
-/* See LICENSE file for copyright and license details. */
 #include <ctype.h>
 #include <locale.h>
 #include <math.h>
@@ -72,40 +71,30 @@ appenditem(struct item *item, struct item **list, struct item **last)
 	*last = item;
 }
 
-static void
-calcoffsets(void)
-{
+static void calcoffsets(void) {
 	int i, n;
 
-	if (lines > 0)
-		n = lines * bh;
-	else
-		n = mw - (promptw + inputw + TEXTW("<") + TEXTW(">"));
+	if (lines > 0) n = lines * bh;
+	else n = mw - (promptw + inputw + TEXTW("<") + TEXTW(">"));
 	/* calculate which items will begin the next page and previous page */
 	for (i = 0, next = curr; next; next = next->right)
 		if ((i += (lines > 0) ? bh : MIN(TEXTW(next->text), n)) > n)
 			break;
 	for (i = 0, prev = curr; prev && prev->left; prev = prev->left)
-		if ((i += (lines > 0) ? bh : MIN(TEXTW(prev->left->text), n)) > n)
-			break;
+		if ((i += (lines > 0) ? bh : MIN(TEXTW(prev->left->text), n)) > n) break;
 }
 
-static void
-cleanup(void)
-{
+static void cleanup(void) {
 	size_t i;
 
 	XUngrabKey(dpy, AnyKey, AnyModifier, root);
-	for (i = 0; i < SchemeLast; i++)
-		free(scheme[i]);
+	for (i = 0; i < SchemeLast; i++) free(scheme[i]);
 	drw_free(drw);
 	XSync(dpy, False);
 	XCloseDisplay(dpy);
 }
 
-static char *
-cistrstr(const char *s, const char *sub)
-{
+static char * cistrstr(const char *s, const char *sub) {
 	size_t len;
 
 	for (len = strlen(sub); *s; s++)
@@ -114,22 +103,14 @@ cistrstr(const char *s, const char *sub)
 	return NULL;
 }
 
-static int
-drawitem(struct item *item, int x, int y, int w)
-{
-	if (item == sel)
-		drw_setscheme(drw, scheme[SchemeSel]);
-	else if (item->out)
-		drw_setscheme(drw, scheme[SchemeOut]);
-	else
-		drw_setscheme(drw, scheme[SchemeNorm]);
-
+static int drawitem(struct item *item, int x, int y, int w) {
+	if (item == sel) drw_setscheme(drw, scheme[SchemeSel]);
+	else if (item->out) drw_setscheme(drw, scheme[SchemeOut]);
+	else drw_setscheme(drw, scheme[SchemeNorm]);
 	return drw_text(drw, x, y, w, bh, lrpad / 2, item->text, 0);
 }
 
-static void
-drawmenu(void)
-{
+static void drawmenu(void) {
 	unsigned int curpos;
 	struct item *item;
 	int x = 0, y = 0, w;
@@ -176,9 +157,7 @@ drawmenu(void)
 	drw_map(drw, win, 0, 0, mw, mh);
 }
 
-static void
-grabfocus(void)
-{
+static void grabfocus(void) {
 	struct timespec ts = { .tv_sec = 0, .tv_nsec = 10000000  };
 	Window focuswin;
 	int i, revertwin;
@@ -193,14 +172,11 @@ grabfocus(void)
 	die("cannot grab focus");
 }
 
-static void
-grabkeyboard(void)
-{
+static void grabkeyboard(void) {
 	struct timespec ts = { .tv_sec = 0, .tv_nsec = 1000000  };
 	int i;
 
-	if (embed)
-		return;
+	if (embed) return;
 	/* try to grab keyboard, we may have to wait for another process to ungrab */
 	for (i = 0; i < 1000; i++) {
 		if (XGrabKeyboard(dpy, DefaultRootWindow(dpy), True, GrabModeAsync,
@@ -211,24 +187,15 @@ grabkeyboard(void)
 	die("cannot grab keyboard");
 }
 
-int
-compare_distance(const void *a, const void *b)
-{
+int compare_distance(const void *a, const void *b) {
 	struct item *da = *(struct item **) a;
 	struct item *db = *(struct item **) b;
-
-	if (!db)
-		return 1;
-	if (!da)
-		return -1;
-
+	if (!db) return 1;
+	if (!da) return -1;
 	return da->distance == db->distance ? 0 : da->distance < db->distance ? -1 : 1;
 }
 
-void
-fuzzymatch(void)
-{
-	/* bang - we have so much memory */
+void fuzzymatch(void) {
 	struct item *it;
 	struct item **fuzzymatches = NULL;
 	char c;
@@ -292,9 +259,7 @@ fuzzymatch(void)
 	calcoffsets();
 }
 
-static void
-match(void)
-{
+static void match(void) {
 	if (fuzzy) {
 		fuzzymatch();
 		return;
@@ -327,64 +292,52 @@ match(void)
 			appenditem(item, &matches, &matchend);
 		else if (!fstrncmp(tokv[0], item->text, len))
 			appenditem(item, &lprefix, &prefixend);
-		else
-			appenditem(item, &lsubstr, &substrend);
+		else appenditem(item, &lsubstr, &substrend);
 	}
 	if (lprefix) {
 		if (matches) {
 			matchend->right = lprefix;
 			lprefix->left = matchend;
-		} else
-			matches = lprefix;
+		} else matches = lprefix;
 		matchend = prefixend;
 	}
 	if (lsubstr) {
 		if (matches) {
 			matchend->right = lsubstr;
 			lsubstr->left = matchend;
-		} else
-			matches = lsubstr;
+		} else matches = lsubstr;
 		matchend = substrend;
 	}
 	curr = sel = matches;
 	calcoffsets();
 }
 
-static void
-insert(const char *str, ssize_t n)
-{
+static void insert(const char *str, ssize_t n) {
 	if (strlen(text) + n > sizeof text - 1)
 		return;
 	/* move existing text out of the way, insert new text, and update cursor */
 	memmove(&text[cursor + n], &text[cursor], sizeof text - cursor - MAX(n, 0));
-	if (n > 0)
-		memcpy(&text[cursor], str, n);
+	if (n > 0) memcpy(&text[cursor], str, n);
 	cursor += n;
 	match();
 }
 
-static size_t
-nextrune(int inc)
-{
+static size_t nextrune(int inc) {
 	ssize_t n;
 
 	/* return location of next utf8 rune in the given direction (+1 or -1) */
-	for (n = cursor + inc; n + inc >= 0 && (text[n] & 0xc0) == 0x80; n += inc)
-		;
+	for (n = cursor + inc; n + inc >= 0 && (text[n] & 0xc0) == 0x80; n += inc) ;
 	return n;
 }
 
-static void
-keypress(XKeyEvent *ev)
-{
+static void keypress(XKeyEvent *ev) {
 	char buf[32];
 	int len;
 	KeySym ksym = NoSymbol;
 	Status status;
 
 	len = XmbLookupString(xic, ev, buf, sizeof buf, &ksym, &status);
-	if (status == XBufferOverflow)
-		return;
+	if (status == XBufferOverflow) return;
 	if (ev->state & ControlMask)
 		switch(ksym) {
 		case XK_a: ksym = XK_Home;      break;
@@ -422,13 +375,11 @@ keypress(XKeyEvent *ev)
 			                  utf8, utf8, win, CurrentTime);
 			return;
 		case XK_Return:
-		case XK_KP_Enter:
-			break;
+		case XK_KP_Enter: break;
 		case XK_bracketleft:
 			cleanup();
 			exit(1);
-		default:
-			return;
+		default: return;
 		}
 	else if (ev->state & Mod1Mask)
 		switch(ksym) {
@@ -534,8 +485,7 @@ keypress(XKeyEvent *ev)
 		}
 		break;
 	case XK_Tab:
-		if (!sel)
-			return;
+		if (!sel) return;
 		strncpy(text, sel->text, sizeof text - 1);
 		text[sizeof text - 1] = '\0';
 		cursor = strlen(text);
@@ -545,9 +495,7 @@ keypress(XKeyEvent *ev)
 	drawmenu();
 }
 
-static void
-paste(void)
-{
+static void paste(void) {
 	char *p, *q;
 	int di;
 	unsigned long dl;
@@ -561,9 +509,7 @@ paste(void)
 	drawmenu();
 }
 
-static void
-readstdin(void)
-{
+static void readstdin(void) {
 	char buf[sizeof text], *p;
 	size_t i, imax = 0, size = 0;
 	unsigned int tmpmax = 0;
@@ -590,9 +536,7 @@ readstdin(void)
 	lines = MIN(lines, i);
 }
 
-static void
-run(void)
-{
+static void run(void) {
 	XEvent ev;
 
 	while (!XNextEvent(dpy, &ev)) {
@@ -623,9 +567,7 @@ run(void)
 	}
 }
 
-static void
-setup(void)
-{
+static void setup(void) {
 	int x, y, i = 0;
 	unsigned int du;
 	XSetWindowAttributes swa;
@@ -720,17 +662,13 @@ setup(void)
 	drawmenu();
 }
 
-static void
-usage(void)
-{
+static void usage(void) {
 	fputs("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
 	      "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]\n", stderr);
 	exit(1);
 }
 
-int
-main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 	XWindowAttributes wa;
 	int i, fast = 0;
 

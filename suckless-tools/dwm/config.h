@@ -76,9 +76,9 @@ static void toggle_gaps(){
     }
 }
 
+static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL };
+/* static const char *term[]  = { "st", NULL }; */
 static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
-/* static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL }; */
-static const char *term[]  = { "st", NULL };
 static const char *ranger[] = { "st", "-e", "ranger", NULL };
 static const char *vimwiki[] = { "st", "-w", "Vimwiki", "-T", "Vimwiki", "-n", "Vimwiki", "-e", "nvim", "-c VimwikiIndex", NULL };
 static const char *musicplayer[] = { "st", "-w", "music", "-T", "music", "-n", "music", "-e", "ranger", "/home/mitch/music", NULL };

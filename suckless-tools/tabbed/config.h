@@ -1,8 +1,8 @@
 static const char font[]        = "Terminus:pixelsize=12:antialias=false:autohint=false";
-static const char* selbgcolor  = "#5F819D";
-static const char* selfgcolor  = "#DCDFDD";
-static const char* normbgcolor   = "#373B41";
-static const char* normfgcolor   = "#DCDFDD";
+static const char* selbgcolor   = "#5F819D";
+static const char* selfgcolor   = "#DCDFDD";
+static const char* normbgcolor  = "#373B41";
+static const char* normfgcolor  = "#DCDFDD";
 static const char* urgbgcolor   = "#CC6666";
 static const char* urgfgcolor   = "#ffffff";
 static const char before[]      = "<";
@@ -38,11 +38,11 @@ static Key keys[] = {
      /* ------ shifts to next tab ------ */
     { MODKEY|ShiftMask,     XK_k,      rotate,      { .i = +1 } },
     { MODKEY|ShiftMask,     XK_j,      rotate,      { .i = -1 } },
-    
+
     { MODKEY,               XK_Tab,    rotate,      { .i = +1 } },
     { MODKEY|ShiftMask,     XK_Tab,    rotate,      { .i = -1 } },
     { ShiftMask,            XK_Tab,    rotate,      { .i = 0 } }, // back-&-forth
-    
+
     /* ------- moves a tab left or right in stack ---- */
     { MODKEY|ShiftMask,     XK_h,      movetab,     { .i = -1 } },
     { MODKEY|ShiftMask,     XK_l,      movetab,     { .i = +1 } },
