@@ -327,9 +327,9 @@ void setup(void) {
 	gdkkb = gdk_seat_get_keyboard(gdk_display_get_default_seat(gdpy));
 
 	for (i = 0; i < LENGTH(certs); ++i) {
-		if (!regcomp(&(certs[i].re), certs[i].regex, REG_EXTENDED)) {
+		if (!regcomp(&(certs[i].re), certs[i].regex, REG_EXTENDED))
 			certs[i].file = g_strconcat(certdir, "/", certs[i].file, NULL);
-		} else {
+		else {
 			fprintf(stderr, "Could not compile regex: %s\n", certs[i].regex);
 			certs[i].regex = NULL;
 		}
@@ -623,106 +623,106 @@ void setparameter(Client *c, int refresh, ParamName p, const Arg *a) {
 	modparams[p] = curconfig[p].prio;
 
 	switch (p) {
-	case AcceleratedCanvas:
-		webkit_settings_set_enable_accelerated_2d_canvas(s, a->i);
-		break;
-	case AccessMicrophone: return; /* do nothing */
-	case AccessWebcam: return; /* do nothing */
-	case CaretBrowsing:
-		webkit_settings_set_enable_caret_browsing(s, a->i);
-		refresh = 0;
-		break;
-	case Certificate:
-		if (a->i) setcert(c, geturi(c));
-		return; /* do not update */
-	case CookiePolicies:
-		webkit_cookie_manager_set_accept_policy(
-		    webkit_web_context_get_cookie_manager(
-		    webkit_web_view_get_context(c->view)),
-		    cookiepolicy_get());
-		refresh = 0;
-		break;
-	case DiskCache:
-		webkit_web_context_set_cache_model(
-		    webkit_web_view_get_context(c->view), a->i ?
-		    WEBKIT_CACHE_MODEL_WEB_BROWSER :
-		    WEBKIT_CACHE_MODEL_DOCUMENT_VIEWER);
-		return; /* do not update */
-	case DefaultCharset:
-		webkit_settings_set_default_charset(s, a->v);
-		return; /* do not update */
-	case DNSPrefetch:
-		webkit_settings_set_enable_dns_prefetching(s, a->i);
-		return; /* do not update */
-	case FileURLsCrossAccess:
-		webkit_settings_set_allow_file_access_from_file_urls(s, a->i);
-		webkit_settings_set_allow_universal_access_from_file_urls(s, a->i);
-		return; /* do not update */
-	case FontSize:
-		webkit_settings_set_default_font_size(s, a->i);
-		return; /* do not update */
-	case FrameFlattening:
-		webkit_settings_set_enable_frame_flattening(s, a->i);
-		break;
-	case Geolocation: refresh = 0; break;
-	case HideBackground:
-		if (a->i) webkit_web_view_set_background_color(c->view, &bgcolor);
-		return; /* do not update */
-	case Inspector:
-		webkit_settings_set_enable_developer_extras(s, a->i);
-		return; /* do not update */
-	case Java:
-		webkit_settings_set_enable_java(s, a->i);
-		return; /* do not update */
-	case JavaScript:
-		webkit_settings_set_enable_javascript(s, a->i);
-		break;
-	case KioskMode: return; /* do nothing */
-	case LoadImages:
-		webkit_settings_set_auto_load_images(s, a->i);
-		break;
-	case MediaManualPlay:
-		webkit_settings_set_media_playback_requires_user_gesture(s, a->i);
-		break;
-	case Plugins:
-		webkit_settings_set_enable_plugins(s, a->i);
-		break;
-	case PreferredLanguages: return; /* do nothing */
-	case RunInFullscreen: return; /* do nothing */
-	case ScrollBars:
-		/* Disabled until we write some WebKitWebExtension for
-		 * manipulating the DOM directly.
-		enablescrollbars = !enablescrollbars; */
-		/* evalscript(c, "document.documentElement.style.overflow = '%s'","hidden"); */
-		return; /* do not update */
-	case ShowIndicators: break;
-	case SmoothScrolling:
-		webkit_settings_set_enable_smooth_scrolling(s, a->i);
-		return; /* do not update */
-	case SiteQuirks:
-		webkit_settings_set_enable_site_specific_quirks(s, a->i);
-		break;
-	case SpellChecking:
-		webkit_web_context_set_spell_checking_enabled(
-		    webkit_web_view_get_context(c->view), a->i);
-		return; /* do not update */
-	case SpellLanguages: return; /* do nothing */
-	case StrictTLS:
-		webkit_web_context_set_tls_errors_policy(
-		    webkit_web_view_get_context(c->view), a->i ?
-		    WEBKIT_TLS_ERRORS_POLICY_FAIL :
-		    WEBKIT_TLS_ERRORS_POLICY_IGNORE);
-		break;
-	case Style:
-		webkit_user_content_manager_remove_all_style_sheets(
-		    webkit_web_view_get_user_content_manager(c->view));
-		if (a->i) setstyle(c, getstyle(geturi(c)));
-		refresh = 0;
-		break;
-	case ZoomLevel:
-		webkit_web_view_set_zoom_level(c->view, a->f);
-		return; /* do not update */
-	default: return; /* do nothing */
+        case AcceleratedCanvas:
+            webkit_settings_set_enable_accelerated_2d_canvas(s, a->i);
+            break;
+        case AccessMicrophone: return; /* do nothing */
+        case AccessWebcam: return; /* do nothing */
+        case CaretBrowsing:
+            webkit_settings_set_enable_caret_browsing(s, a->i);
+            refresh = 0;
+            break;
+        case Certificate:
+            if (a->i) setcert(c, geturi(c));
+            return; /* do not update */
+        case CookiePolicies:
+            webkit_cookie_manager_set_accept_policy(
+                webkit_web_context_get_cookie_manager(
+                webkit_web_view_get_context(c->view)),
+                cookiepolicy_get());
+            refresh = 0;
+            break;
+        case DiskCache:
+            webkit_web_context_set_cache_model(
+                webkit_web_view_get_context(c->view), a->i ?
+                WEBKIT_CACHE_MODEL_WEB_BROWSER :
+                WEBKIT_CACHE_MODEL_DOCUMENT_VIEWER);
+            return; /* do not update */
+        case DefaultCharset:
+            webkit_settings_set_default_charset(s, a->v);
+            return; /* do not update */
+        case DNSPrefetch:
+            webkit_settings_set_enable_dns_prefetching(s, a->i);
+            return; /* do not update */
+        case FileURLsCrossAccess:
+            webkit_settings_set_allow_file_access_from_file_urls(s, a->i);
+            webkit_settings_set_allow_universal_access_from_file_urls(s, a->i);
+            return; /* do not update */
+        case FontSize:
+            webkit_settings_set_default_font_size(s, a->i);
+            return; /* do not update */
+        case FrameFlattening:
+            webkit_settings_set_enable_frame_flattening(s, a->i);
+            break;
+        case Geolocation: refresh = 0; break;
+        case HideBackground:
+            if (a->i) webkit_web_view_set_background_color(c->view, &bgcolor);
+            return; /* do not update */
+        case Inspector:
+            webkit_settings_set_enable_developer_extras(s, a->i);
+            return; /* do not update */
+        case Java:
+            webkit_settings_set_enable_java(s, a->i);
+            return; /* do not update */
+        case JavaScript:
+            webkit_settings_set_enable_javascript(s, a->i);
+            break;
+        case KioskMode: return; /* do nothing */
+        case LoadImages:
+            webkit_settings_set_auto_load_images(s, a->i);
+            break;
+        case MediaManualPlay:
+            webkit_settings_set_media_playback_requires_user_gesture(s, a->i);
+            break;
+        case Plugins:
+            webkit_settings_set_enable_plugins(s, a->i);
+            break;
+        case PreferredLanguages: return; /* do nothing */
+        case RunInFullscreen: return; /* do nothing */
+        case ScrollBars:
+            /* Disabled until we write some WebKitWebExtension for
+            * manipulating the DOM directly.
+            enablescrollbars = !enablescrollbars; */
+            /* evalscript(c, "document.documentElement.style.overflow = '%s'","hidden"); */
+            return; /* do not update */
+        case ShowIndicators: break;
+        case SmoothScrolling:
+            webkit_settings_set_enable_smooth_scrolling(s, a->i);
+            return; /* do not update */
+        case SiteQuirks:
+            webkit_settings_set_enable_site_specific_quirks(s, a->i);
+            break;
+        case SpellChecking:
+            webkit_web_context_set_spell_checking_enabled(
+                webkit_web_view_get_context(c->view), a->i);
+            return; /* do not update */
+        case SpellLanguages: return; /* do nothing */
+        case StrictTLS:
+            webkit_web_context_set_tls_errors_policy(
+                webkit_web_view_get_context(c->view), a->i ?
+                WEBKIT_TLS_ERRORS_POLICY_FAIL :
+                WEBKIT_TLS_ERRORS_POLICY_IGNORE);
+            break;
+        case Style:
+            webkit_user_content_manager_remove_all_style_sheets(
+                webkit_web_view_get_user_content_manager(c->view));
+            if (a->i) setstyle(c, getstyle(geturi(c)));
+            refresh = 0;
+            break;
+        case ZoomLevel:
+            webkit_web_view_set_zoom_level(c->view, a->f);
+            return; /* do not update */
+        default: return; /* do nothing */
 	}
 
 	updatetitle(c);
@@ -731,7 +731,6 @@ void setparameter(Client *c, int refresh, ParamName p, const Arg *a) {
 
 const char * getcert(const char *uri) {
 	int i;
-
 	for (i = 0; i < LENGTH(certs); ++i) {
 		if (certs[i].regex &&
 		    !regexec(&(certs[i].re), uri, 0, NULL, 0))

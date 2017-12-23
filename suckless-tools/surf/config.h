@@ -117,7 +117,7 @@ static SiteSpecific styles[] = {
 	{ ".*",                 "default.css" },
 };
 
-/* ------- BOOK MARKING ---------------- */
+/* ------- BOOK MARKING --------------------------------- */
 #define BM_PICK { .v = (char *[]){ "/bin/sh", "-c", \
     "xprop -id $0 -f _SURF_GO 8s -set _SURF_GO \
     `cat ~/.surf/bookmarks | dmenu -i -l 15 || exit 0`", \
@@ -128,7 +128,14 @@ static SiteSpecific styles[] = {
     cat ~/.surf/bookmarks) | sort -u > ~/.surf/bookmarks_new && \
     mv ~/.surf/bookmarks_new ~/.surf/bookmarks", \
     winid, NULL } }
-/* ----------------------------------------- */
+/* ------------------------------------------------------ */
+
+/* ------------------- GO HOME -------------------------- */
+#define GO_HOME { .v = (char *[]){ "/bin/sh", "-c", \
+    "xprop -id $0 -f _SURF_GO 8s -set _SURF_GO \
+    /home/mitch/workspace/dotfiles/startpage/index.html || exit 0", \
+    winid, NULL } }
+/* ---------------------------------------------------- */
 
 /* ----------- open flash videos with youtube-dl ------------ */
 #define YOUTUBEDL {.v = (char *[]){ "/bin/sh", "-c", \
@@ -136,12 +143,15 @@ static SiteSpecific styles[] = {
         winid, NULL } }
 /* ----------------------------------------------------------------- */
 
-// The complete list of gdk key syms can be found at: http://git.gnome.org/browse/gtk+/plain/gdk/gdkkeysyms.h
+/* --------- function to launch arbitrary commands ---------------- */
+#define SH(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+/* -------------------------------------------------------------------------- */
+
+
+// The complete list of gdk key syms can be found at:
+// http://git.gnome.org/browse/gtk+/plain/gdk/gdkkeysyms.h
 #define MODKEY GDK_CONTROL_MASK
 #define SHIFT GDK_SHIFT_MASK
-
-// function to launch arbitrary commands
-#define SH(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 static Key keys[] = {
     { MODKEY,               GDK_KEY_g,       spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
     { MODKEY,               GDK_KEY_slash,   spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
@@ -151,24 +161,13 @@ static Key keys[] = {
     { 0,                    GDK_KEY_F5,      reload,     { .i = 0 } },
     { 0,                    GDK_KEY_Escape,  stop,       { 0 } },
     { MODKEY,               GDK_KEY_c,       stop,       { 0 } },
-    /* { MODKEY,               GDK_KEY_space,   go_home,       { 0 } }, */
 
     /* ----------------- Custom Functions ---------------------------- */
     { MODKEY,               GDK_KEY_o,      spawn,      YOUTUBEDL },
     { MODKEY,               GDK_KEY_b,      spawn,      BM_PICK },
     { MODKEY|SHIFT,         GDK_KEY_b,      spawn,      BM_ADD },
     { MODKEY,               GDK_KEY_t,      spawn,      SH("python ~/workspace/dotfiles/suckless-tools/surf/scripts-surf/surf-translate.py '$(xclip -o)'") },
-
-    // vim mode
-    { MODKEY,               GDK_KEY_j,      scroll,     { .i = 'd' } },
-    { MODKEY,               GDK_KEY_k,      scroll,     { .i = 'u' } },
-    { MODKEY,               GDK_KEY_l,      scroll,     { .i = 'r' } },
-    { MODKEY,               GDK_KEY_h,      scroll,     { .i = 'l' } },
-
-    /* these conflict with other binds ---- figure out later */
-    /* { MODKEY,               GDK_KEY_f,      scroll,     { .i = 'U' } }, */
-    /* { MODKEY,               GDK_KEY_b,      scroll,     { .i = 'D' } }, */
-
+    { MODKEY,               GDK_KEY_space,  spawn,      GO_HOME  },
     /* ----------------- End Custom Functions ------------------------ */
 
     /* ---------------------- History -------------------------------- */
@@ -183,6 +182,15 @@ static Key keys[] = {
     { MODKEY,                GDK_KEY_BackSpace,   zoom,       { .i = +0 } },
     { 0,                     GDK_KEY_F11,         togglefullscreen, { 0 } },
     /* ------------------------------------------------------------------- */
+
+    // vim mode
+    { MODKEY,               GDK_KEY_j,      scroll,     { .i = 'd' } },
+    { MODKEY,               GDK_KEY_k,      scroll,     { .i = 'u' } },
+    { MODKEY,               GDK_KEY_l,      scroll,     { .i = 'r' } },
+    { MODKEY,               GDK_KEY_h,      scroll,     { .i = 'l' } },
+    /* these conflict with other binds ---- figure out later */
+    /* { MODKEY,               GDK_KEY_f,      scroll,     { .i = 'U' } }, */
+    /* { MODKEY,               GDK_KEY_b,      scroll,     { .i = 'D' } }, */
 
     /* --------------------- Toggles -------------------------------------- */
     { MODKEY|SHIFT,          GDK_KEY_s,      toggle,     { .i = JavaScript } },
