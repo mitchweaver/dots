@@ -162,7 +162,7 @@ static Key keys[] = {
     { mod1,                     XK_q,       killclient, {0} },
     { mod1|shift|ctrl,          XK_q,       quit,       {0} },
     // ------------------------------------------------------------------- //
-    /* { mod1,                     XK_0,       view,           {.ui = ~0 } }, */
+    /* { mod1,                 XK_0,       view,           {.ui = ~0 } }, */
     /* { mod1|shift,           XK_0,       tag,            {.ui = ~0 } }, */
     // ------------------------------------------------------------------- //
     TAGKEYS(XK_1,0) TAGKEYS(XK_2,1) TAGKEYS(XK_3,2) TAGKEYS(XK_4,3)
