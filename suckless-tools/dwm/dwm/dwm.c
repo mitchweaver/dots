@@ -18,18 +18,15 @@
 #include <X11/extensions/Xinerama.h>
 #endif /* XINERAMA */
 #include <X11/Xft/Xft.h>
-
 #include "drw.h"
 #include "util.h"
 
 /* macros */
 #define BUTTONMASK              (ButtonPressMask|ButtonReleaseMask)
 #define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
-#define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
-                               * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
+#define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
 #define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]))
 #define LENGTH(X)               (sizeof X / sizeof X[0])
-/* #define MAXCOLORS               9 */
 #define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
 #define WIDTH(X)                ((X)->w + 2 * (X)->bw + gappx)
 #define HEIGHT(X)               ((X)->h + 2 * (X)->bw + gappx)
@@ -44,8 +41,12 @@ enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
 enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
-enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
-       ClkClientWin, ClkRootWin, ClkLast }; /* clicks */
+
+// -------------------- No title bar patch ---------------------------------- //
+/* enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, ClkRootWin, ClkLast }; /1* clicks *1/ */
+enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkClientWin, ClkRootWin, ClkLast };             /* clicks */
+/* -------------------------------------------------------------------------- */
+
 
 typedef union {
 	int i;
@@ -433,18 +434,18 @@ void buttonpress(XEvent *e) {
 	}
 	if (ev->window == selmon->barwin) {
 		i = x = 0;
-		do
-			x += TEXTW(tags[i]);
+		do x += TEXTW(tags[i]);
 		while (ev->x >= x && ++i < LENGTH(tags));
 		if (i < LENGTH(tags)) {
 			click = ClkTagBar;
 			arg.ui = 1 << i;
-		} else if (ev->x < x + blw)
-			click = ClkLtSymbol;
-		else if (ev->x > selmon->ww - TEXTW(stext))
-			click = ClkStatusText;
-		else
-			click = ClkWinTitle;
+		}
+        else if (ev->x < x + blw) click = ClkLtSymbol;
+// ------------ No title patch ------------------------------------------- //
+		/* else if (ev->x > selmon->ww - TEXTW(stext)) click = ClkStatusText; */
+        /* else click = ClkWinTitle; */
+	    else click = ClkStatusText;
+/* -------------------------------------------------------------------------- */
 	} else if ((c = wintoclient(ev->window))) {
 		focus(c);
 		restack(selmon);
@@ -723,17 +724,18 @@ void drawbar(Monitor *m) {
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
+    /* --------------- No title patch --------------------------------------- */
 	if ((w = m->ww - sw - x) > bh) {
 		if (m->sel) {
 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
-			if (m->sel->isfloating)
-				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
+			if (m->sel->isfloating) drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
+			/* drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0); */
 		} else {
-			drw_setscheme(drw, scheme[SchemeNorm]);
-			drw_rect(drw, x, 0, w, bh, 1, 1);
+            drw_setscheme(drw, scheme[SchemeNorm]);
+            drw_rect(drw, x, 0, w, bh, 1, 1);
 		}
 	}
+    /* -------------------------------------------------------------------------- */
 	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
 }
 
@@ -746,36 +748,28 @@ void enternotify(XEvent *e) {
 	Client *c;
 	Monitor *m;
 	XCrossingEvent *ev = &e->xcrossing;
-
-	if ((ev->mode != NotifyNormal || ev->detail == NotifyInferior) && ev->window != root)
-		return;
+	if ((ev->mode != NotifyNormal || ev->detail == NotifyInferior) && ev->window != root) return;
 	c = wintoclient(ev->window);
 	m = c ? c->mon : wintomon(ev->window);
 	if (m != selmon) {
 		unfocus(selmon->sel, 1);
 		selmon = m;
-	} else if (!c || c == selmon->sel)
-		return;
+	} else if (!c || c == selmon->sel) return;
 	focus(c);
 }
 
 void expose(XEvent *e) {
 	Monitor *m;
 	XExposeEvent *ev = &e->xexpose;
-	if (ev->count == 0 && (m = wintomon(ev->window)))
-		drawbar(m);
+	if (ev->count == 0 && (m = wintomon(ev->window))) drawbar(m);
 }
 
 void focus(Client *c) {
-	if (!c || !ISVISIBLE(c))
-		for (c = selmon->stack; c && !ISVISIBLE(c); c = c->snext);
-	if (selmon->sel && selmon->sel != c)
-		unfocus(selmon->sel, 0);
+	if (!c || !ISVISIBLE(c)) for (c = selmon->stack; c && !ISVISIBLE(c); c = c->snext);
+	if (selmon->sel && selmon->sel != c) unfocus(selmon->sel, 0);
 	if (c) {
-		if (c->mon != selmon)
-			selmon = c->mon;
-		if (c->isurgent)
-			seturgent(c, 0);
+		if (c->mon != selmon) selmon = c->mon;
+		if (c->isurgent) seturgent(c, 0);
 		detachstack(c);
 		attachstack(c);
 		grabbuttons(c, 1);
@@ -792,9 +786,7 @@ void focus(Client *c) {
 /* there are some broken focus acquiring clients needing extra handling */
 void focusin(XEvent *e) {
 	XFocusChangeEvent *ev = &e->xfocus;
-
-	if (selmon->sel && ev->window != selmon->sel->win)
-		setfocus(selmon->sel);
+	if (selmon->sel && ev->window != selmon->sel->win) setfocus(selmon->sel);
 }
 
 /* void focusmon(const Arg *arg) { */
@@ -837,7 +829,6 @@ Atom getatomprop(Client *c, Atom prop) {
 	unsigned long dl;
 	unsigned char *p = NULL;
 	Atom da, atom = None;
-
 	if (XGetWindowProperty(dpy, c->win, prop, 0L, sizeof atom, False, XA_ATOM,
 		&da, &di, &dl, &dl, &p) == Success && p) {
 		atom = *(Atom *)p;
@@ -850,7 +841,6 @@ int getrootptr(int *x, int *y) {
 	int di;
 	unsigned int dui;
 	Window dummy;
-
 	return XQueryPointer(dpy, root, &dummy, &dummy, x, y, &di, &di, &dui);
 }
 
@@ -1017,10 +1007,8 @@ void manage(Window w, XWindowAttributes *wa) {
 	updatewmhints(c);
 	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
 	grabbuttons(c, 0);
-	if (!c->isfloating)
-		c->isfloating = c->oldstate = trans != None || c->isfixed;
-	if (c->isfloating)
-		XRaiseWindow(dpy, c->win);
+	if (!c->isfloating) c->isfloating = c->oldstate = trans != None || c->isfixed;
+	if (c->isfloating) XRaiseWindow(dpy, c->win);
 	attachabove(c);
 	attachstack(c);
 	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
@@ -1169,12 +1157,14 @@ void propertynotify(XEvent *e) {
 			drawbars();
 			break;
 		}
-		if (ev->atom == XA_WM_NAME || ev->atom == netatom[NetWMName]) {
-			updatetitle(c);
-			if (c == c->mon->sel) drawbar(c->mon);
-		}
-		if (ev->atom == netatom[NetWMWindowType])
-			updatewindowtype(c);
+        /* -------------- no title patch ------------------------------------------ */
+		if(ev->atom == XA_WM_NAME || ev->atom == netatom[NetWMName]) updatetitle(c);
+		/* if (ev->atom == XA_WM_NAME || ev->atom == netatom[NetWMName]) { */
+			/* updatetitle(c); */
+			/* if (c == c->mon->sel) drawbar(c->mon); */
+		/* } */
+        /* -------------------------------------------------------------------------- */
+		if (ev->atom == netatom[NetWMWindowType]) updatewindowtype(c);
 	}
 }
 
@@ -1199,8 +1189,7 @@ void resize(Client *c, int x, int y, int w, int h, int interact) {
 		resizeclient(c, x, y, w, h);
 }
 
-void resizeclient(Client *c, int x, int y, int w, int h)
-{
+void resizeclient(Client *c, int x, int y, int w, int h) {
 	XWindowChanges wc;
 	unsigned int n;
 	unsigned int gapoffset;
@@ -1362,8 +1351,7 @@ void run(void) {
 }
 
 void runAutostart(void) {
-	/* system("cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/scripts-dwm; ./autostart_blocking.sh"); */
-	system("cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/scripts-dwm; ./autostart.sh &");
+	system("sh /home/mitch/workspace/dotfiles/suckless-tools/dwm/scripts-dwm/autostart.sh &");
 }
 
 void scan(void) {
@@ -1418,8 +1406,7 @@ int sendevent(Client *c, Atom proto) {
 	XEvent ev;
 
 	if (XGetWMProtocols(dpy, c->win, &protocols, &n)) {
-		while (!exists && n--)
-			exists = protocols[n] == proto;
+		while (!exists && n--) exists = protocols[n] == proto;
 		XFree(protocols);
 	}
 	if (exists) {
@@ -1476,33 +1463,26 @@ void setlayout(const Arg *arg) {
 	if (arg && arg->v)
 		selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] = (Layout *)arg->v;
 	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
-	if (selmon->sel)
-		arrange(selmon);
-	else
-		drawbar(selmon);
+	if (selmon->sel) arrange(selmon);
+	else drawbar(selmon);
 }
 
 /* arg > 1.0 will set mfact absolutely */
 void setmfact(const Arg *arg) {
 	float f;
 
-	if (!arg || !selmon->lt[selmon->sellt]->arrange)
-		return;
+	if (!arg || !selmon->lt[selmon->sellt]->arrange) return;
 	f = arg->f < 1.0 ? arg->f + selmon->mfact : arg->f - 1.0;
-	if (f < 0.1 || f > 0.9)
-		return;
+	if (f < 0.1 || f > 0.9) return;
 	selmon->mfact = selmon->pertag->mfacts[selmon->pertag->curtag] = f;
 	arrange(selmon);
 }
 
 void setsmfact(const Arg *arg){
    float sf;
-
-   if(!arg || !selmon->lt[selmon->sellt]->arrange)
-       return;
+   if(!arg || !selmon->lt[selmon->sellt]->arrange) return;
    sf = arg->sf < 1.0 ? arg->sf + selmon->smfact : arg->sf - 1.0;
-   if(sf < 0 || sf > 0.9)
-       return;
+   if(sf < 0 || sf > 0.9) return;
    selmon->smfact = sf;
    arrange(selmon);
 }
@@ -1554,15 +1534,11 @@ void setup(void) {
 	updatestatus();
 	/* supporting window for NetWMCheck */
 	wmcheckwin = XCreateSimpleWindow(dpy, root, 0, 0, 1, 1, 0, 0, 0);
-	XChangeProperty(dpy, wmcheckwin, netatom[NetWMCheck], XA_WINDOW, 32,
-		PropModeReplace, (unsigned char *) &wmcheckwin, 1);
-	XChangeProperty(dpy, wmcheckwin, netatom[NetWMName], utf8string, 8,
-		PropModeReplace, (unsigned char *) "dwm", 4);
-	XChangeProperty(dpy, root, netatom[NetWMCheck], XA_WINDOW, 32,
-		PropModeReplace, (unsigned char *) &wmcheckwin, 1);
+	XChangeProperty(dpy, wmcheckwin, netatom[NetWMCheck], XA_WINDOW, 32, PropModeReplace, (unsigned char *) &wmcheckwin, 1);
+	XChangeProperty(dpy, wmcheckwin, netatom[NetWMName], utf8string, 8, PropModeReplace, (unsigned char *) "dwm", 4);
+	XChangeProperty(dpy, root, netatom[NetWMCheck], XA_WINDOW, 32, PropModeReplace, (unsigned char *) &wmcheckwin, 1);
 	/* EWMH support per view */
-	XChangeProperty(dpy, root, netatom[NetSupported], XA_ATOM, 32,
-		PropModeReplace, (unsigned char *) netatom, NetLast);
+	XChangeProperty(dpy, root, netatom[NetSupported], XA_ATOM, 32, PropModeReplace, (unsigned char *) netatom, NetLast);
 	XDeleteProperty(dpy, root, netatom[NetClientList]);
 	/* select events */
 	wa.cursor = cursor[CurNormal]->cursor;
@@ -1578,10 +1554,8 @@ void setup(void) {
 
 void seturgent(Client *c, int urg) {
 	XWMHints *wmh;
-
 	c->isurgent = urg;
-	if (!(wmh = XGetWMHints(dpy, c->win)))
-		return;
+	if (!(wmh = XGetWMHints(dpy, c->win))) return;
 	wmh->flags = urg ? (wmh->flags | XUrgencyHint) : (wmh->flags & ~XUrgencyHint);
 	XSetWMHints(dpy, c->win, wmh);
 	XFree(wmh);
@@ -1694,8 +1668,6 @@ void togglefloating(const Arg *arg) {
         selmon->sel->sfw = selmon->sel->w;
         selmon->sel->sfh = selmon->sel->h;
     }
-
-
     arrange(selmon);
 }
 
@@ -1906,7 +1878,6 @@ int updategeom(void) {
 void updatenumlockmask(void) {
 	unsigned int i, j;
 	XModifierKeymap *modmap;
-
 	numlockmask = 0;
 	modmap = XGetModifierMapping(dpy);
 	for (i = 0; i < 8; i++)
@@ -1920,7 +1891,6 @@ void updatenumlockmask(void) {
 void updatesizehints(Client *c) {
 	long msize;
 	XSizeHints size;
-
 	if (!XGetWMNormalHints(dpy, c->win, &size, &msize))
 		/* size is uninitialized, ensure that size.flags aren't used */
 		size.flags = PSize;
@@ -1961,24 +1931,25 @@ void updatesizehints(Client *c) {
 void updatetitle(Client *c) {
 	if (!gettextprop(c->win, netatom[NetWMName], c->name, sizeof c->name))
 		gettextprop(c->win, XA_WM_NAME, c->name, sizeof c->name);
-	if (c->name[0] == '\0') /* hack to mark broken clients */
-		strcpy(c->name, broken);
+
+    // ----- Commenting this out stops clients from being named "broken" --- //
+	/* if (c->name[0] == '\0') /1* hack to mark broken clients *1/ strcpy(c->name, broken); */
+    /* -------------------------------------------------------------------------- */
 }
 
 void updatestatus(void) {
-	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
-		strcpy(stext, "dwm-"VERSION);
+    // ------------- no version patch ------------------------------------------------------ //
+	/* if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext))) strcpy(stext, "dwm-"VERSION); */
+	gettextprop(root, XA_WM_NAME, stext, sizeof(stext));
+    /* ------------------------------------------------------------------------------------- */
 	drawbar(selmon);
 }
 
 void updatewindowtype(Client *c) {
 	Atom state = getatomprop(c, netatom[NetWMState]);
 	Atom wtype = getatomprop(c, netatom[NetWMWindowType]);
-
-	if (state == netatom[NetWMFullscreen])
-		setfullscreen(c, 1);
-	if (wtype == netatom[NetWMWindowTypeDialog])
-		c->isfloating = 1;
+	if (state == netatom[NetWMFullscreen]) setfullscreen(c, 1);
+	if (wtype == netatom[NetWMWindowTypeDialog]) c->isfloating = 1;
 }
 
 void updatewmhints(Client *c) {

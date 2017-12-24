@@ -50,7 +50,7 @@ static Key keys[] = {
 	{ MODKEY,               XK_w,      killclient,  { 0 } },
 
     /* this opens dmenu to rifle through tabs */
-	/* { MODKEY,               XK_m,  spawn,       SETPROP("_TABBED_SELECT_TAB") }, */
+	/* { MODKEY,               XK_t,      spawn,       SETPROP("_TABBED_SELECT_TAB") }, */
 
 	{ MODKEY,               XK_1,      move,        { .i = 0 } },
 	{ MODKEY,               XK_2,      move,        { .i = 1 } },

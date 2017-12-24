@@ -109,7 +109,7 @@ alias v='nvim'
 alias vi='v'
 alias vim='v'
 
-alias r="ranger";[ -n "$RANGER_LEVEL" ] && PS1="$PS1"'(RANGER): ' && clear && ls -F
+alias r="ranger ; x";[ -n "$RANGER_LEVEL" ] && PS1="$PS1"'(RANGER): ' && clear && ls -F
 
 alias h='htop'
 alias htpo='h'
@@ -155,7 +155,7 @@ alias tiv='tiv -256'
 # ←---------------- Git Functions --------------------------→ #
 gitinit() { mkdir -p "$1" && git init "$1" ; }
 gitmote() { git init ; git remote add origin "$1" ; }
-gitup() { git add -A && git commit -m "$@" && git push -u origin master ; }
+gitup() { git add -A ; git commit -m "$@" ; git push -u origin master ; }
 gitadd() {
     if [ $# -eq 0 ] ; then
         git add -A

@@ -77,9 +77,9 @@ static void toggle_gaps(){
     }
 }
 
-static const char *term[]  = { "tabbed", "-c", "-r", "2", "st", "-w", "''", NULL };
+static const char *term[]  = { "tabbed", "-cd", "-r", "2", "st", "-w", "''", NULL };
 /* static const char *term[]  = { "st", NULL }; */
-static const char *net[] = { "tabbed", "-c", "surf", "-e", NULL };
+static const char *net[] = { "tabbed", "-cd", "surf", "-e", NULL };
 static const char *ranger[] = { "st", "-e", "ranger", NULL };
 static const char *vimwiki[] = { "st", "-w", "Vimwiki", "-T", "Vimwiki", "-n", "Vimwiki", "-e", "nvim", "-c VimwikiIndex", NULL };
 static const char *musicplayer[] = { "st", "-w", "music", "-T", "music", "-n", "music", "-e", "ranger", "/home/mitch/music", NULL };
@@ -93,7 +93,7 @@ static const char *mpdtoggle[] = { "mpc", "-q",  "toggle", NULL };
 static const char *mpdseekff[] = { "mpc", "-q", "seek", "+00:00:30", NULL };
 static const char *mpdseekrw[] = { "mpc", "-q", "seek", "-00:00:30", NULL };
 static const char *slock[] = { "slock", NULL };
-static const char *screenshot[] = { "screenshot", NULL };
+/* static const char *screenshot[] = { "screenshot", NULL }; */
 /* static const char *xdgopen[] = { "/home/mitch/workspace/dotfiles/suckless-tools/dwm/scripts-dwm/xdgopen.sh", NULL }; */
 
 #include "movestack.c"
@@ -114,7 +114,7 @@ static Key keys[] = {
     { mod1,                     XK_slash,         spawn,    {.v = mpdtoggle } },
     { mod1,                     XK_period,        spawn,    {.v = mpdnext } },
     { mod1,                     XK_comma,         spawn,    {.v = mpdprev } },
-    { 0,                        XK_Print,         spawn,    {.v = screenshot} },
+    /* { 0,                        XK_Print,         spawn,    {.v = screenshot} }, */
     { mod1,                     XK_semicolon,     spawn,    {.v = voldown }},
     { mod1,                     XK_apostrophe,    spawn,    {.v = volup }},
 
