@@ -26,8 +26,8 @@ unsigned int alpha = 0xFF; // no opacity (recommended)
 
 
 
-unsigned int cols = 60;
-unsigned int rows = 20;
+unsigned int cols = 80;
+unsigned int rows = 30;
 int borderpx = 6; /* Internal border */
 static char shell[] = "/bin/ksh";
 /* ---------------------------------------------------------------------- */

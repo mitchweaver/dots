@@ -1,10 +1,11 @@
 #include "dwm-configh-ignore.h"
 static unsigned int gappx = 10; /* gap pixel between windows */
+
+// not working. really want this to be working...
 static const unsigned int gapX = 10;
 static const unsigned int gapY = 10;
+
 static unsigned int borderpx  = 5; /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int minwsz    = 10;       /* min height for smfact */
 static const char *fonts[]      = { "Terminus:pixelsize=12:antialias=false:autohint=false" };
 static const char gray1[]           = "#222222";
 static const char gray3[]           = "#bbbbbb";
@@ -27,21 +28,20 @@ static const char *colors[][3]      = {
     [SchemeUrg] =  { gray4,       red,         red },
 };
 
-static const char *tags[] = { "", "", "", "", "", "", "", "", "", \
-                              "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
-    /* class      instance    title       tags mask  iscentered   isfloating   monitor */
-    { "Gimp",     NULL,       NULL,       0,         0,           1,           -1 },
+    /* class      instance    title                 tags mask  iscentered   isfloating   monitor */
+    { "Gimp",     NULL,       NULL,                 0,         0,           1,           -1 },
+
+    // when st is launched while floating, center it.--- NOT WORKING.... but good idea
+    /* { "tabbed",    NULL,       NULL,                0,         1,           0,           -1 }, */
+    /* { "st",        NULL,       NULL,                0,         1,           0,           -1 }, */
 
     // surf-download and surf-translate
     { "st",       NULL,       "surf-download",      0,         1,           1,           -1 },
     { "st",       NULL,       "surf-translate",     0,         1,           1,           -1 },
 };
-
-static const float mfact  = 0.50; /* factor of master area size [0.05..0.95] */
-static const float smfact = 0.00; /* factor of tiled clients */
-static const int nmaster     = 1;    /* number of clients in master area */
 
 #include "layouts.c"
 #include "horizgrid.c"
