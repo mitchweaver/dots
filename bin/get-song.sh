@@ -19,7 +19,7 @@ if [ "$song" ]; then
         song="${song}..."
     fi
 
-    echo "[ ♫ $song ]"
+    echo "[ ♫ $song ] ∙"
 
 else
     # has to be " " or else NULL causes errors in apps

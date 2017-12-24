@@ -7,15 +7,11 @@
 # ------------- CONFIGURATION -------------------------- #
 # folders you wish to source
 # These are some of mine, just for examples
-FOLDERS="$HOME/workspace/dotfiles \
+FOLDERS="$HOME/workspace/dotfiles/commonly_edited \
          $HOME/workspace/dotfiles/.config \
-         $HOME/workspace/dotfiles/.config/Discline \
          $HOME/bin \
          $HOME/downloads \
-         $HOME/tmp \
-         $HOME/workspace/dotfiles/.config/ranger \
-         $HOME/workspace/dotfiles/suckless-tools/CONFIGS \
-         $HOME/workspace/diskvlt-bot"
+         $HOME/tmp"
 
 # files you dont want to see in dmenu
 # Doesn't work on BSD

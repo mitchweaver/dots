@@ -1,0 +1,1 @@
+../suckless-tools/slstatus/config.h

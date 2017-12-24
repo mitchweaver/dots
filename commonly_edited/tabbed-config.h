@@ -1,0 +1,1 @@
+../suckless-tools/tabbed/config.h

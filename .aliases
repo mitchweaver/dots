@@ -248,6 +248,7 @@ alias wtfismyip='curl https://wtfismyip.com/text'
 alias weather="~/bin/weather.sh Schmalkalden"
 alias weather-sd="~/bin/weather.sh Dakota_State_University"
 alias weather-ok="~/bin/weather.sh Claremore"
+alias backup="sh ~/bin/backup.sh"
 
 # ←--------------- Specific File Editing -------------------→ #
 alias aliases='v ~/.aliases'

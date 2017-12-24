@@ -1,1 +1,0 @@
-../slstatus/config.h

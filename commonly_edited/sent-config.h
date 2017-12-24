@@ -1,0 +1,1 @@
+../suckless-tools/sent/config.h

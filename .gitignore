@@ -4,6 +4,7 @@ suckless-tools/surf/bookmarks
 .mpd/mpd.db
 .mpd/mpd.pid
 .mpd/mpdstate
+.mpd/mpdlog
 
 *.o
 *.out

@@ -1,3 +1,5 @@
+#include "st-configh-ignores.h"
+
 char font[] = "Terminus:pixelsize=14:antialias=false:autohint=false";
 /* char font[] = "DejaVuSans Mono:pixelsize=12:antialias=true:autohint=true"; */
 
@@ -13,8 +15,6 @@ char font[] = "Terminus:pixelsize=14:antialias=false:autohint=false";
 /* #include "hund-theme.h" */
 /* -------------------------------------------------------------------------- */
 
-
-
 /* -------------------------------------------------------------------------- */
 // NOTE: Opacity breaks some things... Ranger previews flicker like mad, makes
 //       them unusable. Also, tabbed has problems with transparent clients.
@@ -23,8 +23,6 @@ char font[] = "Terminus:pixelsize=14:antialias=false:autohint=false";
 /* unsigned int alpha = 0xcc; // opacity */
 unsigned int alpha = 0xFF; // no opacity (recommended)
 /* -------------------------------------------------------------------------- */
-
-
 
 unsigned int cols = 80;
 unsigned int rows = 30;
@@ -83,5 +81,3 @@ Shortcut shortcuts[] = {
 	/* { CONTROL,              XK_Y,           selpaste,       {.i =  0} }, */
     /* { XK_ANY_MOD,           XK_F6,          swapcolors,     {.i =  0} }, */
 };
-
-#include "configh-do-not-touch.h"
