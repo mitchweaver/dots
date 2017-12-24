@@ -406,7 +406,6 @@ void attachabove(Client *c) {
 		attach(c);
 		return;
 	}
-
 	Client *at;
 	for(at = c->mon->clients; at->next != c->mon->sel; at = at->next);
 	c->next = at->next;
@@ -481,10 +480,8 @@ void cleanup(void) {
 	XUngrabKey(dpy, AnyKey, AnyModifier, root);
 	while (mons)
 		cleanupmon(mons);
-	for (i = 0; i < CurLast; i++)
-		drw_cur_free(drw, cursor[i]);
-	for (i = 0; i < LENGTH(colors); i++)
-		free(scheme[i]);
+	for (i = 0; i < CurLast; i++) drw_cur_free(drw, cursor[i]);
+	for (i = 0; i < LENGTH(colors); i++) free(scheme[i]);
 	XDestroyWindow(dpy, wmcheckwin);
 	drw_free(drw);
 	XSync(dpy, False);
@@ -507,7 +504,6 @@ void cleanupmon(Monitor *mon) { Monitor *m;
 void clientmessage(XEvent *e) {
 	XClientMessageEvent *cme = &e->xclient;
 	Client *c = wintoclient(cme->window);
-
 	if (!c) return;
 	if (cme->message_type == netatom[NetWMState]) {
 		if (cme->data.l[1] == netatom[NetWMFullscreen]
@@ -570,8 +566,7 @@ void configurerequest(XEvent *e) {
 	XWindowChanges wc;
 
 	if ((c = wintoclient(ev->window))) {
-		if (ev->value_mask & CWBorderWidth)
-			c->bw = ev->border_width;
+		if (ev->value_mask & CWBorderWidth) c->bw = ev->border_width;
 		else if (c->isfloating || !selmon->lt[selmon->sellt]->arrange) {
 			m = c->mon;
 			if (ev->value_mask & CWX) {
@@ -1821,10 +1816,8 @@ int updategeom(void) {
 		if (n <= nn) { /* new monitors available */
 			for (i = 0; i < (nn - n); i++) {
 				for (m = mons; m && m->next; m = m->next);
-				if (m)
-					m->next = createmon();
-				else
-					mons = createmon();
+				if (m) m->next = createmon();
+				else mons = createmon();
 			}
 			for (i = 0, m = mons; i < nn && m; m = m->next, i++)
 				if (i >= n
@@ -2008,7 +2001,6 @@ void view(const Arg *arg) {
 Client * wintoclient(Window w) {
 	Client *c;
 	Monitor *m;
-
 	for (m = mons; m; m = m->next)
 		for (c = m->clients; c; c = c->next)
 			if (c->win == w)
@@ -2016,20 +2008,15 @@ Client * wintoclient(Window w) {
 	return NULL;
 }
 
-Monitor *
-wintomon(Window w)
-{
+Monitor * wintomon(Window w) {
 	int x, y;
 	Client *c;
 	Monitor *m;
 
-	if (w == root && getrootptr(&x, &y))
-		return recttomon(x, y, 1, 1);
+	if (w == root && getrootptr(&x, &y)) return recttomon(x, y, 1, 1);
 	for (m = mons; m; m = m->next)
-		if (w == m->barwin)
-			return m;
-	if ((c = wintoclient(w)))
-		return c->mon;
+		if (w == m->barwin) return m;
+	if ((c = wintoclient(w))) return c->mon;
 	return selmon;
 }
 
@@ -2126,30 +2113,24 @@ static void bstack(Monitor *m) {
 void centeredmaster(Monitor *m) {
 	unsigned int i, n, h, mw, mx, my, oty, ety, tw;
 	Client *c;
-
 	/* count number of clients in the selected monitor */
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	if (n == 0)
-		return;
-
+	if (n == 0) return;
 	/* initialize areas */
 	mw = m->ww;
 	mx = 0;
 	my = 0;
 	tw = mw;
-
 	if (n > m->nmaster) {
 		/* go mfact box in the center if more than nmaster clients */
 		mw = m->nmaster ? m->ww * m->mfact : 0;
 		tw = m->ww - mw;
-
 		if (n - m->nmaster > 1) {
 			/* only one client */
 			mx = (m->ww - mw) / 2;
 			tw = (m->ww - mw) / 2;
 		}
 	}
-
 	oty = 0;
 	ety = 0;
 	for (i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
@@ -2157,20 +2138,17 @@ void centeredmaster(Monitor *m) {
 		/* nmaster clients are stacked vertically, in the center
 		 * of the screen */
 		h = (m->wh - my) / (MIN(n, m->nmaster) - i);
-		resize(c, m->wx + mx, m->wy + my, mw - (2*c->bw),
-		       h - (2*c->bw), 0);
+		resize(c, m->wx + mx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
 		my += HEIGHT(c);
 	} else {
 		/* stack clients are stacked vertically */
 		if ((i - m->nmaster) % 2 ) {
 			h = (m->wh - ety) / ( (1 + n - i) / 2);
-			resize(c, m->wx, m->wy + ety, tw - (2*c->bw),
-			       h - (2*c->bw), 0);
+			resize(c, m->wx, m->wy + ety, tw - (2*c->bw), h - (2*c->bw), 0);
 			ety += HEIGHT(c);
 		} else {
 			h = (m->wh - oty) / ((1 + n - i) / 2);
-			resize(c, m->wx + mx + mw, m->wy + oty,
-			       tw - (2*c->bw), h - (2*c->bw), 0);
+			resize(c, m->wx + mx + mw, m->wy + oty, tw - (2*c->bw), h - (2*c->bw), 0);
 			oty += HEIGHT(c);
 		}
 	}

@@ -265,6 +265,9 @@ set wildignore+=/home/mitch/music,/home/mitch/videos,/home/mitch/books,/home/mit
 " Horizontal scrolling
 nmap <silent> <C-o> 10zl
 nmap <silent> <C-i> 10zh
+
+" Nuke +, -, ! at start of lines in diffs (also killing the - lines)
+map <silent> <C-d> :%s/^+<CR> :%s/^-.*<CR> :%s/^!<CR>
 " ----------------------------------------------------------------
 
 " ----------------- Symbol Printing -----------------------------
