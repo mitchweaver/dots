@@ -644,8 +644,7 @@ createmon(void) {
 	return m;
 }
 
-void
-destroynotify(XEvent *e) {
+void destroynotify(XEvent *e) {
 	Client *c;
 	XDestroyWindowEvent *ev = &e->xdestroywindow;
 
@@ -653,18 +652,13 @@ destroynotify(XEvent *e) {
 		unmanage(c, 1);
 }
 
-void
-detach(Client *c)
-{
+void detach(Client *c) {
 	Client **tc;
-
 	for (tc = &c->mon->clients; *tc && *tc != c; tc = &(*tc)->next);
 	*tc = c->next;
 }
 
-void
-detachstack(Client *c)
-{
+void detachstack(Client *c) {
 	Client **tc, *t;
 
 	for (tc = &c->mon->stack; *tc && *tc != c; tc = &(*tc)->snext);
@@ -1110,19 +1104,16 @@ void movemouse(const Arg *arg) {
 			handler[ev.type](&ev);
 			break;
 		case MotionNotify:
-			if ((ev.xmotion.time - lasttime) <= (1000 / 60))
-				continue;
+			if ((ev.xmotion.time - lasttime) <= (1000 / 60)) continue;
 			lasttime = ev.xmotion.time;
 
 			nx = ocx + (ev.xmotion.x - x);
 			ny = ocy + (ev.xmotion.y - y);
-			if (abs(selmon->wx - nx) < snap)
-				nx = selmon->wx;
+			if (abs(selmon->wx - nx) < snap) nx = selmon->wx;
 			else if ((selmon->wx + selmon->ww) - (nx + WIDTH(c)) < snap)
 			/* else if (abs((selmon->wx + selmon->ww) - (nx + WIDTH(c))) < snap) */
 				nx = selmon->wx + selmon->ww - WIDTH(c);
-			if (abs(selmon->wy - ny) < snap)
-				ny = selmon->wy;
+			if (abs(selmon->wy - ny) < snap) ny = selmon->wy;
 			else if ((selmon->wy + selmon->wh) - (ny + HEIGHT(c)) < snap)
 			/* else if (abs((selmon->wy + selmon->wh) - (ny + HEIGHT(c))) < snap) */
 				ny = selmon->wy + selmon->wh - HEIGHT(c);
@@ -1160,10 +1151,8 @@ void propertynotify(XEvent *e) {
 	Window trans;
 	XPropertyEvent *ev = &e->xproperty;
 
-	if ((ev->window == root) && (ev->atom == XA_WM_NAME))
-		updatestatus();
-	else if (ev->state == PropertyDelete)
-		return; /* ignore */
+	if ((ev->window == root) && (ev->atom == XA_WM_NAME)) updatestatus();
+	else if (ev->state == PropertyDelete) return; /* ignore */
 	else if ((c = wintoclient(ev->window))) {
 		switch(ev->atom) {
 		default: break;
@@ -2076,9 +2065,7 @@ wintomon(Window w)
 /* There's no way to check accesses to destroyed windows, thus those cases are
  * ignored (especially on UnmapNotify's). Other types of errors call Xlibs
  * default error handler, which may call exit. */
-int
-xerror(Display *dpy, XErrorEvent *ee)
-{
+int xerror(Display *dpy, XErrorEvent *ee) {
 	if (ee->error_code == BadWindow
 	|| (ee->request_code == X_SetInputFocus && ee->error_code == BadMatch)
 	|| (ee->request_code == X_PolyText8 && ee->error_code == BadDrawable)
@@ -2094,17 +2081,13 @@ xerror(Display *dpy, XErrorEvent *ee)
 	return xerrorxlib(dpy, ee); /* may call exit */
 }
 
-int
-xerrordummy(Display *dpy, XErrorEvent *ee)
-{
+int xerrordummy(Display *dpy, XErrorEvent *ee) {
 	return 0;
 }
 
 /* Startup Error handler to check if another window manager
  * is already running. */
-int
-xerrorstart(Display *dpy, XErrorEvent *ee)
-{
+int xerrorstart(Display *dpy, XErrorEvent *ee) {
 	die("dwm: another window manager is already running");
 	return -1;
 }
@@ -2168,35 +2151,6 @@ static void bstack(Monitor *m) {
 		}
 	}
 }
-
-/* static void bstackhoriz(Monitor *m) { */
-/* 	int w, mh, mx, tx, ty, th; */
-/* 	unsigned int i, n; */
-/* 	Client *c; */
-
-/* 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++); */
-/* 	if (n == 0) */
-/* 		return; */
-/* 	if (n > m->nmaster) { */
-/* 		mh = m->nmaster ? m->mfact * m->wh : 0; */
-/* 		th = (m->wh - mh) / (n - m->nmaster); */
-/* 		ty = m->wy + mh; */
-/* 	} else { */
-/* 		th = mh = m->wh; */
-/* 		ty = m->wy; */
-/* 	} */
-/* 	for (i = mx = 0, tx = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) { */
-/* 		if (i < m->nmaster) { */
-/* 			w = (m->ww - mx) / (MIN(n, m->nmaster) - i); */
-/* 			resize(c, m->wx + mx, m->wy, w - (2 * c->bw), mh - (2 * c->bw), 0); */
-/* 			mx += WIDTH(c); */
-/* 		} else { */
-/* 			resize(c, tx, ty, m->ww - (2 * c->bw), th - (2 * c->bw), 0); */
-/* 			if (th != m->wh) */
-/* 				ty += HEIGHT(c); */
-/* 		} */
-/* 	} */
-/* } */
 
 void centeredmaster(Monitor *m) {
 	unsigned int i, n, h, mw, mx, my, oty, ety, tw;

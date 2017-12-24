@@ -6,7 +6,8 @@ static const unsigned int gapX = 10;
 static const unsigned int gapY = 10;
 
 static unsigned int borderpx  = 5; /* border pixel of windows */
-static const char *fonts[]      = { "Terminus:pixelsize=12:antialias=false:autohint=false" };
+/* static const char *fonts[]      = { "Terminus:pixelsize=12:antialias=false:autohint=false" }; */
+static const char *fonts[]      = { "Terminus:pixelsize=14:antialias=false:autohint=false" };
 static const char gray1[]           = "#222222";
 static const char gray3[]           = "#bbbbbb";
 static const char gray4[]           = "#eeeeee";

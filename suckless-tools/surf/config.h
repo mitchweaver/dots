@@ -153,9 +153,10 @@ static Key keys[] = {
 /* target can be OnDoc, OnLink, OnImg, OnMedia, OnEdit, OnBar, OnSel, OnAny */
 static Button buttons[] = {
 	/* target       event mask      button  function        argument        stop event */
-	{ OnLink,       MODKEY,         1,      clicknewwindow, { .i = 1 },     1 },
 	{ OnLink,       0,              2,      clicknewwindow, { .i = 0 },     1 },
 	{ OnLink,       MODKEY,         2,      clicknewwindow, { .i = 1 },     1 },
-    // this is really buggy, use the ctrl-o bind instead
-	/* { OnMedia,      MODKEY,         1,      clickexternplayer, { 0 },       1 }, */
+	{ OnLink,       MODKEY,         1,      clicknewwindow, { .i = 1 },     1 },
+	{ OnAny,        0,              8,      clicknavigate,  { .i = -1 },    1 },
+	{ OnAny,        0,              9,      clicknavigate,  { .i = +1 },    1 },
+	{ OnMedia,      MODKEY,         1,      clickexternplayer, { 0 },       1 },
 };
