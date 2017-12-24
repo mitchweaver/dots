@@ -267,7 +267,10 @@ nmap <silent> <C-o> 10zl
 nmap <silent> <C-i> 10zh
 
 " Nuke +, -, ! at start of lines in diffs (also killing the - lines)
-map <silent> <C-d> :%s/^+<CR> :%s/^-.*<CR> :%s/^!<CR>
+map <silent> <C-z> :%s/^+<CR> :%s/^-.*<CR> :%s/^!<CR>
+
+" Clear CtrlP cache
+map <silent> <F5> :CtrlPClearCache<CR>
 " ----------------------------------------------------------------
 
 " ----------------- Symbol Printing -----------------------------

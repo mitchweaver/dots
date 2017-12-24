@@ -47,6 +47,7 @@ static const Rule rules[] = {
 #include "layouts.c"
 #include "horizgrid.c"
 #include "fibonacci.c"
+static const int NUM_LAYOUTS = 7;
 static const Layout layouts[] = {
     /* symbol     arrange function */
     { "[T]",      tile },    /* first entry is default */

@@ -33,6 +33,17 @@ export XDG_PICTURES_DIR="$HOME/images"
 export XDG_VIDEOS_DIR="$HOME/videos"
 export XDG_PUBLICSHARE_DIR="/non/existent"
 
+
+
+
+
+# DWM
+export DWM_TEST=9
+
+
+
+
+
 if [ ${#X} -gt 0 ]
 	then
 		true

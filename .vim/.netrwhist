@@ -1,6 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/home/mitch/workspace/terminal-discord/ui'
 let g:netrw_dirhist_2='/home/mitch/workspace/terminal-discord/.git'
 let g:netrw_dirhist_3='/home/mitch/files/discord'
 let g:netrw_dirhist_4='/home/mitch/workspace/dotfiles/bin'
+let g:netrw_dirhist_5='/home/mitch/programs/neofetch/ascii'
+let g:netrw_dirhist_6='/home/mitch/programs/neofetch/ascii/distro'
+let g:netrw_dirhist_7='/home/mitch/.local/share/Trash/files/test'

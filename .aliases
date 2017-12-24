@@ -39,6 +39,11 @@ else # BSD
     alias disks="sysctl hw.disknames"
     alias sensors="sysctl hw.sensors"
     netstart() { sh /etc/netstart "$1" ; }
+    # these are workarounds for the openbsd st patch:
+    pkg_info(){ TERM=xterm ; /usr/sbin/pkg_info "$@" ; TERM=st-git-256color ; }
+    pkg_del(){ TERM=xterm ; /usr/sbin/pkg_del "$@" ; TERM=st-git-256color ; }
+    pkg_add(){ TERM=xterm ; /usr/sbin/pkg_add "$@" ; TERM=st-git-256color ; }
+    pkg_check(){ TERM=xterm ; /usr/sbin/pkg_check "$@" ; TERM=st-git-256color ; }
 fi
 
 alias shutdown='shutdown now'
@@ -136,9 +141,9 @@ alias ytd="youtube-viewer -C -q --vd=high -d"
 alias ytm="youtube-viewer -n -C -q --vd=high"
 alias ytdm='youtube-viewer -q -C --vd=high -n -d --convert-to=opus --convert-cmd="ffmpeg -loglevel -8 -i file:*IN* -vn -acodec libopus -ab 128k -y *OUT*"'
 alias bandcamp="youtube-dl --prefer-ffmpeg -x --audio-quality 0 --audio-format 'opus'"
-# opus-ffmpeg() {
-#     ffmpeg -i file:"$1" -vn -acodec libopus -ab 128k -y -map_metadata 0 "${1%.webm}.opus" && mv "$1" ~/.local/share/Trash/files && clear && ls
-# }
+opus-ffmpeg() {
+    ffmpeg -i file:"$1" -vn -acodec libopus -ab 128k -y -map_metadata 0 "${1%.webm}.opus" && mv "$1" ~/.local/share/Trash/files && clear && ls
+}
 
 alias jpg="jpegoptim *.jpg --strip-all"
 alias recursive-jpg="sh /home/mitch/bin/recursive-jpg-optimizer.sh"
@@ -261,6 +266,9 @@ alias bmks='bmk'
 alias autostart='v ~/workspace/dotfiles/suckless-tools/dwm/autostart.sh'
 alias vssh='v ~/.ssh/config'
 alias rcf='v ~/.config/ranger/rc.conf'
+
+alias dwmc='v ~/workspace/dotfiles/suckless-tools/dwm/dwm/dwm.c'
+alias surfc='v ~/workspace/dotfiles/suckless-tools/surf/surf/surf.c'
 
 # ←-------------- Custom Movement Functions -----------------→ #
 # $HOME
