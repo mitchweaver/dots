@@ -42,6 +42,7 @@ else # BSD
     # these are workarounds for the openbsd st patch:
     pkg_info(){ TERM=xterm ; /usr/sbin/pkg_info "$@" ; TERM=st-git-256color ; }
     pkg_delete(){ TERM=xterm ; /usr/sbin/pkg_delete "$@" ; TERM=st-git-256color ; }
+    alias pkg_del=pkg_delete
     pkg_add(){ TERM=xterm ; /usr/sbin/pkg_add "$@" ; TERM=st-git-256color ; }
     pkg_check(){ TERM=xterm ; /usr/sbin/pkg_check "$@" ; TERM=st-git-256color ; }
 fi
@@ -253,7 +254,8 @@ alias wtfismyip='curl https://wtfismyip.com/text'
 alias weather="~/bin/weather.sh Schmalkalden"
 alias weather-sd="~/bin/weather.sh Dakota_State_University"
 alias weather-ok="~/bin/weather.sh Claremore"
-alias backup="sh ~/bin/backup.sh"
+alias pushall="sh ~/bin/push-all.sh"
+alias pullall="sh ~/bin/pull-all.sh"
 
 # ←--------------- Specific File Editing -------------------→ #
 alias aliases='v ~/.aliases'

@@ -4,17 +4,24 @@ DIM=$(xrandr | grep \* |awk '{print $1}')
 s_width="$(sed 's/x.*//' <<< "$DIM")"
 s_height="$(sed 's/^[^x]*x//' <<< "$DIM")"
 
-w=$(echo $s_width / 1.01 | bc)
-h=$(echo $s_height / 14 | bc)
+w=$(echo $s_width / 1.5 | bc)
+h=$(echo $s_height / 16 | bc)
 x=$(echo $(echo $s_width / 2 | bc) - $(echo $w / 2 | bc) | bc)
-y=$(echo $(echo $s_height / 16 | bc) - $(echo $h / 2 | bc) | bc)
+y=$(echo $(echo $s_height / 20 | bc) - $(echo $h / 2 | bc) | bc)
+
+# w=$s_width
+# h=50
+# x=0
+# y=0
 
 vol() {
     sh ~/bin/BSDNixVolume.sh -get
 }
 
 tim() {
-    printf "%(%a %d %b  - %l:%M %p)T"
+    # printf "%(%a %d %b  - %l:%M %p)T"
+    echo 🌡️
+    # printf "%b" "\\uf1eb asdf"
 }
 
 wrksp() {
@@ -26,17 +33,23 @@ bat() {
 }
 
 for((;;)) {
-    printf "    %s    \\n" "$(vol)%{c}$(tim)%{r}$(wrksp)   $(bat)"
-    sleep 0.1
+    # printf "    %s    \\n" "$(vol)%{c}$(tim)%{r}$(wrksp)   $(bat)"
+    # echo "test lasdfsf 🌡️"
+    cur=TEST
+    printf "%b" "\\uf1eb ${cur/connect}"
+    echo asdf
+    sleep 0.5
 } |\
 
+# -f "DejaVu Sans Mono" \
 lemonbar -db \
-         -f "Roboto Mono" \
-         -f "Noto Sans Symbols" \
          -g "$w"x"$h"+$x+$y \
          -n "bar" \
-         -B "#FFFFFF" \
-         -F "#000000"
-         # -f "Roboto Mono" \
-         # -f "FontAwesome-15" \
+         -B "#d0c8c6" \
+         -F "#0000000"
+         # -f "Droid Sans Mono" \
 
+# -f "Unifont" \
+#          -f "DejaVu Sans Mono" \
+#          -f "Roboto Mono" \
+#          -f "Symbola" \

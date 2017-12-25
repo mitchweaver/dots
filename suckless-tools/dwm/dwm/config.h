@@ -4,10 +4,14 @@ static unsigned int gappx = 10; /* gap pixel between windows */
 // not working. really want this to be working...
 static const unsigned int gapX = 10;
 static const unsigned int gapY = 10;
+static const int topbar         = 1; /* 0 means bottom bar */
 
 static unsigned int borderpx  = 5; /* border pixel of windows */
-/* static const char *fonts[]      = { "Terminus:pixelsize=12:antialias=false:autohint=false" }; */
+
+// hack to make the windows obey lemonbar. Ignore this font.
 static const char *fonts[]      = { "Terminus:pixelsize=14:antialias=false:autohint=false" };
+/* static const char *fonts[]      = { "DejaVu Sans Mono:pixelsize=80:antialias=false:autohint=false" }; */
+
 static const char gray1[]           = "#222222";
 static const char gray3[]           = "#bbbbbb";
 static const char gray4[]           = "#eeeeee";

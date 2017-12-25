@@ -20,7 +20,7 @@
   [12] = "#ae95c7", /* blue    */
   [13] = "#c795ae", /* magenta */
   [14] = "#95aec7", /* cyan    */
-  [15] = "#f3f4f5", /* white   */
+  [15] = "#6d6d6d", /* white   */
 
   /* special colors */
   [256] = "#f3f4f5", /* background */

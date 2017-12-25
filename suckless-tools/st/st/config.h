@@ -4,15 +4,20 @@ char font[] = "Terminus:pixelsize=14:antialias=false:autohint=false";
 /* char font[] = "DejaVuSans Mono:pixelsize=12:antialias=true:autohint=true"; */
 
 /* ----------------- Themes ------------------------------------------------- */
+// best themes:
+// ~~~~~~~~~~~
 #include "ashes-dark-theme.h"
+
 /* #include "ashes-light-theme.h" */
 /* #include "mocha-dark-theme.h" */
 /* #include "mocha-light-theme.h" */
 /* #include "navy-and-ivory-theme.h" */
 /* #include "visibone-theme.h" */
-/* #include "tomorrow-dark-theme.h" */
 /* #include "ocean-dark-theme.h" */
 /* #include "hund-theme.h" */
+/* #include "tomorrow-dark-theme.h" */
+
+/* #include "temp-scheme.h" */
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------- */
@@ -39,7 +44,6 @@ static unsigned int tabspaces = 4;
 unsigned int xfps = 60;
 unsigned int actionfps = 30;
 
-/* #include "solarized-light.h" */
 #include "solarized-dark.h"
 unsigned int defaultrcs = 257;
 

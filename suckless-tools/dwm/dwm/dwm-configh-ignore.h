@@ -13,4 +13,3 @@ static const char *dmenucmd[] = { "dmenu_run", NULL};
 /* static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", gray1, "-nf", gray3, "-sb", cyan, "-sf", gray4, NULL }; */
 
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */

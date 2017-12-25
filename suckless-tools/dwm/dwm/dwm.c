@@ -41,7 +41,6 @@ enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
 enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
 
 // -------------------- No title bar patch ---------------------------------- //
-/* enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, ClkRootWin, ClkLast }; /1* clicks *1/ */
 enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkClientWin, ClkRootWin, ClkLast };             /* clicks */
 /* -------------------------------------------------------------------------- */
 
@@ -355,53 +354,52 @@ void applyrules(Client *c) {
 	c->tags = c->tags & TAGMASK ? c->tags & TAGMASK : c->mon->tagset[c->mon->seltags];
 }
 
-int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact) {
-	int baseismin;
-	Monitor *m = c->mon;
+/* int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact) { */
+/* 	int baseismin; */
+/* 	Monitor *m = c->mon; */
 
-	/* set minimum possible */
-	*w = MAX(1, *w);
-	*h = MAX(1, *h);
-	if (interact) {
-		if (*x > sw) *x = sw - WIDTH(c);
-		if (*y > sh) *y = sh - HEIGHT(c);
-		if (*x + *w + 2 * c->bw < 0) *x = 0;
-		if (*y + *h + 2 * c->bw < 0) *y = 0;
-	} else {
-		if (*x >= m->wx + m->ww) *x = m->wx + m->ww - WIDTH(c);
-		if (*y >= m->wy + m->wh) *y = m->wy + m->wh - HEIGHT(c);
-		if (*x + *w + 2 * c->bw <= m->wx) *x = m->wx;
-		if (*y + *h + 2 * c->bw <= m->wy) *y = m->wy;
-	}
-	if (*h < bh) *h = bh;
-	if (*w < bh) *w = bh;
-	if (resizehints || c->isfloating || !c->mon->lt[c->mon->sellt]->arrange) {
-		/* see last two sentences in ICCCM 4.1.2.3 */
-		baseismin = c->basew == c->minw && c->baseh == c->minh;
-		if (!baseismin) { /* temporarily remove base dimensions */
-			*w -= c->basew;
-			*h -= c->baseh;
-		}
-		/* adjust for aspect limits */
-		if (c->mina > 0 && c->maxa > 0) {
-			if (c->maxa < (float)*w / *h) *w = *h * c->maxa + 0.5;
-			else if (c->mina < (float)*h / *w) *h = *w * c->mina + 0.5;
-		}
-		if (baseismin) { /* increment calculation requires this */
-			*w -= c->basew;
-			*h -= c->baseh;
-		}
-		/* adjust for increment value */
-		if (c->incw) *w -= *w % c->incw;
-		if (c->inch) *h -= *h % c->inch;
-		/* restore base dimensions */
-		*w = MAX(*w + c->basew, c->minw);
-		*h = MAX(*h + c->baseh, c->minh);
-		if (c->maxw) *w = MIN(*w, c->maxw);
-		if (c->maxh) *h = MIN(*h, c->maxh);
-	}
-	return *x != c->x || *y != c->y || *w != c->w || *h != c->h;
-}
+/* 	/1* set minimum possible *1/ */
+/* 	*w = MAX(1, *w); */
+/* 	*h = MAX(1, *h); */
+/* 	if (interact) { */
+/* 		if (*x > sw) *x = sw - WIDTH(c); */
+/* 		if (*y > sh) *y = sh - HEIGHT(c); */
+/* 		if (*x + *w + 2 * c->bw < 0) *x = 0; */
+/* 		if (*y + *h + 2 * c->bw < 0) *y = 0; */
+/* 	} else { */
+/* 		if (*x >= m->wx + m->ww) *x = m->wx + m->ww - WIDTH(c); */
+/* 		if (*y >= m->wy + m->wh) *y = m->wy + m->wh - HEIGHT(c); */
+/* 		if (*x + *w + 2 * c->bw <= m->wx) *x = m->wx; */
+/* 		if (*y + *h + 2 * c->bw <= m->wy) *y = m->wy; */
+/* 	} */
+/* 	if (*h < bh) *h = bh; */
+/* 	if (*w < bh) *w = bh; */
+/* 	if (resizehints || c->isfloating || !c->mon->lt[c->mon->sellt]->arrange) { */
+/* 		baseismin = c->basew == c->minw && c->baseh == c->minh; */
+/* 		if (!baseismin) { /1* temporarily remove base dimensions *1/ */
+/* 			*w -= c->basew; */
+/* 			*h -= c->baseh; */
+/* 		} */
+/* 		/1* adjust for aspect limits *1/ */
+/* 		if (c->mina > 0 && c->maxa > 0) { */
+/* 			if (c->maxa < (float)*w / *h) *w = *h * c->maxa + 0.5; */
+/* 			else if (c->mina < (float)*h / *w) *h = *w * c->mina + 0.5; */
+/* 		} */
+/* 		if (baseismin) { /1* increment calculation requires this *1/ */
+/* 			*w -= c->basew; */
+/* 			*h -= c->baseh; */
+/* 		} */
+/* 		/1* adjust for increment value *1/ */
+/* 		if (c->incw) *w -= *w % c->incw; */
+/* 		if (c->inch) *h -= *h % c->inch; */
+/* 		/1* restore base dimensions *1/ */
+/* 		*w = MAX(*w + c->basew, c->minw); */
+/* 		*h = MAX(*h + c->baseh, c->minh); */
+/* 		if (c->maxw) *w = MIN(*w, c->maxw); */
+/* 		if (c->maxh) *h = MIN(*h, c->maxh); */
+/* 	} */
+/* 	return *x != c->x || *y != c->y || *w != c->w || *h != c->h; */
+/* } */
 
 void arrange(Monitor *m) {
 	if (m) showhide(m->stack);
@@ -688,7 +686,8 @@ void detachstack(Client *c) {
 /* 	return m; */
 /* } */
 
-void drawbar(Monitor *m) {
+void drawbar(Monitor *m) {    /* return; */
+
 	int x, w, sw = 0;
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
@@ -709,9 +708,9 @@ void drawbar(Monitor *m) {
 	}
 	x = 0;
 	for (i = 0; i < LENGTH(tags); i++) {
-// ------ do not draw vacant tags patch -------------------------------------------------- //
+    // ------ do not draw vacant tags patch -------------------------------------------------- //
        /* if(!(occ & 1 << i || m->tagset[m->seltags] & 1 << i)) continue; */
-/* -------------------------------------------------------------------------------------- */
+    /* -------------------------------------------------------------------------------------- */
         w = TEXTW(tags[i]);
 		drw_setscheme(drw, scheme[(m->tagset[m->seltags] & 1 << i) ? SchemeSel : (urg & 1 << i ? SchemeUrg : SchemeNorm)]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
@@ -726,7 +725,7 @@ void drawbar(Monitor *m) {
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
-    /* --------------- No title patch --------------------------------------- */
+    /* /1* --------------- No title patch --------------------------------------- *1/ */
 	if ((w = m->ww - sw - x) > bh) {
 		if (m->sel) {
 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
@@ -763,6 +762,7 @@ void enternotify(XEvent *e) {
 void expose(XEvent *e) {
 	Monitor *m;
 	XExposeEvent *ev = &e->xexpose;
+
 	if (ev->count == 0 && (m = wintomon(ev->window))) drawbar(m);
 }
 
@@ -1157,13 +1157,18 @@ Monitor * recttomon(int x, int y, int w, int h) {
 }
 
 void resize(Client *c, int x, int y, int w, int h, int interact) {
-	if (applysizehints(c, &x, &y, &w, &h, interact)) resizeclient(c, x, y, w, h);
+    // resize hints are garbage, but may be able to use
+    // pieces of this function to rework gaps to be better.
+	/* if (applysizehints(c, &x, &y, &w, &h, interact)) */
+
+    resizeclient(c, x, y, w, h);
 }
 
 void resizeclient(Client *c, int x, int y, int w, int h) {
 	XWindowChanges wc;
 	unsigned int n; // number of clients in selected monitor
-	unsigned int gapoffset;
+
+	unsigned int gapoffset; // the distance away from the 0,0
 	unsigned int gapincr;
 	Client *nbc;
 
@@ -1173,32 +1178,27 @@ void resizeclient(Client *c, int x, int y, int w, int h) {
 	for (n = 0, nbc = nexttiled(selmon->clients); nbc; nbc = nexttiled(nbc->next), n++);
 
 	/* Do nothing if layout is floating */
-	if (c->isfloating || selmon->lt[selmon->sellt]->arrange == NULL) {
+	if (c->isfloating || selmon->lt[selmon->sellt]->arrange == NULL)
 		gapincr = gapoffset = 0;
-	} else {
-        /* If is the only monitor on the workspace */
-        /* and the window is not a terminal */
-		if (n == 1
-
-            // Uncomment these if you want terminals to
-            // Keep their border, regardless of whether they
-            // are the only window on the tag or not
-            /* && (strcmp(c->name, "st") != 0) && */
-            /* (strcmp(c->name, "ranger") != 0) */
-
-        ) {
+	else {
+        // Uncomment these if you want terminals to keep their border,
+        // regardless of whether they are the only window on the tag or not
+        /* && (strcmp(c->name, "st") != 0) && (strcmp(c->name, "ranger") != 0) */
+		if (n == 1) {
             /* then set no border with appropriate gaps */
-			wc.border_width = 0;
-            gapincr = gappx;
-            /* gapincr = -2 * borderpx; */
+            wc.border_width = 0;
+            gapincr = 2 * gappx - 2*borderpx;
 		} else gapincr = 2 * gappx;
         gapoffset = gappx;
 	}
 
-	c->oldx = c->x; c->x = wc.x = x + gapoffset;
-	c->oldy = c->y; c->y = wc.y = y + gapoffset;
-	c->oldw = c->w; c->w = wc.width = w - gapincr;
-	c->oldh = c->h; c->h = wc.height = h - gapincr;
+	c->oldx = c->x; c->oldy = c->y;
+	c->oldw = c->w; c->oldh = c->h;
+
+    c->x = wc.x = x + gapoffset;
+    c->y = wc.y = y + gapoffset;
+    c->w = wc.width = w - gapincr;
+    c->h = wc.height = h - gapincr;
 
 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
 	configure(c);
@@ -1283,7 +1283,10 @@ void restack(Monitor *m) {
 	XEvent ev;
 	XWindowChanges wc;
 
+
 	drawbar(m);
+
+
 	if (!m->sel) return;
 	if (m->sel->isfloating || !m->lt[m->sellt]->arrange)
 		XRaiseWindow(dpy, m->sel->win);
@@ -1435,6 +1438,7 @@ void setlayout(const Arg *arg) {
 		selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] = (Layout *)arg->v;
 	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
 	if (selmon->sel) arrange(selmon);
+
 	else drawbar(selmon);
 }
 
@@ -1891,6 +1895,7 @@ void updatestatus(void) {
 	/* if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext))) strcpy(stext, "dwm-"VERSION); */
 	gettextprop(root, XA_WM_NAME, stext, sizeof(stext));
     /* ------------------------------------------------------------------------------------- */
+
 	drawbar(selmon);
 }
 
