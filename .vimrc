@@ -138,7 +138,7 @@ set hid " hide buffer when closed
 " Nice, but this can be annoying on some color schemes
 " set colorcolumn=80
 
-set scrolloff=6 " keep cursor X lines from the top/bottom when scrolling
+set scrolloff=8 " keep cursor X lines from the top/bottom when scrolling
 set mousehide " hide the mouse while typing (doesn't work on openbsd?)
 
 set fillchars=""  " extremely annoying, they serve no purpose

@@ -312,9 +312,12 @@ void dec_dwm_info_num_clients(int i) {
     fprintf(f2, "%d", val-1);
     fclose(f2);
 }
+
 /* void update_dwm_info(Monitor *m) { */
-    /* for (m; m; m = m->next) { */
-        /* for (c = m->clients; c; c = c->next) */
+/*     for (m; m; m = m->next) { */
+/*         for (c = m->clients; c; c = c->next) { */
+/*         } */
+/*     } */
     // get m->clients?
     /* m->pertag->curtag */
 /* } */
@@ -536,7 +539,6 @@ void clientmessage(XEvent *e) {
 
 void configure(Client *c) {
 	XConfigureEvent ce;
-
 	ce.type = ConfigureNotify;
 	ce.display = dpy;
 	ce.event = c->win;
@@ -1421,12 +1423,11 @@ void setfullscreen(Client *c, int fullscreen) {
 }
 
 void setlayout(const Arg *arg) {
-    // set_dwm_info_layout (/tmp/dwm_info/current_layout)
-    for(int i = 0 ; i < NUM_LAYOUTS ; i++ ) {
-        if (&layouts[i] == arg->v)
+    for(int i = 0 ; i < NUM_LAYOUTS ; i++ )
+        if (&layouts[i] == arg->v) {
             set_dwm_info_current_layout(i);
             break;
-    }
+        }
 
 	if (!arg || !arg->v || arg->v != selmon->lt[selmon->sellt])
 		selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag] ^= 1;

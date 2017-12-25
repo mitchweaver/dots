@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+DIM=$(xrandr | grep \* |awk '{print $1}')
+s_width="$(sed 's/x.*//' <<< "$DIM")"
+s_height="$(sed 's/^[^x]*x//' <<< "$DIM")"
+
+w=$(echo $s_width / 1.01 | bc)
+h=$(echo $s_height / 14 | bc)
+x=$(echo $(echo $s_width / 2 | bc) - $(echo $w / 2 | bc) | bc)
+y=$(echo $(echo $s_height / 16 | bc) - $(echo $h / 2 | bc) | bc)
+
+vol() {
+    sh ~/bin/BSDNixVolume.sh -get
+}
+
+tim() {
+    printf "%(%a %d %b  - %l:%M %p)T"
+}
+
+wrksp() {
+   cat /tmp/dwm_info/current_ws
+}
+
+bat() {
+    sh ~/bin/battery-check.sh
+}
+
+for((;;)) {
+    printf "    %s    \\n" "$(vol)%{c}$(tim)%{r}$(wrksp)   $(bat)"
+    sleep 0.1
+} |\
+
+lemonbar -db \
+         -f "Roboto Mono" \
+         -f "Noto Sans Symbols" \
+         -g "$w"x"$h"+$x+$y \
+         -n "bar" \
+         -B "#FFFFFF" \
+         -F "#000000"
+         # -f "Roboto Mono" \
+         # -f "FontAwesome-15" \
+

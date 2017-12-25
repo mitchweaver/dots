@@ -41,7 +41,7 @@ else # BSD
     netstart() { sh /etc/netstart "$1" ; }
     # these are workarounds for the openbsd st patch:
     pkg_info(){ TERM=xterm ; /usr/sbin/pkg_info "$@" ; TERM=st-git-256color ; }
-    pkg_del(){ TERM=xterm ; /usr/sbin/pkg_del "$@" ; TERM=st-git-256color ; }
+    pkg_delete(){ TERM=xterm ; /usr/sbin/pkg_delete "$@" ; TERM=st-git-256color ; }
     pkg_add(){ TERM=xterm ; /usr/sbin/pkg_add "$@" ; TERM=st-git-256color ; }
     pkg_check(){ TERM=xterm ; /usr/sbin/pkg_check "$@" ; TERM=st-git-256color ; }
 fi

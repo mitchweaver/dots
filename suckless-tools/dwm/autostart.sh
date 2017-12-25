@@ -1,12 +1,14 @@
 #!/bin/sh
 
 xmodmap ~/.Xmodmap &
-xset +fp /home/mitch/.fonts &
-feh --bg-scale /home/mitch/workspace/dotfiles/suckless-tools/dwm/wall &
-slstatus &
+xset +fp ~/.fonts &
+feh --bg-scale ~/workspace/dotfiles/suckless-tools/dwm/wall &
+bash ~/workspace/dotfiles/lemonbar/bar &
 xset m 0 0 &
 xrdb load ~/.Xresources &
 unclutter -jitter 1 -noevents -idle 5 &
+
+# slstatus &
 
 # For some bizarre reason, '-root' stops `tabbed`
 # from starting. Why is this?
