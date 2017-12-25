@@ -16,6 +16,7 @@
 #include <X11/Xutil.h>
 #ifdef XINERAMA
 #include <X11/extensions/Xinerama.h>
+#include <X11/extensions/shape.h>
 #endif /* XINERAMA */
 #include <X11/Xft/Xft.h>
 #include "drw.h"
@@ -129,7 +130,7 @@ typedef struct {
 
 /* function declarations */
 static void applyrules(Client *c);
-static int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact);
+/* static int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact); */
 static void arrange(Monitor *m);
 static void arrangemon(Monitor *m);
 static void attach(Client *c);
@@ -1199,6 +1200,28 @@ void resizeclient(Client *c, int x, int y, int w, int h) {
     c->y = wc.y = y + gapoffset;
     c->w = wc.width = w - gapincr;
     c->h = wc.height = h - gapincr;
+
+    // ------------------ rounded corners --------------------------------- //
+    if(c->isfloating){
+        XWindowAttributes win_attr;
+        XGetWindowAttributes(dpy, c->win, &win_attr);
+        Pixmap mask = XCreatePixmap(dpy, c->win, c->w, c->h, 1);
+        XGCValues xgcv;
+        GC shape_gc = XCreateGC(dpy, mask, 0, &xgcv);
+        int rad = 12;
+        int dia = 2 * rad;
+        XSetForeground(dpy, shape_gc, 0);
+        XFillRectangle(dpy, mask, shape_gc, 0, 0, c->w, c->h);
+        XSetForeground(dpy, shape_gc, 1);
+        XFillArc(dpy, mask, shape_gc, 0, 0, dia, dia, 0, 23040);
+        XFillArc(dpy, mask, shape_gc, c->w-dia-1, 0, dia, dia, 0, 23040);
+        XFillArc(dpy, mask, shape_gc, 0, c->h-dia-1, dia, dia, 0, 23040);
+        XFillArc(dpy, mask, shape_gc, c->w-dia-1, c->h-dia-1, dia, dia, 0, 23040);
+        XFillRectangle(dpy, mask, shape_gc, rad, 0, c->w-dia, c->h);
+        XFillRectangle(dpy, mask, shape_gc, 0, rad, c->w, c->h-dia);
+        XShapeCombineMask(dpy, c->win, ShapeBounding, 0, 0, mask, ShapeSet);
+        XFreePixmap(dpy, mask);
+    } /* -------------------------------------------------------------------- */
 
 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
 	configure(c);
