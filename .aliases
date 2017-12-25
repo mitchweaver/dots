@@ -158,6 +158,8 @@ alias parrot='terminal-parrot'
 alias doge="doge --shibe doge.txt"
 alias tiv='tiv -256'
 
+alias compton="killall compton ; compton &"
+
 # ←---------------- Git Functions --------------------------→ #
 gitinit() { mkdir -p "$1" && git init "$1" ; }
 gitmote() { git init ; git remote add origin "$1" ; }

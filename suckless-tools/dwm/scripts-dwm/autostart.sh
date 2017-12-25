@@ -5,6 +5,7 @@ pkill -9 unclutter slstatus clipmenud
 
 xmodmap ~/.Xmodmap &
 feh --bg-scale ~/workspace/dotfiles/suckless-tools/dwm/wall &
+compton --config ~/.config/compton.conf -b &
 
 xrdb load ~/.Xresources
 xset +fp /home/mitch/.fonts
@@ -24,4 +25,3 @@ slstatus &
 
 # xautolock -time 10 -secure -locker /usr/local/bin/slock
 # xbacklight -set 95
-# compton
