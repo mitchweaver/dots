@@ -155,6 +155,7 @@ static Key keys[] = {
     { mod1,                 XK_Tab,     view,           {0} },
     { mod1|shift,           XK_g,       toggle_gaps,    {0} },
     { mod1|shift,           XK_space,   togglefloating, {0} },
+	{ mod1,                 XK_s,       togglesticky,   {0} },
     // ------------------------------------------------------------------- //
     { mod1,                     XK_t,       setlayout,  {.v = &layouts[0]} }, // tiled
     { mod1,                     XK_f,       setlayout,  {.v = &layouts[1]} }, // floating

@@ -276,6 +276,10 @@ alias rcf='v ~/.config/ranger/rc.conf'
 
 alias dwmc='v ~/workspace/dotfiles/suckless-tools/dwm/dwm/dwm.c'
 alias surfc='v ~/workspace/dotfiles/suckless-tools/surf/surf/surf.c'
+alias tabbedc='v ~/workspace/dotfiles/suckless-tools/tabbed/tabbed/tabbed.c'
+alias dmenuc='v ~/workspace/dotfiles/suckless-tools/dmenu/dmenu/dmenu.c'
+alias stc='v ~/workspace/dotfiles/suckless-tools/st/st/st.c'
+alias slstatusc='v ~/workspace/dotfiles/suckless-tools/slstatus/slstatus/slstatus.c'
 
 # ←-------------- Custom Movement Functions -----------------→ #
 # $HOME

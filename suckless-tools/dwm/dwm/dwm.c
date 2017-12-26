@@ -25,7 +25,10 @@
 #define BUTTONMASK              (ButtonPressMask|ButtonReleaseMask)
 #define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
 #define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
-#define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]))
+// ------------- sticky patch ---------------------------------------------------- //
+/* #define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags])) */
+#define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]) || C->issticky)
+// -------------------------------------------------------------------------------- //
 #define LENGTH(X)               (sizeof X / sizeof X[0])
 #define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
 #define WIDTH(X)                ((X)->w + 2 * (X)->bw + gappx)
@@ -72,8 +75,8 @@ struct Client {
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
 	int bw, oldbw;
 	unsigned int tags;
-    /* -------- isfloating patch ------------------------------------------------ */
-	int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
+    /* -------- isfloating patch (and is sticky patch) -------------------------- */
+	int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate, isfullscreen, issticky;
 	/* int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen; */
     /* -------------------------------------------------------------------------- */
 	Client *next;
@@ -200,6 +203,7 @@ static void tag(const Arg *arg);
 static void tile(Monitor *);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
+static void togglesticky(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
 static void unfocus(Client *c, int setfocus);
@@ -1214,6 +1218,8 @@ void resizeclient(Client *c, int x, int y, int w, int h) {
 
 void drawroundedcorners(Client *c) {
     // ------------------ rounded corners --------------------------------- //
+    // NOTE: this is extremely hacky and surely could be optimized.
+    //       Any X wizards out there reading this, please pull request.
     if(corner_radius > 0 && c && dpy && c->win)
         if(!c->isfullscreen) {
             XWindowAttributes win_attr;
@@ -1679,6 +1685,12 @@ void togglefloating(const Arg *arg) {
         selmon->sel->sfh = selmon->sel->h;
     }
     arrange(selmon);
+}
+
+void togglesticky(const Arg *arg) {
+	if (!selmon->sel) return;
+	selmon->sel->issticky = !selmon->sel->issticky;
+	arrange(selmon);
 }
 
 void toggletag(const Arg *arg) {
