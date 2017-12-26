@@ -7,11 +7,16 @@ static const unsigned int gapY = 10;
 static const int topbar         = 1; /* 0 means bottom bar */
 
 static const int corner_radius = 12;
+static const int round_non_floating = 0; // whether to round corners of tiled clients
+/* static const int round_only_client = 1; // round corners if there is only 1 client in tag */
+static unsigned int borderpx  = 5;
 
-static unsigned int borderpx  = 0; /* border pixel of windows */
+static const char *fonts[]      = { "Terminus:pixelsize=14:antialias=false:autohint=false" };
+/* static const char *fonts[]      = { "DejaVu Sans Mono:pixelsize=12:antialias=true:autohint=true" }; */
+/* static const char *fonts[]      = { "Roboto Mono:pixelsize=12:antialias=true:autohint=true" }; */
+/* static const char *fonts[]      = { "mintsstrong:pixelsize=12:antialias=false:autohint=false" }; */
 
 // hack to make the windows obey lemonbar. Ignore this font.
-static const char *fonts[]      = { "Terminus:pixelsize=14:antialias=false:autohint=false" };
 /* static const char *fonts[]      = { "DejaVu Sans Mono:pixelsize=80:antialias=false:autohint=false" }; */
 
 static const char gray1[]           = "#222222";
@@ -53,6 +58,8 @@ static const Rule rules[] = {
 #include "layouts.c"
 #include "horizgrid.c"
 #include "fibonacci.c"
+#include "centeredmaster.c"
+#include "bottomstack.c"
 static const int NUM_LAYOUTS = 7;
 static const Layout layouts[] = {
     /* symbol     arrange function */

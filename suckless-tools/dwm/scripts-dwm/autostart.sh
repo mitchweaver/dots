@@ -1,14 +1,15 @@
 #!/bin/sh
 
-# in case dwm was restarted, kill all programs
-pkill -9 unclutter slstatus clipmenud compton
-
 xmodmap ~/.Xmodmap &
+
+# in case dwm was restarted, kill all programs
+pkill -9 unclutter slstatus clipmenud compton 2>&1 /dev/null
+
 feh --bg-scale ~/workspace/dotfiles/suckless-tools/dwm/wall &
 compton --config ~/.config/compton.conf -b &
 
+$(mkfontdir /home/mitch/.fonts ; mkfontscale /home/mitch/.fonts ; xset +fp /home/mitch/.fonts ; fc-cache /home/mitch/.fonts) 2>&1 /dev/null &
 xrdb load ~/.Xresources &
-xset +fp /home/mitch/.fonts &
 
 # bash ~/workspace/dotfiles/lemonbar/bar &
 

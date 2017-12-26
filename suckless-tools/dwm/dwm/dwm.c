@@ -1172,21 +1172,19 @@ void resize(Client *c, int x, int y, int w, int h, int interact) {
 
 void resizeclient(Client *c, int x, int y, int w, int h) {
 	XWindowChanges wc;
-	unsigned int n; // number of clients in selected monitor
-
+	unsigned int n; // number of clients on tag
 	unsigned int gapoffset; // the distance away from the 0,0
 	unsigned int gapincr;
 	Client *nbc;
 
 	wc.border_width = c->bw;
 
-	/* Get number of clients for the selected monitor */
+    // find number of clients
 	for (n = 0, nbc = nexttiled(selmon->clients); nbc; nbc = nexttiled(nbc->next), n++);
 
 	/* Do nothing if layout is floating */
-	if (c->isfloating || selmon->lt[selmon->sellt]->arrange == NULL)
-		gapincr = gapoffset = 0;
-	else {
+	if (c->isfloating || selmon->lt[selmon->sellt]->arrange == NULL) gapincr = gapoffset = 0;
+    else {
         // Uncomment these if you want terminals to keep their border,
         // regardless of whether they are the only window on the tag or not
         /* && (strcmp(c->name, "st") != 0) && (strcmp(c->name, "ranger") != 0) */
@@ -1208,7 +1206,7 @@ void resizeclient(Client *c, int x, int y, int w, int h) {
 
     /* -------------------------------------------------------------------------- */
     // if it is floating, then it is handled in resizemouse
-    if(!c->isfloating) drawroundedcorners(c);
+    if(!c->isfloating && round_non_floating == 1) drawroundedcorners(c);
     /* -------------------------------------------------------------------------- */
 
 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
@@ -1220,15 +1218,15 @@ void drawroundedcorners(Client *c) {
     // ------------------ rounded corners --------------------------------- //
     // NOTE: this is extremely hacky and surely could be optimized.
     //       Any X wizards out there reading this, please pull request.
-    if(corner_radius > 0 && c && dpy && c->win)
+    if(corner_radius > 0 && c && dpy && c->win && c->x != 0 && c->y !=0 && \
+            c->w > corner_radius * 2 && c->h > corner_radius * 2)
         if(!c->isfullscreen) {
             XWindowAttributes win_attr;
             if(!XGetWindowAttributes(dpy, c->win, &win_attr)) return;
             Pixmap mask = XCreatePixmap(dpy, c->win, c->w, c->h, 1);
             XGCValues xgcv;
             GC shape_gc = XCreateGC(dpy, mask, 0, &xgcv);
-            int rad = corner_radius; // set in config.h
-            int dia = 2 * rad;
+            int dia = 2 * corner_radius; // set in config.h
             XSetForeground(dpy, shape_gc, 0);
             XFillRectangle(dpy, mask, shape_gc, 0, 0, c->w, c->h);
             XSetForeground(dpy, shape_gc, 1);
@@ -1236,8 +1234,8 @@ void drawroundedcorners(Client *c) {
             XFillArc(dpy, mask, shape_gc, c->w-dia-1, 0, dia, dia, 0, 23040);
             XFillArc(dpy, mask, shape_gc, 0, c->h-dia-1, dia, dia, 0, 23040);
             XFillArc(dpy, mask, shape_gc, c->w-dia-1, c->h-dia-1, dia, dia, 0, 23040);
-            XFillRectangle(dpy, mask, shape_gc, rad, 0, c->w-dia, c->h);
-            XFillRectangle(dpy, mask, shape_gc, 0, rad, c->w, c->h-dia);
+            XFillRectangle(dpy, mask, shape_gc, corner_radius, 0, c->w-dia, c->h);
+            XFillRectangle(dpy, mask, shape_gc, 0, corner_radius, c->w, c->h-dia);
             XShapeCombineMask(dpy, c->win, ShapeBounding, 0, 0, mask, ShapeSet);
             XFreePixmap(dpy, mask);
     } /* -------------------------------------------------------------------- */
@@ -1943,7 +1941,7 @@ void updatetitle(Client *c) {
 	if (!gettextprop(c->win, netatom[NetWMName], c->name, sizeof c->name))
 		gettextprop(c->win, XA_WM_NAME, c->name, sizeof c->name);
     // ----- Commenting this out stops clients from being named "broken" --- //
-	/* if (c->name[0] == '\0') /1* hack to mark broken clients *1/ strcpy(c->name, broken); */
+	if (c->name[0] == '\0') /* hack to mark broken clients */ strcpy(c->name, broken);
     /* -------------------------------------------------------------------------- */
 }
 
@@ -1952,7 +1950,6 @@ void updatestatus(void) {
 	/* if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext))) strcpy(stext, "dwm-"VERSION); */
 	gettextprop(root, XA_WM_NAME, stext, sizeof(stext));
     /* ------------------------------------------------------------------------------------- */
-
 	drawbar(selmon);
 }
 
@@ -2080,76 +2077,4 @@ int main(int argc, char *argv[]) {
 	cleanup();
 	XCloseDisplay(dpy);
 	return EXIT_SUCCESS;
-}
-
-static void bstack(Monitor *m) {
-	int w, h, mh, mx, tx, ty, tw;
-	unsigned int i, n;
-	Client *c;
-
-	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	if (n == 0) return;
-	if (n > m->nmaster) {
-		mh = m->nmaster ? m->mfact * m->wh : 0;
-		tw = m->ww / (n - m->nmaster);
-		ty = m->wy + mh;
-	} else {
-		mh = m->wh;
-		tw = m->ww;
-		ty = m->wy;
-	}
-	for (i = mx = 0, tx = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
-		if (i < m->nmaster) {
-			w = (m->ww - mx) / (MIN(n, m->nmaster) - i);
-			resize(c, m->wx + mx, m->wy, w - (2 * c->bw), mh - (2 * c->bw), 0);
-			mx += WIDTH(c);
-		} else {
-			h = m->wh - mh;
-			resize(c, tx, ty, tw - (2 * c->bw), h - (2 * c->bw), 0);
-			if (tw != m->ww)
-				tx += WIDTH(c);
-		}
-	}
-}
-
-void centeredmaster(Monitor *m) {
-	unsigned int i, n, h, mw, mx, my, oty, ety, tw;
-	Client *c;
-	/* count number of clients in the selected monitor */
-	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	if (n == 0) return;
-	/* initialize areas */
-	mw = m->ww;
-	mx = 0; my = 0;
-	tw = mw;
-	if (n > m->nmaster) {
-		/* go mfact box in the center if more than nmaster clients */
-		mw = m->nmaster ? m->ww * m->mfact : 0;
-		tw = m->ww - mw;
-		if (n - m->nmaster > 1) {
-			/* only one client */
-			mx = (m->ww - mw) / 2;
-			tw = (m->ww - mw) / 2;
-		}
-	}
-	oty = 0; ety = 0;
-	for (i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
-	if (i < m->nmaster) {
-		/* nmaster clients are stacked vertically, in the center
-		 * of the screen */
-		h = (m->wh - my) / (MIN(n, m->nmaster) - i);
-		resize(c, m->wx + mx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
-		my += HEIGHT(c);
-	} else {
-		/* stack clients are stacked vertically */
-		if ((i - m->nmaster) % 2 ) {
-			h = (m->wh - ety) / ( (1 + n - i) / 2);
-			resize(c, m->wx, m->wy + ety, tw - (2*c->bw), h - (2*c->bw), 0);
-			ety += HEIGHT(c);
-		} else {
-			h = (m->wh - oty) / ((1 + n - i) / 2);
-			resize(c, m->wx + mx + mw, m->wy + oty, tw - (2*c->bw), h - (2*c->bw), 0);
-			oty += HEIGHT(c);
-		}
-	}
 }

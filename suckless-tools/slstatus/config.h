@@ -1,6 +1,6 @@
 static const int interval = 1000;
 #define MAXLEN 512
-
+ /* ∙ */
 static const struct arg args[] = {
 
     { run_command, "%s", "sh /home/mitch/bin/get-song.sh"              },

@@ -1,7 +1,8 @@
 #include "st-configh-ignores.h"
 
 char font[] = "Terminus:pixelsize=14:antialias=false:autohint=false";
-/* char font[] = "DejaVuSans Mono:pixelsize=12:antialias=true:autohint=true"; */
+/* char font[] = "DejaVuSans Mono:pixelsize=14:antialias=true:autohint=true"; */
+/* char font[] = "Roboto Mono:pixelsize=16:antialias=true:autohint=true"; */
 
 /* ----------------- Themes ------------------------------------------------- */
 // best themes:

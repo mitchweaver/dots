@@ -35,8 +35,8 @@ xset +fp /home/$USER/.fonts
 
 # exec openbox-session > /home/mitch/log.txt
 
-exec dwm
+# exec dwm
 
-# while true; do
-    # dwm >/dev/null 2>&1
-# done
+while true; do
+    dwm >/dev/null 2>&1
+done
