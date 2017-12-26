@@ -38,5 +38,5 @@ xset +fp /home/$USER/.fonts
 exec dwm
 
 # while true; do
-#     dwm >/dev/null 2>&1
+    # dwm >/dev/null 2>&1
 # done

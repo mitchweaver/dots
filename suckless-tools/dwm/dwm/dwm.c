@@ -224,6 +224,7 @@ static int xerrorstart(Display *dpy, XErrorEvent *ee);
 /* static void zoom(const Arg *arg); */
 static void bstack(Monitor *m);
 static void centeredmaster(Monitor *m);
+static void drawroundedcorners(Client *c);
 
 /* variables */
 static const char broken[] = "broken";
@@ -1201,15 +1202,26 @@ void resizeclient(Client *c, int x, int y, int w, int h) {
     c->w = wc.width = w - gapincr;
     c->h = wc.height = h - gapincr;
 
+    /* -------------------------------------------------------------------------- */
+    // if it is floating, then it is handled in resizemouse
+    if(!c->isfloating) drawroundedcorners(c);
+    /* -------------------------------------------------------------------------- */
+
+	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
+	configure(c);
+	XSync(dpy, False);
+}
+
+void drawroundedcorners(Client *c) {
     // ------------------ rounded corners --------------------------------- //
-    if(c && dpy && win) // null checks to prevent crashes
-        if(c->isfloating){
+    if(corner_radius > 0 && c && dpy && c->win)
+        if(!c->isfullscreen) {
             XWindowAttributes win_attr;
-            XGetWindowAttributes(dpy, c->win, &win_attr);
+            if(!XGetWindowAttributes(dpy, c->win, &win_attr)) return;
             Pixmap mask = XCreatePixmap(dpy, c->win, c->w, c->h, 1);
             XGCValues xgcv;
             GC shape_gc = XCreateGC(dpy, mask, 0, &xgcv);
-            int rad = 12;
+            int rad = corner_radius; // set in config.h
             int dia = 2 * rad;
             XSetForeground(dpy, shape_gc, 0);
             XFillRectangle(dpy, mask, shape_gc, 0, 0, c->w, c->h);
@@ -1222,12 +1234,7 @@ void resizeclient(Client *c, int x, int y, int w, int h) {
             XFillRectangle(dpy, mask, shape_gc, 0, rad, c->w, c->h-dia);
             XShapeCombineMask(dpy, c->win, ShapeBounding, 0, 0, mask, ShapeSet);
             XFreePixmap(dpy, mask);
-        }
-    /* -------------------------------------------------------------------- */
-
-	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
-	configure(c);
-	XSync(dpy, False);
+    } /* -------------------------------------------------------------------- */
 }
 
 void resizemouse(const Arg *arg) {
@@ -1248,10 +1255,10 @@ void resizemouse(const Arg *arg) {
 	ocx = c->x;
 	ocy = c->y;
 
-// ----- RESIZE MOUSE ----------------------
+    // ----- RESIZE MOUSE ----------------------
     ocx2 = c->x + c->w;
     ocy2 = c->y + c->h;
-// -------------------------------------------
+    // -------------------------------------------
     if (XGrabPointer(dpy, root, False, MOUSEMASK, GrabModeAsync, GrabModeAsync,
 		None, cursor[CurResize]->cursor, CurrentTime) != GrabSuccess)
 		return;
@@ -1262,33 +1269,43 @@ void resizemouse(const Arg *arg) {
 		      horizcorner ? (-c->bw) : (c->w + c->bw - 1),
 		      vertcorner ? (-c->bw) : (c->h + c->bw - 1));
 
-//--------------------------------------------------------------
+    //--------------------------------------------------------------
+    int timer = 0;
     do {
 		XMaskEvent(dpy, MOUSEMASK|ExposureMask|SubstructureRedirectMask, &ev);
 		switch(ev.type) {
-		case ConfigureRequest:
-		case Expose:
-		case MapRequest: handler[ev.type](&ev); break;
-		case MotionNotify:
-			if ((ev.xmotion.time - lasttime) <= (1000 / 60)) continue;
-			lasttime = ev.xmotion.time;
+            case ConfigureRequest:
+            case Expose:
+            case MapRequest: handler[ev.type](&ev); break;
+            case MotionNotify:
+                if ((ev.xmotion.time - lasttime) <= (1000 / 60)) continue;
+                lasttime = ev.xmotion.time;
 
-			nw = MAX(ev.xmotion.x - ocx - 2 * c->bw + 1, 1);
-			nh = MAX(ev.xmotion.y - ocy - 2 * c->bw + 1, 1);
-			nx = horizcorner ? ev.xmotion.x : c->x;
-			ny = vertcorner ? ev.xmotion.y : c->y;
-			nw = MAX(horizcorner ? (ocx2 - nx) : (ev.xmotion.x - ocx - 2 * c->bw + 1), 1);
-			nh = MAX(vertcorner ? (ocy2 - ny) : (ev.xmotion.y - ocy - 2 * c->bw + 1), 1);
+                nw = MAX(ev.xmotion.x - ocx - 2 * c->bw + 1, 1);
+                nh = MAX(ev.xmotion.y - ocy - 2 * c->bw + 1, 1);
+                nx = horizcorner ? ev.xmotion.x : c->x;
+                ny = vertcorner ? ev.xmotion.y : c->y;
+                nw = MAX(horizcorner ? (ocx2 - nx) : (ev.xmotion.x - ocx - 2 * c->bw + 1), 1);
+                nh = MAX(vertcorner ? (ocy2 - ny) : (ev.xmotion.y - ocy - 2 * c->bw + 1), 1);
 
-			if (c->mon->wx + nw >= selmon->wx && c->mon->wx + nw <= selmon->wx + selmon->ww
-			&& c->mon->wy + nh >= selmon->wy && c->mon->wy + nh <= selmon->wy + selmon->wh) {
-				if (!c->isfloating && selmon->lt[selmon->sellt]->arrange
-				&& (abs(nw - c->w) > snap || abs(nh - c->h) > snap))
-					togglefloating(NULL);
-			}
-			if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
-				resize(c, nx, ny, nw, nh, 1);
-			break;
+                if (c->mon->wx + nw >= selmon->wx && c->mon->wx + nw <= selmon->wx + selmon->ww
+                && c->mon->wy + nh >= selmon->wy && c->mon->wy + nh <= selmon->wy + selmon->wh) {
+                    if (!c->isfloating && selmon->lt[selmon->sellt]->arrange
+                    && (abs(nw - c->w) > snap || abs(nh - c->h) > snap))
+                        togglefloating(NULL);
+                }
+
+
+                if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
+                    resize(c, nx, ny, nw, nh, 1);
+
+                if(timer == 5) {
+                    timer = 0;
+                    drawroundedcorners(c);
+                }
+                timer++;
+
+                break;
 		}
 	} while (ev.type != ButtonRelease);
 	XWarpPointer(dpy, None, c->win, 0, 0, 0, 0,
@@ -1301,6 +1318,9 @@ void resizemouse(const Arg *arg) {
 		selmon = m;
 		focus(NULL);
 	}
+    // ---------------------------------------------------------------------------- //
+    drawroundedcorners(c);
+    /* -------------------------------------------------------------------------- */
 }
 
 void restack(Monitor *m) {

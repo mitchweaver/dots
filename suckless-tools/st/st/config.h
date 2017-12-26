@@ -31,7 +31,7 @@ unsigned int alpha = 0xFF; // no opacity (recommended)
 
 unsigned int cols = 80;
 unsigned int rows = 30;
-int borderpx = 6; /* Internal border */
+int borderpx = 9; /* Internal border */
 static char shell[] = "/bin/ksh";
 /* ---------------------------------------------------------------------- */
 

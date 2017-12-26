@@ -6,7 +6,9 @@ static const unsigned int gapX = 10;
 static const unsigned int gapY = 10;
 static const int topbar         = 1; /* 0 means bottom bar */
 
-static unsigned int borderpx  = 5; /* border pixel of windows */
+static const int corner_radius = 12;
+
+static unsigned int borderpx  = 0; /* border pixel of windows */
 
 // hack to make the windows obey lemonbar. Ignore this font.
 static const char *fonts[]      = { "Terminus:pixelsize=14:antialias=false:autohint=false" };

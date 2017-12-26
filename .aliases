@@ -79,6 +79,7 @@ alias q='x'
 :wq(){ x; }
 :w(){ c; }
 alias wget="curl -L -O"
+alias stratx='startx'
 
 alias rsync='rsync -rtvuclh --progress --delete'
 alias ..='cd ..'
@@ -133,6 +134,7 @@ alias resize-half='mogrify -resize 50%X50%'
 alias resize-quarter='mogrify -resize 25%X25%'
 
 alias nf="neofetch --ascii_distro openbsd_small"
+alias uf="ufetch-openbsd"
 
 alias disc="cd ~/workspace/Discline ; c ; python3.6 Discline.py"
 alias discord='disc'
@@ -225,22 +227,23 @@ alias checkout='git checkout'
 
 # ←--------------- Suckless Tools Stuff --------------------→ #
 recomp() {
+    stools="/home/mitch/workspace/dotfiles/suckless-tools"
     for i in "$@" ; do
         case $i in
             dwm)
-                cd /home/mitch/workspace/dotfiles/suckless-tools/dwm/dwm && mkclean ; make && make install && c ;;
+                cd $stools/dwm/dwm && mkclean > /dev/null ; make > /dev/null && make install > /dev/null && c ;;
             surf)
-                cd /home/mitch/workspace/dotfiles/suckless-tools/surf/surf && mkclean ; make && make install && c ;;
+                cd $stools/surf/surf && mkclean > /dev/null ; make > /dev/null && make install > /dev/null && c ;;
             tabbed)
-                cd /home/mitch/workspace/dotfiles/suckless-tools/tabbed/tabbed && mkclean ; make && make install && c ;;
+                cd $stools/tabbed/tabbed && mkclean > /dev/null ; make > /dev/null && make install > /dev/null && c ;;
             st)
-                cd /home/mitch/workspace/dotfiles/suckless-tools/st/st && mkclean ; make && make install && c ;;
+                cd $stools/st/st && mkclean > /dev/null ; make > /dev/null && make install > /dev/null && c ;;
             dmenu)
-                cd /home/mitch/workspace/dotfiles/suckless-tools/dmenu/dmenu && mkclean ; make && make install && c ;;
+                cd $stools/dmenu/dmenu && mkclean > /dev/null ; make > /dev/null && make install > /dev/null && c ;;
             slock)
-                cd /home/mitch/workspace/dotfiles/suckless-tools/slock/slock && mkclean ; make && make install && c ;;
+                cd $stools/slock/slock && mkclean > /dev/null ; make > /dev/null && make install > /dev/null && c ;;
             slstatus)
-                cd /home/mitch/workspace/dotfiles/suckless-tools/slstatus/ && mkclean ; make && make install && pkill -9 slstatus ; slstatus & c ;;
+                cd $stools/slstatus/ && mkclean > /dev/null ; make > /dev/null && make install > /dev/null && pkill -9 slstatus ; slstatus & c ;;
             *)
         esac
     done

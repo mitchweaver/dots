@@ -22,7 +22,7 @@ function hintMode(){
 }
 
 function hintHandler(e){
-    e.preventDefault();  //Stop Default Event 
+    e.preventDefault();  //Stop Default Event
     var pressedKey = get_key(e);
     if (pressedKey == 'Enter') {
         if (hint_num_str == '') hint_num_str = '1';
@@ -106,7 +106,7 @@ function setHints() {
             setHighlight(elem, false);
             var span = document.createElement('span');
             // -------------------------------------------------------------------------- //
-            span.style.cssText = [ 
+            span.style.cssText = [
                 'left: ', elem_left, 'px;',
                 'top: ', elem_top, 'px;',
                 'position: absolute;',
@@ -150,7 +150,7 @@ function removeHints() {
 function addKeyBind( key, func, eve ){
     var pressedKey = get_key(eve);
     if( pressedKey == key ){
-        eve.preventDefault();  //Stop Default Event 
+        eve.preventDefault();  //Stop Default Event
         eval(func);
     }
 }
@@ -246,7 +246,7 @@ function get_key(evt){
                 break;
             }; return key;
         }
-        if (/^(Enter|Space|BackSpace|Tab|Esc|Home|End|Left|Right|Up|Down|PageUp|PageDown|F(\d\d?))$/.test(key)) 
+        if (/^(Enter|Space|BackSpace|Tab|Esc|Home|End|Left|Right|Up|Down|PageUp|PageDown|F(\d\d?))$/.test(key))
             return ctrl+meta+shift+key;
     }
     return ctrl+meta+key;

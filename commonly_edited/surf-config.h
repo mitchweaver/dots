@@ -51,6 +51,7 @@ static UriParameters uriparams[] = {
 static SiteSpecific styles[] = {
 	/* regexp               file in $styledir */
 	{ ".*",                 "default.css" },
+    { ".discordapp",        "discord.css" },
 };
 
 /* ------- BOOK MARKING --------------------------------- */
