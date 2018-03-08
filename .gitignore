@@ -53,6 +53,10 @@ config/lman*
 config/htop
 config/redshift*
 
+config/pcmanfm
+config/libfm
+config/ranger/tagged
+
 *dconf*
 *pavucontrol.ini*
 *update-notifier*
