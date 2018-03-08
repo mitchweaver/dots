@@ -1,0 +1,914 @@
+#!/bin/sh
+#
+# http://github.com/mitchweaver/dotfiles
+#
+# This is a separate ~/.aliases file to allow easy transition
+# between multiple shells. For maximum compatibility, I try
+# to keep everything in here POSIX. This file is sourced
+# via a given shell rc.
+#
+##############################################################
+
+# ---------------------------------------------------------------------------
+# Shell prompt / PS1
+# ---------------------------------------------------------------------------
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+case ${SHELL} in
+    /bin/ksh|/bin/mksh|/bin/bash)
+        cd(){
+            [ $# -eq 0 ] &&
+                builtin cd ~ ||
+                builtin cd "$1"
+            export PS1="$(get_PS1)"
+        }
+        ;;
+    /bin/ash)
+        cd(){
+            [ $# -eq 0 ] &&
+                busybox cd ~ ||
+                busybox cd "$1"
+            export PS1="$(get_PS1)"
+        }
+        ;;
+    /bin/dash*)
+        cd(){
+            [ $# -eq 0 ] &&
+                command cd ~ ||
+                command cd "$1"
+            export PS1="$(get_PS1)"
+        }
+
+esac
+
+case ${SHELL} in
+    /bin/ksh|/bin/bash|/bin/ash)
+        [ $(id -u) -eq 0 ] &&
+            # We are in `su` mode!
+            get_PS1() {
+                echo "\[\e[0;32m\][root]\[\e[1;36m\] \W\[\e[1;37m\] "
+            } ||
+
+            get_PS1() {
+                echo "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(parse_git_branch)\[\e[1;37m\] "
+            }
+        ;;
+    /bin/mksh)
+        # note: mksh uses a different PS1 coloring syntax
+        # Todo: add 'su' mode for mksh's syntax
+        x="$(print \\001)"
+        get_PS1() {
+            case ${PWD} in
+                ${HOME}) 
+                    tmp_pwd='~'
+                    ;;
+                *)
+                    tmp_pwd=`basename "${PWD}"` # fix this
+                    ;;
+            esac
+
+            echo -n "$x$(print \\r)$x\e[1;35mm$x\e[0;32mi$x\e[0;33mt$x\e[0;34mc$x\e[1;31mh$x\e[1;36m $tmp_pwd$x$(parse_git_branch)$x\e[1;37m "
+        }
+        ;;
+
+    /bin/dash|*) get_PS1() { echo "\u \W " ; }
+esac
+
+export PS1="$(get_PS1)"
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# OS-specific aliases
+# ---------------------------------------------------------------------------
+case "$(uname)" in
+
+    Linux)
+
+        alias ls='ls --color=always --group-directories-first -F'
+        alias free='free -h'
+        alias grep='grep --color=auto'
+        alias cp='cp -rav'
+
+        [ "$(head -n 1 /etc/os-release)" = "NAME=Gentoo" ] &&
+            {
+                alias emrege=emerge
+                alias emrge=emerge
+                alias emreg=emerge
+                alias emerg=emerge
+                alias emere=emerge
+                emerge() {
+
+                    if [ $# -eq 1 ] ; then
+                        case "$1" in
+                            search)
+                                shift
+                                sudo emerge --search "$@"
+                                ;;
+                            sync)
+                                sudo /usr/bin/emerge --quiet --sync
+                                ;;
+                            world)
+                                sudo /usr/bin/emerge --quiet --update \
+                                    --newuse --changed-use --deep \
+                                    --with-bdeps=y "$@"
+                                ;;
+                            *)
+                                sudo /usr/bin/emerge --update --quiet \
+                                    --newuse --changed-use "$@"
+                                ;;
+                        esac
+                    else
+                        sudo /usr/bin/emerge "$@"
+                    fi
+
+                }
+            }
+
+        ;;
+
+    OpenBSD)
+
+        netstart() { 
+            [ $# -eq 0 ] &&
+                doas /etc/netstart "$@" ||
+                doas /etc/netstart "$@"
+        }
+        alias netasrt=netstart
+        alias netsatrt=netstart
+
+        htop() {
+            # workaround for the frequent crashing
+            if [ "$TERM" = st-256color ] ; then
+                while true ; do
+                    command htop "$@" &&
+                        break
+                done
+            else
+                command htop "$@"
+            fi
+        }
+
+        alias disks="sysctl hw.disknames"
+        alias disklabel='disklabel -h'
+        alias disknames='sysctl hw.disknames'
+        alias sensors="sysctl hw.sensors"
+        pkg() {
+            case "$1" in
+                add) shift ; pkg_add "$@" ;;
+                del|delete) shift ; pkg_delete -a "$@" ;;
+                info) shift ; pkg_info "$@" ;;
+                search) shift ; pkg_info -Q "$@" ;;
+                update) shift ; pkg_add -Uui "$@" ;;
+                check) shift ; pkg_check "$@" ;;
+                *) echo "?"
+            esac
+        }
+        alias killall="pkill -9"
+        alias ls='ls -F'
+        alias cp='cp -rv'
+
+        alias sudo=doas
+        alias sudoedit="doas ${EDITOR}"
+        ;;
+esac
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Printing / Clearing
+# ---------------------------------------------------------------------------
+# type exa > /dev/null 2>&1 &&
+    # alias ls='exa -F'
+
+alias Grep=grep
+alias l=ls
+alias ll='l -l'
+alias la='l -a'
+alias lla='ls -al'
+alias sls=l
+alias sl=l
+alias lsfull='ls "$(pwd)"/*'
+
+alias clear='printf "\033c"' # better clear
+alias c=clear
+alias cc=c
+alias cll=c
+alias cls='c;l'
+alias csl='c;l'
+alias cl='c;l'
+alias lc='c;l'
+alias sc='c;l'
+alias date="date '+%a %b %d - %l:%M %p'"
+alias e=echo
+alias ech=echo
+alias p=printf
+alias file='file -b -i -L'
+
+ext() { echo "${1##*.}" ; }
+filename() { echo "${1%.*}" ; }
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Misc
+# ---------------------------------------------------------------------------
+alias mv='mv -v'
+alias mkdir='mkdir -p'
+alias mkd=mkdir
+alias mkdr=mkd
+mkcd() { mkd "$1" && cd "$1" ; }
+mvcd() { mv "$1" "$2" && cd "$2" ; }
+cpcd() { cp "$1" "$2" && cd "$2" ; }
+
+alias less="less -Q -R" # note: busybox's less doesn't have -Q/-R
+
+du() {
+    [ $# -eq 0 ] && depth=1 || depth=$1
+    command du -ahLd $depth 2> /dev/null | /usr/bin/sort -rh | /usr/bin/head -n 20
+}
+
+alias df='df -h'
+alias man='man -a'
+alias cx='chmod +x'
+alias lex='flex'
+alias yacc='bison'
+
+reload() {
+    . ${HOME}/etc/aliases
+    (cat ${HOME}/.cache/wal/sequences &)
+    xrdb load ${HOME}/etc/Xresources
+    xmodmap ${HOME}/etc/Xmodmap
+    xset m 0 0
+} > /dev/null
+
+alias reloda=reload
+alias jjar='java -jar'
+nasm() {
+    [ -f "$1" ] && clear &&
+        command nasm -f elf32 -g -F dwarf "$1" &&
+            ld -m elf_i386 "${1%.*}.o" -o "${1%.*}" &&
+            ./"${1%.*}"
+}
+
+
+alias nf='neofetch'
+alias nfnone='neofetch --config=none'
+
+alias irssi="irssi -c freenode"
+alias discline='dash ${HOME}/bin/discline ; x'
+
+vpn() { 
+    sudo pkill -9 openvpn -- > /dev/null
+    sudo sh ${HOME}/bin/vpn "$@"
+}
+
+alias rtv="rtv --enable-media --log /dev/null ; c"
+alias reddit=rtv
+alias parrot='terminal-parrot'
+alias doge="doge --shibe doge.txt"
+alias tiv='tiv -256'
+alias compton="pkill -9 compton ; compton & c"
+
+w3m() {
+    [ $# -eq 0 ] &&
+        command w3m -F https://ddg.gg/lite ||
+        command w3m -F "$@"
+}
+bar() {
+    pkill -9 bar lemonbar sleep -- > /dev/null 2>&1
+    ${HOME}/bin/bar & c
+}
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Make / Compiling
+# ---------------------------------------------------------------------------
+alias mkae=make
+alias mkc='make clean'
+alias mkclean=mkc
+alias mkall="make clean ; make && make install"
+
+gcc() {
+
+    command gcc $@
+
+    echo -n "${PWD}"/"$(basename $1 -- 2> /dev/null)" > /tmp/shell/last_gcc
+
+}
+!g() {
+    path="$(cat /tmp/shell/last_gcc -- 2> /dev/null)"
+    if [ -n "$path" ] ; then
+        echo "gcc $path"
+        command gcc "$path"
+    else
+        echo "No recent gcc"
+    fi
+}
+# ---------------------------------------------------------------------------
+
+#---------------------------------------------------------------------------
+# Grep / Searching 
+# ---------------------------------------------------------------------------
+alias g=grep
+alias gerp=g
+alias grpe=g
+alias pgrpe=pgrep
+dugrep() { command du -ahLd 1  | g "$@" ; }
+findgrep() { find . | g "$@" ; }
+alias dugrpe=dugrep
+alias findgrpe=findgrep
+alias fg=findgrep
+alias dg=dugrep
+f () { 
+    [ $# -gt 0 ] && find . -iname "*$1*"
+}
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Exiting
+# ---------------------------------------------------------------------------
+alias x='exit 0'
+alias xx=x
+alias xxx=x
+alias q=x
+alias qq=x
+alias qqq=x
+alias ex=x
+alias exi=x
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Shutdown / Reboot
+# ---------------------------------------------------------------------------
+alias reboot='sudo reboot'
+alias reobot=reboot
+alias restart=reboot
+alias shutdown='sudo shutdown -p now'
+alias poweroff=shutdown
+# ---------------------------------------------------------------------------
+
+# ------------ Job Control Aliases ---------------------- #
+alias killlall='killall'
+alias kilall='killall'
+# ------------------------------------------------------- #
+
+# ---------------------------------------------------------------------------
+# Tar
+# ---------------------------------------------------------------------------
+mkxz() { 
+    tar -cvJpf "$1.tar.xz" "$1" &&
+    [ -f "$1.tar.xz" ] &&
+    rm -rf "$1" &&
+    ls
+}
+mkgz() { 
+    tar -cvzpf "$1.tar.gz" "$1" &&
+    [ -f "$1.tar.gz" ] &&
+    rm -rf "$1" &&
+    ls
+}
+mkbz2() { 
+    tar -cvjpf "$1.tar.bz2" "$1" &&
+    [ -f "$1.tar.bz2" ] &&
+    rm -rf "$1" &&
+    ls
+}
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Vim
+# ---------------------------------------------------------------------------
+if type nvim > /dev/null 2>&1 ; then
+    alias v='nvim'
+    alias vim='v'
+elif type vim > /dev/null 2>&1 ; then
+    alias v='vim'
+elif type vi > /dev/null 2>&1 ; then
+    alias v='vi'
+fi
+
+nvim() {
+    [ $# -eq 0 ] &&
+        command nvim -c VimwikiIndex ||
+        command nvim -p "$@"
+
+    [ $# -gt 0 ] && 
+    {
+        echo -n "${PWD}"/"$(basename $1)" > /tmp/last_vi
+    }
+}
+!v() {
+    path="$(cat /tmp/last_vi -- 2> /dev/null)"
+    if [ -n "$path" ] ; then
+        echo "v $path"
+        v "$path"
+    else
+        echo "No recent vim"
+    fi
+}
+
+notepad() {
+    v "/tmp/notepad.md"
+}
+alias scratchpad=notepad
+alias vtmp=notepad
+alias vt=notepad
+alias vi='command vi'
+alias ivm='vim'
+alias suvim='sudo ${EDITOR}'
+alias suvi='sudo vi'
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# htop
+# ---------------------------------------------------------------------------
+alias h=htop
+alias htpo=h
+alias hto=h
+alias ht=h
+alias hpot=h
+alias hotp=h
+alias hme='h -u ${USER}'
+alias hroot='h -u root'
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Ranger
+# ---------------------------------------------------------------------------
+ranger() {
+
+    if [ $# -eq 0 ] ; then
+        if [ "${PWD}" = ${HOME} ] ; then
+            path=${HOME}
+        else
+            path="${PWD}"
+        fi
+    else
+        path="$1"
+    fi
+
+    echo -n "$path" > /tmp/last_ranger
+
+    command ranger "$@"
+
+}
+!r() {
+    path="$(cat /tmp/last_ranger -- 2> /dev/null)"
+    if [ -n "$path" ] ; then
+        echo "ranger $path"
+        ranger "$path" ; x
+    else
+        echo "No recent ranger"
+    fi
+}
+
+alias rgm='r ${HOME}/music'
+
+# This is a hack to let you use "$@" with an 1-char alias
+# in shells like ksh. You can't do tihs without a function,
+# but you also can't have a 1-char long function.
+_r() {
+    ranger "$@"
+    x
+}
+alias r='_r';[ -n "$RANGER_LEVEL" ] && PS1="$PS1"'(RANGER): ' && clear && ls -F
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Translator
+# ---------------------------------------------------------------------------
+alias trans-shell='command trans -b -I'
+alias rtrans-shell='command trans -b -from en -to de -I'
+trans(){ command trans -no-auto -b "$@" ; }
+rtrans(){ command trans -from en -to de -no-auto -b "$@" ; }
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# YouTube
+# ---------------------------------------------------------------------------
+alias yt="c; youtube-viewer -C -q --vd=high"
+alias ytm="c;yt -n"
+alias ytdv="c;yt -d"
+alias ytdm='c;yt -n -d --convert-to=opus --convert-cmd="ffmpeg -loglevel -8 -i file:*IN* -vn -acodec libopus -ab 128k -y *OUT*"'
+
+alias ytsubs='c;yt --subs-videos --subs-order=unread'
+alias ytsubchans='c;yt --subscriptions'
+alias ytfavs='c;yt --favorites=mine'
+alias ytlists='c;yt --channel-playlists=mine'
+alias ytlikes='c;yt --likes=mine'
+alias ytme='c;yt --channel-videos=mine'
+
+mpv() {
+    if [ $# -gt 0 ] ; then
+        [ $(pgrep mpv) ] && killall mpv
+        command mpv --title=mpv "$@" & x
+    fi
+}
+alias mvp=mpv
+mpvm() { mpv --no-video "$@" ; }
+mpvx() { (mpv "$(xsel -o)" &) ; }
+alias mvpx=mpvx
+
+# Plays the first found result with mpv 
+mpvyt() { mpv ytdl://ytsearch:"$@" ; }
+mpvytm() { mpv --no-video ytdl://ytsearch:"$@" ; }
+alias mvpyt=mpvyt
+alias mvpytm=mvpytm
+
+alias ytdl='youtube-dl --geo-bypass --prefer-ffmpeg'
+alias ytdlm="youtube-dl --extract-audio --geo-bypass --prefer-ffmpeg  --audio-quality 0 --audio-format opus"
+# ---------------------------------------------------------------------------
+# ffmpeg
+# ---------------------------------------------------------------------------
+alias record-webcam='ffmpeg -i /dev/video0 -f sndio -i default "$(date)".mp4'
+
+# ---------------------------------------------------------------------------
+# Images
+# ---------------------------------------------------------------------------
+alias feh='feh -q -N -x --scale-down'
+alias resize-half='mogrify -resize 50%X50%'
+alias resize-quarter='mogrify -resize 25%X25%'
+import() {
+   command import -quiet -silent -window root -quality 100 ${HOME}/import.png
+}
+
+# ---------------------------------------------------------------------------
+# Trash
+# ---------------------------------------------------------------------------
+trash() { 
+    for i in "$@" ; do
+        mv -v "$i" ${HOME}/.local/share/Trash/files 
+    done
+}
+cptrash() { 
+    for i in "$@" ; do
+        cp -rv "$i" ${HOME}/.local/share/Trash/files 
+    done
+}
+emptytrash() { 
+    if type shred > /dev/null 2>&1 ; then
+        find ${HOME}/.local/share/Trash/files -type f -exec shred -fuz {} \; > /dev/null 2>&1
+        find ${HOME}/.local/share/Trash/info -type f -exec shred -fuz {} \; > /dev/null 2>&1
+    fi
+
+    sudo rm -rf ${HOME}/.local/share/Trash/files/*
+    sudo rm -rf ${HOME}/.local/share/Trash/info/*
+    echo "Trashed cleared."
+}
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Weather
+# ---------------------------------------------------------------------------
+alias weather='curl http://wttr.in/Schmalkalden'
+alias weather-sd='curl http://wttr.in/Dakota_State_University'
+alias weather-ok='curl http://wttr.in/Claremore'
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Clipboard management
+# ---------------------------------------------------------------------------
+alias xc='xsel -o'
+alias xco='xsel -o'
+alias xs='xsel -o'
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Networking
+# ---------------------------------------------------------------------------
+alias rsync='rsync -rtvuclh4 --progress --delete'
+ping() { 
+    [ $# -eq 0 ] &&
+        addr=mitchweaver.xyz ||
+        addr="$1"
+    command ping -c 1 -n -q -s 1 -w 10 "$addr" > /dev/null 2>&1
+    [ $? -eq 0 ] && echo "UP" || echo "DOWN"
+}
+alias pingme='ping mitchweaver.xyz'
+alias wtfismyip='w3m https://wtfismyip.com'
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# SSH
+# ---------------------------------------------------------------------------
+alias scp='scp -rp4'
+alias sshd=/usr/sbin/sshd
+echossh() {
+    [ $# -eq 0 ] && echo "No arguments provided." ||
+    case "$1" in
+        -h|--help)
+            echo "Usage: echossh \"text\" user@host file_name"
+            ;;
+        *)
+            echo "$1" | ssh "$2" sh -c 'cat /dev/stdin > "$3"'
+            ;;
+    esac
+}
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Specific file editing
+# ---------------------------------------------------------------------------
+alias kshrc='v ${HOME}/etc/kshrc'
+alias bashrc='v ${HOME}/etc/bashrc'
+alias aliases='v ${HOME}/etc/aliases'
+alias aliase=aliases
+alias alaises=aliases
+alias profile='v ${HOME}/etc/profile'
+alias vimrc='v ${HOME}/etc/vimrc'
+alias virmc=vimrc
+alias bmk='v ${HOME}/var/files/surf-bookmarks.txt'
+alias bmks=bmk
+alias autostart='v ${HOME}/bin/autostart.sh'
+alias vssh='v ${HOME}/.ssh/config'
+# alias sxhkdrc='v ${HOME}/etc/config/sxhkd/sxhkdrc'
+# alias sxkhdrc=sxhkdrc
+alias xinitrc='v ${HOME}/etc/xinitrc'
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# TTY
+# ---------------------------------------------------------------------------
+# make sure colors and printing work if in tty
+case "${TERM:-none}" in
+    linux|none|dumb)
+        printf "%b" "\\e]P0f4f6f7"
+        printf "%b" "\\e]P1668299"
+        printf "%b" "\\e]P2667b99"
+        printf "%b" "\\e]P3998166"
+        printf "%b" "\\e]P4667f99"
+        printf "%b" "\\e]P5668299"
+        printf "%b" "\\e]P6668d99"
+        printf "%b" "\\e]P7363441"
+        printf "%b" "\\e]P87a7b7b"
+        printf "%b" "\\e]P9668299"
+        printf "%b" "\\e]PA667b99"
+        printf "%b" "\\e]PB998166"
+        printf "%b" "\\e]PC667f99"
+        printf "%b" "\\e]PD668299"
+        printf "%b" "\\e]PE668d99"
+        printf "%b" "\\e]PF363441"
+
+        # Fix artifacting.
+        clear
+esac
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Shell specific aliases
+# ---------------------------------------------------------------------------
+case ${SHELL} in
+    /bin/ksh|/bin/mksh|/bin/bash)
+        :q() { x; }
+        :Q() { x; }
+        :wq(){ x; }
+        :w() { x; }
+        ;;
+    *)
+        # if being launched from ksh/bash, fixup non-posix stuff
+        unalias echo print -- > /dev/null 2>&1
+        unset -f basename head trim dirname strip lstrip rstrip \
+            tail -- > /dev/null 2>&1
+        set -o vi -- > /dev/null 2>&1
+esac
+# ------------------------------------------------------- #
+
+# ---------------------------------------------------------------------------
+# Git aliases
+# ---------------------------------------------------------------------------
+alias gti=git
+gitinit() { mkdir -p "$1" && git init "$1" ; }
+gitmote() { git init ; git remote add origin "$1" ; }
+gitup() {
+    git add -A &&
+    if [ $# -eq 0 ] ; then
+        git commit
+    else
+        git commit -m "$@"
+    fi &&
+    git push -u origin master
+}
+gitadd() { [ $# -eq 0 ] && git add -A || git add "$@" ; }
+gitmit() { 
+    if [ $# -eq 1 ] ; then
+        git add -A && git commit -m "$@"
+    else
+        git add "$1"
+        shift
+        git commit -m "$@"
+    fi
+}
+gitout() {
+    # pushes out to the current branch
+    git push -u origin $(git rev-parse --abbrev-ref HEAD) "$@"
+}
+gitdiff() { git diff origin/master ; }
+alias gitiff=gitdiff
+alias gitatus='git status'
+gitreset() { git reset --hard HEAD~"$1" ; }
+gitbase() {
+    [ $# -eq 0 ] &&
+        git rebase -i HEAD~10 ||
+        git rebase -i HEAD~"$1"
+}
+alias gitbsae=gitbase
+gitbort(){ git rebase --abort ; }
+gitstatus() { c ; git status ; }
+gitstat() { gitstatus ; }
+gitclone() { git clone https://github.com/"$1" ; }
+alias gitlog='git log'
+alias gitfetch='git fetch'
+alias gitpull='git pull'
+alias branch='git branch'
+alias checkout='git checkout'
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Custom movement functions
+# ---------------------------------------------------------------------------
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias cd..='cd ..'
+
+# $HOME
+case ${SHELL} in
+    /bin/mksh|/bin/ksh|/bin/bash)
+        g~() { cd ${HOME} ; cls ; }
+        m~() { mv "$1" ${HOME} ; }
+        Y~() { cp "$1" ${HOME} ; }
+        ;;
+esac
+
+# homework
+gh() { cd ${HOME}/var/files/homework ; cls ; }
+mh() { mv "$1" ${HOME}/var/files/homework ; }
+Yh() { cp "$1" ${HOME}/var/files/homework ; }
+
+# workspace
+gw() { cd ${HOME}/var/workspace ; cls ; }
+mw() { mv "$1" ${HOME}/var/workspace ; }
+Yw() { cp "$1" ${HOME}/var/workspace ; }
+
+# /tmp
+gT() { cd /tmp ; cls ; }
+mT() { mv "$1" /tmp ; }
+YT() { cp "$1" /tmp ; }
+
+# bin
+gb() { cd ${HOME}/bin ; cls ; }
+mb() { mv "$1" ${HOME}/bin ; }
+Yb() { cp "$1" ${HOME}/bin ; }
+
+# backup
+#gB(){ cd ${HOME}/backup ; cls ; }
+#mB() { mv "$1" ${HOME}/backup ; }
+#YB() { cp "$1" ${HOME}/backup ; }
+
+# files
+gf() { cd ${HOME}/var/files ; cls ; }
+mf() { mv "$1" ${HOME}/var/files ; }
+Yf() { cp "$1" ${HOME}/var/files ; }
+
+# downloads
+gd(){ cd ${HOME}/var/downloads ; cls ; }
+md() { mv "$1" ${HOME}/var/downloads ; }
+Yd() { cp "$1" ${HOME}/var/downloads ; }
+
+# images
+gi() { cd ${HOME}/var/images ; cls ; }
+mi() { mv "$1" ${HOME}/var/images ; }
+Yi() { cp "$1" ${HOME}/var/images ; }
+
+# wallpapers
+gW() { cd ${HOME}/var/images/wallpapers ; cls ; }
+mW() { mv "$1" ${HOME}/var/images/wallpapers ; }
+YW() { cp "$1" ${HOME}/var/images/wallpapers ; }
+
+# videos
+gV() { cd ${HOME}/var/videos ; cls ; }
+mV() { mv "$1" ${HOME}/var/videos ; }
+YV() { cp "$1" ${HOME}/var/videos ; }
+
+# music
+gm() { cd ${HOME}/var/music; cls ; }
+mm() { mv "$1" ${HOME}/var/music ; cls ; }
+Ym() { cp "$1" ${HOME}/var/music ; cls ; }
+
+# books
+gB() { cd ${HOME}/var/books ; cls ; }
+mB() { mv "$1" ${HOME}/var/books ; }
+YB() { cp "$1" ${HOME}/var/books ; }
+
+# /root
+gr() { cd / ; cls ; }
+mr() { sudo mv "$1" / ; }
+Yr() { sudo cp "$1" / ; }
+
+# /var
+gvar() { cd /var ; cls ; }
+mvar() { sudo mv "$1" /var ; }
+Yvar() { sudo cp "$1" /var ; }
+
+# /usr
+gu() { cd /usr ; cls ; }
+mu() { sudo mv "$1" /usr ; }
+Yu() { sudo cp "$1" /usr ; }
+
+# /usr/local
+guL() { cd /usr/local ; cls ; }
+muL() { sudo mv "$1" /usr/local ; }
+YuL() { sudo cp "$1" /usr/local ; }
+
+# /etc
+ge() { cd /etc ; cls ; }
+me() { sudo mv "$1" /etc ; }
+Ye() { sudo cp "$1" /etc ; }
+
+# /mnt
+gM() { cd /mnt ; cls ; }
+mM() { sudo mv "$1" /mnt ; }
+YM() { sudo cp "$1" /mnt ; }
+
+# /dev
+gD() { cd /dev ; cls ; }
+mD() { sudo mv "$1" /dev ; }
+YD() { sudo cp "$1" /dev ; }
+
+# /lib
+gl() { cd /lib ; cls ; }
+ml() { sudo mv "$1" /lib ; }
+Yl() { sudo cp "$1" /lib ; }
+
+# /opt
+gO() { cd /opt ; cls ; }
+mO() { sudo mv "$1" /opt ; }
+YO() { sudo cp "$1" /opt ; }
+
+# tmp
+gt() { cd ${HOME}/tmp ; cls ; }
+mt() { mv "$1" ${HOME}/tmp ; }
+Yt() { cp "$1" ${HOME}/tmp ; }
+
+# .config
+gcf() { cd ${HOME}/etc/config ; cls ; }
+mcf() { mv "$1" ${HOME}/etc/config ; }
+Ycf() { cp "$1" ${HOME}/etc/config ; }
+
+# programs
+gp() { cd ${HOME}/var/programs ; cls ; }
+mp() { mv "$1" ${HOME}/var/programs ; }
+Yp() { cp "$1" ${HOME}/var/programs ; }
+
+# suckless
+gs() { cd ${HOME}/etc/suckless ; cls ; }
+ms() { mv "$1" ${HOME}/etc/suckless ; }
+Ys() { cp "$1" ${HOME}/etc/suckless ; }
+# ------------------------------------------------------- 
+
+# ---------------------------------------------------------------------------
+# Suckless aliases
+# ---------------------------------------------------------------------------
+alias dwmc='v ${HOME}/etc/suckless/dwm/dwm.c'
+alias surfc='v ${HOME}/etc/suckless/surf/surf.c'
+alias tabbedc='v ${HOME}/etc/suckless/tabbed/tabbed.c'
+alias dmenuc='v ${HOME}/etc/suckless/dmenu/dmenu.c'
+alias stc='v ${HOME}/etc/suckless/st/st.c'
+
+alias dwmcfg='v ${HOME}/etc/suckless/dwm/config.h'
+alias surfcfg='v ${HOME}/etc/suckless/surf/config.h'
+alias tabbedcfg='v ${HOME}/etc/suckless/tabbed/config.h'
+alias dmenucfg='v ${HOME}/etc/suckless/dmenu/config.h'
+alias stcfg='v ${HOME}/etc/suckless/st/config.h'
+
+recomp() {
+    stools="${HOME}/etc/suckless"
+    progs=/"${HOME}/var/programs"
+    for i in "$@" ; do
+        case $i in
+            dwm)      sudo ${HOME}/bin/recomp $stools/dwm ;; 
+            surf)     sudo ${HOME}/bin/recomp $stools/surf ;; 
+            tabbed)   sudo ${HOME}/bin/recomp $stools/tabbed ;; 
+            st)       sudo ${HOME}/bin/recomp $stools/st ;; 
+            dmenu)    sudo ${HOME}/bin/recomp $stools/dmenu ;; 
+            slock)    sudo ${HOME}/bin/recomp $stools/slock ;; 
+            blind)    sudo ${HOME}/bin/recomp $stools/blind ;; 
+            quark)    sudo ${HOME}/bin/recomp $stools/quark ;; 
+            ii)       sudo ${HOME}/bin/recomp $stools/ii ;; 
+            sent)     sudo ${HOME}/bin/recomp $stools/sent ;; 
+            all)      recomp dwm surf tabbed st dmenu  ;; 
+            *)
+        esac
+    done
+}
+
+alias reocmp=recomp
+alias recmop=recomp
+alias ecomp=recomp
+alias recopm=recomp
+alias rdwm='recomp dwm -- > /dev/null ; c'
+alias rsurf='recomp surf -- > /dev/null ; c'
+alias rst='recomp st -- > /dev/null ; c'
+alias rtabbed='recomp tabbed -- > /dev/null ; c'
+alias rdmenu='recomp dmenu -- > /dev/null ; c'
+# ---------------------------------------------------------------------------
