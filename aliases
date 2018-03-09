@@ -7,144 +7,85 @@
 
 alias a=alias
 
-a {fc,w}=true 
-
-_ps1_git() { git branch 2> /dev/null | \
-    sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/' ; }
-
-cd() { [ $# -eq 0 ] &&
-           builtin cd ${HOME} ||
-           builtin cd "$1"
-        export PS1="$(get_PS1)" ; }
-
-case ${SHELL} in
-    /bin/ksh|/bin/bash)
-        [ $(id -u) -eq 0 ] &&
-            get_PS1() { echo "\[\e[0;32m\][root]\[\e[1;36m\] \W\[\e[1;37m\] " ; } ||
-            get_PS1() { echo "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(_ps1_git)\[\e[1;37m\] " ; } ;;
-    /bin/mksh)
-        _x="$(print \\001)"
-        get_PS1() { 
-            case ${PWD} in
-                ${HOME}) tmp_pwd='~' ;;
-                *) tmp_pwd=`basename "${PWD}"`
-            esac
-            echo -n "$_x$(print \\r)$_x\e[1;35mm$_x\e[0;32mi$_x\e[0;33mt$_x\e[0;34mc$_x\e[1;31mh$_x\e[1;36m $tmp_pwd$_x$(_ps1_git)$_x\e[1;37m "
-        } ;;
-    *) get_PS1() { echo "\u \W " ; }
-esac
-
-export PS1="$(get_PS1)"
-
-netstart() { [ $# -eq 0 ] &&
-                 doas /etc/netstart "$@" ||
-                 doas /etc/netstart "$@" ; }
-a disks="sysctl hw.disknames"
-a disklabel='disklabel -h'
-a disknames='sysctl hw.disknames'
-a sensors="sysctl hw.sensors"
-pkg_del() { pkg_delete $@ ; pkg_delete -a ; }
-pkg() { case "$1" in
-            add) shift ; pkg_add "$@" ;;
-            del) shift ; pkg_del "$@" ;;
-            info) shift ; pkg_info "$@" ;;
-            search) shift ; pkg_info -Q "$@" ;;
-            update) shift ; pkg_add -Uui "$@" ;;
-            check) shift ; pkg_check "$@" ;;
-            *) echo "?"
-        esac ; }
-a killall="pkill -9"
-a cp='cp -rv'
-a rm='rm -P'
-
 type exa > /dev/null 2>&1 &&
     a ls='exa -F' ||
     a ls='ls -F'
 
+a {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi}=exit
 a {l,sls,sl}=ls
 a ll='l -l'
 a la='l -a'
 a lla='l -al'
 a lsf='l "${PWD}"/*'
-
 a {c,cc,cll,clear,clar,clea}='printf "\033c"'
 a {cls,csl,cl,lc}='c;l'
 a {e,ech,eho}=echo
-
-a file='file -b -i -L'
-a date="date '+%a %b %d - %l:%M %p'"
-a {dmesg,dmegs}='dmesg | tail -n 20'
-
-ext() { echo "${1##*.}" ; }
-filename() { echo "${1%.*}" ; }
-
-pa(){ ps auwwx | head ; }
-ph(){ ps auwwx | grep -i -e ${USER} | head ; }
-
+a cmd=command
+a {g,Grep,gerp}='grep'
+a pg='pgrep'
+a dg='cmd du -ahLd 1 | g'
+a cp='cp -rv'
 a mv='mv -v'
 a {mkdir,mkd,mkdr}='mkdir -p'
-mkcd() { mkd "$1" && cd "$1" ; }
-mvcd() { mv "$1" "$2" && cd "$2" ; }
-cpcd() { cp "$1" "$2" && cd "$2" ; }
-
-du() { command du -ahLd 1 2> /dev/null | \
-           /usr/bin/sort -rh | /usr/bin/head -n 20 ; }
-
+a rm='rm -P'
+a file='file -b -i -L'
+a bn=basename
+a date="date '+%a %b %d - %l:%M %p'"
+a {dmesg,dmegs}='dmesg | tail -n 20'
+a {k,killall}="pkill -9"
+a pa='ps auwwx | head'
+a ph='ps auwwx | g -i -e ${USER} | head'
 a df='df -h'
 a man='man -a'
 a cx='chmod +x'
 a chown='chown -R'
-
-reload() { . ${HOME}/etc/aes
-           . ${HOME}/etc/profile
-           xrdb load ${HOME}/etc/Xresources
-           xmodmap ${HOME}/etc/Xmodmap
-           xset m 0 0 ; } > /dev/null
-
-a jjar='java -jar'
-nasm() { [ -f "$1" ] && c &&
-             command nasm -f elf32 -g -F dwarf "$1" &&
-                ld -m elf_i386 "${1%.*}.o" -o "${1%.*}" &&
-                    ./"${1%.*}" ; }
-
-a nf='neofetch'
-a {irc,irssi}="irssi -c freenode"
-a discline='dash ${HOME}/usr/bin/discline ; x'
-a {rtv,reddit}="rtv --enable-media ; c"
-a compton="pkill -9 compton ; compton & c"
-
-w3m() { [ $# -eq 0 ] &&
-            command w3m -F https://ddg.gg/lite ||
-            command w3m -F "$@" ; }
-
-bar() { pkill -9 bar lemonbar > /dev/null 2>&1
-        ${HOME}/bin/bar & c ; }
-
-a {mk,mkae}="make -j$(sysctl -n hw.ncpu)"
-a mkc='make clean'
-a mkall="make clean ; make && doas make install"
-
-gcc() { command gcc $@
-        echo -n "${PWD}"/"$(basename $1 -- 2> /dev/null)" \
-        > /tmp/shell/last_gcc ; }
-
-!g() { path="$(cat /tmp/shell/last_gcc -- 2> /dev/null)"
-       [ -n "$path" ] &&
-           { echo "gcc $path" ; command gcc "$path" ; } ||
-                echo "No recent gcc" ; }
-
-g(){ grep "$@" ; }
-pg() { pgrep "$@" ; }
-dg() { command du -ahLd 1  | g "$@" ; }
-f () { [ $# -gt 0 ] && find . -iname "*$1*" ; }
-hg() { [ $# -gt 0 ] && cat ${HISTFILE} | \
-    grep "$@" | head -n 20 ; }
-sg() { sysctl | g "$@" ; }
-
-a {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w}=exit
-
 a reboot='doas reboot'
 a shutdown='doas shutdown -p now'
+a {mk,mkae}="make -j$(sysctl -n hw.ncpu)"
+a mkc='mk clean'
+a mkall="mk clean ; mk && doas mk install"
+a w='curl http://wttr.in/Schmalkalden'
+a wsd='curl http://wttr.in/Dakota_State_University'
+a wok='curl http://wttr.in/Claremore'
+a {xs,xc}='xsel -o ; e'
+a rsync='rsync -rtvulh4 --progress --delete' #-c
+a sshd='doas /usr/sbin/sshd'
+a scp='scp -rp4'
+a pubip='curl https://wtfismyip.com/text'
+a {notepad,vtmp}='${EDITOR} /tmp/notepad.md'
+a {suvim,suvi}='doas ${EDITOR}'
+a view='${EDITOR} -R'
+a {h,htpo,hto,ht,hpot,hotp}=htop
+a hm='h -u ${USER}'
+a hr='h -u root'
+a jjar='java -jar'
+a nf='neofetch'
+a {irc,irssi}="irssi -c freenode"
+a {discline,discord}='dash ${HOME}/usr/bin/discline ; x'
+a {rtv,reddit}="rtv --enable-media ; c"
+a compton="k compton ; compton & c"
+a feh='feh -q -N -x --scale-down'
+a 75%='mogrify -resize 75%X75%'
+a 50%='mogrify -resize 50%X50%'
+a 25%='mogrify -resize 25%X25%'
+a trans='cmd trans -no-auto -b'
+a rtrans='cmd trans -from en -to de -no-auto -b'
+a {netstart,netsart,nestart}='doas sh /etc/nestart'
+a {disks,disknames}="sysctl hw.disknames"
+a {disklabel,label}='disklabel -h'
+a args='[ $# -gt 0 ]'
+
+mkcd() { mkd "$1" && cd "$1" ; }
+mvcd() { mv "$1" "$2" && cd "$2" ; }
+cpcd() { cp "$1" "$2" && cd "$2" ; }
+
+f () { ${args} && find . -iname "*$1*" ; }
+hg() { ${args} && cat ${HISTFILE} |
+           g "$@" | head -n 20 ; }
+sg() { sysctl | g "$@" ; }
+du() { cmd du -ahLd 1 2> /dev/null | sort -rh | head -n 20 ; }
+ext() { e "${1##*.}" ; }
+filename() { e "${1%.*}" ; }
 
 mkxz() { f="$(e $1 | sed 's/\///')" &&
              tar -cvpf "$f.tar" "$f" &&
@@ -160,41 +101,74 @@ mkbz2() { f="$(e $1 | sed 's/\///')" &&
                   [ -f "$f.tar.bz" ] &&
                       rm -rf "$f" && unset f ; }
 
-a {v,vi,vim,nvim}=${EDITOR}
-vim() { [ $# -eq 0 ] &&
-            command ${EDITOR} -c VimwikiIndex ||
-                command ${EDITOR} -p "$@"
+pkg_del() { pkg_delete $@ ; pkg_delete -a ; }
+pkg() { case "$1" in
+            add) shift ; pkg_add "$@" ;;
+            del) shift ; pkg_del "$@" ;;
+            info) shift ; pkg_info "$@" ;;
+            search) shift ; pkg_info -Q "$@" ;;
+            update) shift ; pkg_add -Uui "$@" ;;
+            check) shift ; pkg_check "$@" ;;
+            *) e "?"
+        esac ; }
+
+reload() { . ${HOME}/etc/aes
+           . ${HOME}/etc/profile
+           xrdb load ${HOME}/etc/Xresources
+           xmodmap ${HOME}/etc/Xmodmap
+           xset m 0 0 ; } > /dev/null
+
+nasm() { [ -f "$1" ] && c &&
+             cmd nasm -f elf32 -g -F dwarf "$1" &&
+                ld -m elf_i386 "${1%.*}.o" -o "${1%.*}" &&
+                    ./"${1%.*}" ; }
+
+w3m() { [ $# -eq 0 ] &&
+            cmd w3m -F https://ddg.gg/lite ||
+            cmd w3m -F "$@" ; }
+
+bar() { k bar lemonbar > /dev/null 2>&1
+        ${HOME}/bin/bar & c ; }
+
+gcc() { cmd gcc $@
+        e -n "${PWD}"/"$(bn $1 -- 2> /dev/null)" \
+        > /tmp/shell/last_gcc ; }
+
+!g() { path="$(cat /tmp/shell/last_gcc -- 2> /dev/null)"
+       [ -n "$path" ] &&
+           { e "gcc $path" ; cmd gcc "$path" ; } ||
+                e "No recent gcc" ; }
+
+
+v() { [ $# -eq 0 ] &&
+            cmd ${EDITOR} -c VimwikiIndex ||
+                cmd ${EDITOR} -p "$@"
         [ -f "$1" ] && file="$1" || \
             { [ -f "${PWD}/$1" ] && \
               file="${PWD}/$1" ; } ||
-                  file="${PWD}/$(basename $1)"
-        echo -n "$file" > /tmp/last_vi ; }
+                  file="${PWD}/$(bn $1 -- \
+                  2> /dev/null)"
+        e -n "$file" > /tmp/last_vi ; }
+
+a {vi,vim,nvim}=v
 
 !v() { path="$(cat /tmp/last_vi -- 2> /dev/null)"
        [ -n "$path" ] &&
-           { echo "v $path" ; v "$path" ; x ; } ||
-               echo "No recent vi" ; }
-
-a {notepad,vtmp}='${EDITOR} /tmp/notepad.md'
-a {suvim,suvi}='doas ${EDITOR}'
-a view='${EDITOR} -R'
-
-a {h,htpo,hto,ht,hpot,hotp}=htop
-a hm='h -u ${USER}'
-a hr='h -u root'
+           { e "v $path" ; v "$path" ; x ; } ||
+               e "No recent vi" ; }
 
 ranger() {
     [ $# -eq 0 ] &&
         { [ "${PWD}" = ${HOME} ] &&
           path=${HOME} || path="${PWD}" ; } ||
               path="$1"
-    echo -n "$path" > /tmp/last_ranger
-    command ranger "$@"
+    e -n "$path" > /tmp/last_ranger
+    cmd ranger "$@"
 }
 !r() { path="$(cat /tmp/last_ranger -- 2> /dev/null)"
     [ -n "$path" ] &&
-        { echo "ranger $path" ; ranger "$path" ; x ; } ||
-            echo "No recent ranger" ; }
+        { e "ranger $path" ; ranger "$path" ; x ; } ||
+            e "No recent ranger" ; }
 
 # This is a hack to let you use "$@" with an 1-char alias
 # in shells like ksh. You can't do this without a function,
@@ -202,9 +176,6 @@ ranger() {
 _r() { ranger "$@" ; x ; }
 a r='_r';[ -n "$RANGER_LEVEL" ] && \
     PS1="$PS1"'(RANGER): ' && clear && ls -F
-
-trans(){ command trans -no-auto -b "$@" ; }
-rtrans(){ command trans -from en -to de -no-auto -b "$@" ; }
 
 a yt="c; youtube-viewer -C -q --vd=high"
 a ytm="c;yt -n"
@@ -217,9 +188,8 @@ a ytchans='c;yt --subscriptions'
 a ytfavs='c;yt --favorites=mine'
 a ytme='c;yt --channel-videos=mine'
 
-mpv() { [ $# -gt 0 ] &&
-        { [ $(pgrep mpv) ] && killall mpv ; } ||
-        command mpv --title=mpv "$@" & x ; }
+mpv() { ${args} && k mpv > /dev/null 2>&1 ||
+            cmd mpv --title=mpv "$@" & x ; }
 mpvm() { mpv --no-video "$@" ; }
 mpvx() { (mpv "$(xsel -o)" &) ; }
 mpvyt() { mpv ytdl://ytsearch:"$@" ; }
@@ -229,40 +199,18 @@ a ytdl='youtube-dl --geo-bypass --prefer-ffmpeg'
 a ytdlm="youtube-dl --extract-audio --geo-bypass \
     --prefer-ffmpeg  --audio-quality 0 --audio-format opus"
 
-a record-webcam='ffmpeg -i /dev/video0 -f sndio -i \
-    default "$(date)".mp4'
+a webcam='ffmpeg -i /dev/video0 -f sndio -i \
+              default "$(date)".mp4'
 
-a feh='feh -q -N -x --scale-down'
-a resize-half='mogrify -resize 50%X50%'
-a resize-quarter='mogrify -resize 25%X25%'
-import() { command import -quiet -silent -window root \
-       -quality 100 ${HOME}/import.png ; }
+import() { cmd import -quiet -silent -window root \
+               -quality 100 ${HOME}/import.png ; }
 
-a w='curl http://wttr.in/Schmalkalden'
-a wsd='curl http://wttr.in/Dakota_State_University'
-a wok='curl http://wttr.in/Claremore'
-
-a {xs,xc}='xsel -o ; e'
-
-a rsync='rsync -rtvulh4 --progress --delete' #-c
-a scp='scp -rp4'
 p() { [ $# -eq 0 ] &&
           addr=mitchweaver.xyz ||
               addr="$1"
       ping -c 1 -n -q -s 1 -w 10 \
           "$addr" > /dev/null 2>&1 &&
-              echo "UP" || echo "DOWN" ; }
-a pubip='curl https://wtfismyip.com/text'
-
-a sshd='doas /usr/sbin/sshd'
-
-a kshrc='v ${HOME}/etc/kshrc'
-a {aliases,alaises,aliase}='v ${HOME}/etc/aliases'
-a profile='v ${HOME}/etc/profile'
-a {vimrc,virmc}='v ${HOME}/etc/vimrc'
-a {bmk,bmks}='v ${HOME}/var/files/surf-bookmarks.txt'
-a vssh='v ${HOME}/.ssh/config'
-a xinitrc='v ${HOME}/etc/xinitrc'
+              e "UP" || e "DOWN" ; }
 
 gup() { git add -A &&
         git commit -m "$@" &&
@@ -284,7 +232,7 @@ gbase() { [ $# -eq 0 ] &&
 gmote() { git init ; git remote add origin "$1" ; }
 gclone() { git clone https://github.com/"$1" ; }
 a gbort='git rebase --abort'
-a glog='git log'
+a glog=git\ log
 a gfetch='git fetch'
 a gppull='git pull'
 a gbranch='git branch'
@@ -294,81 +242,89 @@ a {..,cd..}='cd ..'
 a ...='cd ../..'
 a ....='cd ../../..'
 
-g~() { cd ${HOME} ; cls ; }
+g~() { cd ${HOME} ; cl ; }
 m~() { mv "$1" ${HOME} ; }
 Y~() { cp "$1" ${HOME} ; }
-gh() { cd ${HOME}/var/files/homework ; cls ; }
+gh() { cd ${HOME}/var/files/homework ; cl ; }
 mh() { mv "$1" ${HOME}/var/files/homework ; }
 Yh() { cp "$1" ${HOME}/var/files/homework ; }
-gw() { cd ${HOME}/var/workspace ; cls ; }
+gw() { cd ${HOME}/var/workspace ; cl ; }
 mw() { mv "$1" ${HOME}/var/workspace ; }
 Yw() { cp "$1" ${HOME}/var/workspace ; }
-gT() { cd /tmp ; cls ; }
+gT() { cd /tmp ; cl ; }
 mT() { mv "$1" /tmp ; }
 YT() { cp "$1" /tmp ; }
-gb() { cd ${HOME}/bin ; cls ; }
+gb() { cd ${HOME}/bin ; cl ; }
 mb() { mv "$1" ${HOME}/bin ; }
 Yb() { cp "$1" ${HOME}/bin ; }
-gf() { cd ${HOME}/var/files ; cls ; }
+gf() { cd ${HOME}/var/files ; cl ; }
 mf() { mv "$1" ${HOME}/var/files ; }
 Yf() { cp "$1" ${HOME}/var/files ; }
-gd() { cd ${HOME}/var/downloads ; cls ; }
+gd() { cd ${HOME}/var/downloads ; cl ; }
 md() { mv "$1" ${HOME}/var/downloads ; }
 Yd() { cp "$1" ${HOME}/var/downloads ; }
-gi() { cd ${HOME}/var/images ; cls ; }
+gi() { cd ${HOME}/var/images ; cl ; }
 mi() { mv "$1" ${HOME}/var/images ; }
 Yi() { cp "$1" ${HOME}/var/images ; }
-gW() { cd ${HOME}/var/images/wallpapers ; cls ; }
+gW() { cd ${HOME}/var/images/wallpapers ; cl ; }
 mW() { mv "$1" ${HOME}/var/images/wallpapers ; }
 YW() { cp "$1" ${HOME}/var/images/wallpapers ; }
-gV() { cd ${HOME}/var/videos ; cls ; }
+gV() { cd ${HOME}/var/videos ; cl ; }
 mV() { mv "$1" ${HOME}/var/videos ; }
 YV() { cp "$1" ${HOME}/var/videos ; }
-gm() { cd ${HOME}/var/music; cls ; }
-mm() { mv "$1" ${HOME}/var/music ; cls ; }
-Ym() { cp "$1" ${HOME}/var/music ; cls ; }
-gB() { cd ${HOME}/var/books ; cls ; }
+gm() { cd ${HOME}/var/music; cl ; }
+mm() { mv "$1" ${HOME}/var/music ; cl ; }
+Ym() { cp "$1" ${HOME}/var/music ; cl ; }
+gB() { cd ${HOME}/var/books ; cl ; }
 mB() { mv "$1" ${HOME}/var/books ; }
 YB() { cp "$1" ${HOME}/var/books ; }
-gr() { cd / ; cls ; }
+gr() { cd / ; cl ; }
 mr() { doas mv "$1" / ; }
 Yr() { doas cp "$1" / ; }
-gvar() { cd /var ; cls ; }
+gvar() { cd /var ; cl ; }
 mvar() { doas mv "$1" /var ; }
 Yvar() { doas cp "$1" /var ; }
-gu() { cd /usr ; cls ; }
+gu() { cd /usr ; cl ; }
 mu() { doas mv "$1" /usr ; }
 Yu() { doas cp "$1" /usr ; }
-guL() { cd /usr/local ; cls ; }
+guL() { cd /usr/local ; cl ; }
 muL() { doas mv "$1" /usr/local ; }
 YuL() { doas cp "$1" /usr/local ; }
-ge() { cd /etc ; cls ; }
+ge() { cd /etc ; cl ; }
 me() { doas mv "$1" /etc ; }
 Ye() { doas cp "$1" /etc ; }
-gM() { cd /mnt ; cls ; }
+gM() { cd /mnt ; cl ; }
 mM() { doas mv "$1" /mnt ; }
 YM() { doas cp "$1" /mnt ; }
-gD() { cd /dev ; cls ; }
+gD() { cd /dev ; cl ; }
 mD() { doas mv "$1" /dev ; }
 YD() { doas cp "$1" /dev ; }
-gl() { cd /lib ; cls ; }
+gl() { cd /lib ; cl ; }
 ml() { doas mv "$1" /lib ; }
 Yl() { doas cp "$1" /lib ; }
-gO() { cd /opt ; cls ; }
+gO() { cd /opt ; cl ; }
 mO() { doas mv "$1" /opt ; }
 YO() { doas cp "$1" /opt ; }
-gt() { cd ${HOME}/tmp ; cls ; }
+gt() { cd ${HOME}/tmp ; cl ; }
 mt() { mv "$1" ${HOME}/tmp ; }
 Yt() { cp "$1" ${HOME}/tmp ; }
-gcf() { cd ${HOME}/etc/config ; cls ; }
+gcf() { cd ${HOME}/etc/config ; cl ; }
 mcf() { mv "$1" ${HOME}/etc/config ; }
 Ycf() { cp "$1" ${HOME}/etc/config ; }
-gp() { cd ${HOME}/usr/programs ; cls ; }
+gp() { cd ${HOME}/usr/programs ; cl ; }
 mp() { mv "$1" ${HOME}/usr/programs ; }
 Yp() { cp "$1" ${HOME}/usr/programs ; }
-gs() { cd ${HOME}/etc/suckless ; cls ; }
+gs() { cd ${HOME}/etc/suckless ; cl ; }
 ms() { mv "$1" ${HOME}/etc/suckless ; }
 Ys() { cp "$1" ${HOME}/etc/suckless ; }
+
+a kshrc='v ${HOME}/etc/kshrc'
+a {aliases,alaises,aliase}='v ${HOME}/etc/aliases'
+a profile='v ${HOME}/etc/profile'
+a {vimrc,virmc}='v ${HOME}/etc/vimrc'
+a {bmk,bmks}='v ${HOME}/var/files/surf-bookmarks.txt'
+a vssh='v ${HOME}/.ssh/config'
+a xinitrc='v ${HOME}/etc/xinitrc'
 
 a dwmc='v ${HOME}/etc/suckless/dwm/dwm.c'
 a surfc='v ${HOME}/etc/suckless/surf/surf.c'
@@ -401,3 +357,6 @@ recomp() {
         esac
     done
 } ; a {repomc,recopm,recpom}=recomp
+
+a='[ $# -gt 0 ] && alias'
+unalias args
