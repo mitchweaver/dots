@@ -5,7 +5,9 @@
 # note: this is meant for ksh/mksh
 #
 
-alias {fc,w}=true 
+alias a=alias
+
+a {fc,w}=true 
 
 _ps1_git() { git branch 2> /dev/null | \
     sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/' ; }
@@ -37,10 +39,10 @@ export PS1="$(get_PS1)"
 netstart() { [ $# -eq 0 ] &&
                  doas /etc/netstart "$@" ||
                  doas /etc/netstart "$@" ; }
-alias disks="sysctl hw.disknames"
-alias disklabel='disklabel -h'
-alias disknames='sysctl hw.disknames'
-alias sensors="sysctl hw.sensors"
+a disks="sysctl hw.disknames"
+a disklabel='disklabel -h'
+a disknames='sysctl hw.disknames'
+a sensors="sysctl hw.sensors"
 pkg_del() { pkg_delete $@ ; pkg_delete -a ; }
 pkg() { case "$1" in
             add) shift ; pkg_add "$@" ;;
@@ -51,27 +53,27 @@ pkg() { case "$1" in
             check) shift ; pkg_check "$@" ;;
             *) echo "?"
         esac ; }
-alias killall="pkill -9"
-alias cp='cp -rv'
-alias rm='rm -P'
+a killall="pkill -9"
+a cp='cp -rv'
+a rm='rm -P'
 
 type exa > /dev/null 2>&1 &&
-    alias ls='exa -F' ||
-    alias ls='ls -F'
+    a ls='exa -F' ||
+    a ls='ls -F'
 
-alias {l,sls,sl}=ls
-alias ll='l -l'
-alias la='l -a'
-alias lla='l -al'
-alias lsf='l "${PWD}"/*'
+a {l,sls,sl}=ls
+a ll='l -l'
+a la='l -a'
+a lla='l -al'
+a lsf='l "${PWD}"/*'
 
-alias {c,cc,cll,clear}='printf "\033c"'
-alias {cls,csl,cl,lc}='c;l'
-alias {e,ech}=echo
+a {c,cc,cll,clear,clar,clea}='printf "\033c"'
+a {cls,csl,cl,lc}='c;l'
+a {e,ech,eho}=echo
 
-alias file='file -b -i -L'
-alias date="date '+%a %b %d - %l:%M %p'"
-alias {dmesg,dmegs}='dmesg | tail -n 20'
+a file='file -b -i -L'
+a date="date '+%a %b %d - %l:%M %p'"
+a {dmesg,dmegs}='dmesg | tail -n 20'
 
 ext() { echo "${1##*.}" ; }
 filename() { echo "${1%.*}" ; }
@@ -79,8 +81,8 @@ filename() { echo "${1%.*}" ; }
 pa(){ ps auwwx | head ; }
 ph(){ ps auwwx | grep -i -e ${USER} | head ; }
 
-alias mv='mv -v'
-alias {mkdir,mkd,mkdr}='mkdir -p'
+a mv='mv -v'
+a {mkdir,mkd,mkdr}='mkdir -p'
 mkcd() { mkd "$1" && cd "$1" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
@@ -88,27 +90,28 @@ cpcd() { cp "$1" "$2" && cd "$2" ; }
 du() { command du -ahLd 1 2> /dev/null | \
            /usr/bin/sort -rh | /usr/bin/head -n 20 ; }
 
-alias df='df -h'
-alias man='man -a'
-alias cx='chmod +x'
+a df='df -h'
+a man='man -a'
+a cx='chmod +x'
+a chown='chown -R'
 
-reload() { . ${HOME}/etc/aliases
+reload() { . ${HOME}/etc/aes
            . ${HOME}/etc/profile
            xrdb load ${HOME}/etc/Xresources
            xmodmap ${HOME}/etc/Xmodmap
            xset m 0 0 ; } > /dev/null
 
-alias jjar='java -jar'
+a jjar='java -jar'
 nasm() { [ -f "$1" ] && c &&
              command nasm -f elf32 -g -F dwarf "$1" &&
                 ld -m elf_i386 "${1%.*}.o" -o "${1%.*}" &&
                     ./"${1%.*}" ; }
 
-alias nf='neofetch'
-alias {irc,irssi}="irssi -c freenode"
-alias discline='dash ${HOME}/usr/bin/discline ; x'
-alias {rtv,reddit}="rtv --enable-media ; c"
-alias compton="pkill -9 compton ; compton & c"
+a nf='neofetch'
+a {irc,irssi}="irssi -c freenode"
+a discline='dash ${HOME}/usr/bin/discline ; x'
+a {rtv,reddit}="rtv --enable-media ; c"
+a compton="pkill -9 compton ; compton & c"
 
 w3m() { [ $# -eq 0 ] &&
             command w3m -F https://ddg.gg/lite ||
@@ -117,9 +120,9 @@ w3m() { [ $# -eq 0 ] &&
 bar() { pkill -9 bar lemonbar > /dev/null 2>&1
         ${HOME}/bin/bar & c ; }
 
-alias {mk,mkae}="make -j$(sysctl -n hw.ncpu)"
-alias mkc='make clean'
-alias mkall="make clean ; make && doas make install"
+a {mk,mkae}="make -j$(sysctl -n hw.ncpu)"
+a mkc='make clean'
+a mkall="make clean ; make && doas make install"
 
 gcc() { command gcc $@
         echo -n "${PWD}"/"$(basename $1 -- 2> /dev/null)" \
@@ -138,10 +141,10 @@ hg() { [ $# -gt 0 ] && cat ${HISTFILE} | \
     grep "$@" | head -n 20 ; }
 sg() { sysctl | g "$@" ; }
 
-alias {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w}=exit
+a {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w}=exit
 
-alias reboot='doas reboot'
-alias shutdown='doas shutdown -p now'
+a reboot='doas reboot'
+a shutdown='doas shutdown -p now'
 
 mkxz() { f="$(e $1 | sed 's/\///')" &&
              tar -cvpf "$f.tar" "$f" &&
@@ -157,7 +160,7 @@ mkbz2() { f="$(e $1 | sed 's/\///')" &&
                   [ -f "$f.tar.bz" ] &&
                       rm -rf "$f" && unset f ; }
 
-alias {v,vi,vim,nvim}=${EDITOR}
+a {v,vi,vim,nvim}=${EDITOR}
 vim() { [ $# -eq 0 ] &&
             command ${EDITOR} -c VimwikiIndex ||
                 command ${EDITOR} -p "$@"
@@ -172,13 +175,13 @@ vim() { [ $# -eq 0 ] &&
            { echo "v $path" ; v "$path" ; x ; } ||
                echo "No recent vi" ; }
 
-alias {notepad,vtmp}='${EDITOR} /tmp/notepad.md'
-alias {suvim,suvi}='doas ${EDITOR}'
-alias view='${EDITOR} -R'
+a {notepad,vtmp}='${EDITOR} /tmp/notepad.md'
+a {suvim,suvi}='doas ${EDITOR}'
+a view='${EDITOR} -R'
 
-alias {h,htpo,hto,ht,hpot,hotp}=htop
-alias hm='h -u ${USER}'
-alias hr='h -u root'
+a {h,htpo,hto,ht,hpot,hotp}=htop
+a hm='h -u ${USER}'
+a hr='h -u root'
 
 ranger() {
     [ $# -eq 0 ] &&
@@ -197,22 +200,22 @@ ranger() {
 # in shells like ksh. You can't do this without a function,
 # but you also can't have a 1-char long function.
 _r() { ranger "$@" ; x ; }
-alias r='_r';[ -n "$RANGER_LEVEL" ] && \
+a r='_r';[ -n "$RANGER_LEVEL" ] && \
     PS1="$PS1"'(RANGER): ' && clear && ls -F
 
 trans(){ command trans -no-auto -b "$@" ; }
 rtrans(){ command trans -from en -to de -no-auto -b "$@" ; }
 
-alias yt="c; youtube-viewer -C -q --vd=high"
-alias ytm="c;yt -n"
-alias ytdv="c;yt -d"
-alias ytdm='c;yt -n -d --convert-to=opus \
+a yt="c; youtube-viewer -C -q --vd=high"
+a ytm="c;yt -n"
+a ytdv="c;yt -d"
+a ytdm='c;yt -n -d --convert-to=opus \
     --convert-cmd="ffmpeg -loglevel -8 -i \
     file:*IN* -vn -acodec libopus -ab 128k -y *OUT*"'
-alias ytsubs='c;yt --subs-videos --subs-order=unread'
-alias ytchans='c;yt --subscriptions'
-alias ytfavs='c;yt --favorites=mine'
-alias ytme='c;yt --channel-videos=mine'
+a ytsubs='c;yt --subs-videos --subs-order=unread'
+a ytchans='c;yt --subscriptions'
+a ytfavs='c;yt --favorites=mine'
+a ytme='c;yt --channel-videos=mine'
 
 mpv() { [ $# -gt 0 ] &&
         { [ $(pgrep mpv) ] && killall mpv ; } ||
@@ -222,44 +225,44 @@ mpvx() { (mpv "$(xsel -o)" &) ; }
 mpvyt() { mpv ytdl://ytsearch:"$@" ; }
 mpvytm() { mpv --no-video ytdl://ytsearch:"$@" ; }
 
-alias ytdl='youtube-dl --geo-bypass --prefer-ffmpeg'
-alias ytdlm="youtube-dl --extract-audio --geo-bypass \
+a ytdl='youtube-dl --geo-bypass --prefer-ffmpeg'
+a ytdlm="youtube-dl --extract-audio --geo-bypass \
     --prefer-ffmpeg  --audio-quality 0 --audio-format opus"
 
-alias record-webcam='ffmpeg -i /dev/video0 -f sndio -i \
+a record-webcam='ffmpeg -i /dev/video0 -f sndio -i \
     default "$(date)".mp4'
 
-alias feh='feh -q -N -x --scale-down'
-alias resize-half='mogrify -resize 50%X50%'
-alias resize-quarter='mogrify -resize 25%X25%'
+a feh='feh -q -N -x --scale-down'
+a resize-half='mogrify -resize 50%X50%'
+a resize-quarter='mogrify -resize 25%X25%'
 import() { command import -quiet -silent -window root \
        -quality 100 ${HOME}/import.png ; }
 
-alias w='curl http://wttr.in/Schmalkalden'
-alias wsd='curl http://wttr.in/Dakota_State_University'
-alias wok='curl http://wttr.in/Claremore'
+a w='curl http://wttr.in/Schmalkalden'
+a wsd='curl http://wttr.in/Dakota_State_University'
+a wok='curl http://wttr.in/Claremore'
 
-alias {xs,xc}='xsel -o ; e'
+a {xs,xc}='xsel -o ; e'
 
-alias rsync='rsync -rtvuclh4 --progress --delete'
-alias scp='scp -rp4'
+a rsync='rsync -rtvulh4 --progress --delete' #-c
+a scp='scp -rp4'
 p() { [ $# -eq 0 ] &&
           addr=mitchweaver.xyz ||
               addr="$1"
       ping -c 1 -n -q -s 1 -w 10 \
           "$addr" > /dev/null 2>&1 &&
               echo "UP" || echo "DOWN" ; }
-alias pubip='curl https://wtfismyip.com/text'
+a pubip='curl https://wtfismyip.com/text'
 
-alias sshd='doas /usr/sbin/sshd'
+a sshd='doas /usr/sbin/sshd'
 
-alias kshrc='v ${HOME}/etc/kshrc'
-alias {aliases,alaises,aliase}='v ${HOME}/etc/aliases'
-alias profile='v ${HOME}/etc/profile'
-alias {vimrc,virmc}='v ${HOME}/etc/vimrc'
-alias {bmk,bmks}='v ${HOME}/var/files/surf-bookmarks.txt'
-alias vssh='v ${HOME}/.ssh/config'
-alias xinitrc='v ${HOME}/etc/xinitrc'
+a kshrc='v ${HOME}/etc/kshrc'
+a {aliases,alaises,aliase}='v ${HOME}/etc/aliases'
+a profile='v ${HOME}/etc/profile'
+a {vimrc,virmc}='v ${HOME}/etc/vimrc'
+a {bmk,bmks}='v ${HOME}/var/files/surf-bookmarks.txt'
+a vssh='v ${HOME}/.ssh/config'
+a xinitrc='v ${HOME}/etc/xinitrc'
 
 gup() { git add -A &&
         git commit -m "$@" &&
@@ -280,16 +283,16 @@ gbase() { [ $# -eq 0 ] &&
                 git rebase -i HEAD~"$1" ; }
 gmote() { git init ; git remote add origin "$1" ; }
 gclone() { git clone https://github.com/"$1" ; }
-alias gbort='git rebase --abort'
-alias glog='git log'
-alias gfetch='git fetch'
-alias gppull='git pull'
-alias gbranch='git branch'
-alias {gcheck,checkout}='git checkout'
+a gbort='git rebase --abort'
+a glog='git log'
+a gfetch='git fetch'
+a gppull='git pull'
+a gbranch='git branch'
+a {gcheck,checkout}='git checkout'
 
-alias {..,cd..}='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
+a {..,cd..}='cd ..'
+a ...='cd ../..'
+a ....='cd ../../..'
 
 g~() { cd ${HOME} ; cls ; }
 m~() { mv "$1" ${HOME} ; }
@@ -367,17 +370,17 @@ gs() { cd ${HOME}/etc/suckless ; cls ; }
 ms() { mv "$1" ${HOME}/etc/suckless ; }
 Ys() { cp "$1" ${HOME}/etc/suckless ; }
 
-alias dwmc='v ${HOME}/etc/suckless/dwm/dwm.c'
-alias surfc='v ${HOME}/etc/suckless/surf/surf.c'
-alias tabbedc='v ${HOME}/etc/suckless/tabbed/tabbed.c'
-alias dmenuc='v ${HOME}/etc/suckless/dmenu/dmenu.c'
-alias stc='v ${HOME}/etc/suckless/st/st.c'
+a dwmc='v ${HOME}/etc/suckless/dwm/dwm.c'
+a surfc='v ${HOME}/etc/suckless/surf/surf.c'
+a tabbedc='v ${HOME}/etc/suckless/tabbed/tabbed.c'
+a dmenuc='v ${HOME}/etc/suckless/dmenu/dmenu.c'
+a stc='v ${HOME}/etc/suckless/st/st.c'
 
-alias dwmcfg='v ${HOME}/etc/suckless/dwm/config.h'
-alias surfcfg='v ${HOME}/etc/suckless/surf/config.h'
-alias tabbedcfg='v ${HOME}/etc/suckless/tabbed/config.h'
-alias dmenucfg='v ${HOME}/etc/suckless/dmenu/config.h'
-alias stcfg='v ${HOME}/etc/suckless/st/config.h'
+a dwmcfg='v ${HOME}/etc/suckless/dwm/config.h'
+a surfcfg='v ${HOME}/etc/suckless/surf/config.h'
+a tabbedcfg='v ${HOME}/etc/suckless/tabbed/config.h'
+a dmenucfg='v ${HOME}/etc/suckless/dmenu/config.h'
+a stcfg='v ${HOME}/etc/suckless/st/config.h'
 
 recomp() {
     stools="${HOME}/etc/suckless"
@@ -397,4 +400,4 @@ recomp() {
             all)      recomp dwm surf tabbed st dmenu
         esac
     done
-} ; alias {repomc,recopm,recpom}=recomp
+} ; a {repomc,recopm,recpom}=recomp
