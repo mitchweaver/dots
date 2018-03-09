@@ -161,13 +161,16 @@ alias {v,vi,vim,nvim}=${EDITOR}
 vim() { [ $# -eq 0 ] &&
             command ${EDITOR} -c VimwikiIndex ||
                 command ${EDITOR} -p "$@"
-        echo -n "${PWD}"/"$(basename $1 2> /dev/null)" \
-            > /tmp/last_vi ; }
+        [ -f "$1" ] && file="$1" || \
+            { [ -f "${PWD}/$1" ] && \
+              file="${PWD}/$1" ; } ||
+                  file="${PWD}/$(basename $1)"
+        echo -n "$file" > /tmp/last_vi ; }
 
 !v() { path="$(cat /tmp/last_vi -- 2> /dev/null)"
-    [ -n "$path" ] &&
-        { echo "v $path" ; v "$path" ; x ; } ||
-            echo "No recent vi" ; }
+       [ -n "$path" ] &&
+           { echo "v $path" ; v "$path" ; x ; } ||
+               echo "No recent vi" ; }
 
 alias {notepad,vtmp}='${EDITOR} /tmp/notepad.md'
 alias {suvim,suvi}='doas ${EDITOR}'
@@ -239,6 +242,7 @@ alias wok='curl http://wttr.in/Claremore'
 alias {xs,xc}='xsel -o ; e'
 
 alias rsync='rsync -rtvuclh4 --progress --delete'
+alias scp='scp -rp4'
 p() { [ $# -eq 0 ] &&
           addr=mitchweaver.xyz ||
               addr="$1"
@@ -247,11 +251,10 @@ p() { [ $# -eq 0 ] &&
               echo "UP" || echo "DOWN" ; }
 alias pubip='curl https://wtfismyip.com/text'
 
-alias scp='scp -rp4'
 alias sshd='doas /usr/sbin/sshd'
 
 alias kshrc='v ${HOME}/etc/kshrc'
-alias {aliases,alaises,alises}='v ${HOME}/etc/aliases'
+alias {aliases,alaises,aliase}='v ${HOME}/etc/aliases'
 alias profile='v ${HOME}/etc/profile'
 alias {vimrc,virmc}='v ${HOME}/etc/vimrc'
 alias {bmk,bmks}='v ${HOME}/var/files/surf-bookmarks.txt'
