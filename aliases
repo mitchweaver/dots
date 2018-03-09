@@ -74,6 +74,8 @@ a {netstart,netsart,nestart}='doas sh /etc/nestart'
 a {disks,disknames}="sysctl hw.disknames"
 a {disklabel,label}='disklabel -h'
 a args='[ $# -gt 0 ]'
+a ssid="ifconfig iwn0 | grep nwid | \
+    sed -e 's/.*nwid*.\(.*\)chan.*/\1/'"
 
 mkcd() { mkd "$1" && cd "$1" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
