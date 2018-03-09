@@ -1,39 +1,24 @@
 #!/bin/ksh
 #
-# http://github.com/mitchweaver/dotfiles
+# http://github.com/mitchweaver/dots
 #
 
-# If not running interactively, don't do anything.
+# don't run if not interactive
 [[ $- != *i* ]] && return
 
-# run background processes with lower priority
 set bgnice 
 set nohup
-
-# print is a better 'echo' for ksh
-alias echo="builtin print" 
-
-# source my global aliases
-. ${HOME}/etc/aliases
-
-#case ${SHELL} in
-#    /bin/mksh)
-#        set -o vi
-#        alias ksh='mksh'
-#        ;;
-#    /bin/ksh)
-
 set -o vi-tabcomplete
 bind Space:magic-space > /dev/null
 
-#esac > /dev/null 2>&1
+alias echo='builtin print'
 
 export HISTFILE=${HOME}/tmp/.ksh_history
 export HISTSIZE=100000
 export SAVEHIST=$HISTSIZE
 export HISTCONTROL=ignoreboth
 
-(rm -rf \
+(rm -rfP \
     ${HOME}/*.core \
     ${HOME}/*.dump \
     ${HOME}/Desktop \
@@ -42,3 +27,5 @@ export HISTCONTROL=ignoreboth
     ${HOME}/*.hup \
     ${HOME}/.xsel.log \
 > /dev/null 2>&1 &)
+
+. ${HOME}/etc/aliases

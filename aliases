@@ -9,12 +9,8 @@
 #
 ##############################################################
 
-# ---------------------------------------------------------------------------
 # unaliases
-#---------------------------------------------------------------------------
-alias {fc,bg,jobs}=true 
-# fg
-# ---------------------------------------------------------------------------
+alias {fc,bg,jobs,w}=true 
 
 # ---------------------------------------------------------------------------
 # Shell prompt / PS1
@@ -38,7 +34,6 @@ case ${SHELL} in
             get_PS1() {
                 echo "\[\e[0;32m\][root]\[\e[1;36m\] \W\[\e[1;37m\] "
             } ||
-
             get_PS1() {
                 echo "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(parse_git_branch)\[\e[1;37m\] "
             }
@@ -113,7 +108,7 @@ alias sls=l
 alias sl=l
 alias lsfull='ls "$(pwd)"/*'
 
-alias clear='printf "\033c"' # better clear
+alias clear='printf "\033c"'
 alias c=clear
 alias cc=c
 alias cll=c
@@ -125,7 +120,6 @@ alias sc='c;l'
 alias date="date '+%a %b %d - %l:%M %p'"
 alias e=echo
 alias ech=echo
-alias p=printf
 alias file='file -b -i -L'
 
 ext() { echo "${1##*.}" ; }
@@ -168,7 +162,7 @@ reload() {
 alias reloda=reload
 alias jjar='java -jar'
 nasm() {
-    [ -f "$1" ] && clear &&
+    [ -f "$1" ] && c &&
         command nasm -f elf32 -g -F dwarf "$1" &&
             ld -m elf_i386 "${1%.*}.o" -o "${1%.*}" &&
             ./"${1%.*}"
@@ -199,7 +193,7 @@ w3m() {
         command w3m -F "$@"
 }
 bar() {
-    pkill -9 bar lemonbar sleep -- > /dev/null 2>&1
+    pkill -9 bar lemonbar > /dev/null 2>&1
     ${HOME}/bin/bar & c
 }
 # ---------------------------------------------------------------------------
@@ -264,11 +258,6 @@ alias shutdown='doas shutdown -p now'
 alias poweroff=shutdown
 # ---------------------------------------------------------------------------
 
-# ------------ Job Control Aliases ---------------------- #
-alias killlall='killall'
-alias kilall='killall'
-# ------------------------------------------------------- #
-
 # ---------------------------------------------------------------------------
 # Tar
 # ---------------------------------------------------------------------------
@@ -314,22 +303,15 @@ vim() {
 }
 
 notepad() { ${EDITOR} "/tmp/notepad.md" ; }
+alias {suvim,suvi}='doas ${EDITOR}'
 alias ivm='vim'
-alias suvim='doas ${EDITOR}'
-alias suvi='doas vi'
-
 alias view='${EDITOR} -R'
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
 # htop
 # ---------------------------------------------------------------------------
-alias h=htop
-alias htpo=h
-alias hto=h
-alias ht=h
-alias hpot=h
-alias hotp=h
+alias {h,htpo,hto,ht,hpot,hotp}=htop
 alias hme='h -u ${USER}'
 alias hroot='h -u root'
 # ---------------------------------------------------------------------------
@@ -338,13 +320,10 @@ alias hroot='h -u root'
 # Ranger
 # ---------------------------------------------------------------------------
 ranger() {
-
     if [ $# -eq 0 ] ; then
-        if [ "${PWD}" = ${HOME} ] ; then
-            path=${HOME}
-        else
+        [ "${PWD}" = ${HOME} ] &&
+            path=${HOME} ||
             path="${PWD}"
-        fi
     else
         path="$1"
     fi
@@ -352,7 +331,6 @@ ranger() {
     echo -n "$path" > /tmp/last_ranger
 
     command ranger "$@"
-
 }
 !r() {
     path="$(cat /tmp/last_ranger -- 2> /dev/null)"
@@ -459,34 +437,21 @@ emptytrash() {
 }
 # ---------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# Weather
-# ---------------------------------------------------------------------------
-alias weather='curl http://wttr.in/Schmalkalden'
-alias weather-sd='curl http://wttr.in/Dakota_State_University'
-alias weather-ok='curl http://wttr.in/Claremore'
-# ---------------------------------------------------------------------------
+alias w='curl http://wttr.in/Schmalkalden'
+alias w-sd='curl http://wttr.in/Dakota_State_University'
+alias w-ok='curl http://wttr.in/Claremore'
 
-# ---------------------------------------------------------------------------
-# Clipboard management
-# ---------------------------------------------------------------------------
 alias xs='xsel -o ; e'
-# ---------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# Networking
-# ---------------------------------------------------------------------------
 alias rsync='rsync -rtvuclh4 --progress --delete'
-ping() { 
-    [ $# -eq 0 ] &&
+p() { [ $# -eq 0 ] &&
         addr=mitchweaver.xyz ||
         addr="$1"
-    command ping -c 1 -n -q -s 1 -w 10 "$addr" > /dev/null 2>&1
-    [ $? -eq 0 ] && echo "UP" || echo "DOWN"
+      ping -c 1 -n -q -s 1 -w 10 \
+        "$addr" > /dev/null 2>&1 &&
+            echo "UP" || echo "DOWN"
 }
-alias pingme='ping mitchweaver.xyz'
-alias wtfismyip='w3m https://wtfismyip.com'
-# ---------------------------------------------------------------------------
+alias pubip='curl https://wtfismyip.com/text'
 
 # ---------------------------------------------------------------------------
 # SSH
@@ -494,7 +459,7 @@ alias wtfismyip='w3m https://wtfismyip.com'
 alias scp='scp -rp4'
 alias sshd=/usr/sbin/sshd
 echossh() {
-    [ $# -eq 0 ] && echo "No arguments provided." ||
+    [ $# -gt 0 ] &&
     case "$1" in
         -h|--help)
             echo "Usage: echossh \"text\" user@host file_name"
@@ -521,57 +486,13 @@ alias bmk='v ${HOME}/var/files/surf-bookmarks.txt'
 alias bmks=bmk
 alias autostart='v ${HOME}/bin/autostart.sh'
 alias vssh='v ${HOME}/.ssh/config'
-# alias sxhkdrc='v ${HOME}/etc/config/sxhkd/sxhkdrc'
-# alias sxkhdrc=sxhkdrc
 alias xinitrc='v ${HOME}/etc/xinitrc'
 # ---------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# TTY
-# ---------------------------------------------------------------------------
-# make sure colors and printing work if in tty
-case "${TERM:-none}" in
-    linux|none|dumb)
-        printf "%b" "\\e]P0f4f6f7"
-        printf "%b" "\\e]P1668299"
-        printf "%b" "\\e]P2667b99"
-        printf "%b" "\\e]P3998166"
-        printf "%b" "\\e]P4667f99"
-        printf "%b" "\\e]P5668299"
-        printf "%b" "\\e]P6668d99"
-        printf "%b" "\\e]P7363441"
-        printf "%b" "\\e]P87a7b7b"
-        printf "%b" "\\e]P9668299"
-        printf "%b" "\\e]PA667b99"
-        printf "%b" "\\e]PB998166"
-        printf "%b" "\\e]PC667f99"
-        printf "%b" "\\e]PD668299"
-        printf "%b" "\\e]PE668d99"
-        printf "%b" "\\e]PF363441"
-
-        # Fix artifacting.
-        clear
-esac
-# ---------------------------------------------------------------------------
-
-# ---------------------------------------------------------------------------
-# Shell specific aliases
-# ---------------------------------------------------------------------------
-case ${SHELL} in
-    /bin/ksh|/bin/mksh|/bin/bash)
-        :q() { x; }
-        :Q() { x; }
-        :wq(){ x; }
-        :w() { x; }
-        ;;
-    *)
-        # if being launched from ksh/bash, fixup non-posix stuff
-        unalias echo print -- > /dev/null 2>&1
-        unset -f basename head trim dirname strip lstrip rstrip \
-            tail -- > /dev/null 2>&1
-        set -o vi -- > /dev/null 2>&1
-esac
-# ------------------------------------------------------- #
+:q() { x; }
+:Q() { x; }
+:wq(){ x; }
+:w() { x; }
 
 # ---------------------------------------------------------------------------
 # Git aliases
@@ -623,152 +544,87 @@ alias branch='git branch'
 alias checkout='git checkout'
 # ---------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# Custom movement functions
-# ---------------------------------------------------------------------------
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias cd..='cd ..'
 
-# $HOME
-case ${SHELL} in
-    /bin/mksh|/bin/ksh|/bin/bash)
-        g~() { cd ${HOME} ; cls ; }
-        m~() { mv "$1" ${HOME} ; }
-        Y~() { cp "$1" ${HOME} ; }
-        ;;
-esac
-
-# homework
+g~() { cd ${HOME} ; cls ; }
+m~() { mv "$1" ${HOME} ; }
+Y~() { cp "$1" ${HOME} ; }
 gh() { cd ${HOME}/var/files/homework ; cls ; }
 mh() { mv "$1" ${HOME}/var/files/homework ; }
 Yh() { cp "$1" ${HOME}/var/files/homework ; }
-
-# workspace
 gw() { cd ${HOME}/var/workspace ; cls ; }
 mw() { mv "$1" ${HOME}/var/workspace ; }
 Yw() { cp "$1" ${HOME}/var/workspace ; }
-
-# /tmp
 gT() { cd /tmp ; cls ; }
 mT() { mv "$1" /tmp ; }
 YT() { cp "$1" /tmp ; }
-
-# bin
 gb() { cd ${HOME}/bin ; cls ; }
 mb() { mv "$1" ${HOME}/bin ; }
 Yb() { cp "$1" ${HOME}/bin ; }
-
-# backup
-#gB(){ cd ${HOME}/backup ; cls ; }
-#mB() { mv "$1" ${HOME}/backup ; }
-#YB() { cp "$1" ${HOME}/backup ; }
-
-# files
 gf() { cd ${HOME}/var/files ; cls ; }
 mf() { mv "$1" ${HOME}/var/files ; }
 Yf() { cp "$1" ${HOME}/var/files ; }
-
-# downloads
-gd(){ cd ${HOME}/var/downloads ; cls ; }
+gd() { cd ${HOME}/var/downloads ; cls ; }
 md() { mv "$1" ${HOME}/var/downloads ; }
 Yd() { cp "$1" ${HOME}/var/downloads ; }
-
-# images
 gi() { cd ${HOME}/var/images ; cls ; }
 mi() { mv "$1" ${HOME}/var/images ; }
 Yi() { cp "$1" ${HOME}/var/images ; }
-
-# wallpapers
 gW() { cd ${HOME}/var/images/wallpapers ; cls ; }
 mW() { mv "$1" ${HOME}/var/images/wallpapers ; }
 YW() { cp "$1" ${HOME}/var/images/wallpapers ; }
-
-# videos
 gV() { cd ${HOME}/var/videos ; cls ; }
 mV() { mv "$1" ${HOME}/var/videos ; }
 YV() { cp "$1" ${HOME}/var/videos ; }
-
-# music
 gm() { cd ${HOME}/var/music; cls ; }
 mm() { mv "$1" ${HOME}/var/music ; cls ; }
 Ym() { cp "$1" ${HOME}/var/music ; cls ; }
-
-# books
 gB() { cd ${HOME}/var/books ; cls ; }
 mB() { mv "$1" ${HOME}/var/books ; }
 YB() { cp "$1" ${HOME}/var/books ; }
-
-# /root
 gr() { cd / ; cls ; }
 mr() { doas mv "$1" / ; }
 Yr() { doas cp "$1" / ; }
-
-# /var
 gvar() { cd /var ; cls ; }
 mvar() { doas mv "$1" /var ; }
 Yvar() { doas cp "$1" /var ; }
-
-# /usr
 gu() { cd /usr ; cls ; }
 mu() { doas mv "$1" /usr ; }
 Yu() { doas cp "$1" /usr ; }
-
-# /usr/local
 guL() { cd /usr/local ; cls ; }
 muL() { doas mv "$1" /usr/local ; }
 YuL() { doas cp "$1" /usr/local ; }
-
-# /etc
 ge() { cd /etc ; cls ; }
 me() { doas mv "$1" /etc ; }
 Ye() { doas cp "$1" /etc ; }
-
-# /mnt
 gM() { cd /mnt ; cls ; }
 mM() { doas mv "$1" /mnt ; }
 YM() { doas cp "$1" /mnt ; }
-
-# /dev
 gD() { cd /dev ; cls ; }
 mD() { doas mv "$1" /dev ; }
 YD() { doas cp "$1" /dev ; }
-
-# /lib
 gl() { cd /lib ; cls ; }
 ml() { doas mv "$1" /lib ; }
 Yl() { doas cp "$1" /lib ; }
-
-# /opt
 gO() { cd /opt ; cls ; }
 mO() { doas mv "$1" /opt ; }
 YO() { doas cp "$1" /opt ; }
-
-# tmp
 gt() { cd ${HOME}/tmp ; cls ; }
 mt() { mv "$1" ${HOME}/tmp ; }
 Yt() { cp "$1" ${HOME}/tmp ; }
-
-# .config
 gcf() { cd ${HOME}/etc/config ; cls ; }
 mcf() { mv "$1" ${HOME}/etc/config ; }
 Ycf() { cp "$1" ${HOME}/etc/config ; }
-
-# programs
 gp() { cd ${HOME}/usr/programs ; cls ; }
 mp() { mv "$1" ${HOME}/usr/programs ; }
 Yp() { cp "$1" ${HOME}/usr/programs ; }
-
-# suckless
 gs() { cd ${HOME}/etc/suckless ; cls ; }
 ms() { mv "$1" ${HOME}/etc/suckless ; }
 Ys() { cp "$1" ${HOME}/etc/suckless ; }
-# ------------------------------------------------------- 
 
-# ---------------------------------------------------------------------------
-# Suckless aliases
-# ---------------------------------------------------------------------------
 alias dwmc='v ${HOME}/etc/suckless/dwm/dwm.c'
 alias surfc='v ${HOME}/etc/suckless/surf/surf.c'
 alias tabbedc='v ${HOME}/etc/suckless/tabbed/tabbed.c'
@@ -811,4 +667,3 @@ alias rsurf='recomp surf -- > /dev/null ; c'
 alias rst='recomp st -- > /dev/null ; c'
 alias rtabbed='recomp tabbed -- > /dev/null ; c'
 alias rdmenu='recomp dmenu -- > /dev/null ; c'
-# ---------------------------------------------------------------------------
