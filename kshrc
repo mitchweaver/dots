@@ -8,6 +8,7 @@
 
 # run background processes with lower priority
 set bgnice 
+set nohup
 
 # print is a better 'echo' for ksh
 alias echo="builtin print" 

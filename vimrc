@@ -108,7 +108,7 @@ map <silent><leader>ln :set number! relativenumber!<cr>
 " set colorcolumn=80
 
 " Toggle color column on/off
-let s:color_column_old = 80
+let s:color_column_old = 60
 function! s:ToggleColorColumn()
     if s:color_column_old == 0
         let s:color_column_old = &colorcolumn

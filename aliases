@@ -10,41 +10,29 @@
 ##############################################################
 
 # ---------------------------------------------------------------------------
+# unaliases
+#---------------------------------------------------------------------------
+alias {fc,bg,jobs}=true 
+# fg
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # Shell prompt / PS1
 # ---------------------------------------------------------------------------
 parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+    git branch 2> /dev/null | sed -e '/^[^*]/d' \
+        -e 's/* \(.*\)/ (\1)/'
+}
+
+cd() { 
+    [ $# -eq 0 ] &&
+        builtin cd ~ ||
+        builtin cd "$1"
+    export PS1="$(get_PS1)"
 }
 
 case ${SHELL} in
-    /bin/ksh|/bin/mksh|/bin/bash)
-        cd(){
-            [ $# -eq 0 ] &&
-                builtin cd ~ ||
-                builtin cd "$1"
-            export PS1="$(get_PS1)"
-        }
-        ;;
-    /bin/ash)
-        cd(){
-            [ $# -eq 0 ] &&
-                busybox cd ~ ||
-                busybox cd "$1"
-            export PS1="$(get_PS1)"
-        }
-        ;;
-    /bin/dash*)
-        cd(){
-            [ $# -eq 0 ] &&
-                command cd ~ ||
-                command cd "$1"
-            export PS1="$(get_PS1)"
-        }
-
-esac
-
-case ${SHELL} in
-    /bin/ksh|/bin/bash|/bin/ash)
+    /bin/ksh|/bin/bash)
         [ $(id -u) -eq 0 ] &&
             # We are in `su` mode!
             get_PS1() {
@@ -72,116 +60,51 @@ case ${SHELL} in
             echo -n "$x$(print \\r)$x\e[1;35mm$x\e[0;32mi$x\e[0;33mt$x\e[0;34mc$x\e[1;31mh$x\e[1;36m $tmp_pwd$x$(parse_git_branch)$x\e[1;37m "
         }
         ;;
-
-    /bin/dash|*) get_PS1() { echo "\u \W " ; }
+    *) get_PS1() { echo "\u \W " ; }
 esac
 
 export PS1="$(get_PS1)"
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
-# OS-specific aliases
+# OpenBSD-specific aliases
 # ---------------------------------------------------------------------------
-case "$(uname)" in
+netstart() { 
+    [ $# -eq 0 ] &&
+        doas /etc/netstart "$@" ||
+        doas /etc/netstart "$@"
+}
+alias netasrt=netstart
+alias netsatrt=netstart
 
-    Linux)
-
-        alias ls='ls --color=always --group-directories-first -F'
-        alias free='free -h'
-        alias grep='grep --color=auto'
-        alias cp='cp -rav'
-
-        [ "$(head -n 1 /etc/os-release)" = "NAME=Gentoo" ] &&
-            {
-                alias emrege=emerge
-                alias emrge=emerge
-                alias emreg=emerge
-                alias emerg=emerge
-                alias emere=emerge
-                emerge() {
-
-                    if [ $# -eq 1 ] ; then
-                        case "$1" in
-                            search)
-                                shift
-                                sudo emerge --search "$@"
-                                ;;
-                            sync)
-                                sudo /usr/bin/emerge --quiet --sync
-                                ;;
-                            world)
-                                sudo /usr/bin/emerge --quiet --update \
-                                    --newuse --changed-use --deep \
-                                    --with-bdeps=y "$@"
-                                ;;
-                            *)
-                                sudo /usr/bin/emerge --update --quiet \
-                                    --newuse --changed-use "$@"
-                                ;;
-                        esac
-                    else
-                        sudo /usr/bin/emerge "$@"
-                    fi
-
-                }
-            }
-
-        ;;
-
-    OpenBSD)
-
-        netstart() { 
-            [ $# -eq 0 ] &&
-                doas /etc/netstart "$@" ||
-                doas /etc/netstart "$@"
-        }
-        alias netasrt=netstart
-        alias netsatrt=netstart
-
-        htop() {
-            # workaround for the frequent crashing
-            if [ "$TERM" = st-256color ] ; then
-                while true ; do
-                    command htop "$@" &&
-                        break
-                done
-            else
-                command htop "$@"
-            fi
-        }
-
-        alias disks="sysctl hw.disknames"
-        alias disklabel='disklabel -h'
-        alias disknames='sysctl hw.disknames'
-        alias sensors="sysctl hw.sensors"
-        pkg() {
-            case "$1" in
-                add) shift ; pkg_add "$@" ;;
-                del|delete) shift ; pkg_delete -a "$@" ;;
-                info) shift ; pkg_info "$@" ;;
-                search) shift ; pkg_info -Q "$@" ;;
-                update) shift ; pkg_add -Uui "$@" ;;
-                check) shift ; pkg_check "$@" ;;
-                *) echo "?"
-            esac
-        }
-        alias killall="pkill -9"
-        alias ls='ls -F'
-        alias cp='cp -rv'
-
-        alias sudo=doas
-        alias sudoedit="doas ${EDITOR}"
-        ;;
-esac
+alias disks="sysctl hw.disknames"
+alias disklabel='disklabel -h'
+alias disknames='sysctl hw.disknames'
+alias sensors="sysctl hw.sensors"
+pkg_del() { pkg_delete $@ ; pkg_delete -a ; }
+pkg() {
+    case "$1" in
+        add) shift ; pkg_add "$@" ;;
+        del) shift ; pkg_del "$@" ;;
+        info) shift ; pkg_info "$@" ;;
+        search) shift ; pkg_info -Q "$@" ;;
+        update) shift ; pkg_add -Uui "$@" ;;
+        check) shift ; pkg_check "$@" ;;
+        *) echo "?"
+    esac
+}
+alias killall="pkill -9"
+alias cp='cp -rv'
+alias rm='rm -P'
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
 # Printing / Clearing
 # ---------------------------------------------------------------------------
-# type exa > /dev/null 2>&1 &&
-    # alias ls='exa -F'
+type exa > /dev/null 2>&1 &&
+    alias ls='exa -F' ||
+    alias ls='ls -F'
 
-alias Grep=grep
 alias l=ls
 alias ll='l -l'
 alias la='l -a'
@@ -207,6 +130,9 @@ alias file='file -b -i -L'
 
 ext() { echo "${1##*.}" ; }
 filename() { echo "${1%.*}" ; }
+
+pa(){ ps auwwx | head ; }
+ph(){ ps auwwx | grep -i -e ${USER} | head ; }
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
@@ -230,12 +156,10 @@ du() {
 alias df='df -h'
 alias man='man -a'
 alias cx='chmod +x'
-alias lex='flex'
-alias yacc='bison'
 
 reload() {
     . ${HOME}/etc/aliases
-    (cat ${HOME}/.cache/wal/sequences &)
+    . ${HOME}/etc/profile
     xrdb load ${HOME}/etc/Xresources
     xmodmap ${HOME}/etc/Xmodmap
     xset m 0 0
@@ -255,11 +179,11 @@ alias nf='neofetch'
 alias nfnone='neofetch --config=none'
 
 alias irssi="irssi -c freenode"
-alias discline='dash ${HOME}/bin/discline ; x'
+alias discline='dash ${HOME}/usr/bin/discline ; x'
 
 vpn() { 
-    sudo pkill -9 openvpn -- > /dev/null
-    sudo sh ${HOME}/bin/vpn "$@"
+    doas pkill -9 openvpn -- > /dev/null
+    doas sh ${HOME}/bin/vpn "$@"
 }
 
 alias rtv="rtv --enable-media --log /dev/null ; c"
@@ -309,19 +233,12 @@ gcc() {
 #---------------------------------------------------------------------------
 # Grep / Searching 
 # ---------------------------------------------------------------------------
-alias g=grep
-alias gerp=g
-alias grpe=g
-alias pgrpe=pgrep
-dugrep() { command du -ahLd 1  | g "$@" ; }
-findgrep() { find . | g "$@" ; }
-alias dugrpe=dugrep
-alias findgrpe=findgrep
-alias fg=findgrep
-alias dg=dugrep
-f () { 
-    [ $# -gt 0 ] && find . -iname "*$1*"
-}
+g(){ grep "$@" ; }
+pg() { pgrep "$@" ; }
+dg() { command du -ahLd 1  | g "$@" ; }
+fg() { find . | g "$@" ; }
+f () { [ $# -gt 0 ] && find . -iname "*$1*" ; }
+hg() { cat ${HISTFILE} | grep "$@" ; }
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
@@ -340,10 +257,10 @@ alias exi=x
 # ---------------------------------------------------------------------------
 # Shutdown / Reboot
 # ---------------------------------------------------------------------------
-alias reboot='sudo reboot'
+alias reboot='doas reboot'
 alias reobot=reboot
 alias restart=reboot
-alias shutdown='sudo shutdown -p now'
+alias shutdown='doas shutdown -p now'
 alias poweroff=shutdown
 # ---------------------------------------------------------------------------
 
@@ -378,27 +295,16 @@ mkbz2() {
 # ---------------------------------------------------------------------------
 # Vim
 # ---------------------------------------------------------------------------
-if type nvim > /dev/null 2>&1 ; then
-    alias v='nvim'
-    alias vim='v'
-elif type vim > /dev/null 2>&1 ; then
-    alias v='vim'
-elif type vi > /dev/null 2>&1 ; then
-    alias v='vi'
-fi
-
-nvim() {
+alias {v,vi,vim,nvim}=${EDITOR}
+vim() {
     [ $# -eq 0 ] &&
-        command nvim -c VimwikiIndex ||
-        command nvim -p "$@"
-
-    [ $# -gt 0 ] && 
-    {
+        command ${EDITOR} -c VimwikiIndex ||
+        command ${EDITOR} -p "$@"
+        
         echo -n "${PWD}"/"$(basename $1)" > /tmp/last_vi
-    }
 }
 !v() {
-    path="$(cat /tmp/last_vi -- 2> /dev/null)"
+    path="$(cat /tmp/last_vi 2> /dev/null)"
     if [ -n "$path" ] ; then
         echo "v $path"
         v "$path"
@@ -407,16 +313,12 @@ nvim() {
     fi
 }
 
-notepad() {
-    v "/tmp/notepad.md"
-}
-alias scratchpad=notepad
-alias vtmp=notepad
-alias vt=notepad
-alias vi='command vi'
+notepad() { ${EDITOR} "/tmp/notepad.md" ; }
 alias ivm='vim'
-alias suvim='sudo ${EDITOR}'
-alias suvi='sudo vi'
+alias suvim='doas ${EDITOR}'
+alias suvi='doas vi'
+
+alias view='${EDITOR} -R'
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
@@ -551,8 +453,8 @@ emptytrash() {
         find ${HOME}/.local/share/Trash/info -type f -exec shred -fuz {} \; > /dev/null 2>&1
     fi
 
-    sudo rm -rf ${HOME}/.local/share/Trash/files/*
-    sudo rm -rf ${HOME}/.local/share/Trash/info/*
+    doas rm -rf ${HOME}/.local/share/Trash/files/*
+    doas rm -rf ${HOME}/.local/share/Trash/info/*
     echo "Trashed cleared."
 }
 # ---------------------------------------------------------------------------
@@ -568,9 +470,7 @@ alias weather-ok='curl http://wttr.in/Claremore'
 # ---------------------------------------------------------------------------
 # Clipboard management
 # ---------------------------------------------------------------------------
-alias xc='xsel -o'
-alias xco='xsel -o'
-alias xs='xsel -o'
+alias xs='xsel -o ; e'
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
@@ -802,48 +702,48 @@ YB() { cp "$1" ${HOME}/var/books ; }
 
 # /root
 gr() { cd / ; cls ; }
-mr() { sudo mv "$1" / ; }
-Yr() { sudo cp "$1" / ; }
+mr() { doas mv "$1" / ; }
+Yr() { doas cp "$1" / ; }
 
 # /var
 gvar() { cd /var ; cls ; }
-mvar() { sudo mv "$1" /var ; }
-Yvar() { sudo cp "$1" /var ; }
+mvar() { doas mv "$1" /var ; }
+Yvar() { doas cp "$1" /var ; }
 
 # /usr
 gu() { cd /usr ; cls ; }
-mu() { sudo mv "$1" /usr ; }
-Yu() { sudo cp "$1" /usr ; }
+mu() { doas mv "$1" /usr ; }
+Yu() { doas cp "$1" /usr ; }
 
 # /usr/local
 guL() { cd /usr/local ; cls ; }
-muL() { sudo mv "$1" /usr/local ; }
-YuL() { sudo cp "$1" /usr/local ; }
+muL() { doas mv "$1" /usr/local ; }
+YuL() { doas cp "$1" /usr/local ; }
 
 # /etc
 ge() { cd /etc ; cls ; }
-me() { sudo mv "$1" /etc ; }
-Ye() { sudo cp "$1" /etc ; }
+me() { doas mv "$1" /etc ; }
+Ye() { doas cp "$1" /etc ; }
 
 # /mnt
 gM() { cd /mnt ; cls ; }
-mM() { sudo mv "$1" /mnt ; }
-YM() { sudo cp "$1" /mnt ; }
+mM() { doas mv "$1" /mnt ; }
+YM() { doas cp "$1" /mnt ; }
 
 # /dev
 gD() { cd /dev ; cls ; }
-mD() { sudo mv "$1" /dev ; }
-YD() { sudo cp "$1" /dev ; }
+mD() { doas mv "$1" /dev ; }
+YD() { doas cp "$1" /dev ; }
 
 # /lib
 gl() { cd /lib ; cls ; }
-ml() { sudo mv "$1" /lib ; }
-Yl() { sudo cp "$1" /lib ; }
+ml() { doas mv "$1" /lib ; }
+Yl() { doas cp "$1" /lib ; }
 
 # /opt
 gO() { cd /opt ; cls ; }
-mO() { sudo mv "$1" /opt ; }
-YO() { sudo cp "$1" /opt ; }
+mO() { doas mv "$1" /opt ; }
+YO() { doas cp "$1" /opt ; }
 
 # tmp
 gt() { cd ${HOME}/tmp ; cls ; }
@@ -856,9 +756,9 @@ mcf() { mv "$1" ${HOME}/etc/config ; }
 Ycf() { cp "$1" ${HOME}/etc/config ; }
 
 # programs
-gp() { cd ${HOME}/var/programs ; cls ; }
-mp() { mv "$1" ${HOME}/var/programs ; }
-Yp() { cp "$1" ${HOME}/var/programs ; }
+gp() { cd ${HOME}/usr/programs ; cls ; }
+mp() { mv "$1" ${HOME}/usr/programs ; }
+Yp() { cp "$1" ${HOME}/usr/programs ; }
 
 # suckless
 gs() { cd ${HOME}/etc/suckless ; cls ; }
@@ -883,19 +783,19 @@ alias stcfg='v ${HOME}/etc/suckless/st/config.h'
 
 recomp() {
     stools="${HOME}/etc/suckless"
-    progs=/"${HOME}/var/programs"
+    progs=/"${HOME}/usr/programs"
     for i in "$@" ; do
         case $i in
-            dwm)      sudo ${HOME}/bin/recomp $stools/dwm ;; 
-            surf)     sudo ${HOME}/bin/recomp $stools/surf ;; 
-            tabbed)   sudo ${HOME}/bin/recomp $stools/tabbed ;; 
-            st)       sudo ${HOME}/bin/recomp $stools/st ;; 
-            dmenu)    sudo ${HOME}/bin/recomp $stools/dmenu ;; 
-            slock)    sudo ${HOME}/bin/recomp $stools/slock ;; 
-            blind)    sudo ${HOME}/bin/recomp $stools/blind ;; 
-            quark)    sudo ${HOME}/bin/recomp $stools/quark ;; 
-            ii)       sudo ${HOME}/bin/recomp $stools/ii ;; 
-            sent)     sudo ${HOME}/bin/recomp $stools/sent ;; 
+            dwm)      doas ${HOME}/bin/recomp $stools/dwm ;; 
+            surf)     doas ${HOME}/bin/recomp $stools/surf ;; 
+            tabbed)   doas ${HOME}/bin/recomp $stools/tabbed ;; 
+            st)       doas ${HOME}/bin/recomp $stools/st ;; 
+            dmenu)    doas ${HOME}/bin/recomp $stools/dmenu ;; 
+            slock)    doas ${HOME}/bin/recomp $stools/slock ;; 
+            blind)    doas ${HOME}/bin/recomp $stools/blind ;; 
+            quark)    doas ${HOME}/bin/recomp $stools/quark ;; 
+            ii)       doas ${HOME}/bin/recomp $stools/ii ;; 
+            sent)     doas ${HOME}/bin/recomp $stools/sent ;; 
             all)      recomp dwm surf tabbed st dmenu  ;; 
             *)
         esac
