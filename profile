@@ -1,6 +1,6 @@
 p() { for i in "$@" ; do
             export PATH=$PATH:"$i"
-         done ; }
+      done ; }
 
 p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin \
    /sbin ${HOME}/{bin,.local/bin,usr/bin,usr/bin/ascii}
@@ -12,7 +12,7 @@ export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
 
 case ${SHELL} in
     /bin/ksh|/bin/mksh)
-        export ENV=${HOME}/etc/kshrc
+       export ENV=${HOME}/etc/kshrc ;;
     *) export ENV=${HOME}/etc/aliases
 esac
 . ${ENV}
@@ -31,7 +31,7 @@ ulimit -c 0
 
 export {LOCALE,LC_CTYPE}='en_US.UTF-8'
 export LESSCHARSET='utf-8'
-export LESS='-Fd'
+export LESS='-FQRd'
 
 type xdg-open > /dev/null 2>&1 &&
     { export XDG_DESKTOP_DIR="/non/existent"

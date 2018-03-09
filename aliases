@@ -1,553 +1,292 @@
-#!/bin/sh
+#!/bin/ksh
 #
-# http://github.com/mitchweaver/dotfiles
+# http://github.com/mitchweaver/dots
 #
-# This is a separate ~/.aliases file to allow easy transition
-# between multiple shells. For maximum compatibility, I try
-# to keep everything in here POSIX. This file is sourced
-# via a given shell rc.
+# note: this is meant for ksh/mksh
 #
-##############################################################
 
-# unaliases
-alias {fc,bg,jobs,w}=true 
+alias {fc,w}=true 
 
-# ---------------------------------------------------------------------------
-# Shell prompt / PS1
-# ---------------------------------------------------------------------------
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' \
-        -e 's/* \(.*\)/ (\1)/'
-}
+_ps1_git() { git branch 2> /dev/null | \
+    sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/' ; }
 
-cd() { 
-    [ $# -eq 0 ] &&
-        builtin cd ~ ||
-        builtin cd "$1"
-    export PS1="$(get_PS1)"
-}
+cd() { [ $# -eq 0 ] &&
+           builtin cd ${HOME} ||
+           builtin cd "$1"
+        export PS1="$(get_PS1)" ; }
 
 case ${SHELL} in
     /bin/ksh|/bin/bash)
         [ $(id -u) -eq 0 ] &&
-            # We are in `su` mode!
-            get_PS1() {
-                echo "\[\e[0;32m\][root]\[\e[1;36m\] \W\[\e[1;37m\] "
-            } ||
-            get_PS1() {
-                echo "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(parse_git_branch)\[\e[1;37m\] "
-            }
-        ;;
+            get_PS1() { echo "\[\e[0;32m\][root]\[\e[1;36m\] \W\[\e[1;37m\] " ; } ||
+            get_PS1() { echo "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(_ps1_git)\[\e[1;37m\] " ; } ;;
     /bin/mksh)
-        # note: mksh uses a different PS1 coloring syntax
-        # Todo: add 'su' mode for mksh's syntax
-        x="$(print \\001)"
-        get_PS1() {
+        _x="$(print \\001)"
+        get_PS1() { 
             case ${PWD} in
-                ${HOME}) 
-                    tmp_pwd='~'
-                    ;;
-                *)
-                    tmp_pwd=`basename "${PWD}"` # fix this
-                    ;;
+                ${HOME}) tmp_pwd='~' ;;
+                *) tmp_pwd=`basename "${PWD}"`
             esac
-
-            echo -n "$x$(print \\r)$x\e[1;35mm$x\e[0;32mi$x\e[0;33mt$x\e[0;34mc$x\e[1;31mh$x\e[1;36m $tmp_pwd$x$(parse_git_branch)$x\e[1;37m "
-        }
-        ;;
+            echo -n "$_x$(print \\r)$_x\e[1;35mm$_x\e[0;32mi$_x\e[0;33mt$_x\e[0;34mc$_x\e[1;31mh$_x\e[1;36m $tmp_pwd$_x$(_ps1_git)$_x\e[1;37m "
+        } ;;
     *) get_PS1() { echo "\u \W " ; }
 esac
 
 export PS1="$(get_PS1)"
-# ---------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# OpenBSD-specific aliases
-# ---------------------------------------------------------------------------
-netstart() { 
-    [ $# -eq 0 ] &&
-        doas /etc/netstart "$@" ||
-        doas /etc/netstart "$@"
-}
-alias netasrt=netstart
-alias netsatrt=netstart
-
+netstart() { [ $# -eq 0 ] &&
+                 doas /etc/netstart "$@" ||
+                 doas /etc/netstart "$@" ; }
 alias disks="sysctl hw.disknames"
 alias disklabel='disklabel -h'
 alias disknames='sysctl hw.disknames'
 alias sensors="sysctl hw.sensors"
 pkg_del() { pkg_delete $@ ; pkg_delete -a ; }
-pkg() {
-    case "$1" in
-        add) shift ; pkg_add "$@" ;;
-        del) shift ; pkg_del "$@" ;;
-        info) shift ; pkg_info "$@" ;;
-        search) shift ; pkg_info -Q "$@" ;;
-        update) shift ; pkg_add -Uui "$@" ;;
-        check) shift ; pkg_check "$@" ;;
-        *) echo "?"
-    esac
-}
+pkg() { case "$1" in
+            add) shift ; pkg_add "$@" ;;
+            del) shift ; pkg_del "$@" ;;
+            info) shift ; pkg_info "$@" ;;
+            search) shift ; pkg_info -Q "$@" ;;
+            update) shift ; pkg_add -Uui "$@" ;;
+            check) shift ; pkg_check "$@" ;;
+            *) echo "?"
+        esac ; }
 alias killall="pkill -9"
 alias cp='cp -rv'
 alias rm='rm -P'
-# ---------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# Printing / Clearing
-# ---------------------------------------------------------------------------
 type exa > /dev/null 2>&1 &&
     alias ls='exa -F' ||
     alias ls='ls -F'
 
-alias l=ls
+alias {l,sls,sl}=ls
 alias ll='l -l'
 alias la='l -a'
-alias lla='ls -al'
-alias sls=l
-alias sl=l
-alias lsfull='ls "$(pwd)"/*'
+alias lla='l -al'
+alias lsf='l "${PWD}"/*'
 
-alias clear='printf "\033c"'
-alias c=clear
-alias cc=c
-alias cll=c
-alias cls='c;l'
-alias csl='c;l'
-alias cl='c;l'
-alias lc='c;l'
-alias sc='c;l'
-alias date="date '+%a %b %d - %l:%M %p'"
-alias e=echo
-alias ech=echo
+alias {c,cc,cll,clear}='printf "\033c"'
+alias {cls,csl,cl,lc}='c;l'
+alias {e,ech}=echo
+
 alias file='file -b -i -L'
+alias date="date '+%a %b %d - %l:%M %p'"
+alias {dmesg,dmegs}='dmesg | tail -n 20'
 
 ext() { echo "${1##*.}" ; }
 filename() { echo "${1%.*}" ; }
 
 pa(){ ps auwwx | head ; }
 ph(){ ps auwwx | grep -i -e ${USER} | head ; }
-# ---------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# Misc
-# ---------------------------------------------------------------------------
 alias mv='mv -v'
-alias mkdir='mkdir -p'
-alias mkd=mkdir
-alias mkdr=mkd
+alias {mkdir,mkd,mkdr}='mkdir -p'
 mkcd() { mkd "$1" && cd "$1" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
 
-alias less="less -Q -R" # note: busybox's less doesn't have -Q/-R
-
-du() {
-    [ $# -eq 0 ] && depth=1 || depth=$1
-    command du -ahLd $depth 2> /dev/null | /usr/bin/sort -rh | /usr/bin/head -n 20
-}
+du() { command du -ahLd 1 2> /dev/null | \
+           /usr/bin/sort -rh | /usr/bin/head -n 20 ; }
 
 alias df='df -h'
 alias man='man -a'
 alias cx='chmod +x'
 
-reload() {
-    . ${HOME}/etc/aliases
-    . ${HOME}/etc/profile
-    xrdb load ${HOME}/etc/Xresources
-    xmodmap ${HOME}/etc/Xmodmap
-    xset m 0 0
-} > /dev/null
+reload() { . ${HOME}/etc/aliases
+           . ${HOME}/etc/profile
+           xrdb load ${HOME}/etc/Xresources
+           xmodmap ${HOME}/etc/Xmodmap
+           xset m 0 0 ; } > /dev/null
 
-alias reloda=reload
 alias jjar='java -jar'
-nasm() {
-    [ -f "$1" ] && c &&
-        command nasm -f elf32 -g -F dwarf "$1" &&
-            ld -m elf_i386 "${1%.*}.o" -o "${1%.*}" &&
-            ./"${1%.*}"
-}
-
+nasm() { [ -f "$1" ] && c &&
+             command nasm -f elf32 -g -F dwarf "$1" &&
+                ld -m elf_i386 "${1%.*}.o" -o "${1%.*}" &&
+                    ./"${1%.*}" ; }
 
 alias nf='neofetch'
-alias nfnone='neofetch --config=none'
-
-alias irssi="irssi -c freenode"
+alias {irc,irssi}="irssi -c freenode"
 alias discline='dash ${HOME}/usr/bin/discline ; x'
-
-vpn() { 
-    doas pkill -9 openvpn -- > /dev/null
-    doas sh ${HOME}/bin/vpn "$@"
-}
-
-alias rtv="rtv --enable-media --log /dev/null ; c"
-alias reddit=rtv
-alias parrot='terminal-parrot'
-alias doge="doge --shibe doge.txt"
-alias tiv='tiv -256'
+alias {rtv,reddit}="rtv --enable-media ; c"
 alias compton="pkill -9 compton ; compton & c"
 
-w3m() {
-    [ $# -eq 0 ] &&
-        command w3m -F https://ddg.gg/lite ||
-        command w3m -F "$@"
-}
-bar() {
-    pkill -9 bar lemonbar > /dev/null 2>&1
-    ${HOME}/bin/bar & c
-}
-# ---------------------------------------------------------------------------
+w3m() { [ $# -eq 0 ] &&
+            command w3m -F https://ddg.gg/lite ||
+            command w3m -F "$@" ; }
 
-# ---------------------------------------------------------------------------
-# Make / Compiling
-# ---------------------------------------------------------------------------
-alias mkae=make
+bar() { pkill -9 bar lemonbar > /dev/null 2>&1
+        ${HOME}/bin/bar & c ; }
+
+alias {mk,mkae}="make -j$(sysctl -n hw.ncpu)"
 alias mkc='make clean'
-alias mkclean=mkc
-alias mkall="make clean ; make && make install"
+alias mkall="make clean ; make && doas make install"
 
-gcc() {
+gcc() { command gcc $@
+        echo -n "${PWD}"/"$(basename $1 -- 2> /dev/null)" \
+        > /tmp/shell/last_gcc ; }
 
-    command gcc $@
+!g() { path="$(cat /tmp/shell/last_gcc -- 2> /dev/null)"
+       [ -n "$path" ] &&
+           { echo "gcc $path" ; command gcc "$path" ; } ||
+                echo "No recent gcc" ; }
 
-    echo -n "${PWD}"/"$(basename $1 -- 2> /dev/null)" > /tmp/shell/last_gcc
-
-}
-!g() {
-    path="$(cat /tmp/shell/last_gcc -- 2> /dev/null)"
-    if [ -n "$path" ] ; then
-        echo "gcc $path"
-        command gcc "$path"
-    else
-        echo "No recent gcc"
-    fi
-}
-# ---------------------------------------------------------------------------
-
-#---------------------------------------------------------------------------
-# Grep / Searching 
-# ---------------------------------------------------------------------------
 g(){ grep "$@" ; }
 pg() { pgrep "$@" ; }
 dg() { command du -ahLd 1  | g "$@" ; }
-fg() { find . | g "$@" ; }
 f () { [ $# -gt 0 ] && find . -iname "*$1*" ; }
-hg() { cat ${HISTFILE} | grep "$@" ; }
-# ---------------------------------------------------------------------------
+hg() { [ $# -gt 0 ] && cat ${HISTFILE} | \
+    grep "$@" | head -n 20 ; }
+sg() { sysctl | g "$@" ; }
 
-# ---------------------------------------------------------------------------
-# Exiting
-# ---------------------------------------------------------------------------
-alias x='exit 0'
-alias xx=x
-alias xxx=x
-alias q=x
-alias qq=x
-alias qqq=x
-alias ex=x
-alias exi=x
-# ---------------------------------------------------------------------------
+alias {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w}=exit
 
-# ---------------------------------------------------------------------------
-# Shutdown / Reboot
-# ---------------------------------------------------------------------------
 alias reboot='doas reboot'
-alias reobot=reboot
-alias restart=reboot
 alias shutdown='doas shutdown -p now'
-alias poweroff=shutdown
-# ---------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# Tar
-# ---------------------------------------------------------------------------
-mkxz() { 
-    tar -cvJpf "$1.tar.xz" "$1" &&
-    [ -f "$1.tar.xz" ] &&
-    rm -rf "$1" &&
-    ls
-}
-mkgz() { 
-    tar -cvzpf "$1.tar.gz" "$1" &&
-    [ -f "$1.tar.gz" ] &&
-    rm -rf "$1" &&
-    ls
-}
-mkbz2() { 
-    tar -cvjpf "$1.tar.bz2" "$1" &&
-    [ -f "$1.tar.bz2" ] &&
-    rm -rf "$1" &&
-    ls
-}
-# ---------------------------------------------------------------------------
+mkxz() { f="$(e $1 | sed 's/\///')" &&
+             tar -cvpf "$f.tar" "$f" &&
+                 xz "$f.tar" &&
+                     [ -f "$f.tar.xz" ] &&
+                         rm -rf "$f" && unset f ; }
+mkgz() { f="$(e $1 | sed 's/\///')" &&
+            tar -cvzpf "$f.tar.gz" "$f" &&
+                [ -f "$f.tar.gz" ] &&
+                    rm -rf "$f" && unset f ; }
+mkbz2() { f="$(e $1 | sed 's/\///')" &&
+              tar -cvjpf "$f.tar.bz" "$f" &&
+                  [ -f "$f.tar.bz" ] &&
+                      rm -rf "$f" && unset f ; }
 
-# ---------------------------------------------------------------------------
-# Vim
-# ---------------------------------------------------------------------------
 alias {v,vi,vim,nvim}=${EDITOR}
-vim() {
-    [ $# -eq 0 ] &&
-        command ${EDITOR} -c VimwikiIndex ||
-        command ${EDITOR} -p "$@"
-        
-        echo -n "${PWD}"/"$(basename $1)" > /tmp/last_vi
-}
-!v() {
-    path="$(cat /tmp/last_vi 2> /dev/null)"
-    if [ -n "$path" ] ; then
-        echo "v $path"
-        v "$path"
-    else
-        echo "No recent vim"
-    fi
-}
+vim() { [ $# -eq 0 ] &&
+            command ${EDITOR} -c VimwikiIndex ||
+                command ${EDITOR} -p "$@"
+        echo -n "${PWD}"/"$(basename $1 2> /dev/null)" \
+            > /tmp/last_vi ; }
 
-notepad() { ${EDITOR} "/tmp/notepad.md" ; }
+!v() { path="$(cat /tmp/last_vi -- 2> /dev/null)"
+    [ -n "$path" ] &&
+        { echo "v $path" ; v "$path" ; x ; } ||
+            echo "No recent vi" ; }
+
+alias {notepad,vtmp}='${EDITOR} /tmp/notepad.md'
 alias {suvim,suvi}='doas ${EDITOR}'
-alias ivm='vim'
 alias view='${EDITOR} -R'
-# ---------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# htop
-# ---------------------------------------------------------------------------
 alias {h,htpo,hto,ht,hpot,hotp}=htop
-alias hme='h -u ${USER}'
-alias hroot='h -u root'
-# ---------------------------------------------------------------------------
+alias hm='h -u ${USER}'
+alias hr='h -u root'
 
-# ---------------------------------------------------------------------------
-# Ranger
-# ---------------------------------------------------------------------------
 ranger() {
-    if [ $# -eq 0 ] ; then
-        [ "${PWD}" = ${HOME} ] &&
-            path=${HOME} ||
-            path="${PWD}"
-    else
-        path="$1"
-    fi
-
+    [ $# -eq 0 ] &&
+        { [ "${PWD}" = ${HOME} ] &&
+          path=${HOME} || path="${PWD}" ; } ||
+              path="$1"
     echo -n "$path" > /tmp/last_ranger
-
     command ranger "$@"
 }
-!r() {
-    path="$(cat /tmp/last_ranger -- 2> /dev/null)"
-    if [ -n "$path" ] ; then
-        echo "ranger $path"
-        ranger "$path" ; x
-    else
-        echo "No recent ranger"
-    fi
-}
-
-alias rgm='r ${HOME}/music'
+!r() { path="$(cat /tmp/last_ranger -- 2> /dev/null)"
+    [ -n "$path" ] &&
+        { echo "ranger $path" ; ranger "$path" ; x ; } ||
+            echo "No recent ranger" ; }
 
 # This is a hack to let you use "$@" with an 1-char alias
-# in shells like ksh. You can't do tihs without a function,
+# in shells like ksh. You can't do this without a function,
 # but you also can't have a 1-char long function.
-_r() {
-    ranger "$@"
-    x
-}
-alias r='_r';[ -n "$RANGER_LEVEL" ] && PS1="$PS1"'(RANGER): ' && clear && ls -F
-# ---------------------------------------------------------------------------
+_r() { ranger "$@" ; x ; }
+alias r='_r';[ -n "$RANGER_LEVEL" ] && \
+    PS1="$PS1"'(RANGER): ' && clear && ls -F
 
-# ---------------------------------------------------------------------------
-# Translator
-# ---------------------------------------------------------------------------
-alias trans-shell='command trans -b -I'
-alias rtrans-shell='command trans -b -from en -to de -I'
 trans(){ command trans -no-auto -b "$@" ; }
 rtrans(){ command trans -from en -to de -no-auto -b "$@" ; }
-# ---------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# YouTube
-# ---------------------------------------------------------------------------
 alias yt="c; youtube-viewer -C -q --vd=high"
 alias ytm="c;yt -n"
 alias ytdv="c;yt -d"
-alias ytdm='c;yt -n -d --convert-to=opus --convert-cmd="ffmpeg -loglevel -8 -i file:*IN* -vn -acodec libopus -ab 128k -y *OUT*"'
-
+alias ytdm='c;yt -n -d --convert-to=opus \
+    --convert-cmd="ffmpeg -loglevel -8 -i \
+    file:*IN* -vn -acodec libopus -ab 128k -y *OUT*"'
 alias ytsubs='c;yt --subs-videos --subs-order=unread'
-alias ytsubchans='c;yt --subscriptions'
+alias ytchans='c;yt --subscriptions'
 alias ytfavs='c;yt --favorites=mine'
-alias ytlists='c;yt --channel-playlists=mine'
-alias ytlikes='c;yt --likes=mine'
 alias ytme='c;yt --channel-videos=mine'
 
-mpv() {
-    if [ $# -gt 0 ] ; then
-        [ $(pgrep mpv) ] && killall mpv
-        command mpv --title=mpv "$@" & x
-    fi
-}
-alias mvp=mpv
+mpv() { [ $# -gt 0 ] &&
+        { [ $(pgrep mpv) ] && killall mpv ; } ||
+        command mpv --title=mpv "$@" & x ; }
 mpvm() { mpv --no-video "$@" ; }
 mpvx() { (mpv "$(xsel -o)" &) ; }
-alias mvpx=mpvx
-
-# Plays the first found result with mpv 
 mpvyt() { mpv ytdl://ytsearch:"$@" ; }
 mpvytm() { mpv --no-video ytdl://ytsearch:"$@" ; }
-alias mvpyt=mpvyt
-alias mvpytm=mvpytm
 
 alias ytdl='youtube-dl --geo-bypass --prefer-ffmpeg'
-alias ytdlm="youtube-dl --extract-audio --geo-bypass --prefer-ffmpeg  --audio-quality 0 --audio-format opus"
-# ---------------------------------------------------------------------------
-# ffmpeg
-# ---------------------------------------------------------------------------
-alias record-webcam='ffmpeg -i /dev/video0 -f sndio -i default "$(date)".mp4'
+alias ytdlm="youtube-dl --extract-audio --geo-bypass \
+    --prefer-ffmpeg  --audio-quality 0 --audio-format opus"
 
-# ---------------------------------------------------------------------------
-# Images
-# ---------------------------------------------------------------------------
+alias record-webcam='ffmpeg -i /dev/video0 -f sndio -i \
+    default "$(date)".mp4'
+
 alias feh='feh -q -N -x --scale-down'
 alias resize-half='mogrify -resize 50%X50%'
 alias resize-quarter='mogrify -resize 25%X25%'
-import() {
-   command import -quiet -silent -window root -quality 100 ${HOME}/import.png
-}
-
-# ---------------------------------------------------------------------------
-# Trash
-# ---------------------------------------------------------------------------
-trash() { 
-    for i in "$@" ; do
-        mv -v "$i" ${HOME}/.local/share/Trash/files 
-    done
-}
-cptrash() { 
-    for i in "$@" ; do
-        cp -rv "$i" ${HOME}/.local/share/Trash/files 
-    done
-}
-emptytrash() { 
-    if type shred > /dev/null 2>&1 ; then
-        find ${HOME}/.local/share/Trash/files -type f -exec shred -fuz {} \; > /dev/null 2>&1
-        find ${HOME}/.local/share/Trash/info -type f -exec shred -fuz {} \; > /dev/null 2>&1
-    fi
-
-    doas rm -rf ${HOME}/.local/share/Trash/files/*
-    doas rm -rf ${HOME}/.local/share/Trash/info/*
-    echo "Trashed cleared."
-}
-# ---------------------------------------------------------------------------
+import() { command import -quiet -silent -window root \
+       -quality 100 ${HOME}/import.png ; }
 
 alias w='curl http://wttr.in/Schmalkalden'
-alias w-sd='curl http://wttr.in/Dakota_State_University'
-alias w-ok='curl http://wttr.in/Claremore'
+alias wsd='curl http://wttr.in/Dakota_State_University'
+alias wok='curl http://wttr.in/Claremore'
 
-alias xs='xsel -o ; e'
+alias {xs,xc}='xsel -o ; e'
 
 alias rsync='rsync -rtvuclh4 --progress --delete'
 p() { [ $# -eq 0 ] &&
-        addr=mitchweaver.xyz ||
-        addr="$1"
+          addr=mitchweaver.xyz ||
+              addr="$1"
       ping -c 1 -n -q -s 1 -w 10 \
-        "$addr" > /dev/null 2>&1 &&
-            echo "UP" || echo "DOWN"
-}
+          "$addr" > /dev/null 2>&1 &&
+              echo "UP" || echo "DOWN" ; }
 alias pubip='curl https://wtfismyip.com/text'
 
-# ---------------------------------------------------------------------------
-# SSH
-# ---------------------------------------------------------------------------
 alias scp='scp -rp4'
-alias sshd=/usr/sbin/sshd
-echossh() {
-    [ $# -gt 0 ] &&
-    case "$1" in
-        -h|--help)
-            echo "Usage: echossh \"text\" user@host file_name"
-            ;;
-        *)
-            echo "$1" | ssh "$2" sh -c 'cat /dev/stdin > "$3"'
-            ;;
-    esac
-}
-# ---------------------------------------------------------------------------
+alias sshd='doas /usr/sbin/sshd'
 
-# ---------------------------------------------------------------------------
-# Specific file editing
-# ---------------------------------------------------------------------------
 alias kshrc='v ${HOME}/etc/kshrc'
-alias bashrc='v ${HOME}/etc/bashrc'
-alias aliases='v ${HOME}/etc/aliases'
-alias aliase=aliases
-alias alaises=aliases
+alias {aliases,alaises,alises}='v ${HOME}/etc/aliases'
 alias profile='v ${HOME}/etc/profile'
-alias vimrc='v ${HOME}/etc/vimrc'
-alias virmc=vimrc
-alias bmk='v ${HOME}/var/files/surf-bookmarks.txt'
-alias bmks=bmk
-alias autostart='v ${HOME}/bin/autostart.sh'
+alias {vimrc,virmc}='v ${HOME}/etc/vimrc'
+alias {bmk,bmks}='v ${HOME}/var/files/surf-bookmarks.txt'
 alias vssh='v ${HOME}/.ssh/config'
 alias xinitrc='v ${HOME}/etc/xinitrc'
-# ---------------------------------------------------------------------------
 
-:q() { x; }
-:Q() { x; }
-:wq(){ x; }
-:w() { x; }
+gup() { git add -A &&
+        git commit -m "$@" &&
+        git push -u origin $(git branch 2> /dev/null | \
+            sed -e '/^[^*]/d' | sed 's/* //') ; }
+gadd() { [ $# -eq 0 ] && git add -A || git add "$@" ; }
+gmit() { { [ $# -eq 1 ] && git add -A && \
+                git commit -m "$@" ; } ||
+                    { git add "$1" ; shift
+            git commit -m "$@" ; } ; }
+gout() { git push -u origin $(git rev-parse \
+    --abbrev-ref HEAD) "$@" ; }
+gdiff() { git diff origin/master ; }
+gstat(){ git status ; }
+greset() { git reset --hard HEAD~"$1" ; }
+gbase() { [ $# -eq 0 ] &&
+                git rebase -i HEAD~10 ||
+                git rebase -i HEAD~"$1" ; }
+gmote() { git init ; git remote add origin "$1" ; }
+gclone() { git clone https://github.com/"$1" ; }
+alias gbort='git rebase --abort'
+alias glog='git log'
+alias gfetch='git fetch'
+alias gppull='git pull'
+alias gbranch='git branch'
+alias {gcheck,checkout}='git checkout'
 
-# ---------------------------------------------------------------------------
-# Git aliases
-# ---------------------------------------------------------------------------
-alias gti=git
-gitinit() { mkdir -p "$1" && git init "$1" ; }
-gitmote() { git init ; git remote add origin "$1" ; }
-gitup() {
-    git add -A &&
-    if [ $# -eq 0 ] ; then
-        git commit
-    else
-        git commit -m "$@"
-    fi &&
-    git push -u origin master
-}
-gitadd() { [ $# -eq 0 ] && git add -A || git add "$@" ; }
-gitmit() { 
-    if [ $# -eq 1 ] ; then
-        git add -A && git commit -m "$@"
-    else
-        git add "$1"
-        shift
-        git commit -m "$@"
-    fi
-}
-gitout() {
-    # pushes out to the current branch
-    git push -u origin $(git rev-parse --abbrev-ref HEAD) "$@"
-}
-gitdiff() { git diff origin/master ; }
-alias gitiff=gitdiff
-alias gitatus='git status'
-gitreset() { git reset --hard HEAD~"$1" ; }
-gitbase() {
-    [ $# -eq 0 ] &&
-        git rebase -i HEAD~10 ||
-        git rebase -i HEAD~"$1"
-}
-alias gitbsae=gitbase
-gitbort(){ git rebase --abort ; }
-gitstatus() { c ; git status ; }
-gitstat() { gitstatus ; }
-gitclone() { git clone https://github.com/"$1" ; }
-alias gitlog='git log'
-alias gitfetch='git fetch'
-alias gitpull='git pull'
-alias branch='git branch'
-alias checkout='git checkout'
-# ---------------------------------------------------------------------------
-
-alias ..='cd ..'
+alias {..,cd..}='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias cd..='cd ..'
 
 g~() { cd ${HOME} ; cls ; }
 m~() { mv "$1" ${HOME} ; }
@@ -652,18 +391,7 @@ recomp() {
             quark)    doas ${HOME}/bin/recomp $stools/quark ;; 
             ii)       doas ${HOME}/bin/recomp $stools/ii ;; 
             sent)     doas ${HOME}/bin/recomp $stools/sent ;; 
-            all)      recomp dwm surf tabbed st dmenu  ;; 
-            *)
+            all)      recomp dwm surf tabbed st dmenu
         esac
     done
-}
-
-alias reocmp=recomp
-alias recmop=recomp
-alias ecomp=recomp
-alias recopm=recomp
-alias rdwm='recomp dwm -- > /dev/null ; c'
-alias rsurf='recomp surf -- > /dev/null ; c'
-alias rst='recomp st -- > /dev/null ; c'
-alias rtabbed='recomp tabbed -- > /dev/null ; c'
-alias rdmenu='recomp dmenu -- > /dev/null ; c'
+} ; alias {repomc,recopm,recpom}=recomp

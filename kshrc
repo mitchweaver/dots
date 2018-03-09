@@ -17,6 +17,7 @@ export HISTFILE=${HOME}/tmp/.ksh_history
 export HISTSIZE=100000
 export SAVEHIST=$HISTSIZE
 export HISTCONTROL=ignoreboth
+ulimit -c 0
 
 (rm -rfP \
     ${HOME}/*.core \
