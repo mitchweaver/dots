@@ -9,14 +9,14 @@ filetype off
 call plug#begin('~/.vim/vim-plug')
 
 Plug 'vimwiki/vimwiki' " the ultimate note taking system
-Plug 'dylanaraps/wal.vim' " pywal theme
-Plug 'lilydjwg/colorizer' " colorizes rgb hex codes
-Plug 'ervandew/supertab' " code completion
-Plug 'tpope/vim-commentary' " comment toggler
-Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
-Plug 'tpope/vim-surround' " quote/paren etc surrounding
-Plug 'airblade/vim-gitgutter' " git diffing along the left side
 Plug 'godlygeek/tabular' " tab alignment
+Plug 'tpope/vim-commentary' " comment toggler
+Plug 'ervandew/supertab' " code completion
+Plug 'tpope/vim-surround' " quote/paren etc surrounding
+Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
+Plug 'airblade/vim-gitgutter' " git diffing along the left side
+Plug 'lilydjwg/colorizer' " colorizes rgb hex codes
+Plug 'dylanaraps/wal.vim' " pywal theme
 
 call plug#end()
 filetype indent plugin on
@@ -115,11 +115,6 @@ map <silent>tn     :tabnew<CR>
 map <silent>tm     :tabm<Space>
 map <silent>td     :tabclose<CR>
 
-"  scroll up/down without moving the cursor position
-nnoremap <silent><C-3> <C-y>
-nnoremap <silent><C-e> <C-e>
-map <silent><C-y> <nop>
-
 set ignorecase " case insensitive search
 set smartcase " if there are uppercase letters, become case-sensitive.
 set incsearch " live incremental searching
@@ -167,8 +162,12 @@ map <F9>  :setlocal spell! spelllang=en_gb<CR>
 map <F10> :setlocal spell! spelllang=de_de<CR>
 
 " Horizontal scrolling
-map <silent> <C-o> 10zl
-map <silent> <C-i> 10zh
+noremap <silent><C-o> 10zl
+noremap <silent><C-i> 10zh
+
+" swap f/b
+noremap <silent><C-f> <C-b>
+noremap <silent><C-b> <C-f>
 
 " Nuke +, -, ! at start of lines in diffs (also killing the - lines)
 map <silent> <C-z> :%s/^+<CR> :%s/^-.*<CR> :%s/^!<CR>
@@ -179,38 +178,6 @@ map <silent><leader>q :q<CR>
 " print an 80-char line separator
 inoremap <silent><C-z> ---------------------------------------------------------------------------<ESC>:Commentary<CR>0o
 inoremap <silent><C-s> ------------------------------------------------------- <ESC>:Commentary<CR>0llllllllllllllllllllli
-
-" ----------- Page Up/Down Functionality ----------------------
-function GetNumberOfVisibleLines()
-  let cur_line = line(".")
-  let cur_col = virtcol(".")
-  normal H
-  let top_line = line(".")
-  normal L
-  let bot_line = line(".")
-  execute "normal " . cur_line . "G"
-  execute "normal " . cur_col . "|"
-  return bot_line - top_line
-endfunc
-
-function! PageUp()
-  let visible_lines = GetNumberOfVisibleLines()
-  execute "normal " . visible_lines . "\<C-U><silent>:set scroll=0\r"
-endfunction
-
-function! PageDown()
-  let visible_lines = GetNumberOfVisibleLines()
-  execute "normal " . visible_lines . "\<C-D><silent>:set scroll=0\r"
-endfunction
-
-noremap <silent><PageUp> :call PageUp()<CR>
-noremap <silent><PageDown> :call PageDown()<CR>
-" I switch the f/b keys, and also add them to insert mode.
-noremap <silent><C-f> :call PageUp()<CR>
-noremap <silent><C-b> :call PageDown()<CR>
-imap <silent><C-f> <ESC> :call PageUp()<CR><i>
-imap <silent><C-b> <ESC> :call PageDown()<CR><i>
-" ------------------------------------------------------- 
 
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))

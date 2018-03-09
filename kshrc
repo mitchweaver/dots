@@ -6,20 +6,20 @@
 # don't run if not interactive
 [[ $- != *i* ]] && return
 
-set bgnice 
-set nohup
-set -o vi-tabcomplete
-bind Space:magic-space > /dev/null
+# unaliases
+alias {fc,w,r,bg,fg,jobs,autoload,login,stop}=true 
 
 alias echo='builtin print'
 alias type='builtin whence -v'
 
-# unaliases
-alias {fc,w,r,bg,fg,jobs,autoload,local,login,stop}=true 
+. ${HOME}/etc/aliases
+
+set {bgnice,nohup}
+set -o vi-tabcomplete
+bind Space:magic-space > /dev/null
 
 export HISTFILE=${HOME}/tmp/.ksh_history
-export HISTSIZE=100000
-export SAVEHIST=$HISTSIZE
+export {SAVEHIST,HISTSIZE}=100000
 export HISTCONTROL=ignoreboth
 ulimit -c 0
 
@@ -29,9 +29,12 @@ parse_branch() { git branch 2> /dev/null | \
 cd() { [ $# -eq 0 ] &&
            builtin cd ${HOME} ||
            builtin cd "$1"
-        export PS1="$(get_PS1)" ; }
+        [ -n "$RANGER_LEVEL" ]  &&
+            export PS1="$PS1(RANGER): " ||
+            export PS1="$(get_PS1)" ; }
 
-case ${SHELL} in
+# todo: find a good way to wrap these
+case $0 in
     /bin/ksh)
         [ $(id -u) -eq 0 ] &&
             get_PS1() { echo "\[\e[0;32m\][root]\[\e[1;36m\] \W\[\e[1;37m\] " ; } ||
@@ -47,9 +50,9 @@ case ${SHELL} in
         } ;;
 esac
 
-export PS1="$(get_PS1)"
+[ -n "$RANGER_LEVEL" ]  && { clear ; ls ; cd . ; }
 
-(rm -rfP \
+(rm -rf \
     ${HOME}/*.core \
     ${HOME}/*.dump \
     ${HOME}/Desktop \
@@ -58,5 +61,3 @@ export PS1="$(get_PS1)"
     ${HOME}/*.hup \
     ${HOME}/.xsel.log \
 > /dev/null 2>&1 &)
-
-. ${HOME}/etc/aliases
