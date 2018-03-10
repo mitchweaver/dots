@@ -34,7 +34,7 @@ cd() { [ $# -eq 0 ] &&
             export PS1="$(get_PS1)" ; }
 
 # todo: find a good way to wrap these
-case $0 in
+case ${SHELL} in
     /bin/ksh)
         [ $(id -u) -eq 0 ] &&
             get_PS1() { echo "\[\e[0;32m\][root]\[\e[1;36m\] \W\[\e[1;37m\] " ; } ||
@@ -50,7 +50,9 @@ case $0 in
         } ;;
 esac
 
-[ -n "$RANGER_LEVEL" ]  && { clear ; ls ; cd . ; }
+[ -n "$RANGER_LEVEL" ]  && 
+    { clear ; ls ; cd . ; } ||
+        export PS1="$(get_PS1)"
 
 (rm -rf \
     ${HOME}/*.core \

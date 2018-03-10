@@ -262,4 +262,3 @@ augroup END
 
 command! -complete=dir -nargs=* Ranger :call <SID>RangerOpenDir(<f-args>)
 nnoremap <silent><leader>r :Ranger<CR>
-" ------------------------------------------------------- 

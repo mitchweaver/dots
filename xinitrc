@@ -1,5 +1,3 @@
-#!/bin/dash
-
 xset +fp /home/mitch/usr/fonts
 xrdb load /home/mitch/etc/Xresources
 
@@ -13,20 +11,17 @@ cd ${HOME}
 tasks="xbanish clip bar bash sleep lemonbar compton"
 pkill -9 $tasks -- > /dev/null 2>&1
 
-compton --config ${HOME}/etc/config/compton.conf -b -- > /dev/null 2>&1 &
+compton --config ${HOME}/etc/config/compton.conf \
+    > /dev/null 2>&1 &
 
-feh="feh --bg-fill --no-fehbg ${HOME}/var/tmp/wall --"
-mpvbg="mpvbg ${HOME}/var/tmp/wall --"
-case "$(file -b -i -L ${HOME}/var/tmp/wall)" in
-    "image/png")  $feh & ;;
-    "image/jpg")  $feh & ;;
-    "image/jpeg") $feh & ;;
+feh="feh --bg-fill --no-fehbg ${HOME}/var/tmp/wall"
+mpvbg="mpvbg ${HOME}/var/tmp/wall"
+case "$(basename $(file -b -i -L ${HOME}/var/tmp/wall))" in
 
-    "image/gif")  $mpvbg & ;;
-    "video/webm") $mpvbg & ;;
-    "video/mp4")  $mpvbg & ;;
-    "video/mkv")  $mpvbg & ;;
-esac > /dev/null
+    png|jpg|jpeg) $feh ;;
+    gif|webm|mp4|mkv) $mpvbg
+
+esac > /dev/null 2>&1 &
 
 bar > /dev/null 2>&1 &
 
