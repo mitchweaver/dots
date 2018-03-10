@@ -78,7 +78,7 @@ a rtrans='trans -from en -to'
 a {netstart,netsart,nestart}='doas $0 /etc/nestart'
 a {disks,disknames}="sysctl hw.disknames"
 a {disklabel,label}='disklabel -h'
-a ssid="ifconfig iwn0 | grep nwid | \
+a ssid="ifconfig iwn0 | g nwid | \
     sed -e 's/.*nwid*.\(.*\)chan.*/\1/'"
 
 mkcd() { mkd "$1" && cd "$1" ; }
@@ -86,9 +86,8 @@ mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
 
 f () { args && find . -iname "*$1*" ; }
-hg() { args && cat ${HISTFILE} |
-           g $* | head -n 20 ; }
-sg() { sysctl | g $* ; }
+hg() { args && g -e "$@" ${HISTFILE} | head -n 20 ; }
+sg() { sysctl | g "$@" ; }
 du() { cmd du -ahLd 1 2> /dev/null | \
            sort -rh | head -n 20 ; }
 u() { for i in $* ; do unalias $i || \
@@ -151,7 +150,7 @@ gcc() { cmd gcc $@
 
 v() { t $# -eq 0 &&
             cmd ${EDITOR} -c VimwikiIndex ||
-                cmd ${EDITOR} -p $*
+                cmd ${EDITOR} -p "$@"
         t -f "$1" && file="$1" || \
             { t -f "${PWD}/$1" && \
               file="${PWD}/$1" ; } ||
@@ -175,7 +174,7 @@ ranger() { t $# -eq 0 &&
     t -n "$p" &&
         { e "ranger $p" ; ranger "$p" ; x ; } }
 
-r() { ranger $* ; x ; }
+r() { ranger "$@" ; x ; }
 
 a yt="c; youtube-viewer -C -q --vd=high"
 a ytm="c;yt -n"
@@ -192,8 +191,8 @@ mpv() { args && k mpv > /dev/null 2>&1 ||
             cmd mpv --title=mpv $* & x ; }
 mpvm() { mpv --no-video $* ; }
 mpvx() { (mpv "$(xsel -o)" &) ; }
-mpvyt() { mpv ytdl://ytsearch:$* ; }
-mpvytm() { mpv --no-video ytdl://ytsearch:$* ; }
+mpvyt() { mpv ytdl://ytsearch:"$@" ; }
+mpvytm() { mpv --no-video ytdl://ytsearch:"$@" ; }
 
 a ytdl='youtube-dl --geo-bypass --prefer-ffmpeg'
 a ytdlm="youtube-dl --extract-audio --geo-bypass \
