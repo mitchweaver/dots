@@ -1,9 +1,9 @@
 " http://github.com/mitchweaver/dots
-"
+
 " unbind space for everything but leader
 nnoremap <silent><SPACE> <nop>
 let mapleader=" "
-"  --------------- Plugins ------------------------------ "
+"  --------------- Plugins ------------------------------
 set nocompatible
 filetype off
 call plug#begin('~/.vim/vim-plug')
@@ -24,16 +24,15 @@ syntax enable
 map <silent><leader>pi :PlugInstall<CR>
 map <silent><leader>pu :PlugUpdate<CR>
 map <silent><leader>pc :PlugClean<CR>
-" ------------------------------------------------------- "
+" --------------------------------------------------------
 
 colorscheme wal
 set background=dark
 " set background=light
 
-" set mouse=n
 set backspace=indent,eol,start " make backspace useable
 set whichwrap+=<,>,h,l " wrap around lines with these keys
-set updatetime=750 " how long til vim does background calls after typing
+set updatetime=750 " time until bg calls after typing
 set timeout! " Disable keybind timeout
 set ttimeout! " Disable keybind timeout
 set clipboard=unnamed " yank/paste to/from system clipboard
@@ -42,8 +41,8 @@ set novisualbell " kill the visual bell too
 set noerrorbells " did I mention I hate bells?
 set lazyredraw " whether to redraw screen after macros
 set mat=2 " how fast to blink matched brackets
-set textwidth=0 " very annoying warning occurs with long lines
-set backspace=2 " allow backspace to go over new lines, etc
+set textwidth=0 " very annoying warning
+set backspace=2 " allow backspace to go over new lines
 
 set shellslash
 set shell=ksh
@@ -58,13 +57,11 @@ set undoreload=1000
 
 set title " keep window name updated with current file
 set noruler " don't show file position in the bottom right
-set noshowmode " don't show 'insert' or 'normal' etc on bottom left
+set noshowmode " don't show 'insert' or etc on bottom left
 set laststatus=0 " Disable bottom status line / statusbar
 set noshowcmd " don't print the last run command
 set mousehide " hide the mouse while typing
-set ch=1 " command height --- get rid of the wasted line at the bottom
-
-set formatoptions+=o " continue comment marker on new lines
+set ch=1 " get rid of the wasted line at the bottom
 
 map <silent><leader>ln :set number! relativenumber!<cr>
 
@@ -84,16 +81,17 @@ set showmatch " show matching parens
 set hid " hide buffer when closed
 set scrolloff=10 " pad X lines when scrolling
 set fillchars=""  " extremely annoying
+set diffopt+=iwhite " disable white space diffing
+set formatoptions+=o " continue comments new lines
 set synmaxcol=512
 set nowrap
 set encoding=utf-8
-set diffopt+=iwhite " disable white space diffing
 
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab " use spaces instead of tabs.
-set smarttab " let's tab key insert 'tab stops', and bksp deletes tabs.
+set smarttab " soft tab creation / deletion
 set shiftround " tab / shifting moves to closest tabstop.
 set autoindent " match indents on new lines.
 set smartindent
@@ -127,7 +125,7 @@ nnoremap <silent><leader><leader> :let @/ = ""<CR>:noh<CR>
 " Search and Replace
 nmap <Leader>s :%s//g<Left><Left>
 
-" -------------- Extension Settings --------------------------
+" -------------- Extension Settings ----------------------
 let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
 let g:gitgutter_realtime = 0 " only run gitgutter on save
 
@@ -175,8 +173,7 @@ map <silent> <C-z> :%s/^+<CR> :%s/^-.*<CR> :%s/^!<CR>
 map <silent><leader>w :w<CR>
 map <silent><leader>q :q<CR>
 
-" print an 80-char line separator
-inoremap <silent><C-z> ---------------------------------------------------------------------------<ESC>:Commentary<CR>0o
+" print a 60-char line separator
 inoremap <silent><C-s> ------------------------------------------------------- <ESC>:Commentary<CR>0llllllllllllllllllllli
 
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
@@ -198,7 +195,7 @@ map  <silent><C-w>    <nop>
 
 map <leader>md :!/home/mitch/usr/bin/previewmarkdown.sh -i "%" -b $BROWSER<CR>
 
-" ------------------ Open files in ranger (nvim only) ------------------------------------- "
+" ----------- Open files in ranger ----------------------- 
 function! s:RangerOpenDir(...)
     let path = a:0 ? a:1 : getcwd()
 
@@ -257,7 +254,6 @@ function! s:RangerOpenDir(...)
     startinsert
 endfunction
 
-" Override netrw
 let g:loaded_netrwPlugin = 'disable'
 augroup ReplaceNetrwWithRanger
     autocmd StdinReadPre * let s:std_in = 1
@@ -265,5 +261,5 @@ augroup ReplaceNetrwWithRanger
 augroup END
 
 command! -complete=dir -nargs=* Ranger :call <SID>RangerOpenDir(<f-args>)
-" command! -complete=dir -nargs=* RangerCurrentFile :call <SID>RangerOpenDir(expand('%:p:h'), @%)
 nnoremap <silent><leader>r :Ranger<CR>
+" ------------------------------------------------------- 
