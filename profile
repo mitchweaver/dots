@@ -30,9 +30,7 @@ unset i
 
 ulimit -c 0
 
-export LANG='en_US.UTF-8';
-export LC_ALL='en_US.UTF-8';
-export {LOCALE,LC_CTYPE}='en_US.UTF-8'
+export {LANG,LC_ALL,LOCALE,LC_CTYPE}='en_US.UTF-8'
 export LESSCHARSET='utf-8'
 export LESS_TERMCAP_md="${yellow}";
 export PYTHONIOENCODING='UTF-8';
@@ -49,8 +47,8 @@ type xdg-open > /dev/null 2>&1 &&
       export XDG_PICTURES_DIR="${HOME}/var/images"
       export XDG_VIDEOS_DIR="${HOME}/var/videos" ; }
 
-[ -z "$(pgrep X)" ] && {
-    rm -rf ${HOME}/.{Xauthority*,serverauth*} \
+[ -z "$(pgrep X)" ] && 
+    { rm -rf ${HOME}/.{Xauthority*,serverauth*} \
         > /dev/null 2>&1
-    cp ${HOME}/etc/xinitrc ${HOME}/.xinitrc
-    startx -- > /dev/null ; }
+      cp ${HOME}/etc/xinitrc ${HOME}/.xinitrc
+      startx -- > /dev/null ; }
