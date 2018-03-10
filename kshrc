@@ -9,13 +9,15 @@
 # unaliases
 alias {fc,w,r,bg,fg,jobs,autoload,login,stop}=true 
 
+. ${HOME}/etc/aliases
+
 alias echo='builtin print'
 alias type='builtin whence -v'
 
-. ${HOME}/etc/aliases
-
-set {bgnice,nohup}
+set bgnice
+set nohup
 set -o vi-tabcomplete
+set -o csh-history
 bind Space:magic-space > /dev/null
 
 export HISTFILE=${HOME}/tmp/.ksh_history
@@ -28,7 +30,7 @@ parse_branch() { git branch 2> /dev/null | \
 
 cd() { [ $# -eq 0 ] &&
            builtin cd ${HOME} ||
-           builtin cd "$1"
+                 builtin cd "$1"
         [ -n "$RANGER_LEVEL" ]  &&
             export PS1="$PS1(RANGER): " ||
             export PS1="$(get_PS1)" ; }

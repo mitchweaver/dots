@@ -38,7 +38,7 @@ a {dmesg,dmegs}='dmesg | tail -n 20'
 a {k,killall}="pkill -9"
 a pa='ps auwwx | head'
 a ph='ps auwwx | g -i -e ${USER} | head'
-a man='man -a'
+a {m,man}='man -a'
 a args='t $# -gt 0'
 a s=shift
 a loc=local
@@ -132,48 +132,16 @@ nasm() { t -f "$1" && c &&
                 ld -m elf_i386 "${1%.*}.o" -o "${1%.*}" &&
                     ./"${1%.*}" ; }
 
-w3m() { t $# -eq 0 &&
-            cmd w3m -F https://ddg.gg/lite ||
-            cmd w3m -F $* ; }
+w3m() { args || cmd w3m -F https://ddg.gg/lite &&
+                cmd w3m -F $* ; }
 
 bar() { k bar lemonbar > /dev/null 2>&1
         ~/bin/bar & c ; }
 
-gcc() { cmd gcc $@
-        e -n "${PWD}"/"$(bn $1 -- 2> /dev/null)" \
-        > /tmp/shell/last_gcc ; }
-
-!g() { loc p="$(cat /tmp/shell/last_gcc -- 2> /dev/null)"
-       t -n "$p" &&
-           { e "gcc $p" ; cmd gcc "$p" ; } }
-
-
-v() { t $# -eq 0 &&
-            cmd ${EDITOR} -c VimwikiIndex ||
-                cmd ${EDITOR} -p "$@"
-        t -f "$1" && file="$1" || \
-            { t -f "${PWD}/$1" && \
-              file="${PWD}/$1" ; } ||
-                  file="${PWD}/$(bn $1 -- \
-                  2> /dev/null)"
-        e -n "$file" > /tmp/last_vi ; }
+v() { args || cmd ${EDITOR} -c VimwikiIndex &&
+              cmd ${EDITOR} -p "$@" ; }
 
 a {vi,vim,nvim}=v
-
-!v() { loc p="$(cat /tmp/last_vi -- 2> /dev/null)"
-       t -n "$p" &&
-           { e "v $p" ; v "$p" ; x ; } }
-
-ranger() { t $# -eq 0 &&
-              { t "${PWD}" = ~ &&
-                    loc p=~ || p="${PWD}" ; } ||
-                        p="$1"
-                e -n "$p" > /tmp/last_ranger
-                cmd ranger $* ; }
-!r() { loc p="$(cat /tmp/last_ranger 2> /dev/null)"
-    t -n "$p" &&
-        { e "ranger $p" ; ranger "$p" ; x ; } }
-
 r() { ranger "$@" ; x ; }
 
 a yt="c; youtube-viewer -C -q --vd=high"
@@ -222,8 +190,8 @@ gdiff() { git diff origin/master ; }
 gstat(){ git status ; }
 greset() { git reset --hard HEAD~"$1" ; }
 gbase() { t $# -eq 0 &&
-                git rebase -i HEAD~10 ||
-                git rebase -i HEAD~"$1" ; }
+              git rebase -i HEAD~10 ||
+              git rebase -i HEAD~"$1" ; }
 gmote() { git init ; git remote add origin "$1" ; }
 gclone() { git clone https://github.com/"$1" ; }
 a gbort='git rebase --abort'
@@ -238,46 +206,37 @@ a ...='cd ../..'
 a ....='cd ../../..'
 
 _g() { cd "$1" ; cl ; }
-a g~='_g ~'
 a gb='_g ~/bin' ; a gn='_g ~/env' ; a ge='_g ~/etc'
 a gt='_g ~/tmp' ; a gu='_g ~/usr' ; a gv='_g ~/var'
 a gB='_g /bin'  ; a gE='_g /etc'  ; a gM='_g /mnt'  
 a gT='_g /tmp'  ; a gU='_g /usr'  ; a gV='_g /var'
-a gf='_g ~/var/files'    ; a gh='_g ~/var/files/homework'
-a gd='_g ~/var/downloads'; a gi='_g ~/var/images'
-a gm='_g ~/var/music'    ; a gvi='_g ~/var/videos'
-a gw='_g ~/var/workspace'; a gp='_g ~/usr/programs'
-a gs='_g ~/etc/suckless' ; a gcf='_g ~/etc/config'
-_m() { mv "$1" "$2" ; cl ; }
+a gw='_g ~/src'
+a gd='_g ~/var/downloads'; a gf='_g ~/var/files'
+a gi='_g ~/var/images'   ; a gm='_g ~/var/music'
+a gp='_g ~/usr/programs' ; a gvi='_g ~/var/videos'
+_m() { mv "$@" ; cl ; }
 m~() { _m "$1" ~     ; } ; mb() { _m "$1" ~/bin ; }
 mn() { _m "$1" ~/env ; } ; me() { _m "$1" ~/etc ; }
 mt() { _m "$1" ~/tmp ; } ; mu() { _m "$1" ~/usr ; }
-mT() { _m "$1" /tmp  ; } ; 
-mf() { _m "$1" ~/var/files' ; }
-mh() { _m "$1" ~/var/files/homework' ; }
-md() { _m "$1" ~/var/downloads' ; }
-mi() { _m "$1" ~/var/images' ; }
-mm() { _m "$1" ~/var/music' ; }
-mw() { _m "$1" ~/var/workspace' ; }
-mp() { _m "$1" ~/usr/programs' ; }
-ms() { _m "$1" ~/etc/suckless' ; }
-mcf() { _m "$1" ~/etc/config' ; }
-mvi() { _m "$1" ~/var/videos' ; }
+ms() { _m "$1" ~/src ; } ; mT() { _m "$1" /tmp  ; }
+mf() { _m "$1" ~/var/files     ; }
+md() { _m "$1" ~/var/downloads ; }
+mi() { _m "$1" ~/var/images    ; }
+mm() { _m "$1" ~/var/music     ; }
+mp() { _m "$1" ~/usr/programs  ; }
+ms() { _m "$1" ~/etc/suckless  ; }
+mvi() { _m "$1" ~/var/videos   ; }
 _y() { cp "$1" "$2" ; cl ; }
 Y~() { _y "$1" ~     ; } ; Yb() { _y "$1" ~/bin ; }
 Yn() { _y "$1" ~/env ; } ; Ye() { _y "$1" ~/etc ; }
 Yt() { _y "$1" ~/tmp ; } ; Yu() { _y "$1" ~/usr ; }
-YT() { _y "$1" /tmp  ; }
-Yf() { _y "$1" ~/var/files' ; }
-Yh() { _y "$1" ~/var/files/homework' ; }
-Yd() { _y "$1" ~/var/downloads' ; }
-Yi() { _y "$1" ~/var/images' ; }
-Ym() { _y "$1" ~/var/music' ; }
-Yw() { _y "$1" ~/var/workspace' ; }
-Yp() { _y "$1" ~/usr/programs' ; }
-Ys() { _y "$1" ~/etc/suckless' ; }
-Ycf() { _y "$1" ~/etc/config' ; }
-Yvi() { _y "$1" ~/var/videos' ; }
+YT() { _y "$1" /tmp  ; } ; Ys() { _y "$1" ~/src ; }
+Yf() { _y "$1" ~/var/files     ; }
+Yd() { _y "$1" ~/var/downloads ; }
+Yi() { _y "$1" ~/var/images    ; }
+Ym() { _y "$1" ~/var/music     ; }
+Yp() { _y "$1" ~/usr/programs  ; }
+Yvi() { _y "$1" ~/var/videos   ; }
 
 a kshrc='v ~/etc/kshrc'
 a {aliases,alaises,aliase}='v ~/etc/aliases'
