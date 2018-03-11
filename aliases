@@ -2,8 +2,6 @@
 #
 # http://github.com/mitchweaver/dots
 #
-# basically shell script masturbation
-#
 
 alias a=alias
 
@@ -219,27 +217,27 @@ a gw='_g ~/src' ; a gcf='_g ~/etc/config'
 a gd='_g ~/var/downloads'; a gf='_g ~/var/files'
 a gi='_g ~/var/images'   ; a gm='_g ~/var/music'
 a gp='_g ~/usr/programs' ; a gvi='_g ~/var/videos'
-m~() { mv $* ~     ; } ; mb() { mv $* ~/bin ; }
-mn() { mv $* ~/env ; } ; me() { mv $* ~/etc ; }
-mt() { mv $* ~/tmp ; } ; mu() { mv $* ~/usr ; }
-ms() { mv $* ~/src ; } ; mT() { mv $* /tmp  ; }
-mf() { mv $* ~/var/files     ; }
-md() { mv $* ~/var/downloads ; }
-mi() { mv $* ~/var/images    ; }
-mm() { mv $* ~/var/music     ; }
-mp() { mv $* ~/usr/programs  ; }
-ms() { mv $* ~/etc/suckless  ; }
-mvi(){ mv $* ~/var/videos    ; }
-Y~() { cp $* ~     ; } ; Yb() { cp $* ~/bin ; }
-Yn() { cp $* ~/env ; } ; Ye() { cp $* ~/etc ; }
-Yt() { cp $* ~/tmp ; } ; Yu() { cp $* ~/usr ; }
-YT() { cp $* /tmp  ; } ; Ys() { cp $* ~/src ; }
-Yf() { cp $* ~/var/files     ; }
-Yd() { cp $* ~/var/downloads ; }
-Yi() { cp $* ~/var/images    ; }
-Ym() { cp $* ~/var/music     ; }
-Yp() { cp $* ~/usr/programs  ; }
-Yvi() { cp $* ~/var/videos   ; }
+m~() { mv "$@" ~     ; } ; mb() { mv "$@" ~/bin ; }
+mn() { mv "$@" ~/env ; } ; me() { mv "$@" ~/etc ; }
+mt() { mv "$@" ~/tmp ; } ; mu() { mv "$@" ~/usr ; }
+ms() { mv "$@" ~/src ; } ; mT() { mv "$@" /tmp  ; }
+mf() { mv "$@" ~/var/files     ; }
+md() { mv "$@" ~/var/downloads ; }
+mi() { mv "$@" ~/var/images    ; }
+mm() { mv "$@" ~/var/music     ; }
+mp() { mv "$@" ~/usr/programs  ; }
+ms() { mv "$@" ~/etc/suckless  ; }
+mvi(){ mv "$@" ~/var/videos    ; }
+Y~() { cp "$@" ~     ; } ; Yb() { cp "$@" ~/bin ; }
+Yn() { cp "$@" ~/env ; } ; Ye() { cp "$@" ~/etc ; }
+Yt() { cp "$@" ~/tmp ; } ; Yu() { cp "$@" ~/usr ; }
+YT() { cp "$@" /tmp  ; } ; Ys() { cp "$@" ~/src ; }
+Yf() { cp "$@" ~/var/files     ; }
+Yd() { cp "$@" ~/var/downloads ; }
+Yi() { cp "$@" ~/var/images    ; }
+Ym() { cp "$@" ~/var/music     ; }
+Yp() { cp "$@" ~/usr/programs  ; }
+Yvi() { cp "$@" ~/var/videos   ; }
 
 a {aliases,alaises,aliase}='v ~/etc/aliases'
 a profile='v ~/etc/profile'
