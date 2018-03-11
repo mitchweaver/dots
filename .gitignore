@@ -9,6 +9,9 @@ vim/vim-plug
 vim/init.vim
 vim
 
+config/gtk-2.0
+config/gtk-3.0
+
 config/wal
 config/neofetch
 conifg/youtube-viewer
