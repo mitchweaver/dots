@@ -83,9 +83,9 @@ a {disklabel,label}='disklabel -h'
 a ssid="ifconfig iwn0 | g nwid | \
     sed -e 's/.*nwid*.\(.*\)chan.*/\1/'"
 
-mkcd() { mkd "$1" && cd $_ ; }
-mvcd() { mv "$1" "$2" && cd $_ ; }
-cpcd() { cp "$1" "$2" && cd $_ ; }
+mkcd() { mkd "$1" && cd "$2" ; }
+mvcd() { mv "$1" "$2" && cd "$2" ; }
+cpcd() { cp "$1" "$2" && cd "$2" ; }
 
 f() { t $# -gt 1  && find "$1" -iname "*$2*" ||
         find . -iname "*$1*" ; }
@@ -130,7 +130,7 @@ reload() { . ~/etc/aliases
            xmodmap ~/etc/Xmodmap
            xset m 0 0 ; } > /dev/null
 
-nasm() { t -f "$1" && c &&
+nasm() { t -f "$1" &&
              cmd nasm -f elf32 -g -F dwarf "$1" &&
                 ld -m elf_i386 "${1%.*}.o" -o "${1%.*}" &&
                     ./"${1%.*}" ; }
@@ -189,28 +189,28 @@ gmit() { { t $# -eq 1 && git add -A && \
         { git add "$1" ; s ; git commit -m $* ; } ; }
 gout() { git push -u origin $(git rev-parse \
     --abbrev-ref HEAD) "$@" ; }
-gdiff() { git diff origin/master ; }
+gdiff() { args && git diff origin/$1 || \
+    git diff origin/master ; }
 greset() { git reset --hard HEAD~"$1" ; }
 gbase() { t $# -eq 0 &&
               git rebase -i HEAD~10 ||
-              git rebase -i HEAD~"$1" ; }
+              git rebase -i HEAD~$1 ; }
 gmote() { git init 2> /dev/null ; \ 
               git remote add origin "$1" ; }
 a gclone='git clone'
 ghclone() { gclone https://github.com/"$1" ; }
 a gitstat='git status'
 a gbort='git rebase --abort'
-a glog=git\ log
+a glog='git log'
 a gfetch='git fetch'
 a gppull='git pull'
 a gbranch='git branch'
 a {gcheck,checkout}='git checkout'
 
 a {..,cd..}='cd ..'
-a ...='cd ../..'
-a ....='cd ../../..'
+a ...='.. ; ..'
 
-_g() { cd "$1" ; cl ; }
+_g() { cd $_ ; cl ; }
 a gb='_g ~/bin' ; a gn='_g ~/env' ; a ge='_g ~/etc'
 a gt='_g ~/tmp' ; a gu='_g ~/usr' ; a gv='_g ~/var'
 a gB='_g /bin'  ; a gE='_g /etc'  ; a gM='_g /mnt'  
@@ -219,39 +219,37 @@ a gw='_g ~/src' ; a gcf='_g ~/etc/config'
 a gd='_g ~/var/downloads'; a gf='_g ~/var/files'
 a gi='_g ~/var/images'   ; a gm='_g ~/var/music'
 a gp='_g ~/usr/programs' ; a gvi='_g ~/var/videos'
-m~() { mv "$1" ~     ; } ; mb() { mv "$1" ~/bin ; }
-mn() { mv "$1" ~/env ; } ; me() { mv "$1" ~/etc ; }
-mt() { mv "$1" ~/tmp ; } ; mu() { mv "$1" ~/usr ; }
-ms() { mv "$1" ~/src ; } ; mT() { mv "$1" /tmp  ; }
-mf() { mv "$1" ~/var/files     ; }
-md() { mv "$1" ~/var/downloads ; }
-mi() { mv "$1" ~/var/images    ; }
-mm() { mv "$1" ~/var/music     ; }
-mp() { mv "$1" ~/usr/programs  ; }
-ms() { mv "$1" ~/etc/suckless  ; }
-mvi(){ mv "$1" ~/var/videos    ; }
-Y~() { cp "$1" ~     ; } ; Yb() { cp "$1" ~/bin ; }
-Yn() { cp "$1" ~/env ; } ; Ye() { cp "$1" ~/etc ; }
-Yt() { cp "$1" ~/tmp ; } ; Yu() { cp "$1" ~/usr ; }
-YT() { cp "$1" /tmp  ; } ; Ys() { cp "$1" ~/src ; }
-Yf() { cp "$1" ~/var/files     ; }
-Yd() { cp "$1" ~/var/downloads ; }
-Yi() { cp "$1" ~/var/images    ; }
-Ym() { cp "$1" ~/var/music     ; }
-Yp() { cp "$1" ~/usr/programs  ; }
-Yvi() { cp "$1" ~/var/videos   ; }
+m~() { mv $* ~     ; } ; mb() { mv $* ~/bin ; }
+mn() { mv $* ~/env ; } ; me() { mv $* ~/etc ; }
+mt() { mv $* ~/tmp ; } ; mu() { mv $* ~/usr ; }
+ms() { mv $* ~/src ; } ; mT() { mv $* /tmp  ; }
+mf() { mv $* ~/var/files     ; }
+md() { mv $* ~/var/downloads ; }
+mi() { mv $* ~/var/images    ; }
+mm() { mv $* ~/var/music     ; }
+mp() { mv $* ~/usr/programs  ; }
+ms() { mv $* ~/etc/suckless  ; }
+mvi(){ mv $* ~/var/videos    ; }
+Y~() { cp $* ~     ; } ; Yb() { cp $* ~/bin ; }
+Yn() { cp $* ~/env ; } ; Ye() { cp $* ~/etc ; }
+Yt() { cp $* ~/tmp ; } ; Yu() { cp $* ~/usr ; }
+YT() { cp $* /tmp  ; } ; Ys() { cp $* ~/src ; }
+Yf() { cp $* ~/var/files     ; }
+Yd() { cp $* ~/var/downloads ; }
+Yi() { cp $* ~/var/images    ; }
+Ym() { cp $* ~/var/music     ; }
+Yp() { cp $* ~/usr/programs  ; }
+Yvi() { cp $* ~/var/videos   ; }
 
 a {aliases,alaises,aliase}='v ~/etc/aliases'
 a profile='v ~/etc/profile'
 a {bmk,bmks}='v ~/var/files/surf-bookmarks.txt'
 a vssh='v ~/.ssh/config'
 
-rc() { v ~/etc/${1}rc ; }
+rc() { v ~/etc/$1rc ; }
 cfg() { v ~/etc/suckless/$1/config.h ; }
 vc() { v ~/etc/suckless/$1/$1.c ; }
 
-recomp() {
-    loc s="${HOME}/etc/suckless"
-    loc r="doas ${HOME}/bin/recomp"
-    for i in $* ; do $r $s/$i ; done
-} ; a {repomc,recopm,recpom}=recomp
+recomp() { loc r="doas ${HOME}/bin/recomp"
+           loc s="${HOME}/etc/suckless"
+           for i in $* ; do $r $s/$i ; done ; }
