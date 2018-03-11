@@ -15,16 +15,17 @@ a {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi}=exit
 a {l,sls,sl}=ls
 a ll='l -l'
 a la='l -a'
-a lla='l -al'
+a {lla,lal}='l -al'
 a lsf='l "$PWD"/*'
 a {c,cc,cll,clear,clar,clea}='printf "\033c"'
 a {cls,csl,cl,lc}='c;l'
 a {e,ech,eho}=echo
 a {g,Grep,gerp}='grep'
 a pg='pgrep'
-a dg='cmd du -ahLd 1 | g'
-a cp='cp -rv'
-a mv='mv -v'
+a dg='du | g'
+a lg='ls | g'
+a cp='cp -irv'
+a mv='mv -iv'
 a {mkdir,mkd,mkdr}='mkdir -p'
 a rm='rm -P'
 a df='df -h'
@@ -50,19 +51,20 @@ a reboot='doas reboot'
 a shutdown='doas shutdown -p now'
 a {mk,mkae}="make -j$(sysctl -n hw.ncpu)"
 a mkc='mk clean'
-a mkall="mk clean ; mk && doas mk install"
+a mkall="mk clean ; mk && mk install"
 a w='curl http://wttr.in/Schmalkalden'
 a {xs,xc}='xsel -o ; e'
 a rsync='rsync -rtvulh4 --progress --delete' #-c
 a sshd='doas /usr/sbin/sshd'
 a scp='scp -rp4'
 a pubip='curl https://wtfismyip.com/text'
+a diff='git diff'
 a {notepad,vtmp}='${EDITOR} /tmp/notepad.md'
 a {suvim,suvi}='doas ${EDITOR}'
 a view='${EDITOR} -R'
-a {h,htpo,hto,ht,hpot,hotp}=htop
-a hm='h -u ${USER}'
-a hr='h -u root'
+a {h,htpo,hto,ht,hpot,hotp,top}=htop
+a {hm,hme}='h -u ${USER}'
+a {hr,hroot}='h -u root'
 a jjar='java -jar'
 a nf='neofetch'
 a {irc,irssi}="irssi -c freenode"
@@ -187,13 +189,15 @@ gmit() { { t $# -eq 1 && git add -A && \
 gout() { git push -u origin $(git rev-parse \
     --abbrev-ref HEAD) "$@" ; }
 gdiff() { git diff origin/master ; }
-gstat(){ git status ; }
 greset() { git reset --hard HEAD~"$1" ; }
 gbase() { t $# -eq 0 &&
               git rebase -i HEAD~10 ||
               git rebase -i HEAD~"$1" ; }
-gmote() { git init ; git remote add origin "$1" ; }
-gclone() { git clone https://github.com/"$1" ; }
+gmote() { git init 2> /dev/null ; \ 
+              git remote add origin "$1" ; }
+a gclone='git clone'
+ghclone() { gclone https://github.com/"$1" ; }
+a gitstat='git status'
 a gbort='git rebase --abort'
 a glog=git\ log
 a gfetch='git fetch'
@@ -210,33 +214,31 @@ a gb='_g ~/bin' ; a gn='_g ~/env' ; a ge='_g ~/etc'
 a gt='_g ~/tmp' ; a gu='_g ~/usr' ; a gv='_g ~/var'
 a gB='_g /bin'  ; a gE='_g /etc'  ; a gM='_g /mnt'  
 a gT='_g /tmp'  ; a gU='_g /usr'  ; a gV='_g /var'
-a gw='_g ~/src'
+a gw='_g ~/src' ; a gcf='_g ~/etc/config'
 a gd='_g ~/var/downloads'; a gf='_g ~/var/files'
 a gi='_g ~/var/images'   ; a gm='_g ~/var/music'
 a gp='_g ~/usr/programs' ; a gvi='_g ~/var/videos'
-_m() { mv "$@" ; cl ; }
-m~() { _m "$1" ~     ; } ; mb() { _m "$1" ~/bin ; }
-mn() { _m "$1" ~/env ; } ; me() { _m "$1" ~/etc ; }
-mt() { _m "$1" ~/tmp ; } ; mu() { _m "$1" ~/usr ; }
-ms() { _m "$1" ~/src ; } ; mT() { _m "$1" /tmp  ; }
-mf() { _m "$1" ~/var/files     ; }
-md() { _m "$1" ~/var/downloads ; }
-mi() { _m "$1" ~/var/images    ; }
-mm() { _m "$1" ~/var/music     ; }
-mp() { _m "$1" ~/usr/programs  ; }
-ms() { _m "$1" ~/etc/suckless  ; }
-mvi() { _m "$1" ~/var/videos   ; }
-_y() { cp "$1" "$2" ; cl ; }
-Y~() { _y "$1" ~     ; } ; Yb() { _y "$1" ~/bin ; }
-Yn() { _y "$1" ~/env ; } ; Ye() { _y "$1" ~/etc ; }
-Yt() { _y "$1" ~/tmp ; } ; Yu() { _y "$1" ~/usr ; }
-YT() { _y "$1" /tmp  ; } ; Ys() { _y "$1" ~/src ; }
-Yf() { _y "$1" ~/var/files     ; }
-Yd() { _y "$1" ~/var/downloads ; }
-Yi() { _y "$1" ~/var/images    ; }
-Ym() { _y "$1" ~/var/music     ; }
-Yp() { _y "$1" ~/usr/programs  ; }
-Yvi() { _y "$1" ~/var/videos   ; }
+m~() { mv "$1" ~     ; } ; mb() { mv "$1" ~/bin ; }
+mn() { mv "$1" ~/env ; } ; me() { mv "$1" ~/etc ; }
+mt() { mv "$1" ~/tmp ; } ; mu() { mv "$1" ~/usr ; }
+ms() { mv "$1" ~/src ; } ; mT() { mv "$1" /tmp  ; }
+mf() { mv "$1" ~/var/files     ; }
+md() { mv "$1" ~/var/downloads ; }
+mi() { mv "$1" ~/var/images    ; }
+mm() { mv "$1" ~/var/music     ; }
+mp() { mv "$1" ~/usr/programs  ; }
+ms() { mv "$1" ~/etc/suckless  ; }
+mvi(){ mv "$1" ~/var/videos    ; }
+Y~() { cp "$1" ~     ; } ; Yb() { cp "$1" ~/bin ; }
+Yn() { cp "$1" ~/env ; } ; Ye() { cp "$1" ~/etc ; }
+Yt() { cp "$1" ~/tmp ; } ; Yu() { cp "$1" ~/usr ; }
+YT() { cp "$1" /tmp  ; } ; Ys() { cp "$1" ~/src ; }
+Yf() { cp "$1" ~/var/files     ; }
+Yd() { cp "$1" ~/var/downloads ; }
+Yi() { cp "$1" ~/var/images    ; }
+Ym() { cp "$1" ~/var/music     ; }
+Yp() { cp "$1" ~/usr/programs  ; }
+Yvi() { cp "$1" ~/var/videos   ; }
 
 a kshrc='v ~/etc/kshrc'
 a {aliases,alaises,aliase}='v ~/etc/aliases'
@@ -262,5 +264,5 @@ a stcfg='_s st/config.h'
 recomp() {
     loc s="${HOME}/etc/suckless"
     loc r="doas ${HOME}/bin/recomp"
-    for i in $* ; do doas $r $s/$i ; done
+    for i in $* ; do $r $s/$i ; done
 } ; a {repomc,recopm,recpom}=recomp

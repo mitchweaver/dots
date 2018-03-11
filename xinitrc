@@ -23,11 +23,11 @@ case "$(basename $(file -b -i -L ${HOME}/var/tmp/wall))" in
 
 esac > /dev/null 2>&1 &
 
-bar > /dev/null 2>&1 &
-
 clip --daemon &
 
 xbanish &
+
+bar > /dev/null 2>&1 &
 
 while true ; do
     dwm

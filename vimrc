@@ -15,9 +15,9 @@ Plug 'ervandew/supertab' " code completion
 Plug 'tpope/vim-surround' " quote/paren etc surrounding
 Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
 Plug 'airblade/vim-gitgutter' " git diffing along the left side
-Plug 'lilydjwg/colorizer' " colorizes rgb hex codes
 Plug 'dylanaraps/wal.vim' " pywal theme
-
+Plug 'NLKNguyen/papercolor-theme'
+ 
 call plug#end()
 filetype indent plugin on
 syntax enable
@@ -27,8 +27,9 @@ map <silent><leader>pc :PlugClean<CR>
 " --------------------------------------------------------
 
 colorscheme wal
-set background=dark
-" set background=light
+" colorscheme PaperColor
+" set background=dark
+set background=light
 
 set backspace=indent,eol,start " make backspace useable
 set whichwrap+=<,>,h,l " wrap around lines with these keys
