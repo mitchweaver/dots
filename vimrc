@@ -28,8 +28,8 @@ map <silent><leader>pc :PlugClean<CR>
 
 colorscheme wal
 " colorscheme PaperColor
-" set background=dark
-set background=light
+set background=dark
+" set background=light
 
 set backspace=indent,eol,start " make backspace useable
 set whichwrap+=<,>,h,l " wrap around lines with these keys

@@ -1,7 +1,4 @@
-#!/bin/ksh
-#
 # http://github.com/mitchweaver/dots
-#
 
 alias a=alias
 
@@ -28,7 +25,6 @@ a {mkdir,mkd,mkdr}='mkdir -p'
 a rm='rm -P'
 a df='df -h'
 a ln='ln -sf'
-a t=test
 a ag='a | g'
 a file='file -b -i -L'
 a bn=basename
@@ -38,7 +34,6 @@ a {k,killall}="pkill -9"
 a pa='ps auwwx | head'
 a ph='ps auwwx | g -i -e ${USER} | head'
 a {m,man}='man -a'
-a args='t $# -gt 0'
 a s=shift
 a loc=local
 a ex=export
@@ -84,9 +79,9 @@ mkcd() { mkd "$1" && cd "$2" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
 
-f() { t $# -gt 1  && find "$1" -iname "*$2*" ||
+f() { [ $# -gt 1 ] && find "$1" -iname "*$2*" ||
         find . -iname "*$1*" ; }
-hg() { args && g -e "$@" $HISTFILE | head -n 20 ; }
+hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
 sg() { sysctl | g "$@" ; }
 du() { cmd du -ahLd 1 2> /dev/null | \
            sort -rh | head -n 20 ; }
@@ -95,22 +90,22 @@ u() { for i in $* ; do unalias $i || \
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
 
-shred() { t -f "$1" &&
+shred() { [ -f "$1" ] &&
               dd if=/dev/urandom of="$1" bs=1 \
                   count=$(wc < "$1" | sed 's/ //g') ; }
 
 mkxz() { loc f="$(e $1 | sed 's/\///')" &&
              tar -cvpf "$f.tar" "$f" &&
                  xz "$f.tar" &&
-                     t -f "$f.tar.xz" &&
+                     [ -f "$f.tar.xz" ] &&
                          rm -rf "$f" ; }
 mkgz() { loc f="$(e $1 | sed 's/\///')" &&
             tar -cvzpf "$f.tar.gz" "$f" &&
-                t -f "$f.tar.gz" &&
+                [ -f "$f.tar.gz" ] &&
                     rm -rf "$f"; }
 mkbz2() { loc f="$(e $1 | sed 's/\///')" &&
               tar -cvjpf "$f.tar.bz" "$f" &&
-                  t -f "$f.tar.bz" &&
+                  [ -f "$f.tar.bz" ] &&
                       rm -rf "$f" ; }
 
 pkg_del() { pkg_delete $* ; pkg_delete -a ; }
@@ -127,18 +122,18 @@ reload() { . ~/etc/aliases
            xmodmap ~/etc/Xmodmap
            xset m 0 0 ; } > /dev/null
 
-nasm() { t -f "$1" &&
+nasm() { [ -f "$1" ] &&
              cmd nasm -f elf32 -g -F dwarf "$1" &&
                 ld -m elf_i386 "${1%.*}.o" -o "${1%.*}" &&
                     ./"${1%.*}" ; }
 
-w3m() { args || cmd w3m -F https://ddg.gg/lite &&
+w3m() { [ $# -gt 0 ] || cmd w3m -F https://ddg.gg/lite &&
                 cmd w3m -F $* ; }
 
 bar() { k bar lemonbar > /dev/null 2>&1
         ~/bin/bar & c ; }
 
-v() { args || cmd ${EDITOR} -c VimwikiIndex &&
+v() { [ $# -gt 0 ] || cmd ${EDITOR} -c VimwikiIndex &&
               cmd ${EDITOR} -p "$@" ; }
 
 a {vi,vim,nvim}=v
@@ -155,7 +150,7 @@ a ytchans='c;yt --subscriptions'
 a ytfavs='c;yt --favorites=mine'
 a ytme='c;yt --channel-videos=mine'
 
-mpv() { args && { k mpv > /dev/null 2>&1 ;
+mpv() { [ $# -gt 0 ] && { k mpv > /dev/null 2>&1 ;
         cmd mpv --title=mpv $* & x ; } }
 mpvm() { mpv --no-video $* ; }
 mpvx() { (mpv "$(xsel -o)" &) ; }
@@ -172,7 +167,7 @@ a webcam='ffmpeg -i /dev/video0 -f sndio -i \
 import() { cmd import -quiet -silent -window root \
                -quality 100 ~/import.png ; }
 
-p() { args && loc a="$1" || loc a=mitchweaver.xyz
+p() { [ $# -gt 0 ] && loc a="$1" || loc a=mitchweaver.xyz
       ping -c 1 -n -q -s 1 -w 10 $a > /dev/null 2>&1 &&
           "UP" || e "DOWN" ; }
 
@@ -186,7 +181,7 @@ gmit() { { t $# -eq 1 && git add -A && \
         { git add "$1" ; s ; git commit -m $* ; } ; }
 gout() { git push -u origin $(git rev-parse \
     --abbrev-ref HEAD) "$@" ; }
-gdiff() { args && git diff origin/$1 || \
+gdiff() { [ $# -gt 0 ] && git diff origin/$1 || \
     git diff origin/master ; }
 greset() { git reset --hard HEAD~"$1" ; }
 gbase() { t $# -eq 0 &&
@@ -207,7 +202,7 @@ a {gcheck,checkout}='git checkout'
 a {..,cd..}='cd ..'
 a ...='.. ; ..'
 
-_g() { cd $_ ; cl ; }
+_g() { cd $_ ; cl ;  }
 a gb='_g ~/bin' ; a gn='_g ~/env' ; a ge='_g ~/etc'
 a gt='_g ~/tmp' ; a gu='_g ~/usr' ; a gv='_g ~/var'
 a gB='_g /bin'  ; a gE='_g /etc'  ; a gM='_g /mnt'  
