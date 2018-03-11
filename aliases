@@ -87,7 +87,8 @@ mkcd() { mkd "$1" && cd "$1" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
 
-f () { args && find . -iname "*$1*" ; }
+f() { t $# -gt 1  && find "$1" -iname "*$2*" ||
+        find . -iname "*$1*" ; }
 hg() { args && g -e "$@" ${HISTFILE} | head -n 20 ; }
 sg() { sysctl | g "$@" ; }
 du() { cmd du -ahLd 1 2> /dev/null | \
