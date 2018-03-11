@@ -126,6 +126,12 @@ nnoremap <silent><leader><leader> :let @/ = ""<CR>:noh<CR>
 " Search and Replace
 nmap <Leader>s :%s//g<Left><Left>
 
+nnoremap ci: T:ct:
+nnoremap ci. T.ct.
+nnoremap ci, T,ct,
+nnoremap ci< T<ct>
+nnoremap ci> T<ct>
+
 " -------------- Extension Settings ----------------------
 let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
 let g:gitgutter_realtime = 0 " only run gitgutter on save

@@ -83,13 +83,13 @@ a {disklabel,label}='disklabel -h'
 a ssid="ifconfig iwn0 | g nwid | \
     sed -e 's/.*nwid*.\(.*\)chan.*/\1/'"
 
-mkcd() { mkd "$1" && cd "$1" ; }
-mvcd() { mv "$1" "$2" && cd "$2" ; }
-cpcd() { cp "$1" "$2" && cd "$2" ; }
+mkcd() { mkd "$1" && cd $_ ; }
+mvcd() { mv "$1" "$2" && cd $_ ; }
+cpcd() { cp "$1" "$2" && cd $_ ; }
 
 f() { t $# -gt 1  && find "$1" -iname "*$2*" ||
         find . -iname "*$1*" ; }
-hg() { args && g -e "$@" ${HISTFILE} | head -n 20 ; }
+hg() { args && g -e "$@" $HISTFILE | head -n 20 ; }
 sg() { sysctl | g "$@" ; }
 du() { cmd du -ahLd 1 2> /dev/null | \
            sort -rh | head -n 20 ; }
@@ -158,8 +158,8 @@ a ytchans='c;yt --subscriptions'
 a ytfavs='c;yt --favorites=mine'
 a ytme='c;yt --channel-videos=mine'
 
-mpv() { args && k mpv > /dev/null 2>&1 ||
-            cmd mpv --title=mpv $* & x ; }
+mpv() { args && { k mpv > /dev/null 2>&1 ;
+        cmd mpv --title=mpv $* & x ; } }
 mpvm() { mpv --no-video $* ; }
 mpvx() { (mpv "$(xsel -o)" &) ; }
 mpvyt() { mpv ytdl://ytsearch:"$@" ; }
@@ -241,26 +241,14 @@ Ym() { cp "$1" ~/var/music     ; }
 Yp() { cp "$1" ~/usr/programs  ; }
 Yvi() { cp "$1" ~/var/videos   ; }
 
-a kshrc='v ~/etc/kshrc'
 a {aliases,alaises,aliase}='v ~/etc/aliases'
 a profile='v ~/etc/profile'
-a {vimrc,virmc}='v ~/etc/vimrc'
 a {bmk,bmks}='v ~/var/files/surf-bookmarks.txt'
 a vssh='v ~/.ssh/config'
-a xinitrc='v ~/etc/xinitrc'
 
-_s() { v ~/etc/suckless/$1 ; }
-a dwmc='_s dwm/dwm.c'
-a surfc='_s surf/surf.c'
-a tabbedc='_s tabbed/tabbed.c'
-a dmenuc='_s dmenu/dmenu.c'
-a stc='_s st/st.c'
-
-a dwmcfg='_s dwm/config.h'
-a surfcfg='_s surf/config.h'
-a tabbedcfg='_s tabbed/config.h'
-a dmenucfg='_s dmenu/config.h'
-a stcfg='_s st/config.h'
+rc() { v ~/etc/${1}rc ; }
+cfg() { v ~/etc/suckless/$1/config.h ; }
+vc() { v ~/etc/suckless/$1/$1.c ; }
 
 recomp() {
     loc s="${HOME}/etc/suckless"
