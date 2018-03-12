@@ -46,8 +46,8 @@ set textwidth=0 " very annoying warning
 set backspace=2 " allow backspace to go over new lines
 
 set shellslash
-set shell=ksh
-let g:is_ksh=1 " vim's default sh syntax is horrible
+" set shell=ksh
+" let g:is_ksh=1 " vim's default sh syntax is horrible
 set wildmenu " makes shell completion a bit better
 set wildmode=longest,list,full
 set ffs=unix

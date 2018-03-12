@@ -3,7 +3,10 @@ my personal dotfiles
 
 ------
 
+
 ![Image](https://i.imgur.com/6AF3pdn.jpg)
+
+Workflow video: https://i.imgur.com/JV2suCq.mp4
 
 -------
 
