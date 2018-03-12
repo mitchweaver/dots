@@ -79,6 +79,9 @@ mkcd() { mkd "$1" && cd "$2" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
 
+run() { [ $# -ge 2 ] || exit 1 ; x=$1 ; s
+            for i in $(jot $x) ; do "$@" ; done ; }
+
 f() { [ $# -gt 1 ] && find "$1" -iname "*$2*" ||
         find . -iname "*$1*" ; }
 hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
