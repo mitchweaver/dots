@@ -153,7 +153,9 @@ a ytchans='c;yt --subscriptions'
 a ytfavs='c;yt --favorites=mine'
 a ytme='c;yt --channel-videos=mine'
 
-mpv() { [ $# -gt 0 ] && { k mpv > /dev/null 2>&1 ;
+mpv() { [ $# -gt 0 ] && 
+{ kill $(pgrep mpv | grep -v $(pgrep -P \
+    $(cat ${HOME}/.cache/mpvbg.pid))) > /dev/null 2>&1
         cmd mpv --title=mpv $* & x ; } }
 mpvm() { mpv --no-video $* ; }
 mpvx() { (mpv "$(xsel -o)" &) ; }
@@ -178,8 +180,8 @@ gup() { git add -A &&
         git commit -m "$@" &&
         git push -u origin $(git branch 2> /dev/null | \
             sed -e '/^[^*]/d' | sed 's/* //') ; }
-gadd() { t $# -eq 0 && git add -A || git add $* ; }
-gmit() { { t $# -eq 1 && git add -A && \
+gadd() { [ $# -eq 0 ] && git add -A || git add $* ; }
+gmit() { [ $# -eq 1 ] && { git add -A && \
     git commit -m "$@" ; } || \
         { git add "$1" ; s ; git commit -m $* ; } ; }
 gout() { git push -u origin $(git rev-parse \
@@ -187,7 +189,7 @@ gout() { git push -u origin $(git rev-parse \
 gdiff() { [ $# -gt 0 ] && git diff origin/$1 || \
     git diff origin/master ; }
 greset() { git reset --hard HEAD~"$1" ; }
-gbase() { t $# -eq 0 &&
+gbase() { [ $# -eq 0 ] &&
               git rebase -i HEAD~10 ||
               git rebase -i HEAD~$1 ; }
 gmote() { git init 2> /dev/null ; \ 
