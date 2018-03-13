@@ -32,10 +32,10 @@ ulimit -c 0
 
 export {LANG,LC_ALL,LOCALE,LC_CTYPE}='en_US.UTF-8'
 export LESSCHARSET='utf-8'
-export LESS_TERMCAP_md="${yellow}";
-export PYTHONIOENCODING='UTF-8';
+export LESS_TERMCAP_md="${yellow}"
+export PYTHONIOENCODING='UTF-8'
 export LESS='-FQRd'
-export MANPAGER='less -X';
+export MANPAGER='less -X'
 
 type xdg-open > /dev/null 2>&1 &&
     { export XDG_DESKTOP_DIR="/non/existent"

@@ -160,10 +160,8 @@ channel_ignore_list:
   - starboard
   - bots
   - anime
-  - feedback
   - modbots
   - serverlog
-  - voice
   - muted
 - server_name: Discord Linux
   ignores:
