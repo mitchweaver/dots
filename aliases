@@ -86,6 +86,8 @@ f() { [ $# -gt 1 ] && find "$1" -iname "*$2*" ||
         find . -iname "*$1*" ; }
 hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
 sg() { sysctl | g "$@" ; }
+temp() { sysctl -n hw.sensors.cpu0.temp0 | \
+    sed 's/\.00 degC/°C/g' ; }
 du() { cmd du -ahLd 1 2> /dev/null | \
            sort -rh | head -n 20 ; }
 u() { for i in $* ; do unalias $i || \
