@@ -28,9 +28,9 @@ a ln='ln -sf'
 a ag='a | g'
 a file='file -b -i -L'
 a bn=basename
-a date="date '+%a %b %d - %l:%M %p'"
+a {d,date}="date '+%a %b %d - %l:%M %p'"
 a {dmesg,dmegs}='dmesg | tail -n 20'
-a {k,killall}="pkill -9"
+a {pk,killall}="pkill -9"
 a pa='ps auwwx | head'
 a ph='ps auwwx | g -i -e ${USER} | head'
 a {m,man}='man -a'
@@ -45,7 +45,6 @@ a {shutdown,poweroff}='doas shutdown -p now'
 a {mk,mkae}="make -j$(sysctl -n hw.ncpu)"
 a mkc='mk clean'
 a mkall="mk clean ; mk && mk install"
-a w='curl http://wttr.in/Schmalkalden'
 a {xs,xc}='xsel -o ; e'
 a rsync='rsync -rtvulh4 --progress --delete' #-c
 a sshd='doas /usr/sbin/sshd'
@@ -64,7 +63,6 @@ a {discline,discord}='$0 ~/usr/bin/discline ; x'
 a {rtv,reddit}="rtv --enable-media ; c"
 a compton="k compton ; compton & c"
 a feh='feh -q -N -x --scale-down'
-a 75%='mogrify -resize 75%X75%'
 a 50%='mogrify -resize 50%X50%'
 a 25%='mogrify -resize 25%X25%'
 a trans='trans -no-auto -b'
@@ -74,6 +72,8 @@ a {disks,disknames}="sysctl hw.disknames"
 a {disklabel,label}='disklabel -h'
 a ssid="ifconfig iwn0 | g nwid | \
     sed -e 's/.*nwid*.\(.*\)chan.*/\1/'"
+a w='curl -s http://wttr.in/Schmalkalden | \
+    sed 1\ d | sed $\ d | sed $\ d'
 
 mkcd() { mkd "$1" && cd "$2" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
@@ -83,7 +83,7 @@ run() { [ $# -ge 2 ] || exit 1 ; x=$1 ; s
             for i in $(jot $x) ; do "$@" ; done ; }
 
 f() { [ $# -gt 1 ] && find "$1" -iname "*$2*" ||
-        find . -iname "*$1*" ; }
+        find . ! -path . -iname "*$1*" ; }
 hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
 sg() { sysctl | g "$@" ; }
 temp() { sysctl -n hw.sensors.cpu0.temp0 | \
@@ -94,10 +94,6 @@ u() { for i in $* ; do unalias $i || \
           unset -f $i ; done ; }
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
-
-shred() { [ -f "$1" ] &&
-              dd if=/dev/urandom of="$1" bs=1 \
-                  count=$(wc < "$1" | sed 's/ //g') ; }
 
 mkxz() { loc f="$(e $1 | sed 's/\///')" &&
              tar -cvpf "$f.tar" "$f" &&
@@ -155,10 +151,17 @@ a ytchans='c;yt --subscriptions'
 a ytfavs='c;yt --favorites=mine'
 a ytme='c;yt --channel-videos=mine'
 
-mpv() { [ $# -gt 0 ] && 
-{ kill $(pgrep mpv | grep -v "$(pgrep -P \
-    $(cat ${HOME}/.cache/mpvbg.pid))") > /dev/null 2>&1
-        cmd mpv --title=mpv $* & x ; } }
+mpv() { [ $# -eq 0 ] && return
+    if [ "$(pg xwinwrap)" ] ; then
+        kill $(pg mpv | g -v $(pg -P \
+            $(cat ${HOME}/.cache/mpvbg.pid))) \
+                > /dev/null 2>&1
+    else
+        pk mpv
+    fi
+    cmd mpv --title=mpv $* & 
+    x
+}
 mpvm() { mpv --no-video $* ; }
 mpvx() { (mpv "$(xsel -o)" &) ; }
 mpvyt() { mpv ytdl://ytsearch:"$@" ; }
@@ -176,7 +179,7 @@ import() { cmd import -quiet -silent -window root \
 
 p() { [ $# -gt 0 ] && loc a="$1" || loc a=mitchweaver.xyz
       ping -c 1 -n -q -s 1 -w 10 $a > /dev/null 2>&1 &&
-          "UP" || e "DOWN" ; }
+          e "UP" || e "DOWN" ; }
 
 gup() { git add -A &&
         git commit -m "$@" &&

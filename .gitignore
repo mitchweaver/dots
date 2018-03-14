@@ -89,11 +89,11 @@ config/ranger/tagged
 *xfce4*
 *gnome*
 
-chromium
-firefox
-mozilla
-google-chrome
-chrome
+*chromium*
+*firefox*
+*mozilla*
+*google-chrome*
+*chrome*
 
 *mpd*
 

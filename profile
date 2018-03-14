@@ -10,6 +10,9 @@ unset -f p
 export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
     -s , 2 7)}.{$(jot -n -s , 10 0)}/bin
 
+find ${HOME}/tmp ! -path ${HOME}/tmp -exec \
+    rm -rfP "{}" {} \; > /dev/null 2>&1 &
+
 case ${SHELL} in
     /bin/ksh|/bin/mksh)
        export ENV=${HOME}/etc/kshrc ;;
