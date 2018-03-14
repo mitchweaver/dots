@@ -40,8 +40,8 @@ a ex=export
 a cmd=command
 a cx='chmod +x'
 a chown='chown -R'
-a reboot='doas reboot'
-a shutdown='doas shutdown -p now'
+a {reboot,restart}='doas reboot'
+a {shutdown,poweroff}='doas shutdown -p now'
 a {mk,mkae}="make -j$(sysctl -n hw.ncpu)"
 a mkc='mk clean'
 a mkall="mk clean ; mk && mk install"
@@ -156,8 +156,8 @@ a ytfavs='c;yt --favorites=mine'
 a ytme='c;yt --channel-videos=mine'
 
 mpv() { [ $# -gt 0 ] && 
-{ kill $(pgrep mpv | grep -v $(pgrep -P \
-    $(cat ${HOME}/.cache/mpvbg.pid))) > /dev/null 2>&1
+{ kill $(pgrep mpv | grep -v "$(pgrep -P \
+    $(cat ${HOME}/.cache/mpvbg.pid))") > /dev/null 2>&1
         cmd mpv --title=mpv $* & x ; } }
 mpvm() { mpv --no-video $* ; }
 mpvx() { (mpv "$(xsel -o)" &) ; }
@@ -252,3 +252,5 @@ vc() { v ~/etc/suckless/$1/$1.c ; }
 recomp() { loc r="doas ${HOME}/bin/recomp"
            loc s="${HOME}/etc/suckless"
            for i in $* ; do $r $s/$i ; done ; }
+
+a heart='printf "%b\n" "\xe2\x9d\xa4"'
