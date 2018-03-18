@@ -58,7 +58,6 @@ a {h,htpo,hto,ht,hpot,hotp,top}=htop
 a {hm,hme}='h -u ${USER}'
 a {hr,hroot}='h -u root'
 a nf='neofetch'
-a {irc,irssi}="irssi -c freenode"
 a {discline,discord}='$0 ~/usr/bin/discline ; x'
 a {rtv,reddit}="rtv --enable-media ; c"
 a compton="k compton ; compton & c"
@@ -72,8 +71,11 @@ a {disks,disknames}="sysctl hw.disknames"
 a {disklabel,label}='disklabel -h'
 a ssid="ifconfig iwn0 | g nwid | \
     sed -e 's/.*nwid*.\(.*\)chan.*/\1/'"
-a weather='curl -s http://wttr.in/Schmalkalden | \
-    sed 1\ d | sed $\ d | sed $\ d'
+a {w,weather}='curl -s http://wttr.in/Schmalkalden | \
+    head -n 7 | sed 1\ d ; e'
+a {fc,forecast}='curl -s http://wttr.in/Schmalkalden | \
+    tail -n 33 | sed $\ d | sed $\ d'
+a heart='printf "%b\n" "\xe2\x9d\xa4"'
 
 mkcd() { mkd "$1" && cd "$2" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
@@ -88,15 +90,13 @@ hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
 sg() { sysctl | g "$@" ; }
 temp() { sysctl -n hw.sensors.cpu0.temp0 | \
     sed 's/\.00 degC/°C/g' ; }
-du() { 
-    if [ $# -gt 0 ] ; then
-        cmd du -ahLd 1 "$1"
-    else
-        cmd du -ahLd 1
-    fi 2> /dev/null | \
 
-    sort -rh | head -n 20
-}
+du() { if [ $# -gt 0 ] ; then
+           cmd du -ahLd 1 "$1"
+       else
+           cmd du -ahLd 1
+       fi 2> /dev/null | sort -rh | head -n 20 ; }
+
 u() { for i in $* ; do unalias $i || \
           unset -f $i ; done ; }
 ext() { e "${1##*.}" ; }
@@ -116,6 +116,14 @@ mkbz2() { loc f="$(e $1 | sed 's/\///')" &&
                   [ -f "$f.tar.bz" ] &&
                       rm -rf "$f" ; }
 
+qr() { if [ $# -eq 0 ] ; then
+           read data ; echo -n "$data"; 
+       else
+           echo -n $* 
+       fi | curl -F-=\<- qrenco.de ; }
+
+cheat() { curl cheat.sh/$1 ; }
+
 pkg_del() { pkg_delete $* ; pkg_delete -a ; }
 pkg() { case "$1" in
             add) s ; pkg_add $* ;;
@@ -125,10 +133,9 @@ pkg() { case "$1" in
         esac ; }
 
 reload() { . ~/etc/aliases
-           . ~/etc/profile
            xrdb load ~/etc/Xresources
            xmodmap ~/etc/Xmodmap
-           xset m 0 0 ; } > /dev/null
+           xset m 0 0 ; } 2> /dev/null
 
 nasm() { [ -f "$1" ] &&
              cmd nasm -f elf32 -g -F dwarf "$1" &&
@@ -262,5 +269,3 @@ vc() { v ~/etc/suckless/$1/$1.c ; }
 recomp() { loc r="doas ${HOME}/bin/recomp"
            loc s="${HOME}/etc/suckless"
            for i in $* ; do $r $s/$i ; done ; }
-
-a heart='printf "%b\n" "\xe2\x9d\xa4"'
