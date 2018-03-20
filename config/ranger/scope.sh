@@ -80,10 +80,8 @@ case "$mimetype" in
             # pygmentize_format=terminal256
             # highlight_format=xterm256
 
-
             pygmentize_format=st-256color
             highlight_format=st-256color
-
 
         else
             pygmentize_format=terminal

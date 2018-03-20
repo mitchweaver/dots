@@ -88,8 +88,6 @@ f() { [ $# -gt 1 ] && find "$1" -iname "*$2*" ||
         find . ! -path . -iname "*$1*" ; }
 hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
 sg() { sysctl | g -i "$@" ; }
-temp() { sysctl -n hw.sensors.cpu0.temp0 | \
-    sed 's/\.00 degC/°C/g' ; }
 
 du() { if [ $# -gt 0 ] ; then
            cmd du -ahLd 1 "$1"

@@ -18,6 +18,13 @@ conifg/youtube-viewer
 
 *bookmarks*
 
+w3m/bookmarks
+w3m/history
+w3m/cookies
+.w3m/bookmarks
+.w3m/history
+.w3m/cookies
+
 .config/Discline/token
 config/Discline/token
 *token*
