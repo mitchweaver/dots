@@ -18,6 +18,7 @@ set bgnice
 set nohup
 set -o vi-tabcomplete
 set -o csh-history
+set -o trackall
 bind Space:magic-space > /dev/null
 
 export HISTFILE=${HOME}/tmp/.ksh_history
@@ -32,7 +33,7 @@ cd() { [ $# -eq 0 ] &&
            builtin cd ${HOME} ||
                  builtin cd "$1"
         [ -n "$RANGER_LEVEL" ]  &&
-            export PS1="$PS1(RANGER): " ||
+            export PS1="$(get_PS1)(RANGER): " ||
             export PS1="$(get_PS1)" ; }
 
 # todo: find a good way to wrap these
@@ -56,6 +57,7 @@ esac
     { clear ; ls ; cd . ; } ||
         export PS1="$(get_PS1)"
 
+# fix printing problems in tty
 case "${TERM}" in
     linux|dumb|vt220)
         printf "%b" "\e]P0232323" #black

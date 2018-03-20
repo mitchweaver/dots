@@ -15,8 +15,8 @@ Plug 'ervandew/supertab' " code completion
 Plug 'tpope/vim-surround' " quote/paren etc surrounding
 Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
 Plug 'airblade/vim-gitgutter' " git diffing along the left side
+Plug 'tpope/vim-repeat' " allows '.' for more things
 Plug 'dylanaraps/wal.vim' " pywal theme
-Plug 'NLKNguyen/papercolor-theme'
  
 call plug#end()
 filetype indent plugin on
@@ -27,7 +27,6 @@ map <silent><leader>pc :PlugClean<CR>
 " --------------------------------------------------------
 
 colorscheme wal
-" colorscheme PaperColor
 set background=dark
 " set background=light
 
@@ -103,6 +102,8 @@ set noswapfile " annoying
 set hidden " allow buffers with unsaved changes
 set autoread " reload files if changed on disk
 
+nnoremap <Leader>b :b 
+
 set tabpagemax=10 " dont show more than 10 tabs
 map <silent><C-h>  :tabfirst<CR>
 map <silent><C-k>  :tabnext<CR>
@@ -113,6 +114,8 @@ map <silent>tt     :tabedit<Space>
 map <silent>tn     :tabnew<CR>
 map <silent>tm     :tabm<Space>
 map <silent>td     :tabclose<CR>
+
+map Q @q
 
 set ignorecase " case insensitive search
 set smartcase " if there are uppercase letters, become case-sensitive.

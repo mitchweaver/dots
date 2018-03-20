@@ -17,15 +17,15 @@ a {cls,csl,cl,lc}='c;l'
 a {e,ech,eho}=echo
 a {g,Grep,gerp}='grep'
 a pg='pgrep'
-a dg='du | g'
-a lg='ls | g'
+a dg='du | g -i'
+a lg='ls | g -i'
 a cp='cp -irv'
 a mv='mv -iv'
 a {mkdir,mkd,mkdr}='mkdir -p'
 a rm='rm -P'
 a df='df -h'
 a ln='ln -sf'
-a ag='a | g'
+a ag='a | g -i'
 a file='file -b -i -L'
 a bn=basename
 a {d,date}="cmd date '+%a %b %d - %l:%M %p'"
@@ -52,7 +52,7 @@ a scp='scp -rp4'
 a pubip='curl https://wtfismyip.com/text'
 a diff='git diff'
 a {notepad,vtmp}='${EDITOR} /tmp/notepad.md'
-a {suvim,suvi}='doas ${EDITOR}'
+a {suvim,suvi,suv}='doas ${EDITOR}'
 a view='${EDITOR} -R'
 a {h,htpo,hto,ht,hpot,hotp,top}=htop
 a {hm,hme}='h -u ${USER}'
@@ -66,7 +66,7 @@ a 50%='mogrify -resize 50%X50%'
 a 25%='mogrify -resize 25%X25%'
 a trans='trans -no-auto -b'
 a rtrans='trans -from en -to'
-a {netstart,netsart,nestart}='doas $0 /etc/nestart'
+a {netstart,netsart,nestart}='doas $0 /etc/netstart'
 a {disks,disknames}="sysctl hw.disknames"
 a {disklabel,label}='disklabel -h'
 a ssid="ifconfig iwn0 | g nwid | \
@@ -87,7 +87,7 @@ run() { [ $# -ge 2 ] || exit 1 ; x=$1 ; s
 f() { [ $# -gt 1 ] && find "$1" -iname "*$2*" ||
         find . ! -path . -iname "*$1*" ; }
 hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
-sg() { sysctl | g "$@" ; }
+sg() { sysctl | g -i "$@" ; }
 temp() { sysctl -n hw.sensors.cpu0.temp0 | \
     sed 's/\.00 degC/°C/g' ; }
 
@@ -97,7 +97,7 @@ du() { if [ $# -gt 0 ] ; then
            cmd du -ahLd 1
        fi 2> /dev/null | sort -rh | head -n 20 ; }
 
-u() { for i in $* ; do unalias $i || \
+u() { for i ; do unalias $i || \
           unset -f $i ; done ; }
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
@@ -135,7 +135,8 @@ pkg() { case "$1" in
 reload() { . ~/etc/aliases
            xrdb load ~/etc/Xresources
            xmodmap ~/etc/Xmodmap
-           xset m 0 0 ; } 2> /dev/null
+           xset m 0 0 
+           xset b off ; } 2> /dev/null
 
 nasm() { [ -f "$1" ] &&
              cmd nasm -f elf32 -g -F dwarf "$1" &&
@@ -231,7 +232,7 @@ a gb='_g ~/bin' ; a gn='_g ~/env' ; a ge='_g ~/etc'
 a gt='_g ~/tmp' ; a gu='_g ~/usr' ; a gv='_g ~/var'
 a gB='_g /bin'  ; a gE='_g /etc'  ; a gM='_g /mnt'  
 a gT='_g /tmp'  ; a gU='_g /usr'  ; a gV='_g /var'
-a gw='_g ~/src' ; a gcf='_g ~/etc/config'
+a gs='_g ~/src' ; a gcf='_g ~/etc/config'
 a gd='_g ~/var/downloads'; a gf='_g ~/var/files'
 a gi='_g ~/var/images'   ; a gm='_g ~/var/music'
 a gp='_g ~/usr/programs' ; a gvi='_g ~/var/videos'
@@ -268,4 +269,4 @@ vc() { v ~/etc/suckless/$1/$1.c ; }
 
 recomp() { loc r="doas ${HOME}/bin/recomp"
            loc s="${HOME}/etc/suckless"
-           for i in $* ; do $r $s/$i ; done ; }
+           for i ; do $r $s/$i ; done ; }

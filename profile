@@ -1,9 +1,8 @@
-p() { for i in "$@" ; do
-            export PATH=$PATH:"$i"
-      done ; }
+p() { for i ; do export PATH=$PATH:"$i" ; done ; }
 
 p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin \
-   /sbin ${HOME}/{bin,.local/bin,usr/bin,usr/bin/ascii}
+   /sbin ${HOME}/{bin,.local/bin,usr/bin,usr/bin/ascii} \
+   ${HOME}/tmp/bin
 
 unset -f p
 
@@ -12,6 +11,8 @@ export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
 
 find ${HOME}/tmp ! -path ${HOME}/tmp -exec \
     rm -rfP "{}" {} \; > /dev/null 2>&1 &
+
+mkdir ${HOME}/tmp/bin
 
 case ${SHELL} in
     /bin/ksh|/bin/mksh)

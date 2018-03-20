@@ -3,6 +3,7 @@ xrdb load /home/mitch/etc/Xresources
 
 xmodmap ${HOME}/etc/Xmodmap
 xset m 0 0
+xset b off
 xbacklight -set 90
 
 rm ${HOME}/.xinitrc
