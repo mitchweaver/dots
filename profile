@@ -1,8 +1,7 @@
 p() { for i ; do export PATH=$PATH:"$i" ; done ; }
 
 p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin \
-   /sbin ${HOME}/{bin,.local/bin,usr/bin,usr/bin/ascii} \
-   ${HOME}/tmp/bin
+   /sbin ${HOME}/{bin,.local/bin,usr/bin,usr/bin/ascii}
 
 unset -f p
 
@@ -36,9 +35,8 @@ ulimit -c 0
 
 export {LANG,LC_ALL,LOCALE,LC_CTYPE}='en_US.UTF-8'
 export LESSCHARSET='utf-8'
-export LESS_TERMCAP_md="${yellow}"
 export PYTHONIOENCODING='UTF-8'
-export LESS='-FQRd'
+export LESS='-QRd'
 export MANPAGER='less -X'
 
 type xdg-open > /dev/null 2>&1 &&

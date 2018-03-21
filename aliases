@@ -6,15 +6,18 @@ type exa > /dev/null 2>&1 &&
     a ls='exa -F' ||
     a ls='ls -F'
 
+c() { [ $# -eq 0 ] && printf "\033c" || cd "$1" ; }
+
+a {cc,cll,clear,clar,clea}=c
 a {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi}=exit
 a {l,sls,sl}=ls
 a ll='l -l'
 a la='l -a'
 a {lla,lal}='l -al'
 a lsf='l "$PWD"/*'
-a {c,cc,cll,clear,clar,clea}='printf "\033c"'
 a {cls,csl,cl,lc}='c;l'
 a {e,ech,eho}=echo
+a err='>&2 e'
 a {g,Grep,gerp}='grep'
 a pg='pgrep'
 a dg='du | g -i'
@@ -49,7 +52,7 @@ a {xs,xc}='xsel -o ; e'
 a rsync='rsync -rtvulh4 --progress --delete' #-c
 a sshd='doas /usr/sbin/sshd'
 a scp='scp -rp4'
-a pubip='curl https://wtfismyip.com/text'
+a {ip,wtfismyip}='w3m https://wtfismyip.com'
 a diff='git diff'
 a {notepad,vtmp}='${EDITOR} /tmp/notepad.md'
 a {suvim,suvi,suv}='doas ${EDITOR}'
@@ -58,7 +61,7 @@ a {h,htpo,hto,ht,hpot,hotp,top}=htop
 a {hm,hme}='h -u ${USER}'
 a {hr,hroot}='h -u root'
 a nf='neofetch'
-a {discline,discord}='$0 ~/usr/bin/discline ; x'
+a {discline,discord}='dash ~/usr/bin/discline ; x'
 a {rtv,reddit}="rtv --enable-media ; c"
 a compton="k compton ; compton & c"
 a feh='feh -q -N -x --scale-down'
@@ -66,14 +69,12 @@ a 50%='mogrify -resize 50%X50%'
 a 25%='mogrify -resize 25%X25%'
 a trans='trans -no-auto -b'
 a rtrans='trans -from en -to'
-a {netstart,netsart,nestart}='doas $0 /etc/netstart'
-a {disks,disknames}="sysctl hw.disknames"
-a {disklabel,label}='disklabel -h'
-a ssid="ifconfig iwn0 | g nwid | \
-    sed -e 's/.*nwid*.\(.*\)chan.*/\1/'"
-a {w,weather}='curl -s http://wttr.in/Schmalkalden | \
+a {netstart,netsart,nestart}='doas ksh /etc/netstart'
+a disks="sysctl -n hw.disknames"
+a disklabel='disklabel -h'
+a {w,weather}='curl -s http://wttr.in/Schmalkalden?m | \
     head -n 7 | sed 1\ d ; e'
-a {fc,forecast}='curl -s http://wttr.in/Schmalkalden | \
+a {fc,forecast}='curl -s http://wttr.in/Schmalkalden?m | \
     tail -n 33 | sed $\ d | sed $\ d'
 a heart='printf "%b\n" "\xe2\x9d\xa4"'
 
@@ -89,11 +90,9 @@ f() { [ $# -gt 1 ] && find "$1" -iname "*$2*" ||
 hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
 sg() { sysctl | g -i "$@" ; }
 
-du() { if [ $# -gt 0 ] ; then
-           cmd du -ahLd 1 "$1"
-       else
-           cmd du -ahLd 1
-       fi 2> /dev/null | sort -rh | head -n 20 ; }
+du() { [ $# -eq 0 ] && set .
+           cmd du -ahLd 1 "$1" 2> /dev/null | \
+               sort -rh | head -n 20 ; }
 
 u() { for i ; do unalias $i || \
           unset -f $i ; done ; }
@@ -115,26 +114,28 @@ mkbz2() { loc f="$(e $1 | sed 's/\///')" &&
                       rm -rf "$f" ; }
 
 qr() { if [ $# -eq 0 ] ; then
-           read data ; echo -n "$data"; 
+           read data ; e "$data"; 
        else
-           echo -n $* 
+           e $* 
        fi | curl -F-=\<- qrenco.de ; }
 
 cheat() { curl cheat.sh/$1 ; }
 
-pkg_del() { pkg_delete $* ; pkg_delete -a ; }
+pkg_del() { \
+    for i in $* quirks -a ; do pkg_delete $i ; done ; }
 pkg() { case "$1" in
-            add) s ; pkg_add $* ;;
-            del) s ; pkg_del $* ;;
-            info) s ; pkg_info $* ;;
-            search) s ; pkg_info -Q $* ;;
+            add)    s ; pkg_add -D snap $*     ;;
+            del)    s ; pkg_del $*             ;;
+            info)   s ; pkg_info -D snap $*    ;;
+            search) s ; pkg_info -D snap -Q $* ;;
+            *) err \?
         esac ; }
 
 reload() { . ~/etc/aliases
            xrdb load ~/etc/Xresources
            xmodmap ~/etc/Xmodmap
            xset m 0 0 
-           xset b off ; } 2> /dev/null
+           xset b off ; }
 
 nasm() { [ -f "$1" ] &&
              cmd nasm -f elf32 -g -F dwarf "$1" &&
@@ -145,7 +146,7 @@ w3m() { [ $# -gt 0 ] || cmd w3m -F https://ddg.gg/lite &&
                         cmd w3m -F $* ; }
 
 bar() { k bar lemonbar > /dev/null 2>&1
-        ~/bin/bar & c ; }
+            ~/bin/bar & c ; }
 
 v() { [ $# -eq 0 ] && cmd ${EDITOR} -c VimwikiIndex ||
                       cmd ${EDITOR} -p "$@" ; }
@@ -172,8 +173,7 @@ mpv() { [ $# -eq 0 ] && return
     else
         pk mpv
     fi
-    cmd mpv --title=mpv $* & 
-    x
+    cmd mpv --title=mpv $* & x
 }
 mpvm() { mpv --no-video $* ; }
 mpvx() { (mpv "$(xsel -o)" &) ; }
@@ -190,9 +190,9 @@ a webcam='ffmpeg -i /dev/video0 -f sndio -i \
 import() { cmd import -quiet -silent -window root \
                -quality 100 ~/import.png ; }
 
-p() { [ $# -gt 0 ] && loc a="$1" || loc a=mitchweaver.xyz
-      ping -c 1 -n -q -s 1 -w 10 $a > /dev/null 2>&1 &&
-          e "UP" || e "DOWN" ; }
+p() { [ $# -gt 0 ] || set mitchweaver.xyz
+          ping -c 1 -n -q -s 1 -w 10 $1 > /dev/null 2>&1 &&
+              e "UP" || e "DOWN" ; }
 
 gup() { git add -A &&
         git commit -m "$@" &&
