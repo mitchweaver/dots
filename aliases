@@ -267,7 +267,6 @@ for i in dwm st surf tabbed dmenu ; do
     a ${i}cfg="v ~/etc/suckless/$i/config.h"
     a ${i}c="v ~/etc/suckless/$i/$i.c"
 done
-
-recomp() { loc r="sudo ${HOME}/bin/recomp"
-           loc s="${HOME}/etc/suckless"
-           for i ; do $r $s/$i ; done ; }
+recomp() { for i ; do
+               sudo ~/bin/recomp ~/etc/suckless/$i
+           done ; }
