@@ -99,19 +99,19 @@ u() { for i ; do unalias $i || \
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
 
-mkxz() { loc f="$(e $1 | sed 's/\///')" &&
-             tar -cvpf "$f.tar" "$f" &&
-                 xz "$f.tar" &&
-                     [ -f "$f.tar.xz" ] &&
-                         rm -rf "$f" ; }
-mkgz() { loc f="$(e $1 | sed 's/\///')" &&
-            tar -cvzpf "$f.tar.gz" "$f" &&
-                [ -f "$f.tar.gz" ] &&
-                    rm -rf "$f"; }
-mkbz2() { loc f="$(e $1 | sed 's/\///')" &&
-              tar -cvjpf "$f.tar.bz" "$f" &&
-                  [ -f "$f.tar.bz" ] &&
-                      rm -rf "$f" ; }
+mkxz() { set "$(e $1 | sed 's/\///')" &&
+             tar -cvpf "$1.tar" "$1" &&
+                 xz "$1.tar" &&
+                     [ -f "$1.tar.xz" ] &&
+                         rm -rf "$1" ; }
+mkgz() { set "$(e $1 | sed 's/\///')" &&
+            tar -cvzpf "$1.tar.gz" "$1" &&
+                [ -f "$1.tar.gz" ] &&
+                    rm -rf "$1"; }
+mkbz2() { set "$(e $1 | sed 's/\///')" &&
+              tar -cvjpf "$1.tar.bz" "$1" &&
+                  [ -f "$1.tar.bz" ] &&
+                      rm -rf "$1" ; }
 
 qr() { if [ $# -eq 0 ] ; then
            read data ; e "$data"; 
@@ -218,7 +218,7 @@ a gitstat='git status'
 a gbort='git rebase --abort'
 a glog='git log'
 a gfetch='git fetch'
-a gppull='git pull'
+a gpull='git pull'
 a gbranch='git branch'
 a {gcheck,checkout}='git checkout'
 

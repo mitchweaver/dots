@@ -25,7 +25,7 @@ for i in {nvim,vim,vis,vi} ; do
         { export {EDITOR,VISUAL}=$i ; break ; }
 done
 
-for i in {surf,firefox} ; do
+for i in {surf,firefox,chromium} ; do
     type $i > /dev/null 2>&1 &&
         { export BROWSER=$i ; break ; }
 done
