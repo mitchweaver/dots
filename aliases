@@ -2,6 +2,24 @@
 
 alias a=alias
 
+case "$(uname)" in
+    OpenBSD) a sudo=doas
+             a rm='rm -P'
+             a disks='sysctl -n hw.disknames'
+             a disklabel='doas disklabel -h'
+             a sg='sysctl | grep -i'
+             pkg_del() { for i in $* quirks -a ; do 
+                             pkg_delete $i 
+                         done ; }
+             pkg() { case "$1" in
+                         add)    shift ; pkg_add -D snap $*     ;;
+                         del)    shift ; pkg_del $*             ;;
+                         info)   shift ; pkg_info -D snap $*    ;;
+                         search) shift ; pkg_info -D snap -Q $* ;;
+                         *) >&2 echo \?
+                     esac ; }
+esac
+
 type exa > /dev/null 2>&1 &&
     a ls='exa -F' ||
     a ls='ls -F'
@@ -25,7 +43,6 @@ a lg='ls | g -i'
 a cp='cp -irv'
 a mv='mv -iv'
 a {mkdir,mkd,mkdr}='mkdir -p'
-a rm='rm -P'
 a df='df -h'
 a ln='ln -sf'
 a ag='a | g -i'
@@ -43,19 +60,17 @@ a ex=export
 a cmd=command
 a cx='chmod +x'
 a chown='chown -R'
-a {reboot,restart}='doas reboot'
-a {shutdown,poweroff}='doas shutdown -p now'
-a {mk,mkae}="make -j$(sysctl -n hw.ncpu)"
+a {mk,mkae}=make
 a mkc='mk clean'
 a mkall="mk clean ; mk && mk install"
 a {xs,xc}='xsel -o ; e'
 a rsync='rsync -rtvulh4 --progress --delete' #-c
-a sshd='doas /usr/sbin/sshd'
+a sshd='sudo /usr/sbin/sshd'
 a scp='scp -rp4'
 a {ip,wtfismyip}='w3m https://wtfismyip.com'
 a diff='git diff'
 a {notepad,vtmp}='${EDITOR} /tmp/notepad.md'
-a {suvim,suvi,suv}='doas ${EDITOR}'
+a {suvim,suvi,suv}='sudo ${EDITOR}'
 a view='${EDITOR} -R'
 a {h,htpo,hto,ht,hpot,hotp,top}=htop
 a {hm,hme}='h -u ${USER}'
@@ -69,9 +84,6 @@ a 50%='mogrify -resize 50%X50%'
 a 25%='mogrify -resize 25%X25%'
 a trans='trans -no-auto -b'
 a rtrans='trans -from en -to'
-a {netstart,netsart,nestart}='doas ksh /etc/netstart'
-a disks="sysctl -n hw.disknames"
-a disklabel='disklabel -h'
 a {w,weather}='curl -s http://wttr.in/Schmalkalden?m | \
     head -n 7 | sed 1\ d ; e'
 a {fc,forecast}='curl -s http://wttr.in/Schmalkalden?m | \
@@ -88,7 +100,6 @@ run() { [ $# -ge 2 ] || exit 1 ; x=$1 ; s
 f() { [ $# -gt 1 ] && find "$1" -iname "*$2*" ||
         find . ! -path . -iname "*$1*" ; }
 hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
-sg() { sysctl | g -i "$@" ; }
 
 du() { [ $# -eq 0 ] && set .
            cmd du -ahLd 1 "$1" 2> /dev/null | \
@@ -121,16 +132,6 @@ qr() { if [ $# -eq 0 ] ; then
 
 cheat() { curl cheat.sh/$1 ; }
 
-pkg_del() { \
-    for i in $* quirks -a ; do pkg_delete $i ; done ; }
-pkg() { case "$1" in
-            add)    s ; pkg_add -D snap $*     ;;
-            del)    s ; pkg_del $*             ;;
-            info)   s ; pkg_info -D snap $*    ;;
-            search) s ; pkg_info -D snap -Q $* ;;
-            *) err \?
-        esac ; }
-
 reload() { . ~/etc/aliases
            xrdb load ~/etc/Xresources
            xmodmap ~/etc/Xmodmap
@@ -152,7 +153,7 @@ v() { [ $# -eq 0 ] && cmd ${EDITOR} -c VimwikiIndex ||
                       cmd ${EDITOR} -p "$@" ; }
 
 a {vi,vim,nvim}=v
-r() { ranger "$@" ; x ; }
+r() { ranger "$@" ; c ; }
 
 a yt="c; youtube-viewer -C -q --vd=high"
 a ytm="c;yt -n"
@@ -267,6 +268,6 @@ for i in dwm st surf tabbed dmenu ; do
     a ${i}c="v ~/etc/suckless/$i/$i.c"
 done
 
-recomp() { loc r="doas ${HOME}/bin/recomp"
+recomp() { loc r="sudo ${HOME}/bin/recomp"
            loc s="${HOME}/etc/suckless"
            for i ; do $r $s/$i ; done ; }

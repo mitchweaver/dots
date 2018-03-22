@@ -5,11 +5,12 @@ p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin \
 
 unset -f p
 
-export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
-    -s , 2 7)}.{$(jot -n -s , 10 0)}/bin
+[ "$(uname)" = "OpenBSD" ] && #todo: how do i into seq?
+    export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
+        -s , 2 7)}.{$(jot -n -s , 10 0)}/bin
 
 find ${HOME}/tmp ! -path ${HOME}/tmp -exec \
-    rm -rfP "{}" {} \; > /dev/null 2>&1 &
+    rm -rf "{}" {} \; > /dev/null 2>&1 &
 
 case ${SHELL} in
     /bin/ksh|/bin/mksh)

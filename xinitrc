@@ -13,15 +13,9 @@ for i in xbanish clip bar sleep lemonbar compton ; do
     pkill -9 $i
 done > /dev/null 2>&1
 
-if [ "$(pgrep -x dwm)" ] ; then
-    [ $(cat /tmp/dwm_info/gappx) -gt 0 ] &&
-        compton --config ${HOME}/etc/config/compton.conf \
-            > /dev/null 2>&1 &
-else
-    compton --config ${HOME}/etc/config/compton.conf \
-        > /dev/null 2>&1 &
-fi
-
+#compton --config ${HOME}/etc/config/compton.conf \
+#    > /dev/null 2>&1 &
+    
 feh="feh --bg-fill --no-fehbg ${HOME}/var/tmp/wall"
 mpvbg="mpvbg ${HOME}/var/tmp/wall"
 case "$(basename $(file -b -i -L ${HOME}/var/tmp/wall))" in
