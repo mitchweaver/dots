@@ -198,10 +198,10 @@ augroup END
 map  <silent><c-=>    <nop>
 map  <silent><c-->    <nop>
 " conflicts with tabbed
-map <silent><C-h>     <nop>
-map <silent><C-l>     <nop>
-map  <silent><C-n>    <nop>
-map  <silent><C-w>    <nop>
+" map <silent><C-h>     <nop>
+" map <silent><C-l>     <nop>
+" map  <silent><C-n>    <nop>
+" map  <silent><C-w>    <nop>
 
 map <leader>md :!/home/mitch/usr/bin/previewmarkdown.sh -i "%" -b $BROWSER<CR>
 
@@ -272,3 +272,12 @@ augroup END
 
 command! -complete=dir -nargs=* Ranger :call <SID>RangerOpenDir(<f-args>)
 nnoremap <silent><leader>r :Ranger<CR>
+
+" ------------------------------------------------------- 
+
+tnoremap <silent><C-z> <C-\><C-n>
+
+nmap <silent><C-k> :wincmd k<CR>
+nmap <silent><C-j> :wincmd j<CR>
+nmap <silent><C-h> :wincmd h<CR>
+nmap <silent><C-l> :wincmd l<CR>

@@ -262,8 +262,10 @@ a {bmk,bmks}='v ~/var/files/surf-bookmarks.txt'
 a vssh='v ~/.ssh/config'
 
 rc() { v ~/etc/$1rc ; }
-cfg() { v ~/etc/suckless/$1/config.h ; }
-vc() { v ~/etc/suckless/$1/$1.c ; }
+for i in dwm st surf tabbed dmenu ; do
+    a ${i}cfg="v ~/etc/suckless/$i/config.h"
+    a ${i}c="v ~/etc/suckless/$i/$i.c"
+done
 
 recomp() { loc r="doas ${HOME}/bin/recomp"
            loc s="${HOME}/etc/suckless"

@@ -11,16 +11,14 @@ export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
 find ${HOME}/tmp ! -path ${HOME}/tmp -exec \
     rm -rfP "{}" {} \; > /dev/null 2>&1 &
 
-mkdir ${HOME}/tmp/bin
-
 case ${SHELL} in
     /bin/ksh|/bin/mksh)
        export ENV=${HOME}/etc/kshrc ;;
     *) export ENV=${HOME}/etc/aliases
 esac
-. ${ENV}
+[ "$ENV" ] && . ${ENV}
 
-for i in {nvim,vim,vis,vi} ; do
+for i in {nvim,vim,vis,vi,nano} ; do
     type $i > /dev/null 2>&1 &&
         { export {EDITOR,VISUAL}=$i ; break ; }
 done
@@ -33,24 +31,23 @@ unset i
 
 ulimit -c 0
 
-export {LANG,LC_ALL,LOCALE,LC_CTYPE}='en_US.UTF-8'
-export LESSCHARSET='utf-8'
-export PYTHONIOENCODING='UTF-8'
-export LESS='-QRd'
-export MANPAGER='less -X'
+export {LANG,LC_ALL,LOCALE,LC_CTYPE}='en_US.UTF-8' \
+        LESSCHARSET='utf-8' \
+        PYTHONIOENCODING='UTF-8' \
+        LESS='-QRd' \
+        MANPAGER='less -X'
 
 type xdg-open > /dev/null 2>&1 &&
-    { export XDG_DESKTOP_DIR="/non/existent"
-      export XDG_PUBLICSHARE_DIR="/non/existent"
-      export XDG_CONFIG_HOME="${HOME}/etc/config"
-      export XDG_DOCUMENTS_DIR="${HOME}/var/files"
-      export XDG_DOWNLOAD_DIR="${HOME}/var/downloads"
-      export XDG_MUSIC_DIR="${HOME}/var/music"
-      export XDG_PICTURES_DIR="${HOME}/var/images"
-      export XDG_VIDEOS_DIR="${HOME}/var/videos" ; }
+    export XDG_DESKTOP_DIR="/non/existent" \
+           XDG_PUBLICSHARE_DIR="/non/existent" \
+           XDG_CONFIG_HOME="${HOME}/etc/config" \
+           XDG_DOCUMENTS_DIR="${HOME}/var/files" \
+           XDG_DOWNLOAD_DIR="${HOME}/var/downloads" \
+           XDG_MUSIC_DIR="${HOME}/var/music" \
+           XDG_PICTURES_DIR="${HOME}/var/images" \
+           XDG_VIDEOS_DIR="${HOME}/var/videos"
 
 [ -z "$(pgrep X)" ] && 
-    { rm -rf ${HOME}/.{Xauthority*,serverauth*} \
-        > /dev/null 2>&1
+    { rm -rf ${HOME}/.{Xauthority*,serverauth*}
       cp ${HOME}/etc/xinitrc ${HOME}/.xinitrc
-      startx -- > /dev/null ; }
+      startx -- > /dev/null ; } > /dev/null 2>&1

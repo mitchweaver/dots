@@ -9,11 +9,12 @@ xbacklight -set 90
 rm ${HOME}/.xinitrc
 cd ${HOME}
 
-tasks="xbanish clip bar bash sleep lemonbar compton"
-pkill -9 $tasks -- > /dev/null 2>&1
+for i in xbanish clip bar sleep lemonbar compton ; do
+    pkill -9 $i
+done > /dev/null 2>&1
 
 if [ "$(pgrep -x dwm)" ] ; then
-    [ "$(cat /tmp/dwm_info/gappx)" -gt 0 ] &&
+    [ $(cat /tmp/dwm_info/gappx) -gt 0 ] &&
         compton --config ${HOME}/etc/config/compton.conf \
             > /dev/null 2>&1 &
 else
