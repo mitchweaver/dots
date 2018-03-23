@@ -2,7 +2,7 @@
 
 alias a=alias
 
-case "$(uname)" in
+case $(uname) in
     OpenBSD) a sudo=doas
              a rm='rm -P'
              a disks='sysctl -n hw.disknames'
@@ -36,7 +36,7 @@ a lsf='l "$PWD"/*'
 a {cls,csl,cl,lc}='c;l'
 a {e,ech,eho}=echo
 a err='>&2 e'
-a {g,Grep,gerp}='grep'
+a {g,Grep,gerp}=grep
 a pg='pgrep'
 a dg='du | g -i'
 a lg='ls | g -i'
@@ -60,6 +60,8 @@ a ex=export
 a cmd=command
 a cx='chmod +x'
 a chown='chown -R'
+a {shutdown,poweroff}='sudo shutdown -p now'
+a {reboot,restart}='sudo reboot'
 a {mk,mkae}=make
 a mkc='mk clean'
 a mkall="mk clean ; mk && mk install"
@@ -67,7 +69,7 @@ a {xs,xc}='xsel -o ; e'
 a rsync='rsync -rtvulh4 --progress --delete' #-c
 a sshd='sudo /usr/sbin/sshd'
 a scp='scp -rp4'
-a {ip,wtfismyip}='w3m https://wtfismyip.com'
+a {wtf,wtfismyip}='w3m https://wtfismyip.com'
 a diff='git diff'
 a {notepad,vtmp}='${EDITOR} /tmp/notepad.md'
 a {suvim,suvi,suv}='sudo ${EDITOR}'
@@ -75,10 +77,10 @@ a view='${EDITOR} -R'
 a {h,htpo,hto,ht,hpot,hotp,top}=htop
 a {hm,hme}='h -u ${USER}'
 a {hr,hroot}='h -u root'
-a nf='neofetch'
+a nf=neofetch
 a {discline,discord}='dash ~/usr/bin/discline ; x'
 a {rtv,reddit}="rtv --enable-media ; c"
-a compton="k compton ; compton & c"
+a compton='k compton ; compton & c'
 a feh='feh -q -N -x --scale-down'
 a 50%='mogrify -resize 50%X50%'
 a 25%='mogrify -resize 25%X25%'
@@ -90,15 +92,16 @@ a {fc,forecast}='curl -s http://wttr.in/Schmalkalden?m | \
     tail -n 33 | sed $\ d | sed $\ d'
 a heart='printf "%b\n" "\xe2\x9d\xa4"'
 
-mkcd() { mkd "$1" && cd "$2" ; }
+mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
 
-run() { [ $# -ge 2 ] || exit 1 ; x=$1 ; s
-            for i in $(jot $x) ; do "$@" ; done ; }
+run() { [ $# -lt 2 ] && x 1 ; loc c=$1 ; s
+            for i in $(jot $c) ; do "$@" ; done ; }
 
-f() { [ $# -gt 1 ] && find "$1" -iname "*$2*" ||
-        find . ! -path . -iname "*$1*" ; }
+f() { [ $# -eq 1 ] && set . "$1"
+      find "$1" ! -path "$1" -iname "*$2*" ; }
+
 hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
 
 du() { [ $# -eq 0 ] && set .
@@ -139,21 +142,21 @@ reload() { . ~/etc/aliases
            xset b off ; }
 
 nasm() { [ -f "$1" ] &&
-             cmd nasm -f elf32 -g -F dwarf "$1" &&
+            cmd nasm -f elf32 -g -F dwarf "$1" &&
                 ld -m elf_i386 "${1%.*}.o" -o "${1%.*}" &&
                     ./"${1%.*}" ; }
 
-w3m() { [ $# -gt 0 ] || cmd w3m -F https://ddg.gg/lite &&
-                        cmd w3m -F $* ; }
+w3m() { [ $# -eq 0 ] && set https://ddg.gg/lite
+            cmd w3m -F $* ; }
 
 bar() { k bar lemonbar > /dev/null 2>&1
             ~/bin/bar & c ; }
 
-v() { [ $# -eq 0 ] && cmd ${EDITOR} -c VimwikiIndex ||
-                      cmd ${EDITOR} -p "$@" ; }
+v() { [ $# -eq 0 ] && set -- -c VimwikiIndex
+            ${EDITOR} -p "$@" ; }
 
 a {vi,vim,nvim}=v
-r() { ranger "$@" ; c ; }
+r() { ranger "$@" ; x ; }
 
 a yt="c; youtube-viewer -C -q --vd=high"
 a ytm="c;yt -n"
@@ -239,13 +242,6 @@ m~() { mv "$@" ~     ; } ; mb() { mv "$@" ~/bin ; }
 mn() { mv "$@" ~/env ; } ; me() { mv "$@" ~/etc ; }
 mt() { mv "$@" ~/tmp ; } ; mu() { mv "$@" ~/usr ; }
 ms() { mv "$@" ~/src ; } ; mT() { mv "$@" /tmp  ; }
-mf() { mv "$@" ~/var/files     ; }
-md() { mv "$@" ~/var/downloads ; }
-mi() { mv "$@" ~/var/images    ; }
-mm() { mv "$@" ~/var/music     ; }
-mp() { mv "$@" ~/usr/programs  ; }
-ms() { mv "$@" ~/etc/suckless  ; }
-mvi(){ mv "$@" ~/var/videos    ; }
 Y~() { cp "$@" ~     ; } ; Yb() { cp "$@" ~/bin ; }
 Yn() { cp "$@" ~/env ; } ; Ye() { cp "$@" ~/etc ; }
 Yt() { cp "$@" ~/tmp ; } ; Yu() { cp "$@" ~/usr ; }
@@ -255,14 +251,23 @@ Yd() { cp "$@" ~/var/downloads ; }
 Yi() { cp "$@" ~/var/images    ; }
 Ym() { cp "$@" ~/var/music     ; }
 Yp() { cp "$@" ~/usr/programs  ; }
-Yvi() { cp "$@" ~/var/videos   ; }
+Yvi(){ cp "$@" ~/var/videos    ; }
+mf() { mv "$@" ~/var/files     ; }
+md() { mv "$@" ~/var/downloads ; }
+mi() { mv "$@" ~/var/images    ; }
+mm() { mv "$@" ~/var/music     ; }
+mp() { mv "$@" ~/usr/programs  ; }
+ms() { mv "$@" ~/etc/suckless  ; }
+mvi(){ mv "$@" ~/var/videos    ; }
 
 a {aliases,alaises,aliase}='v ~/etc/aliases'
 a profile='v ~/etc/profile'
 a {bmk,bmks}='v ~/var/files/surf-bookmarks.txt'
 a vssh='v ~/.ssh/config'
 
-rc() { v ~/etc/$1rc ; }
+for i in vim ksh xinit ; do
+    a ${i}rc="v ~/etc/${i}rc"
+done
 for i in dwm st surf tabbed dmenu ; do
     a ${i}cfg="v ~/etc/suckless/$i/config.h"
     a ${i}c="v ~/etc/suckless/$i/$i.c"
