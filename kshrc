@@ -14,12 +14,15 @@ alias type='builtin whence -v'
 
 . ${HOME}/etc/aliases
 
-for i in bgnice nohup vi-tabcomplete \
-         csh-history trackall ; do
+for i in bgnice nohup vi-tabcomplete trackall ; do
     set -o $i
 done
 
-bind Space:magic-space > /dev/null
+case ${SHELL} in
+    /bin/ksh)
+        set -o csh-history 
+        bind Space:magic-space > /dev/null
+esac
 
 export HISTFILE=${HOME}/tmp/.ksh_history \
        {SAVEHIST,HISTSIZE}=100000 \
