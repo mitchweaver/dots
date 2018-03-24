@@ -105,15 +105,20 @@ set autoread " reload files if changed on disk
 nnoremap <Leader>b :b 
 
 set tabpagemax=10 " dont show more than 10 tabs
-map <silent><C-h>  :tabfirst<CR>
-map <silent><C-k>  :tabnext<CR>
-map <silent><C-j>  :tabprev<CR>
-map <silent><C-l>  :tablast<CR>
+map <silent>th  :tabfirst<CR>
+map <silent>tk  :tabnext<CR>
+map <silent>tj  :tabprev<CR>
+map <silent>tl  :tablast<CR>
 
 map <silent>tt     :tabedit<Space>
 map <silent>tn     :tabnew<CR>
 map <silent>tm     :tabm<Space>
 map <silent>td     :tabclose<CR>
+
+nmap <silent><C-k> :wincmd k<CR>
+nmap <silent><C-j> :wincmd j<CR>
+nmap <silent><C-h> :wincmd h<CR>
+nmap <silent><C-l> :wincmd l<CR>
 
 map Q @q
 
@@ -275,9 +280,5 @@ nnoremap <silent><leader>r :Ranger<CR>
 
 " ------------------------------------------------------- 
 
+" pause :terminal emulation
 tnoremap <silent><C-z> <C-\><C-n>
-
-nmap <silent><C-k> :wincmd k<CR>
-nmap <silent><C-j> :wincmd j<CR>
-nmap <silent><C-h> :wincmd h<CR>
-nmap <silent><C-l> :wincmd l<CR>

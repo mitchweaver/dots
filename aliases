@@ -131,10 +131,16 @@ mkbz2() { set "$(e $1 | sed 's/\///')" &&
                       rm -rf "$1" ; }
 
 qr() { if [ $# -eq 0 ] ; then
-           read data ; e "$data"; 
+           read input ; e "$input"
        else
            e $* 
        fi | curl -F-=\<- qrenco.de ; }
+
+rot13() { if [ $# -eq 0 ] ; then
+              read input ; e "$input"
+          else
+              e $*
+          fi | tr 'A-Za-z' 'N-ZA-Mn-za-m' ; }
 
 cheat() { curl cheat.sh/$1 ; }
 
