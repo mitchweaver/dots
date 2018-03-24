@@ -95,6 +95,15 @@ a {fc,forecast}='curl -s http://wttr.in/Schmalkalden?m | \
     tail -n 33 | sed $\ d | sed $\ d'
 a heart='printf "%b\n" "\xe2\x9d\xa4"'
 
+for i in dec bin hex oct ; do
+    for j in dec bin hex oct ; do
+        [ $i != $j ] &&
+            a ${i}2${j}="dash ~/bin/conv \
+                -i $(printf %.1s $i) \
+                -o $(echo -n ${j%??} | sed 's/.*2//')"
+    done
+done
+
 mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
@@ -130,18 +139,6 @@ mkbz2() { set "$(e $1 | sed 's/\///')" &&
                   [ -f "$1.tar.bz" ] &&
                       rm -rf "$1" ; }
 
-qr() { if [ $# -eq 0 ] ; then
-           read input ; e "$input"
-       else
-           e $* 
-       fi | curl -F-=\<- qrenco.de ; }
-
-rot13() { if [ $# -eq 0 ] ; then
-              read input ; e "$input"
-          else
-              e $*
-          fi | tr 'A-Za-z' 'N-ZA-Mn-za-m' ; }
-
 cheat() { curl cheat.sh/$1 ; }
 
 reload() { . ~/etc/aliases
@@ -166,6 +163,8 @@ v() { [ $# -eq 0 ] && set -- -c VimwikiIndex
 
 a {vi,vim,nvim}=v
 r() { ranger "$@" ; x ; }
+
+rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
 
 a yt="c; youtube-viewer -C -q --vd=high"
 a ytm="c;yt -n"
@@ -203,9 +202,10 @@ a webcam='ffmpeg -i /dev/video0 -f sndio -i \
 import() { cmd import -quiet -silent -window root \
                -quality 100 ~/import.png ; }
 
-p() { [ $# -gt 0 ] || set mitchweaver.xyz
-          ping -c 1 -n -q -s 1 -w 10 $1 > /dev/null 2>&1 &&
-              e "UP" || e "DOWN" ; }
+ping() { [ $# -gt 0 ] || set mitchweaver.xyz
+             cmd ping -c 1 -n -q -s 1 \
+                 -w 10 $1 > /dev/null 2>&1 &&
+                     e "UP" || e "DOWN" ; }
 
 gup() { git add -A &&
         git commit -m "$@" &&
