@@ -4,6 +4,7 @@ alias a=alias
 
 case $(uname) in
     OpenBSD) a sudo=doas
+             a seq=jot
              a rm='rm -P'
              a disks='sysctl -n hw.disknames'
              a disklabel='doas disklabel -h'
@@ -91,9 +92,10 @@ a trans='trans -no-auto -b'
 a rtrans='trans -from en -to'
 a {w,weather}='curl -s http://wttr.in/Schmalkalden?m | \
     head -n 7 | sed 1\ d ; e'
-a {fc,forecast}='curl -s http://wttr.in/Schmalkalden?m | \
+a forecast='curl -s http://wttr.in/Schmalkalden?m | \
     tail -n 33 | sed $\ d | sed $\ d'
 a heart='printf "%b\n" "\xe2\x9d\xa4"'
+a !!='fc -s'
 
 for i in dec bin hex oct ; do
     for j in dec bin hex oct ; do
@@ -109,7 +111,7 @@ mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
 
 run() { [ $# -lt 2 ] && x 1 ; loc c=$1 ; s
-            for i in $(jot $c) ; do "$@" ; done ; }
+            for i in $(seq $c) ; do "$@" ; done ; }
 
 f() { [ $# -eq 1 ] && set . "$1"
       find "$1" ! -path "$1" -iname "*$2*" ; }
@@ -120,8 +122,7 @@ du() { [ $# -eq 0 ] && set .
            cmd du -ahLd 1 "$1" 2> /dev/null | \
                sort -rh | head -n 20 ; }
 
-u() { for i ; do unalias $i || \
-          unset -f $i ; done ; }
+u() { for i ; do unalias $i || unset -f $i ; done ; }
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
 
@@ -284,3 +285,7 @@ done
 recomp() { for i ; do
                sudo ~/bin/recomp ~/etc/suckless/$i
            done ; }
+
+for i in /bin /sbin /usr/{bin,sbin} ; do
+    hash $(command ls $i)
+done

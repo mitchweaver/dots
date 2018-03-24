@@ -5,7 +5,7 @@ p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin \
 
 unset -f p
 
-[ "$(uname)" = "OpenBSD" ] && #todo: how do i into seq?
+[ "$(uname)" = "OpenBSD" ] && #todo: how to use seq?
     export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
         -s , 2 7)}.{$(jot -n -s , 10 0)}/bin
 
@@ -19,12 +19,12 @@ case ${SHELL} in
 esac
 [ "$ENV" ] && . ${ENV}
 
-for i in {nvim,vim,vis,vi,nano} ; do
+for i in nvim vim vis vi nano ; do
     type $i > /dev/null 2>&1 &&
         { export {EDITOR,VISUAL}=$i ; break ; }
 done
 
-for i in {surf,firefox,chromium} ; do
+for i in surf firefox chromium ; do
     type $i > /dev/null 2>&1 &&
         { export BROWSER=$i ; break ; }
 done
