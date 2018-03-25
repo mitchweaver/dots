@@ -211,6 +211,6 @@ class mpv_play(Command):
 
         if not any(ext in PATH for ext in vid_exts):
             cmd = cmd + "--no-video "
-            os.system("dash ${HOME}/bin/play --mpv --path " + PATH)
+            os.system("dash ${HOME}/bin/play " + PATH)
         else:
             os.system("pkill -9 mpv > /dev/null 2>&1 ; pkill -9 mpd > /dev/null 2>&1 ; nohup " + cmd + PATH + " -- > /dev/null 2>&1 &")

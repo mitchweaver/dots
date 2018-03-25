@@ -126,20 +126,6 @@ u() { for i ; do unalias $i || unset -f $i ; done ; }
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
 
-mkxz() { set "$(e $1 | sed 's/\///')" &&
-             tar -cvpf "$1.tar" "$1" &&
-                 xz "$1.tar" &&
-                     [ -f "$1.tar.xz" ] &&
-                         rm -rf "$1" ; }
-mkgz() { set "$(e $1 | sed 's/\///')" &&
-            tar -cvzpf "$1.tar.gz" "$1" &&
-                [ -f "$1.tar.gz" ] &&
-                    rm -rf "$1"; }
-mkbz2() { set "$(e $1 | sed 's/\///')" &&
-              tar -cvjpf "$1.tar.bz" "$1" &&
-                  [ -f "$1.tar.bz" ] &&
-                      rm -rf "$1" ; }
-
 cheat() { curl cheat.sh/$1 ; }
 
 reload() { . ~/etc/aliases
@@ -167,16 +153,17 @@ r() { ranger "$@" ; x ; }
 
 rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
 
-a yt="c; youtube-viewer -C -q --vd=high"
-a ytm="c;yt -n"
-a ytdv="c;yt -d"
-a ytdm='c;yt -n -d --convert-to=opus \
-    --convert-cmd="ffmpeg -loglevel -8 -i \
-    file:*IN* -vn -acodec libopus -ab 128k -y *OUT*"'
-a ytsubs='c;yt --subs-videos --subs-order=unread'
-a ytchans='c;yt --subscriptions'
-a ytfavs='c;yt --favorites=mine'
-a ytme='c;yt --channel-videos=mine'
+type youtube-viewer > /dev/null 2>&1 &&
+    { a yt="c; youtube-viewer -C -q --vd=high"
+      a ytm="c;yt -n"
+      a ytdv="c;yt -d"
+      a ytdm='c;yt -n -d --convert-to=opus \
+          --convert-cmd="ffmpeg -loglevel -8 -i \
+          file:*IN* -vn -acodec libopus -ab 128k -y *OUT*"'
+      a ytsubs='c;yt --subs-videos --subs-order=unread'
+      a ytchans='c;yt --subscriptions'
+      a ytfavs='c;yt --favorites=mine'
+      a ytme='c;yt --channel-videos=mine' ; }
 
 mpv() { [ $# -eq 0 ] && return
     if [ "$(pg xwinwrap)" ] ; then
@@ -285,7 +272,3 @@ done
 recomp() { for i ; do
                sudo ~/bin/recomp ~/etc/suckless/$i
            done ; }
-
-for i in /bin /sbin /usr/{bin,sbin} ; do
-    hash $(command ls $i)
-done
