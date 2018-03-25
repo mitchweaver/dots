@@ -1,5 +1,10 @@
 # http://github.com/mitchweaver/dots
 
+case $0 in
+    *ksh|*bash) true ;;
+    *) return
+esac
+
 alias a=alias
 
 case $(uname) in
@@ -68,7 +73,8 @@ a {shutdown,poweroff}='sudo shutdown -p now'
 a {reboot,restart}='sudo reboot'
 a {mk,mkae}=make
 a mkc='mk clean'
-a mkall="mk clean ; mk && mk install"
+a mki='mk install'
+a mkall="mkc ; mk && mki"
 a {xs,xc}='xsel -o ; e'
 a rsync='rsync -rtvulh4 --progress --delete' #-c
 a sshd='sudo /usr/sbin/sshd'
@@ -122,7 +128,9 @@ du() { [ $# -eq 0 ] && set .
            cmd du -ahLd 1 "$1" 2> /dev/null | \
                sort -rh | head -n 20 ; }
 
-u() { for i ; do unalias $i || unset -f $i ; done ; }
+u() { for i ; do 
+        unalias $i || unset -f $i
+      done 2> /dev/null ; }
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
 
@@ -149,7 +157,8 @@ v() { [ $# -eq 0 ] && set -- -c VimwikiIndex
             ${EDITOR} -p "$@" ; }
 
 a {vi,vim,nvim}=v
-r() { ranger "$@" ; x ; }
+
+u r ; r() { ranger "$@" ; x ; }
 
 rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
 
