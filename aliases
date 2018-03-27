@@ -15,13 +15,13 @@ case $(uname) in
              a disklabel='doas disklabel -h'
              a sg='sysctl | grep -i'
              pkg_del() { for i in $* quirks -a ; do 
-                             pkg_delete $i 
+                             doas pkg_delete $i 
                          done ; }
              pkg() { case "$1" in
-                         add)    shift ; pkg_add -D snap $*     ;;
-                         del)    shift ; pkg_del $*             ;;
-                         info)   shift ; pkg_info -D snap $*    ;;
-                         search) shift ; pkg_info -D snap -Q $* ;;
+                         add)    shift ; doas pkg_add -D snap $* ;;
+                         del)    shift ; pkg_del $*              ;;
+                         info)   shift ; pkg_info -D snap $*     ;;
+                         search) shift ; pkg_info -D snap -Q $*  ;;
                          *) >&2 echo \?
                      esac ; } ;;
     Linux) a free='free -h'
@@ -81,6 +81,7 @@ a sshd='sudo /usr/sbin/sshd'
 a scp='scp -rp4'
 a {wtf,wtfismyip}='w3m https://wtfismyip.com'
 a diff='git diff'
+a {less,les}='less -QRd'
 a {notepad,vtmp}='${EDITOR} /tmp/notepad.md'
 a {suvim,suvi,suv}='sudo ${EDITOR}'
 a view='${EDITOR} -R'
@@ -96,12 +97,10 @@ a 50%='mogrify -resize 50%X50%'
 a 25%='mogrify -resize 25%X25%'
 a trans='trans -no-auto -b'
 a rtrans='trans -from en -to'
-a {w,weather}='curl -s http://wttr.in/Schmalkalden?m | \
-    head -n 7 | sed 1\ d ; e'
+a {w,weather}='curl -s wttr.in/Schmalkalden?m0TQ'
 a forecast='curl -s http://wttr.in/Schmalkalden?m | \
     tail -n 33 | sed $\ d | sed $\ d'
 a heart='printf "%b\n" "\xe2\x9d\xa4"'
-a !!='fc -s'
 
 for i in dec bin hex oct ; do
     for j in dec bin hex oct ; do
@@ -140,7 +139,10 @@ reload() { . ~/etc/aliases
            xrdb load ~/etc/Xresources
            xmodmap ~/etc/Xmodmap
            xset m 0 0 
-           xset b off ; }
+           xset b off 
+           xset +fp /home/mitch/.fonts
+           set fp rehash
+           fc-cache ; }
 
 nasm() { [ -f "$1" ] &&
             cmd nasm -f elf32 -g -F dwarf "$1" &&
@@ -158,7 +160,7 @@ v() { [ $# -eq 0 ] && set -- -c VimwikiIndex
 
 a {vi,vim,nvim}=v
 
-u r ; r() { ranger "$@" ; x ; }
+u r ; r() { ranger "$@" ; c ; }
 
 rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
 

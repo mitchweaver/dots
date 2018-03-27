@@ -154,6 +154,9 @@ channel_ignore_list:
   - kvlt_speak
 - server_name: /r/unixporn
   ignores:
+  - feedback
+  - helpers
+  - de
   - rules
   - announcements
   - modlog
@@ -163,17 +166,6 @@ channel_ignore_list:
   - modbots
   - serverlog
   - muted
-- server_name: Discord Linux
-  ignores:
-  - rules
-  - annoucements
-  - cool-links
-  - mod-logs
-  - discord-bugs
-  - bot-spam
-  - linux-voice
-  - offtopic-voice
-  - gaming-voice
 - server_name: discord-cli
   ignores:
   - info
@@ -190,6 +182,9 @@ channel_ignore_list:
 - server_name: Unix-like
   ignores:
   - welcome-rules
+  - shitposting
+  - crapposting
+  - craposting
   - announcements
   - greeter
   - mod-log

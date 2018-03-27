@@ -79,7 +79,7 @@ nnoremap <silent><leader>ll :call <SID>ToggleColorColumn()<cr>
 
 set showmatch " show matching parens
 set hid " hide buffer when closed
-set scrolloff=10 " pad X lines when scrolling
+set scrolloff=8 " pad X lines when scrolling
 set fillchars=""  " extremely annoying
 set diffopt+=iwhite " disable white space diffing
 set formatoptions+=o " continue comments new lines
@@ -112,8 +112,8 @@ map <silent>tl  :tablast<CR>
 
 map <silent>tt     :tabedit<Space>
 map <silent>tn     :tabnew<CR>
-map <silent>tm     :tabm<Space>
 map <silent>td     :tabclose<CR>
+map tm             :tabm<Space>
 
 nmap <silent><C-k> :wincmd k<CR>
 nmap <silent><C-j> :wincmd j<CR>
