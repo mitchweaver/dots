@@ -7,6 +7,17 @@ esac
 
 alias a=alias
 
+has() { 
+    for p ; do
+        type $p > /dev/null 2>&1 ||
+            return 1
+    done
+}
+
+has exa &&
+    a ls='exa -F' ||
+    a ls='ls -F'
+
 case $(uname) in
     OpenBSD) a sudo=doas
              a seq=jot
@@ -14,6 +25,9 @@ case $(uname) in
              a disks='sysctl -n hw.disknames'
              a disklabel='doas disklabel -h'
              a sg='sysctl | grep -i'
+             a killall='pkill -9'
+             a webcam='ffmpeg -i /dev/video0 -f sndio -i \
+                 default "$(date)".mp4'
              pkg_del() { for i in $* quirks -a ; do 
                              doas pkg_delete $i 
                          done ; }
@@ -24,14 +38,11 @@ case $(uname) in
                          search) shift ; pkg_info -D snap -Q $*  ;;
                          *) >&2 echo \?
                      esac ; } ;;
+
     Linux) a free='free -h'
            fdisk() { [ $# -eq 0 ] && set -- -l
                      fdisk $* ; }
 esac
-
-type exa > /dev/null 2>&1 &&
-    a ls='exa -F' ||
-    a ls='ls -F'
 
 c() { [ $# -eq 0 ] && printf "\033c" || cd "$1" ; }
 
@@ -55,16 +66,15 @@ a {mkdir,mkd,mkdr}='mkdir -p'
 a df='df -h'
 a ln='ln -sf'
 a ag='a | g -i'
+a tf='typeset -f'
 a file='file -b -i -L'
 a bn=basename
 a {d,date}="cmd date '+%a %b %d - %l:%M %p'"
 a {dmesg,dmegs}='dmesg | tail -n 20'
-a {pk,killall}="pkill -9"
+a pk="pkill"
 a pa='ps auwwx | head'
 a ph='ps auwwx | g -i -e ${USER} | head'
 a {m,man}='man -a'
-a s=shift
-a loc=local
 a ex=export
 a cmd=command
 a cx='chmod +x'
@@ -93,8 +103,6 @@ a {discline,discord}='dash ~/usr/bin/discline ; x'
 a {rtv,reddit}="rtv --enable-media ; c"
 a compton='k compton ; compton & c'
 a feh='feh -q -N -x --scale-down'
-a 50%='mogrify -resize 50%X50%'
-a 25%='mogrify -resize 25%X25%'
 a trans='trans -no-auto -b'
 a rtrans='trans -from en -to'
 a {w,weather}='curl -s wttr.in/Schmalkalden?m0TQ'
@@ -102,38 +110,41 @@ a forecast='curl -s http://wttr.in/Schmalkalden?m | \
     tail -n 33 | sed $\ d | sed $\ d'
 a heart='printf "%b\n" "\xe2\x9d\xa4"'
 
-for i in dec bin hex oct ; do
-    for j in dec bin hex oct ; do
-        [ $i != $j ] &&
-            a ${i}2${j}="dash ~/bin/conv \
-                -i $(printf %.1s $i) \
-                -o $(echo -n ${j%??} | sed 's/.*2//')"
-    done
-done
-
 mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
 
-run() { [ $# -lt 2 ] && x 1 ; loc c=$1 ; s
-            for i in $(seq $c) ; do "$@" ; done ; }
+run() { 
+    [ $# -lt 2 ] && exit 1
+    local c=$1 ; shift
+    for i in $(seq $c) ; do 
+        "$@"
+    done 
+}
 
-f() { [ $# -eq 1 ] && set . "$1"
-      find "$1" ! -path "$1" -iname "*$2*" ; }
+f() { 
+    case $# in
+        1) set . "$1" ;;
+        0) read inp && set . "$inp"
+    esac
+
+    find "$1" ! -path "$1" -iname "*$2*" ; 
+}
 
 hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
 
 du() { [ $# -eq 0 ] && set .
-           cmd du -ahLd 1 "$1" 2> /dev/null | \
-               sort -rh | head -n 20 ; }
+       cmd du -ahLd 1 "$1" 2> /dev/null | \
+           sort -rh | head -n 20 ; }
 
 u() { for i ; do 
-        unalias $i || unset -f $i
+          unalias $i || unset -f $i
       done 2> /dev/null ; }
+
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
-
-cheat() { curl cheat.sh/$1 ; }
+cheat() { curl -s cheat.sh/$1 ; }
+rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
 
 reload() { . ~/etc/aliases
            xrdb load ~/etc/Xresources
@@ -144,27 +155,53 @@ reload() { . ~/etc/aliases
            set fp rehash
            fc-cache ; }
 
-nasm() { [ -f "$1" ] &&
-            cmd nasm -f elf32 -g -F dwarf "$1" &&
-                ld -m elf_i386 "${1%.*}.o" -o "${1%.*}" &&
-                    ./"${1%.*}" ; }
+ping() { [ $# -gt 0 ] || set mitchweaver.xyz
+             cmd ping -c 1 -n -q -s 1 \
+                 -w 10 $1 > /dev/null 2>&1 &&
+                     e "UP" || e "DOWN" ; }
 
-w3m() { [ $# -eq 0 ] && set https://ddg.gg/lite
-            cmd w3m -F $* ; }
+has nasm &&
+    nasm() { [ -f "$1" ] &&
+                cmd nasm -f elf32 -g -F dwarf "$1" &&
+                    ld -m elf_i386 "${1%.*}.o" -o "${1%.*}" &&
+                        ./"${1%.*}" ; }
 
-bar() { k bar lemonbar > /dev/null 2>&1
-            ~/bin/bar & c ; }
+has w3m && 
+    w3m() { [ $# -eq 0 ] && set https://ddg.gg/lite
+                cmd w3m -F $* ; }
 
-v() { [ $# -eq 0 ] && set -- -c VimwikiIndex
-            ${EDITOR} -p "$@" ; }
+has bar &&
+    bar() { k -9 {bar,lemonbar} > /dev/null 2>&1
+                ~/bin/bar & c ; }
 
-a {vi,vim,nvim}=v
+has conv &&
+    for i in dec bin hex oct ; do
+        for j in dec bin hex oct ; do
+            [ $i != $j ] &&
+                a ${i}2${j}="conv \
+                    -i $(printf %.1s $i) \
+                    -o $(echo -n ${j%??} | sed 's/.*2//')"
+        done
+    done
 
-u r ; r() { ranger "$@" ; c ; }
+v() { 
+    [ $# -eq 0 ] && 
+        [ -d ${HOME}/var/files/vimwiki ] &&
+            { has nvim || has vim ; } &&
+                set -- -c VimwikiIndex
+    if has nvim ; then
+        cmd nvim -p "$@"
+    elif has vim ; then
+        cmd vim -p "$@"
+    elif has vi ; then
+        cmd vi "$@"
+    fi
+}
 
-rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
+has ranger &&
+    { u r ; r() { ranger "$@" ; c ; } ; }
 
-type youtube-viewer > /dev/null 2>&1 &&
+has youtube-viewer &&
     { a yt="c; youtube-viewer -C -q --vd=high"
       a ytm="c;yt -n"
       a ytdv="c;yt -d"
@@ -176,68 +213,67 @@ type youtube-viewer > /dev/null 2>&1 &&
       a ytfavs='c;yt --favorites=mine'
       a ytme='c;yt --channel-videos=mine' ; }
 
-mpv() { [ $# -eq 0 ] && return
-    if [ "$(pg xwinwrap)" ] ; then
+mpv() { 
+    [ $# -eq 0 ] && return 1
+    if [ "$(pgrep xwinwrap)" ] ; then
         kill $(pg mpv | g -v $(pg -P \
             $(cat ${HOME}/.cache/mpvbg.pid))) \
                 > /dev/null 2>&1
     else
-        pk mpv
+        pkill -9 mpv
     fi
-    cmd mpv --title=mpv $* & x
+    cmd mpv --title=mpv "$@" & x
 }
-mpvm() { mpv --no-video $* ; }
-mpvx() { (mpv "$(xsel -o)" &) ; }
-mpvyt() { mpv ytdl://ytsearch:"$@" ; }
-mpvytm() { mpv --no-video ytdl://ytsearch:"$@" ; }
 
-a ytdl='youtube-dl --geo-bypass --prefer-ffmpeg'
-a ytdlm="youtube-dl --extract-audio --geo-bypass \
-    --prefer-ffmpeg  --audio-quality 0 --audio-format opus"
+has youtube-dl &&
+    { mpvyt()  { mpv ytdl://ytsearch:"$@" ; }
+      mpvytm() { mpv --no-video ytdl://ytsearch:"$@" ; }
+      a ytdl='youtube-dl --geo-bypass --prefer-ffmpeg'
+      a ytdlm="youtube-dl --extract-audio --geo-bypass \
+         --prefer-ffmpeg  --audio-quality 0 \
+         --audio-format opus" ; }
 
-a webcam='ffmpeg -i /dev/video0 -f sndio -i \
-              default "$(date)".mp4'
+has mogrify &&
+    { a 50%='mogrify -resize 50%X50%'
+      a 25%='mogrify -resize 25%X25%'
+      import() { cmd import -quiet -silent -window root \
+                     -quality 100 ~/import.png ; } ; }
 
-import() { cmd import -quiet -silent -window root \
-               -quality 100 ~/import.png ; }
-
-ping() { [ $# -gt 0 ] || set mitchweaver.xyz
-             cmd ping -c 1 -n -q -s 1 \
-                 -w 10 $1 > /dev/null 2>&1 &&
-                     e "UP" || e "DOWN" ; }
-
-gup() { git add -A &&
-        git commit -m "$@" &&
-        git push -u origin $(git branch 2> /dev/null | \
-            sed -e '/^[^*]/d' | sed 's/* //') ; }
-gadd() { [ $# -eq 0 ] && git add -A || git add $* ; }
-gmit() { [ $# -eq 1 ] && { git add -A && \
-    git commit -m "$@" ; } || \
-        { git add "$1" ; s ; git commit -m $* ; } ; }
-gout() { git push -u origin $(git rev-parse \
-    --abbrev-ref HEAD) "$@" ; }
-gdiff() { [ $# -gt 0 ] && git diff origin/$1 || \
-    git diff origin/master ; }
-greset() { git reset --hard HEAD~"$1" ; }
-gbase() { [ $# -eq 0 ] &&
-              git rebase -i HEAD~10 ||
-              git rebase -i HEAD~$1 ; }
-gmote() { git init 2> /dev/null ; \ 
-              git remote add origin "$1" ; }
-a gclone='git clone'
-ghclone() { gclone https://github.com/"$1" ; }
-a gitstat='git status'
-a gbort='git rebase --abort'
-a glog='git log'
-a gfetch='git fetch'
-a gpull='git pull'
-a gbranch='git branch'
-a {gcheck,checkout}='git checkout'
+has git &&
+{
+    gup() { git add -A &&
+            git commit -m "$@" &&
+            git push -u origin $(git branch 2> /dev/null | \
+                sed -e '/^[^*]/d' | sed 's/* //') ; }
+    gadd() { [ $# -eq 0 ] && git add -A || git add $* ; }
+    gmit() { [ $# -eq 1 ] && { git add -A && \
+        git commit -m "$@" ; } || \
+            { git add "$1" ; shift ; git commit -m $* ; } ; }
+    gout() { git push -u origin $(git rev-parse \
+        --abbrev-ref HEAD) "$@" ; }
+    gdiff() { [ $# -gt 0 ] && git diff origin/$1 || \
+        git diff origin/master ; }
+    greset() { git reset --hard HEAD~"$1" ; }
+    gbase() { [ $# -eq 0 ] &&
+                git rebase -i HEAD~10 ||
+                git rebase -i HEAD~$1 ; }
+    gmote() { git init 2> /dev/null ; \ 
+                git remote add origin "$1" ; }
+    a gclone='git clone'
+    ghclone() { gclone https://github.com/"$1" ; }
+    a gitstat='git status'
+    a gbort='git rebase --abort'
+    a glog='git log'
+    a gfetch='git fetch'
+    a gpull='git pull'
+    a gbranch='git branch'
+    a {gcheck,checkout}='git checkout'
+}
 
 a {..,cd..}='cd ..'
 a ...='.. ; ..'
 
-_g() { cd $_ ; cl ;  }
+_g() { a=$1 ; shift ; cd $a/"$@" ; cl ;  }
 a gb='_g ~/bin' ; a gn='_g ~/env' ; a ge='_g ~/etc'
 a gt='_g ~/tmp' ; a gu='_g ~/usr' ; a gv='_g ~/var'
 a gB='_g /bin'  ; a gE='_g /etc'  ; a gM='_g /mnt'  
@@ -273,10 +309,12 @@ a profile='v ~/etc/profile'
 a {bmk,bmks}='v ~/var/files/surf-bookmarks.txt'
 a vssh='v ~/.ssh/config'
 
-for i in vim ksh xinit ; do
+for i in vim ksh mksh xinit ; do
+    has $i || continue
     a ${i}rc="v ~/etc/${i}rc"
 done
 for i in dwm st surf tabbed dmenu ; do
+    has $i || continue
     a ${i}cfg="v ~/etc/suckless/$i/config.h"
     a ${i}c="v ~/etc/suckless/$i/$i.c"
 done
