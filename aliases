@@ -37,11 +37,18 @@ case $(uname) in
                          info)   shift ; pkg_info -D snap $*     ;;
                          search) shift ; pkg_info -D snap -Q $*  ;;
                          *) >&2 echo \?
-                     esac ; } ;;
+                     esac ; }
+             du() { [ $# -eq 0 ] && set .
+                 command du -ahLd 1 "$1" 2> /dev/null | \
+                     sort -rh | head -n 20 ; } ;;
 
     Linux) a free='free -h'
            fdisk() { [ $# -eq 0 ] && set -- -l
                      fdisk $* ; }
+           du() { [ $# -eq 0 ] && set .
+               command du -ahL --max-depth=1 "$1" 2> /dev/null | \
+                   sort -rh | head -n 20 ; }
+
 esac
 
 c() { [ $# -eq 0 ] && printf "\033c" || cd "$1" ; }
@@ -132,10 +139,6 @@ f() {
 }
 
 hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
-
-du() { [ $# -eq 0 ] && set .
-       cmd du -ahLd 1 "$1" 2> /dev/null | \
-           sort -rh | head -n 20 ; }
 
 u() { for i ; do 
           unalias $i || unset -f $i
