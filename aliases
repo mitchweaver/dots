@@ -156,12 +156,11 @@ reload() { . ~/etc/aliases
            xset b off 
            xset +fp /home/mitch/.fonts
            set fp rehash
-           fc-cache ; }
+           fc-cache ; } 2> /dev/null
 
-ping() { [ $# -gt 0 ] || set mitchweaver.xyz
-             cmd ping -c 1 -n -q -s 1 \
-                 -w 10 $1 > /dev/null 2>&1 &&
-                     e "UP" || e "DOWN" ; }
+ping() { [ $# -eq 0 ] && set mitchweaver.xyz
+             cmd ping -c 1 -n -s 32 -w 10 $1 | \
+                head -n 2 ; }
 
 has nasm &&
     nasm() { [ -f "$1" ] &&
@@ -216,25 +215,25 @@ has youtube-viewer &&
       a ytfavs='c;yt --favorites=mine'
       a ytme='c;yt --channel-videos=mine' ; }
 
-mpv() { 
-    [ $# -eq 0 ] && return 1
-    if [ "$(pgrep xwinwrap)" ] ; then
-        kill $(pg mpv | g -v $(pg -P \
-            $(cat ${HOME}/.cache/mpvbg.pid))) \
-                > /dev/null 2>&1
-    else
-        pkill -9 mpv
-    fi
-    cmd mpv --title=mpv "$@" & x
-}
+has mpv &&
+    mpv() { 
+        [ $# -eq 0 ] && return 1
+        if [ "$(pgrep xwinwrap)" ] ; then
+            kill $(pg mpv | g -v $(pg -P \
+                $(cat ${HOME}/.cache/mpvbg.pid))) \
+                    > /dev/null 2>&1
+        else
+            pkill -9 mpv
+        fi
+        cmd mpv --title=mpv "$@" & x
+    }
 
 has youtube-dl &&
     { mpvyt()  { mpv ytdl://ytsearch:"$@" ; }
       mpvytm() { mpv --no-video ytdl://ytsearch:"$@" ; }
       a ytdl='youtube-dl --geo-bypass --prefer-ffmpeg'
-      a ytdlm="youtube-dl --extract-audio --geo-bypass \
-         --prefer-ffmpeg  --audio-quality 0 \
-         --audio-format opus" ; }
+      a ytdlm='ytdl --extract-audio --audio-quality 0 \
+                   --audio-format opus' ; }
 
 has mogrify &&
     { a 50%='mogrify -resize 50%X50%'
@@ -244,33 +243,52 @@ has mogrify &&
 
 has git &&
 {
-    gup() { git add -A &&
-            git commit -m "$@" &&
-            git push -u origin $(git branch 2> /dev/null | \
-                sed -e '/^[^*]/d' | sed 's/* //') ; }
-    gadd() { [ $# -eq 0 ] && git add -A || git add $* ; }
-    gmit() { [ $# -eq 1 ] && { git add -A && \
-        git commit -m "$@" ; } || \
-            { git add "$1" ; shift ; git commit -m $* ; } ; }
-    gout() { git push -u origin $(git rev-parse \
-        --abbrev-ref HEAD) "$@" ; }
-    gdiff() { [ $# -gt 0 ] && git diff origin/$1 || \
-        git diff origin/master ; }
-    greset() { git reset --hard HEAD~"$1" ; }
-    gbase() { [ $# -eq 0 ] &&
-                git rebase -i HEAD~10 ||
-                git rebase -i HEAD~$1 ; }
-    gmote() { git init 2> /dev/null ; \ 
-                git remote add origin "$1" ; }
-    a gclone='git clone'
-    ghclone() { gclone https://github.com/"$1" ; }
-    a gitstat='git status'
+    for i in init log fetch pull \
+             branch clone help \
+             stash blame clean ; do
+        a g${i}="git $i"
+    done
+    a gmote='git remote'
+    a gstat='git status'
     a gbort='git rebase --abort'
-    a glog='git log'
-    a gfetch='git fetch'
-    a gpull='git pull'
-    a gbranch='git branch'
+    a gcherry='git cherry-pick'
+    a gsub='git submodule'
     a {gcheck,checkout}='git checkout'
+    gup() { 
+        git add -A &&
+        git commit -m "$@" &&
+        git push -u origin $(git branch 2> /dev/null | \
+            sed -e '/^[^*]/d' | sed 's/* //')
+    }
+    gadd() { [ $# -eq 0 ] && set -- -A ; git add "$@" ; }
+    gmit() { 
+        if [ $# -eq 1 ] ; then
+            git add -A &&
+            git commit -m "$@"
+        elif [ $# -gt 1 ] ; then
+            git add "$1" &&
+            shift &&
+            git commit -m "$@"
+        fi
+    }
+    gout() { git push -u origin $(git rev-parse \
+                 --abbrev-ref HEAD) "$@" ; }
+    gdiff() { [ $# -eq 0 ] && set master
+              git diff origin/"$1" ; }
+    greset() { [ $# -eq 0 ] && set 10
+               git reset --hard HEAD~"$1" ; }
+    gbase() { [ $# -eq 0 ] && set 5
+              git rebase -i HEAD~$1 ; }
+    ghclone() { git clone https://github.com/"$1" ; }
+    gtmp() { 
+        [ $# -eq 0 ] && set "/tmp/$(basename ${PWD})-repo"
+        git init --bare "$1" &&
+        git init .
+        git remote add origin "$1" &&
+        git add -A &&
+        git commit -m "initial commit" &&
+        git push -u origin master
+    }
 }
 
 a {..,cd..}='cd ..'
@@ -313,11 +331,9 @@ a {bmk,bmks}='v ~/var/files/surf-bookmarks.txt'
 a vssh='v ~/.ssh/config'
 
 for i in vim ksh mksh xinit ; do
-    has $i || continue
     a ${i}rc="v ~/etc/${i}rc"
 done
 for i in dwm st surf tabbed dmenu ; do
-    has $i || continue
     a ${i}cfg="v ~/etc/suckless/$i/config.h"
     a ${i}c="v ~/etc/suckless/$i/$i.c"
 done
