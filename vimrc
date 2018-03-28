@@ -4,29 +4,31 @@
 nnoremap <silent><SPACE> <nop>
 let mapleader=" "
 "  --------------- Plugins ------------------------------
-set nocompatible
-filetype off
-call plug#begin('~/.vim/vim-plug')
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+    set nocompatible
+    filetype off
+    call plug#begin('~/.vim/vim-plug')
 
-Plug 'vimwiki/vimwiki' " the ultimate note taking system
-Plug 'godlygeek/tabular' " tab alignment
-Plug 'tpope/vim-commentary' " comment toggler
-Plug 'ervandew/supertab' " code completion
-Plug 'tpope/vim-surround' " quote/paren etc surrounding
-Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
-Plug 'airblade/vim-gitgutter' " git diffing along the left side
-Plug 'tpope/vim-repeat' " allows '.' for more things
-Plug 'dylanaraps/wal.vim' " pywal theme
- 
-call plug#end()
-filetype indent plugin on
-syntax enable
-map <silent><leader>pi :PlugInstall<CR>
-map <silent><leader>pu :PlugUpdate<CR>
-map <silent><leader>pc :PlugClean<CR>
-" --------------------------------------------------------
+    Plug 'vimwiki/vimwiki' " the ultimate note taking system
+    Plug 'godlygeek/tabular' " tab alignment
+    Plug 'tpope/vim-commentary' " comment toggler
+    Plug 'ervandew/supertab' " code completion
+    Plug 'tpope/vim-surround' " quote/paren etc surrounding
+    Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
+    Plug 'airblade/vim-gitgutter' " git diffing along the left side
+    Plug 'tpope/vim-repeat' " allows '.' for more things
+    Plug 'dylanaraps/wal.vim' " pywal theme
+    
+    call plug#end()
+    filetype indent plugin on
+    syntax enable
+    map <silent><leader>pi :PlugInstall<CR>
+    map <silent><leader>pu :PlugUpdate<CR>
+    map <silent><leader>pc :PlugClean<CR>
 
 colorscheme wal
+endif
+" --------------------------------------------------------
 set background=dark
 " set background=light
 
@@ -46,7 +48,7 @@ set backspace=2 " allow backspace to go over new lines
 
 set shellslash
 " set shell=ksh
-" let g:is_ksh=1 " vim's default sh syntax is horrible
+" let g:is_ksh=1
 set wildmenu " makes shell completion a bit better
 set wildmode=longest,list,full
 set ffs=unix
@@ -134,42 +136,47 @@ nnoremap <silent><leader><leader> :let @/ = ""<CR>:noh<CR>
 " Search and Replace
 nmap <Leader>s :%s//g<Left><Left>
 
-nnoremap ci: T:ct:
-nnoremap ci. T.ct.
-nnoremap ci, T,ct,
-nnoremap ci< T<ct>
-nnoremap ci> T<ct>
+if has('nvim')
+    nnoremap ci: T:ct:
+    nnoremap ci. T.ct.
+    nnoremap ci, T,ct,
+    nnoremap ci< T<ct>
+    nnoremap ci> T<ct>
+endif
 
 " -------------- Extension Settings ----------------------
-let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
-let g:gitgutter_realtime = 0 " only run gitgutter on save
+if exists(':PlugInstall')
+    let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
+    let g:gitgutter_realtime = 0 " only run gitgutter on save
 
-map <silent><leader>g :GitGutterToggle<CR>
+    map <silent><leader>g :GitGutterToggle<CR>
 
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<c-m>'
-let g:multi_cursor_prev_key='<c-p>'
-let g:multi_cursor_skip_key='<c-x>'
-let g:multi_cursor_quit_key='<esc>'
+    let g:multi_cursor_use_default_mapping=0
+    let g:multi_cursor_next_key='<c-m>'
+    let g:multi_cursor_prev_key='<c-p>'
+    let g:multi_cursor_skip_key='<c-x>'
+    let g:multi_cursor_quit_key='<esc>'
 
-nmap <silent><leader>c :Commentary<CR>
-autocmd FileType asm setlocal commentstring=;\ %s
-autocmd FileType conf setlocal commentstring=#\ %s
-autocmd FileType rc setlocal commentstring=#\ %s
+    nmap <silent><leader>c :Commentary<CR>
+    autocmd FileType asm setlocal commentstring=;\ %s
+    autocmd FileType conf setlocal commentstring=#\ %s
+    autocmd FileType rc setlocal commentstring=#\ %s
 
-let wiki = {}
-let g:vimwikidir = "/home/mitch/var/files/vimwiki"
-let wiki.path = g:vimwikidir
-let g:vimwiki_list=[wiki]
-let g:vimwiki_hl_headers = 1
-let g:vimwiki_hl_cb_checked = 1
-let g:vimwiki_list = [
-    \{'path': '~/var/files/vimwiki/personal.wiki',    'syntax': 'markdown', 'ext': '.md'},
-\]
-let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+    let wiki = {}
+    let g:vimwikidir = "/home/mitch/var/files/vimwiki"
+    let wiki.path = g:vimwikidir
+    let g:vimwiki_list=[wiki]
+    let g:vimwiki_hl_headers = 1
+    let g:vimwiki_hl_cb_checked = 1
+    let g:vimwiki_list = [
+        \{'path': '~/var/files/vimwiki/personal.wiki',    'syntax': 'markdown', 'ext': '.md'},
+    \]
+    let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+    nnoremap <silent><leader>wg :VimwikiDiaryGenerateLinks<CR>
+endif
 
 set wildignore+=*.opus,*.flac,*.pdf,*.jpg,*.png,*.so,*.swp,*.zip,*.gzip,*.bz2,*.tar,*.xz,*.lrzip,*.lrz,*.mp3,*.ogg,*.mp4,*.gif,*.jpeg,*.webm
-nnoremap <silent><leader>wg :VimwikiDiaryGenerateLinks<CR>
 
 map <F9>  :setlocal spell! spelllang=en_gb<CR>
 map <F10> :setlocal spell! spelllang=de_de<CR>
@@ -211,74 +218,77 @@ map  <silent><c-->    <nop>
 map <leader>md :!/home/mitch/usr/bin/previewmarkdown.sh -i "%" -b $BROWSER<CR>
 
 " ----------- Open files in ranger ----------------------- 
-function! s:RangerOpenDir(...)
-    let path = a:0 ? a:1 : getcwd()
+if has('nvim')
+    function! s:RangerOpenDir(...)
+        let path = a:0 ? a:1 : getcwd()
 
-    if !isdirectory(path)
-        echom 'Not a directory: ' . path
-        return
-    endif
-
-    let s:ranger_tempfile = tempname()
-    let opts = ' --cmd="set viewmode multipane"'
-    let opts .= ' --choosefiles=' . shellescape(s:ranger_tempfile)
-    if a:0 > 1
-        let opts .= ' --selectfile='. shellescape(a:2)
-    else
-        let opts .= ' ' . shellescape(path)
-    endif
-    let rangerCallback = {}
-
-    function! rangerCallback.on_exit(id, code, _event)
-        " Open previous buffer or new buffer *before* deleting the terminal
-        " buffer. This ensures that splits don't break if ranger is opened in
-        " a split window.
-        if w:_ranger_del_buf != w:_ranger_prev_buf
-            " Restore previous buffer
-            exec 'silent! buffer! '. w:_ranger_prev_buf
-        else
-            " Previous buffer was empty
-            enew
-        endif
-
-        " Delete terminal buffer
-        exec 'silent! bdelete! ' . w:_ranger_del_buf
-
-        unlet! w:_ranger_prev_buf w:_ranger_del_buf
-
-        let names = ''
-        if filereadable(s:ranger_tempfile)
-            let names = readfile(s:ranger_tempfile)
-        endif
-        if empty(names)
+        if !isdirectory(path)
+            echom 'Not a directory: ' . path
             return
         endif
-        for name in names
-            exec 'edit ' . fnameescape(name)
-            doautocmd BufRead
-        endfor
+
+        let s:ranger_tempfile = tempname()
+        let opts = ' --cmd="set viewmode multipane"'
+        let opts .= ' --choosefiles=' . shellescape(s:ranger_tempfile)
+        if a:0 > 1
+            let opts .= ' --selectfile='. shellescape(a:2)
+        else
+            let opts .= ' ' . shellescape(path)
+        endif
+        let rangerCallback = {}
+
+        function! rangerCallback.on_exit(id, code, _event)
+            " Open previous buffer or new buffer *before* deleting the terminal
+            " buffer. This ensures that splits don't break if ranger is opened in
+            " a split window.
+            if w:_ranger_del_buf != w:_ranger_prev_buf
+                " Restore previous buffer
+                exec 'silent! buffer! '. w:_ranger_prev_buf
+            else
+                " Previous buffer was empty
+                enew
+            endif
+
+            " Delete terminal buffer
+            exec 'silent! bdelete! ' . w:_ranger_del_buf
+
+            unlet! w:_ranger_prev_buf w:_ranger_del_buf
+
+            let names = ''
+            if filereadable(s:ranger_tempfile)
+                let names = readfile(s:ranger_tempfile)
+            endif
+            if empty(names)
+                return
+            endif
+            for name in names
+                exec 'edit ' . fnameescape(name)
+                doautocmd BufRead
+            endfor
+        endfunction
+
+        " Store previous buffer number and the terminal buffer number
+        let w:_ranger_prev_buf = bufnr('%')
+        enew
+        let w:_ranger_del_buf = bufnr('%')
+
+        " Open ranger in nvim terminal
+        call termopen('ranger ' . opts, rangerCallback)
+        startinsert
     endfunction
 
-    " Store previous buffer number and the terminal buffer number
-    let w:_ranger_prev_buf = bufnr('%')
-    enew
-    let w:_ranger_del_buf = bufnr('%')
+    let g:loaded_netrwPlugin = 'disable'
+    augroup ReplaceNetrwWithRanger
+        autocmd StdinReadPre * let s:std_in = 1
+        autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call s:RangerOpenDir(argv()[0]) | endif
+    augroup END
 
-    " Open ranger in nvim terminal
-    call termopen('ranger ' . opts, rangerCallback)
-    startinsert
-endfunction
-
-let g:loaded_netrwPlugin = 'disable'
-augroup ReplaceNetrwWithRanger
-    autocmd StdinReadPre * let s:std_in = 1
-    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call s:RangerOpenDir(argv()[0]) | endif
-augroup END
-
-command! -complete=dir -nargs=* Ranger :call <SID>RangerOpenDir(<f-args>)
-nnoremap <silent><leader>r :Ranger<CR>
-
+    command! -complete=dir -nargs=* Ranger :call <SID>RangerOpenDir(<f-args>)
+    nnoremap <silent><leader>r :Ranger<CR>
+endif
 " ------------------------------------------------------- 
 
 " pause :terminal emulation
-tnoremap <silent><C-z> <C-\><C-n>
+if has('nvim')
+    tnoremap <silent><C-z> <C-\><C-n>
+endif
