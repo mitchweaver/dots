@@ -9,8 +9,13 @@ alias a=alias
 
 has() { 
     for p ; do
-        type $p > /dev/null 2>&1 ||
-            return 1
+        type $p || return 1
+    done > /dev/null 2>&1 
+}
+
+exists() {
+    for p ; do
+        [ -e $p ] || return 1
     done
 }
 
@@ -117,6 +122,10 @@ a forecast='curl -s http://wttr.in/Schmalkalden?m | \
     tail -n 33 | sed $\ d | sed $\ d'
 a heart='printf "%b\n" "\xe2\x9d\xa4"'
 
+dn()  { read i && set $i && e "$@" 1> /dev/null 2> /dev/stdout ; }
+2dn() { read i && set $i && e "$@" 1> /dev/stdout 2> /dev/null ; }
+null() { true ; }
+
 mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
@@ -172,15 +181,15 @@ has w3m &&
     w3m() { [ $# -eq 0 ] && set https://ddg.gg/lite
                 cmd w3m -F $* ; }
 
-has bar &&
+exists ~/bin/bar &&
     bar() { k -9 {bar,lemonbar} > /dev/null 2>&1
                 ~/bin/bar & c ; }
 
-has conv &&
+exists ~/bin/conv &&
     for i in dec bin hex oct ; do
         for j in dec bin hex oct ; do
             [ $i != $j ] &&
-                a ${i}2${j}="conv \
+                a ${i}2${j}="dash ~/bin/conv \
                     -i $(printf %.1s $i) \
                     -o $(echo -n ${j%??} | sed 's/.*2//')"
         done
@@ -294,49 +303,82 @@ has git &&
 a {..,cd..}='cd ..'
 a ...='.. ; ..'
 
-_g() { a=$1 ; shift ; cd $a/"$@" ; cl ;  }
-a gb='_g ~/bin' ; a gn='_g ~/env' ; a ge='_g ~/etc'
-a gt='_g ~/tmp' ; a gu='_g ~/usr' ; a gv='_g ~/var'
-a gB='_g /bin'  ; a gE='_g /etc'  ; a gM='_g /mnt'  
-a gT='_g /tmp'  ; a gU='_g /usr'  ; a gV='_g /var'
-a gs='_g ~/src' ; a gcf='_g ~/etc/config'
-a gd='_g ~/var/downloads'; a gf='_g ~/var/files'
-a gi='_g ~/var/images'   ; a gm='_g ~/var/music'
-a gp='_g ~/usr/programs' ; a gvi='_g ~/var/videos'
-m~() { mv "$@" ~     ; } ; mb() { mv "$@" ~/bin ; }
-mn() { mv "$@" ~/env ; } ; me() { mv "$@" ~/etc ; }
-mt() { mv "$@" ~/tmp ; } ; mu() { mv "$@" ~/usr ; }
-ms() { mv "$@" ~/src ; } ; mT() { mv "$@" /tmp  ; }
-Y~() { cp "$@" ~     ; } ; Yb() { cp "$@" ~/bin ; }
-Yn() { cp "$@" ~/env ; } ; Ye() { cp "$@" ~/etc ; }
-Yt() { cp "$@" ~/tmp ; } ; Yu() { cp "$@" ~/usr ; }
-YT() { cp "$@" /tmp  ; } ; Ys() { cp "$@" ~/src ; }
-Yf() { cp "$@" ~/var/files     ; }
-Yd() { cp "$@" ~/var/downloads ; }
-Yi() { cp "$@" ~/var/images    ; }
-Ym() { cp "$@" ~/var/music     ; }
-Yp() { cp "$@" ~/usr/programs  ; }
-Yvi(){ cp "$@" ~/var/videos    ; }
-mf() { mv "$@" ~/var/files     ; }
-md() { mv "$@" ~/var/downloads ; }
-mi() { mv "$@" ~/var/images    ; }
-mm() { mv "$@" ~/var/music     ; }
-mp() { mv "$@" ~/usr/programs  ; }
-ms() { mv "$@" ~/etc/suckless  ; }
-mvi(){ mv "$@" ~/var/videos    ; }
+_g() { local a=$1 ; shift ; cd $a/"$@" ; cl ;  }
 
-a {aliases,alaises,aliase}='v ~/etc/aliases'
-a profile='v ~/etc/profile'
-a {bmk,bmks}='v ~/var/files/surf-bookmarks.txt'
-a vssh='v ~/.ssh/config'
+for i in bin env etc tmp usr var src ; do
+    exists ~/$i &&
+        a g$(printf %.1s $i)="_g ~/$i"
+    a g$(printf %.1s $i | tr [a-z] [A-Z])="_g /$i"
+done
 
-for i in vim ksh mksh xinit ; do
-    a ${i}rc="v ~/etc/${i}rc"
-done
-for i in dwm st surf tabbed dmenu ; do
-    a ${i}cfg="v ~/etc/suckless/$i/config.h"
-    a ${i}c="v ~/etc/suckless/$i/$i.c"
-done
-recomp() { for i ; do
-               sudo ~/bin/recomp ~/etc/suckless/$i
-           done ; }
+a gM='_g /mnt'
+a g~='_g ~'
+m~() { mv "$@" ~     ; }
+Y~() { cp "$@" ~     ; }
+mT() { mv "$@" /tmp  ; }
+YT() { cp "$@" /tmp  ; }
+
+exists ~/var && {
+    for i in downloads files images music ; do
+        a g$(printf %.1s $i)="_g ~/var/$i"
+    done
+
+    a gvi='_g ~/var/videos'
+    a gbk='_g ~/var/books'
+    a gvt='_g ~/var/tmp'
+    a gyt='_g ~/var/youtube-dl'
+
+    Yf() { cp "$@" ~/var/files     ; }
+    Yd() { cp "$@" ~/var/downloads ; }
+    Yi() { cp "$@" ~/var/images    ; }
+    Ym() { cp "$@" ~/var/music     ; }
+    Yvi(){ cp "$@" ~/var/videos    ; }
+
+    mf() { mv "$@" ~/var/files     ; }
+    md() { mv "$@" ~/var/downloads ; }
+    mi() { mv "$@" ~/var/images    ; }
+    mm() { mv "$@" ~/var/music     ; }
+    mvi(){ mv "$@" ~/var/videos    ; }
+}
+exists ~/usr && {
+    a gr='_g ~/usr/repos' 
+    a gbkup='_g ~/usr/backup'
+    mu() { mv "$@" ~/usr ; }
+    mr() { mv "$@" ~/usr/repos ; }
+    Yu() { cp "$@" ~/usr ; }
+    Yr() { cp "$@" ~/usr/repos ; }
+}
+exists ~/etc && {
+    me() { mv "$@" ~/etc ; }
+    Ye() { cp "$@" ~/etc ; }
+    a gcf='_g ~/etc/config'
+
+    a {aliases,alaises,aliase}='v ~/etc/aliases'
+    a profile='v ~/etc/profile'
+    a {bmk,bmks}='v ~/var/files/surf-bookmarks.txt'
+    a vssh='v ~/.ssh/config'
+
+    for i in vim ksh xinit ; do
+        a ${i}rc="v ~/etc/${i}rc"
+    done
+
+    for i in dwm st surf tabbed dmenu ; do
+        a ${i}cfg="v ~/etc/suckless/$i/config.h"
+        a ${i}c="v ~/etc/suckless/$i/$i.c"
+    done
+    recomp() { for i ; do
+                   sudo ~/bin/recomp ~/etc/suckless/$i
+               done ; }
+}
+exists ~/src && { a gs='_g ~/src'
+                  ms() { mv "$@" ~/src  ; }
+                  Ys() { cp "$@" ~/src ; } ; }
+
+exists ~/bin && { mb() { mv "$@" ~/bin ; }
+                  Yb() { cp "$@" ~/bin ; } ; }
+
+exists ~/tmp && { mt() { mv "$@" ~/tmp ; }
+                  Yt() { cp "$@" ~/tmp ; } ; }
+
+exists ~/env && { mn() { mv "$@" ~/env ; }
+                  Yn() { cp "$@" ~/env ; } ; }
