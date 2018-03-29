@@ -257,7 +257,7 @@ has git &&
              stash blame clean ; do
         a g${i}="git $i"
     done
-    a gmote='git remote'
+    a gmote='git remote add origin'
     a gstat='git status'
     a gbort='git rebase --abort'
     a gcherry='git cherry-pick'
@@ -312,7 +312,6 @@ for i in bin env etc tmp usr var src ; do
 done
 
 a gM='_g /mnt'
-a g~='_g ~'
 m~() { mv "$@" ~     ; }
 Y~() { cp "$@" ~     ; }
 mT() { mv "$@" /tmp  ; }
