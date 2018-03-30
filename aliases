@@ -1,6 +1,9 @@
 # http://github.com/mitchweaver/dots
 
-case $0 in
+[ -z "$SHELL" ] &&
+    export SHELL=$0
+
+case $SHELL in
     *ksh|*bash) true ;;
     *) return
 esac
@@ -16,14 +19,14 @@ u r w
 alias a=alias
 
 has() { 
-    for p ; do
-        type $p || return 1
+    for i ; do
+        type $i || return 1
     done > /dev/null 2>&1 
 }
 
 exists() {
-    for p ; do
-        [ -e $p ] || return 1
+    for i ; do
+        [ -e $i ] || return 1
     done
 }
 
@@ -390,3 +393,5 @@ exists ~/tmp && { mt() { mv "$@" ~/tmp ; }
 
 exists ~/env && { mn() { mv "$@" ~/env ; }
                   Yn() { cp "$@" ~/env ; } ; }
+
+u i j

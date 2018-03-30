@@ -1,23 +1,31 @@
 p() { for i ; do export PATH=$PATH:"$i" ; done ; }
 
-p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin \
-   /sbin ${HOME}/{bin,bin/bin,.local/bin,usr/bin,usr/bin/ascii}
+p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin /sbin \
+   ${HOME}/{bin,bin/bin,.local/bin,usr/bin,usr/bin/ascii}
 
 unset -f p
 
 [ "$(uname)" = "OpenBSD" ] && #todo: how to use seq?
-    export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
-        -s , 2 7)}.{$(jot -n -s , 10 0)}/bin
+        [ -d /usr/local/jdk* ] &&
+            export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
+                -s , 2 7)}.{$(jot -n -s , 10 0)}/bin
+
 
 find ${HOME}/tmp ! -path ${HOME}/tmp -exec \
     rm -rf "{}" {} \; > /dev/null 2>&1 &
 
-case ${SHELL} in
-    /bin/ksh|/bin/mksh)
-       export ENV=${HOME}/etc/kshrc ;;
-    *) export ENV=${HOME}/etc/aliases
-esac
-[ "$ENV" ] && . ${ENV}
+[ -z "$SHELL" ] &&
+    for i in mk k a ba da ; do
+        [ -f /bin/${i}sh ] &&
+            { export SHELL=/bin/${i}sh ; break ; }
+    done
+
+[ -d ${HOME}/etc ] &&
+    case $SHELL in
+        *ksh)
+        export ENV=${HOME}/etc/kshrc ;;
+        *) export ENV=${HOME}/etc/aliases
+    esac
 
 for i in nvim vim vis vi nano ; do
     type $i > /dev/null 2>&1 &&
@@ -30,7 +38,7 @@ for i in surf firefox chromium ; do
 done
 unset i
 
-ulimit -c 0
+ulimit -c 0 2> /dev/null
 
 export {LANG,LC_ALL,LOCALE,LC_CTYPE}='en_US.UTF-8' \
         LESSCHARSET='utf-8' \
@@ -48,7 +56,12 @@ type xdg-open > /dev/null 2>&1 &&
            XDG_PICTURES_DIR="${HOME}/var/images" \
            XDG_VIDEOS_DIR="${HOME}/var/videos"
 
-[ -z "$(pgrep X)" ] && 
-    { rm -rf ${HOME}/.{Xauthority*,serverauth*}
-      cp ${HOME}/etc/xinitrc ${HOME}/.xinitrc
-      startx -- > /dev/null ; } > /dev/null 2>&1
+[ -z "$(pgrep X)" ] &&  
+    [ -f ~/etc/xinitrc ] &&
+        {   
+
+            rm -rf ${HOME}/.{Xauthority*,serverauth*}
+            cp ${HOME}/etc/xinitrc ${HOME}/.xinitrc
+            startx -- > /dev/null
+
+        } > /dev/null 2>&1
