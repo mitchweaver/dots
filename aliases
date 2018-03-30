@@ -9,8 +9,8 @@ case $SHELL in
 esac
 
 u() { 
-    for i ; do 
-        unalias $i || unset -f $i
+    for _u ; do 
+        unalias $_u || unset -f $_u
     done 2> /dev/null
 }
 
@@ -19,14 +19,14 @@ u r w
 alias a=alias
 
 has() { 
-    for i ; do
-        type $i || return 1
+    for _h ; do
+        type $_h || return 1
     done > /dev/null 2>&1 
 }
 
 exists() {
-    for i ; do
-        [ -e $i ] || return 1
+    for _e ; do
+        [ -e $_e ] || return 1
     done
 }
 
@@ -394,4 +394,4 @@ exists ~/tmp && { mt() { mv "$@" ~/tmp ; }
 exists ~/env && { mn() { mv "$@" ~/env ; }
                   Yn() { cp "$@" ~/env ; } ; }
 
-u i j
+u i j _u _p _h
