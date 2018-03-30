@@ -1,7 +1,7 @@
 p() { for i ; do export PATH=$PATH:"$i" ; done ; }
 
 p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin /sbin \
-   ${HOME}/{bin,bin/bin,.local/bin,usr/bin,usr/bin/ascii}
+   ${HOME}/{bin,bin/bin,.local/bin,usr/bin,usr/bin/ascii,usr/local/bin}
 
 unset -f p
 

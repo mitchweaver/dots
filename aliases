@@ -35,12 +35,13 @@ has exa &&
     a ls='ls -F'
 
 case $(uname) in
-    OpenBSD) a sudo=doas
+    OpenBSD) export NPROC=$(sysctl -n hw.ncpu)
+             a sudo=doas
              a seq=jot
              a rm='rm -P'
              a disks='sysctl -n hw.disknames'
              a disklabel='doas disklabel -h'
-             a sg='sysctl | grep -i'
+             a sg='sysctl | grep ji'
              a killall='pkill -9'
              a webcam='ffmpeg -i /dev/video0 -f sndio -i \
                  default "$(date)".mp4'
@@ -58,7 +59,8 @@ case $(uname) in
                  command du -ahLd 1 "$1" 2> /dev/null | \
                      sort -rh | head -n 20 ; } ;;
 
-    Linux) a free='free -h'
+    Linux) export NPROC="$(nproc)"
+           a free='free -h'
            fdisk() { [ $# -eq 0 ] && set -- -l
                      fdisk $* ; }
            du() { [ $# -eq 0 ] && set .
@@ -104,7 +106,7 @@ a cx='chmod +x'
 a chown='chown -R'
 a {shutdown,poweroff}='sudo shutdown -p now'
 a {reboot,restart}='sudo reboot'
-a {mk,mkae}=make
+a {mk,mkae}="make -j$(( $NPROC + 1 ))"
 a mkc='mk clean'
 a mki='mk install'
 a mkall="mkc ; mk && mki"
