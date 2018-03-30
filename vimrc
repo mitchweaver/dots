@@ -161,6 +161,7 @@ if exists(':PlugInstall')
     autocmd FileType asm setlocal commentstring=;\ %s
     autocmd FileType conf setlocal commentstring=#\ %s
     autocmd FileType rc setlocal commentstring=#\ %s
+    autocmd FileType *Pkgfile set filetype=sh
 
     let wiki = {}
     let g:vimwikidir = "/home/mitch/var/files/vimwiki"
