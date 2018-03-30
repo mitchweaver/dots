@@ -289,7 +289,7 @@ if has('nvim')
 endif
 " ------------------------------------------------------- 
 
-" pause :terminal emulation
 if has('nvim')
+    " pause :terminal emulation
     tnoremap <silent><C-z> <C-\><C-n>
 endif

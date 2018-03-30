@@ -81,16 +81,16 @@ a lsf='l "$PWD"/*'
 a {cls,csl,cl,lc}='c;l'
 a {e,ech,eho}=echo
 a err='>&2 e'
-a {Grep,gerp,gr}=grep
+a {Grep,gerp}=grep
 a pg='pgrep'
-a dg='du | gr -i'
-a lg='ls | gr -i'
+a dg='du | grep -i'
+a lg='ls | grep -i'
 a cp='cp -irv'
 a mv='mv -iv'
 a {mkdir,mkd,mkdr}='mkdir -p'
 a df='df -h'
 a ln='ln -sf'
-a ag='a | gr -i'
+a ag='a | grep -i'
 a tf='typeset -f'
 a file='file -b -i -L'
 a bn=basename
@@ -98,7 +98,7 @@ a {d,date}="cmd date '+%a %b %d - %l:%M %p'"
 a {dmesg,dmegs}='dmesg | tail -n 20'
 a pk="pkill"
 a pa='ps auwwx | head'
-a ph='ps auwwx | gr -i -e ${USER} | head'
+a ph='ps auwwx | grep -i -e ${USER} | head'
 a man='man -a'
 a ex=export
 a cmd=command
@@ -109,6 +109,7 @@ a {reboot,restart}='sudo reboot'
 a {mk,mkae}="make -j$(( $NPROC + 1 ))"
 a mkc='mk clean'
 a mki='mk install'
+a mku='mk uninstall'
 a mkall="mkc ; mk && mki"
 a {xs,xc}='xsel -o ; e'
 a rsync='rsync -rtvulh4 --progress --delete' #-c
@@ -165,7 +166,7 @@ f() {
     find "$1" ! -path "$1" -iname "*$2*" ; 
 }
 
-hg() { [ $# -gt 0 ] && gr -e "$@" $HISTFILE | head -n 20 ; }
+hg() { [ $# -gt 0 ] && grep -e "$@" $HISTFILE | head -n 20 ; }
 
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
@@ -242,7 +243,7 @@ has mpv &&
     mpv() { 
         [ $# -eq 0 ] && return 1
         if [ "$(pgrep xwinwrap)" ] ; then
-            kill $(pg mpv | gr -v $(pg -P \
+            kill $(pg mpv | grep -v $(pg -P \
                 $(cat ${HOME}/.cache/mpvbg.pid))) \
                     > /dev/null 2>&1
         else
@@ -368,7 +369,7 @@ exists ~/etc && {
 
     a {aliases,alaises,aliase}='v ~/etc/aliases'
     a profile='v ~/etc/profile'
-    a {bmk,bmks}='v ~/var/files/surf-bookmarks.txt'
+    a {bmk,bmks}='v ~/var/files/bookmarks/bookmarks.txt'
     a vssh='v ~/.ssh/config'
 
     for i in vim ksh xinit ; do
@@ -397,3 +398,5 @@ exists ~/env && { mn() { mv "$@" ~/env ; }
                   Yn() { cp "$@" ~/env ; } ; }
 
 u i j _u _p _h
+
+a prt-get='prt-get -im -is'
