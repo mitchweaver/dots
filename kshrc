@@ -6,10 +6,6 @@
 # don't run if not interactive
 [[ $- != *i* ]] && return
 
-# unaliases
-alias {w,bg,fg,jobs,autoload,login,stop}=true
-unalias r
-
 alias echo='builtin print'
 alias type='builtin whence -v'
 

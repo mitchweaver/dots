@@ -5,6 +5,14 @@ case $0 in
     *) return
 esac
 
+u() { 
+    for i ; do 
+        unalias $i || unset -f $i
+    done 2> /dev/null
+}
+
+u r w
+
 alias a=alias
 
 has() { 
@@ -86,7 +94,7 @@ a {dmesg,dmegs}='dmesg | tail -n 20'
 a pk="pkill"
 a pa='ps auwwx | head'
 a ph='ps auwwx | gr -i -e ${USER} | head'
-a {m,man}='man -a'
+a man='man -a'
 a ex=export
 a cmd=command
 a cx='chmod +x'
@@ -130,9 +138,10 @@ mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
 
-_mark() { export MARK"$1"="$PWD" ; }
-a m=_mark
-g() { eval cd \$MARK"$1" ; cls ; }
+for i in $(seq 9) ; do
+    eval "m${i}() { export _MARK${i}=\$PWD ; }"
+    eval "g${i}() { cd \$_MARK${i} ; }"
+done
 
 run() { 
     [ $# -lt 2 ] && exit 1
@@ -152,10 +161,6 @@ f() {
 }
 
 hg() { [ $# -gt 0 ] && gr -e "$@" $HISTFILE | head -n 20 ; }
-
-u() { for i ; do 
-          unalias $i || unset -f $i
-      done 2> /dev/null ; }
 
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
@@ -214,7 +219,7 @@ v() {
 }
 
 has ranger &&
-    { u r ; r() { ranger "$@" ; c ; } ; }
+    r() { ranger "$@" ; c ; }
 
 has youtube-viewer &&
     { a yt="c; youtube-viewer -C -q --vd=high"
