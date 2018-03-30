@@ -66,7 +66,19 @@ case $(uname) in
            du() { [ $# -eq 0 ] && set .
                command du -ahL --max-depth=1 "$1" 2> /dev/null | \
                    sort -rh | head -n 20 ; }
-
+           has crux && {
+               prt='prt-get -im -is -if --install-scripts'
+               pkg() { case "$1" in
+                       add)    shift ; sudo $prt depinst $* ;;
+                       update) shift ; sudo $prt update $*  ;;
+                       del)    shift ; sudo $prt remove $*  ;;
+                       deps)   shift ; prt-get deps $*      ;;
+                       list)   shift ; pkginfo -i $*        ;;
+                       search) shift ; prt-get search $*    ;;
+                       info)   shift ; prt-get info $*      ;;
+                       *) >&2 echo \?
+                   esac ; }
+           }
 esac
 
 c() { [ $# -eq 0 ] && printf "\033c" || cd "$1" ; }
@@ -96,7 +108,6 @@ a file='file -b -i -L'
 a bn=basename
 a {d,date}="cmd date '+%a %b %d - %l:%M %p'"
 a {dmesg,dmegs}='dmesg | tail -n 20'
-a pk="pkill"
 a pa='ps auwwx | head'
 a ph='ps auwwx | grep -i -e ${USER} | head'
 a man='man -a'
@@ -112,7 +123,7 @@ a mki='mk install'
 a mku='mk uninstall'
 a mkall="mkc ; mk && mki"
 a {xs,xc}='xsel -o ; e'
-a rsync='rsync -rtvulh4 --progress --delete' #-c
+a rsync='rsync -rtvuh4 --progress --delete' #-c
 a sshd='sudo /usr/sbin/sshd'
 a scp='scp -rp4'
 a {wtf,wtfismyip}='w3m https://wtfismyip.com'
@@ -315,6 +326,13 @@ has git &&
     }
 }
 
+wlibc() { 
+    set $(strings -a "$1")
+    for i in musl glibc llvm ; do
+        echo "$@" | grep -oi $i && break
+    done | head -n 1 
+}
+
 a {..,cd..}='cd ..'
 a ...='.. ; ..'
 
@@ -398,5 +416,3 @@ exists ~/env && { mn() { mv "$@" ~/env ; }
                   Yn() { cp "$@" ~/env ; } ; }
 
 u i j _u _p _h
-
-a prt-get='prt-get -im -is'

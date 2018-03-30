@@ -9,7 +9,10 @@ vim/vim-plug
 vim/init.vim
 vim
 
-*~
+# ----------------------------------
+# vi needs to stop this nonsense
+*~*
+# ----------------------------------
 
 config/gtk-2.0
 config/gtk-3.0
@@ -31,7 +34,7 @@ w3m/cookies
 config/Discline/token
 *token*
 
-*abword*
+*abiword*
 *dconf*
 config/autostart
 .config/autostart
