@@ -68,16 +68,16 @@ a lsf='l "$PWD"/*'
 a {cls,csl,cl,lc}='c;l'
 a {e,ech,eho}=echo
 a err='>&2 e'
-a {g,Grep,gerp}=grep
+a {Grep,gerp,gr}=grep
 a pg='pgrep'
-a dg='du | g -i'
-a lg='ls | g -i'
+a dg='du | gr -i'
+a lg='ls | gr -i'
 a cp='cp -irv'
 a mv='mv -iv'
 a {mkdir,mkd,mkdr}='mkdir -p'
 a df='df -h'
 a ln='ln -sf'
-a ag='a | g -i'
+a ag='a | gr -i'
 a tf='typeset -f'
 a file='file -b -i -L'
 a bn=basename
@@ -85,7 +85,7 @@ a {d,date}="cmd date '+%a %b %d - %l:%M %p'"
 a {dmesg,dmegs}='dmesg | tail -n 20'
 a pk="pkill"
 a pa='ps auwwx | head'
-a ph='ps auwwx | g -i -e ${USER} | head'
+a ph='ps auwwx | gr -i -e ${USER} | head'
 a {m,man}='man -a'
 a ex=export
 a cmd=command
@@ -130,6 +130,10 @@ mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
 
+_mark() { export MARK"$1"="$PWD" ; }
+a m=_mark
+g() { eval cd \$MARK"$1" ; cls ; }
+
 run() { 
     [ $# -lt 2 ] && exit 1
     local c=$1 ; shift
@@ -147,7 +151,7 @@ f() {
     find "$1" ! -path "$1" -iname "*$2*" ; 
 }
 
-hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
+hg() { [ $# -gt 0 ] && gr -e "$@" $HISTFILE | head -n 20 ; }
 
 u() { for i ; do 
           unalias $i || unset -f $i
@@ -228,7 +232,7 @@ has mpv &&
     mpv() { 
         [ $# -eq 0 ] && return 1
         if [ "$(pgrep xwinwrap)" ] ; then
-            kill $(pg mpv | g -v $(pg -P \
+            kill $(pg mpv | gr -v $(pg -P \
                 $(cat ${HOME}/.cache/mpvbg.pid))) \
                     > /dev/null 2>&1
         else
