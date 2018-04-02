@@ -10,8 +10,8 @@ unset -f p
             export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
                 -s , 2 7)}.{$(jot -n -s , 10 0)}/bin
 
-find ${HOME}/tmp ! -path ${HOME}/tmp -exec \
-    rm -rf "{}" {} \; > /dev/null 2>&1 &
+(find ${HOME}/tmp ! -path ${HOME}/tmp -exec \
+    rm -rf "{}" {} \; > /dev/null 2>&1 &)
 
 [ -z "$SHELL" ] &&
     for i in mk k a ba da ; do

@@ -221,6 +221,11 @@ exists ~/bin/conv &&
         done
     done
 
+has vi || has busybox &&
+{
+	alias vi='busybox vi'
+}
+
 v() { 
     [ $# -eq 0 ] && 
         [ -d ${HOME}/var/files/vimwiki ] &&
