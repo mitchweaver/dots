@@ -18,14 +18,12 @@ done > /dev/null 2>&1
     
 feh="feh --bg-fill --no-fehbg ${HOME}/var/tmp/wall"
 mpvbg="mpvbg ${HOME}/var/tmp/wall"
-#case "$(basename $(file -b -i -L ${HOME}/var/tmp/wall))" in
-#
-#    *png*|*jpg*|*jpeg*) $feh ;;
-#    *gif*|*webm*|*mp4*|*mkv*) $mpvbg
-#
-#esac > /dev/null 2>&1 &
+case "$(basename $(file -b -i -L ${HOME}/var/tmp/wall))" in
 
-$feh &
+    *png*|*jpg*|*jpeg*) $feh ;;
+    *gif*|*webm*|*mp4*|*mkv*) $mpvbg
+
+esac > /dev/null 2>&1 &
 
 clip --daemon &
 

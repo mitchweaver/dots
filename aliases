@@ -4,7 +4,7 @@
     export SHELL=$0
 
 case "$SHELL" in
-    *ksh|*bash) true ;;
+    *ksh|*bash|ash) true ;;
     *) return
 esac
 
@@ -60,18 +60,11 @@ case $(uname) in
                          info)   shift ; pkg_info -D snap $*     ;;
                          search) shift ; pkg_info -D snap -Q $*  ;;
                          *) >&2 echo \?
-                     esac ; }
-             du() { [ $# -eq 0 ] && set .
-                 command du -ahLd 1 "$1" 2> /dev/null | \
-                     sort -rh | head -n 20 ; } ;;
-
+                     esac ; } ;;
     Linux) export NPROC="$(nproc)"
            a free='free -h'
            fdisk() { [ $# -eq 0 ] && set -- -l
                      fdisk $* ; }
-           du() { [ $# -eq 0 ] && set .
-               command du -ahL --max-depth=1 "$1" 2> /dev/null | \
-                   sort -rh | head -n 20 ; }
            has crux && {
                prt='prt-get -im -is -if --install-scripts'
                pkg() { case "$1" in
@@ -128,7 +121,7 @@ a ag='a | grep -i'
 a tf='typeset -f'
 a file='file -b -i -L'
 a bn=basename
-a {d,date}="cmd date '+%a %b %d - %l:%M %p'"
+a {d,date}="cmd date '+%a %b %d - %H:%M %p'"
 a {dmesg,dmegs}='dmesg | tail -n 20'
 a pa='ps auwwx | head'
 a ph='ps auwwx | grep -i -e ${USER} | head'
@@ -178,6 +171,15 @@ null() { true ; }
 mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
+
+du() { 
+    [ $# -eq 0 ] && set .
+    # gnu
+    { command du -ahL --max-depth=1 "$1" | sort -rh ; } ||
+    # busybox / BSD
+    { command du -ahLd 1 "$1" | sort -r ; } |
+    head -n 20
+} 2> /dev/null
 
 for i in $(seq 9) ; do
     eval "m${i}() { export _MARK${i}=\$PWD ; }"
@@ -434,7 +436,7 @@ exists ~/etc && {
         a ${i}c="v ~/etc/suckless/$i/$i.c"
     done
     recomp() { for i ; do
-                   sudo ~/bin/recomp ~/etc/suckless/$i
+                   ~/bin/recomp ~/etc/suckless/$i
                done ; }
 }
 exists ~/src && { a gs='_g ~/src'
@@ -449,5 +451,13 @@ exists ~/tmp && { mt() { mv "$@" ~/tmp ; }
 
 exists ~/env && { mn() { mv "$@" ~/env ; }
                   Yn() { cp "$@" ~/env ; } ; }
+
+gpk() { cd ~/.local/pk/prefix ; cls ; }
+exists ~/src/pk && {
+    push_ports() { rsync ~/src/pk/ports/ micro:mitchweaverxyz/pk/ports ; }
+    vpk() { v ~/src/pk/pk ; }
+    repk() { cp -f ~/src/pk/pk ~/.local/bin/pk ; }
+    pkbk() { cmd cp -rf ~/.local/pk /tmp/pk ; pack /tmp/pk ; }
+}
 
 u i j _u _p _h

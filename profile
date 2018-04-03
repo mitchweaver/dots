@@ -27,7 +27,7 @@ unset -f p
 
 for i in nvim vim vis vi nano ; do
     type $i > /dev/null 2>&1 &&
-        { export {EDITOR,VISUAL}=$i ; break ; }
+        { export EDITOR=$i VISUAL=$i ; break ; }
 done
 
 for i in surf firefox chromium ; do
@@ -38,11 +38,13 @@ unset i
 
 ulimit -c 0 2> /dev/null
 
-export {LANG,LANGUAGE,LC_ALL,LOCALE,LC_CTYPE}='en_US.UTF-8' \
-        LESSCHARSET='utf-8' \
-        PYTHONIOENCODING='UTF-8' \
-        LESS='-QRd' \
-        MANPAGER='less -X'
+for i in LANG LANGUAGE LC_ALL LOCALE LC_CTYPE ; do
+    export $i='en_US.UTF-8'
+done
+export LESSCHARSET='utf-8' \
+    PYTHONIOENCODING='UTF-8' \
+    LESS='-QRd' \
+    MANPAGER='less'
 
 type xdg-open > /dev/null 2>&1 &&
     export XDG_DESKTOP_DIR="/non/existent" \
@@ -63,5 +65,6 @@ type xdg-open > /dev/null 2>&1 &&
 #            startx -- > /dev/null
 #
 #        } > /dev/null 2>&1
-
-export PATH="$PATH:${HOME}/.local/pk/pk:${HOME}/.local/pk/prefix/bin"
+export PATH="$PATH:${HOME}/.local/bin:${HOME}/.local/pk/prefix/bin"
+export PYTHONPATH="$PYTHONPATH:/home/mitch/.local/pk/prefix/lib/python2.7/site-packages"
+export PYTHONPATH="$PYTHONPATH:/home/mitch/.local/pk/prefix/lib/python3.6/site-packages"
