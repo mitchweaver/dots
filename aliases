@@ -3,7 +3,7 @@
 [ -z "$SHELL" ] &&
     export SHELL=$0
 
-case $SHELL in
+case "$SHELL" in
     *ksh|*bash) true ;;
     *) return
 esac
@@ -30,9 +30,15 @@ exists() {
     done
 }
 
+Linux()   { [ $(uname) = Linux ]   && return 0 || return 1 ; }
+OpenBSD() { [ $(uname) = OpenBSD ] && return 0 || return 1 ; }
+
 has exa &&
     a ls='exa -F' ||
-    a ls='ls -F'
+            case $(uname) in
+                Linux) a ls='ls -F --color=always' ;;
+                *BSD)  a ls='ls -F'
+            esac
 
 case $(uname) in
     OpenBSD) export NPROC=$(sysctl -n hw.ncpu)
@@ -69,21 +75,37 @@ case $(uname) in
            has crux && {
                prt='prt-get -im -is -if --install-scripts'
                pkg() { case "$1" in
-                       add)    shift ; sudo $prt depinst $* ;;
-                       update) shift ; sudo $prt update $*  ;;
-                       del)    shift ; sudo $prt remove $*  ;;
-                       deps)   shift ; prt-get deps $*      ;;
-                       list)   shift ; pkginfo -i $*        ;;
-                       search) shift ; prt-get search $*    ;;
-                       info)   shift ; prt-get info $*      ;;
-                       *) >&2 echo \?
-                   esac ; }
-           }
+                           add)    shift ; sudo $prt depinst $* ;;
+                           update) shift ; sudo $prt update $*  ;;
+                           del)    shift ; sudo $prt remove $*  ;;
+                           deps)   shift ; prt-get deps $*      ;;
+                           list)   shift ; pkginfo -i $*        ;;
+                           search) shift ; prt-get search $*    ;;
+                           info)   shift ; prt-get info $*      ;;
+                           *) >&2 echo \?
+                       esac ; }
+           } ||
+           has emerge && {
+               emerge='emerge -aq --newuse --changed-use'
+               pkg() { case "$1" in
+                           add)    shift ; sudo $emerge $*            ;;
+                           update) shift ; sudo $emerge -u $*         ;;
+                           del)    shift ; sudo emerge --unmerge $*   ;;
+                           list)   shift ; cat /var/tmp/portage/world ;;
+                           search) shift ; emerge --search $*         ;;
+                           sync)   shift ; emerge --sync $*           ;;
+                           info)   shift ; emerge --info $*           ;;
+                           *) >&2 echo \?
+                       esac ; }
+          }
 esac
 
-c() { [ $# -eq 0 ] && printf "\033c" || cd "$1" ; }
+! pgrep -x dvtm > /dev/null &&
+    a clear='printf "\033c"'
 
-a {cc,cll,clear,clar,clea}=c
+c() { [ $# -eq 0 ] && clear || cd "$1" ; }
+
+a {cc,cll,clear,clar,clea}=clear
 a {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi}=exit
 a {l,sls,sl}=ls
 a ll='l -l'
@@ -147,8 +169,10 @@ a forecast='curl -s http://wttr.in/Schmalkalden?m | \
     tail -n 33 | sed $\ d | sed $\ d'
 a heart='printf "%b\n" "\xe2\x9d\xa4"'
 
+has sudo &&
+    a su='sudo su'
+
 dn()  { read i && set $i && e "$@" 1> /dev/null 2> /dev/stdout ; }
-2dn() { read i && set $i && e "$@" 1> /dev/stdout 2> /dev/null ; }
 null() { true ; }
 
 mkcd() { mkd "$_" && cd "$_" ; }
@@ -221,9 +245,11 @@ exists ~/bin/conv &&
         done
     done
 
-has vi || has busybox &&
+has busybox &&
 {
-	alias vi='busybox vi'
+    ! has vi &&
+        alias vi='busybox vi'
+    alias ash='busybox ash'
 }
 
 v() { 
@@ -350,8 +376,12 @@ for i in bin env etc tmp usr var src ; do
 done
 
 a gM='_g /mnt'
-m~() { mv "$@" ~     ; }
-Y~() { cp "$@" ~     ; }
+case "$SHELL" in
+    *ksh|bash)
+        g~() { cd ~          ; }
+        m~() { mv "$@" ~     ; }
+        Y~() { cp "$@" ~     ; }
+esac
 mT() { mv "$@" /tmp  ; }
 YT() { cp "$@" /tmp  ; }
 
