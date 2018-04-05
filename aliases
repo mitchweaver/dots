@@ -1,10 +1,9 @@
 # http://github.com/mitchweaver/dots
 
-[ -z "$SHELL" ] &&
-    export SHELL=$0
+export SHELL=${SHELL:-$0}
 
-case "$SHELL" in
-    *ksh|*bash|ash) true ;;
+case ${SHELL} in
+    *ksh|*ash) true ;;
     *) return
 esac
 
@@ -30,9 +29,6 @@ exists() {
     done
 }
 
-Linux()   { [ $(uname) = Linux ]   && return 0 || return 1 ; }
-OpenBSD() { [ $(uname) = OpenBSD ] && return 0 || return 1 ; }
-
 has exa &&
     a ls='exa -F' ||
             case $(uname) in
@@ -49,8 +45,8 @@ case $(uname) in
              a disklabel='doas disklabel -h'
              a sg='sysctl | grep ji'
              a killall='pkill -9'
-             a webcam='ffmpeg -i /dev/video0 -f sndio -i \
-                 default "$(date)".mp4'
+             a poweroff='doas shutdown -p now'
+             a webcam='ffmpeg -i /dev/video0 -f sndio -i default "$(date)".mp4'
              pkg_del() { for i in $* quirks -a ; do 
                              doas pkg_delete $i 
                          done ; }
@@ -63,8 +59,7 @@ case $(uname) in
                      esac ; } ;;
     Linux) export NPROC="$(nproc)"
            a free='free -h'
-           fdisk() { [ $# -eq 0 ] && set -- -l
-                     fdisk $* ; }
+           fdisk() { [ $# -eq 0 ] && set -- -l ; sudo fdisk "$@" ; }
            has crux && {
                prt='prt-get -im -is -if --install-scripts'
                pkg() { case "$1" in
@@ -90,10 +85,12 @@ case $(uname) in
                            info)   shift ; emerge --info $*           ;;
                            *) >&2 echo \?
                        esac ; }
-          }
+          } ||
+          has setup-alpine &&
+              a pkg=apk
 esac
 
-! pgrep -x dvtm > /dev/null &&
+pgrep -x dvtm > /dev/null ||
     a clear='printf "\033c"'
 
 c() { [ $# -eq 0 ] && clear || cd "$1" ; }
@@ -108,7 +105,7 @@ a lsf='l "$PWD"/*'
 a {cls,csl,cl,lc}='c;l'
 a {e,ech,eho}=echo
 a err='>&2 e'
-a {Grep,gerp}=grep
+a {g,Grep,gerp}=grep
 a pg='pgrep'
 a dg='du | grep -i'
 a lg='ls | grep -i'
@@ -122,7 +119,7 @@ a tf='typeset -f'
 a file='file -b -i -L'
 a bn=basename
 a {d,date}="cmd date '+%a %b %d - %H:%M %p'"
-a {dmesg,dmegs}='dmesg | tail -n 20'
+a dmegs=dmesg
 a pa='ps auwwx | head'
 a ph='ps auwwx | grep -i -e ${USER} | head'
 a man='man -a'
@@ -130,7 +127,7 @@ a ex=export
 a cmd=command
 a cx='chmod +x'
 a chown='chown -R'
-a {shutdown,poweroff}='sudo shutdown -p now'
+a poweroff='sudo poweroff'
 a {reboot,restart}='sudo reboot'
 a {mk,mkae}="make -j$(( $NPROC + 1 ))"
 a mkc='mk clean'
@@ -155,8 +152,6 @@ a {discline,discord}='dash ~/usr/bin/discline ; x'
 a {rtv,reddit}="rtv --enable-media ; c"
 a compton='k compton ; compton & c'
 a feh='feh -q -N -x --scale-down'
-a trans='trans -no-auto -b'
-a rtrans='trans -from en -to'
 a {w,weather}='curl -s wttr.in/Schmalkalden?m0TQ'
 a forecast='curl -s http://wttr.in/Schmalkalden?m | \
     tail -n 33 | sed $\ d | sed $\ d'
@@ -164,6 +159,16 @@ a heart='printf "%b\n" "\xe2\x9d\xa4"'
 
 has sudo &&
     a su='sudo su'
+
+trans() {
+    [ $# -eq 0 ] && read inp && set "$inp"
+    cmd trans -no-auto -b "$@"
+}
+rtrans() {
+    [ $# -eq 0 ] && read inp && set "$inp"
+    # note: $1 needs to be language code, ex: 'de'
+    cmd trans -from en -to "$@"
+}
 
 dn()  { read i && set $i && e "$@" 1> /dev/null 2> /dev/stdout ; }
 null() { true ; }
@@ -230,12 +235,10 @@ has nasm &&
                         ./"${1%.*}" ; }
 
 has w3m && 
-    w3m() { [ $# -eq 0 ] && set https://ddg.gg/lite
-                cmd w3m -F $* ; }
+    w3m() { [ $# -eq 0 ] && set https://ddg.gg/lite ; cmd w3m -F $* ; }
 
 exists ~/bin/bar &&
-    bar() { k -9 {bar,lemonbar} > /dev/null 2>&1
-                ~/bin/bar & c ; }
+    bar() { pkill -9 bar ; ~/bin/bar ; } > /dev/null 2>&1 
 
 exists ~/bin/conv &&
     for i in dec bin hex oct ; do
@@ -247,11 +250,9 @@ exists ~/bin/conv &&
         done
     done
 
-has busybox &&
-{
-    ! has vi &&
-        alias vi='busybox vi'
-    alias ash='busybox ash'
+has busybox && {
+    has vi || a vi='busybox vi'
+    a ash='busybox ash'
 }
 
 v() { 
@@ -287,7 +288,7 @@ has mpv &&
     mpv() { 
         [ $# -eq 0 ] && return 1
         if [ "$(pgrep xwinwrap)" ] ; then
-            kill $(pg mpv | grep -v $(pg -P \
+            kill $(pgrep mpv | grep -v $(pgep -P \
                 $(cat ${HOME}/.cache/mpvbg.pid))) \
                     > /dev/null 2>&1
         else
@@ -297,17 +298,24 @@ has mpv &&
     }
 
 has youtube-dl &&
-    { mpvyt()  { mpv ytdl://ytsearch:"$@" ; }
-      mpvytm() { mpv --no-video ytdl://ytsearch:"$@" ; }
-      a ytdl='youtube-dl --geo-bypass --prefer-ffmpeg'
-      a ytdlm='ytdl --extract-audio --audio-quality 0 \
-                   --audio-format opus' ; }
+{ 
+    mpvyt()  { mpv ytdl://ytsearch:"$@" ; }
+    mpvytm() { mpv --no-video ytdl://ytsearch:"$@" ; }
+    ytdl() { 
+        [ -d ~/var/youtube-dl ] && cd ~/var/youtube-dl
+        youtube-dl --geo-bypass --prefer-ffmpeg "$@"
+    }
+    ytdlm() {
+        ytdl --extract-audio --audio-quality 0 --audio-format opus "$@"
+    }
+}
 
 has mogrify &&
-    { a 50%='mogrify -resize 50%X50%'
-      a 25%='mogrify -resize 25%X25%'
-      import() { cmd import -quiet -silent -window root \
-                     -quality 100 ~/import.png ; } ; }
+{
+    a 50%='mogrify -resize 50%X50%'
+    a 25%='mogrify -resize 25%X25%'
+    a import='import -quiet -silent -window root -quality 100 ~/import.png'
+}
 
 has git &&
 {
@@ -328,7 +336,6 @@ has git &&
         git push -u origin $(git branch 2> /dev/null | \
             sed -e '/^[^*]/d' | sed 's/* //')
     }
-    gadd() { [ $# -eq 0 ] && set -- -A ; git add "$@" ; }
     gmit() { 
         if [ $# -eq 1 ] ; then
             git add -A &&
@@ -339,14 +346,11 @@ has git &&
             git commit -m "$@"
         fi
     }
-    gout() { git push -u origin $(git rev-parse \
-                 --abbrev-ref HEAD) "$@" ; }
-    gdiff() { [ $# -eq 0 ] && set master
-              git diff origin/"$1" ; }
-    greset() { [ $# -eq 0 ] && set 10
-               git reset --hard HEAD~"$1" ; }
-    gbase() { [ $# -eq 0 ] && set 5
-              git rebase -i HEAD~$1 ; }
+    gout() { git push -u origin $(git rev-parse --abbrev-ref HEAD) "$@" ; }
+    gadd()   { [ $# -eq 0 ] && set -- -A  ; git add "$@"               ; }
+    gdiff()  { [ $# -eq 0 ] && set master ; git diff origin/"$1"       ; }
+    greset() { [ $# -eq 0 ] && set 10     ; git reset --hard HEAD~"$1" ; }
+    gbase()  { [ $# -eq 0 ] && set 5      ; git rebase -i HEAD~$1      ; }
     ghclone() { git clone https://github.com/"$1" ; }
     gtmp() { 
         [ $# -eq 0 ] && set "/tmp/$(basename ${PWD})-repo"
@@ -378,7 +382,7 @@ for i in bin env etc tmp usr var src ; do
 done
 
 a gM='_g /mnt'
-case "$SHELL" in
+case ${SHELL} in
     *ksh|bash)
         g~() { cd ~          ; }
         m~() { mv "$@" ~     ; }
@@ -450,10 +454,14 @@ exists ~/tmp && { mt() { mv "$@" ~/tmp ; }
                   Yt() { cp "$@" ~/tmp ; } ; }
 
 exists ~/env && { mn() { mv "$@" ~/env ; }
-                  Yn() { cp "$@" ~/env ; } ; }
+                  Yn() { cp "$@" ~/env ; }
+                  a gn='_g ~/env' ; }
 
-gpk() { cd ~/.local/pk/prefix ; cls ; }
-exists ~/src/pk && {
+has pk &&
+    gpk() { cd ~/.local/pk/prefix ; cls ; }
+
+exists ~/src/pk &&
+{
     push_ports() { rsync ~/src/pk/ports/ micro:mitchweaverxyz/pk/ports ; }
     vpk() { v ~/src/pk/pk ; }
     repk() { cp -f ~/src/pk/pk ~/.local/bin/pk ; }

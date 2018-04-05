@@ -29,6 +29,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 colorscheme wal
 endif
 " --------------------------------------------------------
+
 set background=dark
 " set background=light
 
@@ -47,8 +48,6 @@ set textwidth=0 " very annoying warning
 set backspace=2 " allow backspace to go over new lines
 
 set shellslash
-" set shell=ksh
-" let g:is_ksh=1
 set wildmenu " makes shell completion a bit better
 set wildmode=longest,list,full
 set ffs=unix
@@ -67,7 +66,7 @@ set ch=1 " get rid of the wasted line at the bottom
 
 map <silent><leader>ln :set number! relativenumber!<cr>
 
-let s:color_column_old = 60
+let s:color_column_old = 80
 function! s:ToggleColorColumn()
     if s:color_column_old == 0
         let s:color_column_old = &colorcolumn
@@ -211,10 +210,10 @@ augroup END
 map  <silent><c-=>    <nop>
 map  <silent><c-->    <nop>
 " conflicts with tabbed
-" map <silent><C-h>     <nop>
-" map <silent><C-l>     <nop>
-" map  <silent><C-n>    <nop>
-" map  <silent><C-w>    <nop>
+map <silent><C-h>     <nop>
+map <silent><C-l>     <nop>
+map <silent><C-n>    <nop>
+map <silent><C-w>    <nop>
 
 map <leader>md :!/home/mitch/usr/bin/previewmarkdown.sh -i "%" -b $BROWSER<CR>
 

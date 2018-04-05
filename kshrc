@@ -1,4 +1,4 @@
-#!/bin/ksh
+#!/bin/mksh
 #
 # http://github.com/mitchweaver/dots
 #
@@ -14,48 +14,52 @@ alias type='builtin whence -v'
 set -o bgnice nohup trackall
 
 case ${SHELL} in
+    /*/mksh) set -o vi ;;
     /*/ksh) set -o csh-history vi-tabcomplete
-	    bind Space:magic-space > /dev/null ;;
-    /*/mksh) set -o vi
 esac
 
 export HISTFILE=${HOME}/tmp/.ksh_history \
-       {SAVEHIST,HISTSIZE}=100000 \
+       {SAVEHIST,HISTSIZE}=1000 \
        HISTCONTROL=ignoreboth
+
 ulimit -c 0
 
-cd() { [ $# -eq 0 ] &&
-           builtin cd ${HOME} ||
-                 builtin cd "$1"
-        [ -n "$RANGER_LEVEL" ]  &&
-            export PS1="$(get_PS1)(RANGER) " ||
-            export PS1="$(get_PS1)" ; }
+cd() { 
+    [ $# -eq 0 ] &&
+        builtin cd ${HOME} ||
+        builtin cd "$1"
+    export PS1="$(_get_PS1)${RANGER_LEVEL:+[ranger] }${SSH_TTY:+(SSH) }"
+}
 
-parse_branch() { git branch 2> /dev/null | \
-    sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/' ; }
-
-_is_ssh() { [ "$SSH_TTY" ] && echo "(SSH) " ; }
+_parse_branch() { 
+    git branch | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+} 2> /dev/null 
 
 # todo: find a good way to wrap these
 case ${SHELL} in
-    /bin/ksh)
-        [ $(id -u) -eq 0 ] &&
-            get_PS1() { echo "\[\e[0;32m\][root]\[\e[1;36m\] \W\[\e[1;37m\] $(_is_ssh)" ; } ||
-            get_PS1() { echo "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(parse_branch)\[\e[1;37m\] $(_is_ssh)" ; } ;;
-    /bin/mksh)
-        _x="$(print \\001)"
-        get_PS1() { 
+    /*/mksh)
+        _x="$(echo -n \\001)"
+        _get_PS1() { 
             case ${PWD} in
-                ${HOME}) tmp_pwd='~' ;;
-                *) tmp_pwd=`basename "${PWD}"`
+                ${HOME}) local tmp_pwd='~' ;;
+                *) local tmp_pwd="${PWD##*/}"
             esac
-            echo -n "$_x$(print \\r)$_x\e[1;35mm$_x\e[0;32mi$_x\e[0;33mt$_x\e[0;34mc$_x\e[1;31mh$_x\e[1;36m $tmp_pwd$_x$(parse_branch)$_x\e[1;37m $(_is_ssh)"
+            case ${USER} in
+                mitch) echo -n "$_x$(echo -n \\r)$_x\e[1;35mm$_x\e[0;32mi$_x\e[0;33mt$_x\e[0;34mc$_x\e[1;31mh$_x\e[1;36m $tmp_pwd$_x$(_parse_branch)$_x\e[1;37m " ;;
+                root)  echo -n "$_x$(echo -n \\r)$_x\e[1;35m[root]$_x\e[1;36m $tmp_pwd$_x$(_parse_branch)$_x\e[1;37m " ;;
+                *)     echo -n '% $tmp_pwd '
+            esac
         } ;;
+    /*/ksh) # openbsd
+        case ${USER} in
+            mitch) _get_PS1() { echo -n "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(_parse_branch)\[\e[1;37m\] " ; } ;;
+            root)  _get_PS1() { echo -n "\[\e[0;32m\][root]\[\e[1;36m\] \W\[\e[1;37m\] " ; } ;;
+            *)     _get_PS1() { echo -n '% \W ' ; }
+        esac
 esac
 
-[ -n "$RANGER_LEVEL" ]  && 
-    { clear ; ls ; cd . ; } ||
-        export PS1="$(get_PS1)"
+[ -n "$RANGER_LEVEL" ] && clear
 
-(rm -rf ${HOME}/{*.core,*.dump,Desktop,Downloads} \
-    > /dev/null 2>&1 &)
+cd .
+
+(rm -rf ${HOME}/{*.core,*.dump,Desktop,Downloads} 2> /dev/null &)
