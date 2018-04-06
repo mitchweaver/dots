@@ -238,7 +238,7 @@ has w3m &&
     w3m() { [ $# -eq 0 ] && set https://ddg.gg/lite ; cmd w3m -F $* ; }
 
 exists ~/bin/bar &&
-    bar() { pkill -9 bar ; ~/bin/bar ; } > /dev/null 2>&1 
+    bar() { pkill -9 bar ; ~/bin/bar & } > /dev/null
 
 exists ~/bin/conv &&
     for i in dec bin hex oct ; do
@@ -396,7 +396,7 @@ exists ~/var && {
         a g$(printf %.1s $i)="_g ~/var/$i"
     done
 
-    a gvi='_g ~/var/videos'
+    a {gvi,gvid}='_g ~/var/videos'
     a gbk='_g ~/var/books'
     a gvt='_g ~/var/tmp'
     a gyt='_g ~/var/youtube-dl'
@@ -456,6 +456,17 @@ exists ~/tmp && { mt() { mv "$@" ~/tmp ; }
 exists ~/env && { mn() { mv "$@" ~/env ; }
                   Yn() { cp "$@" ~/env ; }
                   a gn='_g ~/env' ; }
+
+addtorrent() {
+    for i ; do
+        if [ -f "$i" ] ; then
+            cmd mv -f "$i" ~/.torrents/torrents &&
+            echo ${HOME}/.torrents/torrents/"${i##*/}" >> ~/.torrents/queue.txt
+        else
+            echo "$i" >> ~/.torrents/queue.txt
+        fi
+    done
+}
 
 has pk &&
     gpk() { cd ~/.local/pk/prefix ; cls ; }
