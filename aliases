@@ -107,21 +107,19 @@ a {e,ech,eho}=echo
 a err='>&2 e'
 a {g,Grep,gerp}=grep
 a pg='pgrep'
-a dg='du | grep -i'
-a lg='ls | grep -i'
+a dg='du | g -i'
+a lg='ls | g -i'
 a cp='cp -irv'
 a mv='mv -iv'
 a {mkdir,mkd,mkdr}='mkdir -p'
 a df='df -h'
 a ln='ln -sf'
-a ag='a | grep -i'
+a ag='a | g -i'
 a tf='typeset -f'
 a file='file -b -i -L'
 a bn=basename
 a {d,date}="cmd date '+%a %b %d - %H:%M %p'"
 a dmegs=dmesg
-a pa='ps auwwx | head'
-a ph='ps auwwx | grep -i -e ${USER} | head'
 a man='man -a'
 a ex=export
 a cmd=command
@@ -159,6 +157,14 @@ a heart='printf "%b\n" "\xe2\x9d\xa4"'
 
 has sudo &&
     a su='sudo su'
+
+ps() {
+    if [ $# -gt 0 ] ; then
+        cmd ps auwwx | g -i "$@" | g -v grep
+    else
+        cmd ps auwwx
+    fi | head -n 20
+}
 
 trans() {
     [ $# -eq 0 ] && read inp && set "$inp"
@@ -208,7 +214,7 @@ f() {
     find "$1" ! -path "$1" -iname "*$2*" ; 
 }
 
-hg() { [ $# -gt 0 ] && grep -e "$@" $HISTFILE | head -n 20 ; }
+hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
 
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
@@ -297,24 +303,17 @@ has mpv &&
         cmd mpv --title=mpv "$@" & x
     }
 
-has youtube-dl &&
-{ 
-    mpvyt()  { mpv ytdl://ytsearch:"$@" ; }
-    mpvytm() { mpv --no-video ytdl://ytsearch:"$@" ; }
-    ytdl() { 
-        [ -d ~/var/youtube-dl ] && cd ~/var/youtube-dl
-        youtube-dl --geo-bypass --prefer-ffmpeg "$@"
-    }
-    ytdlm() {
-        ytdl --extract-audio --audio-quality 0 --audio-format opus "$@"
-    }
-}
-
 has mogrify &&
 {
     a 50%='mogrify -resize 50%X50%'
     a 25%='mogrify -resize 25%X25%'
     a import='import -quiet -silent -window root -quality 100 ~/import.png'
+}
+
+has youtube-dl &&
+{
+    mpvyt()  { mpv ytdl://ytsearch:"$@" ; }
+    mpvytm() { mpv --no-video ytdl://ytsearch:"$@" ; }
 }
 
 has git &&
@@ -399,7 +398,7 @@ exists ~/var && {
     a {gvi,gvid}='_g ~/var/videos'
     a gbk='_g ~/var/books'
     a gvt='_g ~/var/tmp'
-    a gyt='_g ~/var/youtube-dl'
+    a gyt='_g ~/var/ytdl'
 
     Yf() { cp "$@" ~/var/files     ; }
     Yd() { cp "$@" ~/var/downloads ; }
@@ -457,15 +456,22 @@ exists ~/env && { mn() { mv "$@" ~/env ; }
                   Yn() { cp "$@" ~/env ; }
                   a gn='_g ~/env' ; }
 
-addtorrent() {
-    for i ; do
-        if [ -f "$i" ] ; then
-            cmd mv -f "$i" ~/.torrents/torrents &&
-            echo ${HOME}/.torrents/torrents/"${i##*/}" >> ~/.torrents/queue.txt
-        else
-            echo "$i" >> ~/.torrents/queue.txt
-        fi
-    done
+exists ~/.torrents &&
+    addtorrent() {
+        for i ; do
+            if [ -f "$i" ] ; then
+                cmd mv -f "$i" ~/.torrents/torrents &&
+                echo ${HOME}/.torrents/torrents/"${i##*/}" >> ~/.torrents/queue.txt
+            else
+                echo "$i" >> ~/.torrents/queue.txt
+            fi
+        done
+    }
+
+exists ~/.youtube-dl &&
+{
+    addyt() { echo "$@" >> ~/.youtube-dl/video-queue.txt ; }
+    addytm() { echo "$@" >> ~/.youtube-dl/music-queue.txt ; }
 }
 
 has pk &&

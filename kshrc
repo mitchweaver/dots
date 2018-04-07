@@ -62,4 +62,4 @@ esac
 
 cd .
 
-(rm -rf ${HOME}/{*.core,*.dump,Desktop,Downloads} 2> /dev/null &)
+(rm -rf ${HOME}/{*.core,*.out,*.dump,Desktop,Downloads} 2> /dev/null &)
