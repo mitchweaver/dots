@@ -14,7 +14,7 @@ for i in bar sleep ; do
 done > /dev/null 2>&1
 
 case "$(basename $(file -b -i -L ${HOME}/var/tmp/wall))" in
-    *png*|*jpg*|*jpeg*) feh --bg-fill --no-fehbg ${HOME}/var/tmp/wall" ;;
+    *png*|*jpg*|*jpeg*) feh --bg-fill --no-fehbg ${HOME}/var/tmp/wall ;;
     *gif*|*webm*|*mp4*|*mkv*) mpvbg ${HOME}/var/tmp/wall
 esac > /dev/null 2>&1 &
 
@@ -26,8 +26,9 @@ esac > /dev/null 2>&1 &
 
 bar > /dev/null 2>&1 &
 
-! pgrep -f torrent-queue > /dev/null &&
-    torrent-queue > /dev/null &
+#! pgrep -f torrent-queue > /dev/null &&
+#    torrent-queue > /dev/null &
+
 ! pgrep -f ytdl-queue > /dev/null &&
     ytdl-queue > /dev/null &
 

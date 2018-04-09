@@ -210,9 +210,9 @@ augroup END
 map  <silent><c-=>    <nop>
 map  <silent><c-->    <nop>
 " conflicts with tabbed
-map <silent><C-h>     <nop>
-map <silent><C-l>     <nop>
-map <silent><C-n>    <nop>
+" map <silent><C-h>     <nop>
+" map <silent><C-l>     <nop>
+" map <silent><C-n>    <nop>
 map <silent><C-w>    <nop>
 
 map <leader>md :!/home/mitch/usr/bin/previewmarkdown.sh -i "%" -b $BROWSER<CR>

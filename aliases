@@ -59,7 +59,7 @@ case $(uname) in
                      esac ; } ;;
     Linux) export NPROC="$(nproc)"
            a free='free -h'
-           fdisk() { [ $# -eq 0 ] && set -- -l ; sudo fdisk "$@" ; }
+           a webcam='ffmpeg -i /dev/video0 -f alsa -i default "$(date)".mp4'
            has crux && {
                prt='prt-get -im -is -if --install-scripts'
                pkg() { case "$1" in
@@ -212,6 +212,19 @@ f() {
     esac
 
     find "$1" ! -path "$1" -iname "*$2*" ; 
+}
+
+echossh() {
+    if [ $# -lt 3 ] ; then
+        >&2 echo 'usage: echossh user@host file $@'
+        exit 1
+    else
+        local user_at_host="$1"
+        local file="$2"
+        shift 2
+        echo "$@" | ssh "$user_at_host" \
+            sh -c "cat /dev/stdin >> $file"
+    fi
 }
 
 hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
@@ -456,22 +469,34 @@ exists ~/env && { mn() { mv "$@" ~/env ; }
                   Yn() { cp "$@" ~/env ; }
                   a gn='_g ~/env' ; }
 
-exists ~/.torrents &&
+cat ~/.ssh/config 2> /dev/null | grep torrentbox > /dev/null &&
+{
     addtorrent() {
         for i ; do
             if [ -f "$i" ] ; then
-                cmd mv -f "$i" ~/.torrents/torrents &&
-                echo ${HOME}/.torrents/torrents/"${i##*/}" >> ~/.torrents/queue.txt
+                scp "$i" torrentbox:~/.torrents/torrents &&
+                echossh torrentbox '~/.torrents/queue.txt' '~/.torrents/torrrents'/"${i##*/}" &&
+                rm -f "$i"
             else
-                echo "$i" >> ~/.torrents/queue.txt
+                echossh torrentbox '~/.torrents/queue.txt' "$i"
             fi
         done
     }
+    a checktorrents='ssh torrentbox tail -f /tmp/torrent-queue.log'
+}
 
 exists ~/.youtube-dl &&
 {
-    addyt() { echo "$@" >> ~/.youtube-dl/video-queue.txt ; }
-    addytm() { echo "$@" >> ~/.youtube-dl/music-queue.txt ; }
+    addyt() { 
+        for i ; do
+            echo "$i" >> ~/.youtube-dl/video-queue.txt
+        done
+    }
+    addytm() {
+        for i ; do
+            echo "$i" >> ~/.youtube-dl/music-queue.txt
+        done
+    }
 }
 
 has pk &&
@@ -486,3 +511,5 @@ exists ~/src/pk &&
 }
 
 u i j _u _p _h
+
+a pv='pv -pcre'
