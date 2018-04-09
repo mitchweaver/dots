@@ -1,7 +1,7 @@
 p() { for i ; do export PATH=$PATH:"$i" ; done ; }
 
 p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin /sbin \
-   ${HOME}/{{bin,bin/local/bin},usr/{bin,bin/ascii,local/bin},.local/bin}
+   ${HOME}/{{bin,bin/local/bin,bin/chroots},usr/{bin,bin/ascii,local/bin},.local/bin}
 
 unset -f p
 
@@ -30,7 +30,7 @@ for i in nvim vim vis vi nano ; do
         { export EDITOR=$i VISUAL=$i ; break ; }
 done
 
-for i in surf firefox chromium ; do
+for i in surf chromium chromium-browser firefox ; do
     type $i > /dev/null 2>&1 &&
         { export BROWSER=$i ; break ; }
 done

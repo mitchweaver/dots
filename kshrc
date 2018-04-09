@@ -25,9 +25,15 @@ export HISTFILE=${HOME}/tmp/.ksh_history \
 ulimit -c 0
 
 cd() { 
-    [ $# -eq 0 ] &&
-        builtin cd ${HOME} ||
-        builtin cd "$1"
+    if [ $# -eq 0 ] ; then
+        builtin cd ${HOME}
+    else
+        builtin cd "$@"   ||
+        builtin cd *"$@"  ||
+        builtin cd "$@"*  ||
+        builtin cd *"$@"* ||
+        builtin cd "$(find . -iname *"$@"* | head -n 1)"
+    fi 2> /dev/null
     export PS1="$(_get_PS1)${RANGER_LEVEL:+[ranger] }${SSH_TTY:+(SSH) }"
 }
 
@@ -42,6 +48,7 @@ case ${SHELL} in
         _get_PS1() { 
             case ${PWD} in
                 ${HOME}) local tmp_pwd='~' ;;
+                '/') local tmp_pwd='/' ;;
                 *) local tmp_pwd="${PWD##*/}"
             esac
             case ${USER} in

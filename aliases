@@ -4,14 +4,12 @@ export SHELL=${SHELL:-$0}
 
 case ${SHELL} in
     *ksh|*ash) true ;;
-    *) return
+    *) return # don't break things
 esac
 
-u() { 
-    for _u ; do 
+u() { for _u ; do 
         unalias $_u || unset -f $_u
-    done 2> /dev/null
-}
+    done 2> /dev/null ; }
 
 u r w
 
@@ -29,34 +27,18 @@ exists() {
     done
 }
 
-has exa &&
-    a ls='exa -F' ||
-            case $(uname) in
-                Linux) a ls='ls -F --color=always' ;;
-                *BSD)  a ls='ls -F'
-            esac
+if has exa ; then
+    a ls='exa -F'
+elif has colorls ; then
+    a ls='colorls -F'
+else
+    case $(uname) in
+        Linux) a ls='ls -F --color=always' ;;
+        *BSD)  a ls='ls -F'
+    esac
+fi
 
 case $(uname) in
-    OpenBSD) export NPROC=$(sysctl -n hw.ncpu)
-             a sudo=doas
-             a seq=jot
-             a rm='rm -P'
-             a disks='sysctl -n hw.disknames'
-             a disklabel='doas disklabel -h'
-             a sg='sysctl | grep ji'
-             a killall='pkill -9'
-             a poweroff='doas shutdown -p now'
-             a webcam='ffmpeg -i /dev/video0 -f sndio -i default "$(date)".mp4'
-             pkg_del() { for i in $* quirks -a ; do 
-                             doas pkg_delete $i 
-                         done ; }
-             pkg() { case "$1" in
-                         add)    shift ; doas pkg_add -D snap $* ;;
-                         del)    shift ; pkg_del $*              ;;
-                         info)   shift ; pkg_info -D snap $*     ;;
-                         search) shift ; pkg_info -D snap -Q $*  ;;
-                         *) >&2 echo \?
-                     esac ; } ;;
     Linux) export NPROC="$(nproc)"
            a free='free -h'
            a webcam='ffmpeg -i /dev/video0 -f alsa -i default "$(date)".mp4'
@@ -88,6 +70,27 @@ case $(uname) in
           } ||
           has setup-alpine &&
               a pkg=apk
+        ;;
+    OpenBSD) export NPROC=$(sysctl -n hw.ncpu)
+             a sudo=doas
+             a seq=jot
+             a rm='rm -P'
+             a disks='sysctl -n hw.disknames'
+             a disklabel='doas disklabel -h'
+             a sg='sysctl | grep ji'
+             a killall='pkill -9'
+             a poweroff='doas shutdown -p now'
+             a webcam='ffmpeg -i /dev/video0 -f sndio -i default "$(date)".mp4'
+             pkg_del() { for i in $* quirks -a ; do 
+                             doas pkg_delete $i 
+                         done ; }
+             pkg() { case "$1" in
+                         add)    shift ; doas pkg_add -D snap $* ;;
+                         del)    shift ; pkg_del $*              ;;
+                         info)   shift ; pkg_info -D snap $*     ;;
+                         search) shift ; pkg_info -D snap -Q $*  ;;
+                         *) >&2 echo \?
+                     esac ; }
 esac
 
 pgrep -x dvtm > /dev/null ||
@@ -118,7 +121,7 @@ a ag='a | g -i'
 a tf='typeset -f'
 a file='file -b -i -L'
 a bn=basename
-a {d,date}="cmd date '+%a %b %d - %H:%M %p'"
+a {d,date}="cmd date '+%a %b %d - %I:%M %p'"
 a dmegs=dmesg
 a man='man -a'
 a ex=export
@@ -154,6 +157,19 @@ a {w,weather}='curl -s wttr.in/Schmalkalden?m0TQ'
 a forecast='curl -s http://wttr.in/Schmalkalden?m | \
     tail -n 33 | sed $\ d | sed $\ d'
 a heart='printf "%b\n" "\xe2\x9d\xa4"'
+a chroot='sudo chroot'
+
+for i in 3.6 3.5 3.4 3 ; do
+    type python$i > /dev/null 2>&1 &&
+        { a py3=python$i ; break ; }
+done
+
+for i in 2.7 2.5 2 ; do
+    type python$i > /dev/null 2>&1 &&
+        { a py2=python$i ; break ; }
+done
+
+has py3 && a py=py3 || a py=py2
 
 has sudo &&
     a su='sudo su'
@@ -166,17 +182,9 @@ ps() {
     fi | head -n 20
 }
 
-trans() {
-    [ $# -eq 0 ] && read inp && set "$inp"
-    cmd trans -no-auto -b "$@"
-}
-rtrans() {
-    [ $# -eq 0 ] && read inp && set "$inp"
-    # note: $1 needs to be language code, ex: 'de'
-    cmd trans -from en -to "$@"
-}
-
+# shortcut for '> /dev/null'
 dn()  { read i && set $i && e "$@" 1> /dev/null 2> /dev/stdout ; }
+# shortcut for '> /dev/null 2>&1'
 null() { true ; }
 
 mkcd() { mkd "$_" && cd "$_" ; }
@@ -192,6 +200,9 @@ du() {
     head -n 20
 } 2> /dev/null
 
+# directory marking
+# usage: 'm1' = mark 1
+#        'g1' = return to m1
 for i in $(seq 9) ; do
     eval "m${i}() { export _MARK${i}=\$PWD ; }"
     eval "g${i}() { cd \$_MARK${i} ; }"
@@ -207,11 +218,23 @@ run() {
 
 f() { 
     case $# in
-        1) set . "$1" ;;
+        1) set . "$@" ;;
         0) read inp && set . "$inp"
     esac
 
     find "$1" ! -path "$1" -iname "*$2*" ; 
+}
+fdo() {
+    case $# in
+        2) set . "$@" ;;
+        0) read inp && set . "$inp"
+    esac
+
+    local dir="$1"
+    local string="$2"
+    shift 2
+
+    find "$dir" ! -path "$dir" -iname "*$string*" -exec "$@" "{}" \; 
 }
 
 echossh() {
@@ -244,8 +267,7 @@ reload() { . ~/etc/aliases
            fc-cache ; } 2> /dev/null
 
 ping() { [ $# -eq 0 ] && set mitchweaver.xyz
-             cmd ping -c 1 -n -s 32 -w 10 $1 | \
-                head -n 2 ; }
+         cmd ping -c 1 -n -s 32 -w 10 $1 | head -n 2 ; }
 
 has nasm &&
     nasm() { [ -f "$1" ] &&
@@ -291,6 +313,9 @@ v() {
 has ranger &&
     r() { ranger "$@" ; c ; }
 
+has pv &&
+    a pv='pv -pcre'
+
 has youtube-viewer &&
     { a yt="c; youtube-viewer -C -q --vd=high"
       a ytm="c;yt -n"
@@ -321,6 +346,19 @@ has mogrify &&
     a 50%='mogrify -resize 50%X50%'
     a 25%='mogrify -resize 25%X25%'
     a import='import -quiet -silent -window root -quality 100 ~/import.png'
+}
+
+has trans &&
+{
+    trans() {
+        [ $# -eq 0 ] && read inp && set "$inp"
+        cmd trans -no-auto -b "$@"
+    }
+    rtrans() {
+        [ $# -eq 0 ] && read inp && set "$inp"
+        # note: $1 needs to be language code, ex: 'de'
+        cmd trans -from en -to "$@"
+    }
 }
 
 has youtube-dl &&
@@ -511,5 +549,3 @@ exists ~/src/pk &&
 }
 
 u i j _u _p _h
-
-a pv='pv -pcre'
