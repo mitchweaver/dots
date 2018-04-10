@@ -32,7 +32,9 @@ cd() {
         builtin cd *"$@"  ||
         builtin cd "$@"*  ||
         builtin cd *"$@"* ||
-        builtin cd "$(find . -iname *"$@"* | head -n 1)"
+        builtin cd "$(find . -iname *"$@"* -maxdepth 1 | head -n 1)" ||
+        builtin cd "$(find . -iname *"$@"* -maxdepth 2 | head -n 1)" ||
+        builtin cd "$(find . -iname *"$@"* -maxdepth 10 | head -n 1)"
     fi 2> /dev/null
     export PS1="$(_get_PS1)${RANGER_LEVEL:+[ranger] }${SSH_TTY:+(SSH) }"
 }

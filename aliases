@@ -27,6 +27,17 @@ exists() {
     done
 }
 
+contains() {
+    [ $# -ne 2 ] && return 1
+    local string="$1"
+    local substring="$2"
+    if test "${string#*$substring}" != "$string" ; then
+        return 0    # $substring is in $string
+    else
+        return 1    # $substring is not in $string
+    fi
+}
+
 if has exa ; then
     a ls='exa -F'
 elif has colorls ; then
@@ -41,6 +52,7 @@ fi
 case $(uname) in
     Linux) export NPROC="$(nproc)"
            a free='free -h'
+           a disks='lsblk'
            a webcam='ffmpeg -i /dev/video0 -f alsa -i default "$(date)".mp4'
            has crux && {
                prt='prt-get -im -is -if --install-scripts'
@@ -124,6 +136,9 @@ a bn=basename
 a {d,date}="cmd date '+%a %b %d - %I:%M %p'"
 a dmegs=dmesg
 a man='man -a'
+a h='head -n 15'
+a t='tail -n 15'
+a w='watch -t -n 1'
 a ex=export
 a cmd=command
 a cx='chmod +x'
@@ -145,7 +160,7 @@ a {less,les}='less -QRd'
 a {notepad,vtmp}='v /tmp/notepad'
 a {suvim,suvi,suv}='sudo ${EDITOR}'
 a view='${EDITOR} -R'
-a {h,htpo,hto,ht,hpot,hotp,top}=htop
+a {htpo,hto,ht,hpot,hotp,top}=htop
 a {hm,hme}='h -u ${USER}'
 a {hr,hroot}='h -u root'
 a nf=neofetch
@@ -153,7 +168,7 @@ a {discline,discord}='dash ~/usr/bin/discline ; x'
 a {rtv,reddit}="rtv --enable-media ; c"
 a compton='k compton ; compton & c'
 a feh='feh -q -N -x --scale-down'
-a {w,weather}='curl -s wttr.in/Schmalkalden?m0TQ'
+a weather='curl -s wttr.in/Schmalkalden?m0TQ'
 a forecast='curl -s http://wttr.in/Schmalkalden?m | \
     tail -n 33 | sed $\ d | sed $\ d'
 a heart='printf "%b\n" "\xe2\x9d\xa4"'
@@ -233,8 +248,14 @@ fdo() {
     local dir="$1"
     local string="$2"
     shift 2
+    
+    if contains "$@" '{}' ; then
+        local cmd="$@"
+    else
+        local cmd="$@ {}"
+    fi
 
-    find "$dir" ! -path "$dir" -iname "*$string*" -exec "$@" "{}" \; 
+    find "$dir" ! -path "$dir" -iname "*$string*" -exec $cmd \; 
 }
 
 echossh() {
@@ -297,16 +318,37 @@ has busybox && {
 }
 
 v() { 
-    [ $# -eq 0 ] && 
-        [ -d ${HOME}/var/files/vimwiki ] &&
+    # if no arguments, open my vimwiki page
+    if [ $# -eq 0 ] ; then
+        if [ -d ${HOME}/var/files/vimwiki ] ; then
             { has nvim || has vim ; } &&
                 set -- -c VimwikiIndex
-    if has nvim ; then
-        cmd nvim -p "$@"
-    elif has vim ; then
-        cmd vim -p "$@"
-    elif has vi ; then
-        cmd vi "$@"
+                ${EDITOR} "$@"
+                return
+        else
+            return
+        fi
+    fi
+
+    for i in nvim vim vis vi nano ; do
+        has $i &&
+            { local editor=$i ; break ; }
+    done
+
+    if [ -f *"$@"* ] ; then
+       $editor *"$@"*
+    else
+        local f="$(find . -iname *"$@"* -maxdepth 1 | head -n 1)"
+        if [ -f "$f" ] ; then
+            $editor "$f"
+        else
+            local f="$(find . -iname *"$@"* -maxdepth 2 | head -n 1)"
+            if [ -f "$f" ] ; then
+                $editor "$f"
+            else
+                $editor "$@"
+            fi
+        fi
     fi
 }
 
@@ -363,8 +405,8 @@ has trans &&
 
 has youtube-dl &&
 {
-    mpvyt()  { mpv ytdl://ytsearch:"$@" ; }
-    mpvytm() { mpv --no-video ytdl://ytsearch:"$@" ; }
+    yt()  { mpv ytdl://ytsearch:"$@" ; }
+    ytm() { mpv --no-video ytdl://ytsearch:"$@" ; }
 }
 
 has git &&
@@ -520,7 +562,7 @@ cat ~/.ssh/config 2> /dev/null | grep torrentbox > /dev/null &&
             fi
         done
     }
-    a checktorrents='ssh torrentbox tail -f /tmp/torrent-queue.log'
+    a checktorrents='ssh torrentbox tail -f /tmp/torrent*.log'
 }
 
 exists ~/.youtube-dl &&
@@ -535,6 +577,7 @@ exists ~/.youtube-dl &&
             echo "$i" >> ~/.youtube-dl/music-queue.txt
         done
     }
+    checkyt() { tail -f /tmp/ytdl*.log ; }
 }
 
 has pk &&
