@@ -1,7 +1,19 @@
-p() { for i ; do export PATH=$PATH:"$i" ; done ; }
+export PATH="$PATH:${HOME}/.local/bin:${HOME}/.local/pk/prefix/bin"
+export PYTHONPATH="$PYTHONPATH:/home/mitch/.local/pk/prefix/lib/python2.7/site-packages:/tmp/bin/python2.7/site-packages"
+export PYTHONPATH="$PYTHONPATH:/home/mitch/.local/pk/prefix/lib/python3.6/site-packages:/tmp/bin/python3.6/site-packages"
+
+p() { for i ; do export PATH="$i":$PATH ; done ; }
 
 p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin /sbin \
-   ${HOME}/{{bin,bin/local/bin,bin/chroots},usr/{bin,bin/ascii,local/bin},.local/bin}
+   ${HOME}/{{bin,bin/local/bin,bin/chroots},usr/{bin,bin/ascii},.local/bin} \
+   ${HOME}/bin/metal-archives
+
+# commonly used programs stored in a tmpfs, copied in /etc/rc.local
+if [ -d /tmp/bin ] ; then
+    p /tmp/bin
+else
+    p ${HOME}/usr/local/bin
+fi
 
 unset -f p
 
@@ -44,7 +56,8 @@ done
 export LESSCHARSET='utf-8' \
     PYTHONIOENCODING='UTF-8' \
     LESS='-QRd' \
-    MANPAGER='less'
+    MANPAGER='less' \
+    "$(dbus-launch)"
 
 type xdg-open > /dev/null 2>&1 &&
     export XDG_DESKTOP_DIR="/non/existent" \
@@ -56,15 +69,8 @@ type xdg-open > /dev/null 2>&1 &&
            XDG_PICTURES_DIR="${HOME}/var/images" \
            XDG_VIDEOS_DIR="${HOME}/var/videos"
 
-#[ -z "$(pgrep X)" ] &&  
-#    [ -f ~/etc/xinitrc ] &&
-#        {   
-#
-#            rm -rf ${HOME}/.{Xauthority*,serverauth*}
-#            cp ${HOME}/etc/xinitrc ${HOME}/.xinitrc
-#            startx -- > /dev/null
-#
-#        } > /dev/null 2>&1
-export PATH="$PATH:${HOME}/.local/bin:${HOME}/.local/pk/prefix/bin"
-export PYTHONPATH="$PYTHONPATH:/home/mitch/.local/pk/prefix/lib/python2.7/site-packages"
-export PYTHONPATH="$PYTHONPATH:/home/mitch/.local/pk/prefix/lib/python3.6/site-packages"
+if [ -z "$(pgrep X)" ] ; then
+    clear
+    rm -rf ${HOME}/.{Xauthority*,serverauth*}
+    startx -- > /dev/null
+fi > /dev/null 2>&1

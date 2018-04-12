@@ -69,6 +69,9 @@ config/GIMP/2.9/colorrc
 config/GIMP/2.9/controllerrc
 config/GIMP/2.9/tags.xml
 
+config/Trolltech*
+config/Thunar
+
 config/lman*
 config/htop
 config/redshift*

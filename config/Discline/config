@@ -151,7 +151,6 @@ channel_ignore_list:
   - musicians_talk
   - musician_talk
   - prog_avantgarde_djent
-  - kvlt_speak
 - server_name: /r/unixporn
   ignores:
   - feedback
@@ -179,6 +178,7 @@ channel_ignore_list:
   - listening_room
   - news-board
   - newcomers
+  - rules
 - server_name: Unix-like
   ignores:
   - welcome-rules
@@ -189,6 +189,7 @@ channel_ignore_list:
   - greeter
   - mod-log
   - memes-bots
+  - bots
 - server_name: Retro Computing Discord
   ignores:
   - member-log

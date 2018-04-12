@@ -54,35 +54,43 @@ case $(uname) in
            a free='free -h'
            a disks='lsblk'
            a webcam='ffmpeg -i /dev/video0 -f alsa -i default "$(date)".mp4'
-           has crux && {
+           if has crux ; then
                prt='prt-get -im -is -if --install-scripts'
                pkg() { case "$1" in
-                           add)    shift ; sudo $prt depinst $* ;;
-                           update) shift ; sudo $prt update $*  ;;
-                           del)    shift ; sudo $prt remove $*  ;;
-                           deps)   shift ; prt-get deps $*      ;;
-                           list)   shift ; pkginfo -i $*        ;;
-                           search) shift ; prt-get search $*    ;;
-                           info)   shift ; prt-get info $*      ;;
+                           add)    shift ; sudo $prt depinst $@ ;;
+                           update) shift ; sudo $prt update $@  ;;
+                           del)    shift ; sudo $prt remove $@  ;;
+                           sysup)  shift ; sudo $prt sysup $@   ;;
+                           deps)   shift ; prt-get deps $@      ;;
+                           list)   shift ; pkginfo -i $@        ;;
+                           search) shift ; prt-get search $@    ;;
+                           info)   shift ; prt-get info $@      ;;
                            *) >&2 echo \?
                        esac ; }
-           } ||
-           has emerge && {
-               emerge='emerge -aq --newuse --changed-use'
-               pkg() { case "$1" in
-                           add)    shift ; sudo $emerge $*            ;;
-                           update) shift ; sudo $emerge -u $*         ;;
-                           del)    shift ; sudo emerge --unmerge $*   ;;
-                           list)   shift ; cat /var/tmp/portage/world ;;
-                           search) shift ; emerge --search $*         ;;
-                           sync)   shift ; emerge --sync $*           ;;
-                           info)   shift ; emerge --info $*           ;;
-                           *) >&2 echo \?
-                       esac ; }
-          } ||
-          has setup-alpine &&
+          elif has emerge ; then
+              emerge='emerge -aq --newuse --changed-use'
+              pkg() { case "$1" in
+                          add)    shift ; sudo $emerge $@            ;;
+                          update) shift ; sudo $emerge -u $@         ;;
+                          del)    shift ; sudo emerge --unmerge $@   ;;
+                          list)   shift ; cat /var/tmp/portage/world ;;
+                          search) shift ; emerge --search $@         ;;
+                          sync)   shift ; emerge --sync $@           ;;
+                          info)   shift ; emerge --info $@           ;;
+                          *) >&2 echo \?
+                      esac ; }
+         elif has setup-alpine ; then
               a pkg=apk
-        ;;
+         elif has apt ; then
+             pkg() { case "$1" in
+                         add)    shift ; apt install $@ ;;
+                         del)    shift ; apt remove $@  ;;
+                         sync)   shift ; apt update     ;;
+                         update) shift ; apt upgrade    ;;
+                         *) >&2 echo \?
+                     esac ; }
+         fi
+;;
     OpenBSD) export NPROC=$(sysctl -n hw.ncpu)
              a sudo=doas
              a seq=jot
@@ -138,7 +146,7 @@ a dmegs=dmesg
 a man='man -a'
 a h='head -n 15'
 a t='tail -n 15'
-a w='watch -t -n 1'
+a {w,watch}='watch -t -n 1'
 a ex=export
 a cmd=command
 a cx='chmod +x'
@@ -160,7 +168,7 @@ a {less,les}='less -QRd'
 a {notepad,vtmp}='v /tmp/notepad'
 a {suvim,suvi,suv}='sudo ${EDITOR}'
 a view='${EDITOR} -R'
-a {htpo,hto,ht,hpot,hotp,top}=htop
+a {htpo,hto,ht,hpot,hotp,top,htop}='htop ; c'
 a {hm,hme}='h -u ${USER}'
 a {hr,hroot}='h -u root'
 a nf=neofetch
@@ -187,7 +195,7 @@ done
 has py3 && a py=py3 || a py=py2
 
 has sudo &&
-    a su='sudo su'
+    a su='sudo su -'
 
 ps() {
     if [ $# -gt 0 ] ; then
@@ -271,6 +279,8 @@ echossh() {
     fi
 }
 
+dlzip() { wget "$@" -O dl.zip && unzip dl.zip && rm -f dl.zip && cls ; }
+
 hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
 
 ext() { e "${1##*.}" ; }
@@ -288,7 +298,7 @@ reload() { . ~/etc/aliases
            fc-cache ; } 2> /dev/null
 
 ping() { [ $# -eq 0 ] && set mitchweaver.xyz
-         cmd ping -c 1 -n -s 32 -w 10 $1 | head -n 2 ; }
+         cmd ping -c 1 -n -s 1 -w 10 $1 | head -n 2 ; }
 
 has nasm &&
     nasm() { [ -f "$1" ] &&
@@ -380,11 +390,12 @@ has mpv &&
         else
             pkill -9 mpv
         fi
-        cmd mpv --title=mpv "$@" & x
+        cmd mpv --title=mpv "$@"
     }
 
 has mogrify &&
 {
+    a 75%='mogrify -resize 75%X75%'
     a 50%='mogrify -resize 50%X50%'
     a 25%='mogrify -resize 25%X25%'
     a import='import -quiet -silent -window root -quality 100 ~/import.png'
@@ -405,8 +416,8 @@ has trans &&
 
 has youtube-dl &&
 {
-    yt()  { mpv ytdl://ytsearch:"$@" ; }
-    ytm() { mpv --no-video ytdl://ytsearch:"$@" ; }
+    yt()  { mpv --script-opts=ytdl_hook-try_ytdl_first=yes ytdl://ytsearch:"$@" ; }
+    ytm() { mpv --script-opts=ytdl_hook-try_ytdl_first=yes --no-video ytdl://ytsearch:"$@" ; }
 }
 
 has git &&
@@ -425,8 +436,7 @@ has git &&
     gup() { 
         git add -A &&
         git commit -m "$@" &&
-        git push -u origin $(git branch 2> /dev/null | \
-            sed -e '/^[^*]/d' | sed 's/* //')
+        git push -u origin $(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
     }
     gmit() { 
         if [ $# -eq 1 ] ; then
@@ -491,7 +501,7 @@ exists ~/var && {
     a {gvi,gvid}='_g ~/var/videos'
     a gbk='_g ~/var/books'
     a gvt='_g ~/var/tmp'
-    a gyt='_g ~/var/ytdl'
+    a gyt='_g ~/.youtube-dl'
 
     Yf() { cp "$@" ~/var/files     ; }
     Yd() { cp "$@" ~/var/downloads ; }
@@ -555,7 +565,7 @@ cat ~/.ssh/config 2> /dev/null | grep torrentbox > /dev/null &&
         for i ; do
             if [ -f "$i" ] ; then
                 scp "$i" torrentbox:~/.torrents/torrents &&
-                echossh torrentbox '~/.torrents/queue.txt' '~/.torrents/torrrents'/"${i##*/}" &&
+                echossh torrentbox '~/.torrents/queue.txt' '/home/banana/.torrents/torrents'/"${i##*/}" &&
                 rm -f "$i"
             else
                 echossh torrentbox '~/.torrents/queue.txt' "$i"
@@ -563,6 +573,11 @@ cat ~/.ssh/config 2> /dev/null | grep torrentbox > /dev/null &&
         done
     }
     a checktorrents='ssh torrentbox tail -f /tmp/torrent*.log'
+    torrent() {
+        aria2c --file-allocation=falloc \
+            --check-integrity=true --continue=true \
+            --max-concurrent-downloads=20 --seed-time=0 "$@"
+    }
 }
 
 exists ~/.youtube-dl &&
@@ -578,6 +593,15 @@ exists ~/.youtube-dl &&
         done
     }
     checkyt() { tail -f /tmp/ytdl*.log ; }
+
+    ytdlm() { 
+        for i ; do
+            youtube-dl --geo-bypass --prefer-ffmpeg --extract-audio \
+                --audio-quality 0 --audio-format opus "$i"
+        done
+    }
+    _jpg() { convert "$@" "$(filename "$@")".jpg ; }
+    bandlogo() { band "$@" ; logo "$@" ; }
 }
 
 has pk &&
@@ -590,5 +614,22 @@ exists ~/src/pk &&
     repk() { cp -f ~/src/pk/pk ~/.local/bin/pk ; }
     pkbk() { cmd cp -rf ~/.local/pk /tmp/pk ; pack /tmp/pk ; }
 }
+
+exists ~/var &&
+{
+    mvwait() {
+        for i ; do
+            mv "$i" ~/var/music/waiting_pool
+        done
+    }
+}
+
+randomcat() {
+    for i in $(seq 10) ; do
+        curl -H 'Accept-Content: application/json' -s -L https://aws.random.cat/meow | \
+            jq -r '.[]' | xargs -r -I'{}' curl -s -L {} | feh - && break
+    done 2> /dev/null
+}
+metal() { nohup $BROWSER "https://www.metal-archives.com/search?searchString=$@&type=band_name" > /dev/null 2>&1 & }
 
 u i j _u _p _h

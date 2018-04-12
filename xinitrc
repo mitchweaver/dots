@@ -36,4 +36,4 @@ bar > /dev/null 2>&1 &
 # if I exit dwm, close
 while true ; do
     dwm && break || continue
-done > /dev/null 2>&1
+done > /dev/null 2> /tmp/dwm_err.log
