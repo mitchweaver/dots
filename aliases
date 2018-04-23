@@ -175,7 +175,7 @@ a nf=neofetch
 a {discline,discord}='dash ~/usr/bin/discline ; x'
 a {rtv,reddit}="rtv --enable-media ; c"
 a compton='k compton ; compton & c'
-a feh='feh -q -N -x --scale-down'
+a feh='feh -q -N -x -X -s -Z --scale-down --title feh'
 a weather='curl -s wttr.in/Schmalkalden?m0TQ'
 a forecast='curl -s http://wttr.in/Schmalkalden?m | \
     tail -n 33 | sed $\ d | sed $\ d'
@@ -195,7 +195,7 @@ done
 has py3 && a py=py3 || a py=py2
 
 has sudo &&
-    a su='sudo su -'
+    a su='sudo su -lp'
 
 ps() {
     if [ $# -gt 0 ] ; then
@@ -395,10 +395,18 @@ has mpv &&
 
 has mogrify &&
 {
-    a 75%='mogrify -resize 75%X75%'
-    a 50%='mogrify -resize 50%X50%'
-    a 25%='mogrify -resize 25%X25%'
     a import='import -quiet -silent -window root -quality 100 ~/import.png'
+    jpg() {
+        [ -z "$@" ] && return
+        convert "$@" "$(filename "$@")".jpg &&
+            if [ "$(ext "$@")" != "jpg" ] ; then
+                rm -f "$@"
+            fi
+        jpegoptim *.jpg > /dev/null
+    }
+    75%() { mogrify -resize 75%X75% "$@" ; jpg "$@" ; }
+    50%() { mogrify -resize 50%X50% "$@" ; jpg "$@" ; }
+    25%() { mogrify -resize 25%X25% "$@" ; jpg "$@" ; }
 }
 
 has trans &&
@@ -600,8 +608,6 @@ exists ~/.youtube-dl &&
                 --audio-quality 0 --audio-format opus "$i"
         done
     }
-    _jpg() { convert "$@" "$(filename "$@")".jpg ; }
-    bandlogo() { band "$@" ; logo "$@" ; }
 }
 
 has pk &&
@@ -630,6 +636,22 @@ randomcat() {
             jq -r '.[]' | xargs -r -I'{}' curl -s -L {} | feh - && break
     done 2> /dev/null
 }
-metal() { nohup $BROWSER "https://www.metal-archives.com/search?searchString=$@&type=band_name" > /dev/null 2>&1 & }
+
+split2flac() {
+    if [ "$(find . -maxdepth 1 -iname '*.flac')" ] ; then
+        cmd split2flac ./*.flac || return
+    elif [ "$(find . -maxdepth 1 -iname '*.wav')" ] ; then
+        cmd split2flac ./*.wav || return
+    else
+        return
+    fi
+    rm -f *.flac *.wav scans Scans covers Covers *.cue *.log *.txt
+    mv -f "`find . -maxdepth 1 ! -path . -type d`"/*/* . && \
+        rm -rf "`find . -maxdepth 1 ! -path . -type d`"
+    mv *.jpg cover.jpg
+    jpegoptim *.jpg > /dev/null
+}
+
+bandlogo() { band "$@" ; logo "$@" ; }
 
 u i j _u _p _h
