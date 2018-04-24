@@ -168,9 +168,9 @@ a {less,les}='less -QRd'
 a {notepad,vtmp}='v /tmp/notepad'
 a {suvim,suvi,suv}='sudo ${EDITOR}'
 a view='${EDITOR} -R'
-a {htpo,hto,ht,hpot,hotp,top,htop}='htop ; c'
-a {hm,hme}='h -u ${USER}'
-a {hr,hroot}='h -u root'
+a {htpo,hto,ht,hpot,hotp,top}='htop'
+a {hm,hme}='htop -u ${USER}'
+a {hr,hroot}='htop -u root'
 a nf=neofetch
 a {discline,discord}='dash ~/usr/bin/discline ; x'
 a {rtv,reddit}="rtv --enable-media ; c"
@@ -360,7 +360,7 @@ v() {
             fi
         fi
     fi
-}
+} 2> /dev/null
 
 has ranger &&
     r() { ranger "$@" ; c ; }
@@ -637,21 +637,55 @@ randomcat() {
     done 2> /dev/null
 }
 
-split2flac() {
-    if [ "$(find . -maxdepth 1 -iname '*.flac')" ] ; then
-        cmd split2flac ./*.flac || return
-    elif [ "$(find . -maxdepth 1 -iname '*.wav')" ] ; then
-        cmd split2flac ./*.wav || return
-    else
-        return
-    fi
-    rm -f *.flac *.wav scans Scans covers Covers *.cue *.log *.txt
-    mv -f "`find . -maxdepth 1 ! -path . -type d`"/*/* . && \
-        rm -rf "`find . -maxdepth 1 ! -path . -type d`"
-    mv *.jpg cover.jpg
-    jpegoptim *.jpg > /dev/null
-}
+exists ~/var/music &&
+{
+    split2flac() {
+        if [ "$(find . -maxdepth 1 -iname '*.flac')" ] ; then
+            cmd split2flac ./*.flac || return
+        elif [ "$(find . -maxdepth 1 -iname '*.wav')" ] ; then
+            cmd split2flac ./*.wav || return
+        else
+            return
+        fi
+        rm -f *.flac *.wav scans Scans covers Covers *.cue *.log *.txt *.*nfo *.toc
+        mv -f "`find . -maxdepth 1 ! -path . -type d`"/*/* . && \
+            rm -rf "`find . -maxdepth 1 ! -path . -type d`"
+        jpg *.png 2> /dev/null
+        mv *.jpg cover.jpg
+        jpegoptim *.jpg > /dev/null
+    }
 
-bandlogo() { band "$@" ; logo "$@" ; }
+    bandlogo() { band "$@" ; logo "$@" ; }
+
+    fetchcovers() {
+        for i in * ; do
+            cd "$i" || continue
+            a="$(basename "$(echo $PWD | sed -E 's/\/[0-9]+.*//')") - $(echo "$i" | sed -E 's/[0-9]+ - //')"
+            echo "$a"
+            cover "$a"
+            cd ..
+        done
+    }
+    getcover() {
+        artist=$(basename "$(echo $PWD | sed -E 's/\/[0-9]+.*//')")
+        album=$(basename "$PWD" | sed -E 's/[0-9]+ - //' | sed -E 's/ \(.*//')
+        echo "$artist - $album"
+        cover "$artist - $album"
+    }
+    fehcover() {
+        _PWD=$PWD
+        cd /tmp
+        cover "$@" && feh ./cover.jpg
+        [ -f ./cover.jpg ] && rm -f ./cover.jpg
+        cd "$_PWD"
+    }
+    fehlogo() {
+        _PWD=$PWD
+        cd /tmp
+        logo "$@" && feh ./logo.jpg
+        [ -f ./logo.jpg ] && rm -f ./logo.jpg
+        cd "$_PWD"
+    }
+}
 
 u i j _u _p _h
