@@ -416,9 +416,9 @@ has mogrify &&
             fi
         jpegoptim *.jpg > /dev/null
     }
-    75%() { mogrify -resize 75%X75% "$@" ; jpg "$@" ; }
-    50%() { mogrify -resize 50%X50% "$@" ; jpg "$@" ; }
-    25%() { mogrify -resize 25%X25% "$@" ; jpg "$@" ; }
+    75%() { mogrify -resize '75%X75%' "$@" ; jpg "$@" ; }
+    50%() { mogrify -resize '50%X50%' "$@" ; jpg "$@" ; }
+    25%() { mogrify -resize '25%X25%' "$@" ; jpg "$@" ; }
 }
 
 has trans &&
@@ -436,8 +436,8 @@ has trans &&
 
 has youtube-dl &&
 {
-    yt()  { mpv --script-opts=ytdl_hook-try_ytdl_first=yes ytdl://ytsearch:"$@" ; }
-    ytm() { mpv --script-opts=ytdl_hook-try_ytdl_first=yes --no-video ytdl://ytsearch:"$@" ; }
+    mpvyt()  { mpv --script-opts=ytdl_hook-try_ytdl_first=yes ytdl://ytsearch:"$@" ; }
+    mpvytm() { mpv --script-opts=ytdl_hook-try_ytdl_first=yes --no-video ytdl://ytsearch:"$@" ; }
 }
 
 has git &&
@@ -620,6 +620,11 @@ exists ~/.youtube-dl &&
                 --audio-quality 0 --audio-format opus "$i"
         done
     }
+    ytdl() { 
+        for i ; do
+            youtube-dl --geo-bypass --prefer-ffmpeg "$i"
+        done
+    }
 }
 
 has pk &&
@@ -667,8 +672,6 @@ has cover songs logo band location releases &&
         jpegoptim *.jpg > /dev/null
     }
 
-    bandlogo() { band "$@" ; logo "$@" ; }
-
     fetchcovers() {
         for i in * ; do
             cd "$i" || continue
@@ -677,6 +680,19 @@ has cover songs logo band location releases &&
             cover "$a"
             cd ..
         done
+    }
+
+    bandlogo() {
+        if [ $# -eq 0 ] ; then
+            artist=$(basename "$(echo $PWD | \
+                sed -E 's/\/[0-9]+.*//' | \
+                sed -E 's/\([A-Z][a-z][a-z]\)//')")
+            echo "$artist"
+            band "$artist"
+            logo "$artist"
+        else
+            band "$@" ; logo "$@"
+        fi
     }
     cover() {
         if [ $# -eq 0 ] ; then

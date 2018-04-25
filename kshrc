@@ -28,15 +28,14 @@ cd() {
     if [ $# -eq 0 ] ; then
         builtin cd ${HOME}
     else
-        builtin cd "$@"   ||
-        builtin cd *"$@"  ||
-        builtin cd "$@"*  ||
+        builtin cd "$@" ||
+        builtin cd "$@"* ||
+        builtin cd *"$@" ||
         builtin cd *"$@"* ||
-        builtin cd "$(find . -type d -iname "$@"* -maxdepth 1 | head -n 1)" ||
-        builtin cd "$(find . -type d -iname *"$@" -maxdepth 1 | head -n 1)" ||
-        builtin cd "$(find . -type d -iname *"$@"* -maxdepth 1 | head -n 1)" ||
-        builtin cd "$(find . -type d -iname *"$@"* -maxdepth 2 | head -n 1)" ||
-        builtin cd "$(find . -type d -iname *"$@"* -maxdepth 8 | head -n 1)"
+        for i in 0 1 2 3 4 5 6 7 8 ; do
+            builtin cd "$(find . -maxdepth $(($i + 1)) -mindepth $i -type d -iname "*$@*" | head -n 1)" &&
+                break
+        done
     fi 2> /dev/null
     export PS1="$(_get_PS1)${RANGER_LEVEL:+[ranger] }${SSH_TTY:+(SSH) }"
 }
