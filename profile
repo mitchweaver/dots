@@ -59,6 +59,8 @@ export LESSCHARSET='utf-8' \
     MANPAGER='less' \
     "$(dbus-launch)"
 
+export ALIASES=${HOME}/etc/aliases
+
 type xdg-open > /dev/null 2>&1 &&
     export XDG_DESKTOP_DIR="/non/existent" \
            XDG_PUBLICSHARE_DIR="/non/existent" \
