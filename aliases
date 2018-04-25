@@ -239,6 +239,7 @@ run() {
     done 
 }
 
+# files
 f() { 
     case $# in
         1) set . "$@" ;;
@@ -247,6 +248,17 @@ f() {
 
     find "$1" ! -path "$1" -iname "*$2*" ; 
 }
+
+# folders
+ff() { 
+    case $# in
+        1) set . "$@" ;;
+        0) read inp && set . "$inp"
+    esac
+
+    find "$1" ! -path "$1" -type d -iname "*$2*" ; 
+}
+
 fdo() {
     case $# in
         2) set . "$@" ;;
@@ -637,7 +649,7 @@ randomcat() {
     done 2> /dev/null
 }
 
-exists ~/var/music &&
+has cover songs logo band location releases &&
 {
     split2flac() {
         if [ "$(find . -maxdepth 1 -iname '*.flac')" ] ; then
@@ -666,23 +678,75 @@ exists ~/var/music &&
             cd ..
         done
     }
-    getcover() {
-        artist=$(basename "$(echo $PWD | sed -E 's/\/[0-9]+.*//')")
-        album=$(basename "$PWD" | sed -E 's/[0-9]+ - //' | sed -E 's/ \(.*//')
-        echo "$artist - $album"
-        cover "$artist - $album"
+    cover() {
+        if [ $# -eq 0 ] ; then
+            artist=$(basename "$(echo $PWD | \
+                sed -E 's/\/[0-9]+.*//' | \
+                sed -E 's/\([A-Z][a-z][a-z]\)//')")
+            album=$(basename "$PWD" | sed -E 's/[0-9]+ - //' | sed -E 's/ \(.*//')
+            echo "$artist - $album"
+            cmd cover "$artist - $album"
+        else
+            cmd cover "$@"
+        fi
     }
+    songs() {
+        if [ $# -eq 0 ] ; then
+            artist=$(basename "$(echo $PWD | \
+                sed -E 's/\/[0-9]+.*//' | \
+                sed -E 's/\([A-Z][a-z][a-z]\)//')")
+            album=$(basename "$PWD" | sed -E 's/[0-9]+ - //' | sed -E 's/ \(.*//')
+            echo "$artist - $album"
+            cmd songs "$artist - $album"
+        else
+            cmd songs "$@"
+        fi
+    }
+    location() {
+        if [ $# -eq 0 ] ; then
+            artist=$(basename "$(echo $PWD | \
+                sed -E 's/\/[0-9]+.*//' | \
+                sed -E 's/\([A-Z][a-z][a-z]\)//')")
+            echo "$artist"
+            cmd location "$artist"
+        else
+            cmd location "$@"
+        fi
+    }
+    releases() {
+        if [ $# -eq 0 ] ; then
+            artist=$(basename "$(echo $PWD | \
+                sed -E 's/\/[0-9]+.*//' | \
+                sed -E 's/\([A-Z][a-z][a-z]\)//')")
+            echo "$artist"
+            cmd releases "$artist"
+        else
+            cmd releases "$@"
+        fi
+    }
+    genre() {
+        if [ $# -eq 0 ] ; then
+            artist=$(basename "$(echo $PWD | \
+                sed -E 's/\/[0-9]+.*//' | \
+                sed -E 's/\([A-Z][a-z][a-z]\)//')")
+            echo "$artist"
+            cmd genre "$artist"
+        else
+            cmd genre "$@"
+        fi
+    }
+
     fehcover() {
         _PWD=$PWD
         cd /tmp
-        cover "$@" && feh ./cover.jpg
+        cover "$@" && feh ./cover.jpg 2> /dev/null
         [ -f ./cover.jpg ] && rm -f ./cover.jpg
         cd "$_PWD"
     }
     fehlogo() {
         _PWD=$PWD
         cd /tmp
-        logo "$@" && feh ./logo.jpg
+        logo "$@" && feh ./logo.jpg 2> /dev/null
         [ -f ./logo.jpg ] && rm -f ./logo.jpg
         cd "$_PWD"
     }
