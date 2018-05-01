@@ -9,23 +9,19 @@ esac
 
 u() { for _u ; do 
         unalias $_u || unset -f $_u
-    done 2> /dev/null ; }
+      done 2> /dev/null ; }
 
-u r w
+u r w # nobody uses these...
 
 alias a=alias
 
-has() { 
-    for _h ; do
-        type $_h || return 1
-    done > /dev/null 2>&1 
-}
+has() { for _h ; do
+            type $_h || return 1
+        done > /dev/null 2>&1 ; }
 
-exists() {
-    for _e ; do
-        [ -e $_e ] || return 1
-    done
-}
+exists() { for _e ; do
+               [ -e $_e ] || return 1
+           done ; }
 
 contains() {
     [ $# -ne 2 ] && return 1
@@ -60,7 +56,7 @@ case $(uname) in
                            add)    shift ; sudo $prt depinst $@ ;;
                            update) shift ; sudo $prt update $@  ;;
                            del)    shift ; sudo $prt remove $@  ;;
-                           sysup)  shift ; sudo $prt sysup $@   ;;
+                           sysup)  shift ; sudo $prt sysup -f $@   ;;
                            deps)   shift ; prt-get deps $@      ;;
                            list)   shift ; pkginfo -i $@        ;;
                            search) shift ; prt-get search $@    ;;
@@ -162,7 +158,7 @@ a {xs,xc}='xsel -o ; e'
 a rsync='rsync -rtvuh4 --progress --delete' #-c
 a sshd='sudo /usr/sbin/sshd'
 a scp='scp -rp4'
-a {wtf,wtfismyip}='w3m https://wtfismyip.com'
+a {wtf,wtfismyip}='w3m -dump https://wtfismyip.com'
 a diff='git diff'
 a {less,les}='less -QRd'
 a {notepad,vtmp}='v /tmp/notepad'
@@ -226,7 +222,7 @@ du() {
 # directory marking
 # usage: 'm1' = mark 1
 #        'g1' = return to m1
-for i in $(seq 9) ; do
+for i in 1 2 3 4 5 6 7 8 9 ; do
     eval "m${i}() { export _MARK${i}=\$PWD ; }"
     eval "g${i}() { cd \$_MARK${i} ; }"
 done
@@ -291,6 +287,8 @@ echossh() {
     fi
 }
 
+ps1() { export PS1='% ' ; }
+
 dlzip() { wget "$@" -O dl.zip && unzip dl.zip && rm -f dl.zip && cls ; }
 
 hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
@@ -310,7 +308,7 @@ reload() { . ~/etc/aliases
            fc-cache ; } 2> /dev/null
 
 ping() { [ $# -eq 0 ] && set mitchweaver.xyz
-         cmd ping -c 1 -n -s 1 -w 10 $1 | head -n 2 ; }
+         /bin/ping -c 1 -n -s 1 -w 10 $1 | head -n 2 ; }
 
 has nasm &&
     nasm() { [ -f "$1" ] &&
@@ -325,14 +323,16 @@ exists ~/bin/bar &&
     bar() { pkill -9 bar ; ~/bin/bar & } > /dev/null
 
 exists ~/bin/conv &&
-    for i in dec bin hex oct ; do
-        for j in dec bin hex oct ; do
-            [ $i != $j ] &&
-                a ${i}2${j}="dash ~/bin/conv \
-                    -i $(printf %.1s $i) \
-                    -o $(echo -n ${j%??} | sed 's/.*2//')"
+    getconvs() {
+        for i in dec bin hex oct ; do
+            for j in dec bin hex oct ; do
+                [ $i != $j ] &&
+                    a ${i}2${j}="dash ~/bin/conv \
+                        -i $(printf %.1s $i) \
+                        -o $(echo -n ${j%??} | sed 's/.*2//')"
+            done
         done
-    done
+    }
 
 has busybox && {
     has vi || a vi='busybox vi'
@@ -494,6 +494,7 @@ wlibc() {
 
 a {..,cd..}='cd ..'
 a ...='.. ; ..'
+a ....='.. ; ...'
 
 _g() { local a=$1 ; shift ; cd $a/"$@" ; cl ;  }
 
@@ -654,7 +655,7 @@ randomcat() {
     done 2> /dev/null
 }
 
-has cover songs logo band location releases &&
+has cover &&
 {
     split2flac() {
         if [ "$(find . -maxdepth 1 -iname '*.flac')" ] ; then
@@ -664,7 +665,7 @@ has cover songs logo band location releases &&
         else
             return
         fi
-        rm -f *.flac *.wav scans Scans covers Covers *.cue *.log *.txt *.*nfo *.toc
+        rm -f *.flac *.wav scans Scans covers Covers *.cue *.log *.txt *.*nfo *.toc *.*rip
         mv -f "`find . -maxdepth 1 ! -path . -type d`"/*/* . && \
             rm -rf "`find . -maxdepth 1 ! -path . -type d`"
         jpg *.png 2> /dev/null
@@ -686,7 +687,7 @@ has cover songs logo band location releases &&
         if [ $# -eq 0 ] ; then
             artist=$(basename "$(echo $PWD | \
                 sed -E 's/\/[0-9]+.*//' | \
-                sed -E 's/\([A-Z][a-z][a-z]\)//')")
+                sed -E 's/ \([A-Z]+[a-z]*\)//')")
             echo "$artist"
             band "$artist"
             logo "$artist"
@@ -698,7 +699,7 @@ has cover songs logo band location releases &&
         if [ $# -eq 0 ] ; then
             artist=$(basename "$(echo $PWD | \
                 sed -E 's/\/[0-9]+.*//' | \
-                sed -E 's/\([A-Z][a-z][a-z]\)//')")
+                sed -E 's/ \([A-Z]+[a-z]*\)//')")
             album=$(basename "$PWD" | sed -E 's/[0-9]+ - //' | sed -E 's/ \(.*//')
             echo "$artist - $album"
             cmd cover "$artist - $album"
@@ -710,7 +711,7 @@ has cover songs logo band location releases &&
         if [ $# -eq 0 ] ; then
             artist=$(basename "$(echo $PWD | \
                 sed -E 's/\/[0-9]+.*//' | \
-                sed -E 's/\([A-Z][a-z][a-z]\)//')")
+                sed -E 's/ \([A-Z]+[a-z]*\)//')")
             album=$(basename "$PWD" | sed -E 's/[0-9]+ - //' | sed -E 's/ \(.*//')
             echo "$artist - $album"
             cmd songs "$artist - $album"
@@ -722,7 +723,7 @@ has cover songs logo band location releases &&
         if [ $# -eq 0 ] ; then
             artist=$(basename "$(echo $PWD | \
                 sed -E 's/\/[0-9]+.*//' | \
-                sed -E 's/\([A-Z][a-z][a-z]\)//')")
+                sed -E 's/ \([A-Z]+[a-z]*\)//')")
             echo "$artist"
             cmd location "$artist"
         else
@@ -733,7 +734,7 @@ has cover songs logo band location releases &&
         if [ $# -eq 0 ] ; then
             artist=$(basename "$(echo $PWD | \
                 sed -E 's/\/[0-9]+.*//' | \
-                sed -E 's/\([A-Z][a-z][a-z]\)//')")
+                sed -E 's/ \([A-Z]+[a-z]*\)//')")
             echo "$artist"
             cmd releases "$artist"
         else
@@ -744,7 +745,7 @@ has cover songs logo band location releases &&
         if [ $# -eq 0 ] ; then
             artist=$(basename "$(echo $PWD | \
                 sed -E 's/\/[0-9]+.*//' | \
-                sed -E 's/\([A-Z][a-z][a-z]\)//')")
+                sed -E 's/ \([A-Z]+[a-z]*\)//')")
             echo "$artist"
             cmd genre "$artist"
         else
@@ -765,6 +766,9 @@ has cover songs logo band location releases &&
         logo "$@" && feh ./logo.jpg 2> /dev/null
         [ -f ./logo.jpg ] && rm -f ./logo.jpg
         cd "$_PWD"
+    }
+    backup_music() {
+        rsync /mnt/data/music/ banana:/mnt/500GB/music
     }
 }
 

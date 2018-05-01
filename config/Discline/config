@@ -178,6 +178,7 @@ channel_ignore_list:
   - listening_room
   - news-board
   - newcomers
+  - newcomers-guide
   - rules
 - server_name: Unix-like
   ignores:

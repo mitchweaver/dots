@@ -22,8 +22,10 @@ unset -f p
             export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
                 -s , 2 7)}.{$(jot -n -s , 10 0)}/bin
 
-(find ${HOME}/tmp ! -path ${HOME}/tmp -exec \
-    rm -rf "{}" {} \; > /dev/null 2>&1 &)
+# clear tmp
+# (find ${HOME}/tmp ! -path ${HOME}/tmp -exec \
+    # rm -rf "{}" {} \; > /dev/null 2>&1 &)
+rm -rf ${HOME}/tmp 2> /dev/null && mkdir -p ${HOME}/tmp
 
 [ -z "$SHELL" ] &&
     for i in mk k a ba da ; do
@@ -71,8 +73,11 @@ type xdg-open > /dev/null 2>&1 &&
            XDG_PICTURES_DIR="${HOME}/var/images" \
            XDG_VIDEOS_DIR="${HOME}/var/videos"
 
-if [ -z "$(pgrep X)" ] ; then
-    clear
+if [ -x /tmp/bin/mksh ] ; then
+    export SHELL=/tmp/bin/mksh
+fi
+
+if ! pgrep X > /dev/null ; then
     rm -rf ${HOME}/.{Xauthority*,serverauth*}
-    startx -- > /dev/null
+    startx
 fi > /dev/null 2>&1
