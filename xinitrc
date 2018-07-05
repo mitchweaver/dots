@@ -21,8 +21,10 @@ esac > /dev/null 2>&1 &
 ! pgrep -f clip > /dev/null &&
     clip --daemon &
 
-! pgrep -f xbanish > /dev/null &&
-    xbanish &
+#! pgrep -f xbanish > /dev/null &&
+#    xbanish &
+
+sxhkd &
 
 bar > /dev/null 2>&1 &
 

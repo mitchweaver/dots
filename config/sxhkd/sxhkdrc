@@ -1,0 +1,9 @@
+#button{8-9}
+#    dash /home/mitch/usr/bin/autoclick
+
+
+button9
+    xdotool type 1
+
+button8
+    xdotool type 2

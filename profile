@@ -6,7 +6,7 @@ p() { for i ; do export PATH="$i":$PATH ; done ; }
 
 p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin /sbin \
    ${HOME}/{{bin,bin/local/bin,bin/chroots},usr/{bin,bin/ascii},.local/bin} \
-   ${HOME}/bin/metal-archives
+   ${HOME}/bin/metal-archives ${HOME}/usr/repos/java/bin
 
 # commonly used programs stored in a tmpfs, copied in /etc/rc.local
 if [ -d /tmp/bin ] ; then
@@ -17,10 +17,10 @@ fi
 
 unset -f p
 
-[ "$(uname)" = "OpenBSD" ] && #todo: how to use seq?
-        [ -d /usr/local/jdk* ] &&
-            export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
-                -s , 2 7)}.{$(jot -n -s , 10 0)}/bin
+# [ "$(uname)" = "OpenBSD" ] && #todo: how to use seq?
+        # [ -d /usr/local/jdk* ] &&
+            # export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
+                # -s , 2 7)}.{$(jot -n -s , 10 0)}/bin
 
 # clear tmp
 # (find ${HOME}/tmp ! -path ${HOME}/tmp -exec \

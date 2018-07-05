@@ -126,6 +126,9 @@ startpage/.sass_cache
 *history*
 *cache*
 
+*obs-studio*
+*obs*
+config/obs*
 *.o*
 
 *.o

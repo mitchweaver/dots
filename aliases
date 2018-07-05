@@ -119,13 +119,15 @@ a {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi}=exit
 a {l,sls,sl}=ls
 a ll='l -l'
 a la='l -a'
+a lt='cmd ls -halt'
 a {lla,lal}='l -al'
 a lsf='l "$PWD"/*'
 a {cls,csl,cl,lc}='c;l'
 a {e,ech,eho}=echo
 a err='>&2 e'
 a {g,Grep,gerp}=grep
-a pg='pgrep'
+a {pg,pgrep}='pgrep -f'
+a pkill='pkill -f'
 a dg='du | g -i'
 a lg='ls | g -i'
 a cp='cp -irv'
@@ -308,7 +310,8 @@ reload() { . ~/etc/aliases
            fc-cache ; } 2> /dev/null
 
 ping() { [ $# -eq 0 ] && set mitchweaver.xyz
-         /bin/ping -c 1 -n -s 1 -w 10 $1 | head -n 2 ; }
+         /bin/ping $1 ; }
+         # -c 1 -n -s 1 -w 10 $1 | head -n 2 ; }
 
 has nasm &&
     nasm() { [ -f "$1" ] &&
@@ -320,7 +323,7 @@ has w3m &&
     w3m() { [ $# -eq 0 ] && set https://ddg.gg/lite ; cmd w3m -F $* ; }
 
 exists ~/bin/bar &&
-    bar() { pkill -9 bar ; ~/bin/bar & } > /dev/null
+    bar() { pkill -9 -f bar ; ~/bin/bar & } > /dev/null
 
 exists ~/bin/conv &&
     getconvs() {
@@ -404,6 +407,7 @@ has mpv &&
         fi
         cmd mpv --title=mpv "$@"
     }
+    mpvm() { mpv --no-video "$@" ; }
 
 has mogrify &&
 {
@@ -768,7 +772,11 @@ has cover &&
         cd "$_PWD"
     }
     backup_music() {
-        rsync /mnt/data/music/ banana:/mnt/500GB/music
+        if [ -d /mnt/hdd/music ] ; then
+            rsync /mnt/data/music/ /mnt/hdd/music
+        else
+            rsync /mnt/data/music/ banana:/mnt/500GB/music
+        fi
     }
 }
 

@@ -11,6 +11,8 @@ ln -sf ~/etc/Xresources ~/.Xresources
 xrdb load ~/.Xresources
 #ln -sf ~/etc/profile ~/.profile
 ln -sf ~/etc/config ~/.config
+ln -sf ~/etc/kshrc ~/.kshrc
+ln -sf ~/etc/kshrc ~/.mkshrc
 
 cd ~/etc
 
