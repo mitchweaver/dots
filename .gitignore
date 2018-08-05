@@ -131,6 +131,8 @@ startpage/.sass_cache
 config/obs*
 *.o*
 
+config/blender
+
 *.o
 *.out
 *.bak
