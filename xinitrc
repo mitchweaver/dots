@@ -1,13 +1,13 @@
 cd ${HOME}
 
-xset +fp /home/mitch/usr/fonts
-xrdb load /home/mitch/etc/Xresources
-xmodmap ${HOME}/etc/Xmodmap
-xset m 0 0
-xset b off
-xbacklight -set 90
-
-#rm ${HOME}/.xinitrc
+{
+    xset +fp /home/mitch/usr/fonts
+    xrdb load /home/mitch/etc/Xresources
+    xmodmap ${HOME}/etc/Xmodmap
+    xset m 0 0
+    xset b off
+    xbacklight -set 90
+} &
 
 for i in bar sleep ; do
     pkill -9 $i
@@ -25,6 +25,8 @@ esac > /dev/null 2>&1 &
 #    xbanish &
 
 sxhkd &
+
+compton &
 
 bar > /dev/null 2>&1 &
 
