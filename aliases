@@ -179,6 +179,8 @@ a forecast='curl -s http://wttr.in/Schmalkalden?m | \
     tail -n 33 | sed $\ d | sed $\ d'
 a heart='printf "%b\n" "\xe2\x9d\xa4"'
 a chroot='sudo chroot'
+a x720='xrandr -s 1280x720 ; bar'
+a x1080='xrandr -s 1920x1080 ; bar'
 
 for i in 3.6 3.5 3.4 3 ; do
     type python$i > /dev/null 2>&1 &&
