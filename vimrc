@@ -18,6 +18,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     Plug 'airblade/vim-gitgutter' " git diffing along the left side
     Plug 'tpope/vim-repeat' " allows '.' for more things
     Plug 'dylanaraps/wal.vim' " pywal theme
+    Plug 'sheerun/vim-polyglot' " syntax highlighting
     
     call plug#end()
     filetype indent plugin on
