@@ -53,14 +53,14 @@ case $(uname) in
            if has crux ; then
                prt='prt-get -im -is -if --install-scripts'
                pkg() { case "$1" in
-                           add)    shift ; sudo $prt depinst $@ ;;
-                           update) shift ; sudo $prt update $@  ;;
-                           del)    shift ; sudo $prt remove $@  ;;
+                           add)    shift ; sudo $prt depinst $@ -f ;;
+                           update) shift ; sudo $prt update $@     ;;
+                           del)    shift ; sudo $prt remove $@     ;;
                            sysup)  shift ; sudo $prt sysup -f $@   ;;
-                           deps)   shift ; prt-get deps $@      ;;
-                           list)   shift ; pkginfo -i $@        ;;
-                           search) shift ; prt-get search $@    ;;
-                           info)   shift ; prt-get info $@      ;;
+                           deps)   shift ; prt-get deps $@         ;;
+                           list)   shift ; pkginfo -i $@           ;;
+                           search) shift ; prt-get search $@       ;;
+                           info)   shift ; prt-get info $@         ;;
                            *) >&2 echo \?
                        esac ; }
           elif has emerge ; then
