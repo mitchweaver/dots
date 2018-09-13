@@ -6,7 +6,7 @@ p() { for i ; do export PATH="$i":$PATH ; done ; }
 
 p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin /sbin \
    ${HOME}/{{bin,bin/local/bin,bin/chroots},usr/{bin,bin/ascii},.local/bin} \
-   ${HOME}/bin/metal-archives ${HOME}/usr/repos/java/bin
+   ${HOME}/bin/metal-archives /opt/openjdk/bin
 
 # commonly used programs stored in a tmpfs, copied in /etc/rc.local
 if [ -d /tmp/bin ] ; then
