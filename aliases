@@ -112,7 +112,15 @@ esac
 pgrep -x dvtm > /dev/null ||
     a clear='printf "\033c"'
 
-c() { [ $# -eq 0 ] && clear || cd "$1" ; }
+c() {
+    if [ $# -eq 0 ] ; then
+        clear
+    elif [ -d "$1" ] ; then
+        cd "$1"
+    elif [ -f "$1" ] ; then
+        cat "$1"
+    fi
+}
 
 a {cc,cll,clear,clar,clea}=clear
 a {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi}=exit
@@ -181,6 +189,8 @@ a heart='printf "%b\n" "\xe2\x9d\xa4"'
 a chroot='sudo chroot'
 a x720='xrandr -s 1280x720 ; bar'
 a x1080='xrandr -s 1920x1080 ; bar'
+a click='xdotool click 1'
+a su='su -'
 
 for i in 3.6 3.5 3.4 3 ; do
     type python$i > /dev/null 2>&1 &&
@@ -193,9 +203,6 @@ for i in 2.7 2.5 2 ; do
 done
 
 has py3 && a py=py3 || a py=py2
-
-has sudo &&
-    a su='sudo su -lp'
 
 ps() {
     if [ $# -gt 0 ] ; then
