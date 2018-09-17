@@ -33,8 +33,8 @@ bar > /dev/null 2>&1 &
 #! pgrep -f torrent-queue > /dev/null &&
 #    torrent-queue > /dev/null &
 
-! pgrep -f ytdl-queue > /dev/null &&
-    ytdl-queue > /dev/null &
+#! pgrep -f ytdl-queue > /dev/null &&
+#    ytdl-queue > /dev/null &
 
 # if dwm crashes, relaunch
 # if I exit dwm, close
