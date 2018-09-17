@@ -178,7 +178,6 @@ a {htpo,hto,ht,hpot,hotp,top}='htop'
 a {hm,hme}='htop -u ${USER}'
 a {hr,hroot}='htop -u root'
 a nf=neofetch
-a {discline,discord}='dash ~/usr/bin/discline ; x'
 a {rtv,reddit}="rtv --enable-media ; c"
 a compton='k compton ; compton & c'
 a feh='feh -q -N -x -X -s -Z --scale-down --title feh'
@@ -315,7 +314,7 @@ reload() { . ~/etc/aliases
            xset m 0 0 
            xset b off 
            xset +fp /home/mitch/.fonts
-           set fp rehash
+           xset fp rehash
            fc-cache ; } 2> /dev/null
 
 ping() { [ $# -eq 0 ] && set mitchweaver.xyz
