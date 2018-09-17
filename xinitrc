@@ -30,6 +30,8 @@ compton &
 
 bar > /dev/null 2>&1 &
 
+batmon &
+
 #! pgrep -f torrent-queue > /dev/null &&
 #    torrent-queue > /dev/null &
 
