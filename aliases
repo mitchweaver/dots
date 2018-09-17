@@ -54,9 +54,9 @@ case $(uname) in
                prt='prt-get -im -is -if --install-scripts'
                pkg() { case "$1" in
                            add)    shift ; sudo $prt depinst $@ -f ;;
-                           update) shift ; sudo $prt update $@     ;;
+                           update) shift ; if prt-get isinst $@ > /dev/null ; then sudo $prt update $@  ; fi ;;
                            del)    shift ; sudo $prt remove $@     ;;
-                           sysup)  shift ; sudo $prt sysup -f $@   ;;
+                           # sysup)  shift ; sudo $prt sysup -f $@   ;;
                            deps)   shift ; prt-get deps $@         ;;
                            list)   shift ; pkginfo -i $@           ;;
                            search) shift ; prt-get search $@       ;;
