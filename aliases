@@ -211,11 +211,6 @@ ps() {
     fi | head -n 20
 }
 
-# shortcut for '> /dev/null'
-dn()  { read i && set $i && e "$@" 1> /dev/null 2> /dev/stdout ; }
-# shortcut for '> /dev/null 2>&1'
-null() { true ; }
-
 mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
@@ -319,7 +314,7 @@ reload() { . ~/etc/aliases
 
 ping() { [ $# -eq 0 ] && set mitchweaver.xyz
          /bin/ping $1 ; }
-         # -c 1 -n -s 1 -w 10 $1 | head -n 2 ; }
+         # -c 1 -n -s 16 -w 10 $1 | head -n 2 ; }
 
 has nasm &&
     nasm() { [ -f "$1" ] &&
@@ -391,18 +386,6 @@ has ranger &&
 has pv &&
     a pv='pv -pcre'
 
-# has youtube-viewer &&
-#     { a yt="c; youtube-viewer -C -q --vd=high"
-#       a ytm="c;yt -n"
-#       a ytdv="c;yt -d"
-#       a ytdm='c;yt -n -d --convert-to=opus \
-#           --convert-cmd="ffmpeg -loglevel -8 -i \
-#           file:*IN* -vn -acodec libopus -ab 128k -y *OUT*"'
-#       a ytsubs='c;yt --subs-videos --subs-order=unread'
-#       a ytchans='c;yt --subscriptions'
-#       a ytfavs='c;yt --favorites=mine'
-#       a ytme='c;yt --channel-videos=mine' ; }
-
 has mpv &&
     mpv() { 
         [ $# -eq 0 ] && return 1
@@ -444,12 +427,6 @@ has trans &&
         # note: $1 needs to be language code, ex: 'de'
         cmd trans -from en -to "$@"
     }
-}
-
-has mpv youtube-dl &&
-{
-    yt()  { mpv --script-opts=ytdl_hook-try_ytdl_first=yes ytdl://ytsearch:$(echo "$@" | tr ' ' '+') ; }
-    ytm() { mpv --script-opts=ytdl_hook-try_ytdl_first=yes --no-video ytdl://ytsearch:$(echo "$@" | tr ' ' '+') ; }
 }
 
 has git &&
