@@ -38,6 +38,8 @@ batmon &
 #! pgrep -f ytdl-queue > /dev/null &&
 #    ytdl-queue > /dev/null &
 
+pulseaudio --start --exit-idle-time=-1 &
+
 # if dwm crashes, relaunch
 # if I exit dwm, close
 while true ; do
