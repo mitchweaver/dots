@@ -26,7 +26,7 @@ esac > /dev/null 2>&1 &
 
 sxhkd &
 
-compton &
+# compton &
 
 bar > /dev/null 2>&1 &
 
