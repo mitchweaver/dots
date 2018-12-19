@@ -312,7 +312,7 @@ reload() { . ~/etc/aliases
            xset fp rehash
            fc-cache ; } 2> /dev/null
 
-ping() { [ $# -eq 0 ] && set mitchweaver.xyz
+ping() { [ $# -eq 0 ] && set google.com
          /bin/ping $1 ; }
          # -c 1 -n -s 16 -w 10 $1 | head -n 2 ; }
 
@@ -622,7 +622,7 @@ has pk &&
 
 exists ~/src/pk &&
 {
-    push_ports() { rsync ~/src/pk/ports/ micro:mitchweaverxyz/pk/ports ; }
+    # push_ports() { rsync ~/src/pk/ports/ micro:mitchweaverxyz/pk/ports ; }
     vpk() { v ~/src/pk/pk ; }
     repk() { cp -f ~/src/pk/pk ~/.local/bin/pk ; }
     pkbk() { cmd cp -rf ~/.local/pk /tmp/pk ; pack /tmp/pk ; }
