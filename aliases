@@ -427,6 +427,10 @@ has trans &&
         # note: $1 needs to be language code, ex: 'de'
         cmd trans -from en -to "$@"
     }
+    rde() {
+        [ $# -eq 0 ] && read inp && set "$inp"
+        rtrans de "$*"
+    }
 }
 
 has git &&
@@ -537,6 +541,7 @@ exists ~/etc && {
     me() { mv "$@" ~/etc ; }
     Ye() { cp "$@" ~/etc ; }
     a gcf='_g ~/etc/config'
+    a grs='_g ~/rs'
 
     a {aliases,alaises,aliase}='v ~/etc/aliases'
     a profile='v ~/etc/profile'
@@ -765,4 +770,7 @@ has cover &&
     }
 }
 
+a tb='timer 5'
+
 u i j _u _p _h
+

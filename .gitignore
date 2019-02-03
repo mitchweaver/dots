@@ -20,6 +20,9 @@ config/gtk-3.0
 config/wal
 config/neofetch
 conifg/youtube-viewer
+config/xbindkeys
+config/xbindkeysrc
+config/keys
 
 *bookmarks*
 

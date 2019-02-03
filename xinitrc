@@ -1,13 +1,14 @@
 cd ${HOME}
 
-{
-    xset +fp /home/mitch/usr/fonts
-    xrdb load /home/mitch/etc/Xresources
-    xmodmap ${HOME}/etc/Xmodmap
-    xset m 0 0
-    xset b off
-    xbacklight -set 90
-} &
+xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-I-1 --mode 1360x768 --pos 1920x0 --rotate normal --output DP-1 --off
+
+xset +fp /home/mitch/usr/fonts
+xrdb load /home/mitch/etc/Xresources
+xmodmap ${HOME}/etc/Xmodmap
+mouse_accel &
+xset b off
+xbacklight -set 90
+xbindkeys &
 
 for i in bar sleep ; do
     pkill -9 $i
@@ -24,9 +25,7 @@ esac > /dev/null 2>&1 &
 #! pgrep -f xbanish > /dev/null &&
 #    xbanish &
 
-sxhkd &
-
-# compton &
+compton &
 
 bar > /dev/null 2>&1 &
 

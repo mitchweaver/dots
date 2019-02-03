@@ -4,7 +4,7 @@ export PYTHONPATH="$PYTHONPATH:/home/mitch/.local/pk/prefix/lib/python3.6/site-p
 
 p() { for i ; do export PATH="$i":$PATH ; done ; }
 
-p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin /sbin \
+p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin,bin/rs} /bin /sbin \
    ${HOME}/{{bin,bin/local/bin,bin/chroots},usr/{bin,bin/ascii},.local/bin} \
    ${HOME}/bin/metal-archives
 
