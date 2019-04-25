@@ -1,6 +1,9 @@
 export PATH="$PATH:${HOME}/.local/bin:${HOME}/.local/pk/prefix/bin"
 export PYTHONPATH="$PYTHONPATH:/home/mitch/.local/pk/prefix/lib/python2.7/site-packages:/tmp/bin/python2.7/site-packages"
 export PYTHONPATH="$PYTHONPATH:/home/mitch/.local/pk/prefix/lib/python3.6/site-packages:/tmp/bin/python3.6/site-packages"
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+export LD_LIBRARY_PATH="/usr/lib32:$LD_LIBRARY_PATH"
 
 p() { for i ; do export PATH="$i":$PATH ; done ; }
 

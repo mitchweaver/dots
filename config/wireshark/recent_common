@@ -5,6 +5,15 @@
 
 ######## Recent capture files (latest last), cannot be altered through command line ########
 
+recent.capture_file: /home/mitch/tmp/AAA/ch07_DHCPboot.pkt
+recent.capture_file: /home/mitch/tmp/AAA/ch07_DHCPlab.pkt
+recent.capture_file: /home/mitch/tmp/AAA/ch07_DHCPv6boot.pcap
+recent.capture_file: /home/mitch/tmp/HOMEWORK/dns-moviefone.pkt
+recent.capture_file: /home/mitch/tmp/HOMEWORK/transfer.pkt
+recent.capture_file: /home/mitch/tmp/HOMEWORK/6to4.pcap
+recent.capture_file: /home/mitch/var/downloads/HMW/isatap.pcap
+recent.capture_file: /home/mitch/var/downloads/HMW/6to4.pcap
+recent.capture_file: /home/mitch/var/downloads/HMW/Teredo.pcap
 
 ######## Recent capture filters (latest last), cannot be altered through command line ########
 
@@ -17,9 +26,9 @@
 gui.geometry_main_x: 20
 gui.geometry_main_y: 20
 gui.gtk.geometry_main_x: 0
-gui.gtk.geometry_main_y: 14
-gui.geometry_main_width: 1276
-gui.geometry_main_height: 702
+gui.gtk.geometry_main_y: 0
+gui.geometry_main_width: 1920
+gui.geometry_main_height: 1066
 
 # Main window maximized.
 # TRUE or FALSE (case-insensitive).
@@ -31,7 +40,7 @@ gui.geometry_status_pane: 250
 
 # Statusbar middle pane size.
 # Decimal number.
-gui.geometry_status_pane_right: 823
+gui.geometry_status_pane_right: 999
 
 # Last used Configuration Profile.
 gui.last_used_profile: Default

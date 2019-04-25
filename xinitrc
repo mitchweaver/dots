@@ -5,10 +5,10 @@ xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --ou
 xset +fp /home/mitch/usr/fonts
 xrdb load /home/mitch/etc/Xresources
 xmodmap ${HOME}/etc/Xmodmap
-mouse_accel &
+xset m 0 0
 xset b off
 xbacklight -set 90
-xbindkeys &
+#xbindkeys &
 
 for i in bar sleep ; do
     pkill -9 $i
@@ -22,8 +22,8 @@ esac > /dev/null 2>&1 &
 ! pgrep -f clip > /dev/null &&
     clip --daemon &
 
-#! pgrep -f xbanish > /dev/null &&
-#    xbanish &
+! pgrep -f xbanish > /dev/null &&
+    xbanish &
 
 compton &
 
