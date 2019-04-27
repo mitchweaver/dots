@@ -61,6 +61,7 @@ case $(uname) in
                            list)   shift ; pkginfo -i $@           ;;
                            search) shift ; prt-get search $@       ;;
                            info)   shift ; prt-get info $@         ;;
+                           list)   prt-get listinst ;;
                            *) >&2 echo \?
                        esac ; }
           elif has emerge ; then
