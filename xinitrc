@@ -8,7 +8,6 @@ xmodmap ${HOME}/etc/Xmodmap
 xset m 0 0
 xset b off
 xbacklight -set 90
-#xbindkeys &
 
 for i in bar sleep ; do
     pkill -9 $i
@@ -25,19 +24,21 @@ esac > /dev/null 2>&1 &
 ! pgrep -f xbanish > /dev/null &&
     xbanish &
 
+! pgrep -f batmon > /dev/null &&
+    batmon &
+
+! pgrep -f pulseaudio > /dev/null &&
+    pulseaudio --start --exit-idle-time=-1 &
+
 compton &
 
 bar > /dev/null 2>&1 &
-
-batmon &
 
 #! pgrep -f torrent-queue > /dev/null &&
 #    torrent-queue > /dev/null &
 
 #! pgrep -f ytdl-queue > /dev/null &&
 #    ytdl-queue > /dev/null &
-
-pulseaudio --start --exit-idle-time=-1 &
 
 # if dwm crashes, relaunch
 # if I exit dwm, close

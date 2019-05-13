@@ -406,11 +406,11 @@ has mogrify &&
     a import='import -quiet -silent -window root -quality 100 ~/import.png'
     jpg() {
         [ -z "$@" ] && return
-        convert "$@" "$(filename "$@")".jpg &&
-            if [ "$(ext "$@")" != "jpg" ] ; then
-                rm -f "$@"
-            fi
-        jpegoptim *.jpg > /dev/null
+        # convert "$@" "$(filename "$@")".jpg &&
+            # if [ "$(ext "$@")" != "jpg" ] ; then
+                # rm -f "$@"
+            # fi
+        jpegoptim *.jpg
     }
     75%() { mogrify -resize '75%X75%' "$@" ; jpg "$@" ; }
     50%() { mogrify -resize '50%X50%' "$@" ; jpg "$@" ; }
@@ -542,7 +542,6 @@ exists ~/etc && {
     me() { mv "$@" ~/etc ; }
     Ye() { cp "$@" ~/etc ; }
     a gcf='_g ~/etc/config'
-    a grs='_g ~/rs'
 
     a {aliases,alaises,aliase}='v ~/etc/aliases'
     a profile='v ~/etc/profile'
@@ -771,7 +770,6 @@ has cover &&
     }
 }
 
-a tb='timer 5'
-
 u i j _u _p _h
 
+a save_wall='cp ${HOME}/var/tmp/wall ${HOME}/var/images/wallpapers/unsplash/saved_"$(date)".png'
