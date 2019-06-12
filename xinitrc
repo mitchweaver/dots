@@ -7,7 +7,7 @@ xrdb load /home/mitch/etc/Xresources
 xmodmap ${HOME}/etc/Xmodmap
 xset m 0 0
 xset b off
-xbacklight -set 90
+xbacklight -set 100
 
 for i in bar sleep ; do
     pkill -9 $i
