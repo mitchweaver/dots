@@ -546,7 +546,7 @@ exists ~/etc && {
     a {aliases,alaises,aliase}='v ~/etc/aliases'
     a profile='v ~/etc/profile'
     a {bmk,bmks}='v ~/var/files/bookmarks/bookmarks.txt'
-    a vssh='v ~/.ssh/config'
+    a {vssh,sshv}='v ~/.ssh/config'
 
     for i in vim ksh xinit ; do
         a ${i}rc="v ~/etc/${i}rc"

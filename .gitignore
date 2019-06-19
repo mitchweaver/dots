@@ -62,6 +62,10 @@ config/ranger/bookmarks
 *signal*
 *Signal*
 *apulse*
+
+.config/GIMP
+
+
 .config/GIMP/2.9/action-history
 .config/GIMP/2.9/colorrc
 .config/GIMP/2.9/controllerrc

@@ -16,20 +16,21 @@ p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin,bin/rs} /bin /sbin \
 # commonly used programs stored in a tmpfs, copied in /etc/rc.local
 if [ -d /tmp/bin ] ; then
     p /tmp/bin
+    export SHELL=/tmp/bin/mksh
 else
     p ${HOME}/usr/local/bin
 fi
 
 unset -f p
 
-# [ "$(uname)" = "OpenBSD" ] && #todo: how to use seq?
-        # [ -d /usr/local/jdk* ] &&
-            # export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
-                # -s , 2 7)}.{$(jot -n -s , 10 0)}/bin
+if [ "$(uname)" = "OpenBSD" ] ; then
+    if [ -d /usr/local/jdk* ] ; then
+        export PATH=$PATH:/usr/local/jdk-1.{$(jot -n \
+            -s , 2 7)}.{$(jot -n -s , 10 0)}/bin
+    fi
+fi
 
 # clear tmp
-# (find ${HOME}/tmp ! -path ${HOME}/tmp -exec \
-    # rm -rf "{}" {} \; > /dev/null 2>&1 &)
 rm -rf ${HOME}/tmp 2> /dev/null && mkdir -p ${HOME}/tmp
 
 [ -z "$SHELL" ] &&
@@ -49,11 +50,13 @@ for i in nvim vim vis vi nano ; do
         { export EDITOR=$i VISUAL=$i ; break ; }
 done
 
-for i in surf chromium chromium-browser firefox ; do
-    type $i > /dev/null 2>&1 &&
-        { export BROWSER=$i ; break ; }
+for i in chromium chromium-browser google-chrome \
+        google-chrome-stable firefox surf ; do
+    if type $i > /dev/null 2>&1 ; then
+        export BROWSER=$i
+        break
+    fi
 done
-unset i
 
 ulimit -c 0 2> /dev/null
 
@@ -78,9 +81,7 @@ type xdg-open > /dev/null 2>&1 &&
            XDG_PICTURES_DIR="${HOME}/var/images" \
            XDG_VIDEOS_DIR="${HOME}/var/videos"
 
-if [ -x /tmp/bin/mksh ] ; then
-    export SHELL=/tmp/bin/mksh
-fi
+unset i
 
 if ! pgrep X > /dev/null ; then
     rm -rf ${HOME}/.{Xauthority*,serverauth*}
