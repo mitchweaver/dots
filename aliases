@@ -388,6 +388,7 @@ has pv &&
     a pv='pv -pcre'
 
 has mpv &&
+{
     mpv() { 
         [ $# -eq 0 ] && return 1
         if [ "$(pgrep xwinwrap)" ] ; then
@@ -400,6 +401,7 @@ has mpv &&
         cmd mpv --title=mpv "$@"
     }
     mpvm() { mpv --no-video "$@" ; }
+}
 
 has mogrify &&
 {
@@ -773,3 +775,8 @@ has cover &&
 u i j _u _p _h
 
 a save_wall='cp ${HOME}/var/tmp/wall ${HOME}/var/images/wallpapers/unsplash/saved_"$(date)".png'
+
+clam() {
+    [ -n "$1" ] &&
+        sudo clamscan -r "$1" --move=/tmp/quar/ --log=/tmp/quar/log.txt
+}
