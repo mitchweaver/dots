@@ -23,9 +23,14 @@ conifg/youtube-viewer
 config/xbindkeys
 config/xbindkeysrc
 config/keys
+config/tint2
+config/wireshark
+config/QtProject.conf
+config/youtube-viewer
 
 *bookmarks*
 
+w3m
 w3m/bookmarks
 w3m/history
 w3m/cookies
