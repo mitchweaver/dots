@@ -34,7 +34,9 @@ done > /dev/null 2>&1
 ! pgrep -f pulseaudio > /dev/null &&
     pulseaudio --start --exit-idle-time=-1 &
 
-compton &
+if [ $(cat /tmp/dwm_info/gappx) -gt 0 ] ; then
+    compton &
+fi
 
 ${HOME}/bin/bar > /dev/null 2>&1 &
 
