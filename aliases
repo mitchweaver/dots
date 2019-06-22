@@ -318,10 +318,13 @@ ping() { [ $# -eq 0 ] && set google.com
          # -c 1 -n -s 16 -w 10 $1 | head -n 2 ; }
 
 has nasm &&
-    nasm() { [ -f "$1" ] &&
+    nasm() {
+        if [ -f "$1" ] ; then
                 cmd nasm -f elf32 -g -F dwarf "$1" &&
-                    ld -m elf_i386 "${1%.*}.o" -o "${1%.*}" &&
-                        ./"${1%.*}" ; }
+                    ld -m elf_i386 "${1%.*}.o" -o "${1%.*}"
+                    # && ./"${1%.*}"
+        fi
+    }
 
 has w3m && 
     w3m() { [ $# -eq 0 ] && set https://ddg.gg/lite ; cmd w3m -F $* ; }

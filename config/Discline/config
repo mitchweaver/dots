@@ -5,7 +5,7 @@
 # -------------------------------------------------------------------------
 
 # the default server which will be joined upon startup - CASE SENSITIVE!
-default_server: /r/unixporn
+default_server: r/unixporn
 # the default channel which will be joined upon startup - CASE SENSITIVE!
 default_channel: home
 
@@ -165,11 +165,6 @@ channel_ignore_list:
   - modbots
   - serverlog
   - muted
-- server_name: discord-cli
-  ignores:
-  - info
-  - updates
-  - testing
 - server_name: metal haven
   ignores:
   - info
@@ -180,26 +175,6 @@ channel_ignore_list:
   - newcomers
   - newcomers-guide
   - rules
-- server_name: Unix-like
-  ignores:
-  - welcome-rules
-  - shitposting
-  - crapposting
-  - craposting
-  - announcements
-  - greeter
-  - mod-log
-  - memes-bots
-  - bots
-- server_name: Retro Computing Discord
-  ignores:
-  - member-log
-  - videoarchive
-  - video_archive-discussion
-  - cæts
-  - cats
-  - bork-boxes
-
 
 # ignore this unless you know what you're doing 
 debug: false

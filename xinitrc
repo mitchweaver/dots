@@ -31,8 +31,10 @@ done > /dev/null 2>&1
 ! pgrep -f batmon > /dev/null &&
     batmon &
 
-! pgrep -f pulseaudio > /dev/null &&
-    pulseaudio --start --exit-idle-time=-1 &
+if type pulseaudio > /dev/null ; then
+    ! pgrep -f pulseaudio > /dev/null &&
+        pulseaudio --start --exit-idle-time=-1 &
+fi
 
 if [ $(cat /tmp/dwm_info/gappx) -gt 0 ] ; then
     compton &

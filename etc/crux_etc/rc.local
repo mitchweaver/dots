@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# load commonly used modules
+modprobe fuse tun
+
+# disable ethernet to save battery
+ifconfig enp0s25 down > /dev/null
+ifconfig wlp3s0 down > /dev/null
+
+# run net
+{
+	ifconfig `/bin/sh /home/mitch/bin/interface` up > /dev/null
+	wpa_supplicant -i `/bin/sh /home/mitch/bin/interface` -c /etc/wpa_supplicant.conf > /dev/null &
+	{
+# Set DNS
+cat > /etc/resolv.conf << EOF
+# DNS Server: http://dns.watch
+nameserver 84.200.69.80
+nameserver 84.200.70.40
+EOF
+# Run DHCP
+/sbin/sdhcp -d `/bin/sh /home/mitch/bin/interface`
+
+		# Wait for connectivity, then run vpn
+		for i in `seq 300` ; do
+			if /bin/sh /home/mitch/bin/online ; then
+				/bin/sh /home/mitch/bin/vpn --random
+				chmod 775 /tmp/vpn
+				break
+			else
+				sleep 1
+			fi
+		done
+	} &
+} > /dev/null &
+
+# setup tmpfs with commonly used programs
+# mount -t tmpfs tmpfs /tmp/bin --- NOTE: now done in /etc/fstab!
+/bin/mkdir /tmp/bin
+/bin/cp -f /home/mitch/usr/local/bin/* /tmp/bin
+/bin/cp -f /bin/* /tmp/bin
+# this causes problems? idk why
+rm -f /tmp/bin/ping
+
+# fix often broken permissions
+chmod -R 775 /dev/snd*
+chmod -R 775 /dev/dri*
+chmod -R 777 /dev/shm
+chmod -R 777 /tmp/bin
