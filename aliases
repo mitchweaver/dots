@@ -3,9 +3,12 @@
 # this needs organized so bad, possibly split into multiple files
 #
 # it's a mess, you've been warned...
+# 
+# * CLEANUP IN PROGRESS *
 #
+# # # # # # # # # # # # # # # # # # #
 
-# ----------------- init ---------------------------
+# ------------------------ init -------------------------------
 # fix shell env variable if its broken
 export SHELL=${SHELL:-$0}
 
@@ -76,9 +79,9 @@ if has py3 ; then
 else
     a py=py2
 fi
-# --------------- end init -------------------------
+# --------------------- end init ----------------------------------
 
-# -------------- OS specific aliases -------------------
+# --------------------- OS specific aliases ------------------------
 case $(uname) in
     Linux) export NPROC="$(nproc)"
            a disks='lsblk'
@@ -93,7 +96,7 @@ case $(uname) in
              a poweroff='doas shutdown -p now'
              a webcam='ffmpeg -i /dev/video0 -f sndio -i default "$(date)".mp4'
 esac
-# ---------- end OS specific aliases -------------------
+# ---------------- end OS specific aliases -------------------------
 
 # dynamic 'c' utility
 c() {
@@ -216,14 +219,6 @@ du() {
     { command du -ahLd 1 "$1" | sort -r ; } |
     head -n 20
 } 2> /dev/null
-
-# directory marking
-# usage: 'm1' = mark 1
-#        'g1' = return to m1
-for i in 1 2 3 4 5 6 7 8 9 ; do
-    eval "m${i}() { export _MARK${i}=\$PWD ; }"
-    eval "g${i}() { cd \$_MARK${i} ; }"
-done
 
 # run a given command X times
 run() { 
@@ -399,46 +394,39 @@ v() {
     fi
 } 2> /dev/null
 
-has ranger &&
+if has ranger ; then
     r() { ranger "$@" ; c ; }
+fi
 
-has pv &&
+if has pv ; then
     a pv='pv -pcre'
+fi
 
-has mpv &&
-{
+if has mpv ; then
     mpv() { 
         [ $# -eq 0 ] && return 1
-        if [ "$(pgrep xwinwrap)" ] ; then
-            kill $(pgrep mpv | grep -v $(pgrep -P \
-                $(cat ${HOME}/.cache/mpvbg.pid))) \
-                    > /dev/null 2>&1
+
+        # kill any currently running mpv before launching a new
+        if pgrep xwinwrap > /dev/null ; then
+            # kill all mpv except the one with the mpvbg pid
+            # as not to kill our desktop background! see ~/bin/mpvbg for details
+            kill $(pgrep mpv | grep -v $(pgrep -P $(cat ${HOME}/.cache/mpvbg.pid))) > /dev/null 2>&1
         else
-            pkill -9 mpv
+            pkill mpv
         fi
+
         cmd mpv --title=mpv "$@"
     }
     mpvm() { mpv --no-video "$@" ; }
-}
+fi
 
-has mogrify &&
-{
-    a import='import -quiet -silent -window root -quality 100 ~/import.png'
-    jpg() {
-        [ -z "$@" ] && return
-        # convert "$@" "$(filename "$@")".jpg &&
-            # if [ "$(ext "$@")" != "jpg" ] ; then
-                # rm -f "$@"
-            # fi
-        jpegoptim *.jpg
-    }
-    75%() { mogrify -resize '75%X75%' "$@" ; jpg "$@" ; }
-    50%() { mogrify -resize '50%X50%' "$@" ; jpg "$@" ; }
-    25%() { mogrify -resize '25%X25%' "$@" ; jpg "$@" ; }
-}
+if has mogrify ; then
+    75%() { mogrify -resize '75%X75%' "$@" ; }
+    50%() { mogrify -resize '50%X50%' "$@" ; }
+    25%() { mogrify -resize '25%X25%' "$@" ; }
+fi
 
-has trans &&
-{
+if has trans ; then
     trans() {
         [ $# -eq 0 ] && read inp && set "$inp"
         cmd trans -no-auto -b "$@"
@@ -448,19 +436,14 @@ has trans &&
         # note: $1 needs to be language code, ex: 'de'
         cmd trans -from en -to "$@"
     }
+    # german
     rde() {
         [ $# -eq 0 ] && read inp && set "$inp"
         rtrans de "$*"
     }
-}
+fi
 
-has git &&
-{
-    for i in init log fetch pull \
-             branch clone help \
-             stash blame clean ; do
-        a g${i}="git $i"
-    done
+if has git ; then
     a gmote='git remote add origin'
     a gstat='git status'
     a gbort='git rebase --abort'
@@ -488,8 +471,11 @@ has git &&
     greset() { [ $# -eq 0 ] && set 10     ; git reset --hard HEAD~"$1" ; }
     gbase()  { [ $# -eq 0 ] && set 5      ; git rebase -i HEAD~$1      ; }
     ghclone() { git clone https://github.com/"$1" ; }
+
+    # sets up a git repo in /tmp that you can push/pull from your directory
+    # good for backup when working on quick new ideas / scratchpads
     gtmp() { 
-        [ $# -eq 0 ] && set "/tmp/$(basename ${PWD})-repo"
+        [ $# -eq 0 ] && set -- "/tmp/$(basename ${PWD})-repo"
         git init --bare "$1" &&
         git init .
         git remote add origin "$1" &&
@@ -497,24 +483,27 @@ has git &&
         git commit -m "initial commit" &&
         git push -u origin master
     }
-}
+fi
 
-wlibc() { 
-    set $(strings -a "$1")
-    for i in musl glibc llvm ; do
-        echo "$@" | grep -oi $i && break
-    done | head -n 1 
-}
-
+# ----------------- movement commands -----------------------
 a {..,cd..}='cd ..'
 a ...='.. ; ..'
 a ....='.. ; ...'
 
+# directory marking
+# usage: 'm1' = mark 1
+#        'g1' = return to m1
+for i in 1 2 3 4 5 6 7 8 9 ; do
+    eval "m${i}() { export _MARK${i}=\$PWD ; }"
+    eval "g${i}() { cd \$_MARK${i} ; }"
+done
+
 _g() { local a=$1 ; shift ; cd $a/"$@" ; cl ;  }
 
 for i in bin env etc tmp usr var src ; do
-    exists ~/$i &&
+    if exists ~/$i ; then
         a g$(printf %.1s $i)="_g ~/$i"
+    fi
     a g$(printf %.1s $i | tr [a-z] [A-Z])="_g /$i"
 done
 
@@ -528,7 +517,7 @@ esac
 mT() { mv "$@" /tmp  ; }
 YT() { cp "$@" /tmp  ; }
 
-exists ~/var && {
+if exists ~/var ; then
     for i in downloads files images music ; do
         a g$(printf %.1s $i)="_g ~/var/$i"
     done
@@ -549,16 +538,18 @@ exists ~/var && {
     mi() { mv "$@" ~/var/images    ; }
     mm() { mv "$@" ~/var/music     ; }
     mvi(){ mv "$@" ~/var/videos    ; }
-}
-exists ~/usr && {
+fi
+
+if exists ~/usr ; then
     a gr='_g ~/usr/repos' 
     a gbkup='_g ~/usr/backup'
     mu() { mv "$@" ~/usr ; }
     mr() { mv "$@" ~/usr/repos ; }
     Yu() { cp "$@" ~/usr ; }
     Yr() { cp "$@" ~/usr/repos ; }
-}
-exists ~/etc && {
+fi
+
+if exists ~/etc ; then
     me() { mv "$@" ~/etc ; }
     Ye() { cp "$@" ~/etc ; }
     a gcf='_g ~/etc/config'
@@ -576,44 +567,35 @@ exists ~/etc && {
         a ${i}cfg="v ~/etc/suckless/$i/config.h"
         a ${i}c="v ~/etc/suckless/$i/$i.c"
     done
-    recomp() { for i ; do
-                   ~/bin/recomp ~/etc/suckless/$i
-               done ; }
-}
-exists ~/src && { a gs='_g ~/src'
-                  ms() { mv "$@" ~/src  ; }
-                  Ys() { cp "$@" ~/src ; } ; }
-
-exists ~/bin && { mb() { mv "$@" ~/bin ; }
-                  Yb() { cp "$@" ~/bin ; } ; }
-
-exists ~/tmp && { mt() { mv "$@" ~/tmp ; }
-                  Yt() { cp "$@" ~/tmp ; } ; }
-
-exists ~/env && { mn() { mv "$@" ~/env ; }
-                  Yn() { cp "$@" ~/env ; }
-                  a gn='_g ~/env' ; }
-
-cat ~/.ssh/config 2> /dev/null | grep torrentbox > /dev/null &&
-{
-    addtorrent() {
+    recomp() {
         for i ; do
-            if [ -f "$i" ] ; then
-                scp "$i" torrentbox:~/.torrents/torrents &&
-                echossh torrentbox '~/.torrents/queue.txt' '/home/banana/.torrents/torrents'/"${i##*/}" &&
-                rm -f "$i"
-            else
-                echossh torrentbox '~/.torrents/queue.txt' "$i"
-            fi
+            ~/bin/recomp ~/etc/suckless/$i
         done
     }
-    a checktorrents='ssh torrentbox tail -f /tmp/torrent*.log'
-    torrent() {
-        aria2c --file-allocation=falloc \
-            --check-integrity=true --continue=true \
-            --max-concurrent-downloads=20 --seed-time=0 "$@"
-    }
-}
+fi
+
+if exists ~/src ; then
+    a gs='_g ~/src'
+    ms() { mv "$@" ~/src ; }
+    Ys() { cp "$@" ~/src ; }
+fi
+
+if exists ~/bin ; then
+    mb() { mv "$@" ~/bin ; }
+    Yb() { cp "$@" ~/bin ; }
+fi
+
+if exists ~/tmp ; then
+    mt() { mv "$@" ~/tmp ; }
+    Yt() { cp "$@" ~/tmp ; }
+fi
+
+if exists ~/env ; then
+    mn() { mv "$@" ~/env ; }
+    Yn() { cp "$@" ~/env ; }
+    a gn='_g ~/env'
+fi
+# ----------- end movement commands ------------------
 
 if exists ~/.youtube-dl ; then
     addyt() { 
@@ -652,13 +634,6 @@ if exists ~/var ; then
         done
     }
 fi
-
-randomcat() {
-    for i in $(seq 10) ; do
-        curl -H 'Accept-Content: application/json' -s -L https://aws.random.cat/meow | \
-            jq -r '.[]' | xargs -r -I'{}' curl -s -L {} | feh - && break
-    done 2> /dev/null
-}
 
 if has cover ; then
     split2flac() {
@@ -756,7 +731,6 @@ if has cover ; then
             cmd genre "$@"
         fi
     }
-
     fehcover() {
         _PWD=$PWD
         cd /tmp
