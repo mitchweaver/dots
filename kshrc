@@ -6,9 +6,11 @@
 # don't run if not interactive
 [[ $- != *i* ]] && return
 
+# ksh-specific alternatives
 alias echo='builtin print'
 alias type='builtin whence -v'
 
+# source my aliases
 . ${HOME}/etc/aliases
 
 set -o bgnice nohup trackall
@@ -24,6 +26,7 @@ export HISTFILE=${HOME}/tmp/.ksh_history \
 
 ulimit -c 0
 
+# cd, with recursive fuzzy-find
 cd() { 
     if [ $# -eq 0 ] ; then
         builtin cd ${HOME}
@@ -40,13 +43,14 @@ cd() {
     export PS1="$(_get_PS1)${RANGER_LEVEL:+[ranger] }${SSH_TTY:+(SSH) }"
 }
 
+# get which git branch we're on, used in our PS1
 _parse_branch() { 
     local branch=`git rev-parse --symbolic-full-name --abbrev-ref HEAD`
     [ -n "$branch" ] &&
         echo -n " $branch"
 } 2> /dev/null 
 
-# todo: find a good way to wrap these
+# todo: clean this mess
 case ${SHELL} in
     /*/mksh)
         _x="$(echo -n \\001)"
@@ -70,8 +74,11 @@ case ${SHELL} in
         esac
 esac
 
+# check if we're in ranger or not
 [ -n "$RANGER_LEVEL" ] && clear
 
+# this activates our PS1
 cd .
 
+# clear junk i hate seeing
 (rm -rf ${HOME}/{*.core,*.out,*.dump,Desktop,Downloads} 2> /dev/null &)

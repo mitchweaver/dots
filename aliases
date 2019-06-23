@@ -147,9 +147,7 @@ a cp='cp -irv'
 a mv='mv -iv'
 a {mkdir,mkd,mkdr}='mkdir -p'
 a df='df -h'
-a ln='ln -sf'
 a ag='a | g -i'
-a tf='typeset -f'
 a file='file -b -i -L'
 a bn=basename
 a {d,date}="cmd date '+%a %b %d - %I:%M %p'"
@@ -164,11 +162,12 @@ a chown='chown -R'
 a poweroff='sudo poweroff'
 a {reboot,restart}='sudo reboot'
 
+# gnu make
 a make="make -j$(( $NPROC + 1 ))"
 a makec='make clean'
 a makei='make install'
 a makeu='make uninstall'
-
+# plan9 make
 a mkc='mk clean'
 a mki='mk install'
 a mku='mk uninstall'
@@ -180,22 +179,19 @@ a scp='scp -rp4'
 a {wtf,wtfismyip}='w3m -dump https://wtfismyip.com'
 a diff='diff -u'
 a {less,les}='less -QRd'
-a {suvim,suvi,suv}='sudo ${EDITOR}'
 a view='${EDITOR} -R'
 a {htpo,hto,ht,hpot,hotp,top}='htop'
 a {hm,hme}='htop -u ${USER}'
 a {hr,hroot}='htop -u root'
 a nf=neofetch
-a {rtv,reddit}="rtv --enable-media ; c"
-a compton='pkill -9 compton ; compton & c'
+a {rtv,reddit}='rtv --enable-media ; c'
+a compton='pkill compton ; compton & c'
 a feh='feh -q -N -x -X -s -Z --scale-down --title feh'
 a weather='curl -s wttr.in/madison,sd?m0TQ'
 a forecast='curl -s http://wttr.in/madison,sd?m | \
    tail -n 33 | sed $\ d | sed $\ d'
 a heart='printf "%b\n" "\xe2\x9d\xa4"'
 a chroot='sudo chroot'
-a x720='xrandr -s 1280x720 ; bar'
-a x1080='xrandr -s 1920x1080 ; bar'
 a click='xdotool click 1'
 a su='su -'
 
@@ -249,10 +245,14 @@ ff() {
     find "$1" ! -path "$1" -type d -iname "*$2*" ; 
 }
 
+# exec a command on a given file/folder
 fdo() {
     case $# in
+        # syntax: <folder> <command to be run>
         2) set . "$@" ;;
-        0) read inp && set . "$inp"
+        # no args = try to read from pipe
+#        0) read inp && set . "$inp"
+        *) return
     esac
 
     local dir="$1"
@@ -329,8 +329,8 @@ if has w3m ; then
     w3m() {
         if [ $# -eq 0 ] ; then
             set https://ddg.gg/lite
-            cmd w3m -F $*
         fi
+        cmd w3m -F $*
     }
 fi
 
@@ -360,23 +360,26 @@ if has busybox ; then
 fi
 
 v() { 
+    # find which editor we're using
+    for i in nvim vim vis vi nano ; do
+        if has $i ; then
+            local editor=$i
+            break
+        fi
+    done
+    [ -z "$editor" ] && return
+
     # if no arguments, open my vimwiki page
     if [ $# -eq 0 ] ; then
         if [ -d ${HOME}/var/files/vimwiki ] ; then
-            { has nvim || has vim ; } &&
+            if [ $editor = nvim ] || [ $editor = vim ] ; then
                 set -- -c VimwikiIndex
-                ${EDITOR} "$@"
-                return
-        else
-            return
+            fi
         fi
+        $editor "$@"
     fi
 
-    for i in nvim vim vis vi nano ; do
-        has $i &&
-            { local editor=$i ; break ; }
-    done
-
+    # fuzzy-find file / recurse down
     if [ -f *"$@"* ] ; then
        $editor *"$@"*
     else
