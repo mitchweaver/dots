@@ -1,4 +1,9 @@
 # http://github.com/mitchweaver/dots
+#
+# this needs organized so bad, possibly split into multiple files
+#
+# it's a mess, you've been warned...
+#
 
 export SHELL=${SHELL:-$0}
 
@@ -47,67 +52,17 @@ fi
 
 case $(uname) in
     Linux) export NPROC="$(nproc)"
-           a free='free -h'
            a disks='lsblk'
            a webcam='ffmpeg -i /dev/video0 -f alsa -i default "$(date)".mp4'
-           if has crux ; then
-               prt='prt-get -im -is -if --install-scripts'
-               pkg() { case "$1" in
-                           add)    shift ; sudo $prt depinst $@ -f ;;
-                           update) shift ; if prt-get isinst $@ > /dev/null ; then sudo $prt update $@  ; fi ;;
-                           del)    shift ; sudo $prt remove $@     ;;
-                           # sysup)  shift ; sudo $prt sysup -f $@   ;;
-                           deps)   shift ; prt-get deps $@         ;;
-                           list)   shift ; pkginfo -i $@           ;;
-                           search) shift ; prt-get search $@       ;;
-                           info)   shift ; prt-get info $@         ;;
-                           list)   prt-get listinst ;;
-                           *) >&2 echo \?
-                       esac ; }
-          elif has emerge ; then
-              emerge='emerge -aq --newuse --changed-use'
-              pkg() { case "$1" in
-                          add)    shift ; sudo $emerge $@            ;;
-                          update) shift ; sudo $emerge -u $@         ;;
-                          del)    shift ; sudo emerge --unmerge $@   ;;
-                          list)   shift ; cat /var/tmp/portage/world ;;
-                          search) shift ; emerge --search $@         ;;
-                          sync)   shift ; emerge --sync $@           ;;
-                          info)   shift ; emerge --info $@           ;;
-                          *) >&2 echo \?
-                      esac ; }
-         elif has setup-alpine ; then
-              a pkg=apk
-         elif has apt ; then
-             pkg() { case "$1" in
-                         add)    shift ; apt install $@ ;;
-                         del)    shift ; apt remove $@  ;;
-                         sync)   shift ; apt update     ;;
-                         update) shift ; apt upgrade    ;;
-                         *) >&2 echo \?
-                     esac ; }
-         fi
-;;
+           ;;
     OpenBSD) export NPROC=$(sysctl -n hw.ncpu)
              a sudo=doas
              a seq=jot
-             a rm='rm -P'
              a disks='sysctl -n hw.disknames'
              a disklabel='doas disklabel -h'
-             a sg='sysctl | grep ji'
              a killall='pkill -9'
              a poweroff='doas shutdown -p now'
              a webcam='ffmpeg -i /dev/video0 -f sndio -i default "$(date)".mp4'
-             pkg_del() { for i in $* quirks -a ; do 
-                             doas pkg_delete $i 
-                         done ; }
-             pkg() { case "$1" in
-                         add)    shift ; doas pkg_add -D snap $* ;;
-                         del)    shift ; pkg_del $*              ;;
-                         info)   shift ; pkg_info -D snap $*     ;;
-                         search) shift ; pkg_info -D snap -Q $*  ;;
-                         *) >&2 echo \?
-                     esac ; }
 esac
 
 pgrep -x dvtm > /dev/null ||
@@ -160,19 +115,23 @@ a cx='chmod +x'
 a chown='chown -R'
 a poweroff='sudo poweroff'
 a {reboot,restart}='sudo reboot'
-a {mk,mkae}="make -j$(( $NPROC + 1 ))"
+
+a make="make -j$(( $NPROC + 1 ))"
+a makec='make clean'
+a makei='make install'
+a makeu='make uninstall'
+
 a mkc='mk clean'
 a mki='mk install'
 a mku='mk uninstall'
-a mkall="mkc ; mk && mki"
+
 a {xs,xc}='xsel -o ; e'
 a rsync='rsync -rtvuh4 --progress --delete' #-c
 a sshd='sudo /usr/sbin/sshd'
 a scp='scp -rp4'
 a {wtf,wtfismyip}='w3m -dump https://wtfismyip.com'
-a diff='git diff'
+#a diff='git diff'
 a {less,les}='less -QRd'
-a {notepad,vtmp}='v /tmp/notepad'
 a {suvim,suvi,suv}='sudo ${EDITOR}'
 a view='${EDITOR} -R'
 a {htpo,hto,ht,hpot,hotp,top}='htop'
@@ -395,7 +354,7 @@ has mpv &&
     mpv() { 
         [ $# -eq 0 ] && return 1
         if [ "$(pgrep xwinwrap)" ] ; then
-            kill $(pgrep mpv | grep -v $(pgep -P \
+            kill $(pgrep mpv | grep -v $(pgrep -P \
                 $(cat ${HOME}/.cache/mpvbg.pid))) \
                     > /dev/null 2>&1
         else

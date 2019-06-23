@@ -15,7 +15,7 @@ cd ${HOME}
 
 case "$(basename $(file -b -i -L ${HOME}/var/tmp/wall))" in
     *png*|*jpg*|*jpeg*) feh --bg-fill --no-fehbg ${HOME}/var/tmp/wall ;;
-    *gif*|*webm*|*mp4*|*mkv*) ${HOME}/bin/mpvbg ${HOME}/var/tmp/wall
+    *gif*|*webm*|*mp4*|*mkv*|*stream*) ${HOME}/bin/mpvbg ${HOME}/var/tmp/wall
 esac > /dev/null 2>&1 &
 
 for i in bar sleep clip xbanish batmon ; do
@@ -40,13 +40,8 @@ if [ $(cat /tmp/dwm_info/gappx) -gt 0 ] ; then
     compton &
 fi
 
-${HOME}/bin/bar > /dev/null 2>&1 &
-
-#! pgrep -f torrent-queue > /dev/null &&
-#    torrent-queue > /dev/null &
-
-#! pgrep -f ytdl-queue > /dev/null &&
-#    ytdl-queue > /dev/null &
+! pgrep bar > /dev/null &&
+    ${HOME}/bin/bar > /dev/null 2>&1 &
 
 # if dwm crashes, relaunch -- handy to force-restart after re-compile via pkill
 # if I exit dwm, close
