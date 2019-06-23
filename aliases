@@ -5,29 +5,34 @@
 # it's a mess, you've been warned...
 #
 
+# ----------------- init ---------------------------
+# fix shell env variable if its broken
 export SHELL=${SHELL:-$0}
 
+# don't break things if we aren't using a compliant shell
 case ${SHELL} in
     *ksh|*ash) true ;;
-    *) return # don't break things
+    *) return
 esac
 
-u() { for _u ; do 
-        unalias $_u || unset -f $_u
-      done 2> /dev/null ; }
-
-u r w # nobody uses these...
-
+# lifehack
 alias a=alias
 
-has() { for _h ; do
-            type $_h || return 1
-        done > /dev/null 2>&1 ; }
+# check if we have installed
+has() {
+    for _h ; do
+        type $_h || return 1
+    done > /dev/null 2>&1
+}
 
-exists() { for _e ; do
-               [ -e $_e ] || return 1
-           done ; }
+# check if file/folder exists
+exists() {
+    for _e ; do
+        [ -e $_e ] || return 1
+    done
+}
 
+# checks if one string contains another
 contains() {
     [ $# -ne 2 ] && return 1
     local string="$1"
@@ -39,17 +44,41 @@ contains() {
     fi
 }
 
-if has exa ; then
-    a ls='exa -F'
-elif has colorls ; then
-    a ls='colorls -F'
-else
-    case $(uname) in
-        Linux) a ls='ls -F --color=always' ;;
-        *BSD)  a ls='ls -F'
-    esac
-fi
+# unaliaser
+u() {
+    for _u ; do 
+        unalias $_u || unset -f $_u
+    done 2> /dev/null
+}
 
+# nobody uses these...
+u r w
+
+# find correct python3
+for i in 3.7 3.6 3.5 3.4 3 ; do
+    if type python$i > /dev/null 2>&1 ; then
+        a py3=python$i
+        break
+    fi
+done
+
+# find correct python2
+for i in 2.7 2.5 2 ; do
+    if type python$i > /dev/null 2>&1 ; then
+        a py2=python$i
+        break
+    fi
+done
+
+# set default python
+if has py3 ; then
+    a py=py3
+else
+    a py=py2
+fi
+# --------------- end init -------------------------
+
+# -------------- OS specific aliases -------------------
 case $(uname) in
     Linux) export NPROC="$(nproc)"
            a disks='lsblk'
@@ -64,10 +93,9 @@ case $(uname) in
              a poweroff='doas shutdown -p now'
              a webcam='ffmpeg -i /dev/video0 -f sndio -i default "$(date)".mp4'
 esac
+# ---------- end OS specific aliases -------------------
 
-pgrep -x dvtm > /dev/null ||
-    a clear='printf "\033c"'
-
+# dynamic 'c' utility
 c() {
     if [ $# -eq 0 ] ; then
         clear
@@ -78,6 +106,24 @@ c() {
     fi
 }
 
+# ls stuff
+if has exa ; then
+    a ls='exa -F'
+elif has colorls ; then
+    a ls='colorls -F'
+else
+    case $(uname) in
+        Linux) a ls='ls -F --color=always' ;;
+        *BSD)  a ls='ls -F'
+    esac
+fi
+
+# better clear function, but doesn't work in dvtm
+if ! pgrep -x dvtm > /dev/null ; then
+    a clear='printf "\033c"'
+fi
+
+a cmd=command
 a {cc,cll,clear,clar,clea}=clear
 a {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi}=exit
 a {l,sls,sl}=ls
@@ -110,7 +156,6 @@ a h='head -n 15'
 a t='tail -n 15'
 a {w,watch}='watch -t -n 1'
 a ex=export
-a cmd=command
 a cx='chmod +x'
 a chown='chown -R'
 a poweroff='sudo poweroff'
@@ -130,7 +175,7 @@ a rsync='rsync -rtvuh4 --progress --delete' #-c
 a sshd='sudo /usr/sbin/sshd'
 a scp='scp -rp4'
 a {wtf,wtfismyip}='w3m -dump https://wtfismyip.com'
-#a diff='git diff'
+a diff='diff -u'
 a {less,les}='less -QRd'
 a {suvim,suvi,suv}='sudo ${EDITOR}'
 a view='${EDITOR} -R'
@@ -150,18 +195,6 @@ a x720='xrandr -s 1280x720 ; bar'
 a x1080='xrandr -s 1920x1080 ; bar'
 a click='xdotool click 1'
 a su='su -'
-
-for i in 3.6 3.5 3.4 3 ; do
-    type python$i > /dev/null 2>&1 &&
-        { a py3=python$i ; break ; }
-done
-
-for i in 2.7 2.5 2 ; do
-    type python$i > /dev/null 2>&1 &&
-        { a py2=python$i ; break ; }
-done
-
-has py3 && a py=py3 || a py=py2
 
 ps() {
     if [ $# -gt 0 ] ; then
@@ -192,6 +225,7 @@ for i in 1 2 3 4 5 6 7 8 9 ; do
     eval "g${i}() { cd \$_MARK${i} ; }"
 done
 
+# run a given command X times
 run() { 
     [ $# -lt 2 ] && exit 1
     local c=$1 ; shift
@@ -254,59 +288,81 @@ echossh() {
 
 ps1() { export PS1='% ' ; }
 
-dlzip() { wget "$@" -O dl.zip && unzip dl.zip && rm -f dl.zip && cls ; }
-
-hg() { [ $# -gt 0 ] && g -e "$@" $HISTFILE | head -n 20 ; }
+# search history for command
+hg() {
+    if [ $# -gt 0 ] ; then
+        g -e "$@" $HISTFILE | head -n 20
+    fi
+}
 
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
 cheat() { curl -s cheat.sh/$1 ; }
 rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
 
-reload() { . ~/etc/aliases
-           xrdb load ~/etc/Xresources
-           xmodmap ~/etc/Xmodmap
-           xset m 0 0 
-           xset b off 
-           xset +fp /home/mitch/.fonts
-           xset fp rehash
-           fc-cache ; } 2> /dev/null
+reload() {
+    . ~/etc/aliases
+    xrdb load ~/etc/Xresources
+    xmodmap ~/etc/Xmodmap
+    xset m 0 0 
+    xset b off 
+    xset +fp /home/mitch/.fonts
+    xset fp rehash
+    fc-cache
+} 2> /dev/null
 
-ping() { [ $# -eq 0 ] && set google.com
-         /bin/ping $1 ; }
-         # -c 1 -n -s 16 -w 10 $1 | head -n 2 ; }
+ping() {
+    if [ $# -eq 0 ] ; then
+        if ${HOME}/bin/online ; then
+            echo Online!
+        fi
+    else
+        /bin/ping "$@"
+    fi
+}
 
-has nasm &&
+if has nasm ; then
     nasm() {
         if [ -f "$1" ] ; then
-                cmd nasm -f elf32 -g -F dwarf "$1" &&
-                    ld -m elf_i386 "${1%.*}.o" -o "${1%.*}"
-                    # && ./"${1%.*}"
+            cmd nasm -f elf32 -g -F dwarf "$1" &&
+                ld -m elf_i386 "${1%.*}.o" -o "${1%.*}"
         fi
     }
+fi
 
-has w3m && 
-    w3m() { [ $# -eq 0 ] && set https://ddg.gg/lite ; cmd w3m -F $* ; }
+if has w3m ; then
+    w3m() {
+        if [ $# -eq 0 ] ; then
+            set https://ddg.gg/lite
+            cmd w3m -F $*
+        fi
+    }
+fi
 
-exists ~/bin/bar &&
-    bar() { pkill -9 -f bar ; ~/bin/bar & } > /dev/null
+if exists ${HOME}/bin/bar ; then
+    bar() {
+        pkill bar
+        ${HOME}/bin/bar &
+    } > /dev/null
+fi
 
-exists ~/bin/conv &&
+if exists ${HOME}/bin/conv ; then
     getconvs() {
         for i in dec bin hex oct ; do
             for j in dec bin hex oct ; do
                 [ $i != $j ] &&
-                    a ${i}2${j}="dash ~/bin/conv \
+                    a ${i}2${j}="${HOME}/bin/conv \
                         -i $(printf %.1s $i) \
                         -o $(echo -n ${j%??} | sed 's/.*2//')"
             done
         done
     }
+fi
 
-has busybox && {
+if has busybox ; then
     has vi || a vi='busybox vi'
-    a ash='busybox ash'
-}
+    has ash || a ash='busybox ash'
+fi
 
 v() { 
     # if no arguments, open my vimwiki page
@@ -559,8 +615,7 @@ cat ~/.ssh/config 2> /dev/null | grep torrentbox > /dev/null &&
     }
 }
 
-exists ~/.youtube-dl &&
-{
+if exists ~/.youtube-dl ; then
     addyt() { 
         for i ; do
             echo "$i" >> ~/.youtube-dl/video-queue.txt
@@ -584,27 +639,19 @@ exists ~/.youtube-dl &&
             youtube-dl --geo-bypass --prefer-ffmpeg "$i"
         done
     }
-}
+fi
 
-has pk &&
+if has pk ; then
     gpk() { cd ~/.local/pk/prefix ; cls ; }
+fi
 
-exists ~/src/pk &&
-{
-    # push_ports() { rsync ~/src/pk/ports/ micro:mitchweaverxyz/pk/ports ; }
-    vpk() { v ~/src/pk/pk ; }
-    repk() { cp -f ~/src/pk/pk ~/.local/bin/pk ; }
-    pkbk() { cmd cp -rf ~/.local/pk /tmp/pk ; pack /tmp/pk ; }
-}
-
-exists ~/var &&
-{
+if exists ~/var ; then
     mvwait() {
         for i ; do
             mv "$i" ~/var/music/waiting_pool
         done
     }
-}
+fi
 
 randomcat() {
     for i in $(seq 10) ; do
@@ -613,8 +660,7 @@ randomcat() {
     done 2> /dev/null
 }
 
-has cover &&
-{
+if has cover ; then
     split2flac() {
         if [ "$(find . -maxdepth 1 -iname '*.flac')" ] ; then
             cmd split2flac ./*.flac || return
@@ -725,20 +771,19 @@ has cover &&
         [ -f ./logo.jpg ] && rm -f ./logo.jpg
         cd "$_PWD"
     }
-    backup_music() {
-        if [ -d /mnt/hdd/music ] ; then
-            rsync /mnt/data/music/ /mnt/hdd/music
-        else
-            rsync /mnt/data/music/ banana:/mnt/500GB/music
+fi
+
+if has pape ; then
+    a save_wall='cp ${HOME}/var/tmp/wall ${HOME}/var/images/wallpapers/unsplash/saved_"$(date)".png'
+fi
+
+if has clamscan ; then
+    clam() {
+        if [ -e "$1" ] ; then
+            sudo clamscan -r "$1" --move=/tmp/quar/ --log=/tmp/quar/log.txt
         fi
     }
-}
+fi
 
+# unalias loop/tmp variables
 u i j _u _p _h
-
-a save_wall='cp ${HOME}/var/tmp/wall ${HOME}/var/images/wallpapers/unsplash/saved_"$(date)".png'
-
-clam() {
-    [ -n "$1" ] &&
-        sudo clamscan -r "$1" --move=/tmp/quar/ --log=/tmp/quar/log.txt
-}
