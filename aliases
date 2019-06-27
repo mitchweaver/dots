@@ -176,7 +176,6 @@ a {xs,xc}='xsel -o ; e'
 a rsync='rsync -rtvuh4 --progress --delete' #-c
 a sshd='sudo /usr/sbin/sshd'
 a scp='scp -rp4'
-a {wtf,wtfismyip}='w3m -dump https://wtfismyip.com'
 a diff='diff -u'
 a {less,les}='less -QRd'
 a view='${EDITOR} -R'
@@ -330,7 +329,13 @@ if has w3m ; then
         if [ $# -eq 0 ] ; then
             set https://ddg.gg/lite
         fi
-        cmd w3m -F $*
+        cmd w3m -F "$@"
+    }
+
+    wtf() {
+        w3m -dump http://wtfismyip.com | \
+            head -n 15 | \
+            sed 's/                    //'
     }
 fi
 
