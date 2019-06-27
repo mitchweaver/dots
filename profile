@@ -1,3 +1,5 @@
+umask 022
+
 export PATH="$PATH:${HOME}/.local/bin:${HOME}/.local/pk/prefix/bin"
 export PYTHONPATH="$PYTHONPATH:/home/mitch/.local/pk/prefix/lib/python2.7/site-packages:/tmp/bin/python2.7/site-packages"
 export PYTHONPATH="$PYTHONPATH:/home/mitch/.local/pk/prefix/lib/python3.6/site-packages:/tmp/bin/python3.6/site-packages"

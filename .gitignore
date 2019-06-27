@@ -12,6 +12,7 @@ vim
 # ----------------------------------
 # vi needs to stop this nonsense
 *~*
+*~
 # ----------------------------------
 
 config/gtk-2.0
@@ -48,7 +49,6 @@ config/autostart
 .config/autostart
 *mimeapps*
 *menus*
-*user-dirs*
 
 *xpad*
 *menus*

@@ -1,3 +1,5 @@
+#!/bin/mksh
+
 cd ${HOME}
 
 # if desktop
@@ -19,7 +21,7 @@ case "$(basename $(file -b -i -L ${HOME}/var/tmp/wall))" in
 esac > /dev/null 2>&1 &
 
 for i in bar sleep clip xbanish batmon ; do
-    pkill -9 $i
+    pkill $i
 done > /dev/null 2>&1
 
 ! pgrep -f clip > /dev/null &&
@@ -31,6 +33,9 @@ done > /dev/null 2>&1
 ! pgrep -f batmon > /dev/null &&
     batmon &
 
+! pgrep bar > /dev/null &&
+    ${HOME}/bin/bar > /dev/null 2>&1 &
+
 if type pulseaudio > /dev/null ; then
     ! pgrep -f pulseaudio > /dev/null &&
         pulseaudio --start --exit-idle-time=-1 &
@@ -39,9 +44,6 @@ fi
 if [ $(cat /tmp/dwm_info/gappx) -gt 0 ] ; then
     compton &
 fi
-
-! pgrep bar > /dev/null &&
-    ${HOME}/bin/bar > /dev/null 2>&1 &
 
 # if dwm crashes, relaunch -- handy to force-restart after re-compile via pkill
 # if I exit dwm, close

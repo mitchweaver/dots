@@ -174,6 +174,8 @@ if exists(':PlugInstall')
     \]
     let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 
+    let g:asmsyntax = 'nasm'
+
     nnoremap <silent><leader>wg :VimwikiDiaryGenerateLinks<CR>
 endif
 

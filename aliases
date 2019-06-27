@@ -367,7 +367,13 @@ v() {
             break
         fi
     done
-    [ -z "$editor" ] && return
+    if [ -z "$editor" ] ; then
+        if has busybox ; then
+            editor='busybox vi'
+        else
+            return
+        fi
+    fi
 
     # if no arguments, open my vimwiki page
     if [ $# -eq 0 ] ; then
@@ -413,10 +419,10 @@ if has mpv ; then
         if pgrep xwinwrap > /dev/null ; then
             # kill all mpv except the one with the mpvbg pid
             # as not to kill our desktop background! see ~/bin/mpvbg for details
-            kill $(pgrep mpv | grep -v $(pgrep -P $(cat ${HOME}/.cache/mpvbg.pid))) > /dev/null 2>&1
+            kill $(pgrep -a mpv | grep -v mpvbg | awk '{print $1}')
         else
             pkill mpv
-        fi
+        fi > /dev/null 2>&1
 
         cmd mpv --title=mpv "$@"
     }
