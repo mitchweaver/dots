@@ -307,7 +307,7 @@ reload() {
 
 ping() {
     if [ $# -eq 0 ] ; then
-        if ${HOME}/bin/online ; then
+        if online ; then
             echo Online!
         fi
     else
@@ -333,19 +333,19 @@ if has w3m ; then
     }
 fi
 
-if exists ${HOME}/bin/bar ; then
+if exists bar ; then
     bar() {
         pkill bar
-        ${HOME}/bin/bar &
+        bar &
     } > /dev/null
 fi
 
-if exists ${HOME}/bin/conv ; then
+if exists conv ; then
     getconvs() {
         for i in dec bin hex oct ; do
             for j in dec bin hex oct ; do
                 [ $i != $j ] &&
-                    a ${i}2${j}="${HOME}/bin/conv \
+                    a ${i}2${j}="conv \
                         -i $(printf %.1s $i) \
                         -o $(echo -n ${j%??} | sed 's/.*2//')"
             done
@@ -417,7 +417,7 @@ if has mpv ; then
         # kill any currently running mpv before launching a new
         if pgrep xwinwrap > /dev/null ; then
             # kill all mpv except the one with the mpvbg pid
-            # as not to kill our desktop background! see ~/bin/mpvbg for details
+            # as not to kill our desktop background! see ~/bin/mpv/mpvbg for details
             kill $(pgrep -a mpv | grep -v mpvbg | awk '{print $1}')
         else
             pkill mpv
@@ -577,7 +577,7 @@ if exists ~/etc ; then
     done
     recomp() {
         for i ; do
-            ~/bin/recomp ~/etc/suckless/$i
+            recomp ~/etc/suckless/$i
         done
     }
 fi

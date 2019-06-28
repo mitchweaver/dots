@@ -12,7 +12,7 @@ p() { for i ; do export PATH="$i":$PATH ; done ; }
 
 p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin,bin/rs} /bin /sbin \
    ${HOME}/{{bin,bin/local/bin,bin/chroots},usr/{bin,bin/ascii},.local/bin} \
-   ${HOME}/bin/metal-archives
+   ${HOME}/bin/{file,mpv,misc,net,rice,text,util,wrapper,xorg}
 
 #/opt/openjdk/bin
 
