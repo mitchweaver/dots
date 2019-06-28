@@ -3,7 +3,7 @@ my personal dotfiles
 
 ------
 
-![crux_rice](https://u.teknik.io/Pg6q5.png)
+![crux_rice](https://i.imgur.com/ossASOE.png)
 
 ![openbsd_rice](https://i.redd.it/qgyn862iacl01.gif)
 

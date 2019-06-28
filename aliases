@@ -577,7 +577,7 @@ if exists ~/etc ; then
     done
     recomp() {
         for i ; do
-            recomp ~/etc/suckless/$i
+            cmd recomp ~/etc/suckless/$i > /dev/null
         done
     }
 fi
