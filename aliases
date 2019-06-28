@@ -331,12 +331,6 @@ if has w3m ; then
         fi
         cmd w3m -F "$@"
     }
-
-    wtf() {
-        w3m -dump http://wtfismyip.com | \
-            head -n 15 | \
-            sed 's/                    //'
-    }
 fi
 
 if exists ${HOME}/bin/bar ; then

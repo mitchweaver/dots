@@ -21,7 +21,7 @@ esac > /dev/null 2>&1
 
 _run() { ! pgrep -f $1 && $@ > /dev/null & }
 
-for i in bar 'clip --daemon' 'xbanish -i' batmon composit ; do
+for i in bar 'clip --daemon' xbanish batmon composit ; do
     _run $i
 done > /dev/null 2>&1
 
