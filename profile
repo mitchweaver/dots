@@ -88,5 +88,5 @@ unset i
 
 if ! pgrep X > /dev/null ; then
     rm -rf ${HOME}/.{Xauthority*,serverauth*}
-    startx
-fi > /dev/null 2>&1
+    startx > /dev/null 2>&1
+fi

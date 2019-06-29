@@ -148,7 +148,6 @@ a mv='mv -iv'
 a {mkdir,mkd,mkdr}='mkdir -p'
 a df='df -h'
 a ag='a | g -i'
-a file='file -b -i -L'
 a bn=basename
 a {d,date}="cmd date '+%a %b %d - %I:%M %p'"
 a dmegs=dmesg
@@ -457,7 +456,12 @@ if has git ; then
     a gbort='git rebase --abort'
     a gcherry='git cherry-pick'
     a gsub='git submodule'
-    a {gcheck,checkout}='git checkout'
+    a {gbranch,branch}='git branch'
+    checkout() {
+        git checkout "$1"
+        # activate my PS1 branch detector
+        cd .
+    }
     gup() { 
         git add -A &&
         git commit -m "$@" &&

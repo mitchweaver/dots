@@ -1,3 +1,4 @@
+" Neovim config file
 " http://github.com/mitchweaver/dots
 
 " unbind space for everything but leader
@@ -13,26 +14,32 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     Plug 'godlygeek/tabular' " tab alignment
     Plug 'tpope/vim-commentary' " comment toggler
     Plug 'ervandew/supertab' " code completion
-    Plug 'tpope/vim-surround' " quote/paren etc surrounding
     Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
     Plug 'airblade/vim-gitgutter' " git diffing along the left side
     Plug 'tpope/vim-repeat' " allows '.' for more things
+
     Plug 'dylanaraps/wal.vim' " pywal theme
-    Plug 'sheerun/vim-polyglot' " syntax highlighting
     
     call plug#end()
     filetype indent plugin on
-    syntax enable
+
     map <silent><leader>pi :PlugInstall<CR>
     map <silent><leader>pu :PlugUpdate<CR>
     map <silent><leader>pc :PlugClean<CR>
-
-colorscheme wal
 endif
 " --------------------------------------------------------
 
-set background=dark
-" set background=light
+" ---- syntax stuff -------------
+ set background=dark
+ set background=light
+ colorscheme wal
+ let g:is_posix = 1
+ let g:asmsyntax = 'nasm'
+ autocmd BufRead *.rc setlocal ft=sh
+ autocmd BufRead *.asm setlocal ft=nasm
+
+" syntax off
+" -------------------------------
 
 set backspace=indent,eol,start " make backspace useable
 set whichwrap+=<,>,h,l " wrap around lines with these keys
@@ -40,29 +47,16 @@ set updatetime=750 " time until bg calls after typing
 set timeout! " Disable keybind timeout
 set ttimeout! " Disable keybind timeout
 set clipboard=unnamed " yank/paste to/from system clipboard
-set vb " disable audible bell
-set novisualbell " kill the visual bell too
-set noerrorbells " did I mention I hate bells?
 set lazyredraw " whether to redraw screen after macros
 set mat=2 " how fast to blink matched brackets
 set textwidth=0 " very annoying warning
 set backspace=2 " allow backspace to go over new lines
-
-set shellslash
-set wildmenu " makes shell completion a bit better
-set wildmode=longest,list,full
-set ffs=unix
-
-set history=500
-set undolevels=500
-set undoreload=1000
 
 set title " keep window name updated with current file
 set noruler " don't show file position in the bottom right
 set noshowmode " don't show 'insert' or etc on bottom left
 set laststatus=0 " Disable bottom status line / statusbar
 set noshowcmd " don't print the last run command
-set mousehide " hide the mouse while typing
 set ch=1 " get rid of the wasted line at the bottom
 
 map <silent><leader>ln :set number! relativenumber!<cr>
@@ -80,7 +74,6 @@ endfunction
 nnoremap <silent><leader>ll :call <SID>ToggleColorColumn()<cr>
 
 set showmatch " show matching parens
-set hid " hide buffer when closed
 set scrolloff=8 " pad X lines when scrolling
 set fillchars=""  " extremely annoying
 set diffopt+=iwhite " disable white space diffing
@@ -89,6 +82,7 @@ set synmaxcol=512
 set nowrap
 set encoding=utf-8
 
+" --- tabs ----------
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -97,16 +91,22 @@ set smarttab " soft tab creation / deletion
 set shiftround " tab / shifting moves to closest tabstop.
 set autoindent " match indents on new lines.
 set smartindent
+" --------------------
 
+" ---- annoying nonsense ------------------
+set vb " disable audible bell
+set novisualbell " kill the visual bell too
+set noerrorbells " did I mention I hate bells?
 set nobackup " we have vcs, we don't need backups.
 set nowritebackup " we have vcs, we don't need backups.
 set noswapfile " annoying
+" -----------------------------------------
+
 set hidden " allow buffers with unsaved changes
 set autoread " reload files if changed on disk
 
 nnoremap <Leader>b :b 
 
-set tabpagemax=10 " dont show more than 10 tabs
 map <silent>th  :tabfirst<CR>
 map <silent>tk  :tabnext<CR>
 map <silent>tj  :tabprev<CR>
@@ -133,16 +133,9 @@ set gdefault " use the `g` flag by default.
 set wrapscan " searching wraps lines
 set magic " 'magic' patterns - (extended regex)
 nnoremap <silent><leader><leader> :let @/ = ""<CR>:noh<CR>
+
 " Search and Replace
 nmap <Leader>s :%s//g<Left><Left>
-
-if has('nvim')
-    nnoremap ci: T:ct:
-    nnoremap ci. T.ct.
-    nnoremap ci, T,ct,
-    nnoremap ci< T<ct>
-    nnoremap ci> T<ct>
-endif
 
 " -------------- Extension Settings ----------------------
 if exists(':PlugInstall')
@@ -161,28 +154,18 @@ if exists(':PlugInstall')
     autocmd FileType asm setlocal commentstring=;\ %s
     autocmd FileType conf setlocal commentstring=#\ %s
     autocmd FileType rc setlocal commentstring=#\ %s
-    autocmd FileType *Pkgfile set filetype=sh
 
     let wiki = {}
     let g:vimwikidir = "/home/mitch/var/files/vimwiki"
     let wiki.path = g:vimwikidir
     let g:vimwiki_list=[wiki]
-    let g:vimwiki_hl_headers = 1
-    let g:vimwiki_hl_cb_checked = 1
     let g:vimwiki_list = [
         \{'path': '~/var/files/vimwiki/personal.wiki',    'syntax': 'markdown', 'ext': '.md'},
     \]
     let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-
-    let g:asmsyntax = 'nasm'
-
-    nnoremap <silent><leader>wg :VimwikiDiaryGenerateLinks<CR>
 endif
 
 set wildignore+=*.opus,*.flac,*.pdf,*.jpg,*.png,*.so,*.swp,*.zip,*.gzip,*.bz2,*.tar,*.xz,*.lrzip,*.lrz,*.mp3,*.ogg,*.mp4,*.gif,*.jpeg,*.webm
-
-map <F9>  :setlocal spell! spelllang=en_gb<CR>
-map <F10> :setlocal spell! spelllang=de_de<CR>
 
 " Horizontal scrolling
 noremap <silent><C-o> 10zl
@@ -199,7 +182,7 @@ map <silent><leader>w :w<CR>
 map <silent><leader>q :q<CR>
 
 " print a 60-char line separator
-inoremap <silent><C-s> ------------------------------------------------------- <ESC>:Commentary<CR>0llllllllllllllllllllli
+inoremap <silent><C-s> -*-*-*-*-*--*-*-*-*-*--*-*-*-*-*--*-*-*-*-*--*-*-*-*-*--*-*-*-*-*- <ESC>:Commentary<CR>0llllllllllllllllllllli
 
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
@@ -290,8 +273,3 @@ if has('nvim')
     nnoremap <silent><leader>r :Ranger<CR>
 endif
 " ------------------------------------------------------- 
-
-if has('nvim')
-    " pause :terminal emulation
-    tnoremap <silent><C-z> <C-\><C-n>
-endif
