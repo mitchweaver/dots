@@ -86,7 +86,7 @@ type xdg-open > /dev/null 2>&1 &&
 
 unset i
 
-if ! pgrep X > /dev/null ; then
-    rm -rf ${HOME}/.{Xauthority*,serverauth*}
-    startx > /dev/null 2>&1
-fi
+#if ! pgrep X > /dev/null ; then
+#    rm -rf ${HOME}/.{Xauthority*,serverauth*}
+#    startx > /dev/null 2>&1
+#fi
