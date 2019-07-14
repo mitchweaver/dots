@@ -17,7 +17,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
     Plug 'airblade/vim-gitgutter' " git diffing along the left side
     Plug 'tpope/vim-repeat' " allows '.' for more things
-
     Plug 'dylanaraps/wal.vim' " pywal theme
     
     call plug#end()
@@ -30,15 +29,24 @@ endif
 " --------------------------------------------------------
 
 " ---- syntax stuff -------------
- set background=dark
- set background=light
- colorscheme wal
- let g:is_posix = 1
- let g:asmsyntax = 'nasm'
- autocmd BufRead *.rc setlocal ft=sh
- autocmd BufRead *.asm setlocal ft=nasm
+autocmd BufNewFile,BufRead * set syntax=sh
+autocmd BufNewFile,BufRead *.c set syntax=c
+autocmd BufNewFile,BufRead *.patch set syntax=c
+autocmd BufNewFile,BufRead *.hs set syntax=hs
+autocmd BufNewFile,BufRead *.py set syntax=py
+autocmd BufNewFile,BufRead *.pl set syntax=pl
+autocmd BufNewFile,BufRead *.txt set syntax=off
+autocmd BufNewFile,BufRead *.md set syntax=md
+autocmd BufNewFile,BufRead *.pad set syntax=md
+set background=dark
+" set background=light
+colorscheme wal
+let g:is_posix = 1
+let g:asmsyntax = 'nasm'
+autocmd BufRead *.rc setlocal ft=sh
+autocmd BufRead *.asm setlocal ft=nasm
 
-" syntax off
+syntax off
 " -------------------------------
 
 set backspace=indent,eol,start " make backspace useable
@@ -59,6 +67,7 @@ set laststatus=0 " Disable bottom status line / statusbar
 set noshowcmd " don't print the last run command
 set ch=1 " get rid of the wasted line at the bottom
 
+set number relativenumber
 map <silent><leader>ln :set number! relativenumber!<cr>
 
 let s:color_column_old = 80

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tags>
+
+  <resource identifier="${gimp_data_dir}/brushes/Round.vbr" checksum="a7f02530d3bc7484c8f9240cbe9c65b1">
+    <tag>round</tag>
+  </resource>
+
+  <resource identifier="${gimp_data_dir}/brushes/Round-Fuzzy.vbr" checksum="f8cb2466841104a55e42afce4568d103">
+    <tag>fuzzy</tag>
+    <tag>round</tag>
+  </resource>
+
+</tags>

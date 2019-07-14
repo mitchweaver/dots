@@ -6,6 +6,9 @@
 # don't run if not interactive
 [[ $- != *i* ]] && return
 
+# fix shell env variable if its broken
+export SHELL=${SHELL:-$0}
+
 # ksh-specific alternatives
 alias echo='builtin print'
 alias type='builtin whence -v'
@@ -17,11 +20,11 @@ set -o bgnice nohup trackall
 
 case ${SHELL} in
     /*/mksh) set -o vi ;;
-    /*/ksh) set -o csh-history vi-tabcomplete
+    /*/ksh|/*/loksh) set -o csh-history vi-tabcomplete
 esac
 
 export HISTFILE=${HOME}/tmp/.ksh_history \
-       {SAVEHIST,HISTSIZE}=1000 \
+       {SAVEHIST,HISTSIZE}=500 \
        HISTCONTROL=ignoreboth
 
 ulimit -c 0
@@ -45,10 +48,9 @@ cd() {
 
 # get which git branch we're on, used in our PS1
 _parse_branch() { 
-    local branch=`git rev-parse --symbolic-full-name --abbrev-ref HEAD`
-    [ -n "$branch" ] &&
-        echo -n " $branch"
-} 2> /dev/null 
+    local branch=`git rev-parse --symbolic-full-name --abbrev-ref HEAD 2> /dev/null`
+    [ -n "$branch" ] && echo -n " ($branch)"
+}
 
 # todo: clean this mess
 case ${SHELL} in
@@ -66,9 +68,9 @@ case ${SHELL} in
                 *)     echo -n '% $tmp_pwd '
             esac
         } ;;
-    /*/ksh) # openbsd
+    /*/ksh|/*/loksh)
         case ${USER} in
-            mitch) _get_PS1() { echo -n "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W $(_parse_branch)\[\e[1;37m\] " ; } ;;
+            mitch) _get_PS1() { echo -n "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(_parse_branch)\[\e[1;37m\] " ; } ;;
             root)  _get_PS1() { echo -n "\[\e[0;32m\][root]\[\e[1;36m\] \W\[\e[1;37m\] " ; } ;;
             *)     _get_PS1() { echo -n '% \W ' ; }
         esac

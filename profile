@@ -11,18 +11,8 @@ export LD_LIBRARY_PATH="/usr/lib32:$LD_LIBRARY_PATH"
 p() { for i ; do export PATH="$i":$PATH ; done ; }
 
 p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin,bin/rs} /bin /sbin \
-   ${HOME}/{{bin,bin/local/bin,bin/chroots},usr/{bin,bin/ascii},.local/bin} \
+   ${HOME}/{{bin,bin/local/bin,bin/chroots},usr/{bin,bin/ascii,local/bin},.local/bin} \
    ${HOME}/bin/{file,mpv,misc,net,rice,text,util,wrapper,xorg}
-
-#/opt/openjdk/bin
-
-# commonly used programs stored in a tmpfs, copied in /etc/rc.local
-if [ -d /tmp/bin ] ; then
-    p /tmp/bin
-    export SHELL=/tmp/bin/mksh
-else
-    p ${HOME}/usr/local/bin
-fi
 
 unset -f p
 
@@ -86,7 +76,7 @@ type xdg-open > /dev/null 2>&1 &&
 
 unset i
 
-#if ! pgrep X > /dev/null ; then
-#    rm -rf ${HOME}/.{Xauthority*,serverauth*}
-#    startx > /dev/null 2>&1
-#fi
+if ! pgrep X > /dev/null ; then
+    rm -rf ${HOME}/.{Xauthority*,serverauth*}
+    startx > /dev/null 2>&1
+fi

@@ -166,6 +166,7 @@ a make="make -j$(( $NPROC + 1 ))"
 a makec='make clean'
 a makei='make install'
 a makeu='make uninstall'
+
 # plan9 make
 a mkc='mk clean'
 a mki='mk install'
@@ -400,6 +401,7 @@ v() {
         fi
     fi
 } 2> /dev/null
+a V=v
 
 if has ranger ; then
     r() { ranger "$@" ; c ; }
@@ -452,16 +454,28 @@ fi
 
 if has git ; then
     a gmote='git remote add origin'
+    a gchangemote='git remote set-url origin'
     a gstat='git status'
     a gbort='git rebase --abort'
     a gcherry='git cherry-pick'
     a gsub='git submodule'
     a {gbranch,branch}='git branch'
+    a glog='git log'
+    a ginit='git init'
+    guntracked() { git ls-files --others --exclude-standard ; }
+    gpull() {
+        if [ $# -eq 0 ] ; then
+            git pull "$@"
+        elif [ $1 = master ] ; then
+            git pull origin "$@"
+        fi
+    }
     checkout() {
         git checkout "$1"
         # activate my PS1 branch detector
         cd .
     }
+    a gcheck=checkout
     gup() { 
         git add -A &&
         git commit -m "$@" &&
@@ -469,8 +483,8 @@ if has git ; then
     }
     gmit() { 
         if [ $# -eq 1 ] ; then
-            git add -A &&
-            git commit -m "$@"
+            git add "$1"
+            git commit -m "$(date)"
         elif [ $# -gt 1 ] ; then
             git add "$1" &&
             shift &&
@@ -482,12 +496,19 @@ if has git ; then
     gdiff()  { [ $# -eq 0 ] && set master ; git diff origin/"$1"       ; }
     greset() { [ $# -eq 0 ] && set 10     ; git reset --hard HEAD~"$1" ; }
     gbase()  { [ $# -eq 0 ] && set 5      ; git rebase -i HEAD~$1      ; }
-    ghclone() { git clone https://github.com/"$1" ; }
+    ghclone() {
+        # check if url is valid to my github
+        if curl -s -I -o /dev/null http://github.com/mitchweaver/$1 ; then
+            git clone https://github.com/mitchweaver/$1
+        else
+            git clone https://github.com/$1
+        fi
+    }
 
     # sets up a git repo in /tmp that you can push/pull from your directory
     # good for backup when working on quick new ideas / scratchpads
     gtmp() { 
-        [ $# -eq 0 ] && set -- "/tmp/$(basename ${PWD})-repo"
+        [ $# -eq 0 ] && set -- "$(mktemp -d)"
         git init --bare "$1" &&
         git init .
         git remote add origin "$1" &&
@@ -579,11 +600,6 @@ if exists ~/etc ; then
         a ${i}cfg="v ~/etc/suckless/$i/config.h"
         a ${i}c="v ~/etc/suckless/$i/$i.c"
     done
-    recomp() {
-        for i ; do
-            cmd recomp ~/etc/suckless/$i > /dev/null
-        done
-    }
 fi
 
 if exists ~/src ; then
@@ -770,6 +786,19 @@ if has clamscan ; then
         fi
     }
 fi
+
+
+fff() {
+    cmd fff "$@"
+    cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
+}
+
+helloc() {
+cat > hello.c << EOF
+#include <stdio.h>
+int main() { printf("%s\n", "hi"); return 0; }
+EOF
+}
 
 # unalias loop/tmp variables
 u i j _u _p _h

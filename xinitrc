@@ -11,7 +11,8 @@ cd ${HOME}
 # If dwm crashes, or was pkill, relaunch
 # --- note: this magically preserves opened windows!
 # if I exit dwm, close
+mkdir /tmp/dwm_info
 while type dwm > /dev/null ; do
     dwm && break || continue
-done 1> /tmp/dwm.log \
-     2> /tmp/dwm_err.log
+done 1> /tmp/dwm_info/dwm.log \
+     2> /tmp/dwm_info/dwm_err.log

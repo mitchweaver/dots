@@ -1,0 +1,8 @@
+ERROR 2019-07-02T04:20:30.370 25194 loop_close:133: uv_loop_close() hang?
+[--I] signal   0x9e36c8
+[-AI] async    0x9e3510
+[R--] signal   0x9d5b40
+ERROR 2019-07-04T00:20:17.548 4451  loop_close:133: uv_loop_close() hang?
+[--I] signal   0x9e36c8
+[-AI] async    0x9e3510
+[R--] signal   0x9d5b40
