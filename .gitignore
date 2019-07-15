@@ -23,6 +23,7 @@ config/tint2
 config/wireshark
 config/QtProject.conf
 config/youtube-viewer
+config/GIMP*
 
 *bookmarks*
 

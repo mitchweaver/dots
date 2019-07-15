@@ -1,9 +1,13 @@
 " Neovim config file
+"
 " http://github.com/mitchweaver/dots
+" 
+" " " " " " " " " " " " " " " " " " " "
 
 " unbind space for everything but leader
 nnoremap <silent><SPACE> <nop>
 let mapleader=" "
+
 "  --------------- Plugins ------------------------------
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
     set nocompatible
@@ -11,13 +15,16 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     call plug#begin('~/.vim/vim-plug')
 
     Plug 'vimwiki/vimwiki' " the ultimate note taking system
-    Plug 'godlygeek/tabular' " tab alignment
+    Plug 'ap/vim-buftabline' " display buffers along top as tabs
     Plug 'tpope/vim-commentary' " comment toggler
+    Plug 'godlygeek/tabular' " tab alignment
     Plug 'ervandew/supertab' " code completion
     Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
     Plug 'airblade/vim-gitgutter' " git diffing along the left side
     Plug 'tpope/vim-repeat' " allows '.' for more things
+    Plug 'tpope/vim-surround' " surround stuff with stuff
     Plug 'dylanaraps/wal.vim' " pywal theme
+    Plug 'dylanaraps/fff.vim' " fff file picker if not using ranger, (bottom)
     
     call plug#end()
     filetype indent plugin on
@@ -28,27 +35,8 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 " --------------------------------------------------------
 
-" ---- syntax stuff -------------
-autocmd BufNewFile,BufRead * set syntax=sh
-autocmd BufNewFile,BufRead *.c set syntax=c
-autocmd BufNewFile,BufRead *.patch set syntax=c
-autocmd BufNewFile,BufRead *.hs set syntax=hs
-autocmd BufNewFile,BufRead *.py set syntax=py
-autocmd BufNewFile,BufRead *.pl set syntax=pl
-autocmd BufNewFile,BufRead *.txt set syntax=off
-autocmd BufNewFile,BufRead *.md set syntax=md
-autocmd BufNewFile,BufRead *.pad set syntax=md
-set background=dark
-" set background=light
-colorscheme wal
-let g:is_posix = 1
-let g:asmsyntax = 'nasm'
-autocmd BufRead *.rc setlocal ft=sh
-autocmd BufRead *.asm setlocal ft=nasm
-
-syntax off
-" -------------------------------
-
+" ----------- general ----------------------------------
+set history=200
 set backspace=indent,eol,start " make backspace useable
 set whichwrap+=<,>,h,l " wrap around lines with these keys
 set updatetime=750 " time until bg calls after typing
@@ -59,13 +47,41 @@ set lazyredraw " whether to redraw screen after macros
 set mat=2 " how fast to blink matched brackets
 set textwidth=0 " very annoying warning
 set backspace=2 " allow backspace to go over new lines
-
 set title " keep window name updated with current file
 set noruler " don't show file position in the bottom right
 set noshowmode " don't show 'insert' or etc on bottom left
 set laststatus=0 " Disable bottom status line / statusbar
 set noshowcmd " don't print the last run command
 set ch=1 " get rid of the wasted line at the bottom
+set cmdheight=1 " cmd output only take up 1 line
+
+" automatic linebreak
+set lbr
+set tw=100 " to remind me not to go over 80
+" ------------------------------------------------------
+
+" ----- colors -------------------- 
+set background=dark
+" set background=light
+colorscheme wal
+"  --------------------------------
+
+" ---- syntax stuff -------------
+" autocmd BufNewFile,BufRead * set syntax=sh
+autocmd BufNewFile,BufRead *.c set syntax=c
+autocmd BufNewFile,BufRead *.patch set syntax=c
+autocmd BufNewFile,BufRead *.hs set syntax=hs
+autocmd BufNewFile,BufRead *.py set syntax=py
+autocmd BufNewFile,BufRead *.pl set syntax=pl
+autocmd BufNewFile,BufRead *.txt set syntax=off
+autocmd BufNewFile,BufRead *.md set syntax=md
+autocmd BufNewFile,BufRead *.pad set syntax=md
+let g:is_posix = 1
+let g:asmsyntax = 'nasm'
+autocmd BufRead *.rc setlocal ft=sh
+autocmd BufRead *.asm setlocal ft=nasm
+" syntax off
+" -------------------------------
 
 set number relativenumber
 map <silent><leader>ln :set number! relativenumber!<cr>
@@ -111,25 +127,20 @@ set nowritebackup " we have vcs, we don't need backups.
 set noswapfile " annoying
 " -----------------------------------------
 
+" -------- buffers ------------------------------
 set hidden " allow buffers with unsaved changes
 set autoread " reload files if changed on disk
 
+" b <num> = go to $buffer
 nnoremap <Leader>b :b 
 
-map <silent>th  :tabfirst<CR>
-map <silent>tk  :tabnext<CR>
-map <silent>tj  :tabprev<CR>
-map <silent>tl  :tablast<CR>
-
-map <silent>tt     :tabedit<Space>
-map <silent>tn     :tabnew<CR>
-map <silent>td     :tabclose<CR>
-map tm             :tabm<Space>
-
-nmap <silent><C-k> :wincmd k<CR>
-nmap <silent><C-j> :wincmd j<CR>
-nmap <silent><C-h> :wincmd h<CR>
-nmap <silent><C-l> :wincmd l<CR>
+map <silent><C-k> :bnext<CR>
+map <silent><C-j> :bprev<CR>
+map <leader><C-d> :bd<cr>
+map <silent>tk :bnext<CR>
+map <silent>tj :bprev<CR>
+map <leader>td :bd<cr>
+" -------------------------------------------------
 
 map Q @q
 
@@ -213,72 +224,75 @@ map <silent><C-w>    <nop>
 map <leader>md :!/home/mitch/usr/bin/previewmarkdown.sh -i "%" -b $BROWSER<CR>
 
 " ----------- Open files in ranger ----------------------- 
-if has('nvim')
-    function! s:RangerOpenDir(...)
-        let path = a:0 ? a:1 : getcwd()
+" if has('nvim')
+"     function! s:RangerOpenDir(...)
+"         let path = a:0 ? a:1 : getcwd()
 
-        if !isdirectory(path)
-            echom 'Not a directory: ' . path
-            return
-        endif
+"         if !isdirectory(path)
+"             echom 'Not a directory: ' . path
+"             return
+"         endif
 
-        let s:ranger_tempfile = tempname()
-        let opts = ' --cmd="set viewmode multipane"'
-        let opts .= ' --choosefiles=' . shellescape(s:ranger_tempfile)
-        if a:0 > 1
-            let opts .= ' --selectfile='. shellescape(a:2)
-        else
-            let opts .= ' ' . shellescape(path)
-        endif
-        let rangerCallback = {}
+"         let s:ranger_tempfile = tempname()
+"         let opts = ' --cmd="set viewmode multipane"'
+"         let opts .= ' --choosefiles=' . shellescape(s:ranger_tempfile)
+"         if a:0 > 1
+"             let opts .= ' --selectfile='. shellescape(a:2)
+"         else
+"             let opts .= ' ' . shellescape(path)
+"         endif
+"         let rangerCallback = {}
 
-        function! rangerCallback.on_exit(id, code, _event)
-            " Open previous buffer or new buffer *before* deleting the terminal
-            " buffer. This ensures that splits don't break if ranger is opened in
-            " a split window.
-            if w:_ranger_del_buf != w:_ranger_prev_buf
-                " Restore previous buffer
-                exec 'silent! buffer! '. w:_ranger_prev_buf
-            else
-                " Previous buffer was empty
-                enew
-            endif
+"         function! rangerCallback.on_exit(id, code, _event)
+"             " Open previous buffer or new buffer *before* deleting the terminal
+"             " buffer. This ensures that splits don't break if ranger is opened in
+"             " a split window.
+"             if w:_ranger_del_buf != w:_ranger_prev_buf
+"                 " Restore previous buffer
+"                 exec 'silent! buffer! '. w:_ranger_prev_buf
+"             else
+"                 " Previous buffer was empty
+"                 enew
+"             endif
 
-            " Delete terminal buffer
-            exec 'silent! bdelete! ' . w:_ranger_del_buf
+"             " Delete terminal buffer
+"             exec 'silent! bdelete! ' . w:_ranger_del_buf
 
-            unlet! w:_ranger_prev_buf w:_ranger_del_buf
+"             unlet! w:_ranger_prev_buf w:_ranger_del_buf
 
-            let names = ''
-            if filereadable(s:ranger_tempfile)
-                let names = readfile(s:ranger_tempfile)
-            endif
-            if empty(names)
-                return
-            endif
-            for name in names
-                exec 'edit ' . fnameescape(name)
-                doautocmd BufRead
-            endfor
-        endfunction
+"             let names = ''
+"             if filereadable(s:ranger_tempfile)
+"                 let names = readfile(s:ranger_tempfile)
+"             endif
+"             if empty(names)
+"                 return
+"             endif
+"             for name in names
+"                 exec 'edit ' . fnameescape(name)
+"                 doautocmd BufRead
+"             endfor
+"         endfunction
 
-        " Store previous buffer number and the terminal buffer number
-        let w:_ranger_prev_buf = bufnr('%')
-        enew
-        let w:_ranger_del_buf = bufnr('%')
+"         " Store previous buffer number and the terminal buffer number
+"         let w:_ranger_prev_buf = bufnr('%')
+"         enew
+"         let w:_ranger_del_buf = bufnr('%')
 
-        " Open ranger in nvim terminal
-        call termopen('ranger ' . opts, rangerCallback)
-        startinsert
-    endfunction
+"         " Open ranger in nvim terminal
+"         call termopen('ranger ' . opts, rangerCallback)
+"         startinsert
+"     endfunction
 
-    let g:loaded_netrwPlugin = 'disable'
-    augroup ReplaceNetrwWithRanger
-        autocmd StdinReadPre * let s:std_in = 1
-        autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call s:RangerOpenDir(argv()[0]) | endif
-    augroup END
+"     let g:loaded_netrwPlugin = 'disable'
+"     augroup ReplaceNetrwWithRanger
+"         autocmd StdinReadPre * let s:std_in = 1
+"         autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call s:RangerOpenDir(argv()[0]) | endif
+"     augroup END
 
-    command! -complete=dir -nargs=* Ranger :call <SID>RangerOpenDir(<f-args>)
-    nnoremap <silent><leader>r :Ranger<CR>
-endif
+"     command! -complete=dir -nargs=* Ranger :call <SID>RangerOpenDir(<f-args>)
+"     nnoremap <silent><leader>r :Ranger<CR>
+" endif
+" ---- if using fff instead of ranger use the below:
+nnoremap <silent><leader>f :F<CR>
+nnoremap <silent><leader>r :F<CR>
 " ------------------------------------------------------- 
