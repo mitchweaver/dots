@@ -35,18 +35,6 @@ exists() {
     done
 }
 
-# checks if one string contains another
-contains() {
-    [ $# -ne 2 ] && return 1
-    local string="$1"
-    local substring="$2"
-    if test "${string#*$substring}" != "$string" ; then
-        return 0    # $substring is in $string
-    else
-        return 1    # $substring is not in $string
-    fi
-}
-
 # unaliaser
 u() {
     for _u ; do 
@@ -207,11 +195,7 @@ cpcd() { cp "$1" "$2" && cd "$2" ; }
 
 du() { 
     [ $# -eq 0 ] && set .
-    # gnu
-    { command du -ahL --max-depth=1 "$1" | sort -rh ; } ||
-    # busybox / BSD
-    { command du -ahLd 1 "$1" | sort -r ; } |
-    head -n 20
+    cmd du -ahLd 1 "$1" | sort -rh | head -n 20
 } 2> /dev/null
 
 # files
@@ -222,16 +206,6 @@ f() {
     esac
 
     find "$1" ! -path "$1" -iname "*$2*" ; 
-}
-
-# folders
-ff() { 
-    case $# in
-        1) set . "$@" ;;
-        0) read inp && set . "$inp"
-    esac
-
-    find "$1" ! -path "$1" -type d -iname "*$2*" ; 
 }
 
 # Hack!
@@ -265,6 +239,7 @@ rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
 
 reload() {
     . ~/etc/aliases
+    . ~/etc/fff.conf
     xrdb load ~/etc/Xresources
     xmodmap ~/etc/Xmodmap
     xset m 0 0 
@@ -283,61 +258,37 @@ ping() {
 }
 
 w3m() {
-    if [ $# -eq 0 ] ; then
-        set https://ddg.gg/lite
-    fi
+    [ $# -eq 0 ] && set https://ddg.gg/lite
     cmd w3m -F "$@"
 }
 
 v() { 
-    # find which editor we're using
-    for i in nvim vim vis vi ; do
-        if has $i ; then
-            local editor=$i
-            break
-        fi
-    done
-    if [ -z "$editor" ] ; then
-        if has busybox ; then
-            a vi='busybox vi'
-            editor=vi
-        else
-            return
-        fi
-    fi
-
     # if no arguments, open my vimwiki page
     if [ $# -eq 0 ] ; then
-        if [ -d ${HOME}/var/files/vimwiki ] ; then
-            if [ $editor = nvim ] || [ $editor = vim ] ; then
-                set -- -c VimwikiIndex
-            fi
+        if exists ${HOME}/var/files/vimwiki && [ $EDITOR = nvim ] ; then
+            set -- -c VimwikiIndex
         fi
-        $editor "$@"
+        $EDITOR "$@"
         return
     fi
 
     # fuzzy-find file / recurse down
-    if [ -f *"$@"* ] ; then
-       $editor *"$@"*
+    if [ -f "$1" ] ; then
+        $EDITOR "$1"
     else
-        local f="$(find . -iname *"$@"* -maxdepth 1 | head -n 1)"
-        if [ -f "$f" ] ; then
-            $editor "$f"
-        else
-            local f="$(find . -iname *"$@"* -maxdepth 2 | head -n 1)"
+        for i in 1 2 3 4 5 ; do
+            local f="$(find . -iname *"$@"* -maxdepth $i | head -n 1)"
             if [ -f "$f" ] ; then
-                $editor "$f"
-            else
-                $editor "$@"
+                $EDITOR "$f"
+                return
             fi
-        fi
+        done
     fi
+    $EDITOR "$@"
 } 2> /dev/null
 a V=v
 
 fff() {
-    . ${HOME}/etc/fff.conf
     cmd fff "$@"
     cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
 }
@@ -441,14 +392,7 @@ if has git ; then
     gdiff()  { [ $# -eq 0 ] && set master ; git diff origin/"$1"       ; }
     greset() { [ $# -eq 0 ] && set 10     ; git reset --hard HEAD~"$1" ; }
     gbase()  { [ $# -eq 0 ] && set 5      ; git rebase -i HEAD~$1      ; }
-    ghclone() {
-        # check if url is valid to my github
-        if curl -s -I -o /dev/null http://github.com/mitchweaver/$1 ; then
-            git clone https://github.com/mitchweaver/$1
-        else
-            git clone https://github.com/$1
-        fi
-    }
+    ghclone() { git clone https://github.com/$1 ; }
 
     # sets up a git repo in /tmp that you can push/pull from your directory
     # good for backup when working on quick new ideas / scratchpads
@@ -486,12 +430,14 @@ for i in bin env etc tmp usr var src ; do
 done
 
 a gM='_g /mnt'
+
 case ${SHELL} in
     *ksh|bash)
         g~() { cd ~          ; }
         m~() { mv "$@" ~     ; }
         Y~() { cp "$@" ~     ; }
 esac
+
 mT() { mv "$@" /tmp  ; }
 YT() { cp "$@" /tmp  ; }
 
@@ -534,17 +480,11 @@ if exists ~/etc ; then
 
     a {aliases,alaises,aliase}='v ~/etc/aliases'
     a profile='v ~/etc/profile'
-    a {bmk,bmks}='v ~/var/files/bookmarks/bookmarks.txt'
+    a {bmk,bmks}='v ~/var/files/bkm/bookmarks.txt'
     a {vssh,sshv}='v ~/.ssh/config'
 
-    for i in vim ksh xinit ; do
-        a ${i}rc="v ~/etc/${i}rc"
-    done
-
-    for i in dwm st surf tabbed dmenu ; do
-        a ${i}cfg="v ~/etc/suckless/$i/config.h"
-        a ${i}c="v ~/etc/suckless/$i/$i.c"
-    done
+    a vimrc="v ~/etc/vimrc"
+    a kshrc="v ~/etc/kshrc"
 fi
 
 if exists ~/src ; then
@@ -569,141 +509,6 @@ if exists ~/env ; then
     a gn='_g ~/env'
 fi
 # ----------- end movement commands ------------------
-
-if exists ~/.youtube-dl ; then
-    addyt() { 
-        for i ; do
-            echo "$i" >> ~/.youtube-dl/video-queue.txt
-        done
-    }
-    addytm() {
-        for i ; do
-            echo "$i" >> ~/.youtube-dl/music-queue.txt
-        done
-    }
-    checkyt() { tail -f /tmp/ytdl*.log ; }
-fi
-
-if exists ~/var ; then
-    mvwait() {
-        for i ; do
-            mv "$i" ~/var/music/waiting_pool
-        done
-    }
-fi
-
-# metal-archives commands
-if has cover ; then
-    split2flac() {
-        if [ "$(find . -maxdepth 1 -iname '*.flac')" ] ; then
-            cmd split2flac ./*.flac || return
-        elif [ "$(find . -maxdepth 1 -iname '*.wav')" ] ; then
-            cmd split2flac ./*.wav || return
-        else
-            return
-        fi
-        rm -f *.flac *.wav scans Scans covers Covers *.cue *.log *.txt *.*nfo *.toc *.*rip
-        mv -f "`find . -maxdepth 1 ! -path . -type d`"/*/* . && \
-            rm -rf "`find . -maxdepth 1 ! -path . -type d`"
-        jpg *.png 2> /dev/null
-        mv *.jpg cover.jpg
-        jpegoptim *.jpg > /dev/null
-    }
-
-    fetchcovers() {
-        for i in * ; do
-            cd "$i" || continue
-            a="$(basename "$(echo $PWD | sed -E 's/\/[0-9]+.*//')") - $(echo "$i" | sed -E 's/[0-9]+ - //')"
-            echo "$a"
-            cover "$a"
-            cd ..
-        done
-    }
-
-    bandlogo() {
-        if [ $# -eq 0 ] ; then
-            artist=$(basename "$(echo $PWD | \
-                sed -E 's/\/[0-9]+.*//' | \
-                sed -E 's/ \([A-Z]+[a-z]*\)//')")
-            echo "$artist"
-            band "$artist"
-            logo "$artist"
-        else
-            band "$@" ; logo "$@"
-        fi
-    }
-    cover() {
-        if [ $# -eq 0 ] ; then
-            artist=$(basename "$(echo $PWD | \
-                sed -E 's/\/[0-9]+.*//' | \
-                sed -E 's/ \([A-Z]+[a-z]*\)//')")
-            album=$(basename "$PWD" | sed -E 's/[0-9]+ - //' | sed -E 's/ \(.*//')
-            echo "$artist - $album"
-            cmd cover "$artist - $album"
-        else
-            cmd cover "$@"
-        fi
-    }
-    songs() {
-        if [ $# -eq 0 ] ; then
-            artist=$(basename "$(echo $PWD | \
-                sed -E 's/\/[0-9]+.*//' | \
-                sed -E 's/ \([A-Z]+[a-z]*\)//')")
-            album=$(basename "$PWD" | sed -E 's/[0-9]+ - //' | sed -E 's/ \(.*//')
-            echo "$artist - $album"
-            cmd songs "$artist - $album"
-        else
-            cmd songs "$@"
-        fi
-    }
-    location() {
-        if [ $# -eq 0 ] ; then
-            artist=$(basename "$(echo $PWD | \
-                sed -E 's/\/[0-9]+.*//' | \
-                sed -E 's/ \([A-Z]+[a-z]*\)//')")
-            echo "$artist"
-            cmd location "$artist"
-        else
-            cmd location "$@"
-        fi
-    }
-    releases() {
-        if [ $# -eq 0 ] ; then
-            artist=$(basename "$(echo $PWD | \
-                sed -E 's/\/[0-9]+.*//' | \
-                sed -E 's/ \([A-Z]+[a-z]*\)//')")
-            echo "$artist"
-            cmd releases "$artist"
-        else
-            cmd releases "$@"
-        fi
-    }
-    genre() {
-        if [ $# -eq 0 ] ; then
-            artist=$(basename "$(echo $PWD | \
-                sed -E 's/\/[0-9]+.*//' | \
-                sed -E 's/ \([A-Z]+[a-z]*\)//')")
-            echo "$artist"
-            cmd genre "$artist"
-        else
-            cmd genre "$@"
-        fi
-    }
-    fehcover() {
-        _PWD=$PWD
-        cd /tmp
-        cover "$@" && feh ./cover.jpg 2> /dev/null
-        [ -f ./cover.jpg ] && rm -f ./cover.jpg
-        cd "$_PWD"
-    }
-    fehlogo() {
-        _PWD=$PWD
-        cd /tmp
-        logo "$@" && feh ./logo.jpg 2> /dev/null
-        [ -f ./logo.jpg ] && rm -f ./logo.jpg
-        cd "$_PWD"
-    }
-fi
 
 a save_wall='cp ${HOME}/var/tmp/wall ${HOME}/var/images/wallpapers/unsplash/saved_"$(date)".png'
 

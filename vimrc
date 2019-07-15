@@ -1,7 +1,5 @@
-" Neovim config file
-"
-" http://github.com/mitchweaver/dots
-" 
+" Neovim config file                  "
+" http://github.com/mitchweaver/dots  "
 " " " " " " " " " " " " " " " " " " " "
 
 " unbind space for everything but leader
@@ -36,13 +34,15 @@ endif
 " --------------------------------------------------------
 
 " ----------- general ----------------------------------
+scriptencoding utf-8
+set encoding=utf-8
 set history=200
 set backspace=indent,eol,start " make backspace useable
 set whichwrap+=<,>,h,l " wrap around lines with these keys
 set updatetime=750 " time until bg calls after typing
 set timeout! " Disable keybind timeout
 set ttimeout! " Disable keybind timeout
-set clipboard=unnamed " yank/paste to/from system clipboard
+set clipboard=unnamedplus " yank/paste to/from system clipboard
 set lazyredraw " whether to redraw screen after macros
 set mat=2 " how fast to blink matched brackets
 set textwidth=0 " very annoying warning
@@ -54,6 +54,9 @@ set laststatus=0 " Disable bottom status line / statusbar
 set noshowcmd " don't print the last run command
 set ch=1 " get rid of the wasted line at the bottom
 set cmdheight=1 " cmd output only take up 1 line
+set nostartofline " gg/G etc do not always go to line start
+set modeline " enable per-file custom syntax and etc
+noremap ; :
 
 " automatic linebreak
 set lbr
@@ -161,6 +164,7 @@ nmap <Leader>s :%s//g<Left><Left>
 if exists(':PlugInstall')
     let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
     let g:gitgutter_realtime = 0 " only run gitgutter on save
+    set signcolumn=auto " (mostly for gitgutter): yes=always, no=never, auto=ifchanges
 
     map <silent><leader>g :GitGutterToggle<CR>
 
@@ -183,6 +187,15 @@ if exists(':PlugInstall')
         \{'path': '~/var/files/vimwiki/personal.wiki',    'syntax': 'markdown', 'ext': '.md'},
     \]
     let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+    " vim surround -- becuase nobody uses 's' anyway
+	nmap ss ysiw
+	nmap sl yss
+	vmap s S
+
+    " fff
+    nnoremap <silent><leader>f :F<CR>
+    nnoremap <silent><leader>r :F<CR>
 endif
 
 set wildignore+=*.opus,*.flac,*.pdf,*.jpg,*.png,*.so,*.swp,*.zip,*.gzip,*.bz2,*.tar,*.xz,*.lrzip,*.lrz,*.mp3,*.ogg,*.mp4,*.gif,*.jpeg,*.webm
@@ -191,108 +204,31 @@ set wildignore+=*.opus,*.flac,*.pdf,*.jpg,*.png,*.so,*.swp,*.zip,*.gzip,*.bz2,*.
 noremap <silent><C-o> 10zl
 noremap <silent><C-i> 10zh
 
-" swap f/b
+" swap f/b -- i know, i'm a madman.
 noremap <silent><C-f> <C-b>
 noremap <silent><C-b> <C-f>
 
 " Nuke +, -, ! at start of lines in diffs (also killing the - lines)
 map <silent> <C-z> :%s/^+<CR> :%s/^-.*<CR> :%s/^!<CR>
 
+" remap WQ to :w :q
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
 map <silent><leader>w :w<CR>
 map <silent><leader>q :q<CR>
 
-" print a 60-char line separator
+" print a 60-char line separator, commented
 inoremap <silent><C-s> -*-*-*-*-*--*-*-*-*-*--*-*-*-*-*--*-*-*-*-*--*-*-*-*-*--*-*-*-*-*- <ESC>:Commentary<CR>0llllllllllllllllllllli
 
-cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
-cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
+" conflicts with st/tabbed:
+map  <silent><c-=> <nop>
+map  <silent><c--> <nop>
+map  <silent><C-w> <nop>
+
+" this needs fixed:
+"map <leader>md :!/home/mitch/usr/bin/previewmarkdown.sh -i "%" -b surf<CR>
 
 augroup resCur "reopen vim at previous cursor point
   autocmd!
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup END
-
-" conflicts with st
-map  <silent><c-=>    <nop>
-map  <silent><c-->    <nop>
-" conflicts with tabbed
-" map <silent><C-h>     <nop>
-" map <silent><C-l>     <nop>
-" map <silent><C-n>    <nop>
-map <silent><C-w>    <nop>
-
-map <leader>md :!/home/mitch/usr/bin/previewmarkdown.sh -i "%" -b $BROWSER<CR>
-
-" ----------- Open files in ranger ----------------------- 
-" if has('nvim')
-"     function! s:RangerOpenDir(...)
-"         let path = a:0 ? a:1 : getcwd()
-
-"         if !isdirectory(path)
-"             echom 'Not a directory: ' . path
-"             return
-"         endif
-
-"         let s:ranger_tempfile = tempname()
-"         let opts = ' --cmd="set viewmode multipane"'
-"         let opts .= ' --choosefiles=' . shellescape(s:ranger_tempfile)
-"         if a:0 > 1
-"             let opts .= ' --selectfile='. shellescape(a:2)
-"         else
-"             let opts .= ' ' . shellescape(path)
-"         endif
-"         let rangerCallback = {}
-
-"         function! rangerCallback.on_exit(id, code, _event)
-"             " Open previous buffer or new buffer *before* deleting the terminal
-"             " buffer. This ensures that splits don't break if ranger is opened in
-"             " a split window.
-"             if w:_ranger_del_buf != w:_ranger_prev_buf
-"                 " Restore previous buffer
-"                 exec 'silent! buffer! '. w:_ranger_prev_buf
-"             else
-"                 " Previous buffer was empty
-"                 enew
-"             endif
-
-"             " Delete terminal buffer
-"             exec 'silent! bdelete! ' . w:_ranger_del_buf
-
-"             unlet! w:_ranger_prev_buf w:_ranger_del_buf
-
-"             let names = ''
-"             if filereadable(s:ranger_tempfile)
-"                 let names = readfile(s:ranger_tempfile)
-"             endif
-"             if empty(names)
-"                 return
-"             endif
-"             for name in names
-"                 exec 'edit ' . fnameescape(name)
-"                 doautocmd BufRead
-"             endfor
-"         endfunction
-
-"         " Store previous buffer number and the terminal buffer number
-"         let w:_ranger_prev_buf = bufnr('%')
-"         enew
-"         let w:_ranger_del_buf = bufnr('%')
-
-"         " Open ranger in nvim terminal
-"         call termopen('ranger ' . opts, rangerCallback)
-"         startinsert
-"     endfunction
-
-"     let g:loaded_netrwPlugin = 'disable'
-"     augroup ReplaceNetrwWithRanger
-"         autocmd StdinReadPre * let s:std_in = 1
-"         autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call s:RangerOpenDir(argv()[0]) | endif
-"     augroup END
-
-"     command! -complete=dir -nargs=* Ranger :call <SID>RangerOpenDir(<f-args>)
-"     nnoremap <silent><leader>r :Ranger<CR>
-" endif
-" ---- if using fff instead of ranger use the below:
-nnoremap <silent><leader>f :F<CR>
-nnoremap <silent><leader>r :F<CR>
-" ------------------------------------------------------- 

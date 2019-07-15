@@ -43,7 +43,7 @@ cd() {
                 break
         done
     fi 2> /dev/null
-    export PS1="$(_get_PS1)${RANGER_LEVEL:+[ranger] }${SSH_TTY:+(SSH) }"
+    export PS1="$(_get_PS1)${RANGER_LEVEL:+[ranger] }${FFF_LEVEL:+[fff] }${SSH_TTY:+[SSH] }"
 }
 
 # get which git branch we're on, used in our PS1
@@ -78,6 +78,7 @@ esac
 
 # check if we're in ranger or not
 [ -n "$RANGER_LEVEL" ] && clear
+[ -n "$FFF_LEVEL" ] && clear
 
 # this activates our PS1
 cd .
