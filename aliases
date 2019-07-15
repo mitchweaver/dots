@@ -115,10 +115,7 @@ if has exa ; then
 elif has colorls ; then
     a ls='colorls -F'
 else
-    case $(uname) in
-        Linux) a ls='ls -F --color=always' ;;
-        *BSD)  a ls='ls -F'
-    esac
+    a ls='ls -F'
 fi
 
 # better clear function, but doesn't work in dvtm
@@ -126,6 +123,7 @@ if ! pgrep -x dvtm > /dev/null ; then
     a clear='printf "\033c"'
 fi
 
+# generic aliases
 a cmd=command
 a {cc,cll,clear,clar,clea}=clear
 a {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi}=exit
@@ -137,8 +135,7 @@ a {lla,lal}='l -al'
 a lsf='l "$PWD"/*'
 a {cls,csl,cl,lc}='c;l'
 a {e,ech,eho}=echo
-a err='>&2 e'
-a {g,Grep,gerp}=grep
+a {g,gr,gre,Grep,gerp}=grep
 a {pg,pgrep}='pgrep -f'
 a pkill='pkill -f'
 a dg='du | g -i'
@@ -151,15 +148,15 @@ a ag='a | g -i'
 a bn=basename
 a {d,date}="cmd date '+%a %b %d - %I:%M %p'"
 a dmegs=dmesg
-a man='man -a'
 a h='head -n 15'
 a t='tail -n 15'
 a {w,watch}='watch -t -n 1'
 a ex=export
 a cx='chmod +x'
-a chown='chown -R'
 a poweroff='sudo poweroff'
 a {reboot,restart}='sudo reboot'
+a chroot='sudo chroot'
+a su='su -'
 
 # gnu make
 a make="make -j$(( $NPROC + 1 ))"
@@ -172,27 +169,29 @@ a mkc='mk clean'
 a mki='mk install'
 a mku='mk uninstall'
 
-a {xs,xc}='xsel -o ; e'
-a rsync='rsync -rtvuh4 --progress --delete' #-c
-a sshd='sudo /usr/sbin/sshd'
-a scp='scp -rp4'
+# common program aliases
 a diff='diff -u'
 a {less,les}='less -QRd'
 a view='${EDITOR} -R'
+a rsync='rsync -rtvuh4 --progress --delete' #-c
+a sshd='sudo /usr/sbin/sshd'
+a scp='scp -rp4'
 a {htpo,hto,ht,hpot,hotp,top}='htop'
 a {hm,hme}='htop -u ${USER}'
 a {hr,hroot}='htop -u root'
 a nf=neofetch
-a {rtv,reddit}='rtv --enable-media ; c'
+a rtv='rtv --enable-media ; c'
 a compton='pkill compton ; compton & c'
 a feh='feh -q -N -x -X -s -Z --scale-down --title feh'
+a click='xdotool click 1'
+
+# weather
 a weather='curl -s wttr.in/madison,sd?m0TQ'
 a forecast='curl -s http://wttr.in/madison,sd?m | \
    tail -n 33 | sed $\ d | sed $\ d'
+
+# random printing
 a heart='printf "%b\n" "\xe2\x9d\xa4"'
-a chroot='sudo chroot'
-a click='xdotool click 1'
-a su='su -'
 
 ps() {
     if [ $# -gt 0 ] ; then
@@ -215,15 +214,6 @@ du() {
     head -n 20
 } 2> /dev/null
 
-# run a given command X times
-run() { 
-    [ $# -lt 2 ] && exit 1
-    local c=$1 ; shift
-    for i in $(seq $c) ; do 
-        "$@"
-    done 
-}
-
 # files
 f() { 
     case $# in
@@ -244,33 +234,11 @@ ff() {
     find "$1" ! -path "$1" -type d -iname "*$2*" ; 
 }
 
-# exec a command on a given file/folder
-fdo() {
-    case $# in
-        # syntax: <folder> <command to be run>
-        2) set . "$@" ;;
-        # no args = try to read from pipe
-#        0) read inp && set . "$inp"
-        *) return
-    esac
-
-    local dir="$1"
-    local string="$2"
-    shift 2
-    
-    if contains "$@" '{}' ; then
-        local cmd="$@"
-    else
-        local cmd="$@ {}"
-    fi
-
-    find "$dir" ! -path "$dir" -iname "*$string*" -exec $cmd \; 
-}
-
+# Hack!
 echossh() {
     if [ $# -lt 3 ] ; then
         >&2 echo 'usage: echossh user@host file $@'
-        exit 1
+        return 1
     else
         local user_at_host="$1"
         local file="$2"
@@ -280,6 +248,7 @@ echossh() {
     fi
 }
 
+# if ps1 gets bugged out
 ps1() { export PS1='% ' ; }
 
 # search history for command
@@ -303,64 +272,26 @@ reload() {
     xset +fp /home/mitch/.fonts
     xset fp rehash
     fc-cache
-} 2> /dev/null
+} > /dev/null 2>&1
 
 ping() {
     if [ $# -eq 0 ] ; then
-        if online ; then
-            echo Online!
-        fi
+        online && echo Online!
     else
         /bin/ping "$@"
     fi
 }
 
-if has nasm ; then
-    nasm() {
-        if [ -f "$1" ] ; then
-            cmd nasm -f elf32 -g -F dwarf "$1" &&
-                ld -m elf_i386 "${1%.*}.o" -o "${1%.*}"
-        fi
-    }
-fi
-
-if has w3m ; then
-    w3m() {
-        if [ $# -eq 0 ] ; then
-            set https://ddg.gg/lite
-        fi
-        cmd w3m -F "$@"
-    }
-fi
-
-if exists bar ; then
-    bar() {
-        pkill bar
-        bar &
-    } > /dev/null
-fi
-
-if exists conv ; then
-    getconvs() {
-        for i in dec bin hex oct ; do
-            for j in dec bin hex oct ; do
-                [ $i != $j ] &&
-                    a ${i}2${j}="conv \
-                        -i $(printf %.1s $i) \
-                        -o $(echo -n ${j%??} | sed 's/.*2//')"
-            done
-        done
-    }
-fi
-
-if has busybox ; then
-    has vi || a vi='busybox vi'
-    has ash || a ash='busybox ash'
-fi
+w3m() {
+    if [ $# -eq 0 ] ; then
+        set https://ddg.gg/lite
+    fi
+    cmd w3m -F "$@"
+}
 
 v() { 
     # find which editor we're using
-    for i in nvim vim vis vi nano ; do
+    for i in nvim vim vis vi ; do
         if has $i ; then
             local editor=$i
             break
@@ -368,7 +299,8 @@ v() {
     done
     if [ -z "$editor" ] ; then
         if has busybox ; then
-            editor='busybox vi'
+            a vi='busybox vi'
+            editor=vi
         else
             return
         fi
@@ -382,6 +314,7 @@ v() {
             fi
         fi
         $editor "$@"
+        return
     fi
 
     # fuzzy-find file / recurse down
@@ -403,54 +336,66 @@ v() {
 } 2> /dev/null
 a V=v
 
-if has ranger ; then
+fff() {
+    . ${HOME}/etc/fff.conf
+    cmd fff "$@"
+    cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
+}
+
+if has fff ; then
+    a r=fff
+elif has ranger ; then
     r() { ranger "$@" ; c ; }
 fi
 
-if has pv ; then
-    a pv='pv -pcre'
-fi
+mpv() { 
+    [ $# -eq 0 ] && return 1
 
-if has mpv ; then
-    mpv() { 
-        [ $# -eq 0 ] && return 1
+    # kill any currently running mpv before launching a new
+    if pgrep xwinwrap > /dev/null ; then
+        # kill all mpv except the one with the mpvbg pid
+        # as not to kill our desktop background! see ~/bin/mpv/mpvbg for details
+        kill $(pgrep -a mpv | grep -v mpvbg | awk '{print $1}')
+    else
+        pkill mpv
+    fi > /dev/null 2>&1
 
-        # kill any currently running mpv before launching a new
-        if pgrep xwinwrap > /dev/null ; then
-            # kill all mpv except the one with the mpvbg pid
-            # as not to kill our desktop background! see ~/bin/mpv/mpvbg for details
-            kill $(pgrep -a mpv | grep -v mpvbg | awk '{print $1}')
-        else
-            pkill mpv
-        fi > /dev/null 2>&1
+    cmd mpv --title=mpv "$@"
+}
+mpvm() { mpv --no-video "$@" ; }
 
-        cmd mpv --title=mpv "$@"
-    }
-    mpvm() { mpv --no-video "$@" ; }
-fi
+# youtube-dl
+ytdlm() { 
+    for i ; do
+        youtube-dl --geo-bypass --prefer-ffmpeg --extract-audio \
+            --audio-quality 0 --audio-format opus "$i"
+    done
+}
+ytdl() { 
+    for i ; do
+        youtube-dl --geo-bypass --prefer-ffmpeg "$i"
+    done
+}
 
-if has mogrify ; then
-    75%() { mogrify -resize '75%X75%' "$@" ; }
-    50%() { mogrify -resize '50%X50%' "$@" ; }
-    25%() { mogrify -resize '25%X25%' "$@" ; }
-fi
+# imagemagick
+75%() { mogrify -resize '75%X75%' "$@" ; }
+50%() { mogrify -resize '50%X50%' "$@" ; }
+25%() { mogrify -resize '25%X25%' "$@" ; }
 
-if has trans ; then
-    trans() {
-        [ $# -eq 0 ] && read inp && set "$inp"
-        cmd trans -no-auto -b "$@"
-    }
-    rtrans() {
-        [ $# -eq 0 ] && read inp && set "$inp"
-        # note: $1 needs to be language code, ex: 'de'
-        cmd trans -from en -to "$@"
-    }
-    # german
-    rde() {
-        [ $# -eq 0 ] && read inp && set "$inp"
-        rtrans de "$*"
-    }
-fi
+# translate-shell
+trans() {
+    [ $# -eq 0 ] && read inp && set "$inp"
+    cmd trans -no-auto -b "$@"
+}
+rtrans() {
+    [ $# -eq 0 ] && read inp && set "$inp"
+    # note: $1 needs to be language code, ex: 'de'
+    cmd trans -from en -to "$@"
+}
+rde() {
+    [ $# -eq 0 ] && read inp && set "$inp"
+    rtrans de "$*"
+}
 
 if has git ; then
     a gmote='git remote add origin'
@@ -637,22 +582,6 @@ if exists ~/.youtube-dl ; then
         done
     }
     checkyt() { tail -f /tmp/ytdl*.log ; }
-
-    ytdlm() { 
-        for i ; do
-            youtube-dl --geo-bypass --prefer-ffmpeg --extract-audio \
-                --audio-quality 0 --audio-format opus "$i"
-        done
-    }
-    ytdl() { 
-        for i ; do
-            youtube-dl --geo-bypass --prefer-ffmpeg "$i"
-        done
-    }
-fi
-
-if has pk ; then
-    gpk() { cd ~/.local/pk/prefix ; cls ; }
 fi
 
 if exists ~/var ; then
@@ -663,6 +592,7 @@ if exists ~/var ; then
     }
 fi
 
+# metal-archives commands
 if has cover ; then
     split2flac() {
         if [ "$(find . -maxdepth 1 -iname '*.flac')" ] ; then
@@ -775,24 +705,9 @@ if has cover ; then
     }
 fi
 
-if has pape ; then
-    a save_wall='cp ${HOME}/var/tmp/wall ${HOME}/var/images/wallpapers/unsplash/saved_"$(date)".png'
-fi
+a save_wall='cp ${HOME}/var/tmp/wall ${HOME}/var/images/wallpapers/unsplash/saved_"$(date)".png'
 
-if has clamscan ; then
-    clam() {
-        if [ -e "$1" ] ; then
-            sudo clamscan -r "$1" --move=/tmp/quar/ --log=/tmp/quar/log.txt
-        fi
-    }
-fi
-
-
-fff() {
-    cmd fff "$@"
-    cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
-}
-
+# skeletons
 helloc() {
 cat > hello.c << EOF
 #include <stdio.h>
