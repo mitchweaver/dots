@@ -151,11 +151,13 @@ a make="make -j$(( $NPROC + 1 ))"
 a makec='make clean'
 a makei='make install'
 a makeu='make uninstall'
+a makea='makec;make;makei'
 
 # plan9 make
 a mkc='mk clean'
 a mki='mk install'
 a mku='mk uninstall'
+a mka='mkc;mk;mki'
 
 # common program aliases
 a diff='diff -u'
@@ -283,21 +285,18 @@ v() {
                 return
             fi
         done
-    fi
-    $EDITOR "$@"
-} 2> /dev/null
-a V=v
+        $EDITOR "$@"
+    fi 2> /dev/null
+}
+a {V,vim}=v
 
 fff() {
     cmd fff "$@"
     cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
 }
 
-if has fff ; then
-    a r=fff
-elif has ranger ; then
-    r() { ranger "$@" ; c ; }
-fi
+r() { ranger "$@" ; c ; }
+# a r=fff
 
 mpv() { 
     [ $# -eq 0 ] && return 1

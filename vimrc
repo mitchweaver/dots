@@ -23,6 +23,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     Plug 'tpope/vim-surround' " surround stuff with stuff
     Plug 'dylanaraps/wal.vim' " pywal theme
     Plug 'dylanaraps/fff.vim' " fff file picker if not using ranger, (bottom)
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
     
     call plug#end()
     filetype indent plugin on
@@ -42,7 +43,8 @@ set whichwrap+=<,>,h,l " wrap around lines with these keys
 set updatetime=750 " time until bg calls after typing
 set timeout! " Disable keybind timeout
 set ttimeout! " Disable keybind timeout
-set clipboard=unnamedplus " yank/paste to/from system clipboard
+set clipboard=unnamed " yank/paste to/from system clipboard
+"set clipboard=unnamedplus " yank/paste to/from system clipboard
 set lazyredraw " whether to redraw screen after macros
 set mat=2 " how fast to blink matched brackets
 set textwidth=0 " very annoying warning
@@ -59,8 +61,8 @@ set modeline " enable per-file custom syntax and etc
 noremap ; :
 
 " automatic linebreak
-set lbr
-set tw=100 " to remind me not to go over 80
+" set lbr
+" set tw=100
 " ------------------------------------------------------
 
 " ----- colors -------------------- 
@@ -73,9 +75,9 @@ colorscheme wal
 " autocmd BufNewFile,BufRead * set syntax=sh
 autocmd BufNewFile,BufRead *.c set syntax=c
 autocmd BufNewFile,BufRead *.patch set syntax=c
-autocmd BufNewFile,BufRead *.hs set syntax=hs
-autocmd BufNewFile,BufRead *.py set syntax=py
-autocmd BufNewFile,BufRead *.pl set syntax=pl
+autocmd BufNewFile,BufRead *.hs set syntax=haskell
+autocmd BufNewFile,BufRead *.py set syntax=python
+autocmd BufNewFile,BufRead *.pl set syntax=perl
 autocmd BufNewFile,BufRead *.txt set syntax=off
 autocmd BufNewFile,BufRead *.md set syntax=md
 autocmd BufNewFile,BufRead *.pad set syntax=md
@@ -139,10 +141,10 @@ nnoremap <Leader>b :b
 
 map <silent><C-k> :bnext<CR>
 map <silent><C-j> :bprev<CR>
-map <leader><C-d> :bd<cr>
+map <silent><C-d> :bd<cr>
 map <silent>tk :bnext<CR>
 map <silent>tj :bprev<CR>
-map <leader>td :bd<cr>
+map <silent>td :bd<cr>
 " -------------------------------------------------
 
 map Q @q
@@ -218,15 +220,14 @@ map <silent><leader>w :w<CR>
 map <silent><leader>q :q<CR>
 
 " print a 60-char line separator, commented
-inoremap <silent><C-s> -*-*-*-*-*--*-*-*-*-*--*-*-*-*-*--*-*-*-*-*--*-*-*-*-*--*-*-*-*-*- <ESC>:Commentary<CR>0llllllllllllllllllllli
+map <C-s> 30i-*<ESC>:Commentary<CR>
 
 " conflicts with st/tabbed:
 map  <silent><c-=> <nop>
 map  <silent><c--> <nop>
 map  <silent><C-w> <nop>
 
-" this needs fixed:
-"map <leader>md :!/home/mitch/usr/bin/previewmarkdown.sh -i "%" -b surf<CR>
+map <leader>md :MarkdownPreview<CR>
 
 augroup resCur "reopen vim at previous cursor point
   autocmd!

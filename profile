@@ -51,7 +51,7 @@ fi
 
 for i in nvim vim vis vi nano ; do
     if type $i > /dev/null 2>&1 ; then
-        export EDITOR=$i VISUAL="$i -R"
+        export EDITOR=$i VISUAL=$i
         break
     fi
 done
