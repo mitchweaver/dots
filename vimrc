@@ -72,7 +72,11 @@ colorscheme wal
 "  --------------------------------
 
 " ---- syntax stuff -------------
-" autocmd BufNewFile,BufRead * set syntax=sh
+autocmd BufNewFile,BufRead *.config set syntax=sh
+autocmd BufNewFile,BufRead *.conf set syntax=sh
+autocmd BufNewFile,BufRead *.cfg set syntax=sh
+autocmd BufNewFile,BufRead *.rc set syntax=sh
+
 autocmd BufNewFile,BufRead *.c set syntax=c
 autocmd BufNewFile,BufRead *.patch set syntax=c
 autocmd BufNewFile,BufRead *.hs set syntax=haskell
@@ -85,6 +89,7 @@ let g:is_posix = 1
 let g:asmsyntax = 'nasm'
 autocmd BufRead *.rc setlocal ft=sh
 autocmd BufRead *.asm setlocal ft=nasm
+map <silent><leader>sy :set syntax=sh<cr>
 " syntax off
 " -------------------------------
 

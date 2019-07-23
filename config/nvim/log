@@ -6,3 +6,11 @@ ERROR 2019-07-04T00:20:17.548 4451  loop_close:133: uv_loop_close() hang?
 [--I] signal   0x9e36c8
 [-AI] async    0x9e3510
 [R--] signal   0x9d5b40
+ERROR 2019-07-19T12:59:18.427 8688  loop_close:133: uv_loop_close() hang?
+[--I] signal   0x9e36c8
+[-AI] async    0x9e3510
+[R--] signal   0x9d5b40
+ERROR 2019-07-20T12:30:26.259 5896  loop_close:133: uv_loop_close() hang?
+[--I] signal   0x9e36c8
+[-AI] async    0x9e3510
+[R--] signal   0x9d5b40

@@ -24,6 +24,8 @@ config/wireshark
 config/QtProject.conf
 config/youtube-viewer
 config/GIMP*
+config/mpv/watch_later
+config/nvim/shada/main.shada
 
 *bookmarks*
 

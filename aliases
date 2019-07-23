@@ -113,7 +113,7 @@ fi
 
 # generic aliases
 a cmd=command
-a {cc,cll,clear,clar,clea}=clear
+a {cc,cll,clear,clar,clea,clera}=clear
 a {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi}=exit
 a {l,sls,sl}=ls
 a ll='l -l'
@@ -230,7 +230,7 @@ ps1() { export PS1='% ' ; }
 # search history for command
 hg() {
     if [ $# -gt 0 ] ; then
-        g -e "$@" $HISTFILE | head -n 20
+        g -e "$@" $HISTFILE | grep -v '^hg' | head -n 20
     fi
 }
 
@@ -347,65 +347,6 @@ rde() {
     rtrans de "$*"
 }
 
-if has git ; then
-    a gmote='git remote add origin'
-    a gchangemote='git remote set-url origin'
-    a gstat='git status'
-    a gbort='git rebase --abort'
-    a gcherry='git cherry-pick'
-    a gsub='git submodule'
-    a {gbranch,branch}='git branch'
-    a glog='git log'
-    a ginit='git init'
-    guntracked() { git ls-files --others --exclude-standard ; }
-    gpull() {
-        if [ $# -eq 0 ] ; then
-            git pull "$@"
-        elif [ $1 = master ] ; then
-            git pull origin "$@"
-        fi
-    }
-    checkout() {
-        git checkout "$1"
-        # activate my PS1 branch detector
-        cd .
-    }
-    a gcheck=checkout
-    gup() { 
-        git add -A &&
-        git commit -m "$@" &&
-        git push -u origin $(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
-    }
-    gmit() { 
-        if [ $# -eq 1 ] ; then
-            git add "$1"
-            git commit -m "$(date)"
-        elif [ $# -gt 1 ] ; then
-            git add "$1" &&
-            shift &&
-            git commit -m "$@"
-        fi
-    }
-    gout() { git push -u origin $(git rev-parse --abbrev-ref HEAD) "$@" ; }
-    gadd()   { [ $# -eq 0 ] && set -- -A  ; git add "$@"               ; }
-    gdiff()  { [ $# -eq 0 ] && set master ; git diff origin/"$1"       ; }
-    greset() { [ $# -eq 0 ] && set 10     ; git reset --hard HEAD~"$1" ; }
-    gbase()  { [ $# -eq 0 ] && set 5      ; git rebase -i HEAD~$1      ; }
-    ghclone() { git clone https://github.com/$1 ; }
-
-    # sets up a git repo in /tmp that you can push/pull from your directory
-    # good for backup when working on quick new ideas / scratchpads
-    gtmp() { 
-        [ $# -eq 0 ] && set -- "$(mktemp -d)"
-        git init --bare "$1" &&
-        git init .
-        git remote add origin "$1" &&
-        git add -A &&
-        git commit -m "initial commit" &&
-        git push -u origin master
-    }
-fi
-
 # ----------------- movement commands -----------------------
 a {..,cd..}='cd ..'
 a ...='.. ; ..'
@@ -479,7 +420,7 @@ if exists ~/etc ; then
 
     a {aliases,alaises,aliase}='v ~/etc/aliases'
     a profile='v ~/etc/profile'
-    a {bmk,bmks}='v ~/var/files/bkm/bookmarks.txt'
+    a {bmk,bmks}='r ~/var/files/bkm'
     a {vssh,sshv}='v ~/.ssh/config'
 
     a vimrc="v ~/etc/vimrc"
@@ -507,6 +448,11 @@ if exists ~/env ; then
     Yn() { cp "$@" ~/env ; }
     a gn='_g ~/env'
 fi
+
+mn() { mv "$@" ~/.local/share/Trash/files ; }
+Yn() { cp "$@" ~/.local/share/Trash/files ; }
+a g_='_g ~/.local/share/Trash/files'
+
 # ----------- end movement commands ------------------
 
 a save_wall='cp ${HOME}/var/tmp/wall ${HOME}/var/images/wallpapers/unsplash/saved_"$(date)".png'
