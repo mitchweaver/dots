@@ -1,8 +1,0 @@
-XDG_DOCUMENTS_DIR=${HOME}/var/files
-XDG_DOWNLOAD_DIR=${HOME}/var/downloads
-XDG_PICTURES_DIR=${HOME}/var/images
-XDG_VIDEOS_DIR=${HOME}/var/videos
-XDG_MUSIC_DIR=${HOME}/var/music
-XDG_PUBLICSHARE_DIR=/dev/null
-XDG_DESKTOP_DIR=/dev/null
-XDG_TEMPLATES_DIR=/dev/null
