@@ -152,6 +152,7 @@ a makec='make clean'
 a makei='make install'
 a makeu='make uninstall'
 a makea='makec;make;makei'
+a makeac='makea;c'
 
 # plan9 make
 a mkc='mk clean'
@@ -463,6 +464,14 @@ cat > hello.c << EOF
 #include <stdio.h>
 int main() { printf("%s\n", "hi"); return 0; }
 EOF
+}
+hellosh() {
+cat > hello.sh << EOF
+#!/bin/sh
+main() { printf "%s\n" "hi" ; }
+main "$@"
+EOF
+chmod +x hello.sh
 }
 
 # unalias loop/tmp variables

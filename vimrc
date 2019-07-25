@@ -22,8 +22,9 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     Plug 'tpope/vim-repeat' " allows '.' for more things
     Plug 'tpope/vim-surround' " surround stuff with stuff
     Plug 'dylanaraps/wal.vim' " pywal theme
-    Plug 'dylanaraps/fff.vim' " fff file picker if not using ranger, (bottom)
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+    " Plug 'dylanaraps/fff.vim' " fff file picker
+    Plug 'francoiscabrol/ranger.vim' " ranger file picker
     
     call plug#end()
     filetype indent plugin on
@@ -201,8 +202,11 @@ if exists(':PlugInstall')
 	vmap s S
 
     " fff
-    nnoremap <silent><leader>f :F<CR>
-    nnoremap <silent><leader>r :F<CR>
+"    nnoremap <silent><leader>r :F<CR>
+    " ranger
+    let g:ranger_map_keys = 0
+    " nnoremap <silent><leader>r :Ranger<CR>
+    nnoremap <silent><leader>r :RangerWorkingDirectory<CR>
 endif
 
 set wildignore+=*.opus,*.flac,*.pdf,*.jpg,*.png,*.so,*.swp,*.zip,*.gzip,*.bz2,*.tar,*.xz,*.lrzip,*.lrz,*.mp3,*.ogg,*.mp4,*.gif,*.jpeg,*.webm

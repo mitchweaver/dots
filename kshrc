@@ -76,7 +76,7 @@ case ${SHELL} in
         esac
 esac
 
-# check if we're in ranger or not
+# check if we're in ranger/fff or not
 [ -n "$RANGER_LEVEL" ] && clear
 [ -n "$FFF_LEVEL" ] && clear
 
@@ -84,4 +84,4 @@ esac
 cd .
 
 # clear junk i hate seeing
-(rm -rf ${HOME}/{*.core,*.out,*.dump,Desktop,Downloads} 2> /dev/null &)
+(rm -rf ${HOME}/{*.core,*.out,*.dump,Desktop,Downloads,mpv-shot*} 2> /dev/null &)
