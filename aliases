@@ -135,7 +135,7 @@ a make="make -j$(( $NPROC + 1 ))"
 a makec='make clean'
 a makei='make install'
 a makeu='make uninstall'
-a makea='makec;make;makei'
+a {makea,maeka}='makec;make;makei'
 a makeac='makea;c'
 
 # plan9 make

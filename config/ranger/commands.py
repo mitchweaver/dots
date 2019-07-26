@@ -1,22 +1,6 @@
 from ranger.api.commands import *
 import os
 
-# class trash(Command):
-#     def execute(self):
-#         path=str(self.fm.thisdir.get_selection()[0])
-#         trash="~/.local/share/Trash/files"
-#         os.system("[ ! -d " + trash + " ] && mkdir -p " + trash)
-#         os.system("mv -f " + path + " " + trash)
-
-# class empty_trash(Command):
-#     """:empty
-
-#     Empties the trash directory ~/.Trash
-#     """
-
-#     def execute(self):
-#         self.fm.run("rm -rf /home/myname/.Trash/{*,.[^.]*}")
-
 class mpv_play(Command):
     def execute(self):
         path=str(self.fm.thisdir.get_selection()[0])
