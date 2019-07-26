@@ -45,28 +45,12 @@ u() {
 # nobody uses these...
 u r w
 
-# find correct python3
-for i in 3.7 3.6 3.5 3.4 3 ; do
-    if type python$i > /dev/null 2>&1 ; then
-        a py3=python$i
-        break
-    fi
-done
-
-# find correct python2
-for i in 2.7 2.5 2 ; do
-    if type python$i > /dev/null 2>&1 ; then
-        a py2=python$i
-        break
-    fi
-done
-
-# set default python
-if has py3 ; then
-    a py=py3
-else
-    a py=py2
-fi
+py() {
+    for py_ver in 3.7 3.6 3.5 3.4 3 2.7 2.5 2 ; do
+        type python$py_ver >/dev/null && break
+    done
+    python$py_ver
+}
 # --------------------- end init ----------------------------------
 
 # --------------------- OS specific aliases ------------------------
@@ -450,9 +434,10 @@ if exists ~/env ; then
     a gn='_g ~/env'
 fi
 
-mn() { mv "$@" ~/.local/share/Trash/files ; }
-Yn() { cp "$@" ~/.local/share/Trash/files ; }
+m_() { mv "$@" ~/.local/share/Trash/files ; }
+Y_() { cp "$@" ~/.local/share/Trash/files ; }
 a g_='_g ~/.local/share/Trash/files'
+a trash=m_
 
 # ----------- end movement commands ------------------
 
