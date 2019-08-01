@@ -1,3 +1,5 @@
+#!/bin/loksh
+#
 # http://github.com/mitchweaver/dots
 #
 # this needs organized so bad, possibly split into multiple files
@@ -118,7 +120,7 @@ a {mkdir,mkd,mkdr}='mkdir -p'
 a df='df -h'
 a ag='a | g -i'
 a bn=basename
-a {d,date}="cmd date '+%a %b %d - %I:%M %p'"
+a date="cmd date '+%a %b %d - %I:%M %p'"
 a dmegs=dmesg
 a h='head -n 15'
 a t='tail -n 15'
@@ -131,11 +133,11 @@ a chroot='sudo chroot'
 a su='su -'
 
 # gnu make
-a make="make -j$(( $NPROC + 1 ))"
-a makec='make clean'
-a makei='make install'
-a makeu='make uninstall'
-a {makea,maeka}='makec;make;makei'
+a {make,mak}="make -j$(( $NPROC + 1 ))"
+a {makec,makc}='make clean'
+a {makei,maki}='make install'
+a {makeu,maku}='make uninstall'
+a {makea,maeka,maka}='makec;make;makei'
 a makeac='makea;c'
 
 # plan9 make
@@ -212,7 +214,7 @@ echossh() {
 # if ps1 gets bugged out
 ps1() { export PS1='% ' ; }
 
-# search history for command
+# search history for command: "history grep", no its not mercurial.
 hg() {
     if [ $# -gt 0 ] ; then
         g -e "$@" $HISTFILE | grep -v '^hg' | head -n 20
@@ -351,7 +353,7 @@ for i in bin env etc tmp usr var src ; do
     if exists ~/$i ; then
         a g$(printf %.1s $i)="_g ~/$i"
     fi
-    a g$(printf %.1s $i | tr [a-z] [A-Z])="_g /$i"
+    a g$(printf %.1s $i | tr '[a-z]' '[A-Z]')="_g /$i"
 done
 
 a gM='_g /mnt'
@@ -405,7 +407,7 @@ if exists ~/etc ; then
 
     a {aliases,alaises,aliase}='v ~/etc/aliases'
     a profile='v ~/etc/profile'
-    a {bmk,bmks}='r ~/var/files/bkm'
+    a {bkm,bmk}='r ~/var/files/bkm'
     a {vssh,sshv}='v ~/.ssh/config'
 
     a vimrc="v ~/etc/vimrc"
@@ -434,14 +436,15 @@ if exists ~/env ; then
     a gn='_g ~/env'
 fi
 
-m_() { mv "$@" ~/.local/share/Trash/files ; }
-Y_() { cp "$@" ~/.local/share/Trash/files ; }
-a g_='_g ~/.local/share/Trash/files'
+m_() { mv "$@" ~/.trash ; }
+Y_() { cp "$@" ~/.trash ; }
+a g_='_g ~/.trash'
 a trash=m_
 
 # ----------- end movement commands ------------------
 
-a save_wall='cp ${HOME}/var/tmp/wall ${HOME}/var/images/wallpapers/unsplash/saved_"$(date)".png'
+a save_unsplash_wall="cp ${HOME}/var/tmp/wall ${HOME}/var/images/wallpapers/unsplash/saved_\"$(date)\".png"
+save_wall() { cp -f "$1" ${HOME}/var/tmp/wall ; }
 
 # skeletons
 helloc() {
@@ -461,3 +464,5 @@ chmod +x hello.sh
 
 # unalias loop/tmp variables
 u i j _u _p _h
+
+a b=bonsai

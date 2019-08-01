@@ -1,4 +1,4 @@
-#!/bin/mksh
+#!/bin/loksh
 #
 # http://github.com/mitchweaver/dots
 #
