@@ -1,21 +1,17 @@
-# dotfiles
+# dots
 my personal dotfiles
 
 ------
 
-![crux_rice](https://i.imgur.com/ossASOE.png)
+![other_crux_rice](http://i.imgur.com/oSki6JQ.png)
 
-![openbsd_rice](https://i.redd.it/qgyn862iacl01.gif)
+![crux_rice](http://i.imgur.com/ossASOE.png)
 
-Workflow video: https://i.imgur.com/JV2suCq.mp4
-
--------
-
-Sharing is caring! If you make something cool you think I would like to know about, pull request!
-
-If you like my designs, check out some of my [projects](http://github.com/mitchweaver)
+![openbsd_rice](http://i.redd.it/qgyn862iacl01.gif)
 
 ### See also
 ---------
 
-[bin](http://github.com/mitchweaver/bin) [suckless](http://github.com/mitchweaver/suckless) [ports](http://github.com/mitchweaver/ports)
+[bin](http://github.com/mitchweaver/bin) - helpful scripts  
+[suckless](http://github.com/mitchweaver/suckless) - patches  
+[bonsai](http://github.com/mitchweaver/bonsai) - my upcoming Linux distribution

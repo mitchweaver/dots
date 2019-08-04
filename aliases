@@ -466,3 +466,10 @@ chmod +x hello.sh
 u i j _u _p _h
 
 a b=bonsai
+gud() {
+    # activate my PS1 git branch detection after
+    # git commands
+    cmd gud "$@" ; cd .
+}
+
+a {repomc,reocmp,reomcp,recopm,recmop,recpom}=recomp
