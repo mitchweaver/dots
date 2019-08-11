@@ -40,7 +40,7 @@ set encoding=utf-8
 set history=200
 set backspace=indent,eol,start " make backspace useable
 set whichwrap+=<,>,h,l " wrap around lines with these keys
-set updatetime=750 " time until bg calls after typing
+set updatetime=500 " time until bg calls after typing
 set timeout! " Disable keybind timeout
 set ttimeout! " Disable keybind timeout
 set clipboard=unnamed " yank/paste to/from system clipboard
@@ -174,6 +174,10 @@ if exists(':PlugInstall')
     set signcolumn=auto " (mostly for gitgutter): yes=always, no=never, auto=ifchanges
 
     map <silent><leader>g :GitGutterToggle<CR>
+    nmap ]h <Plug>GitGutterNextHunk
+    nmap [h <Plug>GitGutterPrevHunk
+    nmap <Leader>hs <Plug>GitGutterStageHunk
+    nmap <Leader>hr <Plug>GitGutterUndoHunk
 
     let g:multi_cursor_use_default_mapping=0
     let g:multi_cursor_next_key='<c-m>'

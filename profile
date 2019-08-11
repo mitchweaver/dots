@@ -25,7 +25,7 @@ p() { for i ; do export PATH="$i":$PATH ; done ; }
 
 p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin /sbin \
    ${HOME}/{usr/{bin,bin/ascii,local/bin},.local/bin} \
-   ${HOME}/bin/{file,mpv,misc,net,rice,text,util,wrapper,xorg}
+   ${HOME}/bin/{file,mpv,misc,net,rice,text,util,wrapper,xorg,dev,golf/fun,bonsai}
 
 unset -f p
 
