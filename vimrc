@@ -23,7 +23,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     Plug 'tpope/vim-surround' " surround stuff with stuff
     Plug 'dylanaraps/wal.vim' " pywal theme
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-    " Plug 'dylanaraps/fff.vim' " fff file picker
     
     call plug#end()
     filetype indent plugin on
@@ -76,6 +75,7 @@ autocmd BufNewFile,BufRead *.config set syntax=sh
 autocmd BufNewFile,BufRead *.conf set syntax=sh
 autocmd BufNewFile,BufRead *.cfg set syntax=sh
 autocmd BufNewFile,BufRead *.rc set syntax=sh
+autocmd BufNewFile,BufRead pkgfile set syntax=sh
 
 autocmd BufNewFile,BufRead *.c set syntax=c
 autocmd BufNewFile,BufRead *.patch set syntax=c
@@ -189,6 +189,7 @@ if exists(':PlugInstall')
     autocmd FileType asm setlocal commentstring=;\ %s
     autocmd FileType conf setlocal commentstring=#\ %s
     autocmd FileType rc setlocal commentstring=#\ %s
+    autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
     let wiki = {}
     let g:vimwikidir = "/home/mitch/var/files/vimwiki"

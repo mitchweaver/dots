@@ -2,79 +2,11 @@
 #
 # http://github.com/mitchweaver/dots
 #
-# this needs organized so bad, possibly split into multiple files
-#
-# it's a mess, you've been warned...
-# 
-# * CLEANUP IN PROGRESS *
-#
 # # # # # # # # # # # # # # # # # # #
-
-# ------------------------ init -------------------------------
-# fix shell env variable if its broken
-export SHELL=${SHELL:-$0}
-
-# don't break things if we aren't using a compliant shell
-case ${SHELL} in
-    *ksh|*ash) true ;;
-    *) return
-esac
-
-# lifehack
-alias a=alias
-
-# check if we have installed
-has() {
-    for _h ; do
-        type $_h || return 1
-    done > /dev/null 2>&1
-}
-
-# check if file/folder exists
-exists() {
-    for _e ; do
-        [ -e $_e ] || return 1
-    done
-}
-
-# unaliaser
-u() {
-    for _u ; do 
-        unalias $_u || unset -f $_u
-    done 2> /dev/null
-}
-
-# nobody uses these...
-u r w
-
-py() {
-    for py_ver in 3.7 3.6 3.5 3.4 3 2.7 2.5 2 ; do
-        type python$py_ver >/dev/null && break
-    done
-    python$py_ver
-}
-# --------------------- end init ----------------------------------
-
-# --------------------- OS specific aliases ------------------------
-case $(uname) in
-    Linux) export NPROC="$(nproc)"
-           a disks='lsblk'
-           a webcam='ffmpeg -i /dev/video0 -f alsa -i default "$(date)".mp4'
-           ;;
-    OpenBSD) export NPROC=$(sysctl -n hw.ncpu)
-             a sudo=doas
-             a seq=jot
-             a disks='sysctl -n hw.disknames'
-             a disklabel='doas disklabel -h'
-             a killall='pkill -9'
-             a poweroff='doas shutdown -p now'
-             a webcam='ffmpeg -i /dev/video0 -f sndio -i default "$(date)".mp4'
-esac
-# ---------------- end OS specific aliases -------------------------
 
 # dynamic 'c' utility
 c() {
-    if [ $# -eq 0 ] ; then
+    if [ -z "$1" ] ; then
         clear
     elif [ -d "$1" ] ; then
         cd "$1"
@@ -84,91 +16,83 @@ c() {
 }
 
 # ls stuff
-if has exa ; then
-    a ls='exa -F'
-elif has colorls ; then
-    a ls='colorls -F'
+if ! pgrep 9term >/dev/null && type exa >/dev/null 2>&1 ; then
+    alias ls='exa -F'
 else
-    a ls='ls -F'
-fi
-
-# better clear function, but doesn't work in dvtm
-if ! pgrep -x dvtm > /dev/null ; then
-    a clear='printf "\033c"'
+    alias ls='ls -F'
 fi
 
 # generic aliases
-a cmd=command
-a {cc,cll,clear,clar,clea,clera}=clear
-a {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi}=exit
-a {l,sls,sl}=ls
-a ll='l -l'
-a la='l -a'
-a lt='cmd ls -halt'
-a {lla,lal}='l -al'
-a lsf='l "$PWD"/*'
-a {cls,csl,cl,lc}='c;l'
-a {e,ech,eho}=echo
-a {g,gr,gre,Grep,gerp}=grep
-a {pg,pgrep}='pgrep -f'
-a pkill='pkill -f'
-a dg='du | g -i'
-a lg='ls | g -i'
-a cp='cp -irv'
-a mv='mv -iv'
-a {mkdir,mkd,mkdr}='mkdir -p'
-a df='df -h'
-a ag='a | g -i'
-a bn=basename
-a date="cmd date '+%a %b %d - %I:%M %p'"
-a dmegs=dmesg
-a h='head -n 15'
-a t='tail -n 15'
-a {w,watch}='watch -t -n 1'
-a ex=export
-a cx='chmod +x'
-a poweroff='sudo poweroff'
-a {reboot,restart}='sudo reboot'
-a chroot='sudo chroot'
-a su='su -'
+alias {cc,cll,clear,clar,clea,clera}=clear
+alias {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi}=exit
+alias {l,sls,sl}=ls
+alias ll='l -l'
+alias la='l -a'
+alias lt='command ls -halt'
+alias {lla,lal}='l -al'
+alias lsf='l "$PWD"/*'
+alias {cls,csl,cl,lc}='c;l'
+alias {e,ech,eho}=echo
+alias {g,gr,gre,Grep,gerp}=grep
+alias {pg,pgrep}='pgrep -f'
+alias pkill='pkill -f'
+alias dg='du | g -i'
+alias lg='ls | g -i'
+alias cp='cp -irv'
+alias mv='mv -iv'
+alias {mkdir,mkd,mkdr}='mkdir -p'
+alias df='df -h'
+alias ag='a | g -i'
+alias bn=basename
+alias date="command date '+%a %b %d - %I:%M %p'"
+alias dmegs=dmesg
+alias h='head -n 15'
+alias t='tail -n 15'
+alias {w,watch}='watch -t -n 1'
+alias ex=export
+alias cx='chmod +x'
+alias poweroff='sudo poweroff'
+alias {reboot,restart}='sudo reboot'
+alias chroot='sudo chroot'
+alias su='su -'
 
 # gnu make
-a {make,mak}="make -j$(( $NPROC + 1 ))"
-a {makec,makc}='make clean'
-a {makei,maki}='make install'
-a {makeu,maku}='make uninstall'
-a {makea,maeka,maka}='makec;make;makei'
-a makeac='makea;c'
+alias {make,mak}="make -j$(( $NPROC + 1 ))"
+alias {makec,makc}='make clean'
+alias {makei,maki}='make install'
+alias {makeu,maku}='make uninstall'
+alias {makea,maeka,maka}='makec;make;makei'
+alias makeac='makea;c'
 
 # plan9 make
-a mkc='mk clean'
-a mki='mk install'
-a mku='mk uninstall'
-a mka='mkc;mk;mki'
+alias mkc='mk clean'
+alias mki='mk install'
+alias mku='mk uninstall'
+alias mka='mkc;mk;mki'
 
 # common program aliases
-a diff='diff -u'
-a {less,les}='less -QRd'
-a view='${EDITOR} -R'
-a rsync='rsync -rtvuh4 --progress --delete' #-c
-a sshd='sudo /usr/sbin/sshd'
-a scp='scp -rp4'
-a {htpo,hto,ht,hpot,hotp,top}='htop'
-a {hm,hme}='htop -u ${USER}'
-a {hr,hroot}='htop -u root'
-a nf=neofetch
-a rtv='rtv --enable-media ; c'
-a compton='pkill compton ; compton & c'
-a feh='feh -q -N -x -X -s -Z --scale-down --title feh'
-a click='xdotool click 1'
+alias diff='diff -u'
+alias {less,les}='less -QRd'
+alias view='${EDITOR} -R'
+alias rsync='rsync -rtvuh4 --progress --delete' #-c
+alias sshd='sudo /usr/sbin/sshd'
+alias scp='scp -rp4'
+alias {htpo,hto,ht,hpot,hotp,top}='htop'
+alias {hm,hme}='htop -u ${USER}'
+alias {hr,hroot}='htop -u root'
+alias nf=neofetch
+alias rtv='rtv --enable-media ; c'
+alias compton='pkill compton ; compton & c'
+alias feh='feh -q -N -x -X -s -Z --scale-down --title feh'
+alias click='xdotool click 1'
 
 # weather
-a weather='curl -s wttr.in/madison,sd?m0TQ'
-a forecast='curl -s http://wttr.in/madison,sd?m | \
+alias weather='curl -s wttr.in/madison,sd?m0TQ'
+alias forecast='curl -s http://wttr.in/madison,sd?m | \
    tail -n 33 | sed $\ d | sed $\ d'
 
 # random printing
-a heart='printf "%b\n" "\xe2\x9d\xa4"'
+alias heart='printf "%b\n" "\xe2\x9d\xa4"'
 
 # hash stuff
 md5=md5sum
@@ -178,9 +102,9 @@ sha512=sha512sum
 
 ps() {
     if [ $# -gt 0 ] ; then
-        cmd ps auwwx | g -i "$@" | g -v grep
+        command ps auwwx | g -i "$@" | g -v grep
     else
-        cmd ps auwwx
+        command ps auwwx
     fi | head -n 20
 }
 
@@ -190,7 +114,7 @@ cpcd() { cp "$1" "$2" && cd "$2" ; }
 
 du() { 
     [ $# -eq 0 ] && set .
-    cmd du -ahLd 1 "$1" | sort -rh | head -n 20
+    command du -ahLd 1 "$1" | sort -rh | head -n 20
 } 2> /dev/null
 
 # files
@@ -202,6 +126,9 @@ f() {
 
     find "$1" ! -path "$1" -iname "*$2*" ; 
 }
+
+unalias r
+r() { ranger "$@" ; c ; }
 
 # Hack!
 echossh() {
@@ -221,11 +148,7 @@ echossh() {
 ps1() { export PS1='% ' ; }
 
 # search history for command: "history grep", no its not mercurial.
-hg() {
-    if [ $# -gt 0 ] ; then
-        g -e "$@" $HISTFILE | grep -v '^hg' | head -n 20
-    fi
-}
+hg() { [ "$1" ] && grep -e "$*" $HISTFILE | grep -v '^hg' | head -n 20 ; }
 
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
@@ -254,13 +177,13 @@ ping() {
 
 w3m() {
     [ $# -eq 0 ] && set https://ddg.gg/lite
-    cmd w3m -F "$@"
+    command w3m -F "$@"
 }
 
 v() { 
     # if no arguments, open my vimwiki page
     if [ $# -eq 0 ] ; then
-        if exists ${HOME}/var/files/vimwiki && [ $EDITOR = nvim ] ; then
+        if [ -d ${HOME}/var/files/vimwiki ] && [ $EDITOR = nvim ] ; then
             set -- -c VimwikiIndex
         fi
         $EDITOR "$@"
@@ -281,15 +204,7 @@ v() {
         $EDITOR "$@"
     fi 2> /dev/null
 }
-a {V,vim}=v
-
-fff() {
-    cmd fff "$@"
-    cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
-}
-
-r() { ranger "$@" ; c ; }
-# a r=fff
+alias {V,vim}=v
 
 mpv() { 
     [ $# -eq 0 ] && return 1
@@ -303,7 +218,7 @@ mpv() {
         pkill mpv
     fi > /dev/null 2>&1
 
-    cmd mpv --title=mpv "$@"
+    command mpv --title=mpv "$@"
 }
 mpvm() { mpv --no-video "$@" ; }
 
@@ -321,19 +236,19 @@ ytdl() {
 }
 
 # imagemagick
-75%() { mogrify -resize '75%X75%' "$@" ; }
-50%() { mogrify -resize '50%X50%' "$@" ; }
-25%() { mogrify -resize '25%X25%' "$@" ; }
+resize_75() { mogrify -resize '75%X75%' "$@" ; }
+resize_50() { mogrify -resize '50%X50%' "$@" ; }
+resize_25() { mogrify -resize '25%X25%' "$@" ; }
 
 # translate-shell
 trans() {
     [ $# -eq 0 ] && read inp && set "$inp"
-    cmd trans -no-auto -b "$@"
+    command trans -no-auto -b "$@"
 }
 rtrans() {
     [ $# -eq 0 ] && read inp && set "$inp"
     # note: $1 needs to be language code, ex: 'de'
-    cmd trans -from en -to "$@"
+    command trans -from en -to "$@"
 }
 rde() {
     [ $# -eq 0 ] && read inp && set "$inp"
@@ -341,9 +256,9 @@ rde() {
 }
 
 # ----------------- movement commands -----------------------
-a {..,cd..}='cd ..'
-a ...='.. ; ..'
-a ....='.. ; ...'
+alias {..,cd..}='cd ..'
+alias ...='.. ; ..'
+alias ....='.. ; ...'
 
 # directory marking
 # usage: 'm1' = mark 1
@@ -356,33 +271,24 @@ done
 _g() { local a=$1 ; shift ; cd $a/"$@" ; cl ;  }
 
 for i in bin env etc tmp usr var src ; do
-    if exists ~/$i ; then
-        a g$(printf %.1s $i)="_g ~/$i"
-    fi
-    a g$(printf %.1s $i | tr '[a-z]' '[A-Z]')="_g /$i"
+    alias g$(printf %.1s $i)="_g ~/$i"
+    alias g$(printf %.1s $i | tr '[a-z]' '[A-Z]')="_g /$i"
 done
 
-a gM='_g /mnt'
-
-case ${SHELL} in
-    *ksh|bash)
-        g~() { cd ~          ; }
-        m~() { mv "$@" ~     ; }
-        Y~() { cp "$@" ~     ; }
-esac
+alias gM='_g /mnt'
 
 mT() { mv "$@" /tmp  ; }
 YT() { cp "$@" /tmp  ; }
 
-if exists ~/var ; then
+if [ -d ~/var ] ; then
     for i in downloads files images music ; do
-        a g$(printf %.1s $i)="_g ~/var/$i"
+        alias g$(printf %.1s $i)="_g ~/var/$i"
     done
 
-    a {gvi,gvid}='_g ~/var/videos'
-    a gbk='_g ~/var/books'
-    a gvt='_g ~/var/tmp'
-    a gyt='_g ~/.youtube-dl'
+    alias {gvi,gvid}='_g ~/var/videos'
+    alias gbk='_g ~/var/books'
+    alias gvt='_g ~/var/tmp'
+    alias gyt='_g ~/.youtube-dl'
 
     Yf() { cp "$@" ~/var/files     ; }
     Yd() { cp "$@" ~/var/downloads ; }
@@ -397,59 +303,59 @@ if exists ~/var ; then
     mvi(){ mv "$@" ~/var/videos    ; }
 fi
 
-if exists ~/usr ; then
-    a gr='_g ~/usr/repos' 
-    a gbkup='_g ~/usr/backup'
+if [ -d ~/usr ] ; then
+    alias gr='_g ~/usr/repos' 
+    alias gbkup='_g ~/usr/backup'
     mu() { mv "$@" ~/usr ; }
     mr() { mv "$@" ~/usr/repos ; }
     Yu() { cp "$@" ~/usr ; }
     Yr() { cp "$@" ~/usr/repos ; }
 fi
 
-if exists ~/etc ; then
+if [ -d ~/etc ] ; then
     me() { mv "$@" ~/etc ; }
     Ye() { cp "$@" ~/etc ; }
-    a gcf='_g ~/etc/config'
+    alias gcf='_g ~/etc/config'
 
-    a {aliases,alaises,aliase}='v ~/etc/aliases'
-    a profile='v ~/etc/profile'
-    a {bkm,bmk}='r ~/var/files/bkm'
-    a {vssh,sshv}='v ~/.ssh/config'
+    alias {aliases,alaises,aliase}='v ~/etc/aliases'
+    alias profile='v ~/etc/profile'
+    alias {bkm,bmk}='r ~/var/files/bkm'
+    alias {vssh,sshv}='v ~/.ssh/config'
 
-    a vimrc="v ~/etc/vimrc"
-    a kshrc="v ~/etc/kshrc"
+    alias vimrc="v ~/etc/vimrc"
+    alias kshrc="v ~/etc/kshrc"
 fi
 
-if exists ~/src ; then
-    a gs='_g ~/src'
+if [ -d ~/src ] ; then
+    alias gs='_g ~/src'
     ms() { mv "$@" ~/src ; }
     Ys() { cp "$@" ~/src ; }
 fi
 
-if exists ~/bin ; then
+if [ -d ~/bin ] ; then
     mb() { mv "$@" ~/bin ; }
     Yb() { cp "$@" ~/bin ; }
 fi
 
-if exists ~/tmp ; then
+if [ -d ~/tmp ] ; then
     mt() { mv "$@" ~/tmp ; }
     Yt() { cp "$@" ~/tmp ; }
 fi
 
-if exists ~/env ; then
+if [ -d ~/env ] ; then
     mn() { mv "$@" ~/env ; }
     Yn() { cp "$@" ~/env ; }
-    a gn='_g ~/env'
+    alias gn='_g ~/env'
 fi
 
 m_() { mv "$@" ~/.trash ; }
 Y_() { cp "$@" ~/.trash ; }
-a g_='_g ~/.trash'
-a trash=m_
+alias g_='_g ~/.trash'
+alias trash=m_
 
 # ----------- end movement commands ------------------
 
-a save_unsplash_wall="cp ${HOME}/var/tmp/wall ${HOME}/var/images/wallpapers/unsplash/saved_\"$(date)\".png"
+alias save_unsplash_wall="cp ${HOME}/var/tmp/wall ${HOME}/var/images/wallpapers/unsplash/saved_\"$(date)\".png"
 save_wall() { cp -f "$1" ${HOME}/var/tmp/wall ; }
 
 # skeletons
@@ -468,19 +374,24 @@ EOF
 chmod +x hello.sh
 }
 
-# unalias loop/tmp variables
-u i j _u _p _h
-
 gud() {
     # activate my PS1 git branch detection after
     # git commands
-    cmd gud "$@" ; cd .
+    command gud "$@" ; cd .
 }
 
-a {repomc,reocmp,reomcp,recopm,recmop,recpom}=recomp
+alias {repomc,reocmp,reomcp,recopm,recmop,recpom}=recomp
 
-a bonsai="cd ~/src/bonsai-master ; ./bonsai"
-a {b,bs,bpm}=bonsai
-a mkwebsite='cd ~/src/bonsai-website ; mk site'
-a mkpkgs='cd ~/src/bonsai-website ; mk pkgs'
-a mkbkup='cd ~/src/bonsai-website ; mk bkup'
+forgrep() {
+    find . -type f | while read -r file ; do
+        grep "$*" "$file" >/dev/null && echo $file
+    done
+}
+
+# -*-*- bonsai stuff *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+alias bonsai="cd ~/src/bonsai ; ./bonsai"
+alias {b,bs,bpm}=bonsai
+alias chroot.sh=~/src/bonsai-tools/chroot.sh
+alias pkgskel=~/src/bonsai-tools/pkgskel
+export root=~/env/bs1
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
