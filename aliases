@@ -395,3 +395,8 @@ alias chroot.sh=~/src/bonsai-tools/chroot.sh
 alias pkgskel=~/src/bonsai-tools/pkgskel
 export root=~/env/bs1
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+# adds a magnet link to torrent-queue
+addtorrent() {
+    echo "$*" | sed 's|udp.*|udp|' >> ~/.torrents/queue
+}
