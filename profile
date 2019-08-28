@@ -13,7 +13,7 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
 export _JAVA_AWT_WM_NONREPARENTING=1 # fix for many java apps
 export MAKEFLAGS="-j$(($(nproc) + 1))"
 export CFLAGS='-w -s -O2 -pipe -fstack-protector-strong'
-export LESSCHARSET='utf-8' PYTHONIOENCODING='UTF-8' \
+export LESSCHARSET='utf-8' PYTHONIOENCODING='UTF-8'
 export MANPAGER='less' LESS='-QRd'
 
 export ALIASES=${HOME}/etc/aliases
