@@ -48,7 +48,6 @@ alias date="command date '+%a %b %d - %I:%M %p'"
 alias dmegs=dmesg
 alias h='head -n 15'
 alias t='tail -n 15'
-alias {w,watch}='watch -t -n 1'
 alias ex=export
 alias cx='chmod +x'
 alias poweroff='sudo poweroff'
@@ -85,6 +84,7 @@ alias rtv='rtv --enable-media ; c'
 alias compton='pkill compton ; compton & c'
 alias feh='feh -q -N -x -X -s -Z --scale-down --title feh'
 alias click='xdotool click 1'
+alias w=which
 
 # sums
 alias {512,sha512}=sha512sum
@@ -119,7 +119,7 @@ cpcd() { cp "$1" "$2" && cd "$2" ; }
 
 du() { 
     [ $# -eq 0 ] && set .
-    command du -ahLd 1 "$1" | sort -rh | head -n 20
+    command du -ahLd 1 "$1" | sort -rh | head -n 30
 } 2> /dev/null
 
 # files
@@ -244,6 +244,10 @@ ytdl() {
 resize_75() { mogrify -resize '75%X75%' "$@" ; }
 resize_50() { mogrify -resize '50%X50%' "$@" ; }
 resize_25() { mogrify -resize '25%X25%' "$@" ; }
+transparent() {
+    #turns a PNG white background -> transparent
+    convert "$1" -transparent white "${1%.*}"_transparent.png
+}
 
 # translate-shell
 trans() {
@@ -389,19 +393,26 @@ alias {repomc,reocmp,reomcp,recopm,recmop,recpom}=recomp
 
 forgrep() {
     find . -type f | while read -r file ; do
-        grep "$*" "$file" >/dev/null && echo $file
+        grep -- "$*" "$file" >/dev/null && echo $file
     done
 }
 
 # -*-*- bonsai stuff *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 alias bonsai="cd ~/src/bonsai ; ./bonsai"
 alias {b,bs,bpm}=bonsai
-alias chroot.sh=~/src/bonsai-tools/chroot.sh
-alias pkgskel=~/src/bonsai-tools/pkgskel
-export root=~/env/bs1
+alias chroot.sh=~/src/bonsai/tools/chroot.sh
+alias pkgskel=~/src/bonsai/tools/pkgskel
+alias bootstrap=~/src/bonsai/tools/bootstrap.sh
+export ROOT=~/env/bs1
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # adds a magnet link to torrent-queue
 addtorrent() {
     echo "$*" | sed 's|udp.*|udp|' >> ~/.torrents/queue
+}
+
+fixnet() {
+    sudo pkill -9 dhcpcd
+    sudo dhcpcd ; sudo dhcpcd
+    ping
 }

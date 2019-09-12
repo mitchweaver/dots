@@ -21,7 +21,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     Plug 'airblade/vim-gitgutter' " git diffing along the left side
     Plug 'tpope/vim-repeat' " allows '.' for more things
     Plug 'tpope/vim-surround' " surround stuff with stuff
-    Plug 'dylanaraps/wal.vim' " pywal theme
+    " Plug 'dylanaraps/wal.vim' " pywal theme
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
     
     call plug#end()
@@ -65,9 +65,9 @@ noremap ; :
 " ------------------------------------------------------
 
 " ----- colors -------------------- 
-set background=dark
-" set background=light
-colorscheme wal
+" set background=dark
+set background=light
+" colorscheme wal
 "  --------------------------------
 
 " ---- syntax stuff -------------
@@ -93,7 +93,7 @@ map <silent><leader>sy :set syntax=sh<cr>
 " syntax off
 " -------------------------------
 
-set number relativenumber
+" set number relativenumber
 map <silent><leader>ln :set number! relativenumber!<cr>
 
 let s:color_column_old = 80

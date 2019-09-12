@@ -1,5 +1,5 @@
 umask 022
-ulimit -c 0 2> /dev/null
+ulimit -c 0 2>/dev/null
 
 export PATH="$PATH:${HOME}/.local/bin"
 
@@ -9,7 +9,7 @@ export PATH="$PATH:$PLAN9/bin"
 NPROC="$(nproc 2>/dev/null)"
 export NPROC="${NPROC:=1}"
 
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH"
 export _JAVA_AWT_WM_NONREPARENTING=1 # fix for many java apps
 export MAKEFLAGS="-j$(($(nproc) + 1))"
 export CFLAGS='-w -s -O2 -pipe -fstack-protector-strong'
@@ -17,10 +17,8 @@ export LESSCHARSET='utf-8' PYTHONIOENCODING='UTF-8'
 export MANPAGER='less' LESS='-QRd'
 
 export ALIASES=${HOME}/etc/aliases
-
-pgrep dbus > /dev/null || export "$(dbus-launch)"
-
 export PS1='% '
+pgrep dbus >/dev/null || export "$(dbus-launch)"
 
 if type xdg-open >/dev/null 2>&1 ; then
     export XDG_DESKTOP_DIR="/non/existent" \
@@ -42,7 +40,7 @@ p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin /sbin \
 unset -f p
 
 # clear tmp
-rm -rf ${HOME}/tmp 2> /dev/null && mkdir -p ${HOME}/tmp
+rm -rf ${HOME}/tmp 2>/dev/null && mkdir -p ${HOME}/tmp
 
 [ -d ${HOME}/etc ] &&
     case $SHELL in
@@ -51,7 +49,7 @@ rm -rf ${HOME}/tmp 2> /dev/null && mkdir -p ${HOME}/tmp
     esac
 
 for i in nvim vim vis vi nano ; do
-    if type $i > /dev/null 2>&1 ; then
+    if type $i >/dev/null 2>&1 ; then
         export EDITOR=$i VISUAL=$i
         break
     fi
@@ -59,7 +57,7 @@ done
 
 for i in surf chromium chromium-browser google-chrome \
               google-chrome-stable firefox ; do
-    if type $i > /dev/null 2>&1 ; then
+    if type $i >/dev/null 2>&1 ; then
         export BROWSER=$i
         break
     fi
@@ -69,7 +67,7 @@ for i in LANG LANGUAGE LC_ALL LOCALE LC_CTYPE ; do
     export $i='en_US.UTF-8'
 done
 
-if ! pgrep X > /dev/null ; then
+if ! pgrep X >/dev/null ; then
     rm -rf ${HOME}/.{Xauthority*,serverauth*}
-    startx > /dev/null 2>&1
+    type launchx && launchx >/dev/null 2>&1
 fi
