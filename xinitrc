@@ -7,11 +7,9 @@
 # (ex: run X apps from chroots)
 xhost +local:
 
-#while sleep 10 ; do : ; done
+xset m 0 0
 
 autostart
-
-# sudo chroot ${HOME}/env/bs1 /bin/dwm
 
 # If dwm crashes, or was pkill, relaunch
 # --- note: this magically preserves opened windows!

@@ -63,9 +63,11 @@ for i in surf chromium chromium-browser google-chrome \
     fi
 done
 
-for i in LANG LANGUAGE LC_ALL LOCALE LC_CTYPE ; do
-    export $i='en_US.UTF-8'
-done
+export LANG='en_US.UTF-8' \
+    LANGUAGE='en_US.UTF-8' \
+    LC_ALL='en_US.UTF-8' \
+    LOCALE='en_US.UTF-8' \
+    LC_CTYPE='en_US.UTF-8'
 
 if ! pgrep X >/dev/null ; then
     rm -rf ${HOME}/.{Xauthority*,serverauth*}

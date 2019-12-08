@@ -105,14 +105,6 @@ sha1=sha1sum
 sha256=sha256sum
 sha512=sha512sum
 
-ps() {
-    if [ $# -gt 0 ] ; then
-        command ps auwwx | g -i "$@" | g -v grep
-    else
-        command ps auwwx
-    fi | head -n 20
-}
-
 mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
@@ -416,3 +408,9 @@ fixnet() {
     sudo dhcpcd ; sudo dhcpcd
     ping
 }
+
+alias py=python3
+
+alias full="timer 5"
+alias half="timer 3"
+alias herb="sleep $((60 * 95)) ; notify-send 'Herb-run is ready'"

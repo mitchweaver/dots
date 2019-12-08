@@ -45,3 +45,10 @@ alt + bracketright
     media -sa
 alt + bracketleft
     media -sb
+
+# accounts
+alt + shift + F9
+    pass
+
+Pause
+    sh ~/var/rs/scripts/renderself
