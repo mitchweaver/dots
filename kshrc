@@ -73,4 +73,4 @@ _get_PS1() {
 cd .
 
 # clear junk i hate seeing
-(rm -rf ${HOME}/{*.core,*.out,*.dump,Desktop,Downloads,mpv-shot*,.dbus,.pki,.lesshst,.wget-hsts} 2> /dev/null &)
+(rm -rf ${HOME}/{*.core,*.out,*.dump,Desktop,Downloads,mpv-shot*,.dbus,.pki,.lesshst,.wget-hsts,KrunkerResourceSwapper} 2> /dev/null &)

@@ -1,0 +1,39 @@
+[info   ] UserConfig: Could not read user config file '/home/mitch/etc/config/supertuxkart/config-0.10/config.xml'.  A new file will be created.
+[info   ] [FileManager]: Data files will be fetched from: '/opt/supertuxkart/data/'
+[info   ] [FileManager]: User directory is '/home/mitch/etc/config/supertuxkart/config-0.10/'.
+[info   ] [FileManager]: Addons files will be stored in '/home/mitch/.local/share/supertuxkart/addons/'.
+[info   ] [FileManager]: Screenshots will be stored in '/home/mitch/.local/share/supertuxkart/screenshots/'.
+[info   ] [FileManager]: User-defined grand prix will be stored in '/home/mitch/.local/share/supertuxkart/grandprix/'.
+[info   ] [FileManager]: Asset 0 will be loaded from '/opt/supertuxkart/data/challenges/'.
+[info   ] [FileManager]: Asset 1 will be loaded from '/opt/supertuxkart/data/gfx/'.
+[info   ] [FileManager]: Asset 2 will be loaded from '/opt/supertuxkart/data/grandprix/'.
+[info   ] [FileManager]: Asset 3 will be loaded from '/opt/supertuxkart/data/gui/icons/'.
+[info   ] [FileManager]: Asset 4 will be loaded from '/opt/supertuxkart/data/gui/screens/'.
+[info   ] [FileManager]: Asset 5 will be loaded from '/opt/supertuxkart/data/gui/dialogs/'.
+[info   ] [FileManager]: Asset 6 will be loaded from '/opt/supertuxkart/data/library/'.
+[info   ] [FileManager]: Asset 7 will be loaded from '/opt/supertuxkart/data/models/'.
+[info   ] [FileManager]: Asset 8 will be loaded from '/opt/supertuxkart/data/music/'.
+[info   ] [FileManager]: Asset 9 will be loaded from '/opt/supertuxkart/data/replay/'.
+[info   ] [FileManager]: Asset 10 will be loaded from '/opt/supertuxkart/data/tracks/'.
+[info   ] [FileManager]: Asset 11 will be loaded from '/opt/supertuxkart/data/sfx/'.
+[info   ] [FileManager]: Asset 12 will be loaded from '/opt/supertuxkart/data/shaders/'.
+[info   ] [FileManager]: Asset 13 will be loaded from '/opt/supertuxkart/data/skins/'.
+[info   ] [FileManager]: Asset 14 will be loaded from '/opt/supertuxkart/data/textures/'.
+[info   ] [FileManager]: Asset 15 will be loaded from '/opt/supertuxkart/data/ttf/'.
+[info   ] [FileManager]: Asset 16 will be loaded from '/opt/supertuxkart/data/po/'.
+[verbose  ] translation: Env var LANGUAGE = 'en_US.UTF-8'.
+[verbose  ] translation: Language 'English (United States)'.
+[info   ] tinygettext: Adding language fallback en
+
+[info   ] ServerConfig: Could not read server config file '/home/mitch/etc/config/supertuxkart/config-0.10/server_config.xml'. A new file will be created.
+[info   ] IrrDriver: OpenGL version: 2.1
+[info   ] IrrDriver: OpenGL vendor: Intel Open Source Technology Center
+[info   ] IrrDriver: OpenGL renderer: Mesa DRI Mobile Intel® GM45 Express Chipset 
+[info   ] IrrDriver: OpenGL version string: 2.1 Mesa 19.0.6
+[warn   ] irr_driver: Using the fixed pipeline (old GPU, or shaders disabled in options)
+[info   ] player_manager: A new players.xml file will be created.
+[info   ] Highscore Manager: New highscore file '/home/mitch/etc/config/supertuxkart/config-0.10/highscore.xml' created.
+
+[info   ] GrandPrixManager: Loading Grand Prix files from /opt/supertuxkart/data/grandprix/
+[info   ] GrandPrixManager: Loading Grand Prix files from /home/mitch/.local/share/supertuxkart/grandprix/
+[warn   ] OpenGL: OpenGL version is too old!

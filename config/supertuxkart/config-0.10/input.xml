@@ -1,0 +1,34 @@
+<input version="1">
+
+<!--
+Event 1 : Keyboard button press
+    'id' indicates which button, as defined by irrlicht's EKEY_CODE enum
+    'character' contains the associated unicode character.
+        Only used as fallback when displaying special characters in the UI.
+Event 2 : Gamepad stick motion
+    'id' indicates which stick, starting from 0
+    'direction' 0 means negative, 1 means positive
+Event 3 : Gamepad button press
+    'id' indicates which button, starting from 0
+-->
+
+<keyboard enabled="true">
+    <action name="steerLeft" event="1" id="37" character="0" />
+    <action name="steerRight" event="1" id="39" character="0" />
+    <action name="accel" event="1" id="38" character="0" />
+    <action name="brake" event="1" id="40" character="0" />
+    <action name="nitro" event="1" id="78" character="0" />
+    <action name="drift" event="1" id="86" character="0" />
+    <action name="rescue" event="1" id="8" character="0" />
+    <action name="fire" event="1" id="32" character="0" />
+    <action name="lookBack" event="1" id="66" character="0" />
+    <action name="pauserace" event="1" id="27" character="0" />
+    <action name="menuUp" event="1" id="38" character="0" />
+    <action name="menuDown" event="1" id="40" character="0" />
+    <action name="menuLeft" event="1" id="37" character="0" />
+    <action name="menuRight" event="1" id="39" character="0" />
+    <action name="menuSelect" event="1" id="13" character="0" />
+    <action name="menuCancel" event="1" id="27" character="0" />
+</keyboard>
+
+</input>

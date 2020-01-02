@@ -1,10 +1,10 @@
 # programs
 alt + Return
     tabbed -d -c -r 2 st -w ''
-alt + w
-    tabbed -d -c surf -e
 alt + shift + w
-    chromium --new-window
+    tabbed -d -c surf -e
+alt + w
+    brave --new-window
 alt + r
     st -T floating-st -n floating-st -e ranger
 alt + x
@@ -45,10 +45,3 @@ alt + bracketright
     media -sa
 alt + bracketleft
     media -sb
-
-# accounts
-alt + shift + F9
-    pass
-
-Pause
-    sh ~/var/rs/scripts/renderself

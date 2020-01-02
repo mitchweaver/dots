@@ -55,7 +55,7 @@ for i in nvim vim vis vi nano ; do
     fi
 done
 
-for i in surf chromium chromium-browser google-chrome \
+for i in brave surf chromium chromium-browser google-chrome \
               google-chrome-stable firefox ; do
     if type $i >/dev/null 2>&1 ; then
         export BROWSER=$i

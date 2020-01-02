@@ -411,6 +411,4 @@ fixnet() {
 
 alias py=python3
 
-alias full="timer 5"
-alias half="timer 3"
-alias herb="sleep $((60 * 95)) ; notify-send 'Herb-run is ready'"
+pgrep X >/dev/null && wmname LG3D
