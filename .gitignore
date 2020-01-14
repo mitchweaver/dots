@@ -156,3 +156,9 @@ config/blender
 vim/.netrwhist
 
 config/*krunker*
+config/BraveSoftware
+*brave*
+*Brave*
+
+*krunker*
+*supertuxkart*
