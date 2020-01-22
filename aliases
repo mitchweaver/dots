@@ -85,6 +85,7 @@ alias compton='pkill compton ; compton & c'
 alias feh='feh -q -N -x -X -s -Z --scale-down --title feh'
 alias click='xdotool click 1'
 alias w=which
+alias py=python3
 
 # sums
 alias {512,sha512}=sha512sum
@@ -390,25 +391,20 @@ forgrep() {
 }
 
 # -*-*- bonsai stuff *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-alias bonsai="cd ~/src/bonsai ; ./bonsai"
-alias {b,bs,bpm}=bonsai
-alias chroot.sh=~/src/bonsai/tools/chroot.sh
-alias pkgskel=~/src/bonsai/tools/pkgskel
-alias bootstrap=~/src/bonsai/tools/bootstrap.sh
-export ROOT=~/env/bs1
+# alias bonsai="cd ~/src/bonsai ; ./bonsai"
+# alias {b,bs,bpm}=bonsai
+# alias chroot.sh=~/src/bonsai/tools/chroot.sh
+# alias pkgskel=~/src/bonsai/tools/pkgskel
+# alias bootstrap=~/src/bonsai/tools/bootstrap.sh
+# export ROOT=~/env/bs1
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # adds a magnet link to torrent-queue
-addtorrent() {
-    echo "$*" | sed 's|udp.*|udp|' >> ~/.torrents/queue
-}
+addtorrent() { echo "$*" | sed 's|udp.*|udp|' >> ~/.torrents/queue ; }
 
-fixnet() {
-    sudo pkill -9 dhcpcd
-    sudo dhcpcd ; sudo dhcpcd
-    ping
-}
+alias torrent="aria2c -d ${HOME}/var/downloads --file-allocation=falloc \
+    --check-integrity=true --continue=true --seed-time=0"
 
-alias py=python3
-
-pgrep X >/dev/null && wmname LG3D
+cover() { wget "$1" -O cover.jpg ; }
+band()  { wget "$1" -O band.jpg  ; }
+logo()  { wget "$1" -O logo.jpg  ; }

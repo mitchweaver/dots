@@ -67,10 +67,6 @@ _get_PS1() {
 
 # check if we're in ranger/fff or not
 [ "$RANGER_LEVEL" ] && clear
-[ "$FFF_LEVEL" ] && clear
 
 # this activates our PS1
 cd .
-
-# clear junk i hate seeing
-(rm -rf ${HOME}/{*.core,*.out,*.dump,Desktop,Downloads,mpv-shot*,.dbus,.pki,.lesshst,.wget-hsts,KrunkerResourceSwapper} 2> /dev/null &)
