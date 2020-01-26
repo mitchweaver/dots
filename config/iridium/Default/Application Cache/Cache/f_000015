@@ -1,0 +1,1102 @@
+
+<!DOCTYPE html>
+<html>
+    <head>      	
+        <meta charset="utf-8">        
+        <meta http-equiv="X-UA-Compatible" content="IE=10"/>    
+        <meta http-equiv="pragma" content="no-cache"/>
+        <script>
+            function addStyleToDom(styleHref) {
+                var head = document.getElementsByTagName('head')[0];
+                var linkElement = null;
+                if (window.document.createStyleSheet) {
+                    var link = window.document.createStyleSheet(styleHref);
+                    linkElement = link.owningElement;
+                }
+                else {
+                    linkElement = window.document.createElement('link');
+                    linkElement.rel = 'stylesheet';
+                    linkElement.type = 'text/css';
+                    linkElement.href = styleHref;                    
+                    head.appendChild(linkElement);
+                }
+                return linkElement;
+            }
+
+            function loadStyle(cssPath, callback) {
+                var linkElement = addStyleToDom(cssPath);                
+
+                // If browser supports css link element onload event, use that to callback when the stylesheet has loaded.
+                // Otherwise, wait 50 ms and hope for the best (this is the same logic as StyleLoader.LoadStyle)
+                if ('onload' in linkElement) {                    
+                    var styleLoadedCallback = function () {                        
+                        if ((!linkElement.readyState || (linkElement.readyState && (linkElement.readyState === 'loaded' || linkElement.readyState === 'complete')))) {
+                            linkElement.onload = null;
+                            linkElement.onreadystatechange = null;
+                            linkElement.onerror = null;
+                            callback();
+                        }
+                    };
+                    linkElement.onload = styleLoadedCallback;
+                    linkElement.onreadystatechange = styleLoadedCallback;
+                    linkElement.onerror = styleLoadedCallback;
+                }
+                else {
+                    window.setTimeout(callback, 50)
+                }
+            }
+
+            function loadStyleSheets(styleSheets) {               
+                var count = 0;
+                onStyleLoaded = function () {
+                    count++;                    
+                    if (count === styleSheets.length) {
+                        // Show the contents after all style sheets have loaded
+                        window.document.body.style.display = "block";                       
+                    }
+                };
+
+                for (var i = 0; i < styleSheets.length; i++) {
+                    loadStyle(styleSheets[i], onStyleLoaded);
+                }
+            }
+
+            function InlineImageLoader() {                
+            }
+
+            InlineImageLoader.GetLoader = function InlineImageLoader$GetLoader() {
+                if (window.opener != null) {
+                    return window.opener.InlineImageLoader.GetLoader();
+                }
+            }
+
+            window.onload = function () {                
+                window.opener.popOutProjectionManager.projectionReady(self);
+            }
+
+            window.onbeforeunload = function () {
+                return window.opener.popOutProjectionManager.onBeforeProjectionUnload(self);
+            }
+
+            window.onunload = function () {
+                window.opener.popOutProjectionManager.onProjectionUnload(self);
+            }
+        </script>  
+        <style>
+            .popoutBody 
+            {
+                margin: 0;
+                height: 100%;
+                width: 100%;
+                display: none;
+            }
+        </style>
+    <style>/*---------------------------------------------
+    NativeScrollRegion styles
+----------------------------------------------*/
+
+.customScrollBar::-webkit-scrollbar
+{
+    height: 18px;
+    width: 18px;
+}
+
+.customScrollBar::-webkit-scrollbar:disabled
+{
+    display:none;
+}
+
+.customScrollBar::-webkit-scrollbar-button   
+{
+    background-color: #fff;
+    background-repeat: no-repeat;
+    cursor:pointer;
+}
+
+.customScrollBar::-webkit-scrollbar-button:horizontal:increment,
+.customScrollBar::-webkit-scrollbar-button:horizontal:decrement,
+.customScrollBar::-webkit-scrollbar-button:horizontal:increment:hover,
+.customScrollBar::-webkit-scrollbar-button:horizontal:decrement:hover,
+.customScrollBar::-webkit-scrollbar-button:vertical:increment,
+.customScrollBar::-webkit-scrollbar-button:vertical:decrement,
+.customScrollBar::-webkit-scrollbar-button:vertical:increment:hover,
+.customScrollBar::-webkit-scrollbar-button:vertical:decrement:hover
+{
+    background-position:center;
+    height: 18px;
+    width: 18px;
+}
+
+.customScrollBarLight::-webkit-scrollbar-button 
+{
+    display: none;
+}
+
+.customScrollBar::-webkit-scrollbar-track
+{
+    background-color: #fff;
+}
+
+.customScrollBarLight::-webkit-scrollbar-track
+{
+    background-color: #0072C6;
+}
+
+.customScrollBar::-webkit-scrollbar-thumb
+{
+    border-radius: 9px;
+    border: solid 6px #fff;
+    background-color: #c8c8c8;
+}
+
+.customScrollBarLight::-webkit-scrollbar-thumb
+{
+    border-color: #0072C6;
+    background-color: #95B1C1;
+}
+
+.customScrollBar::-webkit-scrollbar-thumb:vertical
+{
+    min-height:50px;
+}
+
+.customScrollBar::-webkit-scrollbar-thumb:horizontal
+{
+    min-width:50px;
+}
+
+.customScrollBar::-webkit-scrollbar-thumb:hover
+{
+    border-radius: 9px;
+    border: solid 6px #fff;
+    background-color: #98A3A6;
+}
+
+.customScrollBar::-webkit-scrollbar-corner
+{
+    background-color: #fff;
+}
+
+.nativeScrollInertia
+{
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 
+    This rule is stated here, rather than in the stylesheet 
+    generated by CssSpritesGen2, because we want this to be 
+    the default while allowing templates to override to 
+    display as a full block element.
+*/
+.csimg 
+{
+    display: inline-block;
+    overflow: hidden;
+}
+
+/*-------------------------------------
+    Firefox button fix (removes extra
+    button padding) 
+--------------------------------------*/
+button::-moz-focus-inner
+{ 
+    border-width: 0;
+    padding: 0;
+}
+
+/*-------------------------------------
+    TextBox styles
+--------------------------------------*/
+.textbox
+{
+    border-width: 1px;
+    border-style: solid;
+    font-size: 12px;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    -webkit-appearance:none;
+    height: 14px;
+    background-color: #fff;
+}
+
+.mouse .textbox 
+{
+    padding: 3px 5px;
+}
+
+.twide .textbox, .tnarrow .textbox
+{
+    padding: 7px 5px;
+    height: 22px;
+}
+
+.textbox:hover
+{
+    border-color:#666666;
+    background-color: #fff;
+}
+
+.placeholderText
+{
+    font: 12px 'Segoe UI', 'Segoe WP', 'Segoe UI WPC', Tahoma, Arial, sans-serif;
+    color: #a6a6a6;
+}
+
+/*-------------------------------------
+    Text area styles
+-------------------------------------*/
+.twide .textarea, .tnarrow .textarea, .textarea
+{
+    padding: 10px;
+}
+
+.mouse .textarea:hover
+{
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/*---------------------------------------------
+    Button styles
+----------------------------------------------*/
+
+.o365button
+{
+    background: transparent;
+    border-width: 0px;
+    padding: 0px;
+    cursor: pointer !important;
+}
+
+.o365button:disabled
+{
+    cursor: default !important;
+}
+
+.o365buttonOutlined
+{
+    padding-right: 11px;
+    padding-left: 11px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    border-width: 1px;
+    border-style: solid;
+}
+
+.o365buttonOutlined .o365buttonLabel
+{
+    display:inline-block;
+}
+
+.o365buttonOutlined
+{
+    height: 22px;
+}
+
+.o365buttonOutlined .o365buttonLabel
+{
+    height: 18px;
+}
+
+/*-------------------------------------
+    Checkbox styles
+--------------------------------------*/
+
+.checkbox
+{
+    border-style:none;
+    cursor:pointer;
+    vertical-align:middle;
+}
+
+/*---------------------------------------------
+    Popup styles
+----------------------------------------------*/
+.popupShadow 
+{
+    box-shadow: 0 0 20px rgba(0,0,0,.4);
+    border: 1px solid #eaeaea;
+}
+
+.contextMenuDropShadow 
+{
+    box-shadow: 0 0 7px rgba(0,0,0,.4);
+    border: 1px solid #eaeaea;
+}
+
+.modalBackground
+{
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+    opacity: 0.65;
+    filter: Alpha(opacity=65); /* Internet Explorer */
+}
+
+.clearModalBackground
+{
+    /* We use a white background with opacity 0 rather than background-color transparent so that
+       the browser won't allow the user click/touch to propagate to the control beneath it. */
+    background-color: #fff;    /* UX Approved */
+    opacity: 0;
+    filter: Alpha(opacity=0); /* Internet Explorer */
+    height: 100%;
+    width: 100%;
+}
+
+/*---------------------------------------------
+    Context Menu styles
+----------------------------------------------*/
+
+.contextMenuPopup 
+{
+    background-color: #fff;
+}
+
+.tnarrow .contextMenuPopup
+{
+    height: 100%;
+}
+
+
+/*---------------------------------------------
+    Focus Highlight Behavior styles
+----------------------------------------------*/
+.removeFocusOutline *:focus
+{
+    outline: none;
+}
+
+.addFocusOutline button:focus 
+{
+    outline: dotted 1px;
+}
+
+/* transparent defaults */
+.border-color-transparent 
+{
+    border-color: transparent;
+}
+
+/*-------------------------------------
+    DockPanel styles
+--------------------------------------*/
+.vResize, .hResize
+{
+    z-index: 1000;
+}
+
+.hResize, .hResizeCursor *
+{
+    cursor: row-resize !important;
+}
+
+.vResize, .vResizeCursor *
+{
+    cursor: col-resize !important;
+}
+
+.vResizing, .hResizing
+{
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+    -moz-opacity: 0.6;
+    border: solid 1px #fff;
+}
+
+.vResizing
+{
+    border-width: 0px 1px;
+}
+
+.hResizing
+{
+    border-width: 1px 0px;
+}
+</style>
+        <style>/*Font Classes*/
+.ms-font-su
+{
+    font-family: 'Segoe UI Semilight', 'Segoe WP Semilight', 'Segoe UI WPC Semilight', 'Segoe UI', 'Segoe WP', Tahoma, Arial, sans-serif;
+    font-size: 42px;
+    color: #333333;
+}
+
+.ms-font-xxl
+{
+    font-family: 'Segoe UI Semilight', 'Segoe WP Semilight', 'Segoe UI WPC Semilight', 'Segoe UI', 'Segoe WP', Tahoma, Arial, sans-serif;
+    font-size: 28px;
+    color: #333333;
+}
+
+.twide .ms-font-xxl, .tnarrow .ms-font-xxl
+{
+    font-size: 30px;
+}
+
+.ms-font-xl
+{
+    font-family: 'Segoe UI Semilight', 'Segoe WP Semilight', 'Segoe UI WPC Semilight', 'Segoe UI', 'Segoe WP', Tahoma, Arial, sans-serif;
+    font-size: 21px;
+    color: #333333;
+}
+
+.twide .ms-font-xl, .tnarrow .ms-font-xl
+{
+    font-size: 22px;
+}
+
+.ms-font-l
+{
+    font-family: 'Segoe UI', 'Segoe WP', 'Segoe UI WPC', Tahoma, Arial, sans-serif;
+    font-size: 17px;
+    color: #333333;
+}
+
+.twide .ms-font-l, .tnarrow .ms-font-l
+{
+    font-size: 18px;
+}
+
+.ms-font-m
+{
+    font-family: 'Segoe UI', 'Segoe WP', 'Segoe UI WPC', Tahoma, Arial, sans-serif;
+    font-size: 14px;
+    color: #333333;
+}
+
+.twide .ms-font-m, .tnarrow .ms-font-m
+{
+    font-size: 15px;
+}
+
+.ms-font-s
+{
+    font-family: 'Segoe UI', 'Segoe WP', 'Segoe UI WPC', Tahoma, Arial, sans-serif;
+    font-size: 12px;
+    color: #333333;
+}
+
+.twide .ms-font-s, .tnarrow .ms-font-s
+{
+    font-size: 13px;
+}
+
+.ms-font-xs
+{
+    font-family: 'Segoe UI', 'Segoe WP', 'Segoe UI WPC', Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    color: #333333;
+}
+
+.twide .ms-font-xs, .tnarrow .ms-font-xs
+{
+    font-size: 12px;
+}
+
+.ms-font-mi
+{
+    font-weight: bold;
+    font-family: 'Segoe UI Semibold', 'Segoe WP Semibold', 'Segoe UI WPC Semibold', 'Segoe UI', 'Segoe WP', Tahoma, Arial, sans-serif;
+    font-size: 10px;
+    color: #333333;
+}
+
+.twide .ms-font-mi, .tnarrow .ms-font-mi
+{
+    font-size: 11px;
+}
+
+/*Font Weights*/
+.ms-font-weight-light
+{
+    font-family: 'Segoe UI Light', 'Segoe WP Light', 'Segoe UI WPC Semilight', 'Segoe UI Semilight', 'Segoe WP Semilight', 'Segoe UI', 'Segoe WP', Tahoma, Arial, sans-serif;
+}
+
+.ms-font-weight-semilight
+{
+    font-family: 'Segoe UI Semilight', 'Segoe WP Semilight', 'Segoe UI WPC Semilight', 'Segoe UI', 'Segoe WP', Tahoma, Arial, sans-serif;
+}
+
+.ms-font-weight-regular
+{
+    font-family: 'Segoe UI', 'Segoe WP', 'Segoe UI WPC', Tahoma, Arial, sans-serif;
+}
+
+.ms-font-weight-semibold
+{
+    font-weight: bold;
+    font-family: 'Segoe UI Semibold', 'Segoe WP Semibold', 'Segoe UI WPC Semibold', 'Segoe UI', 'Segoe WP', Tahoma, Arial, sans-serif;
+}</style>
+        <style>/*Background Colors*/
+.ms-bg-color-themeDark,
+.ms-bgc-td,
+.ms-bg-color-themeDark-hover:hover,
+.ms-bgc-td-h:hover
+{
+    background-color: #005A9E;
+}
+
+.ms-bg-color-themeDarker,
+.ms-bgc-tdr,
+.ms-bg-color-themeDarker-hover:hover,
+.ms-bgc-tdr-h:hover
+{
+    background-color: #004578;
+}
+
+.ms-bg-color-themePrimary,
+.ms-bgc-tp,
+.ms-bg-color-themePrimary-hover:hover,
+.ms-bgc-tp-h:hover
+{
+    background-color: #0072C6;
+}
+
+.ms-bg-color-themeSecondary,
+.ms-bgc-ts,
+.ms-bg-color-themeSecondary-hover:hover,
+.ms-bgc-ts-h:hover
+{
+    background-color: #2A8DD4;
+}
+
+.ms-bg-color-themeTertiary,
+.ms-bgc-tt,
+.ms-bg-color-themeTertiary-hover:hover,
+.ms-bgc-tt-h:hover
+{
+    background-color: #92C0E0;
+}
+
+.ms-bg-color-themeLight,
+.ms-bgc-tl,
+.ms-bg-color-themeLight-hover:hover,
+.ms-bgc-tl-h:hover
+{
+    background-color: #CDE6F7;
+}
+
+.ms-bg-color-themeLighter,
+.ms-bgc-tlr,
+.ms-bg-color-themeLighter-hover:hover,
+.ms-bgc-tlr-h:hover
+{
+    background-color: #E6F2FA;
+}
+
+/*Border Colors*/
+.ms-border-color-themeDark,
+.ms-bcl-td,
+.ms-border-color-themeDark-hover:hover,
+.ms-bcl-td-h:hover
+{
+    border-color: #005A9E;
+}
+
+.ms-border-color-themeDarker,
+.ms-bcl-tdr,
+.ms-border-color-themeDarker-hover:hover,
+.ms-bcl-tdr-h:hover
+{
+    border-color: #004578;
+}
+
+.ms-border-color-themePrimary,
+.ms-bcl-tp,
+.ms-border-color-themePrimary-hover:hover,
+.ms-bcl-tp-h:hover
+{
+    border-color: #0072C6;
+}
+
+.ms-border-color-themeSecondary,
+.ms-bcl-ts,
+.ms-border-color-themeSecondary-hover:hover,
+.ms-bcl-ts-h:hover
+{
+    border-color: #2A8DD4;
+}
+
+.ms-border-color-themeTertiary,
+.ms-bcl-tt,
+.ms-border-color-themeTertiary-hover:hover,
+.ms-bcl-tt-h:hover
+{
+    border-color: #92C0E0;
+}
+
+.ms-border-color-themeLight,
+.ms-bcl-tl,
+.ms-border-color-themeLight-hover:hover,
+.ms-bcl-tl-h:hover
+{
+    border-color: #CDE6F7;
+}
+
+.ms-border-color-themeLighter,
+.ms-bcl-tlr,
+.ms-border-color-themeLighter-hover:hover,
+.ms-bcl-tlr-h:hover
+{
+    border-color: #E6F2FA;
+}
+
+/*Foreground colors*/
+.ms-font-color-themeDark,
+.ms-fcl-td,
+.ms-font-color-themeDark-hover:hover,
+.ms-fcl-td-h:hover
+{
+    color: #005A9E;
+}
+
+.ms-font-color-themeDarker,
+.ms-fcl-tdr,
+.ms-font-color-themeDarker-hover:hover,
+.ms-fcl-tdr-h:hover
+{
+    color: #004578;
+}
+
+.ms-font-color-themePrimary,
+.ms-fcl-tp,
+.ms-font-color-themePrimary-hover:hover,
+.ms-fcl-tp-h:hover
+{
+    color: #0072C6;
+}
+
+.ms-font-color-themeSecondary,
+.ms-fcl-ts,
+.ms-font-color-themeSecondary-hover:hover,
+.ms-fcl-ts-h:hover
+{
+    color: #2A8DD4;
+}
+
+.ms-font-color-themeTertiary,
+.ms-fcl-tt,
+.ms-font-color-themeTertiary-hover:hover,
+.ms-fcl-tt-h:hover
+{
+    color: #92C0E0;
+}
+
+.ms-font-color-themeLight,
+.ms-fcl-tl,
+.ms-font-color-themeLight-hover:hover,
+.ms-fcl-tl-h:hover
+{
+    color: #CDE6F7;
+}
+
+.ms-font-color-themeLighter,
+.ms-fcl-tlr,
+.ms-font-color-themeLighter-hover:hover,
+.ms-fcl-tlr-h:hover
+{
+    color: #E6F2FA;
+}
+
+/* Suite overrides */
+.o365cs-topnavBGColor
+{
+    background-color: #0072C6;
+}
+.o365cs-topnavLinkBackground
+{
+    background-color: #0072C6;
+    background-color: rgba(0,114,198,.8);
+}
+.o365cs-topnavText
+{
+    color: #FFFFFF;
+}
+.o365cs-o365logo
+{
+    color: #FFFFFF;
+}
+.o365cs-navMenuButton
+{
+    color: #FFFFFF;
+}</style>
+        <style>/*Background Colors*/
+.ms-bg-color-black,
+.ms-bgc-b,
+.ms-bg-color-black-hover:hover,
+.ms-bgc-b-h:hover
+{
+    background-color: #000;
+}
+
+.ms-bg-color-neutralDark,
+.ms-bgc-nd,
+.ms-bg-color-neutralDark-hover:hover,
+.ms-bgc-nd-h:hover
+{
+    background-color: #212121;
+}
+
+.ms-bg-color-neutralPrimary,
+.ms-bgc-np,
+.ms-bg-color-neutralPrimary-hover:hover,
+.ms-bgc-np-h:hover
+{
+    background-color: #333;
+}
+
+.ms-bg-color-neutralSecondary,
+.ms-bgc-ns,
+.ms-bg-color-neutralSecondary-hover:hover,
+.ms-bgc-ns-h:hover
+{
+    background-color: #666;
+}
+
+.ms-bg-color-neutralSecondaryAlt,
+.ms-bgc-nsa,
+.ms-bg-color-neutralSecondaryAlt-hover:hover,
+.ms-bgc-nsa-h:hover
+{
+    background-color: #767676;
+}
+
+.ms-bg-color-neutralTertiary,
+.ms-bgc-nt,
+.ms-bg-color-neutralTertiary-hover:hover,
+.ms-bgc-nt-h:hover
+{
+    background-color: #a6a6a6;
+}
+
+.ms-bg-color-neutralTertiaryAlt,
+.ms-bgc-nta,
+.ms-bg-color-neutralTertiaryAlt-hover:hover,
+.ms-bgc-nta-h:hover
+{
+    background-color: #c8c8c8;
+}
+
+.ms-bg-color-neutralLight,
+.ms-bgc-nl,
+.ms-bg-color-neutralLight-hover:hover,
+.ms-bgc-nl-h:hover
+{
+    background-color: #eaeaea;
+}
+
+.ms-bg-color-neutralLighter,
+.ms-bgc-nlr,
+.ms-bg-color-neutralLighter-hover:hover,
+.ms-bgc-nlr-h:hover
+{
+    background-color: #f4f4f4;
+}
+
+.ms-bg-color-white,
+.ms-bgc-w,
+.ms-bg-color-white-hover:hover,
+.ms-bgc-w-h:hover
+{
+    background-color: #fff;
+}
+
+/*Border Colors*/
+.ms-border-color-black,
+.ms-bcl-b,
+.ms-border-color-black-hover:hover,
+.ms-bcl-b-h:hover
+{
+    border-color: #000;
+}
+
+.ms-border-color-neutralDark,
+.ms-bcl-nd,
+.ms-border-color-neutralDark-hover:hover,
+.ms-bcl-nd-h:hover
+{
+    border-color: #212121;
+}
+
+.ms-border-color-neutralPrimary,
+.ms-bcl-np,
+.ms-border-color-neutralPrimary-hover:hover,
+.ms-bcl-np-h:hover
+{
+    border-color: #333;
+}
+
+.ms-border-color-neutralSecondary,
+.ms-bcl-ns,
+.ms-border-color-neutralSecondary-hover:hover,
+.ms-bcl-ns-h:hover
+{
+    border-color: #666;
+}
+
+.ms-border-color-neutralSecondaryAlt,
+.ms-bcl-nsa,
+.ms-border-color-neutralSecondaryAlt-hover:hover,
+.ms-bcl-nsa-h:hover
+{
+    border-color: #767676;
+}
+
+.ms-border-color-neutralTertiary,
+.ms-bcl-nt,
+.ms-border-color-neutralTertiary-hover:hover,
+.ms-bcl-nt-h:hover
+{
+    border-color: #a6a6a6;
+}
+
+.ms-border-color-neutralTertiaryAlt,
+.ms-bcl-nta,
+.ms-border-color-neutralTertiaryAlt-hover:hover,
+.ms-bcl-nta-h:hover
+{
+    border-color: #c8c8c8;
+}
+
+.ms-border-color-neutralLight,
+.ms-bcl-nl,
+.ms-border-color-neutralLight-hover:hover,
+.ms-bcl-nl-h:hover
+{
+    border-color: #eaeaea;
+}
+
+.ms-border-color-neutralLighter,
+.ms-bcl-nlr,
+.ms-border-color-neutralLighter-hover:hover,
+.ms-bcl-nlr-h:hover
+{
+    border-color: #f4f4f4;
+}
+
+.ms-border-color-white,
+.ms-bcl-w,
+.ms-border-color-white-hover:hover,
+.ms-bcl-w-h:hover
+{
+    border-color: #fff;
+}
+
+/*Foreground colors*/
+.ms-font-color-black,
+.ms-fcl-b,
+.ms-font-color-black-hover:hover,
+.ms-fcl-b-h:hover
+{
+    color: #000;
+}
+
+.ms-font-color-neutralDark,
+.ms-fcl-nd,
+.ms-font-color-neutralDark-hover:hover,
+.ms-fcl-nd-h:hover
+{
+    color: #212121;
+}
+
+.ms-font-color-neutralPrimary,
+.ms-fcl-np,
+.ms-font-color-neutralPrimary-hover:hover,
+.ms-fcl-np-h:hover
+{
+    color: #333;
+}
+
+.ms-font-color-neutralSecondary,
+.ms-fcl-ns,
+.ms-font-color-neutralSecondary-hover:hover,
+.ms-fcl-ns-h:hover
+{
+    color: #666;
+}
+
+.ms-font-color-neutralSecondaryAlt,
+.ms-fcl-nsa,
+.ms-font-color-neutralSecondaryAlt-hover:hover,
+.ms-fcl-nsa-h:hover
+{
+    color: #767676;
+}
+
+.ms-font-color-neutralTertiary,
+.ms-fcl-nt,
+.ms-font-color-neutralTertiary-hover:hover,
+.ms-fcl-nt-h:hover
+{
+    color: #a6a6a6;
+}
+
+.ms-font-color-neutralTertiaryAlt,
+.ms-fcl-nta,
+.ms-font-color-neutralTertiaryAlt-hover:hover,
+.ms-fcl-nta-h:hover
+{
+    color: #c8c8c8;
+}
+
+.ms-font-color-neutralLight,
+.ms-fcl-nl,
+.ms-font-color-neutralLight-hover:hover,
+.ms-fcl-nl-h:hover
+{
+    color: #eaeaea;
+}
+
+.ms-font-color-neutralLighter,
+.ms-fcl-nlr,
+.ms-font-color-neutralLighter-hover:hover,
+.ms-fcl-nlr-h:hover
+{
+    color: #f4f4f4;
+}
+
+.ms-font-color-white,
+.ms-fcl-w,
+.ms-font-color-white-hover:hover,
+.ms-fcl-w-h:hover
+{
+    color: #fff;
+}</style>
+        <style>/*--------------------------------------------------------
+  OWA styles, font and color classes that are only used within OWA
+---------------------------------------------------------*/
+.owa-font-compose
+{
+    font-family: Calibri,Arial,Helvetica,sans-serif;
+}
+.owa-bg-color-neutral-orange
+{
+    background-color: #D82300;
+}
+.owa-bg-color-neutral-red
+{
+    background-color: #A80F22;
+}
+.owa-bg-color-neutral-yellow
+{
+    background-color: #FFEE94;
+}
+.owa-bg-color-neutral-green
+{
+    background-color: #5DD255;
+}
+.owa-bg-color-cal-green
+{
+    background-color: #68A490;
+}
+.owa-bg-color-cal-purple
+{
+    background-color: #976CBE;
+}
+.owa-border-color-neutral-orange
+{
+    border-color: #D82300;
+}
+.owa-border-color-neutral-red
+{
+    border-color: #A80F22;
+}
+.owa-border-color-neutral-yellow
+{
+    border-color: #FFEE94;
+}
+.owa-border-color-neutral-green
+{
+    border-color: #5DD255;
+}
+.owa-border-color-cal-green
+{
+    border-color: #68A490;
+}
+.owa-border-color-cal-purple
+{
+    border-color: #976CBE;
+}
+.owa-color-neutral-orange
+{
+    color: #D82300;
+}
+.owa-color-neutral-red
+{
+    color: #A80F22;
+}
+.owa-color-neutral-yellow
+{
+    color: #FFEE94;
+}
+.owa-color-neutral-green
+{
+    color: #5DD255;
+}
+.owa-color-cal-green
+{
+    color: #68A490;
+}
+.owa-color-cal-green-hover
+{
+    color: #377353;
+}
+.owa-color-cal-purple
+{
+    color: #976CBE;
+}
+.owa-color-cal-purple-hover
+{
+    color: #67397B;
+}
+.owa-color-cal-blue
+{
+    color: #71C2EB;
+}
+.owa-color-cal-brown
+{
+    color: #AB9B81;
+}
+.owa-color-cal-green-alt
+{
+    color: #A9C47A;
+}
+.owa-color-cal-grey
+{
+    color: #999B9C;
+}
+.owa-color-cal-orange
+{
+    color: #E6975C;
+}
+.owa-color-cal-pink
+{
+    color: #CA6AAB;
+}
+.owa-color-cal-red
+{
+    color: #D57272;
+}
+.owa-color-cal-teal
+{
+    color: #7BCBC4;
+}
+.owa-color-cal-yellow
+{
+    color: #E3B75D;
+}
+.owa-color-folder-brown
+{
+    color: #EAC282;
+}</style>
+    
+    </head>
+    <body class="popoutBody notIE8">                       
+    </body>
+</html>

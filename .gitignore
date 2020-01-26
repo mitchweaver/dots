@@ -27,6 +27,19 @@ config/youtube-viewer
 config/GIMP*
 config/mpv/watch_later
 config/nvim/shada/main.shada
+config/Iridium
+config/menus
+config/GIMP*
+config/neofetch
+config/pcmanfm
+config/QtProject*
+config/unity3d
+config/user-dirs.dirs
+config/xfce4
+config/wal
+config/gconf
+config/pulse
+config/libfm
 
 *bookmarks*
 

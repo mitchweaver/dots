@@ -1,0 +1,39 @@
+{
+   "author": "github.com/tarampampam",
+   "background": {
+      "page": "/html/background.html",
+      "persistent": true
+   },
+   "browser_action": {
+      "default_icon": "/img/48x48.png",
+      "default_popup": "/html/popup.html",
+      "default_title": "Random User-Agent"
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "js": [ "/js/inject/content.js" ],
+      "match_about_blank": true,
+      "matches": [ "*://*/*" ],
+      "run_at": "document_start"
+   } ],
+   "default_locale": "en",
+   "description": "__MSG_extension_desc__",
+   "icons": {
+      "128": "/img/128x128.png",
+      "16": "/img/16x16.png",
+      "48": "/img/48x48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApf4nXCMali557ssSe/uoh9qOktZRjJ4ZpJ8Ou3oPGCE8atJUdFiyvhC3Qlmthd8oNX33FBnZOjtbFqFAaFcc1+hb1LouYhQvPh18NbsCunqufj1X9vftiOA5RIZCYVVq106A/ZJwuDJ/vXSGYlS3xfylhq2CBPnwinbLYeTmttPNFZ71Aw6wd+bZmK2yx73aiL3TFvKstrWeUxvVxREldFgJIsy8a4M1DYjilCuf/AoX9evlPDc0TlFinWeEUd6LPdY9XDEbsmDgG+Vm+dfYyH67ReuV4xZvNUSec8f06F9Lw67qYiY7KHzfCvMK0tWMEu9nFY8e6NhRr84IOUO4AwIDAQAB",
+   "manifest_version": 2,
+   "minimum_chrome_version": "49.0",
+   "name": "Random User-Agent",
+   "options_ui": {
+      "chrome_style": true,
+      "open_in_tab": false,
+      "page": "/html/options.html"
+   },
+   "permissions": [ "webRequest", "webRequestBlocking", "*://*/*", "storage", "tabs" ],
+   "short_name": "random-user-agent",
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "2.2.11"
+}

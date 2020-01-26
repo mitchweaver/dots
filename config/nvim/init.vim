@@ -1,3 +1,3 @@
-set runtimepath^=~/etc/vim runtimepath+=~/etc/vim/after
+set runtimepath^=~/src/dots/vim runtimepath+=~/src/dots/vim/after
 let &packpath = &runtimepath
-source ~/etc/vimrc
+source ~/src/dots/vimrc

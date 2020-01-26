@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<style>
+		body {
+			background-color: #fff;
+			margin: 0;
+		}
+
+		#bodyinner {
+			margin: 0;
+			width: 350px;
+			font-family: Helvetica, Arial, sans-serif;
+			font-size: 13px;
+			max-height: 600px;
+			line-height: 1.8em;
+		}
+
+		#header {
+			padding: 10px 10px 5px;
+			font-size: 16px;
+			font-weight: bold;
+			color: #000;
+		}
+
+		#hr {
+			border: solid 1px #ccc;
+			border-top: none
+		}
+
+		#settings {
+			padding: 10px;
+			color: #222;
+		}
+
+		#tips {
+			background: #e1eaf4;
+			padding: 10px;
+			margin: 20px 0 0;
+			font-size: 12px;
+			border-radius: 8px;
+
+		}
+
+		.checkboxes label {
+			display: block;
+			white-space: nowrap;
+		}
+		.checkboxes input {
+			vertical-align: middle;
+		}
+		.checkboxes label span {
+			vertical-align: middle;
+			padding-left: 2px;
+		}
+
+	</style>
+
+</head>
+<body style="overflow:hidden;">
+<div id="bodyinner">
+	<div id="header">Wikiwand Options</div>
+	<hr id="hr">
+	<div id="settings">
+		<B>Ctrl+Click</B> any word to open a quick-definition popup
+		<form action="">
+			<div class="checkboxes">
+			<label for="ocdShowInWikiwand"><input type="checkbox" class="saveOnClick" id="ocdShowInWikiwand"><span>On Wikiwand</span></label>
+			<label for="ocdShowInWebsites"><input type="checkbox" class="saveOnClick" id="ocdShowInWebsites"><span>On all other websites</span></label>
+			</div>
+		</form>
+		<div id="tips">
+			<B>Tip:</B> for links, use Ctrl+Shift+Click to open a popup
+		</div>
+	</div>
+
+</div>
+<script src="../js/popup.js"></script>
+</body>
+</html>

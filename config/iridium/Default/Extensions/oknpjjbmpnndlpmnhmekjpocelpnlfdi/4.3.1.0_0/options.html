@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mercury Reader Options</title>
+    <style>
+      .checkbox-group {
+        display: flex;
+      }
+
+      .checkbox-group input {
+        margin-right: 10px;
+        flex-shrink: 0;
+      }
+
+      div,
+      h2,
+      hr {
+        margin-bottom: 20px;
+      }
+
+      hr {
+        border-top: 1px solid #eee;
+        border-bottom: 0;
+      }
+
+      label {
+        display: block;
+      }
+
+      label b {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      ol {
+        padding: 0 0 0 10px;
+      }
+
+      li {
+        margin-bottom: 10px;
+      }
+
+      input.kindle-email-input {
+        width: 100%;
+        font-size: 16px;
+        margin-bottom: 15px;
+      }
+
+      .mercury-kindle-email {
+        border: 1px solid rgb(191, 191, 191);
+        border-radius: 2px;
+        font-weight: bold;
+        padding: 0 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Send to Kindle</h2>
+    <ol>
+      <li>
+        On Amazon, go to the
+        <a
+          href="https://amazon.com/mn/dcw/myx.html#/home/content/booksAll/dateDsc/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Manage Your Content and Devices
+        </a> screen.
+      </li>
+      <li>
+        Under the <b>Preferences</b> tab, scroll down to find the
+        <b>Personal Document Settings</b> section.
+      </li>
+      <li>
+        Add <span class="mercury-kindle-email">mercury-kindle@postlight.com</span> to
+        your <b>Approved Personal Document E-mail List</b>.
+      </li>
+      <li>
+        Find the email address of your Kindle device under
+        <b>Send-to-Kindle E-Mail Settings</b> and enter it below.
+      </li>
+    </ol>
+    <input
+      class="kindle-email-input"
+      placeholder="email.address@kindle.com"
+    />
+    <hr>
+    <h2>Keyboard Shortcut</h2>
+    <div><b>Want to set your own shortcut?</b> Close this window, click on the "Extensions" menu in the top-left corner, and then click on "Keyboard
+      Shortcuts."
+    </div>
+    <script src="options.js"></script>
+  </body>
+</html>

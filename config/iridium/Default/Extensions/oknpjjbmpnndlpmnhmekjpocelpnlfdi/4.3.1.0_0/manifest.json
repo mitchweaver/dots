@@ -1,0 +1,32 @@
+{
+   "background": {
+      "persistent": true,
+      "scripts": [ "background.bundle.js" ]
+   },
+   "browser_action": {
+      "default_title": "Mercury Reader"
+   },
+   "content_scripts": [ {
+      "css": [ "content.css" ],
+      "js": [ "content.bundle.js" ],
+      "matches": [ "\u003Call_urls>", "*://*/*" ]
+   } ],
+   "content_security_policy": "script-src 'self' https://www.google-analytics.com https://platform.twitter.com https://connect.facebook.net/; object-src 'self'",
+   "description": "Mercury Reader - Clear away the clutter from all of your articles. Instantly.",
+   "icons": {
+      "128": "img/icon-128.png",
+      "16": "img/icon-16.png",
+      "48": "img/icon-48.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDZXKRdTKIIuqK1YTXTSQiVWDH9sMBdrEK4cPVpiDNZV0CpX8Mi8zgM9sZ32sB9LDEwtBQKu1rNxA+9X0whOKIHg6UyvtBOMTmhGrX9thkle5+qXW3FEWYy3jSKk0PO9j9TrUjGZXgP+nndG/vYd+X9Nz99BAcZaG8YXaD3EI0AfQIDAQAB",
+   "manifest_version": 2,
+   "name": "Mercury Reader",
+   "options_ui": {
+      "chrome_style": true,
+      "page": "options.html"
+   },
+   "permissions": [ "contextMenus", "tabs", "storage", "activeTab" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "4.3.1.0",
+   "web_accessible_resources": [ "app.html", "root-url-warning.html", "rootUrlWarning.js" ]
+}

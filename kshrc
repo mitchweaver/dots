@@ -16,7 +16,7 @@ alias echo='builtin print'
 alias type='builtin whence -v'
 
 # source my aliases
-[ -f ${HOME}/etc/aliases ] && . ${HOME}/etc/aliases
+[ -f ${HOME}/src/dots/aliases ] && . ${HOME}/src/dots/aliases
 
 set -o bgnice nohup trackall csh-history vi-tabcomplete
 
@@ -59,7 +59,7 @@ _get_PS1() {
     case ${USER} in
         # for colored PS1
         # mitch) _get_PS1() { echo -n "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(_parse_branch)\[\e[1;37m\] " ; } ;;
-        mitch) echo -n "\[\e[1;37m\]\W $(_parse_branch)" ;;
+        alan) echo -n "\[\e[1;37m\]\W $(_parse_branch)" ;;
         root) echo -n "\[\e[1;37m\]root \W " ;;
         *)     _get_PS1() { echo -n '% \W ' ; }
     esac

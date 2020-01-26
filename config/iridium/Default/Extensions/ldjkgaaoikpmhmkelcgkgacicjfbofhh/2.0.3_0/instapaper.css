@@ -1,0 +1,220 @@
+.instapaper_overlay {
+    position: fixed;
+    z-index: 2147483647;
+    left: 0;
+    top: -150px;
+    width: 100%;
+    font-size: 24px !important;
+    transition: .4s ease-out;
+    -webkit-transform: translate3d(0,0,0) translateZ(0);
+    text-align: center;
+    padding: 10px 0px;
+    margin: 0;
+    background-color: white;
+    color: rgb(60,60,60);
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 0px 1px, rgba(0, 0, 0, 0.298039) 0px 3px 50px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: none;
+    font-family: 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    line-height: 1.0;
+    letter-spacing: normal;
+    font-variant: normal;
+    font-style: normal;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.instapaper_overlay.showing {
+    -webkit-transform: translate(0, 150px) translate3d(0,0,0) translateZ(0);
+}
+
+.instapaper_overlay #ov_logoContainer {
+    position:relative;
+    float: left;
+    margin-top: 8px;
+    margin-left: 30px;
+    width: 168px;
+}
+
+.instapaper_overlay #ov_logo {
+    position: absolute;
+    width: 142px;
+    height: 26px;
+    background-image:url('chrome-extension://__MSG_@@extension_id__/saving_logo.png');
+    background-size: 142px 26px;
+}
+
+
+.instapaper_overlay #oc {
+    position: relative;
+    float: right;
+    width: 36px;
+    height: 36px;
+    margin-right: 30px;
+    margin-top: 2px;
+    cursor:pointer;   
+    background-image:url('chrome-extension://__MSG_@@extension_id__/saving_close.png');
+    background-size: 36px;
+    border: none !important;
+}
+
+.instapaper_overlay #of {
+    height: 36px;
+    opacity: 0;
+    transition: opacity .25s ease-out;
+    visibility: hidden;
+    position: relative;
+    float: right;
+    margin-top: 2px;
+    margin-right: 35px;
+    border: none !important;
+}
+
+.instapaper_overlay #ofi {
+    width: 36px;
+    height: 36px;
+    cursor:pointer;
+    background-image:url('chrome-extension://__MSG_@@extension_id__/saving_folder.png');
+    background-size: 36px;
+}
+
+.instapaper_overlay #ofd {
+    position: absolute;
+    width: 200px;
+    background-color: rgba(255,255,255,.98);
+    box-shadow: rgba(0, 0, 0, 0.156863) 0px 5px 7px 0px, rgba(0, 0, 0, 0.498039) 0px 0px 1px 0px;
+    border-radius: 0px 0px 5px 5px;
+    left: -146px;
+    top: 46px;
+}
+
+.instapaper_overlay #ofa {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 11px;
+    border-top-width: 0;
+    border-bottom-color: rgba(0,0,0,.25);
+    top: -11px;
+    left: 150px;
+}
+
+.instapaper_overlay #ofai {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 10px;
+    border-top-width: 0;
+    border-bottom-color: white;
+    margin-left: -10px;
+    top: 1px;
+}
+
+.instapaper_overlay #ofl {
+    max-height: 280px;
+    overflow-y: scroll;
+    text-align: left;
+    font-size: 14px;
+}
+
+.instapaper_overlay #oft {
+    padding: 18px 15px 10px 15px;
+    color: #777;
+}
+
+.instapaper_overlay .folder_row {
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 8px 15px;
+    color: black;
+}
+
+.instapaper_overlay .folder_row:hover {
+    color: #0074bf;
+}
+
+.instapaper_overlay .folder_row .folder_row_img {
+    float: left;
+    margin-top: -7px;
+    margin-right: 5px;
+    width: 25px;
+    height: 25px;
+    background-image:url('chrome-extension://__MSG_@@extension_id__/saving_folder_small.png');
+    background-size: 25px;
+}
+
+.instapaper_overlay .folder_row:hover .folder_row_img {
+    background-image:url('chrome-extension://__MSG_@@extension_id__/saving_folder_small_active.png');
+}
+
+.instapaper_overlay #om {
+    display: block;
+    margin: 0px auto;
+    margin-top: 7px;
+    width: 250px;
+    color: rgb(60, 60, 60);
+    border: none !important;
+    font-size: 24px !important;
+}
+
+.instapaper_highlight[fragmention] {
+    background-color: rgba(255,242,51,0.298039) !important;
+    outline: none !important;
+    display: inline !important;
+}
+
+.action-instapaper a {
+    display: block;
+    margin-top: 5px;
+    background-image:url('chrome-extension://__MSG_@@extension_id__/alpha_off.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px 16px;
+    width: 24px;
+    height: 16px;
+}
+
+.action-instapaper a:hover {
+    background-image:url('chrome-extension://__MSG_@@extension_id__/alpha_on.png');
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.3) {
+    .instapaper_overlay #ov_logo {
+        background-image:url('chrome-extension://__MSG_@@extension_id__/saving_logo@2x.png');
+    }
+
+    .instapaper_overlay #oc {
+        background-image:url('chrome-extension://__MSG_@@extension_id__/saving_close@2x.png');
+    }
+
+    .instapaper_overlay #ofi {
+        background-image:url('chrome-extension://__MSG_@@extension_id__/saving_folder@2x.png');
+    }
+
+    .instapaper_overlay .folder_row .folder_row_img {
+        background-image:url('chrome-extension://__MSG_@@extension_id__/saving_folder_small@2x.png');
+    }
+
+    .instapaper_overlay .folder_row:hover .folder_row_img {
+        background-image:url('chrome-extension://__MSG_@@extension_id__/saving_folder_small_active@2x.png');
+    }
+
+    .action-instapaper a {
+        background-image:url('chrome-extension://__MSG_@@extension_id__/alpha_off@2x.png');
+    }
+
+    .action-instapaper a:hover {
+        background-image:url('chrome-extension://__MSG_@@extension_id__/alpha_on@2x.png');
+    }
+}
+

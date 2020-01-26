@@ -1,0 +1,133 @@
+#wikiwand-ext-switch-button-div{
+    position:absolute;
+    top:10px;
+    left:300px;
+    top:55px;
+    z-index:2000000;
+    cursor:pointer;
+    border-radius: 3px;
+    background-color: #0074E7;
+    padding:5px;
+    padding-bottom: 1px;
+    padding-top:1px;
+}
+#wikiwand-ext-switch-button-div a{
+    color:white;
+}
+#wikiwand-ext-switch-button {
+    width:227px;
+    height:48px;
+    z-index:2000000;
+}
+
+.wikiwand-ext-switch-button-RTL {
+    right:100px; !important;
+    left:auto !important;
+}
+#wikiwand-ext-switch-link {
+    cursor:pointer;
+}
+#wikiwand-ext-loading {
+    position:fixed;
+    width:120px;
+    height:120px;
+    margin-left:-60px;
+    margin-top:-60px;
+    top:50%;
+    left:50%;
+    z-index:100000;
+    opacity:0;
+}
+
+
+
+.toggle_wiki_wikiwand {
+	direction: ltr;
+	text-align: left;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	height: 40px;
+	display: inline-block;
+	transform: translateX(100%);
+	-webkit-transform: translateX(100%);
+	-moz-transform: translateX(100%);
+	z-index: 50;
+	transition: all .3s ease-out;
+	-webkit-transition: all .3s ease-out;
+	-moz-transition: all .3s ease-out;
+	padding: 0 2px;
+	background-color: #f1f1f1;
+}
+.toggle_wiki_wikiwand.toggle_wiki_wikiwand-RTL{
+	right: auto;
+	left: 0;
+	transform: translateX(-100%);
+	-webkit-transform: translateX(-100%);
+	-moz-transform: translateX(-100%);
+}
+.toggle_wiki_wikiwand:hover{
+	transform: translateX(0);
+	-webkit-transform: translateX(0);
+	-moz-transform: translateX(0);
+}
+
+.switch_logo_wikiwand{
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+	padding: 5px 3px 0;
+}
+
+.switch_logo_wikiwand img{
+	display: block;
+	width: 100px;
+}
+.toggle_wiki_wikiwand i{
+	position: absolute;
+	right: 100%;
+	top: 0;
+	background-color:#bc348b;
+	width: 40px;
+	height: 40px;
+	display: block;
+}
+.toggle_wiki_wikiwand.toggle_wiki_wikiwand-RTL i{
+	right: auto;
+	left: 100%;
+}
+.toggle_wiki_wikiwand i img{
+	display: block;
+	width: 100%;
+}
+.wikiwand_switch{
+	cursor: pointer;
+}
+#switch_btn_wikiwand{
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	height: 26px;
+	border-radius:15px;
+	background-color: rgba(0,0,0,.08);
+	width: 50px;
+	box-shadow: 0 0 2px rgba(0,0,0,.12) inset;
+}
+
+#switch_btn_wikiwand:after{
+	content: '';
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 3px;
+	left: 3px;
+	transition: all .3s ease-out;
+	-webkit-transition: all .3s ease-out;
+	-moz-transition: all .3s ease-out;
+	border-radius:50%;
+	background-color: #bc348b;
+}
+#switch_btn_wikiwand.wand_wikiwand:after{
+	left: 26px
+}
+

@@ -35,7 +35,6 @@ alias {cls,csl,cl,lc}='c;l'
 alias {e,ech,eho}=echo
 alias {g,gr,gre,Grep,gerp}=grep
 alias {pg,pgrep}='pgrep -f'
-alias pkill='pkill -f'
 alias dg='du | g -i'
 alias lg='ls | g -i'
 alias cp='cp -irv'
@@ -50,12 +49,19 @@ alias h='head -n 15'
 alias t='tail -n 15'
 alias ex=export
 alias cx='chmod +x'
-alias poweroff='sudo poweroff'
-alias {reboot,restart}='sudo reboot'
-alias chroot='sudo chroot'
+alias poweroff='doas halt -p'
+alias {reboot,restart}='doas reboot'
+alias chroot='doas chroot'
 alias su='su -'
+ping() {
+    if [ $# -eq 0 ] ; then
+        command ping $(dns)
+    else
+        command ping $@
+    fi
+}
 
-# gnu make
+# make
 alias {make,mak}="make -j$(( $NPROC + 1 ))"
 alias {makec,makc}='make clean'
 alias {makei,maki}='make install'
@@ -63,25 +69,18 @@ alias {makeu,maku}='make uninstall'
 alias {makea,maeka,maka}='makec;make;makei'
 alias makeac='makea;c'
 
-# plan9 make
-alias mkc='mk clean'
-alias mki='mk install'
-alias mku='mk uninstall'
-alias mka='mkc;mk;mki'
-
 # common program aliases
 alias diff='diff -u'
 alias {less,les}='less -QRd'
 alias view='${EDITOR} -R'
 alias rsync='rsync -rtvuh4 --progress --delete' #-c
-alias sshd='sudo /usr/sbin/sshd'
+alias sshd='doas /usr/sbin/sshd'
 alias scp='scp -rp4'
 alias {htpo,hto,ht,hpot,hotp,top}='htop'
 alias {hm,hme}='htop -u ${USER}'
 alias {hr,hroot}='htop -u root'
 alias nf=neofetch
 alias rtv='rtv --enable-media ; c'
-alias compton='pkill compton ; compton & c'
 alias feh='feh -q -N -x -X -s -Z --scale-down --title feh'
 alias click='xdotool click 1'
 alias w=which
@@ -154,24 +153,19 @@ cheat() { curl -s cheat.sh/$1 ; }
 rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
 
 reload() {
-    . ~/etc/aliases
-    . ~/etc/fff.conf
-    xrdb load ~/etc/Xresources
-    xmodmap ~/etc/Xmodmap
+    . ~/src/dots/aliases
+    xrdb load ~/src/dots/Xresources
+    xmodmap ~/src/dots/Xmodmap
     xset m 0 0 
     xset b off 
-    xset +fp /home/mitch/.fonts
+    xset +fp ~/.fonts
     xset fp rehash
     fc-cache
-} > /dev/null 2>&1
-
-ping() {
-    if [ $# -eq 0 ] ; then
-        online && echo Online!
-    else
-        /bin/ping "$@"
+    if pgrep -x sxhkd >/dev/null ; then
+        pkill -x sxhkd
+        sxhkd -c ${HOME}/src/dots/sxhkdrc &
     fi
-}
+} > /dev/null 2>&1
 
 w3m() {
     [ $# -eq 0 ] && set https://ddg.gg/lite
@@ -181,7 +175,7 @@ w3m() {
 v() { 
     # if no arguments, open my vimwiki page
     if [ $# -eq 0 ] ; then
-        if [ -d ${HOME}/var/files/vimwiki ] && [ $EDITOR = nvim ] ; then
+        if [ -d ${HOME}/files/vimwiki ] && [ $EDITOR = nvim ] ; then
             set -- -c VimwikiIndex
         fi
         $EDITOR "$@"
@@ -272,7 +266,7 @@ done
 
 _g() { local a=$1 ; shift ; cd $a/"$@" ; cl ;  }
 
-for i in bin env etc tmp usr var src ; do
+for i in bin env tmp src ; do
     alias g$(printf %.1s $i)="_g ~/$i"
     alias g$(printf %.1s $i | tr '[a-z]' '[A-Z]')="_g /$i"
 done
@@ -282,95 +276,65 @@ alias gM='_g /mnt'
 mT() { mv "$@" /tmp  ; }
 YT() { cp "$@" /tmp  ; }
 
-if [ -d ~/var ] ; then
-    for i in downloads files images music ; do
-        alias g$(printf %.1s $i)="_g ~/var/$i"
-    done
-
-    alias {gvi,gvid}='_g ~/var/videos'
-    alias gbk='_g ~/var/books'
-    alias gvt='_g ~/var/tmp'
-    alias gyt='_g ~/.youtube-dl'
-
-    Yf() { cp "$@" ~/var/files     ; }
-    Yd() { cp "$@" ~/var/downloads ; }
-    Yi() { cp "$@" ~/var/images    ; }
-    Ym() { cp "$@" ~/var/music     ; }
-    Yvi(){ cp "$@" ~/var/videos    ; }
-
-    mf() { mv "$@" ~/var/files     ; }
-    md() { mv "$@" ~/var/downloads ; }
-    mi() { mv "$@" ~/var/images    ; }
-    mm() { mv "$@" ~/var/music     ; }
-    mvi(){ mv "$@" ~/var/videos    ; }
-fi
-
-if [ -d ~/usr ] ; then
-    alias gr='_g ~/usr/repos' 
-    alias gbkup='_g ~/usr/backup'
-    mu() { mv "$@" ~/usr ; }
-    mr() { mv "$@" ~/usr/repos ; }
-    Yu() { cp "$@" ~/usr ; }
-    Yr() { cp "$@" ~/usr/repos ; }
-fi
-
-if [ -d ~/etc ] ; then
-    me() { mv "$@" ~/etc ; }
-    Ye() { cp "$@" ~/etc ; }
-    alias gcf='_g ~/etc/config'
-
-    alias {aliases,alaises,aliase}='v ~/etc/aliases'
-    alias profile='v ~/etc/profile'
-    alias {bkm,bmk}='r ~/var/files/bkm'
-    alias {vssh,sshv}='v ~/.ssh/config'
-
-    alias vimrc="v ~/etc/vimrc"
-    alias kshrc="v ~/etc/kshrc"
-fi
-
-if [ -d ~/src ] ; then
-    alias gs='_g ~/src'
-    ms() { mv "$@" ~/src ; }
-    Ys() { cp "$@" ~/src ; }
-fi
-
-if [ -d ~/bin ] ; then
-    mb() { mv "$@" ~/bin ; }
-    Yb() { cp "$@" ~/bin ; }
-fi
-
-if [ -d ~/tmp ] ; then
-    mt() { mv "$@" ~/tmp ; }
-    Yt() { cp "$@" ~/tmp ; }
-fi
-
-if [ -d ~/env ] ; then
-    mn() { mv "$@" ~/env ; }
-    Yn() { cp "$@" ~/env ; }
-    alias gn='_g ~/env'
-fi
-
-m_() { mv "$@" ~/.trash ; }
-Y_() { cp "$@" ~/.trash ; }
+alias gb="_g ~/bin"
+alias ge="_g ~/env"
+alias gt="_g ~/tmp"
+alias gs="_g ~/src"
+alias gf="_g ~/files"
+alias gi="_g ~/images"
+alias gm="_g ~/music"
+alias gv="_g ~/videos"
+alias gd="_g ~/Downloads"
+alias gcf='_g ~/src/dots/config'
 alias g_='_g ~/.trash'
+
+Yf() { cp "$@" ~/files     ; }
+Yd() { cp "$@" ~/Downloads ; }
+Yi() { cp "$@" ~/images    ; }
+Ym() { cp "$@" ~/music     ; }
+Ys() { cp "$@" ~/src       ; }
+Yvi(){ cp "$@" ~/videos    ; }
+Yb() { cp "$@" ~/bin ; }
+Yt() { cp "$@" ~/tmp ; }
+Ye() { cp "$@" ~/env ; }
+Y_() { cp "$@" ~/.trash ; }
+
+mf() { mv "$@" ~/files     ; }
+md() { mv "$@" ~/Downloads ; }
+mi() { mv "$@" ~/images    ; }
+mm() { mv "$@" ~/music     ; }
+ms() { mv "$@" ~/src       ; }
+mvi(){ mv "$@" ~/videos    ; }
+mb() { mv "$@" ~/bin ; }
+me() { mv "$@" ~/env ; }
+mt() { mv "$@" ~/tmp ; }
+m_() { mv "$@" ~/.trash ; }
 alias trash=m_
 
-# ----------- end movement commands ------------------
+alias {aliases,alaises,aliase}='v ~/src/dots/aliases'
+alias profile='v ~/src/dots/profile'
+alias {vssh,sshv}='v ~/.ssh/config'
 
-alias save_unsplash_wall="cp ${HOME}/var/tmp/wall ${HOME}/var/images/wallpapers/unsplash/saved_\"$(date)\".png"
-save_wall() { cp -f "$1" ${HOME}/var/tmp/wall ; }
+alias vimrc="v ~/src/dots/vimrc"
+alias kshrc="v ~/src/dots/kshrc"
+# ----------- end movement commands ------------------
 
 # skeletons
 helloc() {
 cat > hello.c << EOF
 #include <stdio.h>
-int main() { printf("%s\n", "hi"); return 0; }
+int main() {
+    printf("%s\n", "hi");
+    return 0;
+}
 EOF
 }
 hellosh() {
 cat > hello.sh << EOF
 #!/bin/sh
-main() { printf "%s\n" "hi" ; }
+main() {
+    printf "%s\n" "hi"
+}
 main "$@"
 EOF
 chmod +x hello.sh
@@ -402,9 +366,9 @@ forgrep() {
 # adds a magnet link to torrent-queue
 addtorrent() { echo "$*" | sed 's|udp.*|udp|' >> ~/.torrents/queue ; }
 
-alias torrent="aria2c -d ${HOME}/var/downloads --file-allocation=falloc \
+alias torrent="aria2c -d ${HOME}/Downloads --file-allocation=falloc \
     --check-integrity=true --continue=true --seed-time=0"
 
-cover() { wget "$1" -O cover.jpg ; }
-band()  { wget "$1" -O band.jpg  ; }
-logo()  { wget "$1" -O logo.jpg  ; }
+cover() { curl "$1" -o cover.jpg ; }
+band()  { curl "$1" -o band.jpg  ; }
+logo()  { curl "$1" -o logo.jpg  ; }

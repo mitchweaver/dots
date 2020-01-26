@@ -1,0 +1,245 @@
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight:normal;
+	src: url('chrome-extension://__MSG_@@extension_id__/fonts/OpenSans-Regular.woff2') format('woff2');
+}
+
+#ww_hovercard {
+	position: fixed;
+	width: 500px;
+	left: 10px;
+	padding: 15px;
+	top: 10px;
+	z-index: 10000;
+	background: white;
+	border: solid 1px #e7e7e7;
+	border-radius: 2px;
+	box-shadow: 2px 5px 10px rgba(0,0,0,.15);
+
+	word-wrap: normal;
+	direction: ltr;
+	text-align: left;
+	font-family: "Open Sans";
+	letter-spacing: 0;
+	font-weight: normal;
+	line-height: 1.4em;
+	text-decoration: none;
+
+	color: #000;
+	font-size: 14px;
+}
+
+#ww_hovercard .ww_title {
+	font-size: 22px;
+	display: block;
+	width: 100%;
+}
+
+#ww_hovercard .ww_image img {
+	display: block;
+	float: right;
+	max-height: 150px;
+	max-width: 180px;
+	width: auto;
+	height: auto;
+	margin: 10px;
+	border-radius: 2px;
+}
+
+#ww_hovercard .ww_text {
+	color: #555;
+	padding: 10px 0 0;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+#ww_hovercard .ww_disambig {
+	color: #555;
+	padding: 10px 0px 0;
+	overflow: hidden;
+}
+
+
+
+
+#ww_hovercard a, #ww_hovercard .ww_title, #ww_hovercard .ww_readmore_dis a {
+	word-wrap: normal;
+	direction: ltr;
+	text-align: left;
+	font-family: "Open Sans";
+	letter-spacing: 0;
+	font-weight: normal;
+	line-height: 1.4em;
+	text-decoration: none;
+
+	color: #1559b5;
+	-webkit-transition: color .2s;
+	-moz-transition: color .2s;
+	-ms-transition: color .2s;
+	-o-transition: color .2s;
+	transition: color .2s;
+}
+
+#ww_hovercard a:hover, #ww_hovercard .ww_title:hover, #ww_hovercard .ww_readmore_dis a:hover {
+	color: #40bbe1;
+}
+
+
+#ww_hovercard .ww_readmore a{
+	display: block;
+	width: 30px;
+	height: 30px;
+	margin-left: -3px;
+	background-image: url('chrome-extension://__MSG_@@extension_id__/images/cards/go.svg');
+	background-position: center;
+	-webkit-transition: opacity .2s;
+	-moz-transition: opacity .2s;
+	-ms-transition: opacity .2s;
+	-o-transition: opacity .2s;
+	transition: opacity .2s;
+}
+
+#ww_hovercard .ww_readmore a:hover {
+	opacity: .8;
+}
+
+
+
+#ww_progress {
+	position: fixed;
+	width: 20px;
+	height: 20px;
+
+	/*background: url('chrome-extension://__MSG_@@extension_id__/progress.gif');*/
+	background-size: 80%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #f0f0f0;
+	border-radius: 10px;
+	z-index: 10000;
+	box-shadow: 0 0 2px rgba(0,0,0,.3);
+}
+
+#ww_nomatches {
+	word-wrap: normal;
+	direction: ltr;
+	text-align: left;
+	font-family: "Open Sans";
+	letter-spacing: 0;
+	font-weight: normal;
+	line-height: 1.4em;
+	text-decoration: none;
+
+	position: fixed;
+	padding: 2px 7px 3px;
+	background: #db5252;
+	border-radius: 2px;
+	color: #fff;
+	font-size: 13px;
+
+
+}
+
+#ww_hovercard .ww_button {
+	position: absolute;
+	right: 30px;
+	top: 5px;
+	width: 20px;
+	height: 20px;
+	display: block;
+	cursor: pointer;
+	background-image: url('chrome-extension://__MSG_@@extension_id__/images/cards/settings.png');
+	background-size: 100% 100%;
+	background-position: center;
+	opacity: 0.5;
+	-webkit-transition: opacity .2s;
+	-moz-transition: opacity .2s;
+	-ms-transition: opacity .2s;
+	-o-transition: opacity .2s;
+	transition: opacity .2s;
+}
+
+#ww_hovercard .ww_button:hover {
+	opacity: 1;
+}
+
+#ww_hovercard .ww_feedback_button {
+	right: 59px;
+	background-image: url('chrome-extension://__MSG_@@extension_id__/images/cards/feedback.svg');
+}
+
+#ww_hovercard .ww_settings_button {
+	right: 32px;
+	background-image: url('chrome-extension://__MSG_@@extension_id__/images/cards/settings.svg');
+}
+
+#ww_hovercard .ww_x_button {
+	right: 5px;
+	background-image: url('chrome-extension://__MSG_@@extension_id__/images/cards/x.svg');
+}
+
+
+
+#ww_hovercard .ww_disambig_option {
+	padding: 2px 5px;
+	border-radius: 2px;
+	background: #fefefe;
+	display: inline-block;
+	vertical-align: top;
+	margin-bottom: 4px;
+	margin-right: 10px;
+	width: 46%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#ww_hovercard .ww_disambig_option:before {
+	content: '';
+	display: inline-block;
+	vertical-align: middle;
+	width: 16px;
+	height: 14px;
+	background-image: url('chrome-extension://__MSG_@@extension_id__/images/cards/link.svg');
+	background-position: center;
+	margin-right: 2px;
+}
+
+
+#ww_hovercard .ww_readmore_dis a{
+	display: block;
+	font-size: 36px;
+	font-weight: bold;
+	width: 30px;
+	padding: 3px  5px  10px;
+	line-height: 25px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

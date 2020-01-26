@@ -1,0 +1,45 @@
+<!doctype html>
+<html style="height: 100%;">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title>Mercury Reader</title>
+    <base target="_parent" />
+    <link type="text/css" rel="stylesheet" href="https://fast.fonts.net/cssapi/7eac07a4-87b9-4a20-bf3c-d6e4a28befef.css"/>
+    <link type="text/css" rel="stylesheet" href="./content.css"/>
+  </head>
+  <body style="height: 100%; margin: 0;">
+    <div style="height: 100%; width: 100%; position: fixed;">
+      <div class="mercury-warning-container"
+           style="border-bottom: 1px solid #dbdbdb; font-family: 'Avenir Next LT W01 Demi'; display: flex; justify-content: center; align-items: center; height: 56px; width: 100%; background-color: #393939;">
+        <div style="display: flex; justify-content: center; align-items: center;">
+          <svg style="padding: 0 25px 0 10px; flex-shrink: 0;"
+            width="33"
+            height="33"
+            viewBox="0 0 52 53"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.114 42.752c-2.398 1.102-3.968 1.697-4.13 1.758l-.687.26-8.742-8.743.263-.69c.062-.16.654-1.695 1.747-4.04l-9.23-4.792 16.282-7.692c.742-1.09 1.527-2.187 2.357-3.272 9.58-12.526 20.36-17.32 31.17-13.865l.542.173.173.54c3.456 10.816-1.377 21.56-13.978 31.072-1.347 1.017-2.71 1.967-4.06 2.85l-7.027 15.733-4.68-9.29zM6.52 42.406c1.096-1.096 2.854-1.12 3.92-.055 1.065 1.067 1.04 2.825-.054 3.92l-.172.137-10.26 6.385L6.52 42.406zm26.06-22.66c-2.116-2.114-2.067-5.603.107-7.777 2.174-2.175 5.663-2.223 7.777-.108 2.114 2.114 2.067 5.603-.107 7.777-2.173 2.173-5.663 2.222-7.778.107z" fill="#f06142" fill-rule="evenodd"/>
+          </svg>
+          <p style="color: #FFFFFF; font-size: 13px; font-weight: 500; padding-right: 23px; display: inline;">
+            <span style="font-weight: 600;">Warning!</span> Mercury Reader works best on individual articles. Are you sure?
+          </p>
+        </div>
+        <!-- span keeps user from being able to click on padding, which is confusing -->
+        <div>
+          <span style="padding-right: 13px">
+            <button id="mercury-warning-render-button"
+              style="cursor: pointer; background-color: inherit; border: none; color: #F06040; font-size: 14px; font-weight: 600;">
+              Render anyway
+            </button>
+          </span>
+          <button
+            id="mercury-warning-cancel-button"
+            style="cursor: pointer; background-color: inherit; border: none; color: #AAAAAA; font-size: 14px; font-weight: 600;">
+            Cancel
+          </button>
+        </div>
+      </div>
+      <div style="background: #FFFFFF; opacity: 0.6; height: 100%; width: 100%;"></div>
+    </div>
+    <script src="rootUrlWarning.js"></script>
+  </body>
+</html>

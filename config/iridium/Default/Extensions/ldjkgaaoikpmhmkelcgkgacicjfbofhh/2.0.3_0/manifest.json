@@ -1,0 +1,41 @@
+{
+   "background": {
+      "scripts": [ "readlater.js" ]
+   },
+   "browser_action": {
+      "default_icon": "insta_default_action.png"
+   },
+   "content_scripts": [ {
+      "css": [ "instapaper.css" ],
+      "js": [ "bookmarklet.js", "deflate-base64-min.js", "highlight_ugly.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_start"
+   }, {
+      "js": [ "twitter.js" ],
+      "matches": [ "http://twitter.com/*", "https://twitter.com/*" ]
+   }, {
+      "js": [ "reddit.js" ],
+      "matches": [ "http://www.reddit.com/*" ]
+   }, {
+      "js": [ "hackernews.js" ],
+      "matches": [ "https://news.ycombinator.com/*" ]
+   }, {
+      "css": [ "usv.css" ],
+      "js": [ "usv.js" ],
+      "matches": [ "http://www.usv.com/", "https://www.usv.com/" ]
+   } ],
+   "description": "Instapaper browser extension to save links for offline reading.",
+   "icons": {
+      "128": "insta_logo.png",
+      "16": "insta_logo_tiny.png",
+      "48": "insta_logo_small.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCNcvYperSK23UpwYHO33ZoogjhTKzDGqkePcfR0bzHwqiQrppmlQNur9JuwQmetHbSr7g+9O0p2fgfeURGsAq1sSXDOi0iMNHChza6BxpvL9MThyh9akJxg1I3WHfkAY0wvHp1dkds3J7ellAJdZQkDRKj9RWeZUh3QSgBSr90tQIDAQAB",
+   "manifest_version": 2,
+   "name": "Instapaper",
+   "options_page": "options.html",
+   "permissions": [ "storage", "activeTab", "contextMenus", "http://*/*", "https://*/*" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "2.0.3",
+   "web_accessible_resources": [ "*.png" ]
+}

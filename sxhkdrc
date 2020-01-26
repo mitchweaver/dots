@@ -1,10 +1,11 @@
 # programs
 alt + Return
     tabbed -d -c -r 2 st -w ''
+    #st
 alt + shift + w
     tabbed -d -c surf -e
 alt + w
-    brave --new-window
+    iridium --new-window
 alt + r
     st -T floating-st -n floating-st -e ranger
 alt + x
@@ -13,6 +14,8 @@ Print
     scrap -n
 control + Print
     scrap
+alt + e
+    pcmanfm
 
 # dmenus
 alt + p

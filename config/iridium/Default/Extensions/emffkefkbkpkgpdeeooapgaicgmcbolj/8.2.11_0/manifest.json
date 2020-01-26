@@ -1,0 +1,39 @@
+{
+   "background": {
+      "page": "html/background.html",
+      "persistent": true
+   },
+   "browser_action": {
+      "default_icon": {
+         "19": "images/icon19.png",
+         "38": "images/icon38.png"
+      },
+      "default_popup": "html/popup.html",
+      "default_title": "Wikiwand"
+   },
+   "content_scripts": [ {
+      "css": [ "css/autowand.css", "css/cards.css" ],
+      "js": [ "lib/jquery.js", "js/namespaces.js", "js/url-tests.js", "js/content-script.js", "js/cards-click.js", "js/cards-display.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_start"
+   } ],
+   "content_security_policy": "img-src 'self' https://*.doubleclick.net https://www.google-analytics.com https://www.wikiwand.com/ https://www.localwiki.com/ https://www.local.wikiwand.com/ ; script-src 'self' https://www.google-analytics.com ; object-src 'self'",
+   "description": "Good old Wikipedia gets a great new look",
+   "homepage_url": "https://www.wikiwand.com",
+   "icons": {
+      "128": "images/icon128.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDglPHhZuLFBzscGc6SCbT7/B2lK1/OHVRtEmwqiV7670JIKT2POfvNTgjE7DdY9nd6xYKqj4WiI5YTjJKA8riLkpgH0TNi+Xgt3YmquI7UYZP3d6JqjYOkucXRUR8FGyBowu+pW/TwAM8/oF/kZCsxSEMkrqYKHZufAjkVywrHzQIDAQAB",
+   "manifest_version": 2,
+   "name": "Wikiwand: Wikipedia Modernized",
+   "options_page": "html/options.html",
+   "options_ui": {
+      "chrome_style": false,
+      "page": "html/options.html"
+   },
+   "permissions": [ "http://*.wikipedia.org/*", "https://*.wikipedia.org/*", "http://wikipedia.org/*", "https://wikipedia.org/*", "webRequestBlocking", "webRequest", "cookies", "storage", "tabs", "webNavigation" ],
+   "short_name": "Wikiwand",
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "8.2.11",
+   "web_accessible_resources": [ "*.png", "*.gif", "*.jpg", "*.svg", "*.woff2" ]
+}

@@ -1,0 +1,18 @@
+{
+   "background": {
+      "scripts": [ "background.js" ]
+   },
+   "description": "Right click selected text to search for books on Goodreads.",
+   "icons": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "96": "icon96.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqZY8YILne8f86GoA55R8mUvl90Ko3gktsFpyXQrxVAw/7gzMb+2rALa+MCyAZSX6Gs5DciloisJ27cZWX4a6PsrGaOIj8uzh0vkZcEVLb1VNN/X7kvBbWmlXHCwU2FzzoAfpRCJsBdogPM72Y2o56Pug26ou4s9Ui8oMhc3klkfrpgxuV/CQ07bBhH58gisrc6b+ZyVx0S9nGuUy0NWzbJ+awvqv1QvKvMdqZ9FSr2LHr3eZMv5fuSisvleXJ3YBr8St8Ufz6ky8KnJWY+tokaot/zVIHbkVcG/0m5/gQ/4AtcKfMmsmxp9wUzg9AdDArXU3syFPFDpS0G8JPSYB3QIDAQAB",
+   "manifest_version": 2,
+   "minimum_chrome_version": "6",
+   "name": "Goodreads Right Click Simple",
+   "permissions": [ "contextMenus", "tabs" ],
+   "update_url": "http://clients2.google.com/service/update2/crx",
+   "version": "0.0.0.1"
+}

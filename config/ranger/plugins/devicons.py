@@ -55,9 +55,13 @@ file_node_extensions = {
     'efi'      : '',
     'ejs'      : '',
     'elf'      : '',
+    'elm'      : '',
     'epub'     : '',
     'erl'      : '',
+    'ex'       : '',
     'exe'      : '',
+    'exs'      : '',
+    'eex'      : '',
     'f#'       : '',
     'fifo'     : '|',
     'fish'     : '',
@@ -265,6 +269,8 @@ file_node_exact_matches = {
     '.xinitrc'                         : '',
     '.xinputrc'                        : '',
     'config'                           : '',
+    'Dockerfile'                       : '',
+    'docker-compose.yml'               : '',
     'dropbox'                          : '',
     'exact-match-case-sensitive-1.txt' : 'X1',
     'exact-match-case-sensitive-2'     : 'X2',
@@ -313,4 +319,4 @@ file_node_exact_matches = {
 
 def devicon(file):
   if file.is_directory: return dir_node_exact_matches.get(file.relative_path, '')
-  return file_node_exact_matches.get(file.relative_path, file_node_extensions.get(file.extension, ''))
+  return file_node_exact_matches.get(os.path.basename(file.relative_path), file_node_extensions.get(file.extension, ''))
