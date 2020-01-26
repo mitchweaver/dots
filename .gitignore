@@ -41,6 +41,8 @@ config/gconf
 config/pulse
 config/libfm
 
+vim/vim-plug
+
 *bookmarks*
 
 w3m
