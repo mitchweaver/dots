@@ -28,6 +28,7 @@ config/GIMP*
 config/mpv/watch_later
 config/nvim/shada/main.shada
 config/Iridium
+config/iridium
 config/menus
 config/GIMP*
 config/neofetch

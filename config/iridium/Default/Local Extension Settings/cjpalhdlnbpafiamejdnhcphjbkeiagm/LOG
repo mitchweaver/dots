@@ -1,6 +1,0 @@
-2020/01/26-16:28:55.580 6c95be40 Reusing MANIFEST /home/alan/.config/iridium/Default/Local Extension Settings/cjpalhdlnbpafiamejdnhcphjbkeiagm/MANIFEST-000001
-2020/01/26-16:28:55.580 6c95be40 Recovering log #81
-2020/01/26-16:28:55.646 6c95be40 Reusing old log /home/alan/.config/iridium/Default/Local Extension Settings/cjpalhdlnbpafiamejdnhcphjbkeiagm/000081.log 
-2020/01/26-16:52:55.440 4590f440 Compacting 1@0 + 4@1 files
-2020/01/26-16:52:55.517 4590f440 compacted to: files[ 1 4 0 0 0 0 0 ]
-2020/01/26-16:52:55.517 4590f440 Compaction error: Corruption: not an sstable (bad magic number)

@@ -1,5 +1,0 @@
-2020/01/13-18:53:35.844 3022 Reusing MANIFEST /home/mitch/etc/config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.8freebooks.net_0.indexeddb.leveldb/MANIFEST-000001
-2020/01/13-18:53:37.684 41b6 Level-0 table #5: started
-2020/01/13-18:53:37.687 41b6 Level-0 table #5: 584 bytes OK
-2020/01/13-18:53:37.691 41b6 Delete type=0 #3
-2020/01/13-18:53:37.691 41b6 Manual compaction at level-0 from '\x00\x01\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x02\x00\x00\x00' @ 0 : 0; will stop at (end)
