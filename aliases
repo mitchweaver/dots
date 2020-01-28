@@ -33,7 +33,7 @@ alias {lla,lal}='l -al'
 alias lsf='l "$PWD"/*'
 alias {cls,csl,cl,lc}='c;l'
 alias {e,ech,eho}=echo
-alias {g,gr,gre,Grep,gerp}=grep
+alias {g,gr,gre,Grep,gerp,grpe}=grep
 alias {pg,pgrep}='pgrep -f'
 alias dg='du | g -i'
 alias lg='ls | g -i'
@@ -76,7 +76,7 @@ alias view='${EDITOR} -R'
 alias rsync='rsync -rtvuh4 --progress --delete' #-c
 alias sshd='doas /usr/sbin/sshd'
 alias scp='scp -rp4'
-alias {htpo,hto,ht,hpot,hotp,top}='htop'
+alias {htpo,hto,ht,hpot,hotp}='htop'
 alias {hm,hme}='htop -u ${USER}'
 alias {hr,hroot}='htop -u root'
 alias nf=neofetch
@@ -330,7 +330,8 @@ int main() {
 EOF
 }
 hellosh() {
-cat > hello.sh << EOF
+    [ $# -eq 0 ] && set hello.sh
+cat > $1 << EOF
 #!/bin/sh
 main() {
     printf "%s\n" "hi"
@@ -369,6 +370,6 @@ addtorrent() { echo "$*" | sed 's|udp.*|udp|' >> ~/.torrents/queue ; }
 alias torrent="aria2c -d ${HOME}/Downloads --file-allocation=falloc \
     --check-integrity=true --continue=true --seed-time=0"
 
-cover() { curl "$1" -o cover.jpg ; }
-band()  { curl "$1" -o band.jpg  ; }
-logo()  { curl "$1" -o logo.jpg  ; }
+cover() { curl -q "$1" -o cover.jpg ; }
+band()  { curl -q "$1" -o band.jpg  ; }
+logo()  { curl -q "$1" -o logo.jpg  ; }

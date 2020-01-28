@@ -1,11 +1,8 @@
 # programs
 alt + Return
     tabbed -d -c -r 2 st -w ''
-    #st
-alt + shift + w
-    tabbed -d -c surf -e
 alt + w
-    iridium --new-window
+    browser
 alt + r
     st -T floating-st -n floating-st -e ranger
 alt + x
@@ -30,14 +27,14 @@ alt + i
     mus -m
 
 # misc
-alt + shift + k
+control + alt + k
     keys
 
 # volume / media
 alt + apostrophe
-    vol -inc 2
+    vol -inc 8
 alt + semicolon
-    vol -dec 2
+    vol -dec 8
 alt + slash
     media -t
 alt + period

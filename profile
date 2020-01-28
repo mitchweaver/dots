@@ -6,8 +6,10 @@ export PATH="$PATH:${HOME}/.local/bin"
 export PLAN9=${HOME}/src/plan9/plan9port
 export PATH="$PATH:$PLAN9/bin"
 
-#NPROC="$(nproc 2>/dev/null)"
-#export NPROC="${NPROC:=1}"
+case $(uname) in
+    Linux)   export NPROC=$(nproc 2>/dev/null) ;;
+    OpenBSD) export NPROC=$(sysctl -n hw.ncpu)
+esac
 
 export LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH"
 export _JAVA_AWT_WM_NONREPARENTING=1 # fix for many java apps
@@ -33,7 +35,7 @@ fi
 p() { for i ; do export PATH="$i":$PATH ; done ; }
 
 p /usr/{bin,sbin,local/bin,local/sbin,X11R6/bin} /bin /sbin \
-   ${HOME}/src/ascii,.local/bin} \
+   ${HOME}/src/ascii ${HOME}/.local/bin \
    ${HOME}/bin/{file,mpv,misc,net,rice,text,util,wrapper,xorg,dev,golf/fun,bonsai,9}
 
 unset -f p
@@ -47,8 +49,19 @@ rm -rf ${HOME}/tmp 2>/dev/null && mkdir -p ${HOME}/tmp
         *) export ENV="$ALIASES"
     esac
 
-export EDITOR=nvim
-export BROWSER=iridium
+for i in nvim vis vim vi ; do
+    if type $i >/dev/null 2>&1 ; then
+        export EDITOR=$i
+        break
+    fi
+done
+
+for i in iridium chromium chrome firefox ; do
+    if type $i >/dev/null 2>&1 ; then
+        export BROWSER=$i
+        break
+    fi
+done
 
 export LANG='en_US.UTF-8' \
     LANGUAGE='en_US.UTF-8' \
@@ -56,8 +69,11 @@ export LANG='en_US.UTF-8' \
     LOCALE='en_US.UTF-8' \
     LC_CTYPE='en_US.UTF-8'
 
-if ! pgrep X >/dev/null ; then
-    rm -rf ${HOME}/.{Xauthority*,serverauth*}
-    #type launchx && launchx >/dev/null 2>&1
-    ! pgrep -x X && startx
+if ! pgrep -x X >/dev/null ; then
+    rm -rf ${HOME}/.{Xauthority*,serverauth*} 2>/dev/null
+    if type launchx >/dev/null && [ $(uname) = Linux ] ; then
+        launchx >/dev/null 2>&1
+    else
+        startx
+    fi
 fi
