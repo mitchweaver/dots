@@ -227,6 +227,8 @@ ytdl() {
     done
 }
 
+alias getres="ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0"
+
 # imagemagick
 resize_75() { mogrify -resize '75%X75%' "$@" ; }
 resize_50() { mogrify -resize '50%X50%' "$@" ; }
@@ -266,15 +268,9 @@ done
 
 _g() { local a=$1 ; shift ; cd $a/"$@" ; cl ;  }
 
-for i in bin env tmp src ; do
-    alias g$(printf %.1s $i)="_g ~/$i"
-    alias g$(printf %.1s $i | tr '[a-z]' '[A-Z]')="_g /$i"
-done
-
+alias gB="_g /bin"
+alias gT="_g /tmp"
 alias gM='_g /mnt'
-
-mT() { mv "$@" /tmp  ; }
-YT() { cp "$@" /tmp  ; }
 
 alias gb="_g ~/bin"
 alias ge="_g ~/env"
@@ -287,6 +283,9 @@ alias gv="_g ~/videos"
 alias gd="_g ~/Downloads"
 alias gcf='_g ~/src/dots/config'
 alias g_='_g ~/.trash'
+
+mT() { mv "$@" /tmp  ; }
+YT() { cp "$@" /tmp  ; }
 
 Yf() { cp "$@" ~/files     ; }
 Yd() { cp "$@" ~/Downloads ; }
@@ -354,15 +353,6 @@ forgrep() {
         grep -- "$*" "$file" >/dev/null && echo $file
     done
 }
-
-# -*-*- bonsai stuff *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# alias bonsai="cd ~/src/bonsai ; ./bonsai"
-# alias {b,bs,bpm}=bonsai
-# alias chroot.sh=~/src/bonsai/tools/chroot.sh
-# alias pkgskel=~/src/bonsai/tools/pkgskel
-# alias bootstrap=~/src/bonsai/tools/bootstrap.sh
-# export ROOT=~/env/bs1
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # adds a magnet link to torrent-queue
 addtorrent() { echo "$*" | sed 's|udp.*|udp|' >> ~/.torrents/queue ; }

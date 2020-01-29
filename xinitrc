@@ -13,10 +13,10 @@ xset +fp ${HOME}/files/fonts
 xset m 0 0
 xset b off
 
-# enable scrolling with thiknpad trackpoint (openbsd)
-xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation" 1
-xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation Button" 2
-xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation Axes" 6 7 4 5
+# enable scrolling with thinkpad trackpoint (openbsd)
+xinput set-prop /dev/wsmouse "WS Pointer Wheel Emulation" 1
+xinput set-prop /dev/wsmouse "WS Pointer Wheel Emulation Button" 2
+xinput set-prop /dev/wsmouse "WS Pointer Wheel Emulation Axes" 6 7 4 5
 
 # allow local network to access xserver
 # (ex: run X apps from chroots)

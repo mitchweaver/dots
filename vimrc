@@ -192,11 +192,11 @@ if exists(':PlugInstall')
     autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
     let wiki = {}
-    let g:vimwikidir = "/home/mitch/var/files/vimwiki"
+    let g:vimwikidir = "/home/alan/files/vimwiki"
     let wiki.path = g:vimwikidir
     let g:vimwiki_list=[wiki]
     let g:vimwiki_list = [
-        \{'path': '~/var/files/vimwiki/personal.wiki',    'syntax': 'markdown', 'ext': '.md'},
+        \{'path': '~/files/vimwiki/personal.wiki',    'syntax': 'markdown', 'ext': '.md'},
     \]
     let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 
