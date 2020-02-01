@@ -1,13 +1,7 @@
-#!/bin/loksh
+#!/bin/ksh
 #
 # http://github.com/mitchweaver/dots
 #
-
-# don't run if not interactive
-[[ $- != *i* ]] && return
-
-# fix shell env variable if its broken
-export SHELL=${SHELL:-$0}
 
 ulimit -c 0
 
@@ -21,9 +15,9 @@ alias type='builtin whence -v'
 set -o bgnice nohup trackall csh-history vi-tabcomplete
 
 export HISTFILE=${HOME}/tmp/.ksh_history \
-       SAVEHIST=500 \
+       HISTCONTROL=ignoreboth \
        HISTSIZE=500 \
-       HISTCONTROL=ignoreboth
+       SAVEHIST=500
 
 # cd, with recursive fuzzy-find
 cd() { 
@@ -39,8 +33,6 @@ cd() {
                 break
         done
     fi 2> /dev/null
-    ! pgrep -x 9term >/dev/null &&
-    # export PS1="$(_get_PS1)${RANGER_LEVEL:+[ranger] }${FFF_LEVEL:+[fff] }${SSH_TTY:+[SSH] }"
     PS1="$(_get_PS1)"
     if [ "$RANGER_LEVEL" ] ; then
         set -- $PS1
@@ -52,13 +44,13 @@ cd() {
 # get which git branch we're on, used in our PS1
 _parse_branch() { 
     set -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
-    [ "$1" ] && echo -n "($*) "
+    [ "$1" ] && echo -n " ($*)"
 }
 
 _get_PS1() {
     case ${USER} in
-        alan)  echo -n "\[\e[1;35m\]a\[\e[0;32m\]l\[\e[0;33m\]a\[\e[0;34m\]n\[\e[1;36m\] \W $(_parse_branch)\[\e[1;37m\] " ;;
-        mitch) echo -n "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W $(_parse_branch)\[\e[1;37m\] " ;;
+        alan)  echo -n "\[\e[1;35m\]a\[\e[0;32m\]l\[\e[0;33m\]a\[\e[0;34m\]n\[\e[1;36m\] \W$(_parse_branch)\[\e[1;37m\] " ;;
+        mitch) echo -n "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(_parse_branch)\[\e[1;37m\] " ;;
         root)  echo -n "\[\e[1;37m\]root \W " ;;
         *)     echo -n '% \W '
     esac

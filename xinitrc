@@ -25,13 +25,13 @@ xhost +local:
 bright 100 &
 vol -dec 100 &
 
-! pgrep -x sxhkd   && sxhkd -c ${HOME}/src/dots/sxhkdrc &
-! pgrep -x dunst   && dunst -conf ${HOME}/src/dots/dunstrc &
-! pgrep -x bar     && bar     &
-! pgrep -x batmon  && batmon  &
-! pgrep -x clip    && clip -d &
-! pgrep -x xbanish && xbanish &
-# ! pgrep -x compton && compton &
+! pgrep -f sxhkd      && sxhkd -c ${HOME}/src/dots/sxhkdrc &
+! pgrep -f dunst      && dunst -conf ${HOME}/src/dots/dunstrc &
+! pgrep -f bar        && bar     &
+! pgrep -f batmon     && batmon  &
+! pgrep -f clip       && clip -d &
+! pgrep -f xbanish    && xbanish &
+! pgrep -f ytdl-queue && ytdl-queue -d &
 
 # If dwm crashes, or was pkill, relaunch
 # --- note: this magically preserves opened windows!

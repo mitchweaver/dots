@@ -34,14 +34,13 @@ alias lsf='l "$PWD"/*'
 alias {cls,csl,cl,lc}='c;l'
 alias {e,ech,eho}=echo
 alias {g,gr,gre,Grep,gerp,grpe}=grep
-alias {pg,pgrep}='pgrep -f'
+alias pg=pgrep
 alias dg='du | g -i'
 alias lg='ls | g -i'
 alias cp='cp -irv'
 alias mv='mv -iv'
 alias {mkdir,mkd,mkdr}='mkdir -p'
 alias df='df -h'
-alias ag='a | g -i'
 alias bn=basename
 alias date="command date '+%a %b %d - %I:%M %p'"
 alias dmegs=dmesg
@@ -54,11 +53,8 @@ alias {reboot,restart}='doas reboot'
 alias chroot='doas chroot'
 alias su='su -'
 ping() {
-    if [ $# -eq 0 ] ; then
-        command ping $(dns)
-    else
-        command ping $@
-    fi
+    [ "$1" ] || set eff.org
+    command ping -L -n -s 1 -w 2 $@
 }
 
 # make
@@ -85,6 +81,7 @@ alias feh='feh -q -N -x -X -s -Z --scale-down --title feh'
 alias click='xdotool click 1'
 alias w=which
 alias py=python3
+alias jpg='jpegoptim -s'
 
 # sums
 alias {512,sha512}=sha512sum
@@ -112,7 +109,7 @@ cpcd() { cp "$1" "$2" && cd "$2" ; }
 du() { 
     [ $# -eq 0 ] && set .
     command du -ahLd 1 "$1" | sort -rh | head -n 30
-} 2> /dev/null
+} 2>/dev/null
 
 # files
 f() { 
@@ -165,7 +162,7 @@ reload() {
         pkill -x sxhkd
         sxhkd -c ${HOME}/src/dots/sxhkdrc &
     fi
-} > /dev/null 2>&1
+} >/dev/null 2>&1
 
 w3m() {
     [ $# -eq 0 ] && set https://ddg.gg/lite
@@ -194,7 +191,7 @@ v() {
             fi
         done
         $EDITOR "$@"
-    fi 2> /dev/null
+    fi 2>/dev/null
 }
 alias {V,vim}=v
 
@@ -202,19 +199,18 @@ mpv() {
     [ $# -eq 0 ] && return 1
 
     # kill any currently running mpv before launching a new
-    if pgrep xwinwrap > /dev/null ; then
+    if pgrep xwinwrap >/dev/null ; then
         # kill all mpv except the one with the mpvbg pid
         # as not to kill our desktop background! see ~/bin/mpv/mpvbg for details
         kill $(pgrep -a mpv | grep -v mpvbg | awk '{print $1}')
     else
         pkill mpv
-    fi > /dev/null 2>&1
+    fi >/dev/null 2>&1
 
     command mpv --title=mpv "$@"
 }
 mpvm() { mpv --no-video "$@" ; }
 
-# youtube-dl
 ytdlm() { 
     for i ; do
         youtube-dl --geo-bypass --prefer-ffmpeg --extract-audio \
@@ -266,7 +262,7 @@ for i in 1 2 3 4 5 6 7 8 9 ; do
     eval "g${i}() { cd \$_MARK${i} ; }"
 done
 
-_g() { local a=$1 ; shift ; cd $a/"$@" ; cl ;  }
+_g() { local a=$1 ; shift ; cd $a/"$@" ; ls ; }
 
 alias gB="_g /bin"
 alias gT="_g /tmp"
@@ -283,6 +279,7 @@ alias gv="_g ~/videos"
 alias gd="_g ~/Downloads"
 alias gcf='_g ~/src/dots/config'
 alias g_='_g ~/.trash'
+alias gyt='_g ~/videos/youtube/completed'
 
 mT() { mv "$@" /tmp  ; }
 YT() { cp "$@" /tmp  ; }
@@ -363,3 +360,5 @@ alias torrent="aria2c -d ${HOME}/Downloads --file-allocation=falloc \
 cover() { curl -q "$1" -o cover.jpg ; }
 band()  { curl -q "$1" -o band.jpg  ; }
 logo()  { curl -q "$1" -o logo.jpg  ; }
+
+addyt() { echo "$1" >>${HOME}/videos/youtube/.queue ; }

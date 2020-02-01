@@ -69,7 +69,7 @@ export LANG='en_US.UTF-8' \
     LOCALE='en_US.UTF-8' \
     LC_CTYPE='en_US.UTF-8'
 
-if ! pgrep -x X >/dev/null ; then
+if ! pgrep X >/dev/null ; then
     rm -rf ${HOME}/.{Xauthority*,serverauth*} 2>/dev/null
     if type launchx >/dev/null && [ $(uname) = Linux ] ; then
         launchx >/dev/null 2>&1

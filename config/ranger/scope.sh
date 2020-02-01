@@ -52,13 +52,13 @@ if [ "$preview_images" = "True" ]; then
         video/* | image/*)
             exit 7;;
         video/*)
-            # ffmpeg -loglevel quiet -i "$path" -f mjpeg -t 0.0001 -ss 0 -y "$cached" && exit 6;;
-            ffmpeg -loglevel panic -y -i "$path"  -r 0.0033 -vf scale=-1:240 -vcodec png "$cached" ; exit 6;;
+            ffmpeg -loglevel quiet -i "$path" -f mjpeg -t 0.0001 -ss 0 -y "$cached" && exit 6;;
+            # ffmpeg -loglevel panic -y -i "$path"  -r 0.0033 -vf scale=-1:240 -vcodec png "$cached" ; exit 6;;
             # ffmpeg -ss 3 -i "$path"-vf "select=gt(scene\,0.4)" -frames:v 5 -vsync vfr -vf fps=fps=1/600 "$cached" > /dev/null ; exit 6;;
     esac
 fi
 
-case "$extension" in
+# case "$extension" in
     # PDF documents:
     # pdf)
         # try pdftoppm -jpeg -singlefile "${FILE_PATH}" "${IMAGE_CACHE_PATH//.jpg}" && exit 6
@@ -72,7 +72,7 @@ case "$extension" in
     # htm|html|xhtml)
         # try w3m    -dump "$path" && { dump | trim | fmt -s -w $width; exit 4; }
         # ;; # fall back to highlight/cat if the text browsers fail
-esac
+# esac
 
 case "$mimetype" in
     text/* | */xml |*/diff | */sh | */bash | */ksh )
