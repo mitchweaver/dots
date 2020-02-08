@@ -30,11 +30,11 @@ background ${HOME}/.wall &
 ! pgrep -f bar        && bar     &
 ! pgrep -f batmon     && batmon  &
 ! pgrep -f clip       && clip -d &
-! pgrep -f xbanish    && xbanish &
+# ! pgrep -f xbanish    && xbanish &
 ! pgrep -f ytdl-queue && ytdl-queue -d &
 
 # If dwm crashes, or was pkill, relaunch
 # --- note: this magically preserves opened windows!
 while type dwm >/dev/null ; do
-    dwm && break || continue
+    cd ${HOME} && dwm && break || continue
 done

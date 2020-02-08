@@ -29,6 +29,8 @@ alt + i
 # misc
 control + alt + k
     keys
+shift + Delete
+    xsel -o
 
 # volume / media
 alt + apostrophe

@@ -212,12 +212,18 @@ mpv() {
 ytdlm() { 
     for i ; do
         youtube-dl --geo-bypass --prefer-ffmpeg --extract-audio \
-            --audio-quality 0 --audio-format mp3 "$i"
+            --audio-quality 0 --audio-format mp3 --no-playlist "$i"
     done
 }
 ytdl() { 
     for i ; do
         youtube-dl --geo-bypass --prefer-ffmpeg "$i"
+    done
+}
+ytdlpm() { 
+    for i ; do
+        youtube-dl --geo-bypass --prefer-ffmpeg --extract-audio \
+            --audio-quality 0 --audio-format mp3 "$i"
     done
 }
 
@@ -227,6 +233,7 @@ alias getres="ffprobe -v error -select_streams v:0 -show_entries stream=width,he
 resize_75() { mogrify -resize '75%X75%' "$@" ; }
 resize_50() { mogrify -resize '50%X50%' "$@" ; }
 resize_25() { mogrify -resize '25%X25%' "$@" ; }
+rotate_90() { convert -rotate 90 "$1" "$1" ; }
 transparent() {
     #turns a PNG white background -> transparent
     convert "$1" -transparent white "${1%.*}"_transparent.png
