@@ -69,7 +69,7 @@ alias makeac='makea;c'
 alias diff='diff -u'
 alias {less,les}='less -QRd'
 alias view='${EDITOR} -R'
-alias rsync='rsync -rtvuh4 --progress --delete' #-c
+alias rsync='rsync -rtvuh --progress --delete --partial' #-c4
 alias sshd='doas /usr/sbin/sshd'
 alias scp='scp -rp4'
 alias {htpo,hto,ht,hpot,hotp}='htop'
@@ -110,7 +110,7 @@ du() {
     command du -ahLd 1 "$1" | sort -rh | head -n 30
 } 2>/dev/null
 
-# files
+# file searching
 f() { 
     case $# in
         1) set . "$@" ;;
@@ -119,6 +119,10 @@ f() {
 
     find "$1" ! -path "$1" -iname "*$2*" ; 
 }
+
+# openbsd
+alias sg='sysctl | grep -i'
+alias disks='sysctl -n hw.disknames'
 
 unalias r
 r() { ranger "$@" ; c ; }
@@ -209,15 +213,15 @@ mpv() {
     command mpv --title=mpv "$@"
 }
 
+ytdl() { 
+    for i ; do
+        youtube-dl --geo-bypass --prefer-ffmpeg "$i"
+    done
+}
 ytdlm() { 
     for i ; do
         youtube-dl --geo-bypass --prefer-ffmpeg --extract-audio \
             --audio-quality 0 --audio-format mp3 --no-playlist "$i"
-    done
-}
-ytdl() { 
-    for i ; do
-        youtube-dl --geo-bypass --prefer-ffmpeg "$i"
     done
 }
 ytdlpm() { 
@@ -227,7 +231,7 @@ ytdlpm() {
     done
 }
 
-alias getres="ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0"
+alias getres='ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0'
 
 # imagemagick
 resize_75() { mogrify -resize '75%X75%' "$@" ; }

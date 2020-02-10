@@ -31,6 +31,8 @@ control + alt + k
     keys
 shift + Delete
     xsel -o
+alt + Delete
+    touchpad
 
 # volume / media
 alt + apostrophe

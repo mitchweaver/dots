@@ -1,0 +1,2 @@
+/bin/chmod +x /dev/drm* 2>/dev/null
+/bin/sh /home/alan/bin/net/net urtwn0

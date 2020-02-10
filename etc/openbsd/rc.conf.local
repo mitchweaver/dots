@@ -1,0 +1,6 @@
+apmd_flags=-H
+cron_flags=NO
+ntpd_flags=NO
+pf=NO
+smtpd_flags=NO
+sshd_flags=NO
