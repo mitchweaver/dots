@@ -1,6 +1,4 @@
-#Xft.dpi: 192
 Xft.dpi: 144
-#Xft.dpi: 96
 Xft.antialias: 1
 Xft.autohint: 1
 Xft.hinting: 1

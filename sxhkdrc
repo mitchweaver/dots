@@ -1,5 +1,7 @@
 # programs
 alt + Return
+    st
+alt + shift + Return
     tabbed -d -c -r 2 st -w ''
 alt + w
     browser
