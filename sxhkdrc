@@ -8,7 +8,7 @@ alt + w
 alt + r
     st -T floating-st -n floating-st -e ranger
 alt + x
-    slock -m "$(bonsai2)"
+    slock
 Print
     scrap -n
 control + Print

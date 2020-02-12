@@ -372,7 +372,7 @@ logo()  { curl -q "$1" -o logo.jpg  ; }
 
 addyt() { echo "$1" >>${HOME}/videos/youtube/.queue ; }
 
-alias jpg='find . -type f -name "*.jpg" -exec jpegoptim -s {} \;'
+alias jpg='find . -type f -name "*.jp*" -exec jpegoptim -s {} \;'
 
 dl() { curl -q -L -C - -# --url "$1" --output "$(basename "$1")" ; }
 

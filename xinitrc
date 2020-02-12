@@ -6,11 +6,11 @@
 rm -f ${HOME}/.cache/font-config/*.cache*
 
 xrdb load ${HOME}/src/dots/Xresources
-xmodmap ${HOME}/src/dots/Xmodmap
 xset +fp ${HOME}/files/fonts
 xset m 0 0
 xset b off
 xhost +local: >/dev/null
+xmodmap ${HOME}/src/dots/Xmodmap &
 
 read -r machine </etc/myname
 case "$machine" in
@@ -24,17 +24,13 @@ bright set 70 >/dev/null
 vol set 50    >/dev/null
 background ${HOME}/.wall
 
-pgrep -f sxhkd      || sxhkd   -c       ${HOME}/src/dots/sxhkdrc &
-pgrep -f dunst      || dunst   -conf    ${HOME}/src/dots/dunstrc &
-pgrep -f compton    || compton --config ${HOME}/src/dots/compton.conf -b
-pgrep -f bar        || bar     &
-pgrep -f batmon     || batmon  &
-pgrep -f clip       || clip -d &
-pgrep -f xbanish    || xbanish &
-pgrep -f ytdl-queue || ytdl-queue -d &
-
-# If dwm crashes, or was pkill, relaunch
-# --- note: this magically preserves opened windows!
 while type dwm >/dev/null ; do
-    cd ${HOME} && dwm && break || continue
+    pgrep -f sxhkd      || sxhkd   -c       ${HOME}/src/dots/sxhkdrc &
+    pgrep -f dunst      || dunst   -conf    ${HOME}/src/dots/dunstrc &
+    pgrep -f compton    || compton --config ${HOME}/src/dots/compton.conf -b
+    pgrep -f bar        || bar           &
+    pgrep -f batmon     || batmon        &
+    pgrep -f clip       || clip -d       &
+    pgrep -f ytdl-queue || ytdl-queue -d &
+    dwm && break || continue
 done >${HOME}/.cache/dwm.log 2>&1
