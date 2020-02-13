@@ -6,7 +6,6 @@
 ulimit -c 0
 
 set -o bgnice
-set -o nohup
 set -o trackall
 set -o csh-history
 set -o vi-tabcomplete
