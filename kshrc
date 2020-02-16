@@ -99,6 +99,7 @@ alias date="command date '+%a %b %d - %I:%M %p'"
 alias dmegs=dmesg
 alias h='head -n 15'
 alias t='tail -n 15'
+alias tf='tail -f'
 alias ex=export
 alias cx='chmod +x'
 alias poweroff='doas halt -p'
@@ -128,20 +129,19 @@ alias {htpo,hto,ht,hpot,hotp}='htop'
 alias {hm,hme}='htop -u ${USER}'
 alias {hr,hroot}='htop -u root'
 alias nf=neofetch
-alias rtv='rtv --enable-media ; c'
 alias feh='feh -q -N -x -X -s -Z --scale-down --title feh'
 alias click='xdotool click 1'
 alias w=which
-alias py=python3
+alias py=python3.7
 
 # sums
-alias {512,sha512}=sha512sum
-alias {256,sha256}=sha256sum
+alias sha512=sha512sum
+alias sha256=sha256sum
 alias md5=md5sum
 
 # weather
-alias weather='curl -s wttr.in/madison,sd?m0TQ'
-alias forecast='curl -s http://wttr.in/madison,sd?m | \
+alias weather='curl -s wttr.in/madison,sd?u0TQ'
+alias forecast='curl -s http://wttr.in/madison,sd?u | \
    tail -n 33 | sed $\ d | sed $\ d'
 
 # random printing
@@ -149,20 +149,14 @@ alias heart='printf "%b\n" "\xe2\x9d\xa4"'
 
 alias jpg='find . -type f -name "*.jp*" -exec jpegoptim -s {} \;'
 
-# hash stuff
-md5=md5sum
-sha1=sha1sum
-sha256=sha256sum
-sha512=sha512sum
-
 mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
 
 du() { 
     [ $# -eq 0 ] && set .
-    command du -ahLd 1 "$1" | sort -rh | head -n 30
-} 2>/dev/null
+    command du -ahLd 1 "$1" | sort -rh | head -n 30 2>/dev/null
+}
 
 # file searching
 f() { 
@@ -207,7 +201,7 @@ cheat() { curl -s cheat.sh/$1 ; }
 rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
 
 reload() {
-    . ~/src/dots/aliases
+    . ~/src/dots/kshrc
     xrdb load ~/src/dots/Xresources
     xmodmap ~/src/dots/Xmodmap
     xset m 0 0 
@@ -370,7 +364,6 @@ mt() { mv "$@" ~/tmp ; }
 m_() { mv "$@" ~/.trash ; }
 alias trash=m_
 
-alias {aliases,alaises,aliase}='v ~/src/dots/aliases'
 alias profile='v ~/src/dots/profile'
 alias {vssh,sshv}='v ~/.ssh/config'
 
@@ -427,8 +420,14 @@ logo()  { curl -q "$1" -o logo.jpg  ; }
 addyt() { echo "$1" >>${HOME}/videos/youtube/.queue ; }
 
 dl() { curl -q -L -C - -# --url "$1" --output "$(basename "$1")" ; }
+alias wget=dl
 
 sxiv() {
     [ "$1" ] || set -- .
     command sxiv -t "$1"
+}
+
+pingpi() {
+    set -- $(grep 138 ~/.ssh/config)
+    ping $2
 }

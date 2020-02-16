@@ -22,6 +22,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     Plug 'tpope/vim-repeat' " allows '.' for more things
     Plug 'tpope/vim-surround' " surround stuff with stuff
     Plug 'dylanaraps/wal.vim' " pywal theme
+    Plug 'sheerun/vim-polyglot' " syntax highlighting
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
     
     call plug#end()

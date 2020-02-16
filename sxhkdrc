@@ -26,7 +26,8 @@ alt + u
 alt + c
     clip
 alt + i
-    mus -m
+    musmenu
+    # mus -m
 
 # misc
 control + alt + k

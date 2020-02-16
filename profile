@@ -71,9 +71,5 @@ export LANG='en_US.UTF-8' \
 
 if ! pgrep X >/dev/null ; then
     rm -rf ${HOME}/.{Xauthority*,serverauth*} 2>/dev/null
-    if type launchx >/dev/null && [ $(uname) = Linux ] ; then
-        launchx >/dev/null 2>&1
-    else
-        startx
-    fi
+    startx
 fi
