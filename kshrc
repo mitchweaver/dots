@@ -87,7 +87,6 @@ alias lsf='l "$PWD"/*'
 alias {cls,csl,cl,lc}='c;l'
 alias {e,ech,eho}=echo
 alias {g,gr,gre,Grep,gerp,grpe}=grep
-alias pg=pgrep
 alias dg='du | g -i'
 alias lg='ls | g -i'
 alias cp='cp -irv'
@@ -123,7 +122,6 @@ alias diff='diff -u'
 alias {less,les}='less -QRd'
 alias view='${EDITOR} -R'
 alias rsync='rsync -rtvuh --progress --delete --partial' #-c4
-alias sshd='doas /usr/sbin/sshd'
 alias scp='scp -rp4'
 alias {htpo,hto,ht,hpot,hotp}='htop'
 alias {hm,hme}='htop -u ${USER}'
@@ -133,6 +131,7 @@ alias feh='feh -q -N -x -X -s -Z --scale-down --title feh'
 alias click='xdotool click 1'
 alias w=which
 alias py=python3.7
+alias dm='dmesg | tail -n 30'
 
 # sums
 alias sha512=sha512sum
@@ -154,7 +153,7 @@ mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
 
 du() { 
-    [ $# -eq 0 ] && set .
+    [ "$1" ] || set .
     command du -ahLd 1 "$1" | sort -rh | head -n 30 2>/dev/null
 }
 
@@ -189,11 +188,11 @@ echossh() {
     fi
 }
 
-# if ps1 gets bugged out
+# quick fix ps1 if bugged out
 ps1() { export PS1='% ' ; }
 
 # search history for command: "history grep", no its not mercurial.
-hg() { [ "$1" ] && grep -e "$*" $HISTFILE | grep -v '^hg' | head -n 20 ; }
+hg() { [ "$1" ] && grep -i "$*" $HISTFILE | grep -v '^hg' | head -n 20 ; }
 
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
@@ -211,12 +210,12 @@ reload() {
     fc-cache
     if pgrep -x sxhkd >/dev/null ; then
         pkill -x sxhkd
-        sxhkd -c ${HOME}/src/dots/sxhkdrc &
+        sxhkd -c ~/src/dots/sxhkdrc &
     fi
 } >/dev/null 2>&1
 
 w3m() {
-    [ $# -eq 0 ] && set https://ddg.gg/lite
+    [ "$1" ] && set https://ddg.gg/lite
     command w3m -F "$@"
 }
 
@@ -290,6 +289,14 @@ transparent() {
     #turns a PNG white background -> transparent
     convert "$1" -transparent white "${1%.*}"_transparent.png
 }
+png2jpg() {
+    for i ; do
+        [ -f "$i" ] || continue
+        convert "$i" "${i%png}"jpg || exit 1
+        jpegoptim -s "${i%png}"jpg || exit 1
+        rm "$1"
+    done
+}
 
 # translate-shell
 trans() {
@@ -319,7 +326,7 @@ for i in 1 2 3 4 5 6 7 8 9 ; do
     eval "g${i}() { cd \$_MARK${i} ; }"
 done
 
-_g() { local a=$1 ; shift ; cd $a/"$@" ; ls ; }
+_g() { _a=$1 ; shift ; cd $_a/"$*" ; ls ; }
 
 alias gB="_g /bin"
 alias gT="_g /tmp"
@@ -431,3 +438,5 @@ pingpi() {
     set -- $(grep 138 ~/.ssh/config)
     ping $2
 }
+
+mupdf() { [ -f "$1" ] && command mupdf "$1" >/dev/null 2>&1 & }
