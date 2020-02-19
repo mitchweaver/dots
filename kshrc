@@ -119,9 +119,8 @@ alias {makea,maeka,maka,mka}='makec;make&&makei'
 
 # common program aliases
 alias diff='diff -u'
-alias {less,les}='less -QRd'
-alias view='${EDITOR} -R'
-alias rsync='rsync -rtvuh --progress --delete --partial' #-c4
+alias less='less -QRd'
+alias {rs,rsync}='rsync -rtvuh4 --progress --delete --partial' #-c
 alias scp='scp -rp4'
 alias {htpo,hto,ht,hpot,hotp}='htop'
 alias {hm,hme}='htop -u ${USER}'
@@ -132,6 +131,7 @@ alias click='xdotool click 1'
 alias w=which
 alias py=python3.7
 alias dm='dmesg | tail -n 30'
+alias cv='curl -v'
 
 # sums
 alias sha512=sha512sum
@@ -344,6 +344,7 @@ alias gd="_g ~/Downloads"
 alias gcf='_g ~/src/dots/config'
 alias g_='_g ~/.trash'
 alias gyt='_g ~/videos/youtube/completed'
+alias gW='_g ~/images/wallpapers'
 
 mT() { mv "$@" /tmp  ; }
 YT() { cp "$@" /tmp  ; }

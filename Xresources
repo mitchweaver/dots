@@ -1,4 +1,9 @@
-Xft.dpi: 144
+// x200
+Xft.dpi: 96
+
+// surface
+//Xft.dpi: 144
+
 Xft.antialias: 1
 Xft.autohint: 1
 Xft.hinting: 1
