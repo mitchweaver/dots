@@ -76,7 +76,6 @@ alias {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi}=exit
 alias {l,sls,sl}=ls
 alias ll='l -l'
 alias la='l -a'
-alias lt='command ls -halt'
 alias {lla,lal}='l -al'
 alias lsf='l "$PWD"/*'
 alias {cls,csl,cl,lc}='c;l'
@@ -104,7 +103,7 @@ ping() {
     command ping -L -n -s 1 -w 2 $@
 }
 pingcv() {
-    [ "$1" ] || set eff.org
+    [ "$1" ] || set google.com
     curl -v "$1"
 }
 alias cres='cat /etc/resolv.conf'

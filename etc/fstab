@@ -1,3 +1,4 @@
+# HEY IDIOT, DONT FORGET TO CHANGE THE DRIVE IDs
 d3bad44be809ea5f.b none swap sw
 d3bad44be809ea5f.a / ffs rw 1 1
 d3bad44be809ea5f.l /home ffs rw,nodev,nosuid,softdep,noatime 1 2
@@ -7,5 +8,4 @@ d3bad44be809ea5f.h /usr/local ffs rw,wxallowed,nodev 1 2
 d3bad44be809ea5f.k /usr/obj ffs rw,nodev,nosuid 1 2
 d3bad44be809ea5f.j /usr/src ffs rw,nodev,nosuid 1 2
 d3bad44be809ea5f.e /var ffs rw,nodev,nosuid 1 2
-#d3bad44be809ea5f.d /tmp ffs rw,nodev,nosuid 1 2
-swap /tmp mfs rw,nosuid,-s=2000000 0 0
+swap /tmp mfs rw,nosuid,-s=1500000 0 0
