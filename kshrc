@@ -16,14 +16,14 @@ export HISTFILE=${HOME}/.cache/.ksh_history \
        SAVEHIST=500
 
 cd() { 
-    if [ $# -eq 0 ] ; then
-        builtin cd ${HOME}
+    if [ "$1" ] ; then
+        builtin cd --  "$*"  ||
+        builtin cd --  "$*"* ||
+        builtin cd -- *"$*"  ||
+        builtin cd -- *"$*"*
     else
-        builtin cd "$*" ||
-        builtin cd "$*"* ||
-        builtin cd *"$*" ||
-        builtin cd *"$*"*
-    fi 2> /dev/null
+        builtin cd -- ${HOME}
+    fi 2>/dev/null
     if [ "$RANGER_LEVEL" ] ; then
         PS1="[ranger: $(_get_PS1)] "
     else
@@ -59,12 +59,12 @@ cd .
 
 # dynamic 'c' utility
 c() {
-    if [ -z "$1" ] ; then
-        clear
-    elif [ -d "$1" ] ; then
+    if [ -d "$1" ] ; then
         cd "$1"
     elif [ -f "$1" ] ; then
-        cat "$1"
+        cat -- "$1"
+    else
+        clear
     fi
 }
 
@@ -102,20 +102,12 @@ ping() {
     [ "$1" ] || set eff.org
     command ping -L -n -s 1 -w 2 $@
 }
-pingcv() {
-    [ "$1" ] || set google.com
-    curl -v "$1"
-}
-alias cres='cat /etc/resolv.conf'
-
-# watch
-wdo() { while sleep 1 ; do $@ ; done ; }
 
 # common program aliases
 alias diff='diff -u'
 alias less='less -QRd'
-alias {rs,rsync}='rsync -rtvuh4 --progress --delete --partial' #-c
-alias scp='scp -rp4'
+alias {rs,rsync}='rsync -rtvuh --progress --delete --partial' #-c
+alias scp='scp -rp'
 alias {htpo,hto,ht,hpot,hotp}='htop'
 alias {hm,hme}='htop -u ${USER}'
 alias {hr,hroot}='htop -u root'
@@ -125,6 +117,9 @@ alias w=which
 alias py=python3.7
 alias dm='dmesg | tail -n 20'
 alias cv='curl -v'
+
+dl() { curl -q -L -C - -# --url "$1" --output "$(basename "$1")" ; }
+alias wget=dl
 
 # weather
 alias weather='curl -s wttr.in/madison,sd?u0TQ'
@@ -166,20 +161,6 @@ alias {makeu,maku,mku}='make uninstall'
 unalias r
 r() { ranger "$@" ; c ; }
 
-# Hack!
-echossh() {
-    if [ $# -lt 3 ] ; then
-        >&2 echo 'usage: echossh user@host file $@'
-        return 1
-    else
-        local user_at_host="$1"
-        local file="$2"
-        shift 2
-        echo "$@" | ssh "$user_at_host" \
-            sh -c "cat /dev/stdin >> $file"
-    fi
-}
-
 # quick fix ps1 if bugged out
 ps1() { export PS1='% ' ; }
 
@@ -211,30 +192,23 @@ w3m() {
 }
 
 v() { 
-    # if no arguments, open my vimwiki page
-    if [ $# -eq 0 ] ; then
-        if [ -d ${HOME}/files/vimwiki ] && [ $EDITOR = nvim ] ; then
-            set -- -c VimwikiIndex
+    if [ "$1" ] ; then
+        if [ -f "$1" ] ; then
+            command nvim "$1"
+        else
+            for i in $(jot 5) ; do
+                f="$(find . -type f -iname *"$@"* -maxdepth $i | head -n 1)"
+                if [ -f "$f" ] ; then
+                    command nvim "$f"
+                    break
+                fi
+            done
         fi
-        $EDITOR "$@"
-        return
-    fi
-
-    # fuzzy-find file / recurse down
-    if [ -f "$1" ] ; then
-        $EDITOR "$1"
     else
-        for i in 1 2 3 4 5 ; do
-            local f="$(find . -iname *"$@"* -maxdepth $i | head -n 1)"
-            if [ -f "$f" ] ; then
-                $EDITOR "$f"
-                return
-            fi
-        done
-        $EDITOR "$@"
-    fi 2>/dev/null
+        command nvim -c VimwikiIndex
+    fi
 }
-alias {V,vim}=v
+alias {V,vim,nvim}=v
 
 mpv() { 
     [ $# -eq 0 ] && return 1
@@ -418,22 +392,28 @@ logo()  { curl -q "$1" -o logo.jpg  ; }
 
 addyt() { echo "$1" >>${HOME}/videos/youtube/.queue ; }
 
-dl() { curl -q -L -C - -# --url "$1" --output "$(basename "$1")" ; }
-alias wget=dl
-
 sxiv() {
-    [ "$1" ] || set -- .
+    [ "$1" ] || set .
     command sxiv -t "$1"
 }
 
-pingpi() {
-    set -- $(grep 138 ~/.ssh/config)
-    ping $2
-}
-
-mupdf() { [ -f "$1" ] && command mupdf "$1" >/dev/null 2>&1 & }
+pingpi() { ping $(grep -A 1 'Host pi' .ssh/config | grep -oE '[0-9]+.*') ; }
 
 # ----- old stuff I rarely use but still want to keep:------
 # rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
 # alias heart='printf "%b\n" "\xe2\x9d\xa4"'
 # alias click='xdotool click 1'
+#
+## Hack!
+# echossh() {
+#     if [ $# -lt 3 ] ; then
+#         >&2 echo 'usage: echossh user@host file $@'
+#         return 1
+#     else
+#         local user_at_host="$1"
+#         local file="$2"
+#         shift 2
+#         echo "$@" | ssh "$user_at_host" \
+#             sh -c "cat /dev/stdin >> $file"
+#     fi
+# }
