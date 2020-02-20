@@ -68,12 +68,7 @@ c() {
     fi
 }
 
-# ls stuff
-if type exa >/dev/null 2>&1 ; then
-    alias ls='exa -F'
-else
-    alias ls='ls -F'
-fi
+ls() { exa -F "$@" 2>/dev/null || command ls -F "$@" ; }
 
 # generic aliases
 alias {cc,cll,clear,clar,clea,clera}=clear
@@ -101,7 +96,6 @@ alias t='tail -n 15'
 alias tf='tail -f'
 alias ex=export
 alias cx='chmod +x'
-alias poweroff='doas halt -p'
 alias {reboot,restart}='doas reboot'
 alias chroot='doas chroot'
 alias su='su -'
@@ -109,13 +103,14 @@ ping() {
     [ "$1" ] || set eff.org
     command ping -L -n -s 1 -w 2 $@
 }
+pingcv() {
+    [ "$1" ] || set eff.org
+    curl -v "$1"
+}
+alias cres='cat /etc/resolv.conf'
 
-# make
-alias {make,mak,mk}="make -j$(( $NPROC + 1 ))"
-alias {makec,makc,mkc}='make clean'
-alias {makei,maki,mki}='make install'
-alias {makeu,maku,mku}='make uninstall'
-alias {makea,maeka,maka,mka}='makec;make&&makei'
+# watch
+wdo() { while sleep 1 ; do $@ ; done ; }
 
 # common program aliases
 alias diff='diff -u'
@@ -127,24 +122,15 @@ alias {hm,hme}='htop -u ${USER}'
 alias {hr,hroot}='htop -u root'
 alias nf=neofetch
 alias feh='feh -q -N -x -X -s -Z --scale-down --title feh'
-alias click='xdotool click 1'
 alias w=which
 alias py=python3.7
-alias dm='dmesg | tail -n 30'
+alias dm='dmesg | tail -n 20'
 alias cv='curl -v'
-
-# sums
-alias sha512=sha512sum
-alias sha256=sha256sum
-alias md5=md5sum
 
 # weather
 alias weather='curl -s wttr.in/madison,sd?u0TQ'
 alias forecast='curl -s http://wttr.in/madison,sd?u | \
    tail -n 33 | sed $\ d | sed $\ d'
-
-# random printing
-alias heart='printf "%b\n" "\xe2\x9d\xa4"'
 
 alias jpg='find . -type f -name "*.jp*" -exec jpegoptim -s {} \;'
 
@@ -170,6 +156,13 @@ f() {
 # openbsd
 alias sg='sysctl | grep -i'
 alias disks='sysctl -n hw.disknames'
+alias poweroff='doas halt -p'
+
+# make
+alias {make,mak,mk}="make -j${NPROC:-1}"
+alias {makec,makc,mkc}='make clean'
+alias {makei,maki,mki}='make install'
+alias {makeu,maku,mku}='make uninstall'
 
 unalias r
 r() { ranger "$@" ; c ; }
@@ -197,7 +190,6 @@ hg() { [ "$1" ] && grep -i "$*" $HISTFILE | grep -v '^hg' | head -n 20 ; }
 ext() { e "${1##*.}" ; }
 filename() { e "${1%.*}" ; }
 cheat() { curl -s cheat.sh/$1 ; }
-rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
 
 reload() {
     . ~/src/dots/kshrc
@@ -215,7 +207,7 @@ reload() {
 } >/dev/null 2>&1
 
 w3m() {
-    [ "$1" ] && set https://ddg.gg/lite
+    [ "$1" ] || set https://ddg.gg/lite
     command w3m -F "$@"
 }
 
@@ -262,18 +254,18 @@ mpv() {
 
 ytdl() { 
     for i ; do
-        youtube-dl --geo-bypass --prefer-ffmpeg "$i"
+        youtube-dl -c -R 50 --geo-bypass --prefer-ffmpeg "$i"
     done
 }
 ytdlm() { 
     for i ; do
-        youtube-dl --geo-bypass --prefer-ffmpeg --extract-audio \
+        youtube-dl -c -R 50 --geo-bypass --prefer-ffmpeg --extract-audio \
             --audio-quality 0 --audio-format mp3 --no-playlist "$i"
     done
 }
 ytdlpm() { 
     for i ; do
-        youtube-dl --geo-bypass --prefer-ffmpeg --extract-audio \
+        youtube-dl -c -R 50 --geo-bypass --prefer-ffmpeg --extract-audio \
             --audio-quality 0 --audio-format mp3 "$i"
     done
 }
@@ -409,7 +401,7 @@ gud() {
 
 alias {repomc,reocmp,reomcp,recopm,recmop,recpom}=recomp
 
-forgrep() {
+findgrep() {
     find . -type f | while read -r file ; do
         grep -- "$*" "$file" >/dev/null && echo $file
     done
@@ -441,3 +433,8 @@ pingpi() {
 }
 
 mupdf() { [ -f "$1" ] && command mupdf "$1" >/dev/null 2>&1 & }
+
+# ----- old stuff I rarely use but still want to keep:------
+# rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
+# alias heart='printf "%b\n" "\xe2\x9d\xa4"'
+# alias click='xdotool click 1'
