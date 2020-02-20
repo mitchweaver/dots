@@ -81,6 +81,7 @@ alias lsf='l "$PWD"/*'
 alias {cls,csl,cl,lc}='c;l'
 alias {e,ech,eho}=echo
 alias {g,gr,gre,Grep,gerp,grpe}=grep
+alias pgrpe=pgrep
 alias dg='du | g -i'
 alias lg='ls | g -i'
 alias cp='cp -irv'
@@ -98,10 +99,6 @@ alias cx='chmod +x'
 alias {reboot,restart}='doas reboot'
 alias chroot='doas chroot'
 alias su='su -'
-ping() {
-    [ "$1" ] || set eff.org
-    command ping -L -n -s 1 -w 2 $@
-}
 
 # common program aliases
 alias diff='diff -u'
@@ -116,7 +113,6 @@ alias feh='feh -q -N -x -X -s -Z --scale-down --title feh'
 alias w=which
 alias py=python3.7
 alias dm='dmesg | tail -n 20'
-alias cv='curl -v'
 
 dl() { curl -q -L -C - -# --url "$1" --output "$(basename "$1")" ; }
 alias wget=dl
@@ -397,7 +393,15 @@ sxiv() {
     command sxiv -t "$1"
 }
 
+ping() {
+    [ "$1" ] || set eff.org
+    command ping -L -n -s 1 -w 2 $@
+}
 pingpi() { ping $(grep -A 1 'Host pi' .ssh/config | grep -oE '[0-9]+.*') ; }
+pingd() { ping $(dns) ; }
+
+alias cv='curl -v'
+alias cvd='curl -v dns.watch'
 
 # ----- old stuff I rarely use but still want to keep:------
 # rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }

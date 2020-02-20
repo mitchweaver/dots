@@ -14,4 +14,3 @@ my personal dotfiles
 
 [bin](http://github.com/mitchweaver/bin) - helpful scripts  
 [suckless](http://github.com/mitchweaver/suckless) - patches  
-[bonsai](http://github.com/mitchweaver/bonsai) - my upcoming Linux distribution
