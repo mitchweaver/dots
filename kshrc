@@ -109,10 +109,10 @@ alias {htpo,hto,ht,hpot,hotp}='htop'
 alias {hm,hme}='htop -u ${USER}'
 alias {hr,hroot}='htop -u root'
 alias nf=neofetch
-alias feh='feh -q -N -x -X -s -Z --scale-down --title feh'
 alias w=which
 alias py=python3.7
 alias dm='dmesg | tail -n 20'
+alias {feh,mpv}=opn
 
 dl() { curl -q -L -C - -# --url "$1" --output "$(basename "$1")" ; }
 alias wget=dl
@@ -147,6 +147,7 @@ f() {
 alias sg='sysctl | grep -i'
 alias disks='sysctl -n hw.disknames'
 alias poweroff='doas halt -p'
+alias net='doas sh /etc/netstart $(interface)'
 
 # make
 alias {make,mak,mk}="make -j${NPROC:-1}"
@@ -192,34 +193,20 @@ v() {
         if [ -f "$1" ] ; then
             command nvim "$1"
         else
-            for i in $(jot 5) ; do
+            for i in 1 2 ; do
                 f="$(find . -type f -iname *"$@"* -maxdepth $i | head -n 1)"
                 if [ -f "$f" ] ; then
                     command nvim "$f"
                     break
                 fi
             done
+            command nvim "$1"
         fi
     else
         command nvim -c VimwikiIndex
     fi
 }
 alias {V,vim,nvim}=v
-
-mpv() { 
-    [ $# -eq 0 ] && return 1
-
-    # kill any currently running mpv before launching a new
-    if pgrep xwinwrap >/dev/null ; then
-        # kill all mpv except the one with the mpvbg pid
-        # as not to kill our desktop background! see ~/bin/mpv/mpvbg for details
-        kill $(pgrep -a mpv | grep -v mpvbg | awk '{print $1}')
-    else
-        pkill mpv
-    fi >/dev/null 2>&1
-
-    command mpv --title=mpv "$@"
-}
 
 ytdl() { 
     for i ; do
@@ -333,6 +320,11 @@ mt() { mv "$@" ~/tmp ; }
 m_() { mv "$@" ~/.trash ; }
 alias trash=m_
 
+alias lD='ls ~/Downloads'
+alias lt='ls ~/tmp'
+alias lT='ls /tmp'
+alias l_='ls ~/.trash'
+
 alias profile='v ~/src/dots/profile'
 alias {vssh,sshv}='v ~/.ssh/config'
 
@@ -372,7 +364,7 @@ alias {repomc,reocmp,reomcp,recopm,recmop,recpom}=recomp
 
 findgrep() {
     find . -type f | while read -r file ; do
-        grep -- "$*" "$file" >/dev/null && echo $file
+        grep -- "$*" "$file" >/dev/null 2>&1 && echo $file
     done
 }
 
@@ -393,15 +385,20 @@ sxiv() {
     command sxiv -t "$1"
 }
 
+# net testing
 ping() {
     [ "$1" ] || set eff.org
     command ping -L -n -s 1 -w 2 $@
 }
-pingpi() { ping $(grep -A 1 'Host pi' .ssh/config | grep -oE '[0-9]+.*') ; }
 pingd() { ping $(dns) ; }
-
+pingpi() { ping $(grep -A 1 'Host pi' .ssh/config | grep -oE '[0-9]+.*') ; }
+alias p=ping
+alias pd=pingd
+alias pp=pingpi
+alias p8='ping 8.8.8.8'
 alias cv='curl -v'
 alias cvd='curl -v dns.watch'
+alias cvg='curl -v google.com'
 
 # ----- old stuff I rarely use but still want to keep:------
 # rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }

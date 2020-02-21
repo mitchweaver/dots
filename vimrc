@@ -193,7 +193,7 @@ if exists(':PlugInstall')
     autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
     let wiki = {}
-    let g:vimwikidir = "/home/alan/files/vimwiki"
+    let g:vimwikidir = "/home/mitch/files/vimwiki"
     let wiki.path = g:vimwikidir
     let g:vimwiki_list=[wiki]
     let g:vimwiki_list = [
