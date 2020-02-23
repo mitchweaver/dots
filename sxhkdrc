@@ -25,9 +25,6 @@ alt + u
     tasks
 alt + c
     clip
-alt + i
-    musmenu
-    # mus -m
 
 # misc
 control + alt + k
@@ -43,12 +40,12 @@ alt + apostrophe
 alt + semicolon
     vol -dec 8
 alt + slash
-    media -t
+    mpvc toggle
 alt + period
-    media -n
+    mpvc --track +1
 alt + comma
-    media -p
+    mpvc --track -1
 alt + bracketright
-    media -sa
+    mpvc --seek +30
 alt + bracketleft
-    media -sb
+    mpvc --seek -30

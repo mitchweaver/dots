@@ -69,7 +69,4 @@ export LANG='en_US.UTF-8' \
     LOCALE='en_US.UTF-8' \
     LC_CTYPE='en_US.UTF-8'
 
-if ! pgrep X >/dev/null ; then
-    #rm -rf ${HOME}/.{Xauthority*,serverauth*} 2>/dev/null
-    startx
-fi
+pgrep X >/dev/null || launchx

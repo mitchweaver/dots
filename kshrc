@@ -2,6 +2,11 @@
 #
 # http://github.com/mitchweaver/dots
 #
+# This thing is a mess... But I try to keep the beast at bay.
+#
+# Check out http://github.com/mitchweaver/bin for where
+# more complicated stuff gets moved when it grows too unruly.
+#
 
 ulimit -c 0
 
@@ -82,7 +87,7 @@ alias {cls,csl,cl,lc}='c;l'
 alias {e,ech,eho}=echo
 alias {g,gr,gre,Grep,gerp,grpe}=grep
 alias pgrpe=pgrep
-alias dg='du | g -i'
+alias dg='d | g -i'
 alias lg='ls | g -i'
 alias cp='cp -irv'
 alias mv='mv -iv'
@@ -113,6 +118,9 @@ alias w=which
 alias py=python3.7
 alias dm='dmesg | tail -n 20'
 alias {feh,mpv}=opn
+alias h1='head -n 1'
+alias t1='tail -n 1'
+alias cmd=command
 
 dl() { curl -q -L -C - -# --url "$1" --output "$(basename "$1")" ; }
 alias wget=dl
@@ -127,21 +135,6 @@ alias jpg='find . -type f -name "*.jp*" -exec jpegoptim -s {} \;'
 mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
-
-du() { 
-    [ "$1" ] || set .
-    command du -ahLd 1 "$1" | sort -rh | head -n 30 2>/dev/null
-}
-
-# file searching
-f() { 
-    case $# in
-        1) set . "$@" ;;
-        0) read inp && set . "$inp"
-    esac
-
-    find "$1" ! -path "$1" -iname "*$2*" ; 
-}
 
 # openbsd
 alias sg='sysctl | grep -i'
@@ -189,24 +182,13 @@ w3m() {
 }
 
 v() { 
-    if [ "$1" ] ; then
-        if [ -f "$1" ] ; then
-            command nvim "$1"
-        else
-            for i in 1 2 ; do
-                f="$(find . -type f -iname *"$@"* -maxdepth $i | head -n 1)"
-                if [ -f "$f" ] ; then
-                    command nvim "$f"
-                    break
-                fi
-            done
-            command nvim "$1"
-        fi
+    if [ -z "$1" ] ; then
+        nvim -c VimwikiIndex
     else
-        command nvim -c VimwikiIndex
+        nvim "$@"
     fi
 }
-alias {V,vim,nvim}=v
+alias {V,vim}=v
 
 ytdl() { 
     for i ; do
@@ -293,6 +275,8 @@ alias gcf='_g ~/src/dots/config'
 alias g_='_g ~/.trash'
 alias gyt='_g ~/videos/youtube/completed'
 alias gW='_g ~/images/wallpapers'
+alias gV='_g /var'
+alias gE='_g /etc'
 
 mT() { mv "$@" /tmp  ; }
 YT() { cp "$@" /tmp  ; }
@@ -332,28 +316,6 @@ alias vimrc="v ~/src/dots/vimrc"
 alias kshrc="v ~/src/dots/kshrc"
 # ----------- end movement commands ------------------
 
-# skeletons
-helloc() {
-cat > hello.c << EOF
-#include <stdio.h>
-int main() {
-    printf("%s\n", "hi");
-    return 0;
-}
-EOF
-}
-hellosh() {
-    [ $# -eq 0 ] && set hello.sh
-cat > $1 << EOF
-#!/bin/sh
-main() {
-    printf "%s\n" "hi"
-}
-main "$@"
-EOF
-chmod +x hello.sh
-}
-
 gud() {
     # activate my PS1 git branch detection after
     # git commands
@@ -362,23 +324,12 @@ gud() {
 
 alias {repomc,reocmp,reomcp,recopm,recmop,recpom}=recomp
 
-findgrep() {
-    find . -type f | while read -r file ; do
-        grep -- "$*" "$file" >/dev/null 2>&1 && echo $file
-    done
-}
-
-# adds a magnet link to torrent-queue
-addtorrent() { echo "$*" | sed 's|udp.*|udp|' >> ~/.torrents/queue ; }
-
-alias torrent="aria2c -d ${HOME}/Downloads --file-allocation=falloc \
-    --check-integrity=true --continue=true --seed-time=0"
-
 cover() { curl -q "$1" -o cover.jpg ; }
 band()  { curl -q "$1" -o band.jpg  ; }
 logo()  { curl -q "$1" -o logo.jpg  ; }
 
-addyt() { echo "$1" >>${HOME}/videos/youtube/.queue ; }
+addyt() { ytdl-queue -a "$1" ; }
+addtorrent() { torrent-queue -a "$1" ; }
 
 sxiv() {
     [ "$1" ] || set .
