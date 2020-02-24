@@ -56,7 +56,7 @@ for i in nvim vis vim vi ; do
     fi
 done
 
-for i in iridium chromium chrome firefox ; do
+for i in iridium chromium chrome firefox surf ; do
     if type $i >/dev/null 2>&1 ; then
         export BROWSER=$i
         break

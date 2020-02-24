@@ -104,23 +104,23 @@ alias cx='chmod +x'
 alias {reboot,restart}='doas reboot'
 alias chroot='doas chroot'
 alias su='su -'
+alias h1='head -n 1'
+alias t1='tail -n 1'
+alias cmd=command
 
 # common program aliases
 alias diff='diff -u'
 alias less='less -QRd'
 alias {rs,rsync}='rsync -rtvuh --progress --delete --partial' #-c
 alias scp='scp -rp'
-alias {htpo,hto,ht,hpot,hotp}='htop'
-alias {hm,hme}='htop -u ${USER}'
-alias {hr,hroot}='htop -u root'
+alias hme='htop -u ${USER}'
+alias hroot='htop -u root'
 alias nf=neofetch
 alias w=which
 alias py=python3.7
 alias dm='dmesg | tail -n 20'
 alias {feh,mpv}=opn
-alias h1='head -n 1'
-alias t1='tail -n 1'
-alias cmd=command
+alias branch='git branch'
 
 dl() { curl -q -L -C - -# --url "$1" --output "$(basename "$1")" ; }
 alias wget=dl
