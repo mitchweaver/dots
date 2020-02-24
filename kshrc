@@ -141,6 +141,10 @@ alias sg='sysctl | grep -i'
 alias disks='sysctl -n hw.disknames'
 alias poweroff='doas halt -p'
 alias net='doas sh /etc/netstart $(interface)'
+alias fortune=/usr/games/fortune
+alias tetris=/usr/games/tetris
+alias grdc=/usr/games/grdc
+alias banner=/usr/games/banner
 
 # make
 alias {make,mak,mk}="make -j${NPROC:-1}"
@@ -180,15 +184,7 @@ w3m() {
     [ "$1" ] || set https://ddg.gg/lite
     command w3m -F "$@"
 }
-
-v() { 
-    if [ -z "$1" ] ; then
-        nvim -c VimwikiIndex
-    else
-        nvim "$@"
-    fi
-}
-alias {V,vim}=v
+alias wdump='w3m -dump'
 
 ytdl() { 
     for i ; do
@@ -350,6 +346,8 @@ alias p8='ping 8.8.8.8'
 alias cv='curl -v'
 alias cvd='curl -v dns.watch'
 alias cvg='curl -v google.com'
+
+alias compton='pgrep -f compton || compton --config ${HOME}/src/dots/compton.conf -b'
 
 # ----- old stuff I rarely use but still want to keep:------
 # rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }

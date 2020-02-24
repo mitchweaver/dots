@@ -3,11 +3,11 @@ my personal dotfiles
 
 ------
 
-![other_crux_rice](http://i.imgur.com/oSki6JQ.png)
+![openbsd_rice](https://i.redd.it/adumeevthui41.png)
 
 ![crux_rice](http://i.imgur.com/ossASOE.png)
 
-![openbsd_rice](http://i.redd.it/qgyn862iacl01.gif)
+![other_crux_rice](http://i.imgur.com/oSki6JQ.png)
 
 ### See also
 ---------
