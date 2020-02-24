@@ -27,7 +27,7 @@ while type dwm >/dev/null ; do
     pgrep -f batmon     || batmon        &
     pgrep -f clip       || clip -d       &
     pgrep -f ytdl-queue || ytdl-queue -d &
-    # pgrep -f compton       || compton --config ${HOME}/src/dots/compton.conf -b
+    pgrep -f compton    || compton --config ${HOME}/src/dots/compton.conf -b
     #pgrep -f torrent-queue || torrent-queue -d &
     dwm >${HOME}/.cache/dwm.log 2>&1 && exit || continue
 done

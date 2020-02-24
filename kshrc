@@ -7,6 +7,12 @@
 # Check out http://github.com/mitchweaver/bin for where
 # more complicated stuff gets moved when it grows too unruly.
 #
+#  #             #
+#  #   m   mmm   # mm    m mm   mmm
+#  # m"   #   "  #"  #   #"  " #"  "
+#  #"#     """m  #   #   #     #
+#  #  "m  "mmm"  #   #   #     "#mm"
+#
 
 ulimit -c 0
 
@@ -141,10 +147,7 @@ alias sg='sysctl | grep -i'
 alias disks='sysctl -n hw.disknames'
 alias poweroff='doas halt -p'
 alias net='doas sh /etc/netstart $(interface)'
-alias fortune=/usr/games/fortune
-alias tetris=/usr/games/tetris
-alias grdc=/usr/games/grdc
-alias banner=/usr/games/banner
+alias games='export PATH="/usr/games:$PATH"; echo "/usr/games added to your \$PATH"'
 
 # make
 alias {make,mak,mk}="make -j${NPROC:-1}"
@@ -161,8 +164,6 @@ ps1() { export PS1='% ' ; }
 # search history for command: "history grep", no its not mercurial.
 hg() { [ "$1" ] && grep -i "$*" $HISTFILE | grep -v '^hg' | head -n 20 ; }
 
-ext() { e "${1##*.}" ; }
-filename() { e "${1%.*}" ; }
 cheat() { curl -s cheat.sh/$1 ; }
 
 reload() {
@@ -181,7 +182,7 @@ reload() {
 } >/dev/null 2>&1
 
 w3m() {
-    [ "$1" ] || set https://ddg.gg/lite
+    [ "$1" ] || set https://duckduckgo.com/lite
     command w3m -F "$@"
 }
 alias wdump='w3m -dump'
@@ -225,19 +226,10 @@ png2jpg() {
 }
 
 # translate-shell
-trans() {
-    [ $# -eq 0 ] && read inp && set "$inp"
-    command trans -no-auto -b "$@"
-}
-rtrans() {
-    [ $# -eq 0 ] && read inp && set "$inp"
-    # note: $1 needs to be language code, ex: 'de'
-    command trans -from en -to "$@"
-}
-rde() {
-    [ $# -eq 0 ] && read inp && set "$inp"
-    rtrans de "$*"
-}
+alias trans='trans -no-auto -b "$@"'
+# note: $1 needs to be language code, ex: 'de'
+alias rtrans='command trans -from en -to'
+alias rde='rtrans de'
 
 # ----------------- movement commands -----------------------
 alias {..,cd..}='cd ..'
