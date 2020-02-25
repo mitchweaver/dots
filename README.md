@@ -5,6 +5,8 @@ my personal dotfiles
 
 ![openbsd_rice](https://i.redd.it/adumeevthui41.png)
 
+![openbsd_rice_2](https://i.imgur.com/PpPbyfm.png)
+
 ![crux_rice](http://i.imgur.com/ossASOE.png)
 
 ![other_crux_rice](http://i.imgur.com/oSki6JQ.png)

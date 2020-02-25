@@ -317,7 +317,8 @@ gud() {
     command gud "$@" ; cd .
 }
 
-alias {repomc,reocmp,reomcp,recopm,recmop,recpom}=recomp
+recomp() { P="$PWD" ; cd ~/src/suckless ; ./build.sh "$@" ; cd "$P" ; }
+alias rcp=recomp
 
 cover() { curl -q "$1" -o cover.jpg ; }
 band()  { curl -q "$1" -o band.jpg  ; }

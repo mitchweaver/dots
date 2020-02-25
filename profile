@@ -20,6 +20,7 @@ rm -rf ${HOME}/tmp 2>/dev/null && mkdir -p ${HOME}/tmp
 export PATH="/bin:/sbin:/usr/{bin,sbin,local/bin,local/sbin,X11R6/bin}:$PATH"
 export PATH="$PATH:$(printf '%s:' ${HOME}/bin/*/)"
 export PATH="$PATH:${HOME}/src/ascii:${HOME}/.local/bin"
+export MANPATH="$MANPATH:${HOME}/.local/share/man"
 
 if [ -d ${HOME}/src/plan9/plan9port ] ; then
     export PLAN9=${HOME}/src/plan9/plan9port
