@@ -50,11 +50,16 @@ _parse_branch() {
 }
 
 _get_PS1() {
-    case ${USER} in
-        alan)  echo -n "\[\e[1;35m\]a\[\e[0;32m\]l\[\e[0;33m\]a\[\e[0;34m\]n\[\e[1;36m\] \W$(_parse_branch)\[\e[1;37m\] " ;;
-        mitch) echo -n "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(_parse_branch)\[\e[1;37m\] " ;;
-        root)  echo -n "\[\e[1;37m\]root \W " ;;
-        *)     echo -n '% \W '
+    case "$TERM" in
+        dumb)
+            echo '% '
+            ;;
+        *)
+            case ${USER} in
+                mitch) echo -n "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(_parse_branch)\[\e[1;37m\] " ;;
+                root)  echo -n "\[\e[1;37m\]root \W " ;;
+                *)     echo -n '% \W '
+            esac
     esac
 }
 
@@ -79,7 +84,10 @@ c() {
     fi
 }
 
-ls() { exa -F "$@" 2>/dev/null || command ls -F "$@" ; }
+case "$TERM" in
+    dumb) alias ls='ls -F' ;;
+       *) ls() { exa -F "$@" 2>/dev/null || command ls -F "$@" ; }
+esac
 
 # generic aliases
 alias {cc,cll,clear,clar,clea,clera}=clear
@@ -121,7 +129,6 @@ alias {rs,rsync}='rsync -rtvuh --progress --delete --partial' #-c
 alias scp='scp -rp'
 alias hme='htop -u ${USER}'
 alias hroot='htop -u root'
-alias nf=neofetch
 alias w=which
 alias py=python3.7
 alias dm='dmesg | tail -n 20'

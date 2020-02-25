@@ -23,7 +23,12 @@ export PATH="$PATH:${HOME}/src/ascii:${HOME}/.local/bin"
 
 if [ -d ${HOME}/src/plan9/plan9port ] ; then
     export PLAN9=${HOME}/src/plan9/plan9port
+elif [ -d /usr/local/plan9 ] ; then
+    export PLAN9=/usr/local/plan9
+fi
+if [ "$PLAN9" ] ; then
     export PATH="$PATH:$PLAN9/bin"
+    export font=$PLAN9/font/lucsans/unicode.8.font
 fi
 
 [ -f ${HOME}/src/dots/kshrc ] && export ENV=${HOME}/src/dots/kshrc
