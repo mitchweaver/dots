@@ -19,7 +19,7 @@ ulimit -c 0
 set -o bgnice
 set -o trackall
 set -o csh-history
-set -o vi-tabcomplete
+set -o vi
 
 export HISTFILE=${HOME}/.cache/.ksh_history \
        HISTCONTROL=ignoreboth \
@@ -297,6 +297,7 @@ mb() { mv "$@" ~/bin ; }
 me() { mv "$@" ~/env ; }
 mt() { mv "$@" ~/tmp ; }
 m_() { mv "$@" ~/.trash ; }
+mW() { mv "$@" ~/images/wallpapers ; }
 alias trash=m_
 
 alias lD='ls ~/Downloads'
@@ -347,11 +348,16 @@ alias cv='curl -v'
 alias cvd='curl -v dns.watch'
 alias cvg='curl -v google.com'
 
-alias compton='pgrep -f compton || compton --config ${HOME}/src/dots/compton.conf -b'
+cw() { cat $(which $1) ; }
+
+alias cmptn='pgrep -x compton ; compton --config ${HOME}/src/dots/compton.conf -b'
+
+alias heart='printf "%b\n" "\xe2\x9d\xa4"'
+
+alias hw='n -f ~/files/hw.txt'
 
 # ----- old stuff I rarely use but still want to keep:------
 # rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
-# alias heart='printf "%b\n" "\xe2\x9d\xa4"'
 # alias click='xdotool click 1'
 #
 ## Hack!
