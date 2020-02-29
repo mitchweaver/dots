@@ -22,12 +22,12 @@ PATH="/bin:/sbin:$PATH"
 PATH="/usr/bin:/usr/sbin:/usr/X11R6/bin:$PATH"
 PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 PATH="${HOME}/bin:${HOME}/.local/bin:$PATH"
-PATH="$PATH:$(printf '%s:' ${HOME}/bin/*/ | sed -E 's/\/$//g')"
+PATH="$PATH:$(printf '%s:' ${HOME}/bin/*/)"
 PATH="$PATH:${HOME}/src/ascii"
 export PATH
 
-MANPATH="/usr/share/man:/usr/local/share/man"
-MANPATH="${HOME}/.local/share/man:.:$MANPATH"
+MANPATH="/usr/share/man:/usr/local/share/man:/usr/local/man"
+MANPATH="${HOME}/.local/share/man:$MANPATH"
 export MANPATH
 
 export LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH"
@@ -44,11 +44,12 @@ fi
 
 [ -f ${HOME}/src/dots/kshrc ] && export ENV=${HOME}/src/dots/kshrc
 
-export EDITOR=nvim
+export EDITOR=v
 export MANPAGER=less
 export BROWSER=surf
 
-export CFLAGS='-O2 -pipe -fstack-protector-strong'
+export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
+export NPROC=$(sysctl -n hw.ncpu 2>/dev/null || echo 1)
 
 export LANG='en_US.UTF-8' \
        LANGUAGE='en_US.UTF-8' \
@@ -62,5 +63,8 @@ export XDG_CONFIG_HOME="${HOME}/.config" \
        XDG_DOWNLOAD_DIR="${HOME}/Downloads"
 
 export _JAVA_AWT_WM_NONREPARENTING=1 # fix for many java apps
+
+# various programs
+export HTOPRC=${HOME}/src/dots/htoprc
 
 pgrep X >/dev/null || launchx

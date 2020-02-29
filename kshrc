@@ -121,6 +121,8 @@ alias su='su -'
 alias h1='head -n 1'
 alias t1='tail -n 1'
 alias cmd=command
+alias pk='pkill -x'
+alias pg='pgrep -x'
 
 # common program aliases
 alias diff='diff -u'
@@ -308,7 +310,7 @@ alias l_='ls ~/.trash'
 alias profile='v ~/src/dots/profile'
 alias {vssh,sshv}='v ~/.ssh/config'
 
-alias vimrc="v ~/src/dots/vimrc"
+alias vimrc="v ~/src/dots/nvim/nvimrc"
 alias kshrc="v ~/src/dots/kshrc"
 # ----------- end movement commands ------------------
 
@@ -355,6 +357,14 @@ alias cmptn='pgrep -x compton ; compton --config ${HOME}/src/dots/compton.conf -
 alias heart='printf "%b\n" "\xe2\x9d\xa4"'
 
 alias hw='n -f ~/files/hw.txt'
+
+bkm() {
+    if [ "$1" ] ; then
+        echo "$*" >>~/files/bkm
+    else
+        $EDITOR ~/files/bkm
+    fi
+}
 
 # ----- old stuff I rarely use but still want to keep:------
 # rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }

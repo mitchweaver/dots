@@ -76,25 +76,29 @@ fi
 
 case "$mimetype" in
     text/* | */xml |*/diff | */sh | */bash | */ksh )
-        if [ "$(tput colors)" -ge 256 ]; then
+        # if [ "$(tput colors)" -ge 256 ]; then
             # pygmentize_format=terminal256
             # highlight_format=xterm256
 
-            pygmentize_format=st-256color
-            highlight_format=st-256color
+            # pygmentize_format=st-256color
+            # highlight_format=st-256color
 
-        else
-            pygmentize_format=terminal
-            highlight_format=ansi
-        fi
-        try safepipe highlight --out-format=${highlight_format} "$path" && { dump | trim; exit 5; }
-        try safepipe pygmentize -f ${pygmentize_format} "$path" && { dump | trim; exit 5; }
+        # else
+            # pygmentize_format=terminal
+            # highlight_format=ansi
+        # fi
+        # try safepipe highlight --out-format=${highlight_format} "$path" && { dump | trim; exit 5; }
+        # try safepipe pygmentize -f ${pygmentize_format} "$path" && { dump | trim; exit 5; }
+        cat "$path" | trim ; exit 5 ;
         exit 2;;
     # Display information about media files:
     # video/* | audio/*)
     audio/*)
         # Use sed to remove spaces so the output fits into the narrow window
         try mediainfo "$path" && { dump | trim | sed 's/  \+:/: /;';  exit 5; } || exit 1;;
+    *)
+        cat "$path" | trim ; exit 5 ;
+        exit 2;;
 esac
 
 exit 1

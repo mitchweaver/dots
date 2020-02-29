@@ -35,6 +35,7 @@ config/pulse
 config/libfm
 config/enchant
 vim/vim-plug
+nvim/vim-plug
 *bookmarks*
 w3m
 w3m/bookmarks
