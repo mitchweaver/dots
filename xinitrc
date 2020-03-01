@@ -3,15 +3,16 @@
 # http://github.com/mitchweaver/dots
 #
 
-xrdb load ~/src/dots/Xresources
+xrdb load $DOTS/Xresources
 
 rm -f ~/.cache/font-config/*.cache*
 find ~/files/fonts -type f -name fonts.dir | while read -r dir ; do
     xset +fp "${dir%/*}"
 done
 xset fp rehash
+fc-cache
 
-xmodmap ~/src/dots/Xmodmap &
+xmodmap $DOTS/Xmodmap &
 xset m 0 0 &
 xset b off &
 xhost +local: >/dev/null &
@@ -22,17 +23,16 @@ xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Button' 2 &
 xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Axes' 6 7 4 5 &
 
 background &
-bright set 100 &
-vol set 50 &
+bright -s 100 &
+vol -s 50 &
 
 while type dwm >/dev/null ; do
-    pgrep -f dunst      || dunst -conf ~/src/dots/dunstrc &
+    pgrep -f dunst      || dunst -conf $DOTS/dunstrc &
     pgrep -f xbanish    || xbanish       &
     pgrep -f slstatus   || slstatus      &
     pgrep -f batmon     || batmon        &
     pgrep -f clip       || clip -d       &
     pgrep -f ytdl-queue || ytdl-queue -d &
-    pgrep -f compton    || compton --config ~/src/dots/compton.conf -b
-    #pgrep -f torrent-queue || torrent-queue -d &
-    dwm >~/.cache/dwm.log 2>&1 && exit || continue
+    pgrep -f compton    || compton --config $DOTS/compton.conf -b
+    dwm && exit || continue
 done

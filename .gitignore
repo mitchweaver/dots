@@ -115,3 +115,5 @@ config/obs*
 *unity3d
 vim/.netrwhist
 config/nvim/log
+*TorBrowser-Data*
+*torbrowser*

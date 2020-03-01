@@ -1,8 +1,8 @@
 Xft.dpi: 96
-Xft.antialias: 1
-Xft.autohint: 1
-Xft.hinting: 1
-Xft.hintstyle: hintfull
+Xft.antialias: true
+Xft.autohint: true
+Xft.hinting: true
+Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 Xcursor.theme: plan9

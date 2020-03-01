@@ -97,7 +97,9 @@ case "$mimetype" in
         # Use sed to remove spaces so the output fits into the narrow window
         try mediainfo "$path" && { dump | trim | sed 's/  \+:/: /;';  exit 5; } || exit 1;;
     *)
-        cat "$path" | trim ; exit 5 ;
+        if head -n 1 "$path" | grep '#!/bin/sh' >/dev/null ; then
+            cat "$path" | trim ; exit 5 ;
+        fi
         exit 2;;
 esac
 

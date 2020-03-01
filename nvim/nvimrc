@@ -40,7 +40,7 @@ set encoding=utf-8
 set history=200
 set backspace=indent,eol,start " make backspace useable
 set whichwrap+=<,>,h,l " wrap around lines with these keys
-set updatetime=1000 " time until bg calls after typing
+set updatetime=750 " time until bg calls after typing
 set timeout! " Disable keybind timeout
 set ttimeout! " Disable keybind timeout
 set clipboard=unnamed " yank/paste to/from system clipboard
@@ -224,7 +224,7 @@ noremap <silent><C-f> <C-b>
 noremap <silent><C-b> <C-f>
 
 " Nuke +, -, ! at start of lines in diffs (also killing the - lines)
-map <silent> <C-z> :%s/^+<CR> :%s/^-.*<CR> :%s/^!<CR>
+" map <silent> <C-z> :%s/^+<CR> :%s/^-.*<CR> :%s/^!<CR>
 
 " remap WQ to :w :q
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
@@ -240,7 +240,7 @@ map  <silent><c-=> <nop>
 map  <silent><c--> <nop>
 map  <silent><C-w> <nop>
 
-map <leader>md :MarkdownPreview<CR>
+" map <leader>md :MarkdownPreview<CR>
 
 augroup resCur "reopen vim at previous cursor point
   autocmd!
