@@ -32,7 +32,8 @@ cd() {
         builtin cd --  "$1"* ||
         builtin cd -- *"$1"  ||
         builtin cd -- *"$1"* ||
-        ls | grep -- "$1"
+        builtin cd -- "$(find . -type d -maxdepth 1 \
+                            -iname "*$1*" | head -n 1)"
     else
         builtin cd
     fi 2>/dev/null
@@ -102,7 +103,7 @@ c() {
     elif [ -f "$1" ] ; then
         cat -- "$1"
     else
-        clear ; cd .
+        clear
     fi
 }
 
