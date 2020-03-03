@@ -27,12 +27,5 @@ bright -s 100 &
 vol -s 50 &
 
 while type dwm >/dev/null ; do
-    pgrep -f dunst      || dunst -conf $DOTS/dunstrc &
-    pgrep -f xbanish    || xbanish       &
-    pgrep -f slstatus   || slstatus      &
-    pgrep -f batmon     || batmon        &
-    pgrep -f clip       || clip -d       &
-    pgrep -f ytdl-queue || ytdl-queue -d &
-    pgrep -f compton    || compton --config $DOTS/compton.conf -b
     dwm && exit || continue
 done

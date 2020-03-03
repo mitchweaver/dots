@@ -13,8 +13,9 @@
 
 # my vars
 export DOTS=~/src/dots
-export MPV_OPTS='--really-quiet --sub-auto=no --gapless-audio'
 export MENU_PROG=~/bin/wrapper/menu
+export MPV_OPTS='--really-quiet --sub-auto=no --gapless-audio'
+export MUPDF_OPTS='-r 120 -C #d9d5ba'
 export MUPDF_TINT=e8e8e8
 
 umask 022
