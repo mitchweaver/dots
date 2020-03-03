@@ -37,29 +37,48 @@ cd() {
         builtin cd
     fi 2>/dev/null
     if [ "$RANGER_LEVEL" ] ; then
-        export PS1="[ranger: $(_get_PS1)] "
+        export PS1="[ranger: $(PS1)] "
     else
-        export PS1="$(_get_PS1)"
+        export PS1="$(PS1)"
     fi
 }
 
-# get which git branch we're on, used in our PS1
-_parse_branch() { 
-    set -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
-    [ "$1" ] && echo -n " ($*)"
-}
+PS1() {
+    case $TERM in
+        *256color)
+        # -*-*-*-*-*- random color ever char -*-*-*-*-*-*-*-*-*-*-*-*
+        # getcode() {
+        #     code=$(( $RANDOM % 10 ))
+        #     case $code in
+        #         0) getcode ;;
+        #         7) getcode ;;
+        #         8) getcode ;;
+        #         9) getcode ;;
+        #         *) printf '%s' "\[\e[1;3${code}m\]"
+        #     esac
+        # }
+        # printf '%s\n' "$USER" | fold -w 1 | while read -r c ; do
+        #     printf '%s' "$(getcode)$c"
+        # done
+        # printf '%s' "$(getcode) \W $(getcode)"
+        # set -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
+        # [ "$1" ] && printf '(%s) ' "$1"
+        # printf '%s' '\[\e[1;37m\]' # clear formatting
+        # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-_get_PS1() {
-    case "$TERM" in
-        dumb)
-            echo '% '
-            ;;
-        *)
-            case ${USER} in
-                mitch) echo -n "\[\e[1;35m\]m\[\e[0;32m\]i\[\e[0;33m\]t\[\e[0;34m\]c\[\e[1;31m\]h\[\e[1;36m\] \W$(_parse_branch)\[\e[1;37m\] " ;;
-                root)  echo -n "\[\e[1;37m\]root \W " ;;
-                *)     echo -n '% \W '
-            esac
+        # -*-*-*-*-*- color incrementing per char -*-*-*-*-*-*-*-*-*-*
+        code=1
+        printf '%s\n' "$USER" | fold -w 1 | while read -r c ; do
+            printf '%s' "\[\e[1;3${code}m\]$c"
+            code=$(( $code + 1 ))
+        done
+        printf '%s' "\[\e[1;3$(( ${#USER} + 1 ))m\] \W \[\e[1;3$(( ${#USER} + 2 ))m\]"
+        set -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
+        [ "$1" ] && printf '(%s) ' "$1"
+        printf '%s' '\[\e[1;37m\]' # clear formatting
+        # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+        ;;
+        *) printf '%s' '% '
     esac
 }
 
@@ -83,7 +102,7 @@ c() {
     elif [ -f "$1" ] ; then
         cat -- "$1"
     else
-        clear
+        clear ; cd .
     fi
 }
 
@@ -126,11 +145,12 @@ a t1='tail -n 1'
 a cmd=command
 a pk='pkill -x'
 a pg='pgrep -x'
+a mna=man
 
 # common program aliases
 a diff='diff -u'
 a less='less -QRd'
-a {rs,rsync}='rsync -rtvuh --progress --delete --partial' #-c
+a rsync='rsync -rtvuh --progress --delete --partial' #-c
 a scp='scp -rp'
 a hme='htop -u ${USER}'
 a hroot='htop -u root'
@@ -195,9 +215,10 @@ reload() {
 } >/dev/null 2>&1
 
 w3m() {
-    [ "$1" ] || set https://duckduckgo.com/lite
-    command w3m -F "$@"
+    [ "$1" ] || set -- https://duckduckgo.com/lite
+    command w3m -F -s -graph -no-mouse -o auto_image=FALSE "$*"
 }
+ddg() { w3m https://duckduckgo.com/lite/?q="$*" ; }
 a wdump='w3m -dump'
 
 ytdl() { 

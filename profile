@@ -15,6 +15,7 @@
 export DOTS=~/src/dots
 export MPV_OPTS='--really-quiet --sub-auto=no --gapless-audio'
 export MENU_PROG=~/bin/wrapper/menu
+export MUPDF_TINT=e8e8e8
 
 umask 022
 ulimit -c 0
