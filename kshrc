@@ -163,9 +163,9 @@ a hroot='htop -u root'
 a w=which
 a py=python3.7
 a dm='dmesg | tail -n 20'
-a {feh,mpv}=opn
 a branch='git branch'
 a click='xdotool click 1'
+a {feh,mpv}=opn
 
 dl() { curl -q -L -C - -# --url "$1" --output "$(basename "$1")" ; }
 a wget=dl
@@ -175,7 +175,7 @@ a weather='curl -s wttr.in/madison,sd?u0TQ'
 a forecast='curl -s http://wttr.in/madison,sd?u | \
    tail -n 33 | sed $\ d | sed $\ d'
 
-a jpg='find . -type f -name "*.jp*" -exec jpegoptim -s {} \;'
+a jpg='find . -type f -iname "*.jp*" -exec jpegoptim -s {} \;'
 
 mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
@@ -406,3 +406,12 @@ a anime='n -f ~/files/anime.txt'
 a games='n -f ~/files/games.txt'
 
 a shuffle='play -r ~/music'
+
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+txt2pdf() {
+    [ -f "$1" ] || exit 1
+    # -h "header string"
+    pr -d "$1" | mandoc -T pdf >"${1%.txt}".pdf
+}

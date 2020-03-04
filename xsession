@@ -3,6 +3,9 @@
 # http://github.com/mitchweaver/dots
 #
 
+DOTS=~/src/dots
+. $DOTS/profile
+
 xrdb load $DOTS/Xresources
 
 rm -f ~/.cache/font-config/*.cache*
@@ -26,9 +29,8 @@ case $myname in
 esac
 
 background &
-bright -s 100 &
+# bright -s 100 &
+xbacklight -set 100 &
 vol -s 50 &
 
-while type dwm >/dev/null ; do
-    dwm && exit || continue
-done
+exec dwm

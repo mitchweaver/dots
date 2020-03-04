@@ -39,7 +39,7 @@ PATH=$PATH:${HOME}/src/ascii
 # PATH=$PATH:/usr/games
 export PATH
 
-MANPATH=/usr/share/man:/usr/local/share/man:/usr/local/man
+MANPATH=/usr/share/man:/usr/local/share/man:/usr/local/man:$MANPATH
 MANPATH=~/.local/share/man:$MANPATH
 export MANPATH
 
@@ -77,5 +77,3 @@ export _JAVA_AWT_WM_NONREPARENTING=1 # fix for many java apps
 
 # various programs
 export HTOPRC=$DOTS/htoprc
-
-pgrep X >/dev/null || launchx
