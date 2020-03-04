@@ -14,7 +14,7 @@
 # my vars
 export DOTS=~/src/dots
 export MENU_PROG=~/bin/wrapper/menu
-export MPV_OPTS='--really-quiet --sub-auto=no --gapless-audio'
+export MPV_OPTS="--really-quiet --include=$DOTS/mpv.conf"
 
 # if [ -f ~/.cache/wal/colors ] ; then
     # read -r bg <~/.cache/wal/colors
