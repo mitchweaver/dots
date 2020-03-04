@@ -123,7 +123,7 @@ a lsf='l "$PWD"/*'
 a {cls,csl,cl,lc}='c;l'
 a {e,ech,eho}=echo
 a {g,gr,gre,Grep,gerp,grpe}=grep
-a pgrpe=pgrep
+a {pg,pgrpe}=pgrep
 a dg='d | g -i'
 a lg='ls | g -i'
 a cp='cp -irv'
@@ -145,7 +145,6 @@ a h1='head -n 1'
 a t1='tail -n 1'
 a cmd=command
 a pk='pkill -x'
-a pg='pgrep -x'
 a mna=man
 
 # common program aliases
@@ -176,12 +175,17 @@ mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
 
+ps() {
+    [ "$1" ] || set -- -Auxww
+    cmd ps "$@"
+}
+psg() { ps | g "$*" | g -v "grep $*" ; }
+
 # openbsd
 a sg='sysctl | grep -i'
 a disks='sysctl -n hw.disknames'
 a poweroff='doas halt -p'
 a net='doas sh /etc/netstart $(interface)'
-a games='export PATH="/usr/games:$PATH"; echo "/usr/games added to your \$PATH"'
 
 # make
 a {make,mak,mk}="make -j${NPROC:-1}"
@@ -304,6 +308,7 @@ a gV='_g /var'
 a gE='_g /etc'
 a gss='_g ~/src/suckless'
 a gssd='_g ~/src/suckless/dwm'
+a gsd='_g ~/src/dots'
 
 mT() { mv "$@" /tmp  ; }
 YT() { cp "$@" /tmp  ; }
@@ -387,17 +392,6 @@ a cmptn='pgrep -x compton ; compton --config ${HOME}/src/dots/compton.conf -b'
 a heart='printf "%b\n" "\xe2\x9d\xa4"'
 
 a hw='n -f ~/files/hw.txt'
-
-bkm() {
-    if [ "$1" ] ; then
-        echo "$*" >>~/files/bkm.txt
-    else
-        $EDITOR ~/files/bkm.txt
-    fi
-}
-
-ps() {
-    [ "$1" ] || set -- -Auxww
-    cmd ps "$@"
-}
-psg() { ps | g "$*" | g -v "grep $*" ; }
+a words='n -f ~/files/words.txt'
+a bkm='n -f ~/files/bkm.txt'
+a games='n -f ~/files/games.txt'

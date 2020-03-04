@@ -15,8 +15,13 @@
 export DOTS=~/src/dots
 export MENU_PROG=~/bin/wrapper/menu
 export MPV_OPTS='--really-quiet --sub-auto=no --gapless-audio'
-export MUPDF_OPTS='-r 120 -C #d9d5ba'
-export MUPDF_TINT=e8e8e8
+
+# if [ -f ~/.cache/wal/colors ] ; then
+    # read -r bg <~/.cache/wal/colors
+    # export MUPDF_OPTS="-C ${bg#?}"
+# else
+    export MUPDF_OPTS='-C d9d5ba'
+# fi
 
 umask 022
 ulimit -c 0
@@ -31,6 +36,7 @@ PATH=/usr/local/bin:/usr/local/sbin:$PATH
 PATH=~/bin:${HOME}/.local/bin:$PATH
 PATH=$PATH:$(printf '%s:' ${HOME}/bin/*/)
 PATH=$PATH:${HOME}/src/ascii
+# PATH=$PATH:/usr/games
 export PATH
 
 MANPATH=/usr/share/man:/usr/local/share/man:/usr/local/man

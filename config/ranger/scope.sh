@@ -58,21 +58,10 @@ if [ "$preview_images" = "True" ]; then
     esac
 fi
 
-# case "$extension" in
-    # PDF documents:
-    # pdf)
-        # try pdftoppm -jpeg -singlefile "${FILE_PATH}" "${IMAGE_CACHE_PATH//.jpg}" && exit 6
-        # try pdftotext -l 10 -nopgbrk -q "$path" - && \
-        #     { dump | trim | fmt -s -w $width; exit 0; } || exit 1;;
-    # md|markdown|markd)
-    # BitTorrent Files
-    # torrent)
-        # try transmission-show "$path" && { dump | trim; exit 5; } || exit 1;;
-    # HTML Pages:
-    # htm|html|xhtml)
-        # try w3m    -dump "$path" && { dump | trim | fmt -s -w $width; exit 4; }
-        # ;; # fall back to highlight/cat if the text browsers fail
-# esac
+case "$extension" in
+    # IGNORE:
+    pdf|epub|mobi) exit 1;;
+esac
 
 case "$mimetype" in
     text/* | */xml |*/diff | */sh | */bash | */ksh )

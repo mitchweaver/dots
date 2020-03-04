@@ -68,7 +68,7 @@ noremap ; :
 " ----- colors -------------------- 
 " set background=dark
 set background=light
-colorscheme wal
+" colorscheme wal
 "  --------------------------------
 
 " ---- syntax stuff -------------
