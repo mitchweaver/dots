@@ -404,3 +404,5 @@ a shows='n -f ~/files/shows.txt'
 a movies='n -f ~/files/movies.txt'
 a anime='n -f ~/files/anime.txt'
 a games='n -f ~/files/games.txt'
+
+a shuffle='play -r ~/music'

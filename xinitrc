@@ -17,10 +17,13 @@ xset m 0 0 &
 xset b off &
 xhost +local: >/dev/null &
 
-# enable scrolling with thinkpad trackpoint (openbsd)
-xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation' 1 &
-xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Button' 2 &
-xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Axes' 6 7 4 5 &
+read -r myname </etc/myname
+case $myname in
+    x200) # enable scrolling with thinkpad trackpoint (openbsd)
+        xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation' 1 &
+        xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Button' 2 &
+        xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Axes' 6 7 4 5 &
+esac
 
 background &
 bright -s 100 &
