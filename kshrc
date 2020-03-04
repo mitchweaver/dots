@@ -109,7 +109,13 @@ c() {
 
 case "$TERM" in
     dumb) a ls='ls -F' ;;
-       *) ls() { exa -F "$@" 2>/dev/null || command ls -F "$@" ; }
+       *)
+           if type exa >/dev/null ; then
+               a ls='exa -F --group-directories-first'
+               a {tree,lst}='exa -F -T'
+           else
+               a ls='ls -F'
+           fi
 esac
 
 # generic aliases
@@ -394,4 +400,7 @@ a heart='printf "%b\n" "\xe2\x9d\xa4"'
 a hw='n -f ~/files/hw.txt'
 a words='n -f ~/files/words.txt'
 a bkm='n -f ~/files/bkm.txt'
+a shows='n -f ~/files/shows.txt'
+a movies='n -f ~/files/movies.txt'
+a anime='n -f ~/files/anime.txt'
 a games='n -f ~/files/games.txt'
