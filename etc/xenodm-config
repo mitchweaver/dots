@@ -16,5 +16,5 @@ DisplayManager._0.reset:        /etc/X11/xenodm/TakeConsole
 DisplayManager.*.authName:  MIT-MAGIC-COOKIE-1
 
 ! -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-DisplayManager._0.autoLogin: mitch
+! DisplayManager._0.autoLogin: mitch
 ! -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

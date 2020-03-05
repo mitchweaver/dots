@@ -1,7 +1,7 @@
 " Neovim config file                  "
 " http://github.com/mitchweaver/dots  "
 " " " " " " " " " " " " " " " " " " " "
-set runtimepath^=~/src/dots/nvim runtimepath+=~/src/dots/nvim/after
+set runtimepath^=~/etc/nvim runtimepath+=~/etc/nvim/after
 let &packpath = &runtimepath
 
 " unbind space for everything but leader
@@ -11,7 +11,7 @@ let mapleader=" "
 " -*-*-*-*-*-*-*-* Plugins *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set nocompatible
 filetype off
-call plug#begin('~/src/dots/nvim/vim-plug')
+call plug#begin('~/etc/nvim/vim-plug')
 
 Plug 'vimwiki/vimwiki' " the ultimate note taking system
 Plug 'ap/vim-buftabline' " display buffers along top as tabs
@@ -67,7 +67,7 @@ noremap ; :
 
 " ----- colors -------------------- 
 " set background=dark
-set background=light
+" set background=light
 colorscheme wal
 "  --------------------------------
 
@@ -153,6 +153,10 @@ map <silent>tj :bprev<CR>
 map <silent>td :bd<cr>
 " -------------------------------------------------
 
+" make < and > retain selection
+vnoremap < <gv
+vnoremap > >gv
+
 map Q @q
 
 set ignorecase " case insensitive search
@@ -193,11 +197,11 @@ if exists(':PlugInstall')
     autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
     let wiki = {}
-    let g:vimwikidir = "/home/mitch/files/vimwiki"
+    let g:vimwikidir = "/home/mitch/usr/files/vimwiki"
     let wiki.path = g:vimwikidir
     let g:vimwiki_list=[wiki]
     let g:vimwiki_list = [
-        \{'path': '~/files/vimwiki/personal.wiki',    'syntax': 'markdown', 'ext': '.md'},
+        \{'path': '~/usr/files/vimwiki/personal.wiki',    'syntax': 'markdown', 'ext': '.md'},
     \]
     let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 

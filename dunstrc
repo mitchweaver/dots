@@ -27,7 +27,6 @@
     hide_duplicate_count = true
     show_indicators = yes
     icon_position = right
-    icon_folders = /usr/share/icons/Paper/48x48@2x/status/:/usr/share/icons/Paper/48x48@2x/devices/:/usr/share/icons/Paper/48x48@2x/apps:/usr/share/icons/Paper/48x48@2x/categories:/usr/share/icons/Paper/48x48@2x/emblems
     sticky_history = yes
     history_length = 20
     always_run_script = true

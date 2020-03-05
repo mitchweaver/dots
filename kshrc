@@ -14,14 +14,12 @@
 #  #  "m  "mmm"  #   #   #     "#mm"
 #
 
-ulimit -c 0
-
 set -o bgnice
 set -o trackall
 set -o csh-history
 set -o vi
 
-export HISTFILE=${HOME}/.cache/.ksh_history \
+export HISTFILE=~/.cache/.ksh_history \
        HISTCONTROL=ignoreboth \
        HISTSIZE=500 \
        SAVEHIST=500
@@ -48,39 +46,18 @@ cd() {
 PS1() {
     case $TERM in
         *256color)
-        # -*-*-*-*-*- random color ever char -*-*-*-*-*-*-*-*-*-*-*-*
-        # getcode() {
-        #     code=$(( $RANDOM % 10 ))
-        #     case $code in
-        #         0) getcode ;;
-        #         7) getcode ;;
-        #         8) getcode ;;
-        #         9) getcode ;;
-        #         *) printf '%s' "\[\e[1;3${code}m\]"
-        #     esac
-        # }
-        # printf '%s\n' "$USER" | fold -w 1 | while read -r c ; do
-        #     printf '%s' "$(getcode)$c"
-        # done
-        # printf '%s' "$(getcode) \W $(getcode)"
-        # set -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
-        # [ "$1" ] && printf '(%s) ' "$1"
-        # printf '%s' '\[\e[1;37m\]' # clear formatting
-        # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-        # -*-*-*-*-*- color incrementing per char -*-*-*-*-*-*-*-*-*-*
-        code=1
-        printf '%s\n' "$USER" | fold -w 1 | while read -r c ; do
-            printf '%s' "\[\e[1;3${code}m\]$c"
-            code=$(( $code + 1 ))
-        done
-        printf '%s' "\[\e[1;3$(( ${#USER} + 1 ))m\] \W \[\e[1;3$(( ${#USER} + 2 ))m\]"
-        set -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
-        [ "$1" ] && printf '(%s) ' "$1"
-        printf '%s' '\[\e[1;37m\]' # clear formatting
-        # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-        ;;
-        *) printf '%s' '% '
+            code=1
+            printf '%s\n' "$USER" | fold -w 1 | while read -r c ; do
+                printf '%s' "\[\e[1;3${code}m\]$c"
+                code=$(( $code + 1 ))
+            done
+            printf '%s' "\[\e[1;3$(( ${#USER} + 1 ))m\] \W \[\e[1;3$(( ${#USER} + 2 ))m\]"
+            set -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
+            [ "$1" ] && printf '(%s) ' "$1"
+            printf '%s' '\[\e[1;37m\]' # clear formatting
+            ;;
+        *)
+            printf '%s' '% '
     esac
 }
 
@@ -94,9 +71,6 @@ cd .
 # begin generic aliases
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-# hack!
-alias a=alias
-
 # dynamic 'c' utility
 c() { 
     if [ -f "$1" ] ; then
@@ -109,74 +83,72 @@ c() {
 }
 
 case "$TERM" in
-    dumb) a ls='ls -F' ;;
+    dumb)
+        alias ls='ls -F'
+        ;;
        *)
            if type exa >/dev/null ; then
-               a ls='exa -F --group-directories-first'
-               a {tree,lst}='exa -F -T'
+               alias ls='exa -F --group-directories-first'
+               alias tree='exa -F -T'
            else
-               a ls='ls -F'
+               alias ls='ls -F'
            fi
 esac
 
 # generic aliases
-a {cc,cll,clear,clar,clea,clera}=clear
-a {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi,ex}=exit
-a {l,sls,sl}=ls
-a {ll,lll}='l -l'
-a la='l -a'
-a {lla,lal}='l -al'
-a lsf='l "$PWD"/*'
-a {cls,csl,cl,lc}='c;l'
-a {e,ech,eho}=echo
-a {g,gr,gre,Grep,gerp,grpe}=grep
-a {pg,pgrpe}=pgrep
-a dg='d | g -i'
-a lg='ls | g -i'
-a cp='cp -irv'
-a mv='mv -iv'
-a {mkdir,mkd,mkdr}='mkdir -p'
-a df='df -h'
-a bn=basename
-a date="command date '+%a %b %d - %I:%M %p'"
-a dmegs=dmesg
-a h='head -n 15'
-a t='tail -n 15'
-a tf='tail -f'
-a ex=export
-a cx='chmod +x'
-a {reboot,restart}='doas reboot'
-a chroot='doas chroot'
-a su='su -'
-a h1='head -n 1'
-a t1='tail -n 1'
-a cmd=command
-a pk='pkill -x'
-a mna=man
+alias {cc,cll,clear,clar,clea,clera}=clear
+alias {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi,ex}=exit
+alias {l,sls,sl}=ls
+alias {ll,lll}='l -l'
+alias la='l -a'
+alias {lla,lal}='l -al'
+alias lsf='l "$PWD"/*'
+alias {cls,csl,cl,lc}='c;l'
+alias {e,ech,eho}=echo
+alias {g,gr,gre,Grep,gerp,grpe}=grep
+alias {pg,pgrpe}=pgrep
+alias dg='d | g -i'
+alias lg='ls | g -i'
+alias cp='cp -irv'
+alias mv='mv -iv'
+alias {mkdir,mkd,mkdr}='mkdir -p'
+alias df='df -h'
+alias bn=basename
+alias dmegs=dmesg
+alias h='head -n 15'
+alias t='tail -n 15'
+alias tf='tail -f'
+alias ex=export
+alias cx='chmod +x'
+alias {reboot,restart}='doas reboot'
+alias su='su -'
+alias h1='head -n 1'
+alias t1='tail -n 1'
+alias cmd=command
+alias pk='pkill -x'
+alias mna=man
 
 # common program aliases
-a diff='diff -u'
-a less='less -QRd'
-a rsync='rsync -rtvuh --progress --delete --partial' #-c
-a scp='scp -rp'
-a hme='htop -u ${USER}'
-a hroot='htop -u root'
-a w=which
-a py=python3.7
-a dm='dmesg | tail -n 20'
-a branch='git branch'
-a click='xdotool click 1'
-a {feh,mpv}=opn
+alias diff='diff -u'
+alias less='less -QRd'
+alias rsync='rsync -rtvuh --progress --delete --partial' #-c
+alias scp='scp -rp'
+alias w=which
+alias py=python3.7
+alias dm='dmesg | tail -n 20'
+alias branch='git branch'
+alias click='xdotool click 1'
+alias {feh,mpv}=opn
 
 dl() { curl -q -L -C - -# --url "$1" --output "$(basename "$1")" ; }
-a wget=dl
+alias wget=dl
 
 # weather
-a weather='curl -s wttr.in/madison,sd?u0TQ'
-a forecast='curl -s http://wttr.in/madison,sd?u | \
+alias weather='curl -s wttr.in/madison,sd?u0TQ'
+alias forecast='curl -s http://wttr.in/madison,sd?u | \
    tail -n 33 | sed $\ d | sed $\ d'
 
-a jpg='find . -type f -iname "*.jp*" -exec jpegoptim -s {} \;'
+alias jpg='find . -type f -iname "*.jp*" -exec jpegoptim -s {} \;'
 
 mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
@@ -189,16 +161,33 @@ ps() {
 psg() { ps | g "$*" | g -v "grep $*" ; }
 
 # openbsd
-a sg='sysctl | grep -i'
-a disks='sysctl -n hw.disknames'
-a poweroff='doas halt -p'
-a net='doas sh /etc/netstart $(interface)'
+alias sg='sysctl | grep -i'
+alias disks='sysctl -n hw.disknames'
+alias poweroff='doas halt -p'
+alias net='doas sh /etc/netstart $(interface)'
 
 # make
-a {make,mak,mk}="make -j${NPROC:-1}"
-a {makec,makc,mkc}='make clean'
-a {makei,maki,mki}='make install'
-a {makeu,maku,mku}='make uninstall'
+alias {make,mak,mk}="make -j${NPROC:-1}"
+alias {makec,makc,mkc}='make clean'
+alias {makei,maki,mki}='make install'
+alias {makeu,maku,mku}='make uninstall'
+
+# network
+alias traffic='netstat -w1 -b -I iwn0'
+alias dump_all="doas tcpdump -n -i iwn0"
+alias dump_web="doas tcpdump -n -i iwn0 port 80 or port 443 or port 53"
+alias dump_http="doas tcpdump -n -i iwn0 port 80 or port 443"
+alias dump_dns="doas tcpdump -n -i iwn0 port 53"
+alias dump_ssh="doas tcpdump -n -i iwn0 port 22"
+ping() {
+    [ "$1" ] || set eff.org
+    command ping -L -n -s 1 -w 2 $@
+}
+pingpi() { ping $(grep -A 1 'Host pi' .ssh/config | grep -oE '[0-9]+.*') ; }
+alias p=ping
+alias pp=pingpi
+alias p8='ping 8.8.8.8'
+alias cv='curl -v'
 
 unalias r
 r() { ranger "$@" ; c ; }
@@ -211,27 +200,12 @@ hg() { [ "$1" ] && grep -i "$*" $HISTFILE | grep -v '^hg' | head -n 20 ; }
 
 cheat() { curl -s cheat.sh/$1 ; }
 
-reload() {
-    cd
-    . ~/src/dots/kshrc
-    xrdb load ~/src/dots/Xresources
-    xmodmap ~/src/dots/Xmodmap
-    xset m 0 0 
-    xset b off 
-    rm -f ~/.cache/font-config/*.cache*
-    find ~/files/fonts -type f -name fonts.dir | while read -r dir ; do
-        xset +fp "${dir%/*}"
-    done
-    xset fp rehash
-    fc-cache
-} >/dev/null 2>&1
-
 w3m() {
     [ "$1" ] || set -- https://duckduckgo.com/lite
     command w3m -F -s -graph -no-mouse -o auto_image=FALSE "$@"
 }
 ddg() { w3m https://duckduckgo.com/lite/?q="$*" ; }
-a wdump='w3m -dump'
+alias wdump='w3m -dump'
 
 ytdl() { 
     for i ; do
@@ -251,7 +225,7 @@ ytdlpm() {
     done
 }
 
-a getres='ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0'
+alias getres='ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0'
 
 rgb2hex() { printf "#%02x%02x%02x\n" "$@" ; }
 
@@ -274,15 +248,15 @@ png2jpg() {
 }
 
 # translate-shell
-a trans='trans -no-auto -b "$@"'
+alias trans='trans -no-auto -b "$@"'
 # note: $1 needs to be language code, ex: 'de'
-a rtrans='command trans -from en -to'
-a rde='rtrans de'
+alias rtrans='command trans -from en -to'
+alias rde='rtrans de'
 
 # ----------------- movement commands -----------------------
-a {..,cd..}='cd ..'
-a ...='.. ; ..'
-a ....='.. ; ...'
+alias {..,cd..}='cd ..'
+alias ...='.. ; ..'
+alias ....='.. ; ...'
 
 # directory marking
 # usage: 'm1' = mark 1
@@ -294,75 +268,67 @@ done
 
 _g() { _a=$1 ; shift ; cd $_a/"$*" ; ls ; }
 
-a gB="_g /bin"
-a gT="_g /tmp"
-a gM='_g /mnt'
+alias gB="_g /bin"
+alias gT="_g /tmp"
+alias gM='_g /mnt'
 
-a gb="_g ~/bin"
-a ge="_g ~/env"
-a gt="_g ~/tmp"
-a gs="_g ~/src"
-a gf="_g ~/files"
-a gi="_g ~/images"
-a gm="_g ~/music"
-a gv="_g ~/videos"
-a gd="_g ~/Downloads"
-a gcf='_g ~/src/dots/config'
-a g_='_g ~/tmp/trash'
-a gyt='_g ~/videos/youtube'
-a gW='_g ~/images/wallpapers'
-a gV='_g /var'
-a gE='_g /etc'
-a gss='_g ~/src/suckless'
-a gssd='_g ~/src/suckless/dwm'
-a gsd='_g ~/src/dots'
+alias gb="_g ~/bin"
+alias gt="_g ~/tmp"
+alias gs="_g ~/src"
+alias gf="_g $XDG_DOCUMENTS_DIR"
+alias gi="_g $XDG_PICTURES_DIR"
+alias gm="_g $XDG_MUSIC_DIR"
+alias gv="_g $XDG_VIDEOS_DIR"
+alias gd="_g $XDG_DOWNLOAD_DIR"
+alias gcf='_g $DOTS/config'
+alias gyt='_g $XDG_VIDEOS_DIR/youtube'
+alias gytc='_g $XDG_VIDEOS_DIR/youtube/completed'
+alias gW='_g $XDG_PICTURES_DIR/wallpapers'
+alias gV='_g /var'
+alias gE='_g /etc'
+alias gss='_g ~/src/suckless'
+alias ge='_g $DOTS'
 
 mT() { mv "$@" /tmp  ; }
 YT() { cp "$@" /tmp  ; }
 
-Yf() { cp "$@" ~/files     ; }
-Yd() { cp "$@" ~/Downloads ; }
-Yi() { cp "$@" ~/images    ; }
-Ym() { cp "$@" ~/music     ; }
+Yf() { cp "$@" $XDG_DOCUMENTS_DIR     ; }
+Yd() { cp "$@" $XDG_DOWNLOAD_DIR ; }
+Yi() { cp "$@" $XDG_PICTURES_DIR    ; }
+Ym() { cp "$@" $XDG_MUSIC_DIR     ; }
+Yvi(){ cp "$@" $XDG_VIDEOS_DIR    ; }
 Ys() { cp "$@" ~/src       ; }
-Yvi(){ cp "$@" ~/videos    ; }
 Yb() { cp "$@" ~/bin ; }
 Yt() { cp "$@" ~/tmp ; }
-Ye() { cp "$@" ~/env ; }
-Y_() { cp "$@" ~/tmp/trash ; }
 
-mf() { mv "$@" ~/files     ; }
-md() { mv "$@" ~/Downloads ; }
-mi() { mv "$@" ~/images    ; }
-mm() { mv "$@" ~/music     ; }
+mf() { mv "$@" $XDG_DOCUMENTS_DIR     ; }
+md() { mv "$@" $XDG_DOWNLOAD_DIR ; }
+mi() { mv "$@" $XDG_PICTURES_DIR    ; }
+mm() { mv "$@" $XDG_MUSIC_DIR     ; }
 ms() { mv "$@" ~/src       ; }
-mvi(){ mv "$@" ~/videos    ; }
+mvi(){ mv "$@" $XDG_VIDEOS_DIR    ; }
 mb() { mv "$@" ~/bin ; }
-me() { mv "$@" ~/env ; }
 mt() { mv "$@" ~/tmp ; }
-m_() { mv "$@" ~/tmp/trash ; }
-mW() { mv "$@" ~/images/wallpapers ; }
+mW() { mv "$@" $XDG_PICTURES_DIR/wallpapers ; }
 
-a lD='ls ~/Downloads'
-a lt='ls ~/tmp'
-a lT='ls /tmp'
-a l_='ls ~/tmp/trash'
+alias lD='ls $XDG_DOWNLOAD_DIR'
+alias lt='ls ~/tmp'
+alias lT='ls /tmp'
 
-a profile='v ~/src/dots/profile'
-a {vssh,sshv}='v ~/.ssh/config'
+alias profile='$EDITOR $DOTS/profile'
+alias vssh='$EDITOR ~/.ssh/config'
 
-a vimrc="v ~/src/dots/nvim/nvimrc"
-a kshrc="v ~/src/dots/kshrc"
+alias vimrc="$EDITOR $DOTS/nvim/nvimrc"
+alias kshrc="$EDITOR $DOTS/kshrc"
 # ----------- end movement commands ------------------
 
 gud() {
-    # activate my PS1 git branch detection after
-    # git commands
+    # activate my PS1 git branch detection after git commands
     command gud "$@" ; cd .
 }
 
 recomp() { ~/src/suckless/build.sh "$@" ; }
-a rcp=recomp
+alias rcp=recomp
 
 cover() { curl -q "$1" -o cover.jpg ; }
 band()  { curl -q "$1" -o band.jpg  ; }
@@ -370,44 +336,16 @@ logo()  { curl -q "$1" -o logo.jpg  ; }
 
 addyt() { ytdl-queue -a "$1" ; }
 
-# net testing
-ping() {
-    [ "$1" ] || set eff.org
-    command ping -L -n -s 1 -w 2 $@
-}
-pingd() {
-    ping $(grep -E '([0-9].\.)+' /etc/resolv.conf | \
-        head -n 1 | awk '{print $2}')
-}
-pingpi() { ping $(grep -A 1 'Host pi' .ssh/config | grep -oE '[0-9]+.*') ; }
-a p=ping
-a pd=pingd
-a pp=pingpi
-a p8='ping 8.8.8.8'
-a cv='curl -v'
-a cvd='curl -v dns.watch'
-a cvg='curl -v google.com'
-
 cw() { [ "$1" ] && cat "$(which "$1")" ; }
 
-a cmptn='pgrep -x compton ; compton --config ${HOME}/src/dots/compton.conf -b'
+# alias heart='printf "%b\n" "\xe2\x9d\xa4"'
 
-a heart='printf "%b\n" "\xe2\x9d\xa4"'
-
-a hw='n -f ~/files/hw.txt'
-a words='n -f ~/files/words.txt'
-a bkm='n -f ~/files/bkm.txt'
-a shows='n -f ~/files/shows.txt'
-a movies='n -f ~/files/movies.txt'
-a anime='n -f ~/files/anime.txt'
-a games='n -f ~/files/games.txt'
-
-a shuffle='play -r ~/music'
+alias hw="n -f $XDG_DOCUMENTS_DIR/hw.txt"
+alias words="n -f $XDG_DOCUMENTS_DIR/words.txt"
+alias bkm="n -f $XDG_DOCUMENTS_DIR/bkm.txt"
+alias shows="n -f $XDG_DOCUMENTS_DIR/shows.txt"
+alias movies="n -f $XDG_DOCUMENTS_DIR/movies.txt"
+alias anime="n -f $XDG_DOCUMENTS_DIR/anime.txt"
+alias games="n -f $XDG_DOCUMENTS_DIR/games.txt"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-a traffic="doas tcpdump -n -i $(interface)"
-a traffic_web="doas tcpdump -n -i $(interface) port 80 or port 443 or port 53"
-a traffic_http="doas tcpdump -n -i $(interface) port 80 or port 443"
-a traffic_dns="doas tcpdump -n -i $(interface) port 53"
-a traffic_ssh="doas tcpdump -n -i $(interface) port 22"
