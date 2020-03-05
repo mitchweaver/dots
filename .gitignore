@@ -15,6 +15,7 @@ config/xbindkeysrc
 config/keys
 config/tint2
 config/wireshark
+*wireshark*
 config/QtProject.conf
 config/youtube-viewer
 config/GIMP*

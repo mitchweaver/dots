@@ -1,1 +1,11 @@
+# /etc/resolv.conf.tail
+#
+# The contents of this file is appended to
+# /etc/resolv.conf once dhclient has exited.
+#
+# Remember: order matters!
+#
+# bind - query domain name server
+# file - look for entry in /etc/hosts
+#
 lookup file bind

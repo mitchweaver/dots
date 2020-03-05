@@ -22,7 +22,7 @@ Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
 Plug 'airblade/vim-gitgutter' " git diffing along the left side
 Plug 'tpope/vim-surround' " surround stuff with stuff
 Plug 'dylanaraps/wal.vim' " pywal theme
-" Plug 'tpope/vim-repeat' " allows '.' for more things
+Plug 'tpope/vim-repeat' " allows '.' to do more things
 " Plug 'sheerun/vim-polyglot' " syntax highlighting
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 

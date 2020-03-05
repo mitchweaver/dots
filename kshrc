@@ -26,6 +26,7 @@ export HISTFILE=${HOME}/.cache/.ksh_history \
        HISTSIZE=500 \
        SAVEHIST=500
 
+# fuzzy finding cd
 cd() { 
     if [ "$1" ] ; then
         builtin cd --  "$1"  ||
@@ -97,11 +98,11 @@ cd .
 alias a=alias
 
 # dynamic 'c' utility
-c() {
-    if [ -d "$1" ] ; then
-        cd "$1"
-    elif [ -f "$1" ] ; then
+c() { 
+    if [ -f "$1" ] ; then
         cat -- "$1"
+    elif [ "$1" ] ; then
+        cd "$1"
     else
         clear
     fi
@@ -227,7 +228,7 @@ reload() {
 
 w3m() {
     [ "$1" ] || set -- https://duckduckgo.com/lite
-    command w3m -F -s -graph -no-mouse -o auto_image=FALSE "$*"
+    command w3m -F -s -graph -no-mouse -o auto_image=FALSE "$@"
 }
 ddg() { w3m https://duckduckgo.com/lite/?q="$*" ; }
 a wdump='w3m -dump'
@@ -307,8 +308,8 @@ a gm="_g ~/music"
 a gv="_g ~/videos"
 a gd="_g ~/Downloads"
 a gcf='_g ~/src/dots/config'
-a g_='_g ~/.trash'
-a gyt='_g ~/videos/youtube/completed'
+a g_='_g ~/tmp/trash'
+a gyt='_g ~/videos/youtube'
 a gW='_g ~/images/wallpapers'
 a gV='_g /var'
 a gE='_g /etc'
@@ -328,7 +329,7 @@ Yvi(){ cp "$@" ~/videos    ; }
 Yb() { cp "$@" ~/bin ; }
 Yt() { cp "$@" ~/tmp ; }
 Ye() { cp "$@" ~/env ; }
-Y_() { cp "$@" ~/.trash ; }
+Y_() { cp "$@" ~/tmp/trash ; }
 
 mf() { mv "$@" ~/files     ; }
 md() { mv "$@" ~/Downloads ; }
@@ -339,14 +340,13 @@ mvi(){ mv "$@" ~/videos    ; }
 mb() { mv "$@" ~/bin ; }
 me() { mv "$@" ~/env ; }
 mt() { mv "$@" ~/tmp ; }
-m_() { mv "$@" ~/.trash ; }
+m_() { mv "$@" ~/tmp/trash ; }
 mW() { mv "$@" ~/images/wallpapers ; }
-a trash=m_
 
 a lD='ls ~/Downloads'
 a lt='ls ~/tmp'
 a lT='ls /tmp'
-a l_='ls ~/.trash'
+a l_='ls ~/tmp/trash'
 
 a profile='v ~/src/dots/profile'
 a {vssh,sshv}='v ~/.ssh/config'
@@ -369,19 +369,16 @@ band()  { curl -q "$1" -o band.jpg  ; }
 logo()  { curl -q "$1" -o logo.jpg  ; }
 
 addyt() { ytdl-queue -a "$1" ; }
-addtorrent() { torrent-queue -a "$1" ; }
-
-sxiv() {
-    [ "$1" ] || set .
-    command sxiv -t "$1"
-}
 
 # net testing
 ping() {
     [ "$1" ] || set eff.org
     command ping -L -n -s 1 -w 2 $@
 }
-pingd() { ping $(dns) ; }
+pingd() {
+    ping $(grep -E '([0-9].\.)+' /etc/resolv.conf | \
+        head -n 1 | awk '{print $2}')
+}
 pingpi() { ping $(grep -A 1 'Host pi' .ssh/config | grep -oE '[0-9]+.*') ; }
 a p=ping
 a pd=pingd
@@ -407,11 +404,10 @@ a games='n -f ~/files/games.txt'
 
 a shuffle='play -r ~/music'
 
-
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-txt2pdf() {
-    [ -f "$1" ] || exit 1
-    # -h "header string"
-    pr -d "$1" | mandoc -T pdf >"${1%.txt}".pdf
-}
+a traffic="doas tcpdump -n -i $(interface)"
+a traffic_web="doas tcpdump -n -i $(interface) port 80 or port 443 or port 53"
+a traffic_http="doas tcpdump -n -i $(interface) port 80 or port 443"
+a traffic_dns="doas tcpdump -n -i $(interface) port 53"
+a traffic_ssh="doas tcpdump -n -i $(interface) port 22"

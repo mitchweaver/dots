@@ -1,6 +1,7 @@
 apmd_flags=-H
+unbound_flags=
+xenodm_flags=
 cron_flags=NO
 ntpd_flags=NO
-pf=NO
 smtpd_flags=NO
 sshd_flags=NO
