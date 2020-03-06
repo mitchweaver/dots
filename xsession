@@ -2,7 +2,11 @@
 # http://github.com/mitchweaver/dots
 #
 
-cleanup() {
+# -*-*-*-*-*-*-* run on exit *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+do_exit() {
+    ssh-add -D </dev/null
+    eval $(ssh-agent -s -k)
+
     rm -rf ~/tmp
     mkdir  ~/tmp
 
@@ -16,43 +20,25 @@ cleanup() {
            ~/.pki \
            ~/.cache/fontconfig \
            ~/.local
+
+    for pid in $_pids ; do
+        kill $pid
+    done
 }
-trap cleanup EXIT SIGINT SIGTERM
+trap do_exit EXIT INT TERM KILL
 
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# my vars
-export DOTS=~/etc
-export MENU_PROG=menu
-export MPV_OPTS="--really-quiet --include=$DOTS/mpv.conf"
-export MUPDF_OPTS='-C d9d5ba'
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# -*-*-*-*-*-*-* my vars *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+export DOTS=~/etc \
+       MENU_PROG=menu \
+       MPV_OPTS="--really-quiet --include=$DOTS/mpv.conf" \
+       MUPDF_OPTS='-C d9d5ba'
 
-PATH=/bin:/sbin:$PATH
-PATH=/usr/bin:/usr/sbin:/usr/X11R6/bin:$PATH
-PATH=/usr/local/bin:/usr/local/sbin:$PATH
-PATH=${HOME}/bin:${HOME}/usr/bin:$PATH
-PATH=$PATH:$(printf '%s:' ${HOME}/bin/*/)
-PATH=$PATH:${HOME}/src/ascii
-export PATH
-
-MANPATH=/usr/share/man:/usr/local/share/man:/usr/local/man:$MANPATH
-MANPATH=~/usr/share/man:$MANPATH
-export MANPATH
-
-export ENV=$DOTS/kshrc
-export EDITOR=v
-export BROWSER=chrome
-export PAGER=less MANPAGER=less
-export LESS=-ieR
-
-export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
-export NPROC=$(sysctl -n hw.ncpu)
-
-export LANG='en_US.UTF-8' \
-       LANGUAGE='en_US.UTF-8' \
-       LC_ALL='en_US.UTF-8' \
-       LOCALE='en_US.UTF-8' \
-       LC_CTYPE='en_US.UTF-8'
+export ENV=$DOTS/kshrc \
+       EDITOR=~/bin/wrapper/v \
+       BROWSER=~/bin/wrapper/brws \
+       PAGER=less \
+       MANPAGER=less \
+       LESS=-ieR
 
 export XDG_CONFIG_HOME=$DOTS/config \
        XDG_DOWNLOAD_DIR=~/Downloads \
@@ -66,8 +52,29 @@ export XDG_CONFIG_HOME=$DOTS/config \
        XDG_PUBLICSHARE_DIR=~/.cache \
        XDG_TEMPLATES_DIR=~/.cache
 
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# -*-*-*-*-*-*-* system vars *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+PATH=/bin:/sbin:$PATH
+PATH=/usr/bin:/usr/sbin:/usr/X11R6/bin:$PATH
+PATH=/usr/local/bin:/usr/local/sbin:$PATH
+PATH=${HOME}/bin:${HOME}/usr/bin:$PATH
+PATH=$PATH:$(printf '%s:' ${HOME}/bin/*/)
+PATH=$PATH:${HOME}/src/ascii
+export PATH
 
+MANPATH=/usr/share/man:/usr/local/share/man:/usr/local/man:$MANPATH
+MANPATH=~/usr/share/man:$MANPATH
+export MANPATH
+
+export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
+export NPROC=$(sysctl -n hw.ncpu)
+
+export LANG='en_US.UTF-8' \
+       LANGUAGE='en_US.UTF-8' \
+       LC_ALL='en_US.UTF-8' \
+       LOCALE='en_US.UTF-8' \
+       LC_CTYPE='en_US.UTF-8'
+
+# -*-*-*-*-*-*-*-* one-off commands *-*-*-*-*-*-*-*-*-*-*-*-*-*
 umask 022
 ulimit -c 0
 
@@ -89,16 +96,21 @@ background &
 xbacklight -set 100 &
 vol -s 50 &
 
-pgrep xidle    >/dev/null || xidle -timeout 300 -ne -program ~/bin/lck &
-# pgrep compton  >/dev/null || compton --config $DOTS/compton.conf &
-pgrep dunst    >/dev/null || dunst -conf $DOTS/dunstrc &
-pgrep slstatus >/dev/null || slstatus &
-pgrep xbanish  >/dev/null || xbanish  &
-pgrep sctd     >/dev/null || sctd     &
-pgrep batmon   >/dev/null || batmon   &
-pgrep clip     >/dev/null || clip -d  &
-pgrep ytdlq    >/dev/null || ytdlq -d &
+# -*-*-*-*-*-*-*-* user daemons *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+_pids=
+
+# compton --config $DOTS/compton.conf       & _pids="$_pids $!"
+xidle -area 6 -timeout 300 -sw -program lck & _pids="$_pids $!"
+dunst -conf $DOTS/dunstrc                   & _pids="$_pids $!"
+slstatus                                    & _pids="$_pids $!"
+xbanish                                     & _pids="$_pids $!"
+sctd                                        & _pids="$_pids $!"
+batmon                                      & _pids="$_pids $!"
+clip -d                                     & _pids="$_pids $!"
+ytdlq -d                                    & _pids="$_pids $!"
+
+# -*-*-*-*-*-*-*-* start *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 dwm
 
-exit
+do_exit

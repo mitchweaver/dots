@@ -174,11 +174,11 @@ alias {makeu,maku,mku}='make uninstall'
 
 # network
 alias traffic='netstat -w1 -b -I iwn0'
-alias dump_all="doas tcpdump -n -i iwn0"
-alias dump_web="doas tcpdump -n -i iwn0 port 80 or port 443 or port 53"
-alias dump_http="doas tcpdump -n -i iwn0 port 80 or port 443"
-alias dump_dns="doas tcpdump -n -i iwn0 port 53"
-alias dump_ssh="doas tcpdump -n -i iwn0 port 22"
+alias dumpall="doas tcpdump -n -i iwn0"
+alias dumpweb="doas tcpdump -n -i iwn0 port 80 or port 443 or port 53"
+alias dumphttp="doas tcpdump -n -i iwn0 port 80 or port 443"
+alias dumpdns="doas tcpdump -n -i iwn0 port 53"
+alias dumpssh="doas tcpdump -n -i iwn0 port 22"
 ping() {
     [ "$1" ] || set eff.org
     command ping -L -n -s 1 -w 2 $@

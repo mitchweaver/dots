@@ -1,0 +1,5 @@
+#!/bin/sh
+
+if test -x /usr/local/bin/feh && [ -f /etc/X11/xenodm/openbsd_wall.jpg ] ; then
+	/usr/local/bin/feh --no-fehbg --bg-fill /etc/X11/xenodm/openbsd_wall.jpg
+fi
