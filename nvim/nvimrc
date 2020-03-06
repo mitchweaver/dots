@@ -24,7 +24,6 @@ Plug 'tpope/vim-surround' " surround stuff with stuff
 Plug 'dylanaraps/wal.vim' " pywal theme
 Plug 'tpope/vim-repeat' " allows '.' to do more things
 " Plug 'sheerun/vim-polyglot' " syntax highlighting
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 call plug#end()
 filetype indent plugin on

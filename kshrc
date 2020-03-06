@@ -138,10 +138,12 @@ alias py=python3.7
 alias dm='dmesg | tail -n 20'
 alias branch='git branch'
 alias click='xdotool click 1'
-alias {feh,mpv}=opn
+
+feh()   { command feh   $FEH_OPTS   "$@" ; }
+mpv()   { command mpv   $MPV_OPTS   "$@" ; }
+mupdf() { command mupdf $MUPDF_OPTS "$@" ; }
 
 dl() { curl -q -L -C - -# --url "$1" --output "$(basename "$1")" ; }
-alias wget=dl
 
 # weather
 alias weather='curl -s wttr.in/madison,sd?u0TQ'
@@ -183,7 +185,7 @@ ping() {
     [ "$1" ] || set eff.org
     command ping -L -n -s 1 -w 2 $@
 }
-pingpi() { ping $(grep -A 1 'Host pi' .ssh/config | grep -oE '[0-9]+.*') ; }
+pingpi() { ping $(grep -A 1 'Host pi' ~/.ssh/config | grep -oE '[0-9]+.*') ; }
 alias p=ping
 alias pp=pingpi
 alias p8='ping 8.8.8.8'
@@ -334,7 +336,8 @@ cover() { curl -q "$1" -o cover.jpg ; }
 band()  { curl -q "$1" -o band.jpg  ; }
 logo()  { curl -q "$1" -o logo.jpg  ; }
 
-addyt() { ytdl-queue -a "$1" ; }
+addyt() { ytdlq -a "$1" ; }
+tfyt() { tf ~/usr/videos/youtube/ytdlq-*.log ; }
 
 cw() { [ "$1" ] && cat "$(which "$1")" ; }
 

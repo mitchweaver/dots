@@ -21,17 +21,20 @@ do_exit() {
            ~/.cache/fontconfig \
            ~/.local
 
-    for pid in $_pids ; do
-        kill $pid
-    done
+    # kill daemons, asking nicely first
+    for pid in $_pids ; do kill $pid ; done
+    sleep 1
+    for pid in $_pids ; do kill -0 $pid && kill -9 $pid ; done 2>/dev/null
 }
 trap do_exit EXIT INT TERM KILL
 
 # -*-*-*-*-*-*-* my vars *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-export DOTS=~/etc \
-       MENU_PROG=menu \
-       MPV_OPTS="--really-quiet --include=$DOTS/mpv.conf" \
-       MUPDF_OPTS='-C d9d5ba'
+export DOTS=~/etc
+
+export MENU_PROG=menu \
+       MPV_OPTS="--include=$DOTS/mpv.conf --really-quiet --force-seekable=yes" \
+       MUPDF_OPTS='-C d9d5ba' \
+       SUBS_FILE=~/usr/files/subs.txt
 
 export ENV=$DOTS/kshrc \
        EDITOR=~/bin/wrapper/v \
@@ -99,8 +102,9 @@ vol -s 50 &
 # -*-*-*-*-*-*-*-* user daemons *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 _pids=
 
-# compton --config $DOTS/compton.conf       & _pids="$_pids $!"
-xidle -area 6 -timeout 300 -sw -program lck & _pids="$_pids $!"
+xidle -area 6 -timeout 300 \
+     -sw -program "${HOME}/bin/wrapper/lck" & _pids="$_pids $!"
+compton --config $DOTS/compton.conf         & _pids="$_pids $!"
 dunst -conf $DOTS/dunstrc                   & _pids="$_pids $!"
 slstatus                                    & _pids="$_pids $!"
 xbanish                                     & _pids="$_pids $!"
