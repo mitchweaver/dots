@@ -39,6 +39,7 @@ config/enchant
 *torbrowser-launcher*
 *TorBrowser-Data*
 *ranger/bookmarks
+*ranger/plugins
 *chrom*
 *firefox*
 *GIMP/2.9/action-history
@@ -79,7 +80,7 @@ config/libfm
 *.cache
 *.tmp
 *.temp
-*__pycache__
+*__pycache__*
 *TODO*
 *FAQ*
 *krunker*

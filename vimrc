@@ -1,7 +1,11 @@
 " Neovim config file                  "
+"  ⡀⢀ ⠄ ⣀⣀  ⡀⣀ ⢀⣀                     "
+"  ⠱⠃ ⠇ ⠇⠇⠇ ⠏  ⠣⠤                     "
+"                                     "
 " http://github.com/mitchweaver/dots  "
-" " " " " " " " " " " " " " " " " " " "
-set runtimepath^=~/etc/nvim runtimepath+=~/etc/nvim/after
+"                                     "
+"'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 
 " unbind space for everything but leader
@@ -11,7 +15,7 @@ let mapleader=" "
 " -*-*-*-*-*-*-*-* Plugins *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set nocompatible
 filetype off
-call plug#begin('~/etc/nvim/vim-plug')
+call plug#begin('~/.vim/vim-plug')
 
 Plug 'vimwiki/vimwiki' " the ultimate note taking system
 Plug 'ap/vim-buftabline' " display buffers along top as tabs
@@ -21,9 +25,9 @@ Plug 'ervandew/supertab' " code completion
 Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
 Plug 'airblade/vim-gitgutter' " git diffing along the left side
 Plug 'tpope/vim-surround' " surround stuff with stuff
-Plug 'dylanaraps/wal.vim' " pywal theme
+" Plug 'dylanaraps/wal.vim' " pywal theme
 Plug 'tpope/vim-repeat' " allows '.' to do more things
-" Plug 'sheerun/vim-polyglot' " syntax highlighting
+Plug 'sheerun/vim-polyglot' " syntax highlighting
 
 call plug#end()
 filetype indent plugin on
@@ -55,8 +59,8 @@ set laststatus=0 " Disable bottom status line / statusbar
 set noshowcmd " don't print the last run command
 set ch=1 " get rid of the wasted line at the bottom
 set cmdheight=1 " cmd output only take up 1 line
-set nostartofline " gg/G etc do not always go to line start
-set modeline " enable per-file custom syntax and etc
+set nostartofline " gg/G do not always go to line start
+set modeline " enable per-file custom syntax
 noremap ; :
 
 " automatic linebreak
@@ -66,8 +70,8 @@ noremap ; :
 
 " ----- colors -------------------- 
 " set background=dark
-" set background=light
-colorscheme wal
+set background=light
+" colorscheme wal
 "  --------------------------------
 
 " ---- syntax stuff -------------
@@ -196,11 +200,11 @@ if exists(':PlugInstall')
     autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
     let wiki = {}
-    let g:vimwikidir = "/home/mitch/usr/files/vimwiki"
+    let g:vimwikidir = "$XDG_DOCUMENTS_DIR/vimwiki"
     let wiki.path = g:vimwikidir
     let g:vimwiki_list=[wiki]
     let g:vimwiki_list = [
-        \{'path': '~/usr/files/vimwiki/personal.wiki',    'syntax': 'markdown', 'ext': '.md'},
+        \{'path': '$XDG_DOCUMENTS_DIR/vimwiki/personal.wiki',    'syntax': 'markdown', 'ext': '.md'},
     \]
     let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 

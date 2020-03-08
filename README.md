@@ -9,8 +9,6 @@ my personal dotfiles
 
 ![crux_rice](http://i.imgur.com/ossASOE.png)
 
-![other_crux_rice](http://i.imgur.com/oSki6JQ.png)
-
 ### See also
 ---------
 
