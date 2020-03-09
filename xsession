@@ -10,7 +10,8 @@ do_exit() {
         ~/.Xauthority-n \
         ~/.xsession-errors \
         ~/.xsel.log \
-        ~/.cache/clip.log
+        ~/.cache/clip.log \
+        ~/.cache/.shell_history*
 
     rm -rf ~/.dbus \
         ~/.pki \
@@ -44,7 +45,7 @@ vol -s 50 &
 # -*-*-*-*-*-*-*-* user daemons *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 _pids=
 
-pgrep -f compton  >/dev/null || compton     & _pids="$_pids $!"
+# pgrep -f compton  >/dev/null || compton     & _pids="$_pids $!"
 pgrep -f dunst    >/dev/null || dunst       & _pids="$_pids $!"
 pgrep -f slstatus >/dev/null || slstatus    & _pids="$_pids $!"
 pgrep -f xbanish  >/dev/null || xbanish     & _pids="$_pids $!"
@@ -57,6 +58,7 @@ pgrep -f xidle    >/dev/null || xidle -area 6 -timeout 300 -sw \
 
 # -*-*-*-*-*-*-*-* start *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-dwm
+# if dwm exits 0, restart -- this allows hot reloading of config.h
+while type dwm >/dev/null ; do dwm && continue || break ; done
 
 do_exit

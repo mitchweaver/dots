@@ -12,9 +12,7 @@ PATH=$PATH:$(printf '%s:' ${HOME}/bin/*/)
 PATH=$PATH:${HOME}/src/ascii
 export PATH
 
-MANPATH=/usr/share/man:/usr/local/share/man:/usr/local/man:$MANPATH
-MANPATH=~/usr/share/man:$MANPATH
-export MANPATH
+export MANPATH=~/.local/share/man:
 
 export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
 export NPROC=$(sysctl -n hw.ncpu)
@@ -44,7 +42,7 @@ export TRASH_DIR=${XDG_CACHE_HOME}/trash \
 
 export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s' \
        MPV_OPTS="--really-quiet --force-seekable=yes" \
-       MUPDF_OPTS='-C d9d5ba'
+       MUPDF_OPTS='-C f8f6f6'
 
 # -*-*-*-*-*-*-* default programs *-*-*-*-*-*-*-*-*-*-*-*-*-*
 for i in v nvim vim vi mg nano ; do
@@ -55,4 +53,17 @@ for i in brws chrome chromium firefox surf ; do
     type $i && { export BROWSER=$i ; break ; }
 done >/dev/null
 
-type less >/dev/null && export PAGER=less LESS=-iR MANPAGER=more
+if type less >/dev/null ; then
+    export PAGER=less \
+           MANPAGER=less
+    # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
+    export LESS='-QRsim +Gg' 
+    # active colors in less, taken from arch-wiki
+    export LESS_TERMCAP_mb=$'\e[1;31m' \
+           LESS_TERMCAP_md=$'\e[1;33m' \
+           LESS_TERMCAP_so=$'\e[01;44;37m' \
+           LESS_TERMCAP_us=$'\e[01;37m' \
+           LESS_TERMCAP_me=$'\e[0m' \
+           LESS_TERMCAP_se=$'\e[0m'\
+           LESS_TERMCAP_ue=$'\e[0m'
+fi

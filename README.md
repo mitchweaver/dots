@@ -1,11 +1,14 @@
-# dots
-my personal dotfiles
+# ⚫ ⚫ ⚫
+
+My personal dotfiles and [OpenBSD](http://openbsd.org) `/etc` configs.
 
 ------
 
-![openbsd_rice](https://i.imgur.com/HGvUlT7.png)
+![img](http://0x0.st/iT7V.png)
 
-![openbsd_rice 2](https://i.redd.it/adumeevthui41.png)
+![img](https://i.imgur.com/HGvUlT7.png)
+
+![img](https://i.redd.it/adumeevthui41.png)
 
 ![crux_rice](http://i.imgur.com/ossASOE.png)
 

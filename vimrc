@@ -25,9 +25,9 @@ Plug 'ervandew/supertab' " code completion
 Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
 Plug 'airblade/vim-gitgutter' " git diffing along the left side
 Plug 'tpope/vim-surround' " surround stuff with stuff
-" Plug 'dylanaraps/wal.vim' " pywal theme
+Plug 'dylanaraps/wal.vim' " pywal theme
 Plug 'tpope/vim-repeat' " allows '.' to do more things
-Plug 'sheerun/vim-polyglot' " syntax highlighting
+" Plug 'sheerun/vim-polyglot' " syntax highlighting
 
 call plug#end()
 filetype indent plugin on
@@ -71,7 +71,7 @@ noremap ; :
 " ----- colors -------------------- 
 " set background=dark
 set background=light
-" colorscheme wal
+colorscheme wal
 "  --------------------------------
 
 " ---- syntax stuff -------------

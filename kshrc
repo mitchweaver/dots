@@ -19,7 +19,7 @@ export HISTFILE=${XDG_CACHE_HOME:-~/.cache}/.shell_history-$$ \
        HISTCONTROL=ignoredups:ignorespace \
        HISTSIZE=300
 
-trap 'rm "$HISTFILE"' EXIT TERM KILL QUIT HUP
+trap 'rm "$HISTFILE" 2>/dev/null' EXIT TERM KILL QUIT
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # PS1
@@ -63,6 +63,16 @@ cd() {
         export PS1="$(get_PS1)"
     fi
 }
+# fuzzy finding cat
+cat() { 
+    [ "$1" = -- ] && shift
+    if [ "$1" ] ; then
+        /bin/cat --  "$1"  ||
+        /bin/cat --  "$1"* ||
+        /bin/cat -- *"$1"  ||
+        /bin/cat -- *"$1"*
+    fi 2>/dev/null
+}
 
 # check if we're in ranger
 [ "$RANGER_LEVEL" ] && clear
@@ -79,12 +89,12 @@ alias ps1='export PS1="% "'
 
 # dynamic 'c' utility
 c() { 
-    if [ -f "$1" ] ; then
-        cat -- "$1"
-    elif [ "$1" ] ; then
+    if [ -z "$1" ] ; then
+        clear
+    elif [ -d "$1" ] ; then
         cd "$1"
     else
-        clear
+        cat "$1" || cd "$1"
     fi
 }
 
@@ -165,7 +175,8 @@ alias res='ffprobe -v error -select_streams v:0 -show_entries stream=width,heigh
 resize_75() { mogrify -resize '75%X75%' "$@" ; }
 resize_50() { mogrify -resize '50%X50%' "$@" ; }
 resize_25() { mogrify -resize '25%X25%' "$@" ; }
-rotate_90() { convert -rotate 90 "$1" "$1" ; }
+rotate_90() { convert -rotate 90 "$1" "$1"   ; }
+mog_1080()  { mogrify -resize '1920X1080' "$@" ; }
 transparent() {
     #turn a PNG white background -> transparent
     convert "$1" -transparent white "${1%.*}"_transparent.png
@@ -209,6 +220,7 @@ alias gytc='_g $XDG_VIDEOS_DIR/youtube/completed'
 alias gW='_g $XDG_PICTURES_DIR/wallpapers'
 alias gb="_g ~/bin"
 alias gs="_g ~/src"
+alias gk="_g ~/bks"
 alias gE='_g /etc'
 alias gM='_g /mnt'
 alias gT="_g /tmp"
@@ -216,12 +228,14 @@ alias gV='_g /var'
 alias gss='_g ~/src/suckless'
 alias gsd='_g ~/src/dots'
 alias gcf='_g ~/.config'
+alias gch='_g ~/.cache'
 
 Yf() { cp "$@" $XDG_DOCUMENTS_DIR ; }
 Yi() { cp "$@" $XDG_PICTURES_DIR ; }
 Ym() { cp "$@" $XDG_MUSIC_DIR ; }
 Yvi(){ cp "$@" $XDG_VIDEOS_DIR ; }
 Yb() { cp "$@" ~/bin ; }
+Yk() { cp "$@" ~/bks ; }
 Ys() { cp "$@" ~/src ; }
 YT() { cp "$@" /tmp ; }
 
@@ -231,6 +245,7 @@ mm() { mv "$@" $XDG_MUSIC_DIR ; }
 mvi(){ mv "$@" $XDG_VIDEOS_DIR ; }
 mW() { mv "$@" $XDG_PICTURES_DIR/wallpapers ; }
 mb() { mv "$@" ~/bin ; }
+mk() { mv "$@" ~/bks ; }
 ms() { mv "$@" ~/src ; }
 mT() { mv "$@" /tmp  ; }
 
@@ -300,7 +315,7 @@ pi_route() {
 
 w3m() {
     [ "$1" ] || set -- https://duckduckgo.com/lite
-    command w3m -F -s -graph -no-mouse -o auto_image=FALSE "$@"
+    command w3m -F -s -graph -no-mouse "$@"
 }
 ddg() { w3m https://duckduckgo.com/lite/?q="$*" ; }
 alias wdump='w3m -dump'
@@ -319,6 +334,10 @@ alias poweroff='doas shutdown'
 alias reboot='doas reboot'
 alias net='doas sh /etc/netstart $(interface)'
 
+# pf logging
+alias pfdump='doas tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout
+alias pfdrop='doas tcpdump -nettti pflog0 action drop'   # follow dropped
+
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # unsorted junk below
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -327,5 +346,6 @@ alias heart='printf "%b\n" "\xe2\x9d\xa4"'
 cheat() { curl -s cheat.sh/$1 ; }
 
 pdf2txt() {
-    mutool draw -F txt -i -- "$1" 2>/dev/null | tr -s '[:blank:]' | less
+    mutool draw -F txt -i -- "$1" 2>/dev/null |
+        sed 's/[^[:print:]]//g' | tr -s '[:blank:]'
 }

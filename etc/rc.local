@@ -1,2 +1,2 @@
-/bin/chmod +x /dev/drm* 2>/dev/null
-/bin/chmod -R 777 /tmp 2>/dev/null
+/bin/chmod     +x  /dev/drm* 2>/dev/null
+/bin/chmod -R  777 /tmp      2>/dev/null
