@@ -47,9 +47,9 @@ _pids=
 
 # pgrep -f compton  >/dev/null || compton     & _pids="$_pids $!"
 pgrep -f dunst    >/dev/null || dunst       & _pids="$_pids $!"
-pgrep -f slstatus >/dev/null || slstatus    & _pids="$_pids $!"
+pgrep -f bar      >/dev/null || bar         & _pids="$_pids $!"
 pgrep -f xbanish  >/dev/null || xbanish     & _pids="$_pids $!"
-pgrep -f sctd     >/dev/null || sctd 5000   & _pids="$_pids $!"
+pgrep -f sctd     >/dev/null || sctd        & _pids="$_pids $!"
 pgrep -f batmon   >/dev/null || batmon      & _pids="$_pids $!"
 pgrep -f clip     >/dev/null || clip -d     & _pids="$_pids $!"
 pgrep -f ytdlq    >/dev/null || ytdlq -d    & _pids="$_pids $!"

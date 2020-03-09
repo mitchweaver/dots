@@ -213,6 +213,8 @@ if exists(':PlugInstall')
 	nmap sl yss
 	vmap s S
 
+    let g:buftabline_show = 1
+
     " fff
 "    nnoremap <silent><leader>r :F<CR>
     " ranger

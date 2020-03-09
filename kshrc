@@ -25,14 +25,25 @@ trap 'rm "$HISTFILE" 2>/dev/null' EXIT TERM KILL QUIT
 # PS1
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 get_PS1() {
+    # --------------------------------------------------------
+    # settings:
+    # PS1_STYLE=username
+    PS1_STYLE=pwd
+    # --------------------------------------------------------
     if [ $TERM = st-256color ] ; then
-        # print username in color palette, one color per character
-        code=1
-        printf '%s\n' "$USER" | fold -w 1 | while read -r c ; do
-            printf '%s' "\[\e[1;3${code}m\]$c"
-            code=$(( $code + 1 ))
-        done
-        printf '%s' "\[\e[1;3$(( ${#USER} + 1 ))m\] \W \[\e[1;3$(( ${#USER} + 2 ))m\]"
+        case $PS1_STYLE in
+            pwd)
+                printf '%s' "\[\e[1;36m\]\W "
+                ;;
+            username)
+                # print username in color palette, one color per character
+                code=1
+                printf '%s\n' "$USER" | fold -w 1 | while read -r c ; do
+                    printf '%s' "\[\e[1;3${code}m\]$c"
+                    code=$(( $code + 1 ))
+                done
+                printf '%s' "\[\e[1;3$(( ${#USER} + 1 ))m\] \W \[\e[1;3$(( ${#USER} + 2 ))m\]"
+        esac
 
         # print git repo name in parenthesis, if we're inside one
         set -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
@@ -258,12 +269,13 @@ for i in 1 2 3 4 5 6 7 8 9 ; do
 done
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# development
+# development (warning: may conflict with plan9 mk)
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-alias {make,mak,mk}="make -j${NPROC:-1}"
-alias {makec,makc,mkc}='make clean'
-alias {makei,maki,mki}='make install'
-alias {makeu,maku,mku}='make uninstall'
+alias mk="make -j${NPROC:-1}"
+alias mkc='make clean'
+alias mki='make install'
+alias mku='make uninstall'
+alias mks='make -s install'
 alias {recomp,rcp}=~/src/suckless/build.sh
 gud() {
     # activate my PS1 git branch detection after git commands

@@ -53,17 +53,6 @@ for i in brws chrome chromium firefox surf ; do
     type $i && { export BROWSER=$i ; break ; }
 done >/dev/null
 
-if type less >/dev/null ; then
-    export PAGER=less \
-           MANPAGER=less
-    # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
-    export LESS='-QRsim +Gg' 
-    # active colors in less, taken from arch-wiki
-    export LESS_TERMCAP_mb=$'\e[1;31m' \
-           LESS_TERMCAP_md=$'\e[1;33m' \
-           LESS_TERMCAP_so=$'\e[01;44;37m' \
-           LESS_TERMCAP_us=$'\e[01;37m' \
-           LESS_TERMCAP_me=$'\e[0m' \
-           LESS_TERMCAP_se=$'\e[0m'\
-           LESS_TERMCAP_ue=$'\e[0m'
-fi
+export PAGER=less MANPAGER=less
+# opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
+export LESS='-QRsim +Gg'
