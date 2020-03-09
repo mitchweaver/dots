@@ -1,5 +1,10 @@
 #!/bin/sh
 
-if test -x /usr/local/bin/feh && [ -f /etc/X11/xenodm/openbsd_wall.jpg ] ; then
-	/usr/local/bin/feh --no-fehbg --bg-fill /etc/X11/xenodm/openbsd_wall.jpg
+wall=/etc/X11/xenodm/openbsd_wall.jpg
+if [ -f $wall ] ; then
+    if test -x /usr/local/bin/feh ; then
+        /usr/local/bin/feh --no-fehbg --bg-fill $wall &
+    elif test -x /usr/local/bin/hsetroot ; then
+        /usr/local/bin/hsetroot -fill $wall &
+    fi
 fi

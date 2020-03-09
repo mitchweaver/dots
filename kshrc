@@ -145,13 +145,12 @@ ps() {
 }
 psg() { ps | g "$*" | g -v "grep $*" ; }
 hg() { [ "$1" ] && grep -i "$*" "$HISTFILE" | grep -v '^hg' | head -n 20 ; }
+fcg() { fc-list | sed 's|.*: ||g' | grep -i "$*" ; }
 
 unalias r 2>/dev/null
 r() { ranger "$@" ; c ; }
-feh()   { command feh   $FEH_OPTS   "$@" ; }
 mpv()   { command mpv   $MPV_OPTS   "$@" ; }
 mupdf() { command mupdf $MUPDF_OPTS "$@" ; }
-alias sxiv='sxiv -t .'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # youtube-dl / ffmpeg
@@ -326,3 +325,7 @@ alias net='doas sh /etc/netstart $(interface)'
 
 alias heart='printf "%b\n" "\xe2\x9d\xa4"'
 cheat() { curl -s cheat.sh/$1 ; }
+
+pdf2txt() {
+    mutool draw -F txt -i -- "$1" 2>/dev/null | tr -s '[:blank:]' | less
+}

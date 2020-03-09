@@ -55,4 +55,4 @@ for i in brws chrome chromium firefox surf ; do
     type $i && { export BROWSER=$i ; break ; }
 done >/dev/null
 
-type less >/dev/null && export PAGER=less MANPAGER=less LESS=-ieR
+type less >/dev/null && export PAGER=less LESS=-iR MANPAGER=more

@@ -11,7 +11,7 @@ install:
 	install -D -m 0400 compton.conf      ~/.config/compton.conf
 	install -D -m 0400 mpv.conf          ~/.config/mpv/mpv.conf
 	install -D -m 0400 dunstrc           ~/.config/dunst/dunstrc
-	install -D -m 0400 ranger/scope.sh   ~/.config/ranger/scope.sh
+	install -D -m 0700 ranger/scope.sh   ~/.config/ranger/scope.sh
 	install -D -m 0400 ranger/rifle.conf ~/.config/ranger/rifle.conf
 	install -D -m 0400 ranger/rc.conf    ~/.config/ranger/rc.conf
 	install    -m 0400 kshrc ~/.kshrc
