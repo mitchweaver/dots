@@ -19,7 +19,7 @@ export HISTFILE=${XDG_CACHE_HOME:-~/.cache}/.shell_history-$$ \
        HISTCONTROL=ignoredups:ignorespace \
        HISTSIZE=300
 
-trap 'rm "$HISTFILE" 2>/dev/null' EXIT TERM KILL QUIT
+trap '/bin/rm "$HISTFILE" 2>/dev/null' EXIT TERM KILL QUIT
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # PS1
@@ -160,17 +160,32 @@ alias dm='dmesg | tail -n 20'
 mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
-cw() { [ "$1" ] && cat "$(which "$1")" ; }
-ps() {
-    [ "$1" ] || set -- -Auxww
-    cmd ps "$@"
+
+# dump contents of a file in $PATH
+cw() { cat "$(which "${1:-?}")" ; }
+
+# search for running process
+psg() { ps -Auxww | grep -i "$*" | grep -v "grep $*" ; }
+
+# search shell history
+hg() {
+    [ "$1" ] || exit 1
+    grep -i "$*" "$HISTFILE" | grep -v '^hg' | head -n 20
 }
-psg() { ps | g "$*" | g -v "grep $*" ; }
-hg() { [ "$1" ] && grep -i "$*" "$HISTFILE" | grep -v '^hg' | head -n 20 ; }
+
+# search for a font name
 fcg() { fc-list | sed 's|.*: ||g' | grep -i "$*" ; }
 
+# trash
+rm() {
+    mkdir -p "${TRASH_DIR:=~/.cache/trash}"
+    /bin/mv -f -- "$@" "${TRASH_DIR}"
+}
+empty_trash() { /bin/rm -rf -- "${TRASH_DIR:-~/.cache/trash}" ; }
+
 unalias r 2>/dev/null
-r() { ranger "$@" ; c ; }
+r() { ranger "$@" ; clear ; }
+
 mpv()   { command mpv   $MPV_OPTS   "$@" ; }
 mupdf() { command mupdf $MUPDF_OPTS "$@" ; }
 
@@ -198,7 +213,7 @@ png2jpg() {
         [ -f "$i" ] || continue
         convert "$i" "${i%png}"jpg || exit 1
         jpegoptim -s "${i%png}"jpg || exit 1
-        rm "$1"
+        /bin/rm "$1"
     done
 }
 alias jpg='find . -type f -iname "*.jp*" -exec jpegoptim -s {} \;'
@@ -308,10 +323,7 @@ alias dumphttp="doas tcpdump -n -i iwn0 port 80 or port 443"
 alias dumpdns="doas tcpdump -n -i iwn0 port 53"
 alias dumpssh="doas tcpdump -n -i iwn0 port 22"
 
-ping() {
-    [ "$1" ] || set eff.org
-    command ping -L -n -s 1 -w 2 $@
-}
+ping() { command ping -L -n -s 1 -w 2 "${1:-eff.org}" ; }
 pingpi() { ping $(grep -A 1 'Host pi' ~/.ssh/config | grep -oE '[0-9]+.*') ; }
 alias p=ping
 alias pp=pingpi
@@ -327,8 +339,8 @@ pi_route() {
 }
 
 w3m() {
-    [ "$1" ] || set -- https://duckduckgo.com/lite
-    command w3m -F -s -graph -no-mouse "$@"
+    command w3m -F -s -graph -no-mouse \
+        "${@:-https://duckduckgo.com/lite}"
 }
 ddg() { w3m https://duckduckgo.com/lite/?q="$*" ; }
 alias wdump='w3m -dump'
