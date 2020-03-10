@@ -45,7 +45,7 @@ vol -s 50 &
 # -*-*-*-*-*-*-*-* user daemons *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 _pids=
 
-# pgrep -f compton  >/dev/null || compton     & _pids="$_pids $!"
+pgrep -f picom  >/dev/null   || picom     & _pids="$_pids $!"
 pgrep -f dunst    >/dev/null || dunst       & _pids="$_pids $!"
 pgrep -f bar      >/dev/null || bar         & _pids="$_pids $!"
 pgrep -f xbanish  >/dev/null || xbanish     & _pids="$_pids $!"
