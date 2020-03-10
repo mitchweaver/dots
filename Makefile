@@ -8,7 +8,7 @@ install:
 	install    -m 0400 xmodmaprc ~/.xmodmaprc
 	install    -m 0400 xsession  ~/.xsession
 	install    -m 0400 vimrc     ~/.vimrc
-	install -D -m 0400 compton.conf      ~/.config/compton.conf
+	install -D -m 0400 picom.conf        ~/.config/picom.conf
 	install -D -m 0400 mpv.conf          ~/.config/mpv/mpv.conf
 	install -D -m 0400 dunstrc           ~/.config/dunst/dunstrc
 	install -D -m 0700 ranger/scope.sh   ~/.config/ranger/scope.sh
@@ -44,7 +44,7 @@ uninstall:
 	rm -f ~/.vimrc
 	rm -f ~/.vim/autoload/plug.vim
 	rm -f ~/.config/nvim/init.vim
-	rm -f ~/.config/compton.conf
+	rm -f ~/.config/picom.conf
 	rm -f ~/.config/mpv/mpv.conf
 	rm -f ~/.config/dunst/dunstrc
 	rm -f ~/.config/ranger/scope.sh

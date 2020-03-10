@@ -319,7 +319,7 @@ alias cv='curl -v'
 
 # allow ssh to my piNAS while under vpn
 pi_route() {
-    ip=$(grep -A 1 'Host pi' .ssh/config | grep -oE '[0-9]+.*')
+    ip=$(grep -A 1 'Host pi' ~/.ssh/config | grep -oE '[0-9]+.*')
     gate=$(route -n show -inet -gateway | grep default | awk '{print $2}')
     doas route delete $ip/24 >/dev/null
     doas route add $ip/24 $gate
@@ -345,6 +345,7 @@ alias disklabel='doas disklabel'
 alias poweroff='doas shutdown'
 alias reboot='doas reboot'
 alias net='doas sh /etc/netstart $(interface)'
+alias temp='sysctl -n hw.sensors.cpu0.temp0;sysctl -n hw.sensors.acpitz0.temp0'
 
 # pf logging
 alias pfdump='doas tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout

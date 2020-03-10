@@ -258,66 +258,16 @@ handle_image() {
 handle_mime() {
     local mimetype="${1}"
     case "${mimetype}" in
-        ## RTF and DOC
-        text/rtf|*msword)
-            ## Preview as text conversion
-            ## note: catdoc does not always work for .doc files
-            ## catdoc: http://www.wagner.pp.ru/~vitus/software/catdoc/
-            catdoc -- "${FILE_PATH}" && exit 5
-            exit 1;;
-
-        ## DOCX, ePub, FB2 (using markdown)
-        ## You might want to remove "|epub" and/or "|fb2" below if you have
-        ## uncommented other methods to preview those formats
-        *wordprocessingml.document|*/epub+zip|*/x-fictionbook+xml)
-            ## Preview as markdown conversion
-            pandoc -s -t markdown -- "${FILE_PATH}" && exit 5
-            exit 1;;
-
-        ## XLS
-        *ms-excel)
-            ## Preview as csv conversion
-            ## xls2csv comes with catdoc:
-            ##   http://www.wagner.pp.ru/~vitus/software/catdoc/
-            xls2csv -- "${FILE_PATH}" && exit 5
-            exit 1;;
-
-        ## Text
-        text/* | */xml)
+        text/* | */xml | *script)
             ## Syntax highlight
-            if [[ "$( stat --printf='%s' -- "${FILE_PATH}" )" -gt "${HIGHLIGHT_SIZE_MAX}" ]]; then
-                exit 2
-            fi
-            if [[ "$( tput colors )" -ge 256 ]]; then
-                local pygmentize_format='terminal256'
-                local highlight_format='xterm256'
-            else
-                local pygmentize_format='terminal'
-                local highlight_format='ansi'
-            fi
-            env HIGHLIGHT_OPTIONS="${HIGHLIGHT_OPTIONS}" highlight \
-                --out-format="${highlight_format}" \
-                --force -- "${FILE_PATH}" && exit 5
-            env COLORTERM=8bit bat --color=always --style="plain" \
-                -- "${FILE_PATH}" && exit 5
-            pygmentize -f "${pygmentize_format}" -O "style=${PYGMENTIZE_STYLE}"\
-                -- "${FILE_PATH}" && exit 5
+            cat "$FILE_PATH" && exit 5
             exit 2;;
-
-        ## DjVu
-        image/vnd.djvu)
-            ## Preview as text conversion (requires djvulibre)
-            djvutxt "${FILE_PATH}" | fmt -w "${PV_WIDTH}" && exit 5
-            exiftool "${FILE_PATH}" && exit 5
-            exit 1;;
-
         ## Image
         image/*)
             ## Preview as text conversion
             # img2txt --gamma=0.6 --width="${PV_WIDTH}" -- "${FILE_PATH}" && exit 4
             exiftool "${FILE_PATH}" && exit 5
             exit 1;;
-
         ## Video and audio
         video/* | audio/*)
             mediainfo "${FILE_PATH}" && exit 5
