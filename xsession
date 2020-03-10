@@ -53,6 +53,8 @@ pgrep -f sctd     >/dev/null || sctd        & _pids="$_pids $!"
 pgrep -f batmon   >/dev/null || batmon      & _pids="$_pids $!"
 pgrep -f clip     >/dev/null || clip -d     & _pids="$_pids $!"
 pgrep -f ytdlq    >/dev/null || ytdlq -d    & _pids="$_pids $!"
+pgrep -f xdimmer  >/dev/null || \
+        xdimmer -p 30 -s 20 -t 150 & _pids="$_pids $!"
 pgrep -f xidle    >/dev/null || xidle -area 6 -timeout 300 -sw \
          -program "${HOME}/bin/wrapper/lck" & _pids="$_pids $!"
 

@@ -4,13 +4,10 @@ My personal dotfiles and [OpenBSD](http://openbsd.org) `/etc` configs.
 
 ------
 
-![img](http://0x0.st/iT7V.png)
+![obsd_sepia_rice](https://i.imgur.com/C1zSkJM.png)
 
-![img](https://i.imgur.com/HGvUlT7.png)
+![obsd_sepia_rice2](https://i.imgur.com/ecCsAkD.png)
 
-![img](https://i.redd.it/adumeevthui41.png)
-
-![crux_rice](http://i.imgur.com/ossASOE.png)
 
 ### See also
 ---------

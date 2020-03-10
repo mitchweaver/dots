@@ -118,7 +118,7 @@ case "$TERM" in
        *)
            if type exa >/dev/null ; then
                alias ls='exa -F --group-directories-first'
-               alias tree='exa -F -T'
+               alias {lt,tree}='exa -F -T'
            else
                alias ls='ls -F'
            fi
@@ -131,6 +131,7 @@ alias {l,sls,sl}=ls
 alias {ll,lll}='l -l'
 alias la='l -a'
 alias {lla,lal}='l -al'
+alias {l1,lv}='ls -1'
 alias lsf='l "$PWD"/*'
 alias {cls,csl,cl,lc}='c;l'
 alias {e,ech,eho}=echo
@@ -208,10 +209,10 @@ logo()  { curl -q -# -L "$1" -o logo.jpg  ; }
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # translate-shell
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-alias trans='trans -no-auto -b'
+trans() { command trans -no-auto -b "$*" ; }
 alias rtrans='command trans -from en -to'
-alias rde='rtrans de'
-alias rja='rtrans ja'
+rde() { rtrans de "$*" ; }
+rja() { rtrans ja "$*" ; }
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # movement commands
