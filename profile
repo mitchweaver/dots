@@ -38,11 +38,12 @@ export XDG_CONFIG_HOME=~/.config \
 
 export TRASH_DIR=${XDG_CACHE_HOME}/trash \
        MENU_PROG=menu \
+       TASKS_FILE=~/fil/tasks.txt \
        SUBS_FILE=~/fil/subs.txt
 
 export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s' \
        MPV_OPTS="--really-quiet --force-seekable=yes" \
-       MUPDF_OPTS='-C #e5d7b4'
+       MUPDF_OPTS='-C fcfaf6'
 
 # -*-*-*-*-*-*-* default programs *-*-*-*-*-*-*-*-*-*-*-*-*-*
 for i in v nvim vim vi mg nano ; do
