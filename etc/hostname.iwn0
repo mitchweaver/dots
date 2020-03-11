@@ -1,6 +1,2 @@
+join phone wpakey <CHANGE_ME>
 nwid GoTrojans wpa wpaakms 802.1x
-nwid phone wpakey <CHANGE_ME>
-!pkill -9 wpa_supplicant
-!/usr/local/sbin/wpa_supplicant -c /etc/wpa_supplicant.conf -i iwn0 -D openbsd -B
-inet6 autoconf
-dhcp
