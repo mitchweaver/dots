@@ -1,4 +1,10 @@
 !pkill -9 wpa_supplicant
 !/usr/local/sbin/wpa_supplicant -B -f /var/log/wpa_supplicant.log \
-    -N -c /etc/wpa_supplicant.conf -i iwn0 -D openbsd \
-    -N -c /etc/wpa_supplicant.conf -i em0  -D wired
+       -c /etc/wpa_supplicant.conf -i em0  -D wired \
+    -N -c /etc/wpa_supplicant.conf -i iwn0 -D openbsd
+!ifconfig em0 inet6 autoconf
+!ifconfig em0 up
+!ifconfig iwn0 inet6 autoconf
+!ifconfig iwn0 up
+!dhclient em0
+!dhclient iwn0
