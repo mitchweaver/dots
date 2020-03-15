@@ -15,6 +15,7 @@ install:
 	install -D -m 0400 ranger/rifle.conf ~/.config/ranger/rifle.conf
 	install -D -m 0400 ranger/rc.conf    ~/.config/ranger/rc.conf
 	install    -m 0400 kshrc ~/.kshrc
+	install    -m 0400 rtorrent.rc ~/.rtorrent.rc
 	mkdir -p ~/.config/nvim ~/.vim/autoload
 	printf '%s\n%s\n%s\n' \
 		'set runtimepath^=~/.vim runtimepath+=~/.vim/after' \
@@ -41,6 +42,7 @@ uninstall:
 	rm -f ~/.xsession
 	rm -f ~/.kshrc
 	rm -f ~/.bashrc
+	rm -f ~/.rtorrent.rc
 	rm -f ~/.vimrc
 	rm -f ~/.vim/autoload/plug.vim
 	rm -f ~/.config/nvim/init.vim

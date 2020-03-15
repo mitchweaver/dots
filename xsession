@@ -11,7 +11,8 @@ do_exit() {
         ~/.xsession-errors \
         ~/.xsel.log \
         ~/.cache/clip.log \
-        ~/.cache/.shell_history*
+        ~/.cache/.shell_history* \
+        ~/.python_history
 
     rm -rf ~/.dbus \
         ~/.pki \
@@ -32,10 +33,6 @@ case $(sysctl -n hw.version) in
         xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Axes' 6 7 4 5 &
 esac
 
-xrandr | grep 'VGA-1 connected' >/dev/null &&
-xrandr --output LVDS-1 --auto --pos 0x0 \
-       --output VGA-1  --auto --right-of LVDS-1
-
 xrdb load ~/.Xdefaults
 xmodmap ~/.xmodmaprc &
 xset m 0 0 &
@@ -46,13 +43,14 @@ xbacklight -set 100 &
 sct 5500 &
 background &
 vol -s 50 &
+mond &
 
 export DIMENSIONS=$(dimensions)
 
 # -*-*-*-*-*-*-*-* user daemons *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 _pids=
 
-pgrep -f picom    >/dev/null || picom       & _pids="$_pids $!"
+# pgrep -f picom    >/dev/null || picom       & _pids="$_pids $!"
 pgrep -f dunst    >/dev/null || dunst       & _pids="$_pids $!"
 pgrep -f bar      >/dev/null || bar         & _pids="$_pids $!"
 pgrep -f xbanish  >/dev/null || xbanish     & _pids="$_pids $!"

@@ -12,7 +12,11 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # shell options
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-set -o vi csh-history bgnice trackall ignoreeof
+set -o vi
+set -o csh-history
+set -o bgnice
+set -o trackall
+set -o ignoreeof
 
 # save hist file per shell, deleting on close
 export HISTFILE=${XDG_CACHE_HOME:-~/.cache}/.shell_history-$$ \
@@ -167,6 +171,9 @@ cw() { cat "$(which "${1:-?}")" ; }
 # search for running process
 psg() { ps -Auxww | grep -i "$*" | grep -v "grep $*" ; }
 
+# grab urls of any running processes
+psurls() { ps -Auxww | urls ; }
+
 # search shell history
 hg() {
     [ "$1" ] || exit 1
@@ -176,28 +183,6 @@ hg() {
 # search for a font name
 fcg() { fc-list | sed 's|.*: ||g' | grep -i "$*" ; }
 
-# trash
-rm() {
-    mkdir -p "${TRASH_DIR:=~/.cache/trash}"
-    case $1 in
-        -r|-rf)
-            rec=true
-            shift
-    esac
-    for i ; do
-        if [ ! -d "$i" ] ; then
-            /bin/mv -f -- "$i" "${TRASH_DIR}"
-        elif [ "$rec" ] ; then
-            /bin/mv -f -- "$i" "${TRASH_DIR}"
-        else
-            >&2 printf '%s\n' "$i: is a directory"
-            return 1
-        fi
-    done
-    unset rec
-}
-empty_trash() { /bin/rm -rf -- "${TRASH_DIR:-~/.cache/trash}" ; }
-
 unalias r 2>/dev/null
 r() { ranger "$@" ; clear ; }
 
@@ -205,7 +190,7 @@ alias mpv="mpv $MPV_OPTS"
 alias mupdf="mupdf $MUPDF_OPTS"
 alias ytdl="youtube-dl $YTDL_OPTS"
 
-b() { brws "$*" >/dev/null 2>&1 & }
+b() { [ "$1" ] && brws "$*" >/dev/null 2>&1 & }
 
 alias hme='htop -u mitch'
 alias hrt='htop -u root'
@@ -329,13 +314,13 @@ alias shows="n -f $XDG_DOCUMENTS_DIR/shows.txt"
 alias movies="n -f $XDG_DOCUMENTS_DIR/movies.txt"
 alias anime="n -f $XDG_DOCUMENTS_DIR/anime.txt"
 alias games="n -f $XDG_DOCUMENTS_DIR/games.txt"
+alias links="n -f $XDG_DOCUMENTS_DIR/links.txt"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # networking
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-alias rsync='rsync -rtvuh --progress --delete --partial'
+alias rsync='rsync -rtvuh --progress --delete --partial' #-z
 alias scp='scp -rp'
-dl() { curl -q -L -C - -# --url "$1" --output "$(basename "$1")" ; }
 
 alias traffic='netstat -w 1 -b'
 alias dumpall="doas tcpdump -n -i iwn0"
@@ -351,15 +336,6 @@ alias pp=pingpi
 alias p8='ping 8.8.8.8'
 alias cv='curl -v'
 alias cvip='curl -v wtfismyip.com/text'
-
-# allow ssh to my piNAS while under vpn
-pi_route() {
-    ip=$(grep -A 1 'Host pi' ~/.ssh/config | grep -oE '[0-9]+.*')
-    set -- $(route -n show -inet -gateway | grep default | awk '{print $2}')
-    gate=$1
-    doas route delete $ip/24 >/dev/null
-    doas route add $ip/24 $gate
-}
 
 w3m() {
     command w3m -F -s -graph -no-mouse \
@@ -378,10 +354,8 @@ alias forecast='curl -s wttr.in/madison,sd?u | tail -n 33 | head -n 31'
 alias sg='sysctl | grep -i'
 alias disks='sysctl -n hw.disknames'
 alias disklabel='doas disklabel'
-alias poweroff='doas shutdown'
 alias reboot='doas reboot'
 alias net='doas sh /etc/netstart'
-alias temp='sysctl -n hw.sensors.cpu0.temp0;sysctl -n hw.sensors.acpitz0.temp0'
 
 # pf logging
 alias pfdump='doas tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout
@@ -400,3 +374,25 @@ pdf2txt() {
 }
 
 alias shrug="printf '%s\n' '¯\\_(ツ)_/¯' | tee /dev/tty | clip -i"
+alias tm="printf '%s\n' '™'"
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# pi stuff
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*#
+# pi_ip() { grep -A 1 'Host pi' ~/.ssh/config | grep -oE '[0-9]+.*' ; }
+# pi_port() {
+#     grep -A 3 'Host pi' /home/mitch/.ssh/config  | \
+#         awk '{print $2}' | tail -n 1
+# }
+# allow ssh to my piNAS while under vpn
+pi_route() {
+    doas route add 192.168.1.122 192.168.1.1
+    # set -- $(route -n show -inet -gateway | grep default | awk '{print $2}')
+    # gate=$1
+    # doas route delete $(pi_ip)/24 >/dev/null
+    # doas route add $(pi_ip)/24 $gate
+}
+# mount_sshfs_pi() {
+#     doas sshfs -o allow_other,IdentityFile=${HOME}/.ssh/id_rsa \
+#         banana@$(pi_ip):/mnt /mnt/pi -p $(pi_port) -C
+# }

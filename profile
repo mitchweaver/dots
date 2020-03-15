@@ -38,8 +38,12 @@ export XDG_CONFIG_HOME=~/.config \
 
 export TRASH_DIR=${XDG_CACHE_HOME}/trash \
        MENU_PROG=menu \
+       PLUMBER=opn \
        TASKS_FILE=~/fil/tasks.txt \
-       SUBS_FILE=~/fil/subs.txt
+       SUBS_FILE=~/fil/subs.txt \
+       TWITCH_STREAM_FILE=~/fil/twitch.txt \
+       RADIO_STATIONS_FILE=~/fil/radio.txt \
+       YTDLQ_DIR=~/vid/youtube
 
 export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s' \
        MPV_OPTS="--really-quiet --force-seekable=yes" \
