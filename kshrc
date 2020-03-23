@@ -228,6 +228,16 @@ band()  { curl -q -# -L "$1" -o band.jpg  ; }
 logo()  { curl -q -# -L "$1" -o logo.jpg  ; }
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# mupdf
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+pdf2txt() {
+    # this is kinda jank... WIP
+    mutool draw -F txt -i -- "$1" 2>/dev/null |
+        sed 's/[^[:print:]]//g' | tr -s '[:blank:]'
+}
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # translate-shell
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 trans() { command trans -no-auto -b "$*" 2>/dev/null ; }
@@ -319,7 +329,7 @@ alias links="n -f $XDG_DOCUMENTS_DIR/links.txt"
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # networking
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-alias rsync='rsync -rtvuh --progress --delete --partial' #-z
+alias rsync='rsync -rvhtu --progress --delete --partial' #-z -c
 alias scp='scp -rp'
 
 alias traffic='netstat -w 1 -b'
@@ -362,29 +372,26 @@ alias pfdump='doas tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout
 alias pfdrop='doas tcpdump -nettti pflog0 action drop'   # follow dropped
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# unsorted junk below
+# irc shenanigans
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-alias heart='printf "%b\n" "\xe2\x9d\xa4"'
-cheat() { curl -s cheat.sh/$1 ; }
-
-pdf2txt() {
-    mutool draw -F txt -i -- "$1" 2>/dev/null |
-        sed 's/[^[:print:]]//g' | tr -s '[:blank:]'
-}
-
 alias shrug="printf '%s\n' '¯\\_(ツ)_/¯' | tee /dev/tty | clip -i"
+alias heart='printf "%b\n" "\xe2\x9d\xa4"'
 alias tm="printf '%s\n' '™'"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# pi stuff
+# unsorted junk below
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+cheat() { curl -s cheat.sh/$1 ; }
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# pi stuff, ignore
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*#
 # pi_ip() { grep -A 1 'Host pi' ~/.ssh/config | grep -oE '[0-9]+.*' ; }
 # pi_port() {
 #     grep -A 3 'Host pi' /home/mitch/.ssh/config  | \
 #         awk '{print $2}' | tail -n 1
 # }
-# allow ssh to my piNAS while under vpn
 pi_route() {
     doas route add 192.168.1.122 192.168.1.1
     # set -- $(route -n show -inet -gateway | grep default | awk '{print $2}')

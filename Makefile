@@ -2,32 +2,35 @@ all:
 	@>&2 echo "Use 'make install' to install."
 
 install:
-	install    -m 0400 gitconfig ~/.gitconfig
-	install    -m 0400 profile   ~/.profile
-	install    -m 0400 Xdefaults ~/.Xdefaults
-	install    -m 0400 xmodmaprc ~/.xmodmaprc
-	install    -m 0400 xsession  ~/.xsession
-	install    -m 0400 vimrc     ~/.vimrc
-	install -D -m 0400 picom.conf        ~/.config/picom.conf
-	install -D -m 0400 mpv.conf          ~/.config/mpv/mpv.conf
-	install -D -m 0400 dunstrc           ~/.config/dunst/dunstrc
-	install -D -m 0700 ranger/scope.sh   ~/.config/ranger/scope.sh
-	install -D -m 0400 ranger/rifle.conf ~/.config/ranger/rifle.conf
-	install -D -m 0400 ranger/rc.conf    ~/.config/ranger/rc.conf
-	install    -m 0400 kshrc ~/.kshrc
-	install    -m 0400 rtorrent.rc ~/.rtorrent.rc
-	mkdir -p ~/.config/nvim ~/.vim/autoload
-	printf '%s\n%s\n%s\n' \
+	@install    -m 0400 gitconfig ~/.gitconfig
+	@install    -m 0400 profile   ~/.profile
+	@install    -m 0400 Xdefaults ~/.Xdefaults
+	@install    -m 0400 xmodmaprc ~/.xmodmaprc
+	@install    -m 0400 xsession  ~/.xsession
+	@install    -m 0400 vimrc     ~/.vimrc
+	@install -D -m 0400 picom.conf        ~/.config/picom.conf
+	@install -D -m 0400 mpv.conf          ~/.config/mpv/mpv.conf
+	@install -D -m 0400 dunstrc           ~/.config/dunst/dunstrc
+	@install -D -m 0700 ranger/scope.sh   ~/.config/ranger/scope.sh
+	@install -D -m 0400 ranger/rifle.conf ~/.config/ranger/rifle.conf
+	@install -D -m 0400 ranger/rc.conf    ~/.config/ranger/rc.conf
+	@install    -m 0400 kshrc ~/.kshrc
+	@install    -m 0400 rtorrent.rc ~/.rtorrent.rc
+	@mkdir -p ~/.config/nvim ~/.vim/autoload
+	@printf '%s\n%s\n%s\n' \
 		'set runtimepath^=~/.vim runtimepath+=~/.vim/after' \
 		'let &packpath=&runtimepath' \
 		'source ~/.vimrc' \
 		>~/.config/nvim/init.vim
-	curl -sfL https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
+	[ -f ~/.vim/autoload/plug.vim ] || \
+		curl -sfL https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
 		>~/.vim/autoload/plug.vim
-	mkdir -p ~/.config/ranger/plugins
-	curl -sfL https://github.com/alexanderjeurissen/ranger_devicons/raw/master/__init__.py \
+	@mkdir -p ~/.config/ranger/plugins
+	[ -f ~/.config/ranger/plugins/devicons_linemode.py ] || \
+		curl -sfL https://github.com/alexanderjeurissen/ranger_devicons/raw/master/__init__.py \
 		>~/.config/ranger/plugins/devicons_linemode.py
-	curl -sfL https://github.com/alexanderjeurissen/ranger_devicons/raw/master/devicons.py \
+	[ -f ~/.config/ranger/plugins/devicons.py ] || \
+		curl -sfL https://github.com/alexanderjeurissen/ranger_devicons/raw/master/devicons.py \
 		>~/.config/ranger/plugins/devicons.py
 	ln -sf ~/.Xdefaults ~/.Xresources
 	ln -sf ~/.kshrc     ~/.bashrc

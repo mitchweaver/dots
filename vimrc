@@ -41,13 +41,10 @@ map <silent><leader>pc :PlugClean<CR>
 scriptencoding utf-8
 set encoding=utf-8
 set history=200
-set backspace=indent,eol,start " make backspace useable
-set whichwrap+=<,>,h,l " wrap around lines with these keys
-set updatetime=750 " time until bg calls after typing
-set timeout! " Disable keybind timeout
-set ttimeout! " Disable keybind timeout
-set clipboard=unnamed " yank/paste to/from system clipboard
-"set clipboard=unnamedplus " yank/paste to/from system clipboard
+set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+set updatetime=750
+set clipboard=unnamedplus
 set lazyredraw " whether to redraw screen after macros
 set mat=2 " how fast to blink matched brackets
 set textwidth=0 " very annoying warning
@@ -62,10 +59,6 @@ set cmdheight=1 " cmd output only take up 1 line
 set nostartofline " gg/G do not always go to line start
 set modeline " enable per-file custom syntax
 noremap ; :
-
-" automatic linebreak
-" set lbr
-" set tw=100
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 " ----- colors -------------------- 
