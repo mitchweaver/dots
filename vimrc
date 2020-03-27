@@ -5,14 +5,19 @@
 " http://github.com/mitchweaver/dots  "
 "                                     "
 "'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"
+
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+"  Init
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
-
 " unbind space for everything but leader
 nnoremap <silent><SPACE> <nop>
 let mapleader=" "
 
-" -*-*-*-*-*-*-*-* Plugins *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+"  Plugins
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set nocompatible
 filetype off
 call plug#begin('~/.vim/vim-plug')
@@ -35,9 +40,16 @@ filetype indent plugin on
 map <silent><leader>pi :PlugInstall<CR>
 map <silent><leader>pu :PlugUpdate<CR>
 map <silent><leader>pc :PlugClean<CR>
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-" -*-*-*-*-*- general -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+"  Theme
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+set background=light
+colorscheme wal
+
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+"  General
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 scriptencoding utf-8
 set encoding=utf-8
 set history=200
@@ -61,13 +73,9 @@ set modeline " enable per-file custom syntax
 noremap ; :
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-" ----- colors -------------------- 
-" set background=dark
-set background=light
-colorscheme wal
-"  --------------------------------
-
-" ---- syntax stuff -------------
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+"  Syntax
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 autocmd BufNewFile,BufRead *.config set syntax=sh
 autocmd BufNewFile,BufRead *.conf set syntax=sh
 autocmd BufNewFile,BufRead *.cfg set syntax=sh
@@ -87,11 +95,12 @@ let g:asmsyntax = 'nasm'
 autocmd BufRead *.rc setlocal ft=sh
 autocmd BufRead *.asm setlocal ft=nasm
 map <silent><leader>sy :set syntax=sh<cr>
-" syntax off
-" -------------------------------
 
-" set number relativenumber
-map <silent><leader>ln :set number! relativenumber!<cr>
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" Line Numbers
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+map <silent><leader>ln :set number!<cr>
+map <silent><leader>nl :set relativenumber!<cr>
 
 let s:color_column_old = 80
 function! s:ToggleColorColumn()
@@ -112,9 +121,10 @@ set diffopt+=iwhite " disable white space diffing
 set formatoptions+=o " continue comments new lines
 set synmaxcol=512
 set nowrap
-set encoding=utf-8
 
-" --- tabs ----------
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+"  Style
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -123,18 +133,20 @@ set smarttab " soft tab creation / deletion
 set shiftround " tab / shifting moves to closest tabstop.
 set autoindent " match indents on new lines.
 set smartindent
-" --------------------
 
-" ---- annoying nonsense ------------------
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+"  Annoying nonsense
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set vb " disable audible bell
 set novisualbell " kill the visual bell too
 set noerrorbells " did I mention I hate bells?
 set nobackup " we have vcs, we don't need backups.
 set nowritebackup " we have vcs, we don't need backups.
 set noswapfile " annoying
-" -----------------------------------------
 
-" -------- buffers ------------------------------
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+"  Buffers
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set hidden " allow buffers with unsaved changes
 set autoread " reload files if changed on disk
 
@@ -147,7 +159,7 @@ map <silent><C-d> :bd<cr>
 map <silent>tk :bnext<CR>
 map <silent>tj :bprev<CR>
 map <silent>td :bd<cr>
-" -------------------------------------------------
+
 
 " make < and > retain selection
 vnoremap < <gv
@@ -168,7 +180,15 @@ nnoremap <silent><leader><leader> :let @/ = ""<CR>:noh<CR>
 " Search and Replace
 nmap <Leader>s :%s//g<Left><Left>
 
-" -------------- Extension Settings ----------------------
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+"  Hacks
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" execute line as shell command and replace it with output
+noremap W !!sh<cr>
+
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+"  Extensions
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 if exists(':PlugInstall')
     let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
     let g:gitgutter_realtime = 0 " only run gitgutter on save
@@ -208,8 +228,6 @@ if exists(':PlugInstall')
 
     let g:buftabline_show = 1
 
-    " fff
-"    nnoremap <silent><leader>r :F<CR>
     " ranger
     let g:ranger_map_keys = 0
     nnoremap <silent><leader>r :Ranger<CR>
@@ -217,16 +235,13 @@ endif
 
 set wildignore+=*.opus,*.flac,*.pdf,*.jpg,*.png,*.so,*.swp,*.zip,*.gzip,*.bz2,*.tar,*.xz,*.lrzip,*.lrz,*.mp3,*.ogg,*.mp4,*.gif,*.jpeg,*.webm
 
-" Horizontal scrolling
+" horizontal scrolling
 noremap <silent><C-o> 10zl
 noremap <silent><C-i> 10zh
 
-" swap f/b -- i know, i'm a madman.
+" swap f/b -- i know, i'm a madman
 noremap <silent><C-f> <C-b>
 noremap <silent><C-b> <C-f>
-
-" Nuke +, -, ! at start of lines in diffs (also killing the - lines)
-" map <silent> <C-z> :%s/^+<CR> :%s/^-.*<CR> :%s/^!<CR>
 
 " remap WQ to :w :q
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
@@ -242,14 +257,12 @@ map  <silent><c-=> <nop>
 map  <silent><c--> <nop>
 map  <silent><C-w> <nop>
 
-" map <leader>md :MarkdownPreview<CR>
-
 augroup resCur "reopen vim at previous cursor point
   autocmd!
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup END
 
-" ----------- Open files in ranger ----------------------- 
+" -*-*-*-*-* Open files in ranger *-*-*-*-*-*-*-*-*-*-*-*-*-*
 if has('nvim')
     function! s:Ranger(...)
         let path = a:0 ? a:1 : getcwd()
@@ -317,4 +330,4 @@ if has('nvim')
 
     command! -complete=dir -nargs=* Ranger :call <SID>Ranger(<f-args>)
 endif
-" -------------------------------------------------------
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

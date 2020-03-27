@@ -190,10 +190,14 @@ alias mpv="mpv $MPV_OPTS"
 alias mupdf="mupdf $MUPDF_OPTS"
 alias ytdl="youtube-dl $YTDL_OPTS"
 
-b() { [ "$1" ] && brws "$*" >/dev/null 2>&1 & }
-
 alias hme='htop -u mitch'
 alias hrt='htop -u root'
+
+# du for humans
+d() {
+    [ -d "${1:-.}" ] &&
+    du -ahLd 1 "${1:-.}" 2>/dev/null | sort -rh | head -n 20
+}
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # youtube-dl / ffmpeg
@@ -300,6 +304,10 @@ for i in 1 2 3 4 5 6 7 8 9 ; do
     eval "g${i}() { cd \$_MARK${i} ; }"
 done
 
+alias gd='_g /home/_brws/Downloads'
+Yd() { cp "$@" /home/_brws/Downloads ; }
+md() { mv "$@" /home/_brws/Downloads ; }
+
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # development (warning: may conflict with plan9 mk)
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -317,6 +325,11 @@ gud() {
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # notes
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+v() {
+    [ "$1" ] || set -- -c VimwikiIndex
+    nvim -n "$@"
+}
+
 alias hw="n -f $XDG_DOCUMENTS_DIR/hw.txt"
 alias words="n -f $XDG_DOCUMENTS_DIR/words.txt"
 alias bkm="n -f $XDG_DOCUMENTS_DIR/bkm.txt"
@@ -353,6 +366,17 @@ w3m() {
 }
 wddg() { w3m https://duckduckgo.com/lite/?q="$*" ; }
 alias wdump='w3m -dump'
+
+# nicely format http://wtfismyip.com output
+wtf() {
+    w3m -dump https://wtfismyip.com | head -n 15 | \
+    while read -r line ; do
+        case $line in
+            *:*|'') ;;
+            *) printf '%s\n' "$line"
+        esac
+    done
+}
 
 # weather
 alias weather='curl -s wttr.in/madison,sd?u0TQ'
@@ -403,3 +427,28 @@ pi_route() {
 #     doas sshfs -o allow_other,IdentityFile=${HOME}/.ssh/id_rsa \
 #         banana@$(pi_ip):/mnt /mnt/pi -p $(pi_port) -C
 # }
+
+bkup_ff() {
+    d=~/fil/bkup/ff
+    f=$d/mozilla-"$(date | tr ' ' '-')".tar
+    doas tar -cpf "$f" /home/_brws/.mozilla
+    xz "$f"
+}
+
+helloc() {
+cat >${1:-hello.c}<<'EOF'
+#include <stdio.h>
+int main() {
+    printf("%s\n", "hi");
+    return 0;
+}
+EOF
+}
+
+hellosh() {
+cat >${1:-hello.sh}<<"EOF"
+#!/bin/sh
+echo hi
+EOF
+chmod +x ${1:-hello.sh}
+}

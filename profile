@@ -50,14 +50,8 @@ export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s' \
        MUPDF_OPTS='-C fcfaf6'
 
 # -*-*-*-*-*-*-* default programs *-*-*-*-*-*-*-*-*-*-*-*-*-*
-for i in v nvim vim vi mg nano ; do
-    type $i && { export EDITOR=$i ; break ; }
-done >/dev/null
-
-for i in brws chrome chromium firefox surf ; do
-    type $i && { export BROWSER=$i ; break ; }
-done >/dev/null
-
+export EDITOR=nvim
+export BROWSER=brws
 export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
 export LESS='-QRsim +Gg'

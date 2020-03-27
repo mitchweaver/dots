@@ -40,10 +40,9 @@ xset b off &
 xhost +local: >/dev/null &
 xbacklight -set 100 &
 
-sct 5500 &
 background &
-vol -s 50 &
-mond &
+sct 5500 &
+vol -s 60 &
 
 export DIMENSIONS=$(dimensions)
 
@@ -53,12 +52,11 @@ _pids=
 # pgrep -f picom    >/dev/null || picom       & _pids="$_pids $!"
 pgrep -f dunst    >/dev/null || dunst       & _pids="$_pids $!"
 pgrep -f bar      >/dev/null || bar         & _pids="$_pids $!"
-pgrep -f xbanish  >/dev/null || xbanish     & _pids="$_pids $!"
+# pgrep -f xbanish  >/dev/null || xbanish     & _pids="$_pids $!"
 pgrep -f batmon   >/dev/null || batmon      & _pids="$_pids $!"
 pgrep -f clip     >/dev/null || clip -d     & _pids="$_pids $!"
 pgrep -f ytdlq    >/dev/null || ytdlq -d    & _pids="$_pids $!"
-# pgrep -f xdimmer  >/dev/null || xdimmer -p 30 -t 150 & _pids="$_pids $!"
-pgrep -f xidle    >/dev/null || xidle -area 6 -timeout 300 -sw \
+pgrep -f xidle    >/dev/null || xidle -area 6 -timeout 420 -sw \
          -program "${HOME}/bin/wrapper/lck" & _pids="$_pids $!"
 
 # -*-*-*-*-*-*-*-* start *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
