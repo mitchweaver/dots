@@ -70,6 +70,7 @@ set ch=1 " get rid of the wasted line at the bottom
 set cmdheight=1 " cmd output only take up 1 line
 set nostartofline " gg/G do not always go to line start
 set modeline " enable per-file custom syntax
+" set mouse=a
 noremap ; :
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 

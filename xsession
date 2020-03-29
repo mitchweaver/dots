@@ -20,13 +20,13 @@ do_exit() {
 
     # kill daemons, asking nicely first
     for pid in $_pids ; do kill $pid ; done
-    sleep 1
+    sleep 0.5
     for pid in $_pids ; do kill -0 $pid && kill -9 $pid ; done 2>/dev/null
 }
 trap do_exit EXIT INT TERM KILL
 
 case $(sysctl -n hw.version) in
-    'ThinkPad X200s')
+    *ThinkPad*)
         # enable scrolling with thinkpad trackpoint (openbsd)
         xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation' 1 &
         xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Button' 2 &
@@ -41,23 +41,22 @@ xhost +local: >/dev/null &
 xbacklight -set 100 &
 
 background &
-sct 5500 &
 vol -s 60 &
+sct 6000 &
+echo 6000 >~/.cache/sct
 
 export DIMENSIONS=$(dimensions)
 
 # -*-*-*-*-*-*-*-* user daemons *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 _pids=
 
-# pgrep -f picom    >/dev/null || picom       & _pids="$_pids $!"
 pgrep -f dunst    >/dev/null || dunst       & _pids="$_pids $!"
-pgrep -f bar      >/dev/null || bar         & _pids="$_pids $!"
-# pgrep -f xbanish  >/dev/null || xbanish     & _pids="$_pids $!"
-pgrep -f batmon   >/dev/null || batmon      & _pids="$_pids $!"
+pgrep -f xbanish  >/dev/null || xbanish     & _pids="$_pids $!"
+pgrep -f bar      >/dev/null || bar -d      & _pids="$_pids $!"
 pgrep -f clip     >/dev/null || clip -d     & _pids="$_pids $!"
 pgrep -f ytdlq    >/dev/null || ytdlq -d    & _pids="$_pids $!"
 pgrep -f xidle    >/dev/null || xidle -area 6 -timeout 420 -sw \
-         -program "${HOME}/bin/wrapper/lck" & _pids="$_pids $!"
+    -program "${HOME}/bin/wrapper/lck" & _pids="$_pids $!"
 
 # -*-*-*-*-*-*-*-* start *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 

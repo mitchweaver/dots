@@ -50,8 +50,8 @@ get_PS1() {
         esac
 
         # print git repo name in parenthesis, if we're inside one
-        set -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
-        [ "$1" ] && printf '(%s) ' "$1"
+        #set -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
+        #[ "$1" ] && printf '(%s) ' "$1"
 
         # clear formatting
         printf '%s' '\[\e[1;37m\]'
@@ -77,16 +77,6 @@ cd() {
     else
         export PS1="$(get_PS1)"
     fi
-}
-# fuzzy finding cat
-cat() { 
-    [ "$1" = -- ] && shift
-    if [ "$1" ] ; then
-        /bin/cat --  "$1"  ||
-        /bin/cat --  "$1"* ||
-        /bin/cat -- *"$1"  ||
-        /bin/cat -- *"$1"*
-    fi 2>/dev/null
 }
 
 # check if we're in ranger
@@ -118,6 +108,7 @@ case "$TERM" in
         dumb)
             alias ls='ls -F'
             export NO_COLOR=true
+            cd .
             ;;
        *)
            if type exa >/dev/null ; then
@@ -128,18 +119,25 @@ case "$TERM" in
            fi
 esac
 
-# generic aliases
 alias {cc,cll,clear,claer,clar,clea,clera}=clear
 alias {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi,ex}=exit
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# ls stuff
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 alias {l,sls,sl}=ls
 alias {ll,lll}='l -l'
 alias la='l -a'
 alias {lla,lal}='l -al'
 alias {l1,lv}='ls -1'
 alias lsf='l "$PWD"/*'
+
+# hack - print directories with full path name
+lsd() { printf '%s\n' "$*"/*/ ; }
+
 alias {cls,csl,cl,lc}='c;l'
 alias {e,ech,eho}=echo
-alias {g,gr,gre,Grep,gerp,grpe}=grep
+alias {g,gr,gre,Grep,gerp,grpe}='grep -i'
 alias {pg,pgrpe}=pgrep
 alias dg='d | g -i'
 alias lg='ls | g -i'
@@ -183,6 +181,20 @@ hg() {
 # search for a font name
 fcg() { fc-list | sed 's|.*: ||g' | grep -i "$*" ; }
 
+# grep for terms within tree of files
+findgrep() {
+    case $# in
+        0) return 1 ;;
+        1) set -- . "$1" ;;
+        2) [ -d "$1" ] || return 1
+    esac
+    find "$1" -type f 2>/dev/null | \
+    while read -r file ; do
+        grep -- "$2" "$file" >/dev/null &&
+            printf '%s\n' "$file"
+    done 2>/dev/null
+}
+
 unalias r 2>/dev/null
 r() { ranger "$@" ; clear ; }
 
@@ -209,10 +221,10 @@ alias res='ffprobe -v error -select_streams v:0 -show_entries stream=width,heigh
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # imagemagick
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-resize_75() { mogrify -resize '75%X75%' "$@" ; }
-resize_50() { mogrify -resize '50%X50%' "$@" ; }
-resize_25() { mogrify -resize '25%X25%' "$@" ; }
-rotate_90() { convert -rotate 90 "$1" "$1"   ; }
+resize_75() { for i ; do echo "$i" ; mogrify -resize '75%X75%' "$i" ; done ; }
+resize_50() { for i ; do echo "$i" ; mogrify -resize '50%X50%' "$i" ; done ; }
+resize_25() { for i ; do echo "$i" ; mogrify -resize '25%X25%' "$i" ; done ; }
+rotate_right() { for i ; do echo "$i" ; convert -rotate 90 "$i" "$i" ; done  ; }
 mog_1080()  { mogrify -resize '1920X1080' "$@" ; }
 transparent() {
     #turn a PNG white background -> transparent
@@ -221,9 +233,12 @@ transparent() {
 png2jpg() {
     for i ; do
         [ -f "$i" ] || continue
-        convert "$i" "${i%png}"jpg || exit 1
-        jpegoptim -s "${i%png}"jpg || exit 1
-        /bin/rm "$1"
+        case $i in
+            *.png)
+                convert "$i" "${i%png}"jpg || exit 1
+                jpegoptim -s "${i%png}"jpg || exit 1
+                /bin/rm "$i"
+        esac
     done
 }
 alias jpg='find . -type f -iname "*.jp*" -exec jpegoptim -s {} \;'
@@ -345,7 +360,15 @@ alias links="n -f $XDG_DOCUMENTS_DIR/links.txt"
 alias rsync='rsync -rvhtu --progress --delete --partial' #-z -c
 alias scp='scp -rp'
 
-alias traffic='netstat -w 1 -b'
+traffic() {
+netstat -w 1 -b | \
+while read -r _ _ line ; do
+	set -- $line
+	printf '%s' $1 | human
+	printf '%s' $2 | human
+done
+}
+
 alias dumpall="doas tcpdump -n -i iwn0"
 alias dumpweb="doas tcpdump -n -i iwn0 port 80 or port 443 or port 53"
 alias dumphttp="doas tcpdump -n -i iwn0 port 80 or port 443"
@@ -389,7 +412,12 @@ alias sg='sysctl | grep -i'
 alias disks='sysctl -n hw.disknames'
 alias disklabel='doas disklabel'
 alias reboot='doas reboot'
-alias net='doas sh /etc/netstart'
+alias poweroff='doas halt -p'
+net() {
+    doas sh /etc/netstart
+    vpn -i && doas vpn -r
+    doas rcctl restart unbound
+}
 
 # pf logging
 alias pfdump='doas tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout
@@ -452,3 +480,14 @@ echo hi
 EOF
 chmod +x ${1:-hello.sh}
 }
+
+qr() { cat "${1:-?}" | curl -sF-=\<- qrenco.de ; }
+
+if [ -f ~/.cache/wal/sequences ] ; then
+    case $(ps -p $PPID -o command=) in
+        *st*) ;;
+        *) cat ~/.cache/wal/sequences
+    esac
+fi
+
+alias mount_phone='doas simple-mtpfs --device 1 -o allow_other /mnt/android'

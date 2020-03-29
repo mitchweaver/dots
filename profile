@@ -8,7 +8,6 @@ PATH=/bin:/sbin:$PATH
 PATH=/usr/bin:/usr/sbin:/usr/X11R6/bin:$PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 PATH=${HOME}/bin:${HOME}/.local/bin:$PATH
-PATH=$PATH:$(printf '%s:' ${HOME}/bin/*/)
 PATH=$PATH:${HOME}/src/ascii
 export PATH
 
@@ -17,11 +16,24 @@ export MANPATH=~/.local/share/man:
 export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
 export NPROC=$(sysctl -n hw.ncpu)
 
-export LANG='en_US.UTF-8' \
-       LANGUAGE='en_US.UTF-8' \
-       LC_ALL='en_US.UTF-8' \
-       LOCALE='en_US.UTF-8' \
-       LC_CTYPE='en_US.UTF-8'
+export LC_CTYPE='en_US.UTF-8'
+export LANG="$LC_CTYPE" \
+       LANGUAGE="$LC_CTYPE" \
+       LC_ALL="$LC_CTYPE" \
+       LOCALE="$LC_CTYPE"
+
+# -*-*-*-*-*-*-* plan 9 stuff *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+if [ -d ${HOME}/src/plan9/plan9port ] ; then
+    export PLAN9=${HOME}/src/plan9/plan9port
+elif [ -d /usr/local/plan9 ] ; then
+    export PLAN9=/usr/local/plan9
+fi
+if [ "$PLAN9" ] ; then
+    export PATH=$PATH:$PLAN9/bin
+    export font=/usr/local/plan9/lib/font/terminus/ter-u14v.font
+    export lfont=/usr/local/plan9/lib/font/mntcarlo/mntcarlo.font
+    export tabstop=4
+fi
 
 # -*-*-*-*-*-*-* my vars *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 export XDG_CONFIG_HOME=~/.config \
@@ -48,6 +60,10 @@ export TRASH_DIR=${XDG_CACHE_HOME}/trash \
 export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s' \
        MPV_OPTS="--really-quiet --force-seekable=yes" \
        MUPDF_OPTS='-C fcfaf6'
+
+export PASH_CLIP='xsel -in' \
+       PASH_LENGTH=32
+       PASH_DIR=~/fil/pash
 
 # -*-*-*-*-*-*-* default programs *-*-*-*-*-*-*-*-*-*-*-*-*-*
 export EDITOR=nvim
