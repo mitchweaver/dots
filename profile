@@ -23,8 +23,8 @@ export LANG="$LC_CTYPE" \
        LOCALE="$LC_CTYPE"
 
 # -*-*-*-*-*-*-* plan 9 stuff *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-if [ -d ${HOME}/src/plan9/plan9port ] ; then
-    export PLAN9=${HOME}/src/plan9/plan9port
+if [ -d ~/src/plan9 ] ; then
+    export PLAN9=~/src/plan9
 elif [ -d /usr/local/plan9 ] ; then
     export PLAN9=/usr/local/plan9
 fi
@@ -73,3 +73,8 @@ export BROWSER=brws
 export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
 export LESS='-QRsim +Gg'
+
+# -*-*-*-*-*-*-* other stuff *-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*
+# empty ~/tmp
+rm -rf ~/tmp 2>/dev/null ||:
+mkdir -p ~/tmp

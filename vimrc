@@ -32,6 +32,7 @@ Plug 'airblade/vim-gitgutter' " git diffing along the left side
 Plug 'tpope/vim-surround' " surround stuff with stuff
 Plug 'dylanaraps/wal.vim' " pywal theme
 Plug 'tpope/vim-repeat' " allows '.' to do more things
+" Plug 'chrisbra/Colorizer' " colorize hex codes in terminal
 " Plug 'sheerun/vim-polyglot' " syntax highlighting
 
 call plug#end()
@@ -179,7 +180,8 @@ set magic " 'magic' patterns - (extended regex)
 nnoremap <silent><leader><leader> :let @/ = ""<CR>:noh<CR>
 
 " Search and Replace
-nmap <Leader>s :%s//g<Left><Left>
+nmap <leader>s :%s//g<Left><Left>
+nmap <leader>md :!ghmd2html %:p >/tmp/tmp.html && surf /tmp/tmp.html && rm /tmp/tmp.html<CR>
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 "  Hacks
@@ -191,6 +193,10 @@ noremap W !!sh<cr>
 "  Extensions
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 if exists(':PlugInstall')
+    " let g:colorizer_auto_color = 1
+    " let g:termguicolors = 1
+    " autocmd VimEnter * ColorHighlight
+
     let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
     let g:gitgutter_realtime = 0 " only run gitgutter on save
     set signcolumn=auto " (mostly for gitgutter): yes=always, no=never, auto=ifchanges
@@ -214,19 +220,20 @@ if exists(':PlugInstall')
     autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
     let wiki = {}
-    let g:vimwikidir = "$XDG_DOCUMENTS_DIR/vimwiki"
+    let g:vimwikidir = "~/src/wvr.sh/src/wiki"
     let wiki.path = g:vimwikidir
     let g:vimwiki_list=[wiki]
     let g:vimwiki_list = [
-        \{'path': '$XDG_DOCUMENTS_DIR/vimwiki/personal.wiki',    'syntax': 'markdown', 'ext': '.md'},
+        \{'path': '~/src/wvr.sh/src/wiki', 'syntax': 'markdown', 'ext': '.md'},
     \]
-    let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+    let g:vimwiki_ext2syntax = {'.md': 'markdown'}
 
     " vim surround -- becuase nobody uses 's' anyway
 	nmap ss ysiw
 	nmap sl yss
 	vmap s S
 
+    " show buffers as tabs
     let g:buftabline_show = 1
 
     " ranger

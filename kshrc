@@ -283,6 +283,7 @@ alias gW='_g $XDG_PICTURES_DIR/wallpapers'
 alias gb="_g ~/bin"
 alias gs="_g ~/src"
 alias gk="_g ~/bks"
+alias gt="_g ~/tmp"
 alias gE='_g /etc'
 alias gM='_g /mnt'
 alias gT="_g /tmp"
@@ -299,7 +300,8 @@ Yvi(){ cp "$@" $XDG_VIDEOS_DIR ; }
 Yb() { cp "$@" ~/bin ; }
 Yk() { cp "$@" ~/bks ; }
 Ys() { cp "$@" ~/src ; }
-YT() { cp "$@" /tmp ; }
+Yt() { cp "$@" ~/tmp ; }
+YT() { cp "$@" /tmp  ; }
 
 mf() { mv "$@" $XDG_DOCUMENTS_DIR ; }
 mi() { mv "$@" $XDG_PICTURES_DIR ; }
@@ -309,6 +311,7 @@ mW() { mv "$@" $XDG_PICTURES_DIR/wallpapers ; }
 mb() { mv "$@" ~/bin ; }
 mk() { mv "$@" ~/bks ; }
 ms() { mv "$@" ~/src ; }
+mt() { mv "$@" ~/tmp ; }
 mT() { mv "$@" /tmp  ; }
 
 # directory marking
@@ -322,6 +325,10 @@ done
 alias gd='_g /home/_brws/Downloads'
 Yd() { cp "$@" /home/_brws/Downloads ; }
 md() { mv "$@" /home/_brws/Downloads ; }
+
+mw() { mv "$@" ~/src/wvr.sh/    ; }
+Yw() { cp -r "$@" ~/src/wvr.sh/ ; }
+alias gw='_g ~/src/wvr.sh'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # development (warning: may conflict with plan9 mk)
@@ -429,6 +436,7 @@ alias pfdrop='doas tcpdump -nettti pflog0 action drop'   # follow dropped
 alias shrug="printf '%s\n' '¯\\_(ツ)_/¯' | tee /dev/tty | clip -i"
 alias heart='printf "%b\n" "\xe2\x9d\xa4"'
 alias tm="printf '%s\n' '™'"
+alias copyright="printf '%s\n' '©'"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # unsorted junk below
@@ -491,3 +499,4 @@ if [ -f ~/.cache/wal/sequences ] ; then
 fi
 
 alias mount_phone='doas simple-mtpfs --device 1 -o allow_other /mnt/android'
+alias shck='shellcheck -s sh'
