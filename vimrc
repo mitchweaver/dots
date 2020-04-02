@@ -188,6 +188,10 @@ nmap <leader>md :!ghmd2html %:p >/tmp/tmp.html && surf /tmp/tmp.html && rm /tmp/
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " execute line as shell command and replace it with output
 noremap W !!sh<cr>
+" pipe line to fmt and replace current line
+noremap F !!fmt<cr>
+" prepend '> ' to lines as if to block quote
+noremap Q !!sed 's/^/> /g'<cr>
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 "  Extensions
@@ -251,9 +255,6 @@ noremap <silent><C-i> 10zh
 noremap <silent><C-f> <C-b>
 noremap <silent><C-b> <C-f>
 
-" remap WQ to :w :q
-cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
-cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
 map <silent><leader>w :w<CR>
 map <silent><leader>q :q<CR>
 
