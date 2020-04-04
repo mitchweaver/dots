@@ -12,11 +12,15 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # shell options
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-set -o vi
-set -o csh-history
-set -o bgnice
-set -o trackall
-set -o ignoreeof
+
+case ${SHELL##/*} in
+    ksh)
+        set -o csh-history
+        ;;
+    *)
+        set -o vi
+        set -o ignoreeof
+esac
 
 # save hist file per shell, deleting on close
 export HISTFILE=${XDG_CACHE_HOME:-~/.cache}/.shell_history-$$ \
