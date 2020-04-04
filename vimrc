@@ -181,7 +181,6 @@ nnoremap <silent><leader><leader> :let @/ = ""<CR>:noh<CR>
 
 " Search and Replace
 nmap <leader>s :%s//g<Left><Left>
-nmap <leader>md :!ghmd2html %:p >/tmp/tmp.html && surf /tmp/tmp.html && rm /tmp/tmp.html<CR>
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 "  Hacks
@@ -192,6 +191,10 @@ noremap W !!sh<cr>
 noremap F !!fmt<cr>
 " prepend '> ' to lines as if to block quote
 noremap Q !!sed 's/^/> /g'<cr>
+
+" view open file in rendered markdown
+nmap <leader>md :!smu %:p >/tmp/tmp.html && surf /tmp/tmp.html && rm /tmp/tmp.html<CR>
+nmap <leader>ghmd :!ghmd2html %:p >/tmp/tmp.html && surf /tmp/tmp.html && rm /tmp/tmp.html<CR>
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 "  Extensions
