@@ -12,11 +12,15 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # shell options
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-set -o vi
-set -o csh-history
-set -o bgnice
-set -o trackall
-set -o ignoreeof
+
+case ${SHELL##/*} in
+    ksh)
+        set -o csh-history
+        ;;
+    *)
+        set -o vi
+        set -o ignoreeof
+esac
 
 # save hist file per shell, deleting on close
 export HISTFILE=${XDG_CACHE_HOME:-~/.cache}/.shell_history-$$ \
@@ -105,18 +109,20 @@ c() {
 
 # ls
 case "$TERM" in
-        dumb)
+    dumb)
+        alias ls='ls -F'
+        export NO_COLOR=true
+        cd .
+        ;;
+    *)
+        if type colorls >/dev/null ; then
+            alias ls='colorls -G -F'
+        elif type exa >/dev/null ; then
+            alias ls='exa -F --group-directories-first'
+            alias {lt,tree}='exa -F -T'
+        else
             alias ls='ls -F'
-            export NO_COLOR=true
-            cd .
-            ;;
-       *)
-           if type exa >/dev/null ; then
-               alias ls='exa -F --group-directories-first'
-               alias {lt,tree}='exa -F -T'
-           else
-               alias ls='ls -F'
-           fi
+        fi
 esac
 
 alias {cc,cll,clear,claer,clar,clea,clera}=clear
@@ -370,9 +376,9 @@ alias scp='scp -rp'
 traffic() {
 netstat -w 1 -b | \
 while read -r _ _ line ; do
-	set -- $line
-	printf '%s' $1 | human
-	printf '%s' $2 | human
+    set -- $line
+    printf '%s' $1 | human
+    printf '%s' $2 | human
 done
 }
 
@@ -500,3 +506,5 @@ fi
 
 alias mount_phone='doas simple-mtpfs --device 1 -o allow_other /mnt/android'
 alias shck='shellcheck -s sh'
+
+smv() { scp -rp "${1:-?}" "${2:-?}" && rm -r "${1:-?}" ; }

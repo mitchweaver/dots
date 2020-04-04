@@ -51,7 +51,7 @@ export DIMENSIONS=$(dimensions)
 _pids=
 
 pgrep -f dunst    >/dev/null || dunst       & _pids="$_pids $!"
-pgrep -f xbanish  >/dev/null || xbanish     & _pids="$_pids $!"
+# pgrep -f xbanish  >/dev/null || xbanish     & _pids="$_pids $!"
 pgrep -f bar      >/dev/null || bar -d      & _pids="$_pids $!"
 pgrep -f clip     >/dev/null || clip -d     & _pids="$_pids $!"
 pgrep -f ytdlq    >/dev/null || ytdlq -d    & _pids="$_pids $!"
