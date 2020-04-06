@@ -14,7 +14,12 @@ export PATH
 export MANPATH=~/.local/share/man:
 
 export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
-export NPROC=$(sysctl -n hw.ncpu)
+
+while read -r line ; do
+    case $line in
+        *'cpu cores'*) export NPROC="${line#*: }"
+    esac
+done </proc/cpuinfo
 
 export LC_CTYPE='en_US.UTF-8'
 export LANG="$LC_CTYPE" \
@@ -42,8 +47,9 @@ export XDG_CONFIG_HOME=~/.config \
        XDG_MUSIC_DIR=~/mus \
        XDG_PICTURES_DIR=~/img \
        XDG_VIDEOS_DIR=~/vid \
-       XDG_CACHE_HOME=~/.cache \
-       XDG_DATA_HOME=~/.cache \
+
+export XDG_CACHE_HOME=~/.cache \
+       XDG_DATA_HOME=~/.local \
        XDG_DESKTOP_DIR=~/.cache \
        XDG_PUBLICSHARE_DIR=~/.cache \
        XDG_TEMPLATES_DIR=~/.cache

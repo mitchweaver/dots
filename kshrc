@@ -12,15 +12,11 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # shell options
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-case ${SHELL##/*} in
-    ksh)
-        set -o csh-history
-        ;;
-    *)
-        set -o vi
-        set -o ignoreeof
-esac
+set -o vi
+set -o csh-history
+set -o bgnice
+set -o trackall
+set -o ignoreeof
 
 # save hist file per shell, deleting on close
 export HISTFILE=${XDG_CACHE_HOME:-~/.cache}/.shell_history-$$ \
@@ -508,3 +504,19 @@ alias mount_phone='doas simple-mtpfs --device 1 -o allow_other /mnt/android'
 alias shck='shellcheck -s sh'
 
 smv() { scp -rp "${1:-?}" "${2:-?}" && rm -r "${1:-?}" ; }
+
+if type crux >/dev/null ; then
+    pkg() {
+        flag=$1
+        shift
+        case $flag in
+            a) doas prt-get depinst -f -im -is -if --install-scripts "$@" ;;
+            u) doas prt-get update  -f -im -is -if --install-scripts "$@" ;;
+            d) doas prt-get remove "$@" ;;
+            i) prt-get info "$@" ;;
+            s) prt-get search "$@" ;;
+        esac
+    }
+fi
+
+ddg() { w3m -dump duckduckgo.com/html/search?q="$*" ; }
