@@ -149,7 +149,6 @@ alias {mkdir,mkd,mkdr}='mkdir -p'
 alias df='df -h'
 alias bn=basename
 alias tf='tail -f'
-alias cx='chmod +x'
 alias su='su -'
 alias h='head -n 15'
 alias t='tail -n 15'
@@ -160,6 +159,7 @@ alias pk=pkill
 alias w=which
 alias py=python3.7
 alias dm='dmesg | tail -n 20'
+alias poweroff='doas poweroff'
 
 mkcd() { mkd "$_" && cd "$_" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
@@ -169,10 +169,10 @@ cpcd() { cp "$1" "$2" && cd "$2" ; }
 cw() { cat "$(which "${1:-?}")" ; }
 
 # search for running process
-psg() { ps -Auxww | grep -i "$*" | grep -v "grep $*" ; }
+psg() { ps -auxww | grep -i "$*" | grep -v "grep $*" ; }
 
 # grab urls of any running processes
-psurls() { ps -Auxww | urls ; }
+psurls() { ps -auxww | urls ; }
 
 # search shell history
 hg() {
@@ -184,17 +184,23 @@ hg() {
 fcg() { fc-list | sed 's|.*: ||g' | grep -i "$*" ; }
 
 # grep for terms within tree of files
-findgrep() {
+# (I don't use the "fg"/"bg" commands)
+fg() {
     case $# in
-        0) return 1 ;;
-        1) set -- . "$1" ;;
-        2) [ -d "$1" ] || return 1
+        0) return ;;
+        1) set -- . "$1"
     esac
-    find "$1" -type f 2>/dev/null | \
-    while read -r file ; do
-        grep -- "$2" "$file" >/dev/null &&
-            printf '%s\n' "$file"
-    done 2>/dev/null
+    case $1 in
+        -h)
+            >&2 echo 'Usage: fg [dir] [search terms]'
+            ;;
+        *)
+            find "$1" -type f 2>/dev/null | \
+            while read -r f ; do
+                grep -i -- "$2" "$f" >/dev/null &&
+                printf '%s\n' "$f"
+            done
+    esac
 }
 
 unalias r 2>/dev/null
@@ -273,7 +279,7 @@ alias {..,cd..}='cd ..'
 alias ...='.. ; ..'
 alias ....='.. ; ...'
 
-_g() { _a=$1 ; shift ; cd $_a/"$*" ; ls ; }
+_g() { _a=$1 ; shift ; cd $_a/"$*" ; }
 
 alias gf="_g $XDG_DOCUMENTS_DIR"
 alias gi="_g $XDG_PICTURES_DIR"
@@ -292,6 +298,7 @@ alias gT="_g /tmp"
 alias gV='_g /var'
 alias gss='_g ~/src/suckless'
 alias gsd='_g ~/src/dots'
+alias gsb='_g ~/src/bonsai'
 alias gcf='_g ~/.config'
 alias gch='_g ~/.cache'
 
@@ -311,7 +318,6 @@ mm() { mv "$@" $XDG_MUSIC_DIR ; }
 mvi(){ mv "$@" $XDG_VIDEOS_DIR ; }
 mW() { mv "$@" $XDG_PICTURES_DIR/wallpapers ; }
 mb() { mv "$@" ~/bin ; }
-mk() { mv "$@" ~/bks ; }
 ms() { mv "$@" ~/src ; }
 mt() { mv "$@" ~/tmp ; }
 mT() { mv "$@" /tmp  ; }
@@ -324,9 +330,9 @@ for i in 1 2 3 4 5 6 7 8 9 ; do
     eval "g${i}() { cd \$_MARK${i} ; }"
 done
 
-alias gd='_g /home/_brws/Downloads'
-Yd() { cp "$@" /home/_brws/Downloads ; }
-md() { mv "$@" /home/_brws/Downloads ; }
+alias gd='_g ~/Downloads'
+Yd() { cp "$@" ~/Downloads ; }
+md() { mv "$@" ~/Downloads ; }
 
 mw() { mv "$@" ~/src/wvr.sh/    ; }
 Yw() { cp -r "$@" ~/src/wvr.sh/ ; }
@@ -340,10 +346,17 @@ alias mkc='make clean'
 alias mki='make install'
 alias mku='make uninstall'
 alias mks='make -s install'
-alias {recomp,rcp}=~/src/suckless/build.sh
+alias mkt='make test'
+alias mkki='make ; make install'
 gud() {
     # activate my PS1 git branch detection after git commands
     command gud "$@" ; cd .
+}
+rcp() {
+    case $1 in
+        bs|bonsai) gsb;mkki;cd - >/dev/null ;;
+        st|dwm|dmenu|surf|tabbed) ~/src/suckless/build.sh "$@"
+    esac
 }
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -356,12 +369,12 @@ v() {
 
 alias hw="n -f $XDG_DOCUMENTS_DIR/hw.txt"
 alias words="n -f $XDG_DOCUMENTS_DIR/words.txt"
-alias bkm="n -f $XDG_DOCUMENTS_DIR/bkm.txt"
 alias shows="n -f $XDG_DOCUMENTS_DIR/shows.txt"
 alias movies="n -f $XDG_DOCUMENTS_DIR/movies.txt"
 alias anime="n -f $XDG_DOCUMENTS_DIR/anime.txt"
 alias games="n -f $XDG_DOCUMENTS_DIR/games.txt"
 alias links="n -f $XDG_DOCUMENTS_DIR/links.txt"
+alias books="n -f $XDG_DOCUMENTS_DIR/books.txt"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # networking
@@ -384,7 +397,7 @@ alias dumphttp="doas tcpdump -n -i iwn0 port 80 or port 443"
 alias dumpdns="doas tcpdump -n -i iwn0 port 53"
 alias dumpssh="doas tcpdump -n -i iwn0 port 22"
 
-ping() { command ping -L -n -s 1 -w 2 "${1:-eff.org}" ; }
+ping() { command ping -L -n -s 1 -w 2 "${1:-wvr.sh}" ; }
 pingpi() { ping $(grep -A 1 'Host pi' ~/.ssh/config | grep -oE '[0-9]+.*') ; }
 alias p=ping
 alias pp=pingpi
@@ -410,27 +423,27 @@ wtf() {
     done
 }
 
-# weather
-alias weather='curl -s wttr.in/madison,sd?u0TQ'
-alias forecast='curl -s wttr.in/madison,sd?u | tail -n 33 | head -n 31'
+weather() {
+    read -r wttr <~/.cache/wttr
+    curl -s wttr.in/$wttr?u0TQ
+}
+forecast() {
+    read -r wttr <~/.cache/wttr
+    curl -s wttr.in/$wttr?u | tail -n 33 | head -n 31
+}
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # openbsd specific
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-alias sg='sysctl | grep -i'
-alias disks='sysctl -n hw.disknames'
-alias disklabel='doas disklabel'
-alias reboot='doas reboot'
-alias poweroff='doas halt -p'
-net() {
-    doas sh /etc/netstart
-    vpn -i && doas vpn -r
-    doas rcctl restart unbound
+[ -f /var/log/pflog ] && {
+    alias sg='sysctl | grep -i'
+    alias disks='sysctl -n hw.disknames'
+    alias disklabel='doas disklabel'
+    alias reboot='doas reboot'
+    alias poweroff='doas halt -p'
+    alias pfdump='doas tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout
+    alias pfdrop='doas tcpdump -nettti pflog0 action drop'   # follow dropped
 }
-
-# pf logging
-alias pfdump='doas tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout
-alias pfdrop='doas tcpdump -nettti pflog0 action drop'   # follow dropped
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # irc shenanigans
@@ -449,28 +462,17 @@ cheat() { curl -s cheat.sh/$1 ; }
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # pi stuff, ignore
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*#
-# pi_ip() { grep -A 1 'Host pi' ~/.ssh/config | grep -oE '[0-9]+.*' ; }
-# pi_port() {
-#     grep -A 3 'Host pi' /home/mitch/.ssh/config  | \
-#         awk '{print $2}' | tail -n 1
-# }
-pi_route() {
-    doas route add 192.168.1.122 192.168.1.1
-    # set -- $(route -n show -inet -gateway | grep default | awk '{print $2}')
-    # gate=$1
-    # doas route delete $(pi_ip)/24 >/dev/null
-    # doas route add $(pi_ip)/24 $gate
+pi_ip() { grep -A 1 'Host pi' ~/.ssh/config | grep -oE '[0-9]+.*' ; }
+pi_port() {
+    grep -A 3 'Host pi' /home/mitch/.ssh/config  | \
+        awk '{print $2}' | tail -n 1
 }
-# mount_sshfs_pi() {
-#     doas sshfs -o allow_other,IdentityFile=${HOME}/.ssh/id_rsa \
-#         banana@$(pi_ip):/mnt /mnt/pi -p $(pi_port) -C
-# }
-
-bkup_ff() {
-    d=~/fil/bkup/ff
-    f=$d/mozilla-"$(date | tr ' ' '-')".tar
-    doas tar -cpf "$f" /home/_brws/.mozilla
-    xz "$f"
+mountpi() {
+    doas sshfs -o allow_other,IdentityFile=${HOME}/.ssh/id_rsa \
+        banana@$(pi_ip):/mnt /mnt/pi -p $(pi_port) -C
+}
+umountpi() {
+    doas umount /mnt/pi
 }
 
 helloc() {
@@ -486,6 +488,9 @@ EOF
 hellosh() {
 cat >${1:-hello.sh}<<"EOF"
 #!/bin/sh
+#
+# http://github.com/mitchweaver
+#
 echo hi
 EOF
 chmod +x ${1:-hello.sh}
@@ -517,6 +522,25 @@ if type crux >/dev/null ; then
             s) prt-get search "$@" ;;
         esac
     }
+elif type xbps-query >/dev/null ; then
+    pkg() {
+        flag=$1
+        shift
+        case $flag in
+            a|u) doas xbps-install -Su "$@" ;;
+            d) doas xbps-remove -R "$@" ;;
+            i) xbps-query --repository --show "$@" ;;
+            s) xbps-query --repository -s "$@" ;;
+        esac
+    }
 fi
-
 ddg() { w3m -dump duckduckgo.com/html/search?q="$*" ; }
+scfg() { v ~/src/suckless/$1/cfg/config.h ; }
+alias speedtest='speedtest-cli --simple'
+
+rmdir Desktop Downloads 2>/dev/null ||:
+
+alias kshrc='v ~/src/dots/kshrc'
+
+alias ga1='grep -i -A 1'
+alias ga='grep -i -A 6'

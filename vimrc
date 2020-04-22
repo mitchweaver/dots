@@ -30,8 +30,8 @@ Plug 'ervandew/supertab' " code completion
 Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
 Plug 'airblade/vim-gitgutter' " git diffing along the left side
 Plug 'tpope/vim-surround' " surround stuff with stuff
-Plug 'dylanaraps/wal.vim' " pywal theme
 Plug 'tpope/vim-repeat' " allows '.' to do more things
+Plug 'dylanaraps/wal.vim' " pywal theme
 " Plug 'chrisbra/Colorizer' " colorize hex codes in terminal
 " Plug 'sheerun/vim-polyglot' " syntax highlighting
 
@@ -72,6 +72,7 @@ set cmdheight=1 " cmd output only take up 1 line
 set nostartofline " gg/G do not always go to line start
 set modeline " enable per-file custom syntax
 " set mouse=a
+set mouse=
 noremap ; :
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -155,8 +156,6 @@ set autoread " reload files if changed on disk
 " b <num> = go to $buffer
 nnoremap <Leader>b :b 
 
-map <silent><C-k> :bnext<CR>
-map <silent><C-j> :bprev<CR>
 map <silent><C-d> :bd<cr>
 map <silent>tk :bnext<CR>
 map <silent>tj :bprev<CR>
@@ -193,8 +192,8 @@ noremap F !!fmt<cr>
 noremap Q !!sed 's/^/> /g'<cr>
 
 " view open file in rendered markdown
-nmap <leader>md :!smu %:p >/tmp/tmp.html && surf /tmp/tmp.html && rm /tmp/tmp.html<CR>
-nmap <leader>ghmd :!ghmd2html %:p >/tmp/tmp.html && surf /tmp/tmp.html && rm /tmp/tmp.html<CR>
+nmap <leader>md :!smu "%:p" >/tmp/tmp.html && $BROWSER /tmp/tmp.html<CR>
+nmap <leader>ghmd :!ghmd2html "%:p" >/tmp/tmp.html && $BROWSER /tmp/tmp.html<CR>
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 "  Extensions
@@ -267,7 +266,7 @@ map <C-s> 30i-*<ESC>:Commentary<CR>
 " conflicts with st/tabbed:
 map  <silent><c-=> <nop>
 map  <silent><c--> <nop>
-map  <silent><C-w> <nop>
+" map  <silent><C-w> <nop>
 
 augroup resCur "reopen vim at previous cursor point
   autocmd!
@@ -343,3 +342,32 @@ if has('nvim')
     command! -complete=dir -nargs=* Ranger :call <SID>Ranger(<f-args>)
 endif
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+
+" ---- cant get below working right, annoying
+"  for now, just keep using default split bindings
+"
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" C-w-hjkl --- moving
+" C-w-v --- vertical split
+" C-w-s --- horis split
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+" func! WinMove(key)
+"     let t:curwin = winnr()
+"     exec "wincmd ".a:key
+"     if (t:curwin == winnr())
+"         if (match(a:key,'[jk]'))
+"             wincmd v
+"         else
+"             wincmd s
+"         endif
+"         exec "wincmd ".a:key
+"     endif
+" endfu
+ 
+" nnoremap <silent><C-h> :call WinMove('h')<cr>
+" nnoremap <silent><C-j> :call WinMove('j')<cr>
+" nnoremap <silent><C-k> :call WinMove('k')<cr>
+" nnoremap <silent><C-l> :call WinMove('l')<cr>
+" set fillchars+=vert:│

@@ -13,5 +13,6 @@ mklinks:
 	ln -sf ~/src/dots/mpv.conf ~/.config/mpv/mpv.conf
 	ln -sf ~/src/dots/picom.conf ~/.config/picom.conf
 	ln -sf ~/src/dots/profile ~/.profile
+	ln -sf ~/src/dots/vimrc ~/.vimrc
 
 install: mkdirs mklinks
