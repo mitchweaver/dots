@@ -22,31 +22,83 @@ set nocompatible
 filetype off
 call plug#begin('~/.vim/vim-plug')
 
-Plug 'vimwiki/vimwiki' " the ultimate note taking system
-Plug 'ap/vim-buftabline' " display buffers along top as tabs
-Plug 'tpope/vim-commentary' " comment toggler
-Plug 'godlygeek/tabular' " tab alignment
-Plug 'ervandew/supertab' " code completion
-Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
-Plug 'airblade/vim-gitgutter' " git diffing along the left side
-Plug 'tpope/vim-surround' " surround stuff with stuff
 Plug 'tpope/vim-repeat' " allows '.' to do more things
 Plug 'dylanaraps/wal.vim' " pywal theme
+Plug 'godlygeek/tabular' " tab alignment
+Plug 'sheerun/vim-polyglot' " syntax highlighting
+
+Plug 'ap/vim-buftabline' " display buffers along top as tabs
+    let g:buftabline_show = 1
+
+Plug 'tpope/vim-commentary' " comment toggler
+    nmap <silent><leader>c :Commentary<CR>
+    autocmd FileType asm setlocal commentstring=;\ %s
+    autocmd FileType conf setlocal commentstring=#\ %s
+    autocmd FileType rc setlocal commentstring=#\ %s
+    autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
+
+Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
+    let g:multi_cursor_use_default_mapping=0
+    let g:multi_cursor_next_key='<c-m>'
+    let g:multi_cursor_prev_key='<c-p>'
+    let g:multi_cursor_skip_key='<c-x>'
+    let g:multi_cursor_quit_key='<esc>'
+
+Plug 'airblade/vim-gitgutter' " git diffing along the left side
+    let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
+    let g:gitgutter_realtime = 0 " only run gitgutter on save
+    set signcolumn=auto " yes=always, no=never, auto=ifchanges
+    map <silent><leader>g :GitGutterToggle<CR>
+    nmap ]h <Plug>GitGutterNextHunk
+    nmap [h <Plug>GitGutterPrevHunk
+    nmap <Leader>hs <Plug>GitGutterStageHunk
+    nmap <Leader>hr <Plug>GitGutterUndoHunk
+
+Plug 'tpope/vim-surround' " surround stuff with stuff
+	nmap ss ysiw
+	nmap sl yss
+	vmap s S
+
+" Plug 'Yggdroot/indentLine' " show indentation lines
+    " let g:indentLine_enabled = 1
+
+" Plug 'maxboisvert/vim-simple-complete'
+"     let g:vsc_type_complete_length = 1
+"     set complete=.,w,b,u,t,i
+
+" this is broken, displays in colorscheme rather than natural colors...
 " Plug 'chrisbra/Colorizer' " colorize hex codes in terminal
-" Plug 'sheerun/vim-polyglot' " syntax highlighting
+    " autocmd VimEnter * ColorHighlight
+    " let g:colorizer_auto_color = 1
+    " let g:termguicolors = 1
+
+Plug 'w0rp/ale'
+    let g:ale_sign_column_always = 1
+    let g:ale_lint_on_text_changed = 'never'
+    let g:ale_fix_on_save = 1
+
+Plug 'vimwiki/vimwiki' " the ultimate note taking system
+    let wiki = {}
+    let g:vimwikidir = "~/src/wvr.sh/src/wiki"
+    let wiki.path = g:vimwikidir
+    let g:vimwiki_list=[wiki]
+    let g:vimwiki_list = [
+        \{'path': '~/src/wvr.sh/src/wiki', 'syntax': 'markdown', 'ext': '.md'},
+    \]
+    let g:vimwiki_ext2syntax = {'.md': 'markdown'}
 
 call plug#end()
 filetype indent plugin on
 
-map <silent><leader>pi :PlugInstall<CR>
-map <silent><leader>pu :PlugUpdate<CR>
-map <silent><leader>pc :PlugClean<CR>
+if exists(':PlugInstall')
+    map <silent><leader>pi :PlugInstall<CR>
+    map <silent><leader>pu :PlugUpdate<CR>
+    map <silent><leader>pc :PlugClean<CR>
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-"  Theme
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-set background=light
-colorscheme wal
+    " pywal --- must be set after loading plugin
+    colorscheme wal
+    set background=light
+endif
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 "  General
@@ -71,9 +123,13 @@ set ch=1 " get rid of the wasted line at the bottom
 set cmdheight=1 " cmd output only take up 1 line
 set nostartofline " gg/G do not always go to line start
 set modeline " enable per-file custom syntax
-" set mouse=a
-set mouse=
+" set mouse=a " enable mouse globally
+set mouse= " disable mouse globally
+
+" remove need to hold shift for commands
 noremap ; :
+" make :W still save
+noremap :W :w
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -195,58 +251,6 @@ noremap Q !!sed 's/^/> /g'<cr>
 nmap <leader>md :!smu "%:p" >/tmp/tmp.html && $BROWSER /tmp/tmp.html<CR>
 nmap <leader>ghmd :!ghmd2html "%:p" >/tmp/tmp.html && $BROWSER /tmp/tmp.html<CR>
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-"  Extensions
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-if exists(':PlugInstall')
-    " let g:colorizer_auto_color = 1
-    " let g:termguicolors = 1
-    " autocmd VimEnter * ColorHighlight
-
-    let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
-    let g:gitgutter_realtime = 0 " only run gitgutter on save
-    set signcolumn=auto " (mostly for gitgutter): yes=always, no=never, auto=ifchanges
-
-    map <silent><leader>g :GitGutterToggle<CR>
-    nmap ]h <Plug>GitGutterNextHunk
-    nmap [h <Plug>GitGutterPrevHunk
-    nmap <Leader>hs <Plug>GitGutterStageHunk
-    nmap <Leader>hr <Plug>GitGutterUndoHunk
-
-    let g:multi_cursor_use_default_mapping=0
-    let g:multi_cursor_next_key='<c-m>'
-    let g:multi_cursor_prev_key='<c-p>'
-    let g:multi_cursor_skip_key='<c-x>'
-    let g:multi_cursor_quit_key='<esc>'
-
-    nmap <silent><leader>c :Commentary<CR>
-    autocmd FileType asm setlocal commentstring=;\ %s
-    autocmd FileType conf setlocal commentstring=#\ %s
-    autocmd FileType rc setlocal commentstring=#\ %s
-    autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
-
-    let wiki = {}
-    let g:vimwikidir = "~/src/wvr.sh/src/wiki"
-    let wiki.path = g:vimwikidir
-    let g:vimwiki_list=[wiki]
-    let g:vimwiki_list = [
-        \{'path': '~/src/wvr.sh/src/wiki', 'syntax': 'markdown', 'ext': '.md'},
-    \]
-    let g:vimwiki_ext2syntax = {'.md': 'markdown'}
-
-    " vim surround -- becuase nobody uses 's' anyway
-	nmap ss ysiw
-	nmap sl yss
-	vmap s S
-
-    " show buffers as tabs
-    let g:buftabline_show = 1
-
-    " ranger
-    let g:ranger_map_keys = 0
-    nnoremap <silent><leader>r :Ranger<CR>
-endif
-
 set wildignore+=*.opus,*.flac,*.pdf,*.jpg,*.png,*.so,*.swp,*.zip,*.gzip,*.bz2,*.tar,*.xz,*.lrzip,*.lrz,*.mp3,*.ogg,*.mp4,*.gif,*.jpeg,*.webm
 
 " horizontal scrolling
@@ -341,6 +345,10 @@ if has('nvim')
 
     command! -complete=dir -nargs=* Ranger :call <SID>Ranger(<f-args>)
 endif
+
+" ranger
+let g:ranger_map_keys = 0
+nnoremap <silent><leader>r :Ranger<CR>
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 

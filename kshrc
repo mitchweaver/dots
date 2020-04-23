@@ -157,7 +157,7 @@ alias t1='tail -n 1'
 alias cmd=command
 alias pk=pkill
 alias w=which
-alias py=python3.7
+alias py=python3
 alias dm='dmesg | tail -n 20'
 alias poweroff='doas poweroff'
 
@@ -544,3 +544,7 @@ alias kshrc='v ~/src/dots/kshrc'
 
 alias ga1='grep -i -A 1'
 alias ga='grep -i -A 6'
+
+sshvpn-bonsai() {
+    sshvpn root@$(ga1 bonsai ~/.ssh/config | grep -oE '[0-9].*')
+}
