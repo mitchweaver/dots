@@ -73,8 +73,10 @@ export TRASH_DIR=${XDG_CACHE_HOME}/trash \
        YTDLQ_DIR=~/vid/youtube
 
 export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s' \
-       MPV_OPTS="--really-quiet --force-seekable=yes --ytdl-raw-options=force-ipv4=" \
-       MUPDF_OPTS='-C fcfaf6'
+       MPV_OPTS="--really-quiet --force-seekable=yes" \
+       MUPDF_OPTS='-C d9d5ba'
+
+# --ytdl-raw-options=force-ipv4=
 
 export PASH_CLIP='xsel -in' \
        PASH_LENGTH=32

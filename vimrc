@@ -59,8 +59,10 @@ Plug 'tpope/vim-surround' " surround stuff with stuff
 	nmap sl yss
 	vmap s S
 
-" Plug 'Yggdroot/indentLine' " show indentation lines
-    " let g:indentLine_enabled = 1
+Plug 'ervandew/supertab' " insert mode tab completion
+
+Plug 'Yggdroot/indentLine' " show indentation lines
+    let g:indentLine_enabled = 1
 
 " Plug 'maxboisvert/vim-simple-complete'
 "     let g:vsc_type_complete_length = 1
@@ -79,11 +81,11 @@ Plug 'w0rp/ale'
 
 Plug 'vimwiki/vimwiki' " the ultimate note taking system
     let wiki = {}
-    let g:vimwikidir = "~/src/wvr.sh/src/wiki"
+    let g:vimwikidir = "~/fil/wiki"
     let wiki.path = g:vimwikidir
     let g:vimwiki_list=[wiki]
     let g:vimwiki_list = [
-        \{'path': '~/src/wvr.sh/src/wiki', 'syntax': 'markdown', 'ext': '.md'},
+        \{'path': '~/fil/wiki', 'syntax': 'markdown', 'ext': '.md'},
     \]
     let g:vimwiki_ext2syntax = {'.md': 'markdown'}
 
@@ -95,7 +97,7 @@ if exists(':PlugInstall')
     map <silent><leader>pu :PlugUpdate<CR>
     map <silent><leader>pc :PlugClean<CR>
 
-    " pywal --- must be set after loading plugin
+    " colorschemes must be set after loading plugins
     colorscheme wal
     set background=light
 endif
@@ -241,7 +243,7 @@ nmap <leader>s :%s//g<Left><Left>
 "  Hacks
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " execute line as shell command and replace it with output
-noremap W !!sh<cr>
+noremap <leader>W !!sh<cr>
 " pipe line to fmt and replace current line
 noremap F !!fmt<cr>
 " prepend '> ' to lines as if to block quote

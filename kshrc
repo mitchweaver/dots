@@ -498,12 +498,12 @@ chmod +x ${1:-hello.sh}
 
 qr() { cat "${1:-?}" | curl -sF-=\<- qrenco.de ; }
 
-if [ -f ~/.cache/wal/sequences ] ; then
-    case $(ps -p $PPID -o command=) in
-        *st*) ;;
-        *) cat ~/.cache/wal/sequences
-    esac
-fi
+# if [ -f ~/.cache/wal/sequences ] ; then
+#     case $(ps -p $PPID -o command=) in
+#         *st*) ;;
+#         *) cat ~/.cache/wal/sequences
+#     esac
+# fi
 
 alias mount_phone='doas simple-mtpfs --device 1 -o allow_other /mnt/android'
 alias shck='shellcheck -s sh'
@@ -545,6 +545,5 @@ alias kshrc='v ~/src/dots/kshrc'
 alias ga1='grep -i -A 1'
 alias ga='grep -i -A 6'
 
-sshvpn-bonsai() {
-    sshvpn root@$(ga1 bonsai ~/.ssh/config | grep -oE '[0-9].*')
-}
+sshvpn-bonsai() { sshvpn root@$(ga1 bonsai ~/.ssh/config | grep -oE '[0-9].*') ; }
+sshvpn-wvr()    { sshvpn root@$(ga1 wvr    ~/.ssh/config | grep -oE '[0-9].*') ; }
