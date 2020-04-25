@@ -510,9 +510,9 @@ alias shck='shellcheck -s sh'
 
 smv() { scp -rp "${1:-?}" "${2:-?}" && rm -r "${1:-?}" ; }
 
-if type crux >/dev/null ; then
+if command -v crux >/dev/null ; then
     pkg() {
-        flag=$1
+        flag=${1#-}
         shift
         case $flag in
             a) doas prt-get depinst -f -im -is -if --install-scripts "$@" ;;
@@ -522,9 +522,9 @@ if type crux >/dev/null ; then
             s) prt-get search "$@" ;;
         esac
     }
-elif type xbps-query >/dev/null ; then
+elif command -v xbps-query >/dev/null ; then
     pkg() {
-        flag=$1
+        flag=${1#-}
         shift
         case $flag in
             a|u) doas xbps-install -Su "$@" ;;
@@ -533,7 +533,19 @@ elif type xbps-query >/dev/null ; then
             s) xbps-query --repository -s "$@" ;;
         esac
     }
+elif command -v apt >/dev/null ; then
+    pkg() {
+        flag=${1#-}
+        shift
+        case $flag in
+            a) doas apt install "$@" ;;
+            u) doas apt upgrade "$@" ;;
+            i) apt info "$@" ;;
+            s) apt search "$@" ;;
+        esac
+    }
 fi
+
 ddg() { w3m -dump duckduckgo.com/html/search?q="$*" ; }
 scfg() { v ~/src/suckless/$1/cfg/config.h ; }
 alias speedtest='speedtest-cli --simple'

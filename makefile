@@ -14,5 +14,6 @@ mklinks:
 	ln -sf ~/src/dots/picom.conf ~/.config/picom.conf
 	ln -sf ~/src/dots/profile ~/.profile
 	ln -sf ~/src/dots/vimrc ~/.vimrc
+	ln -sf ~/src/dots/cava.conf ~/.config/cava/config
 
 install: mkdirs mklinks

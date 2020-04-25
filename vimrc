@@ -247,7 +247,7 @@ noremap <leader>W !!sh<cr>
 " pipe line to fmt and replace current line
 noremap F !!fmt<cr>
 " prepend '> ' to lines as if to block quote
-noremap Q !!sed 's/^/> /g'<cr>
+noremap Q :norm 0i> <esc>$
 
 " view open file in rendered markdown
 nmap <leader>md :!smu "%:p" >/tmp/tmp.html && $BROWSER /tmp/tmp.html<CR>
