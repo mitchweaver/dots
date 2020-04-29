@@ -1,0 +1,73 @@
+# programs
+alt + Return
+    st -c term -T term
+alt + shift + Return
+    tabbed -d -c -r 2 st -w ''
+alt + w
+    brws
+alt + shift + w
+    brws -a
+alt + r
+    st -c ranger -e ranger --cmd='set viewmode multipane'
+alt + x
+    slock
+Print
+    scrap -n
+control + Print
+    scrap -u
+alt + e
+    pcmanfm
+
+# dmenus
+alt + p
+    menu run -p 'Run:'
+alt + o
+    dedit
+alt + i
+    brws
+alt + shift + i
+    brws -a
+alt + u
+    tasks
+alt + c
+    clip
+
+# misc
+control + alt + k
+    keys
+shift + Delete
+    xsel -o
+
+# brightness
+XF86MonBrightnessUp
+    bright i
+XF86MonBrightnessDown
+    bright d
+
+# redshift control
+alt + equal
+    xsctc i
+alt + minus
+    xsctc d
+
+# volume
+alt + apostrophe
+    vol i
+alt + semicolon
+    vol d
+XF86VolumeUp
+    vol i
+XF86VolumeDown
+    vol d
+
+# media / mpv
+alt + slash
+    mmt -t
+alt + period
+    mmt -n
+alt + comma
+    mmt -p
+alt + bracketright
+    mmt -f
+alt + bracketleft
+    mmt -b

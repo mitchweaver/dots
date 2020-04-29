@@ -15,5 +15,10 @@ mklinks:
 	ln -sf ~/src/dots/profile ~/.profile
 	ln -sf ~/src/dots/vimrc ~/.vimrc
 	ln -sf ~/src/dots/cava.conf ~/.config/cava/config
+	ln -sf ~/src/dots/ranger/rc.conf ~/.config/ranger/rc.conf
+	ln -sf ~/src/dots/ranger/rifle.conf ~/.config/ranger/rifle.conf
+	ln -sf ~/src/dots/ranger/scope.sh ~/.config/ranger/scope.sh
+	ln -sf ~/src/dots/idesk ~/.idesktop
+	ln -sf ~/src/dots/idesk/ideskrc ~/.ideskrc
 
 install: mkdirs mklinks

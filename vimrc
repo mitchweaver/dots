@@ -163,7 +163,10 @@ map <silent><leader>sy :set syntax=sh<cr>
 map <silent><leader>ln :set number!<cr>
 map <silent><leader>nl :set relativenumber!<cr>
 
-let s:color_column_old = 80
+" set color column width to 72 chars
+" editor will start with it hidden, but allow it
+" it to be toggleable with leader + 'll'
+let s:color_column_old = 72
 function! s:ToggleColorColumn()
     if s:color_column_old == 0
         let s:color_column_old = &colorcolumn

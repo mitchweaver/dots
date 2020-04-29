@@ -215,15 +215,18 @@ alias hrt='htop -u root'
 
 # du for humans
 d() {
-    [ -d "${1:-.}" ] &&
-    du -ahLd 1 "${1:-.}" 2>/dev/null | sort -rh | head -n 20
+    if [ -d "${1:-.}" ] ; then
+        du -ahLd 1 "${1:-.}" 2>/dev/null | sort -rh | head -n 20
+    elif [ -f "$1" ] ; then
+        du -ahL "$1"
+    fi
 }
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # youtube-dl / ffmpeg
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 addyt() { ytdlq -a "$1" ; }
-tfyt() { tf ~/vid/youtube/ytdlq-*.log ; }
+tfyt() { tf "$YTDLQ_DIR"/ytdlq-*.log ; }
 alias res='ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -285,8 +288,8 @@ alias gf="_g $XDG_DOCUMENTS_DIR"
 alias gi="_g $XDG_PICTURES_DIR"
 alias gm="_g $XDG_MUSIC_DIR"
 alias gv="_g $XDG_VIDEOS_DIR"
-alias gyt='_g $XDG_VIDEOS_DIR/youtube'
-alias gytc='_g $XDG_VIDEOS_DIR/youtube/completed'
+alias gyt='_g $YTDLQ_DIR'
+alias gytc='_g $YTDLQ_DIR/completed'
 alias gW='_g $XDG_PICTURES_DIR/wallpapers'
 alias gb="_g ~/bin"
 alias gs="_g ~/src"
@@ -366,36 +369,13 @@ v() {
     [ "$1" ] || set -- -c VimwikiIndex
     nvim -n "$@"
 }
-
-alias hw="n -f $XDG_DOCUMENTS_DIR/hw.txt"
-alias words="n -f $XDG_DOCUMENTS_DIR/words.txt"
-alias shows="n -f $XDG_DOCUMENTS_DIR/shows.txt"
-alias movies="n -f $XDG_DOCUMENTS_DIR/movies.txt"
-alias anime="n -f $XDG_DOCUMENTS_DIR/anime.txt"
-alias games="n -f $XDG_DOCUMENTS_DIR/games.txt"
 alias links="n -f $XDG_DOCUMENTS_DIR/links.txt"
-alias books="n -f $XDG_DOCUMENTS_DIR/books.txt"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # networking
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 alias rsync='rsync -rvhtu --progress --delete --partial' #-z -c
 alias scp='scp -rp'
-
-traffic() {
-netstat -w 1 -b | \
-while read -r _ _ line ; do
-    set -- $line
-    printf '%s' $1 | human
-    printf '%s' $2 | human
-done
-}
-
-alias dumpall="doas tcpdump -n -i iwn0"
-alias dumpweb="doas tcpdump -n -i iwn0 port 80 or port 443 or port 53"
-alias dumphttp="doas tcpdump -n -i iwn0 port 80 or port 443"
-alias dumpdns="doas tcpdump -n -i iwn0 port 53"
-alias dumpssh="doas tcpdump -n -i iwn0 port 22"
 
 ping() { command ping -L -n -s 1 -w 2 "${1:-wvr.sh}" ; }
 pingpi() { ping $(grep -A 1 'Host pi' ~/.ssh/config | grep -oE '[0-9]+.*') ; }
@@ -468,12 +448,34 @@ pi_port() {
         awk '{print $2}' | tail -n 1
 }
 mountpi() {
-    doas sshfs -o allow_other,IdentityFile=${HOME}/.ssh/id_rsa \
-        banana@$(pi_ip):/mnt /mnt/pi -p $(pi_port) -C
+    dir=/mnt/pi
+
+    # create directories if needed
+    for hdd in 2TB 500GB_1 500GB_2 ; do
+        [ -d $dir/$hdd ] || doas mkdir -p $dir/$hdd
+    done
+
+    # if we have nfs, use that
+    if command -v mount.nfs >/dev/null ; then
+        # start statd service if not running
+        pgrep rpc.statd >/dev/null || doas rpc.statd
+        doas mount -t nfs $(pi_ip):/mnt/2TB $dir/2TB
+        doas mount -t nfs $(pi_ip):/mnt/500GB_1 $dir/500GB_1
+        doas mount -t nfs $(pi_ip):/mnt/500GB_2 $dir/500GB_2
+    # otherwise use sshfs
+    elif command -v sshfs >/dev/null ; then
+        doas sshfs -o allow_other,IdentityFile=${HOME}/.ssh/id_rsa \
+            banana@$(pi_ip):/mnt $dir -p $(pi_port) -C
+    else
+        >&2 echo "Neither nfs nor sshfs installed."
+        return 1
+    fi
 }
-umountpi() {
-    doas umount /mnt/pi
-}
+umountpi() { doas umount /mnt/pi ; }
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# UNSORTED JUNK BELOW THIS LINE
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 helloc() {
 cat >${1:-hello.c}<<'EOF'
@@ -559,3 +561,37 @@ alias ga='grep -i -A 6'
 
 sshvpn-bonsai() { sshvpn root@$(ga1 bonsai ~/.ssh/config | grep -oE '[0-9].*') ; }
 sshvpn-wvr()    { sshvpn root@$(ga1 wvr    ~/.ssh/config | grep -oE '[0-9].*') ; }
+
+addtorrent() {
+    if [ -f "$1" ] ; then
+        while read -r link ; do
+            torrent-queue a "$link"
+        done < "$1"
+    else
+        torrent-queue a "$1"
+    fi
+}
+
+# fix vi not working with doas, look into why later
+alias doas='TERM=vt100 doas'
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+silent() { "$@" >/dev/null 2>&1 ; }
+
+iif() { "$@" && echo yes || echo no ; }
+
+rmv() {
+    rsync "$1"/ "$2" && rm -r "$1"
+}
+
+pair_mouse() {
+    id=D1:4D:33:44:16:66
+    bluetoothctl power on
+    bluetoothctl default-agent
+    bluetoothctl pairable on
+    bluetoothctl scan on
+    bluetoothctl pair $id
+    bluetoothctl trust $id
+    bluetoothctl connect $id
+}

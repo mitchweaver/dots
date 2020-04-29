@@ -1,7 +1,7 @@
 [global]
     monitor = 0
     follow = mouse
-    geometry = "220x15-20+30"
+    geometry = "520x105-25+35"
     max_icon_size = 40
     indicate_hidden = yes
     shrink = no
