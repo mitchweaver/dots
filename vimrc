@@ -271,6 +271,7 @@ map <silent><leader>q :q<CR>
 
 " print a 60-char line separator, commented
 map <C-s> 30i-*<ESC>:Commentary<CR>
+map <C-d> 30i-/<ESC>:Commentary<CR>
 
 " conflicts with st/tabbed:
 map  <silent><c-=> <nop>

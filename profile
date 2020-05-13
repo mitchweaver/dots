@@ -7,11 +7,19 @@ export ENV=~/.kshrc
 PATH=/bin:/sbin:$PATH
 PATH=/usr/bin:/usr/sbin:/usr/X11R6/bin:$PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
-PATH=${HOME}/bin:${HOME}/.local/bin:$PATH
 PATH=$PATH:${HOME}/src/ascii
+PATH=$(printf '%s:' ${HOME}/bin/*/):${HOME}/bin:$PATH
+PATH=${HOME}/.local/bin:$PATH
 export PATH
 
-export MANPATH=~/.local/share/man:
+export MANPATH="${HOME}/.local/share/man:$MANPATH"
+
+# ---- bonsai stuff --------
+export BONSAI_ROOT="${HOME}/.bonsai"
+export PATH="$BONSAI_ROOT/bin:$PATH"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$BONSAI_ROOT/lib"
+export MANPATH="$BONSAI_ROOT/share/man:$MANPATH"
+# --------------------------
 
 export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
 
@@ -78,8 +86,8 @@ export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s' \
 
 # --ytdl-raw-options=force-ipv4=
 
-export PASH_CLIP='xsel -in' \
-       PASH_LENGTH=32
+export PASH_CLIP='clip -i' \
+       PASH_LENGTH=32 \
        PASH_DIR=~/fil/pash
 
 # -*-*-*-*-*-*-* default programs *-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -94,3 +102,6 @@ export LESSHISTFILE=/dev/null
 # empty ~/tmp
 rm -rf ~/tmp 2>/dev/null ||:
 mkdir -p ~/tmp
+
+# autostart X on login
+pgrep X >/dev/null || launchx

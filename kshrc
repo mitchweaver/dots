@@ -29,35 +29,34 @@ trap '/bin/rm "$HISTFILE" 2>/dev/null' EXIT TERM KILL QUIT
 # PS1
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 get_PS1() {
-    # --------------------------------------------------------
-    # settings:
-    # PS1_STYLE=username
-    PS1_STYLE=pwd
-    # --------------------------------------------------------
-    if [ $TERM = st-256color ] ; then
-        case $PS1_STYLE in
-            pwd)
-                printf '%s' "\[\e[1;36m\]\W "
-                ;;
-            username)
-                # print username in color palette, one color per character
-                code=1
-                printf '%s\n' "$USER" | fold -w 1 | while read -r c ; do
-                    printf '%s' "\[\e[1;3${code}m\]$c"
-                    code=$(( $code + 1 ))
-                done
-                printf '%s' "\[\e[1;3$(( ${#USER} + 1 ))m\] \W \[\e[1;3$(( ${#USER} + 2 ))m\]"
-        esac
+    case $TERM in
+        *-256color)
+        PS1_STYLE=pwd
+            case ${PS1_STYLE:-username} in
+                pwd)
+                    printf '%s' "\[\e[1;36m\]\W "
+                    ;;
+                username)
+                    # print username in color palette, one color per character
+                    code=1
+                    printf '%s\n' "$USER" | fold -w 1 | while read -r c ; do
+                        printf '%s' "\[\e[1;3${code}m\]$c"
+                        code=$(( code + 1 ))
+                    done
+                    printf '%s' "\[\e[1;3$(( ${#USER} + 1 ))m\] \W \[\e[1;3$(( ${#USER} + 2 ))m\]"
+            esac
 
-        # print git repo name in parenthesis, if we're inside one
-        #set -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
-        #[ "$1" ] && printf '(%s) ' "$1"
+            # print git repo name in parenthesis, if we're inside one
+            set -f
+            set +f -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
+            [ "$1" ] && printf '(%s) ' "$1"
 
-        # clear formatting
-        printf '%s' '\[\e[1;37m\]'
-    else
-        echo '% '
-    fi
+            # clear formatting
+            printf '%s' '\[\e[1;37m\]'
+            ;;
+        *)
+            echo '% '
+    esac
 }
 
 # fuzzy finding cd
@@ -85,8 +84,7 @@ cd() {
 # this activates our PS1
 cd .
 
-# quick fix ps1 if bugged out
-alias ps1='export PS1="% "'
+ps1() { export PS1="${@:-%} " ; }
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # begin generic aliases
@@ -213,6 +211,17 @@ alias ytdl="youtube-dl $YTDL_OPTS"
 alias hme='htop -u mitch'
 alias hrt='htop -u root'
 
+sxiv() {
+    # if arguments, view files
+    # if no arguments, start in thumbnail mode in folder
+    if [ "$1" ] ; then
+        command sxiv -a -b -N sxiv -p -q -r -s d "$@"
+    else
+        command sxiv -a -b -N sxiv -p -q -r -s d -t .
+    fi 2>/dev/null
+}
+alias s=sxiv
+
 # du for humans
 d() {
     if [ -d "${1:-.}" ] ; then
@@ -232,15 +241,6 @@ alias res='ffprobe -v error -select_streams v:0 -show_entries stream=width,heigh
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # imagemagick
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-resize_75() { for i ; do echo "$i" ; mogrify -resize '75%X75%' "$i" ; done ; }
-resize_50() { for i ; do echo "$i" ; mogrify -resize '50%X50%' "$i" ; done ; }
-resize_25() { for i ; do echo "$i" ; mogrify -resize '25%X25%' "$i" ; done ; }
-rotate_right() { for i ; do echo "$i" ; convert -rotate 90 "$i" "$i" ; done  ; }
-mog_1080()  { mogrify -resize '1920X1080' "$@" ; }
-transparent() {
-    #turn a PNG white background -> transparent
-    convert "$1" -transparent white "${1%.*}"_transparent.png
-}
 png2jpg() {
     for i ; do
         [ -f "$i" ] || continue
@@ -375,6 +375,7 @@ alias links="n -f $XDG_DOCUMENTS_DIR/links.txt"
 # networking
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 alias rsync='rsync -rvhtu --progress --delete --partial' #-z -c
+alias fatsync='rsync -rvhu --progress --delete --partial' # for fat32
 alias scp='scp -rp'
 
 ping() { command ping -L -n -s 1 -w 2 "${1:-wvr.sh}" ; }
@@ -449,27 +450,17 @@ pi_port() {
 }
 mountpi() {
     dir=/mnt/pi
-
+    drives='2TB 1TB 500GB_1 500GB_2 500GB_3 160GB'
     # create directories if needed
-    for hdd in 2TB 500GB_1 500GB_2 ; do
+    for hdd in $drives ; do
         [ -d $dir/$hdd ] || doas mkdir -p $dir/$hdd
     done
 
-    # if we have nfs, use that
-    if command -v mount.nfs >/dev/null ; then
-        # start statd service if not running
-        pgrep rpc.statd >/dev/null || doas rpc.statd
-        doas mount -t nfs $(pi_ip):/mnt/2TB $dir/2TB
-        doas mount -t nfs $(pi_ip):/mnt/500GB_1 $dir/500GB_1
-        doas mount -t nfs $(pi_ip):/mnt/500GB_2 $dir/500GB_2
-    # otherwise use sshfs
-    elif command -v sshfs >/dev/null ; then
-        doas sshfs -o allow_other,IdentityFile=${HOME}/.ssh/id_rsa \
-            banana@$(pi_ip):/mnt $dir -p $(pi_port) -C
-    else
-        >&2 echo "Neither nfs nor sshfs installed."
-        return 1
-    fi
+    # start statd service if not running
+    pgrep rpc.statd >/dev/null || doas rpc.statd
+    for hdd in $drives ; do
+        doas mount -t nfs $(pi_ip):/mnt/$drive $dir/$drive
+    done
 }
 umountpi() { doas umount /mnt/pi ; }
 
@@ -586,12 +577,27 @@ rmv() {
 }
 
 pair_mouse() {
-    id=D1:4D:33:44:16:66
-    bluetoothctl power on
-    bluetoothctl default-agent
-    bluetoothctl pairable on
-    bluetoothctl scan on
-    bluetoothctl pair $id
-    bluetoothctl trust $id
-    bluetoothctl connect $id
+    id=D1:4D:33:44:16:6a
+    bluetooth
+    {
+        bluetoothctl power on
+        bluetoothctl default-agent
+        bluetoothctl pairable on
+        bluetoothctl --timeout 2 scan on
+        bluetoothctl pair $id &&
+        bluetoothctl trust $id &&
+        bluetoothctl connect $id
+    } &
+    unset id
+    xset m 0 0
+}
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# crap
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# sum numbers in a file
+sum() { [ -f "$1" ] && paste -sd+ <"$1" | bc ; }
+
+mount_sdcard() {
+    doas mount -t vfat -o  uid=mitch /dev/mmcblk0 /mnt/sd
 }
