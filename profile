@@ -81,8 +81,7 @@ export TRASH_DIR=${XDG_CACHE_HOME}/trash \
        YTDLQ_DIR=~/.ytdlq
 
 export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s' \
-       MPV_OPTS="--really-quiet --force-seekable=yes" \
-       MUPDF_OPTS='-C d9d5ba'
+       MPV_OPTS="--really-quiet --force-seekable=yes"
 
 # --ytdl-raw-options=force-ipv4=
 

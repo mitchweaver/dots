@@ -206,7 +206,8 @@ r() { ranger "$@" ; clear ; }
 
 alias mpv="mpv $MPV_OPTS"
 alias mupdf="mupdf $MUPDF_OPTS"
-alias ytdl="youtube-dl $YTDL_OPTS"
+alias ytdl="youtube-dl -c -R 50 --geo-bypass --prefer-ffmpeg"
+alias ytdlm="youtube-dl -x -c -R 50 --geo-bypass --prefer-ffmpeg"
 
 alias hme='htop -u mitch'
 alias hrt='htop -u root'
@@ -217,7 +218,7 @@ sxiv() {
     if [ "$1" ] ; then
         command sxiv -a -b -N sxiv -p -q -r -s d "$@"
     else
-        command sxiv -a -b -N sxiv -p -q -r -s d -t .
+        command sxiv -a -N sxiv -p -q -r -s d -t . # -b
     fi 2>/dev/null
 }
 alias s=sxiv
@@ -413,6 +414,9 @@ forecast() {
     curl -s wttr.in/$wttr?u | tail -n 33 | head -n 31
 }
 
+sshvpn-bonsai() { sshvpn root@$(ga1 bonsai ~/.ssh/config | grep -oE '[0-9].*') ; }
+sshvpn-wvr()    { sshvpn root@$(ga1 wvr    ~/.ssh/config | grep -oE '[0-9].*') ; }
+
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # openbsd specific
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -550,9 +554,6 @@ alias kshrc='v ~/src/dots/kshrc'
 alias ga1='grep -i -A 1'
 alias ga='grep -i -A 6'
 
-sshvpn-bonsai() { sshvpn root@$(ga1 bonsai ~/.ssh/config | grep -oE '[0-9].*') ; }
-sshvpn-wvr()    { sshvpn root@$(ga1 wvr    ~/.ssh/config | grep -oE '[0-9].*') ; }
-
 addtorrent() {
     if [ -f "$1" ] ; then
         while read -r link ; do
@@ -601,3 +602,6 @@ sum() { [ -f "$1" ] && paste -sd+ <"$1" | bc ; }
 mount_sdcard() {
     doas mount -t vfat -o  uid=mitch /dev/mmcblk0 /mnt/sd
 }
+
+# remove site block in /etc/hosts
+unhosts() { for i ; do doas sed -i "s/.*$i.*//g" /etc/hosts ; done ; }
