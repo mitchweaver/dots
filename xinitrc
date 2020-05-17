@@ -39,7 +39,8 @@ run autorotate
 
 unset -f run
 
-exec dwm
+exec gnome-session
+# exec dwm
 
 # if dwm exits 0, restart -- this allows hot reloading of config.h
 ####while type dwm >/dev/null ; do dwm || break ; done
