@@ -137,7 +137,7 @@ lsd() { printf '%s\n' "$*"/*/ ; }
 
 alias {cls,csl,cl,lc}='c;l'
 alias {e,ech,eho}=echo
-alias {g,gr,gre,Grep,gerp,grpe}='grep -i'
+alias {g,gr,gre,Grep,gerp,grpe}='grep -i --color=auto'
 alias {pg,pgrpe}=pgrep
 alias dg='d | g -i'
 alias lg='ls | g -i'
@@ -254,9 +254,9 @@ png2jpg() {
     done
 }
 alias jpg='find . -type f -iname "*.jp*" -exec jpegoptim -s {} \;'
-cover() { curl -q -# -L "$1" -o cover.jpg ; }
-band()  { curl -q -# -L "$1" -o band.jpg  ; }
-logo()  { curl -q -# -L "$1" -o logo.jpg  ; }
+cover() { curl -q -# -L "$1" -o cover.jpg ; jpg ; }
+band()  { curl -q -# -L "$1" -o band.jpg  ; jpg ; }
+logo()  { curl -q -# -L "$1" -o logo.jpg  ; jpg ; }
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # mupdf
@@ -380,9 +380,9 @@ alias fatsync='rsync -rvhu --progress --delete --partial' # for fat32
 alias scp='scp -rp'
 
 ping() { command ping -L -n -s 1 -w 2 "${1:-wvr.sh}" ; }
-pingpi() { ping $(grep -A 1 'Host pi' ~/.ssh/config | grep -oE '[0-9]+.*') ; }
+pingnfs() { ping $(grep -A 1 'Host nfs' ~/.ssh/config | grep -oE '[0-9]+.*') ; }
 alias p=ping
-alias pp=pingpi
+alias pp=pingnfs
 alias p8='ping 8.8.8.8'
 alias cv='curl -v'
 alias cvip='curl -v wtfismyip.com/text'
@@ -445,28 +445,25 @@ alias copyright="printf '%s\n' '©'"
 cheat() { curl -s cheat.sh/$1 ; }
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# pi stuff, ignore
+# nfs stuff, ignore
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*#
-pi_ip() { grep -A 1 'Host pi' ~/.ssh/config | grep -oE '[0-9]+.*' ; }
-pi_port() {
-    grep -A 3 'Host pi' /home/mitch/.ssh/config  | \
+nfs_ip() { grep -A 1 'Host nfs' ~/.ssh/config | grep -oE '[0-9]+.*' ; }
+nfs_port() {
+    grep -A 3 'Host nfs' /home/mitch/.ssh/config  | \
         awk '{print $2}' | tail -n 1
 }
-mountpi() {
-    dir=/mnt/pi
-    drives='2TB 1TB 500GB_1 500GB_2 500GB_3 160GB'
-    # create directories if needed
-    for hdd in $drives ; do
-        [ -d $dir/$hdd ] || doas mkdir -p $dir/$hdd
-    done
-
+mountnfs() {
     # start statd service if not running
     pgrep rpc.statd >/dev/null || doas rpc.statd
-    for hdd in $drives ; do
-        doas mount -t nfs $(pi_ip):/mnt/$drive $dir/$drive
-    done
-}
-umountpi() { doas umount /mnt/pi ; }
+    doas mkdir -p /mnt/nfs
+    doas mount -t nfs $(nfs_ip):/nfs/storage /mnt/nfs
+} ; umountnfs() { doas umount /mnt/nfs ; }
+
+mountsamba() {
+    doas mount -t cifs \
+        -o username=samba,password=samba,file_mode=0777,dir_mode=0777 \
+        //$(nfs_ip)/Share /mnt/samba
+} ; umountsamba() { doas umount /mnt/samba ; }
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # UNSORTED JUNK BELOW THIS LINE
@@ -547,22 +544,12 @@ ddg() { w3m -dump duckduckgo.com/html/search?q="$*" ; }
 scfg() { v ~/src/suckless/$1/cfg/config.h ; }
 alias speedtest='speedtest-cli --simple'
 
-rmdir Desktop Downloads 2>/dev/null ||:
+rmdir Desktop 2>/dev/null ||:
 
 alias kshrc='v ~/src/dots/kshrc'
 
 alias ga1='grep -i -A 1'
 alias ga='grep -i -A 6'
-
-addtorrent() {
-    if [ -f "$1" ] ; then
-        while read -r link ; do
-            torrent-queue a "$link"
-        done < "$1"
-    else
-        torrent-queue a "$1"
-    fi
-}
 
 # fix vi not working with doas, look into why later
 alias doas='TERM=vt100 doas'
@@ -605,3 +592,28 @@ mount_sdcard() {
 
 # remove site block in /etc/hosts
 unhosts() { for i ; do doas sed -i "s/.*$i.*//g" /etc/hosts ; done ; }
+
+alias iotop='doas iotop -o -P'
+
+
+# foo/bar.mp4 ---> foo/foo.mp4
+rename_as_parent_dir() {
+    file=${1##*/}
+    dir=${1%/$file}
+    mv -f "$1" "$dir/$dir"
+}
+
+empty_trash() {
+    rm -rf ~/.cache/trash 2>/dev/null ||:
+    mkdir -p ~/.cache/trash
+}
+
+toilet() {
+    command toilet -f \
+    $(
+        ls /usr/share/figlet | \
+        while read -r font ; do
+            echo ${font%.tlf}
+        done | menu -p 'Select font:'
+    ) "$@"
+}

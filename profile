@@ -53,6 +53,8 @@ if [ "$PLAN9" ] ; then
 fi
 
 # -*-*-*-*-*-*-* my vars *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+export XDG_OPEN=opn
+
 export XDG_CONFIG_HOME=~/.config \
        XDG_DOWNLOAD_DIR=~/Downloads \
        XDG_DOCUMENTS_DIR=~/fil \

@@ -17,6 +17,8 @@ control + Print
     scrap -u
 alt + e
     pcmanfm
+alt + v
+    virt-manager
 
 # dmenus
 alt + p

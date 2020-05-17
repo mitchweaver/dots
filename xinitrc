@@ -31,7 +31,7 @@ run xidle -area 6 -timeout 420 -sw -program slock
 run sxhkd -c ~/src/dots/sxhkdrc
 # run plank
 
-run bar -d
+#run bar -d
 run clip -d
 run ytdlq -d
 run torrent-queue -d
@@ -39,9 +39,9 @@ run autorotate
 
 unset -f run
 
-# if dwm exits 0, restart -- this allows hot reloading of config.h
-# while type dwm >/dev/null ; do dwm && continue || break ; done
-
 exec dwm
+
+# if dwm exits 0, restart -- this allows hot reloading of config.h
+####while type dwm >/dev/null ; do dwm || break ; done
 
 # vim:ft=config

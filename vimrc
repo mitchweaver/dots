@@ -61,8 +61,8 @@ Plug 'tpope/vim-surround' " surround stuff with stuff
 
 Plug 'ervandew/supertab' " insert mode tab completion
 
-Plug 'Yggdroot/indentLine' " show indentation lines
-    let g:indentLine_enabled = 1
+" Plug 'Yggdroot/indentLine' " show indentation lines
+    " let g:indentLine_enabled = 1
 
 " Plug 'maxboisvert/vim-simple-complete'
 "     let g:vsc_type_complete_length = 1
@@ -251,6 +251,8 @@ noremap <leader>W !!sh<cr>
 noremap F !!fmt<cr>
 " prepend '> ' to lines as if to block quote
 noremap Q :norm 0i> <esc>$
+
+noremap <leader>T !!toilet -f smblock<cr>
 
 " view open file in rendered markdown
 nmap <leader>md :!smu "%:p" >/tmp/tmp.html && $BROWSER /tmp/tmp.html<CR>
