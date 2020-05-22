@@ -12,26 +12,34 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # shell options
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+case ${0##*/} in
+    *ksh)
+        set -o csh-history
+        set -o trackall
+        set -o bgnice
+esac
+
 set -o vi
-set -o csh-history
-set -o bgnice
-set -o trackall
 set -o ignoreeof
 
 # save hist file per shell, deleting on close
-export HISTFILE=${XDG_CACHE_HOME:-~/.cache}/.shell_history-$$ \
-       HISTCONTROL=ignoredups:ignorespace \
-       HISTSIZE=300
+# export HISTFILE="${XDG_CACHE_HOME:-${HOME}/.cache}/.shell_history-$$" \
+# trap '/bin/rm -f "$HISTFILE" 2>/dev/null' EXIT TERM KILL QUIT
 
-trap '/bin/rm "$HISTFILE" 2>/dev/null' EXIT TERM KILL QUIT
+export HISTFILE="/tmp/$USER.history" \
+       HISTCONTROL=ignoredups:ignorespace \
+       HISTSIZE=500
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# PS1
+# ▛▀▖▞▀▖▗▌ 
+# ▙▄▘▚▄  ▌ 
+# ▌  ▖ ▌ ▌ 
+# ▘  ▝▀ ▝▀ 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 get_PS1() {
     case $TERM in
         *-256color)
-        PS1_STYLE=pwd
+            PS1_STYLE=pwd
             case ${PS1_STYLE:-username} in
                 pwd)
                     printf '%s' "\[\e[1;36m\]\W "
@@ -109,7 +117,7 @@ case "$TERM" in
         cd .
         ;;
     *)
-        if type colorls >/dev/null ; then
+        if command -v colorls >/dev/null ; then
             alias ls='colorls -G -F'
         elif type exa >/dev/null ; then
             alias ls='exa -F --group-directories-first'
@@ -157,11 +165,38 @@ alias pk=pkill
 alias w=which
 alias py=python3
 alias dm='dmesg | tail -n 20'
-alias poweroff='doas poweroff'
+alias poweroff='sudo poweroff'
+alias doas=sudo
 
-mkcd() { mkd "$_" && cd "$_" ; }
+mkcd() { mkd "$1" && cd "$1" ; }
 mvcd() { mv "$1" "$2" && cd "$2" ; }
 cpcd() { cp "$1" "$2" && cd "$2" ; }
+
+# moves a file, making dir if needed
+mkmv() {
+    case $1 in
+        -h)
+            echo 'Usage: mkvmv <files> <directory>'
+            ;;
+        --)
+            shift
+            ;;
+        *)
+            case $# in
+                0|1)
+                    >&2 echo 'Not enough arguments.'
+                    exit 1
+                    ;;
+                2)
+                    mkdir -p "$2"
+                    mv -iv "$1" "$2"/
+                    ;;
+                *)
+                    >&2 echo 'Not yet implemented.'
+                    exit 1
+            esac
+    esac
+}
 
 # dump contents of a file in $PATH
 cw() { cat "$(which "${1:-?}")" ; }
@@ -261,7 +296,6 @@ logo()  { curl -q -# -L "$1" -o logo.jpg  ; jpg ; }
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # mupdf
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
 pdf2txt() {
     # this is kinda jank... WIP
     mutool draw -F txt -i -- "$1" 2>/dev/null |
@@ -293,26 +327,26 @@ alias gyt='_g $YTDLQ_DIR'
 alias gytc='_g $YTDLQ_DIR/completed'
 alias gW='_g $XDG_PICTURES_DIR/wallpapers'
 alias gb="_g ~/bin"
-alias gs="_g ~/src"
-alias gk="_g ~/bks"
+alias gs="_g ${XDG_DOCUMENTS_DIR}/src"
+alias gk="_g ${XDG_DOCUMENTS_DIR}/books"
 alias gt="_g ~/tmp"
 alias gE='_g /etc'
 alias gM='_g /mnt'
 alias gT="_g /tmp"
 alias gV='_g /var'
-alias gss='_g ~/src/suckless'
-alias gsd='_g ~/src/dots'
-alias gsb='_g ~/src/bonsai'
-alias gcf='_g ~/.config'
-alias gch='_g ~/.cache'
+alias gss='_g ${XDG_DOCUMENTS_DIR}/src/suckless'
+alias gsd='_g ${XDG_DOCUMENTS_DIR}/src/dots'
+alias gsb='_g ${XDG_DOCUMENTS_DIR}/src/bonsai'
+alias gcf='_g ${XDG_CONFIG_DIR}'
+alias gch='_g ${XDG_CACHE_HOME}'
 
 Yf() { cp "$@" $XDG_DOCUMENTS_DIR ; }
 Yi() { cp "$@" $XDG_PICTURES_DIR ; }
 Ym() { cp "$@" $XDG_MUSIC_DIR ; }
 Yvi(){ cp "$@" $XDG_VIDEOS_DIR ; }
 Yb() { cp "$@" ~/bin ; }
-Yk() { cp "$@" ~/bks ; }
-Ys() { cp "$@" ~/src ; }
+Yk() { cp "$@" "${XDG_DOCUMENTS_DIR}/books" ; }
+Ys() { cp "$@" ${XDG_DOCUMENTS_DIR}/src ; }
 Yt() { cp "$@" ~/tmp ; }
 YT() { cp "$@" /tmp  ; }
 
@@ -322,7 +356,7 @@ mm() { mv "$@" $XDG_MUSIC_DIR ; }
 mvi(){ mv "$@" $XDG_VIDEOS_DIR ; }
 mW() { mv "$@" $XDG_PICTURES_DIR/wallpapers ; }
 mb() { mv "$@" ~/bin ; }
-ms() { mv "$@" ~/src ; }
+ms() { mv "$@" ${XDG_DOCUMENTS_DIR}/src ; }
 mt() { mv "$@" ~/tmp ; }
 mT() { mv "$@" /tmp  ; }
 
@@ -334,13 +368,13 @@ for i in 1 2 3 4 5 6 7 8 9 ; do
     eval "g${i}() { cd \$_MARK${i} ; }"
 done
 
-alias gd='_g ~/Downloads'
-Yd() { cp "$@" ~/Downloads ; }
-md() { mv "$@" ~/Downloads ; }
+alias gd='_g ${XDG_DOWNLOAD_DIR}'
+Yd() { cp "$@" ${XDG_DOWNLOAD_DIR} ; }
+md() { mv "$@" ${XDG_DOWNLOAD_DIR} ; }
 
-mw() { mv "$@" ~/src/wvr.sh/    ; }
-Yw() { cp -r "$@" ~/src/wvr.sh/ ; }
-alias gw='_g ~/src/wvr.sh'
+mw() { mv "$@" ${XDG_DOCUMENTS_DIR}/src/wvr.sh/    ; }
+Yw() { cp -r "$@" ${XDG_DOCUMENTS_DIR}/src/wvr.sh/ ; }
+alias gw='_g ${XDG_DOCUMENTS_DIR}/src/wvr.sh'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # development (warning: may conflict with plan9 mk)
@@ -359,18 +393,11 @@ gud() {
 rcp() {
     case $1 in
         bs|bonsai) gsb;mkki;cd - >/dev/null ;;
-        st|dwm|dmenu|surf|tabbed) ~/src/suckless/build.sh "$@"
+        st|dwm|dmenu|surf|tabbed) ${XDG_DOCUMENTS_DIR}/src/suckless/build.sh "$@"
     esac
 }
 
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# notes
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-v() {
-    [ "$1" ] || set -- -c VimwikiIndex
-    nvim -n "$@"
-}
-alias links="n -f $XDG_DOCUMENTS_DIR/links.txt"
+alias v=nvim
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # networking
@@ -406,11 +433,11 @@ wtf() {
 }
 
 weather() {
-    read -r wttr <~/.cache/wttr
+    read -r wttr <${XDG_CACHE_HOME}/wttr
     curl -s wttr.in/$wttr?u0TQ
 }
 forecast() {
-    read -r wttr <~/.cache/wttr
+    read -r wttr <${XDG_CACHE_HOME}/wttr
     curl -s wttr.in/$wttr?u | tail -n 33 | head -n 31
 }
 
@@ -423,11 +450,11 @@ sshvpn-wvr()    { sshvpn root@$(ga1 wvr    ~/.ssh/config | grep -oE '[0-9].*') ;
 [ -f /var/log/pflog ] && {
     alias sg='sysctl | grep -i'
     alias disks='sysctl -n hw.disknames'
-    alias disklabel='doas disklabel'
-    alias reboot='doas reboot'
-    alias poweroff='doas halt -p'
-    alias pfdump='doas tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout
-    alias pfdrop='doas tcpdump -nettti pflog0 action drop'   # follow dropped
+    alias disklabel='sudo disklabel'
+    alias reboot='sudo reboot'
+    alias poweroff='sudo halt -p'
+    alias pfdump='sudo tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout
+    alias pfdrop='sudo tcpdump -nettti pflog0 action drop'   # follow dropped
 }
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -454,16 +481,16 @@ nfs_port() {
 }
 mountnfs() {
     # start statd service if not running
-    pgrep rpc.statd >/dev/null || doas rpc.statd
-    doas mkdir -p /mnt/nfs
-    doas mount -t nfs $(nfs_ip):/nfs/storage /mnt/nfs
-} ; umountnfs() { doas umount /mnt/nfs ; }
+    pgrep rpc.statd >/dev/null || sudo rpc.statd
+    sudo mkdir -p /mnt/nfs
+    sudo mount -t nfs $(nfs_ip):/nfs/storage /mnt/nfs
+} ; umountnfs() { sudo umount /mnt/nfs ; }
 
 mountsamba() {
-    doas mount -t cifs \
+    sudo mount -t cifs \
         -o username=samba,password=samba,file_mode=0777,dir_mode=0777 \
         //$(nfs_ip)/Share /mnt/samba
-} ; umountsamba() { doas umount /mnt/samba ; }
+} ; umountsamba() { sudo umount /mnt/samba ; }
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # UNSORTED JUNK BELOW THIS LINE
@@ -492,14 +519,14 @@ chmod +x ${1:-hello.sh}
 
 qr() { cat "${1:-?}" | curl -sF-=\<- qrenco.de ; }
 
-# if [ -f ~/.cache/wal/sequences ] ; then
+# if [ -f ${XDG_CACHE_HOME}/wal/sequences ] ; then
 #     case $(ps -p $PPID -o command=) in
 #         *st*) ;;
-#         *) cat ~/.cache/wal/sequences
+#         *) cat ${XDG_CACHE_HOME}/wal/sequences
 #     esac
 # fi
 
-alias mount_phone='doas simple-mtpfs --device 1 -o allow_other /mnt/android'
+alias mount_phone='sudo simple-mtpfs --device 1 -o allow_other /mnt/android'
 alias shck='shellcheck -s sh'
 
 smv() { scp -rp "${1:-?}" "${2:-?}" && rm -r "${1:-?}" ; }
@@ -509,9 +536,9 @@ if command -v crux >/dev/null ; then
         flag=${1#-}
         shift
         case $flag in
-            a) doas prt-get depinst -f -im -is -if --install-scripts "$@" ;;
-            u) doas prt-get update  -f -im -is -if --install-scripts "$@" ;;
-            d) doas prt-get remove "$@" ;;
+            a) sudo prt-get depinst -f -im -is -if --install-scripts "$@" ;;
+            u) sudo prt-get update  -f -im -is -if --install-scripts "$@" ;;
+            d) sudo prt-get remove "$@" ;;
             i) prt-get info "$@" ;;
             s) prt-get search "$@" ;;
         esac
@@ -521,8 +548,8 @@ elif command -v xbps-query >/dev/null ; then
         flag=${1#-}
         shift
         case $flag in
-            a|u) doas xbps-install -Su "$@" ;;
-            d) doas xbps-remove -R "$@" ;;
+            a|u) sudo xbps-install -Su "$@" ;;
+            d) sudo xbps-remove -R "$@" ;;
             i) xbps-query --repository --show "$@" ;;
             s) xbps-query --repository -s "$@" ;;
         esac
@@ -532,27 +559,29 @@ elif command -v apt >/dev/null ; then
         flag=${1#-}
         shift
         case $flag in
-            a) doas apt install "$@" ;;
-            u) doas apt upgrade "$@" ;;
-            i) apt info "$@" ;;
+            a) sudo apt install "$@" ;;
+            u) sudo apt upgrade "$@" ;;
+            d) sudo apt purge "$@" ;;
+            i) apt show "$@" ;;
             s) apt search "$@" ;;
+            l) apt list "$@"
         esac
     }
 fi
 
 ddg() { w3m -dump duckduckgo.com/html/search?q="$*" ; }
-scfg() { v ~/src/suckless/$1/cfg/config.h ; }
+scfg() { v ${XDG_DOCUMENTS_DIR}/src/suckless/$1/cfg/config.h ; }
 alias speedtest='speedtest-cli --simple'
 
 rmdir Desktop 2>/dev/null ||:
 
-alias kshrc='v ~/src/dots/kshrc'
+alias kshrc='v ${XDG_DOCUMENTS_DIR}/src/dots/kshrc'
 
 alias ga1='grep -i -A 1'
 alias ga='grep -i -A 6'
 
-# fix vi not working with doas, look into why later
-alias doas='TERM=vt100 doas'
+# fix vi not working with sudo, look into why later
+alias sudo='TERM=vt100 sudo'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -587,13 +616,13 @@ pair_mouse() {
 sum() { [ -f "$1" ] && paste -sd+ <"$1" | bc ; }
 
 mount_sdcard() {
-    doas mount -t vfat -o  uid=mitch /dev/mmcblk0 /mnt/sd
+    sudo mount -t vfat -o  uid=mitch /dev/mmcblk0 /mnt/sd
 }
 
 # remove site block in /etc/hosts
-unhosts() { for i ; do doas sed -i "s/.*$i.*//g" /etc/hosts ; done ; }
+unhosts() { for i ; do sudo sed -i "s/.*$i.*//g" /etc/hosts ; done ; }
 
-alias iotop='doas iotop -o -P'
+alias iotop='sudo iotop -o -P'
 
 
 # foo/bar.mp4 ---> foo/foo.mp4
@@ -601,11 +630,6 @@ rename_as_parent_dir() {
     file=${1##*/}
     dir=${1%/$file}
     mv -f "$1" "$dir/$dir"
-}
-
-empty_trash() {
-    rm -rf ~/.cache/trash 2>/dev/null ||:
-    mkdir -p ~/.cache/trash
 }
 
 toilet() {

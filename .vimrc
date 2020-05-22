@@ -1,13 +1,14 @@
-" Neovim config file                  "
-"  ⡀⢀ ⠄ ⣀⣀  ⡀⣀ ⢀⣀                     "
-"  ⠱⠃ ⠇ ⠇⠇⠇ ⠏  ⠣⠤                     "
-"                                     "
-" http://github.com/mitchweaver/dots  "
-"                                     "
-"'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"'"
+"      ▌    ▗           
+" ▗▖▖ ▞  ▌ ▌▄ ▛▚▀▖▙▀▖▞▀▖
+" ▘▝ ▞   ▐▐ ▐ ▌▐ ▌▌  ▌ ▖
+"    ▘ ▝  ▘ ▀▘▘▝ ▘▘  ▝▀ 
+" http://github.com/mitchweaver/dots
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-"  Init
+" ▜▘   ▗▐  
+" ▐ ▛▀▖▄▜▀ 
+" ▐ ▌ ▌▐▐ ▖
+" ▀▘▘ ▘▀▘▀ 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
@@ -16,14 +17,16 @@ nnoremap <silent><SPACE> <nop>
 let mapleader=" "
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-"  Plugins
+" ▛▀▖▜       ▗       
+" ▙▄▘▐ ▌ ▌▞▀▌▄ ▛▀▖▞▀▘
+" ▌  ▐ ▌ ▌▚▄▌▐ ▌ ▌▝▀▖
+" ▘   ▘▝▀▘▗▄▘▀▘▘ ▘▀▀ 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set nocompatible
 filetype off
 call plug#begin('~/.vim/vim-plug')
 
 Plug 'tpope/vim-repeat' " allows '.' to do more things
-Plug 'dylanaraps/wal.vim' " pywal theme
 Plug 'godlygeek/tabular' " tab alignment
 Plug 'sheerun/vim-polyglot' " syntax highlighting
 
@@ -61,18 +64,20 @@ Plug 'tpope/vim-surround' " surround stuff with stuff
 
 Plug 'ervandew/supertab' " insert mode tab completion
 
-" Plug 'Yggdroot/indentLine' " show indentation lines
-    " let g:indentLine_enabled = 1
+Plug 'Yggdroot/indentLine' " show indentation lines
+    let g:indentLine_enabled = 1
 
-" Plug 'maxboisvert/vim-simple-complete'
-"     let g:vsc_type_complete_length = 1
-"     set complete=.,w,b,u,t,i
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Plug 'maxboisvert/vim-simple-complete' " testing this out
+    let g:vsc_type_complete_length = 1
+    set complete=.,w,b,u,t,i
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-" this is broken, displays in colorscheme rather than natural colors...
-" Plug 'chrisbra/Colorizer' " colorize hex codes in terminal
-    " autocmd VimEnter * ColorHighlight
-    " let g:colorizer_auto_color = 1
-    " let g:termguicolors = 1
+" ---- only works if you aren't using a colorscheme...
+Plug 'chrisbra/Colorizer' " colorize hex codes in terminal
+    autocmd VimEnter * ColorHighlight
+    let g:colorizer_auto_color = 1
+    let g:termguicolors = 1
 
 Plug 'w0rp/ale'
     let g:ale_sign_column_always = 1
@@ -81,13 +86,28 @@ Plug 'w0rp/ale'
 
 Plug 'vimwiki/vimwiki' " the ultimate note taking system
     let wiki = {}
-    let g:vimwikidir = "~/fil/wiki"
+    let g:vimwikidir = "~/Documents/wiki"
     let wiki.path = g:vimwikidir
     let g:vimwiki_list=[wiki]
     let g:vimwiki_list = [
-        \{'path': '~/fil/wiki', 'syntax': 'markdown', 'ext': '.md'},
+        \{'path': '~/Documents/wiki', 'syntax': 'markdown', 'ext': '.md'},
     \]
     let g:vimwiki_ext2syntax = {'.md': 'markdown'}
+    let g:vimwiki_global_ext = 0
+
+    " start vimwiki if vim started with no arguments
+    function InsertIfEmpty()
+        if @% == ""
+            :VimwikiIndex
+        endif
+    endfunction
+    au VimEnter * call InsertIfEmpty()
+
+Plug 'danilo-augusto/vim-afterglow' " theme based on sublime text
+    let g:afterglow_inherit_background=1 " use same background color as terminal
+    let g:afterglow_italic_comments=1 " helps with visual grepping
+
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 call plug#end()
 filetype indent plugin on
@@ -97,15 +117,22 @@ if exists(':PlugInstall')
     map <silent><leader>pu :PlugUpdate<CR>
     map <silent><leader>pc :PlugClean<CR>
 
-    " colorschemes must be set after loading plugins
-    colorscheme wal
-    set background=light
+    " NOTE: colorschemes must be set after loading plugins
+    " colorscheme afterglow
+    colorscheme onehalfdark
+    set background=dark
+    set t_Co=256 " fix terminal colors
+    set termguicolors
 endif
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-"  General
+" ▞▀▖               ▜ 
+" ▌▄▖▞▀▖▛▀▖▞▀▖▙▀▖▝▀▖▐ 
+" ▌ ▌▛▀ ▌ ▌▛▀ ▌  ▞▀▌▐ 
+" ▝▀ ▝▀▘▘ ▘▝▀▘▘  ▝▀▘ ▘
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 scriptencoding utf-8
+set cursorline " highlight current line of cursor
 set encoding=utf-8
 set history=200
 set backspace=indent,eol,start
@@ -125,8 +152,8 @@ set ch=1 " get rid of the wasted line at the bottom
 set cmdheight=1 " cmd output only take up 1 line
 set nostartofline " gg/G do not always go to line start
 set modeline " enable per-file custom syntax
-" set mouse=a " enable mouse globally
-set mouse= " disable mouse globally
+set mouse=a " enable mouse globally
+" set mouse= " disable mouse globally
 
 " remove need to hold shift for commands
 noremap ; :
@@ -135,7 +162,10 @@ noremap :W :w
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-"  Syntax
+" ▞▀▖      ▐        
+" ▚▄ ▌ ▌▛▀▖▜▀ ▝▀▖▚▗▘
+" ▖ ▌▚▄▌▌ ▌▐ ▖▞▀▌▗▚ 
+" ▝▀ ▗▄▘▘ ▘ ▀ ▝▀▘▘ ▘
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 autocmd BufNewFile,BufRead *.config set syntax=sh
 autocmd BufNewFile,BufRead *.conf set syntax=sh
@@ -158,10 +188,14 @@ autocmd BufRead *.asm setlocal ft=nasm
 map <silent><leader>sy :set syntax=sh<cr>
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-" Line Numbers
+" ▌  ▗        ▙ ▌       ▌           
+" ▌  ▄ ▛▀▖▞▀▖ ▌▌▌▌ ▌▛▚▀▖▛▀▖▞▀▖▙▀▖▞▀▘
+" ▌  ▐ ▌ ▌▛▀  ▌▝▌▌ ▌▌▐ ▌▌ ▌▛▀ ▌  ▝▀▖
+" ▀▀▘▀▘▘ ▘▝▀▘ ▘ ▘▝▀▘▘▝ ▘▀▀ ▝▀▘▘  ▀▀ 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 map <silent><leader>ln :set number!<cr>
 map <silent><leader>nl :set relativenumber!<cr>
+set number! " start with line numbering enabled
 
 " set color column width to 72 chars
 " editor will start with it hidden, but allow it
@@ -187,7 +221,10 @@ set synmaxcol=512
 set nowrap
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-"  Style
+" ▞▀▖▐     ▜    
+" ▚▄ ▜▀ ▌ ▌▐ ▞▀▖
+" ▖ ▌▐ ▖▚▄▌▐ ▛▀ 
+" ▝▀  ▀ ▗▄▘ ▘▝▀▘
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set tabstop=4
 set shiftwidth=4
@@ -209,7 +246,10 @@ set nowritebackup " we have vcs, we don't need backups.
 set noswapfile " annoying
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-"  Buffers
+" ▛▀▖   ▗▀▖▗▀▖         
+" ▙▄▘▌ ▌▐  ▐  ▞▀▖▙▀▖▞▀▘
+" ▌ ▌▌ ▌▜▀ ▜▀ ▛▀ ▌  ▝▀▖
+" ▀▀ ▝▀▘▐  ▐  ▝▀▘▘  ▀▀ 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set hidden " allow buffers with unsaved changes
 set autoread " reload files if changed on disk
@@ -243,7 +283,10 @@ nnoremap <silent><leader><leader> :let @/ = ""<CR>:noh<CR>
 nmap <leader>s :%s//g<Left><Left>
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-"  Hacks
+" ▌ ▌      ▌     
+" ▙▄▌▝▀▖▞▀▖▌▗▘▞▀▘
+" ▌ ▌▞▀▌▌ ▖▛▚ ▝▀▖
+" ▘ ▘▝▀▘▝▀ ▘ ▘▀▀ 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " execute line as shell command and replace it with output
 noremap <leader>W !!sh<cr>
@@ -285,7 +328,12 @@ augroup resCur "reopen vim at previous cursor point
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup END
 
-" -*-*-*-*-* Open files in ranger *-*-*-*-*-*-*-*-*-*-*-*-*-*
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" ▛▀▖               
+" ▙▄▘▝▀▖▛▀▖▞▀▌▞▀▖▙▀▖
+" ▌▚ ▞▀▌▌ ▌▚▄▌▛▀ ▌  
+" ▘ ▘▝▀▘▘ ▘▗▄▘▝▀▘▘  
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 if has('nvim')
     function! s:Ranger(...)
         let path = a:0 ? a:1 : getcwd()
@@ -357,9 +405,13 @@ endif
 " ranger
 let g:ranger_map_keys = 0
 nnoremap <silent><leader>r :Ranger<CR>
+
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-
+" ▞▀▖   ▜ ▗▐     
+" ▚▄ ▛▀▖▐ ▄▜▀ ▞▀▘
+" ▖ ▌▙▄▘▐ ▐▐ ▖▝▀▖
+" ▝▀ ▌   ▘▀▘▀ ▀▀ 
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " ---- cant get below working right, annoying
 "  for now, just keep using default split bindings
 "

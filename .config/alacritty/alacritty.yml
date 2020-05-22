@@ -1,0 +1,319 @@
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# ▞▀▖▌     ▜▜ 
+# ▚▄ ▛▀▖▞▀▖▐▐ 
+# ▖ ▌▌ ▌▛▀ ▐▐ 
+# ▝▀ ▘ ▘▝▀▘ ▘▘
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+shell:
+  program: /usr/bin/env
+  args:
+    - bash
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# ▌ ▌▗      ▌       
+# ▌▖▌▄ ▛▀▖▞▀▌▞▀▖▌  ▌
+# ▙▚▌▐ ▌ ▌▌ ▌▌ ▌▐▐▐ 
+# ▘ ▘▀▘▘ ▘▝▀▘▝▀  ▘▘ 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+window:
+  dimensions:
+    columns: 80
+    lines: 24
+
+  padding:
+    x: 0
+    y: 0
+
+  # either 'full' or 'none'
+  decorations: full
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# ▞▀▖         ▜▜ ▗       
+# ▚▄ ▞▀▖▙▀▖▞▀▖▐▐ ▄ ▛▀▖▞▀▌
+# ▖ ▌▌ ▖▌  ▌ ▌▐▐ ▐ ▌ ▌▚▄▌
+# ▝▀ ▝▀ ▘  ▝▀  ▘▘▀▘▘ ▘▗▄▘
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  history: 2000
+  # lines per scroll
+  multiplier: 3
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# ▛▀▘     ▐     
+# ▙▄▞▀▖▛▀▖▜▀ ▞▀▘
+# ▌ ▌ ▌▌ ▌▐ ▖▝▀▖
+# ▘ ▝▀ ▘ ▘ ▀ ▀▀ 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+font:
+  # FONTS: monospace, 'ShureTechMono Nerd Font', 'IBM Plex Mono', Hack
+  normal:
+    family: Hack
+    style: Regular
+  bold:
+    family: Hack
+    style: Bold
+  italic:
+    family: Hack
+    style: Italic
+  bold_italic:
+    family: Hack
+    style: Bold Italic
+  size: 14
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# ▙▗▌▗       
+# ▌▘▌▄ ▞▀▘▞▀▖
+# ▌ ▌▐ ▝▀▖▌ ▖
+# ▘ ▘▀▘▀▀ ▝▀ 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+background_opacity: 1.0
+
+# allow programs to change window title
+dynamic_title: true
+
+selection:
+  # save selected text to primary clipboard
+  save_to_clipboard: true
+
+mouse:
+  # milliseconds
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
+
+  # hide cursor while typing
+  hide_when_typing: true
+
+  # URL launcher
+  url:
+    # opn is my plumber, see my ~/bin
+    launcher:
+      program: opn
+      args: []
+    # modifiers needed to be held for url launcher
+    modifiers: None
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# ▙▗▌            
+# ▌▘▌▞▀▖▌ ▌▞▀▘▞▀▖
+# ▌ ▌▌ ▌▌ ▌▝▀▖▛▀ 
+# ▘ ▘▝▀ ▝▀▘▀▀ ▝▀▘
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# NOTE: To trigger mouse bindings when an application running within
+# Alacritty captures the mouse, the `Shift` modifier is automatically
+# added as a requirement.
+#
+# mouse: Left / Right / Middle / 4 / 5
+# mods: Control / Super / Shift / Alt
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# ▌ ▌         
+# ▙▞ ▞▀▖▌ ▌▞▀▘
+# ▌▝▖▛▀ ▚▄▌▝▀▖
+# ▘ ▘▝▀▘▗▄▘▀▀ 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# PREDEFINED ACTIONS:
+#
+#   - Copy
+#   - Paste
+#   - PasteSelection
+#   - IncreaseFontSize
+#   - DecreaseFontSize
+#   - ResetFontSize
+#   - ScrollPageUp
+#   - ScrollPageDown
+#   - ScrollLineUp
+#   - ScrollLineDown
+#   - ScrollToTop
+#   - ScrollToBottom
+#   - ClearHistory
+#   - Hide
+#   - Minimize
+#   - Quit
+#   - ToggleFullscreen
+#   - SpawnNewInstance
+#   - ClearLogNotice
+#   - ReceiveChar
+#   - None
+#
+# - `command`: Fork and execute a specified command plus arguments
+#
+#    The `command` field must be a map containing a `program` string and an
+#    `args` array of command line parameter strings. For example:
+#       `{ program: "alacritty", args: ["-e", "vttest"] }`
+#
+# mods: Control / Super / Shift / Alt
+key_bindings:
+  - { key: V,        mods: Control|Shift, action: Paste            }
+  - { key: C,        mods: Control|Shift, action: Copy             }
+  - { key: Insert,   mods: Shift,         action: PasteSelection   }
+  - { key: Key0,     mods: Control,       action: ResetFontSize    }
+  - { key: Equals,   mods: Control,       action: IncreaseFontSize }
+  - { key: Add,      mods: Control,       action: IncreaseFontSize }
+  - { key: Subtract, mods: Control,       action: DecreaseFontSize }
+  - { key: Minus,    mods: Control,       action: DecreaseFontSize }
+  - { key: PageUp,    mods: Shift,   action: ScrollPageUp,   mode: ~Alt       }
+  - { key: PageDown,  mods: Shift,   action: ScrollPageDown, mode: ~Alt       }
+  - { key: Home,      mods: Shift,   action: ScrollToTop,    mode: ~Alt       }
+  - { key: End,       mods: Shift,   action: ScrollToBottom, mode: ~Alt       }
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# ▞▀▖   ▜        ▞▀▖   ▌               
+# ▌  ▞▀▖▐ ▞▀▖▙▀▖ ▚▄ ▞▀▖▛▀▖▞▀▖▛▚▀▖▞▀▖
+# ▌ ▖▌ ▌▐ ▌ ▌▌   ▖ ▌▌ ▖▌ ▌▛▀ ▌▐ ▌▛▀ 
+# ▝▀ ▝▀  ▘▝▀ ▘   ▝▀ ▝▀ ▘ ▘▝▀▘▘▝ ▘▝▀▘
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+schemes:
+  # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  default: &default
+    primary:
+      background: '#000000'
+      foreground: '#eaeaea'
+
+    cursor:
+      text: '#000000'
+      cursor: '#ffffff'
+
+    normal:
+      black:   '#000000'
+      red:     '#d54e53'
+      green:   '#b9ca4a'
+      yellow:  '#e6c547'
+      blue:    '#7aa6da'
+      magenta: '#c397d8'
+      cyan:    '#70c0ba'
+      white:   '#eaeaea'
+
+    bright:
+      black:   '#666666'
+      red:     '#ff3334'
+      green:   '#9ec400'
+      yellow:  '#e7c547'
+      blue:    '#7aa6da'
+      magenta: '#b77ee0'
+      cyan:    '#54ced6'
+      white:   '#ffffff'
+  # -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+  tomorrow_dark: &tomorrow_dark
+    # Default colors
+    primary:
+      background: '0x1d1f21'
+      foreground: '0xc5c8c6'
+
+    # Normal colors
+    normal:
+      black:   '0x1d1f21'
+      red:     '0xcc6666'
+      green:   '0xb5bd68'
+      yellow:  '0xf0c674'
+      blue:    '0x81a2be'
+      magenta: '0xb294bb'
+      cyan:    '0x8abeb7'
+      white:   '0xc5c8c6'
+
+    # Bright colors
+    bright:
+      black:   '0x969896'
+      red:     '0xcc6666'
+      green:   '0xb5bd68'
+      yellow:  '0xf0c674'
+      blue:    '0x81a2be'
+      magenta: '0xb294bb'
+      cyan:    '0x8abeb7'
+      white:   '0xffffff'
+  # -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+  ocean_dark: &ocean_dark
+    # Default colors
+    primary:
+      background: '0x2b303b'
+      foreground: '0xc0c5ce'
+
+    # Normal colors
+    normal:
+      black:   '0x2b303b'
+      red:     '0xbf616a'
+      green:   '0xa3be8c'
+      yellow:  '0xebcb8b'
+      blue:    '0x8fa1b3'
+      magenta: '0xb48ead'
+      cyan:    '0x96b5b4'
+      white:   '0xc0c5ce'
+
+    # Bright colors
+    bright:
+      black:   '0x65737e'
+      red:     '0xbf616a'
+      green:   '0xa3be8c'
+      yellow:  '0xebcb8b'
+      blue:    '0x8fa1b3'
+      magenta: '0xb48ead'
+      cyan:    '0x96b5b4'
+      white:   '0xeff1f5'
+  # -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+  eighties_dark: &eighties_dark
+    # Default colors
+    primary:
+      background: '0x2d2d2d'
+      foreground: '0xd3d0c8'
+
+    # Normal colors
+    normal:
+      black:   '0x2d2d2d'
+      red:     '0xf2777a'
+      green:   '0x99cc99'
+      yellow:  '0xffcc66'
+      blue:    '0x6699cc'
+      magenta: '0xcc99cc'
+      cyan:    '0x66cccc'
+      white:   '0xd3d0c8'
+
+    # Bright colors
+    bright:
+      black:   '0x747369'
+      red:     '0xf2777a'
+      green:   '0x99cc99'
+      yellow:  '0xffcc66'
+      blue:    '0x6699cc'
+      magenta: '0xcc99cc'
+      cyan:    '0x66cccc'
+      white:   '0xf2f0ec'
+  # -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+  one-half_dark: &one-half_dark
+    primary:
+      background: '0x282c34'
+      foreground: '0xdcdfe4'
+
+    normal:
+      black: '0x282c34'
+      red: '0xe06c75'
+      green: '0x98c379'
+      yellow: '0xe5c07b'
+      blue: '0x61afef'
+      magenta: '0xc678dd'
+      cyan: '0x56b6c2'
+      white: '0xdcdfe4'
+
+    bright:
+      black: '0x282c34'
+      red: '0xe06c75'
+      green: '0x98c379'
+      yellow: '0xe5c07b'
+      blue: '0x61afef'
+      magenta: '0xc678dd'
+      cyan: '0x56b6c2'
+      white: '0xdcdfe4'
+# -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# ▞▀▖   ▌             ▞▀▖   ▜       ▐  ▗       
+# ▚▄ ▞▀▖▛▀▖▞▀▖▛▚▀▖▞▀▖ ▚▄ ▞▀▖▐ ▞▀▖▞▀▖▜▀ ▄ ▞▀▖▛▀▖
+# ▖ ▌▌ ▖▌ ▌▛▀ ▌▐ ▌▛▀  ▖ ▌▛▀ ▐ ▛▀ ▌ ▖▐ ▖▐ ▌ ▌▌ ▌
+# ▝▀ ▝▀ ▘ ▘▝▀▘▘▝ ▘▝▀▘ ▝▀ ▝▀▘ ▘▝▀▘▝▀  ▀ ▀▘▝▀ ▘ ▘
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# colors: *default
+# colors: *tomorrow_dark
+# colors: *ocean_dark
+# colors: *eighties_dark
+colors: *one-half_dark

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# load commonly needed modules
+modprobe tun
+modprobe tap
+
+# disable ipv6
+sysctl -w net.ipv6.conf.all.disable_ipv6=1
+
+# remove webcam module
+rmmod uvcvideo 2>/dev/null ||:
