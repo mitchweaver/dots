@@ -666,3 +666,11 @@ dbuild() {
     [ "$1" ] || { >&2 'Usage: dbuild <tag>' ; exit 1 ; }
     docker build --tag "$1" .
 }
+DOCKER_NUKE() {
+    printf 'This will delete all images and containers, confirm? (y/n):'
+    read -r ans
+    [ "$ans" = y ] && {
+        docker rm $(docker ps -a -q) --force
+        docker rmi $(docker images -q) --force
+    }
+}
