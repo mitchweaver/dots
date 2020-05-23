@@ -27,8 +27,10 @@ filetype off
 call plug#begin('~/.vim/vim-plug')
 
 Plug 'tpope/vim-repeat' " allows '.' to do more things
+Plug 'tpope/vim-speeddating' " allows C-a to increment dates and times
 Plug 'godlygeek/tabular' " tab alignment
 Plug 'sheerun/vim-polyglot' " syntax highlighting
+Plug 'ekalinin/Dockerfile.vim' " syntax for dockerfiles
 
 Plug 'ap/vim-buftabline' " display buffers along top as tabs
     let g:buftabline_show = 1
@@ -62,18 +64,19 @@ Plug 'tpope/vim-surround' " surround stuff with stuff
 	nmap sl yss
 	vmap s S
 
+Plug 'jiangmiao/auto-pairs' " autotype brackets, parents, tags
+    let g:AutoPairsFlyMode = 0
+    let g:AutoPairsShortcutBackInsert = '<M-b>'
+
 Plug 'ervandew/supertab' " insert mode tab completion
 
 Plug 'Yggdroot/indentLine' " show indentation lines
     let g:indentLine_enabled = 1
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 Plug 'maxboisvert/vim-simple-complete' " testing this out
     let g:vsc_type_complete_length = 1
     set complete=.,w,b,u,t,i
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-" ---- only works if you aren't using a colorscheme...
 Plug 'chrisbra/Colorizer' " colorize hex codes in terminal
     autocmd VimEnter * ColorHighlight
     let g:colorizer_auto_color = 1
@@ -81,33 +84,18 @@ Plug 'chrisbra/Colorizer' " colorize hex codes in terminal
 
 Plug 'w0rp/ale'
     let g:ale_sign_column_always = 1
-    let g:ale_lint_on_text_changed = 'never'
     let g:ale_fix_on_save = 1
+    " uncomment to only have ale check on file saves
+    """""let g:ale_lint_on_text_changed = 'never'
+    let g:airline#extensions#ale#enabled = 1
 
-Plug 'vimwiki/vimwiki' " the ultimate note taking system
-    let wiki = {}
-    let g:vimwikidir = "~/Documents/wiki"
-    let wiki.path = g:vimwikidir
-    let g:vimwiki_list=[wiki]
-    let g:vimwiki_list = [
-        \{'path': '~/Documents/wiki', 'syntax': 'markdown', 'ext': '.md'},
-    \]
-    let g:vimwiki_ext2syntax = {'.md': 'markdown'}
-    let g:vimwiki_global_ext = 0
-
-    " start vimwiki if vim started with no arguments
-    function InsertIfEmpty()
-        if @% == ""
-            :VimwikiIndex
-        endif
-    endfunction
-    au VimEnter * call InsertIfEmpty()
+Plug 'ryanoasis/vim-devicons' " adds icons to plugins
 
 Plug 'danilo-augusto/vim-afterglow' " theme based on sublime text
     let g:afterglow_inherit_background=1 " use same background color as terminal
-    let g:afterglow_italic_comments=1 " helps with visual grepping
+    let g:afterglow_italic_comments=1
 
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
 
 call plug#end()
 filetype indent plugin on
@@ -116,14 +104,25 @@ if exists(':PlugInstall')
     map <silent><leader>pi :PlugInstall<CR>
     map <silent><leader>pu :PlugUpdate<CR>
     map <silent><leader>pc :PlugClean<CR>
-
+    " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
     " NOTE: colorschemes must be set after loading plugins
     " colorscheme afterglow
     colorscheme onehalfdark
+    " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
     set background=dark
     set t_Co=256 " fix terminal colors
     set termguicolors
 endif
+
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" ▛▀▘     ▐  
+" ▙▄▞▀▖▛▀▖▜▀ 
+" ▌ ▌ ▌▌ ▌▐ ▖
+" ▘ ▝▀ ▘ ▘ ▀ 
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+set guifont=Hack:h12
+" set guifont=IBM\ Plex\ Mono:h12
+" set guifont=ShureTechMono\ Nerd\ Font:h12
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " ▞▀▖               ▜ 
@@ -153,7 +152,6 @@ set cmdheight=1 " cmd output only take up 1 line
 set nostartofline " gg/G do not always go to line start
 set modeline " enable per-file custom syntax
 set mouse=a " enable mouse globally
-" set mouse= " disable mouse globally
 
 " remove need to hold shift for commands
 noremap ; :
@@ -236,7 +234,10 @@ set autoindent " match indents on new lines.
 set smartindent
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-"  Annoying nonsense
+" ▞▀▖            ▗                                
+" ▙▄▌▛▀▖▛▀▖▞▀▖▌ ▌▄ ▛▀▖▞▀▌ ▛▀▖▞▀▖▛▀▖▞▀▘▞▀▖▛▀▖▞▀▘▞▀▖
+" ▌ ▌▌ ▌▌ ▌▌ ▌▚▄▌▐ ▌ ▌▚▄▌ ▌ ▌▌ ▌▌ ▌▝▀▖▛▀ ▌ ▌▝▀▖▛▀ 
+" ▘ ▘▘ ▘▘ ▘▝▀ ▗▄▘▀▘▘ ▘▗▄▘ ▘ ▘▝▀ ▘ ▘▀▀ ▝▀▘▘ ▘▀▀ ▝▀▘
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set vb " disable audible bell
 set novisualbell " kill the visual bell too

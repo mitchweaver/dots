@@ -36,4 +36,7 @@ torrent-queue -d &
     xmodmap ~/.xmodmaprc
 } &
 
+command -v nemo >/dev/null &&
+xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
+
 # vim:ft=config

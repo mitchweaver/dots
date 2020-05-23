@@ -87,7 +87,9 @@ export MPV_OPTS="--really-quiet --force-seekable=yes --player-operation-mode=pse
 # ▌ ▌▞▀▖▐  ▝▀▖▌ ▌▐▜▀  ▙▄▘▙▀▖▞▀▖▞▀▌▙▀▖▝▀▖▛▚▀▖▞▀▘
 # ▌ ▌▛▀ ▜▀ ▞▀▌▌ ▌▐▐ ▖ ▌  ▌  ▌ ▌▚▄▌▌  ▞▀▌▌▐ ▌▝▀▖
 # ▀▀ ▝▀▘▐  ▝▀▘▝▀▘ ▘▀  ▘  ▘  ▝▀ ▗▄▘▘  ▝▀▘▘▝ ▘▀▀ 
-if command -v gnvim >/dev/null ; then
+if command -v gnvim-launch >/dev/null ; then
+    export EDITOR=gnvim-launch
+elif command -v gnvim >/dev/null ; then
     export EDITOR='gnvim --disable-ext-tabline'
 else
     export EDITOR=nvim

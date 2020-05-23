@@ -641,3 +641,28 @@ toilet() {
         done | menu -p 'Select font:'
     ) "$@"
 }
+
+
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# ▛▀▖      ▌        
+# ▌ ▌▞▀▖▞▀▖▌▗▘▞▀▖▙▀▖
+# ▌ ▌▌ ▌▌ ▖▛▚ ▛▀ ▌  
+# ▀▀ ▝▀ ▝▀ ▘ ▘▝▀▘▘  
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# list images/containers
+alias {dli,dlsi}='docker images'
+alias {dlc,dlsc}='docker container ls -a'
+
+# rm images/containers
+alias {drmi,dirm}='docker image rm'
+alias {drmc,dcrm}='docker container rm'
+
+alias {dst,dstop}='docker stop'
+alias drun='docker run'
+alias {drunr,drunrm}='docker run --rm'
+alias dps='docker ps'
+dbuild() {
+    [ "$1" ] || { >&2 'Usage: dbuild <tag>' ; exit 1 ; }
+    docker build --tag "$1" .
+}
