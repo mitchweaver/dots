@@ -1,10 +1,27 @@
-"      ▌    ▗           
-" ▗▖▖ ▞  ▌ ▌▄ ▛▚▀▖▙▀▖▞▀▖
-" ▘▝ ▞   ▐▐ ▐ ▌▐ ▌▌  ▌ ▖
-"    ▘ ▝  ▘ ▀▘▘▝ ▘▘  ▝▀ 
 " http://github.com/mitchweaver/dots
+"          ____                    _____                    _____          
+"        /\    \                  /\    \                  /\    \         
+"       /::\____\                /::\    \                /::\____\        
+"      /:::/    /                \:::\    \              /::::|   |        
+"     /:::/    /                  \:::\    \            /:::::|   |        
+"    /:::/    /                    \:::\    \          /::::::|   |        
+"   /:::/____/                      \:::\    \        /:::/|::|   |        
+"   |::|    |                       /::::\    \      /:::/ |::|   |        
+"   |::|    |     _____    ____    /::::::\    \    /:::/  |::|___|______  
+"   |::|    |    /\    \  /\   \  /:::/\:::\    \  /:::/   |::::::::\    \ 
+"   |::|    |   /::\____\/::\   \/:::/  \:::\____\/:::/    |:::::::::\____\
+"   |::|    |  /:::/    /\:::\  /:::/    \::/    /\::/    / ~~~~~/:::/    /
+"   |::|    | /:::/    /  \:::\/:::/    / \/____/  \/____/      /:::/    / 
+"   |::|____|/:::/    /    \::::::/    /                       /:::/    /  
+"   |:::::::::::/    /      \::::/____/                       /:::/    /   
+"   \::::::::::/____/        \:::\    \                      /:::/    /    
+"    ~~~~~~~~~~               \:::\    \                    /:::/    /     
+"                              \:::\    \                  /:::/    /      
+"                               \:::\____\                /:::/    /       
+"                                \::/    /                \::/    /        
+"                                 \/____/                  \/____/
+"
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " ▜▘   ▗▐  
 " ▐ ▛▀▖▄▜▀ 
 " ▐ ▌ ▌▐▐ ▖
@@ -16,105 +33,166 @@ let &packpath = &runtimepath
 nnoremap <silent><SPACE> <nop>
 let mapleader=" "
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " ▛▀▖▜       ▗       
 " ▙▄▘▐ ▌ ▌▞▀▌▄ ▛▀▖▞▀▘
 " ▌  ▐ ▌ ▌▚▄▌▐ ▌ ▌▝▀▖
 " ▘   ▘▝▀▘▗▄▘▀▘▘ ▘▀▀ 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-set nocompatible
-filetype off
-call plug#begin('~/.vim/vim-plug')
+if has('nvim')
+    set nocompatible
+    filetype off
+    call plug#begin('~/.vim/vim-plug')
 
-Plug 'tpope/vim-repeat' " allows '.' to do more things
-Plug 'tpope/vim-speeddating' " allows C-a to increment dates and times
-Plug 'godlygeek/tabular' " tab alignment
-Plug 'sheerun/vim-polyglot' " syntax highlighting
-Plug 'ekalinin/Dockerfile.vim' " syntax for dockerfiles
+    Plug 'tpope/vim-repeat' " allows '.' to do more things
+    Plug 'tpope/vim-speeddating' " allows C-a to increment dates and times
+    Plug 'godlygeek/tabular' " tab alignment
+    Plug 'sheerun/vim-polyglot' " syntax highlighting
+    Plug 'ekalinin/Dockerfile.vim' " syntax for dockerfiles
 
-Plug 'ap/vim-buftabline' " display buffers along top as tabs
-    let g:buftabline_show = 1
+    Plug 'ap/vim-buftabline' " display buffers along top as tabs
+        let g:buftabline_show = 1
 
-Plug 'tpope/vim-commentary' " comment toggler
-    nmap <silent><leader>c :Commentary<CR>
-    autocmd FileType asm setlocal commentstring=;\ %s
-    autocmd FileType conf setlocal commentstring=#\ %s
-    autocmd FileType rc setlocal commentstring=#\ %s
-    autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
+    Plug 'tpope/vim-commentary' " comment toggler
+        nmap <silent><leader>c :Commentary<CR>
+        autocmd FileType asm setlocal commentstring=;\ %s
+        autocmd FileType conf setlocal commentstring=#\ %s
+        autocmd FileType rc setlocal commentstring=#\ %s
+        autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
-Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
-    let g:multi_cursor_use_default_mapping=0
-    let g:multi_cursor_next_key='<c-m>'
-    let g:multi_cursor_prev_key='<c-p>'
-    let g:multi_cursor_skip_key='<c-x>'
-    let g:multi_cursor_quit_key='<esc>'
+    Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
+        let g:multi_cursor_use_default_mapping=0
+        let g:multi_cursor_next_key='<c-m>'
+        let g:multi_cursor_prev_key='<c-p>'
+        let g:multi_cursor_skip_key='<c-x>'
+        let g:multi_cursor_quit_key='<esc>'
 
-Plug 'airblade/vim-gitgutter' " git diffing along the left side
-    let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
-    let g:gitgutter_realtime = 0 " only run gitgutter on save
-    set signcolumn=auto " yes=always, no=never, auto=ifchanges
-    map <silent><leader>g :GitGutterToggle<CR>
-    nmap ]h <Plug>GitGutterNextHunk
-    nmap [h <Plug>GitGutterPrevHunk
-    nmap <Leader>hs <Plug>GitGutterStageHunk
-    nmap <Leader>hr <Plug>GitGutterUndoHunk
+    Plug 'airblade/vim-gitgutter' " git diffing along the left side
+        let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
+        let g:gitgutter_realtime = 0 " only run gitgutter on save
+        set signcolumn=auto " yes=always, no=never, auto=ifchanges
+        map <silent><leader>g :GitGutterToggle<CR>
+        nmap ]h <Plug>GitGutterNextHunk
+        nmap [h <Plug>GitGutterPrevHunk
+        nmap <Leader>hs <Plug>GitGutterStageHunk
+        nmap <Leader>hr <Plug>GitGutterUndoHunk
 
-Plug 'tpope/vim-surround' " surround stuff with stuff
-	nmap ss ysiw
-	nmap sl yss
-	vmap s S
+    Plug 'tpope/vim-surround' " surround stuff with stuff
+        nmap ss ysiw
+        nmap sl yss
+        vmap s S
 
-Plug 'jiangmiao/auto-pairs' " autotype brackets, parents, tags
-    let g:AutoPairsFlyMode = 0
-    let g:AutoPairsShortcutBackInsert = '<M-b>'
+    Plug 'jiangmiao/auto-pairs' " autotype brackets, parents, tags
+        let g:AutoPairsFlyMode = 0
+        let g:AutoPairsShortcutBackInsert = '<M-b>'
+        " remove single/double quotes from autopairing, causes too much headache:
+        let g:AutoPairs = {'(':')', '[':']', '{':'}', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 
-Plug 'ervandew/supertab' " insert mode tab completion
+    Plug 'honza/vim-snippets' " snippets repo
+    Plug 'SirVer/ultisnips' " snippet driver
+        let g:UltiSnipsExpandTrigger="<c-l>"
+        let g:UltiSnipsListSnippets = '<c-cr>'
+        let g:UltiSnipsEditSplit="vertical"
+        """"" can't get these to work, idk why
+        " let g:UltiSnipsJumpBackwardTrigger = '<c-j>'
+        " let g:UltiSnipsJumpForwardTrigger = '<c-k>'
 
-Plug 'Yggdroot/indentLine' " show indentation lines
-    let g:indentLine_enabled = 1
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+        let g:deoplete#enable_at_startup = 1
 
-Plug 'maxboisvert/vim-simple-complete' " testing this out
-    let g:vsc_type_complete_length = 1
-    set complete=.,w,b,u,t,i
+    Plug 'ervandew/supertab' " tab completion rather than <c-n>
+        let g:SuperTabDefaultCompletionType = "<c-n>"
 
-Plug 'chrisbra/Colorizer' " colorize hex codes in terminal
-    autocmd VimEnter * ColorHighlight
-    let g:colorizer_auto_color = 1
-    let g:termguicolors = 1
+    " Plug 'Yggdroot/indentLine' " show indentation lines
+    "     let g:indentLine_enabled = 1
 
-Plug 'w0rp/ale'
-    let g:ale_sign_column_always = 1
-    let g:ale_fix_on_save = 1
-    " uncomment to only have ale check on file saves
-    """""let g:ale_lint_on_text_changed = 'never'
-    let g:airline#extensions#ale#enabled = 1
+    Plug 'chrisbra/Colorizer' " colorize hex codes in terminal
+        autocmd VimEnter * ColorHighlight
+        let g:colorizer_maxlines = 2000
+        let g:colorizer_auto_color = 1 " color on file open
+        let g:colorizer_skip_comments = 1 " do not color in comments
+        let g:colorizer_colornames = 0 " only color hex codes, not names
+        let g:termguicolors = 1
 
-Plug 'ryanoasis/vim-devicons' " adds icons to plugins
+    Plug 'w0rp/ale'
+        let g:ale_sign_column_always = 1
+        let g:ale_fix_on_save = 1
+        " uncomment to only have ale check on file saves
+        """""let g:ale_lint_on_text_changed = 'never'
+        let g:airline#extensions#ale#enabled = 1
+        let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 
-Plug 'danilo-augusto/vim-afterglow' " theme based on sublime text
-    let g:afterglow_inherit_background=1 " use same background color as terminal
-    let g:afterglow_italic_comments=1
+    Plug 'gyim/vim-boxdraw' " the coolest plugin you never knew you needed
 
-Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
+    Plug 'ryanoasis/vim-devicons' " adds icons to plugins
 
-call plug#end()
-filetype indent plugin on
+    Plug 'mhinz/vim-startify'
+        let g:startify_files_number = 10
+        " 0: recently-used files update on vim exit, 1: immediate
+        let g:startify_update_oldfiles = 1
+        let g:startify_change_to_dir = 1
+        " remove fortune and cowsay from startify... annoying...
+        let g:startify_custom_header = [
+            \ '                                 ',
+            \ '      ⢀⣀ ⣰⡀ ⢀⣀ ⡀⣀ ⣰⡀ ⣀⡀ ⢀⣀ ⢀⡀ ⢀⡀ ',
+            \ '      ⠭⠕ ⠘⠤ ⠣⠼ ⠏   ⠘⠤ ⡧⠜ ⠣⠼ ⣑⡺ ⠣⠭',
+            \ ]
 
-if exists(':PlugInstall')
-    map <silent><leader>pi :PlugInstall<CR>
-    map <silent><leader>pu :PlugUpdate<CR>
-    map <silent><leader>pc :PlugClean<CR>
-    " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
-    " NOTE: colorschemes must be set after loading plugins
-    " colorscheme afterglow
-    colorscheme onehalfdark
-    " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
-    set background=dark
-    set t_Co=256 " fix terminal colors
-    set termguicolors
+        " note: remove . getcwd() if you just want to see global MRU
+        let g:startify_lists = [
+            \ { 'type': 'dir',       'header': ['   Last Updated in: '. getcwd()] },
+            \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+            \ ]
+
+        let g:startify_bookmarks = [
+            \ {'v': '~/.vimrc'},
+            \ {'c': '~/.shellrc'},
+            \ ]
+        let g:startify_skiplist = [
+            \ 'COMMIT_EDITMSG',
+            \ escape(fnamemodify(resolve($VIMRUNTIME), ':p'), '\') .'doc',
+            \ 'bundle/.*/doc',
+            \ ]
+
+    Plug 'danilo-augusto/vim-afterglow' " theme based on sublime text
+        let g:afterglow_inherit_background=1 " use same background color as terminal
+        let g:afterglow_italic_comments=1
+
+    Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
+
+    Plug 'NLKNguyen/papercolor-theme'
+        let g:PaperColor_Theme_Options = {
+        \   'language': {
+        \     'python': {
+        \       'highlight_builtins' : 1
+        \     },
+        \     'cpp': {
+        \       'highlight_standard_library': 1
+        \     },
+        \     'c': {
+        \       'highlight_builtins' : 1
+        \     }
+        \   }
+        \ }
+
+    call plug#end()
+    filetype indent plugin on
+
+    if exists(':PlugInstall')
+        map <silent><leader>pi :PlugInstall<CR>
+        map <silent><leader>pu :PlugUpdate<CR>
+        map <silent><leader>pc :PlugClean<CR>
+        " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+        " NOTE: colorschemes must be set after loading plugins
+        " colorscheme afterglow
+        " colorscheme onehalfdark
+        colorscheme PaperColor
+        " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+        set background=light
+        set t_Co=256 " fix terminal colors
+        set termguicolors
+    endif
 endif
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " ▛▀▘     ▐  
 " ▙▄▞▀▖▛▀▖▜▀ 
 " ▌ ▌ ▌▌ ▌▐ ▖
@@ -124,7 +202,6 @@ set guifont=Hack:h12
 " set guifont=IBM\ Plex\ Mono:h12
 " set guifont=ShureTechMono\ Nerd\ Font:h12
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " ▞▀▖               ▜ 
 " ▌▄▖▞▀▖▛▀▖▞▀▖▙▀▖▝▀▖▐ 
 " ▌ ▌▛▀ ▌ ▌▛▀ ▌  ▞▀▌▐ 
@@ -159,7 +236,6 @@ noremap ; :
 noremap :W :w
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " ▞▀▖      ▐        
 " ▚▄ ▌ ▌▛▀▖▜▀ ▝▀▖▚▗▘
 " ▖ ▌▚▄▌▌ ▌▐ ▖▞▀▌▗▚ 
@@ -185,7 +261,6 @@ autocmd BufRead *.rc setlocal ft=sh
 autocmd BufRead *.asm setlocal ft=nasm
 map <silent><leader>sy :set syntax=sh<cr>
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " ▌  ▗        ▙ ▌       ▌           
 " ▌  ▄ ▛▀▖▞▀▖ ▌▌▌▌ ▌▛▚▀▖▛▀▖▞▀▖▙▀▖▞▀▘
 " ▌  ▐ ▌ ▌▛▀  ▌▝▌▌ ▌▌▐ ▌▌ ▌▛▀ ▌  ▝▀▖
@@ -193,7 +268,7 @@ map <silent><leader>sy :set syntax=sh<cr>
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 map <silent><leader>ln :set number!<cr>
 map <silent><leader>nl :set relativenumber!<cr>
-set number! " start with line numbering enabled
+set relativenumber! " start with line numbering enabled
 
 " set color column width to 72 chars
 " editor will start with it hidden, but allow it
@@ -218,7 +293,6 @@ set formatoptions+=o " continue comments new lines
 set synmaxcol=512
 set nowrap
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " ▞▀▖▐     ▜    
 " ▚▄ ▜▀ ▌ ▌▐ ▞▀▖
 " ▖ ▌▐ ▖▚▄▌▐ ▛▀ 
@@ -233,7 +307,6 @@ set shiftround " tab / shifting moves to closest tabstop.
 set autoindent " match indents on new lines.
 set smartindent
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " ▞▀▖            ▗                                
 " ▙▄▌▛▀▖▛▀▖▞▀▖▌ ▌▄ ▛▀▖▞▀▌ ▛▀▖▞▀▖▛▀▖▞▀▘▞▀▖▛▀▖▞▀▘▞▀▖
 " ▌ ▌▌ ▌▌ ▌▌ ▌▚▄▌▐ ▌ ▌▚▄▌ ▌ ▌▌ ▌▌ ▌▝▀▖▛▀ ▌ ▌▝▀▖▛▀ 
@@ -246,7 +319,6 @@ set nobackup " we have vcs, we don't need backups.
 set nowritebackup " we have vcs, we don't need backups.
 set noswapfile " annoying
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " ▛▀▖   ▗▀▖▗▀▖         
 " ▙▄▘▌ ▌▐  ▐  ▞▀▖▙▀▖▞▀▘
 " ▌ ▌▌ ▌▜▀ ▜▀ ▛▀ ▌  ▝▀▖
@@ -283,7 +355,6 @@ nnoremap <silent><leader><leader> :let @/ = ""<CR>:noh<CR>
 " Search and Replace
 nmap <leader>s :%s//g<Left><Left>
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " ▌ ▌      ▌     
 " ▙▄▌▝▀▖▞▀▖▌▗▘▞▀▘
 " ▌ ▌▞▀▌▌ ▖▛▚ ▝▀▖
@@ -329,7 +400,6 @@ augroup resCur "reopen vim at previous cursor point
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup END
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " ▛▀▖               
 " ▙▄▘▝▀▖▛▀▖▞▀▌▞▀▖▙▀▖
 " ▌▚ ▞▀▌▌ ▌▚▄▌▛▀ ▌  
@@ -407,7 +477,6 @@ endif
 let g:ranger_map_keys = 0
 nnoremap <silent><leader>r :Ranger<CR>
 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " ▞▀▖   ▜ ▗▐     
 " ▚▄ ▛▀▖▐ ▄▜▀ ▞▀▘
 " ▖ ▌▙▄▘▐ ▐▐ ▖▝▀▖

@@ -1,0 +1,8 @@
+[MASTER]
+ignore=third_party
+jobs=2
+disable=
+    missing-module-docstring,
+    missing-function-docstring,
+    invalid-name,
+    E305, # "expected 2 blank lines after class or function"

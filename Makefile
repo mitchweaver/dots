@@ -27,3 +27,4 @@ install:
 	ln -sf ${DOTS_DIR}/.config/autostart ${HOME}/.config/autostart
 	mkdir -p ${HOME}/.config/alacritty
 	ln -sf ${DOTS_DIR}/.config/alacritty/alacritty.yml ${HOME}/.config/alacritty/alacritty.yml
+	ln -sf ${DOTS_DIR}/.pylintrc ${HOME}/.pylintrc

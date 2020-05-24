@@ -122,5 +122,5 @@ fi
 # ▌ ▌▐ ▖▌ ▌▛▀ ▌   ▝▀▖▐ ▖▌ ▌▜▀ ▜▀ 
 # ▝▀  ▀ ▘ ▘▝▀▘▘   ▀▀  ▀ ▝▀▘▐  ▐  
 # empty ~/tmp
-# rm -rf ~/tmp 2>/dev/null ||:
-# mkdir -p ~/tmp
+rm -rf ~/tmp 2>/dev/null ||:
+mkdir -p ~/tmp

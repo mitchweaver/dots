@@ -28,7 +28,7 @@ set -o ignoreeof
 
 export HISTFILE="/tmp/$USER.history" \
        HISTCONTROL=ignoredups:ignorespace \
-       HISTSIZE=500
+       HISTSIZE=300
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # ▛▀▖▞▀▖▗▌ 
@@ -163,7 +163,6 @@ alias t1='tail -n 1'
 alias cmd=command
 alias pk=pkill
 alias w=which
-alias py=python3
 alias dm='dmesg | tail -n 20'
 alias poweroff='sudo poweroff'
 alias doas=sudo
@@ -397,12 +396,22 @@ rcp() {
     esac
 }
 
-alias v=nvim
+v() {
+    case ${EDITOR:-vi} in
+        # terminal editor
+        vi|vim|nvim|nano)
+            $EDITOR -- "$@"
+            ;;
+        *)
+            # graphical editor
+            ($EDITOR "$@" >/dev/null 2>&1 &)
+    esac
+}
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # networking
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-alias rsync='rsync -rvhtu --progress --delete --partial' #-z -c
+alias rsync='rsync -rvhtu --progress --delete --partial --links' #-z -c
 alias fatsync='rsync -rvhu --progress --delete --partial' # for fat32
 alias scp='scp -rp'
 
@@ -560,7 +569,7 @@ elif command -v apt >/dev/null ; then
         shift
         case $flag in
             a) sudo apt install "$@" ;;
-            u) sudo apt upgrade "$@" ;;
+            u) sudo apt update ; sudo apt upgrade "$@" ;;
             d) sudo apt purge "$@" ;;
             i) apt show "$@" ;;
             s) apt search "$@" ;;
@@ -667,10 +676,26 @@ dbuild() {
     docker build --tag "$1" .
 }
 DOCKER_NUKE() {
-    printf 'This will delete all images and containers, confirm? (y/n):'
+    printf 'This will delete all images and containers, confirm? (y/n): '
     read -r ans
     [ "$ans" = y ] && {
         docker rm $(docker ps -a -q) --force
         docker rmi $(docker images -q) --force
     }
+}
+
+alias {py,py3}=python3
+alias py2=python2
+
+
+alias ytm='yt -m'
+
+
+iwaitdo() {
+    file=$1
+    shift
+    [ -f "$file" ] || { >&2 echo "No such file: $file" ; return 1 ; }
+    [   "$1"     ] || { >&2 echo "No action given."    ; return 1 ; }
+
+    while inotifywait -e modify "$file" ; do eval "$*" ; done
 }
