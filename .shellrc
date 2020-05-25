@@ -213,7 +213,7 @@ hg() {
 }
 
 # search for a font name
-fcg() { fc-list | sed 's|.*: ||g' | grep -i "$*" ; }
+fcg() { fc-list | grep -i "$*" ; }
 
 # grep for terms within tree of files
 # (I don't use the "fg"/"bg" commands)
@@ -338,6 +338,7 @@ alias gsd='_g ${XDG_DOCUMENTS_DIR}/src/dots'
 alias gsb='_g ${XDG_DOCUMENTS_DIR}/src/bonsai'
 alias gcf='_g ${XDG_CONFIG_DIR}'
 alias gch='_g ${XDG_CACHE_HOME}'
+alias gdsk='_g ${XDG_DESKTOP_DIR}'
 
 Yf() { cp "$@" $XDG_DOCUMENTS_DIR ; }
 Yi() { cp "$@" $XDG_PICTURES_DIR ; }
@@ -699,3 +700,9 @@ iwaitdo() {
 
     while inotifywait -e modify "$file" ; do eval "$*" ; done
 }
+
+nemo() {
+    [ "$1" ] || set .
+    command nemo "$@"
+}
+alias n=nemo

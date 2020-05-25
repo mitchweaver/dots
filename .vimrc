@@ -81,11 +81,13 @@ if has('nvim')
         nmap sl yss
         vmap s S
 
-    Plug 'jiangmiao/auto-pairs' " autotype brackets, parents, tags
-        let g:AutoPairsFlyMode = 0
-        let g:AutoPairsShortcutBackInsert = '<M-b>'
-        " remove single/double quotes from autopairing, causes too much headache:
-        let g:AutoPairs = {'(':')', '[':']', '{':'}', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
+
+    " ------------ buggy and annoying af, look into later:
+    " Plug 'jiangmiao/auto-pairs' " autotype brackets, parents, tags
+    "     let g:AutoPairsFlyMode = 0
+    "     let g:AutoPairsShortcutBackInsert = '<M-b>'
+    "     " remove single/double quotes from autopairing, causes too much headache:
+    "     let g:AutoPairs = {'(':')', '[':']', '{':'}', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 
     Plug 'honza/vim-snippets' " snippets repo
     Plug 'SirVer/ultisnips' " snippet driver
@@ -268,7 +270,7 @@ map <silent><leader>sy :set syntax=sh<cr>
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 map <silent><leader>ln :set number!<cr>
 map <silent><leader>nl :set relativenumber!<cr>
-set relativenumber! " start with line numbering enabled
+set number! " start with line numbering enabled
 
 " set color column width to 72 chars
 " editor will start with it hidden, but allow it

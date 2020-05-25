@@ -27,6 +27,7 @@ export MANPATH="$BONSAI_ROOT/share/man:$MANPATH"
 export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
 
 export NPROC=$(nproc)
+export PYTHONOPTIMIZE=2 # disable docstrings, debug info
 
 [ "$NPROC" ] ||
 while read -r line ; do
@@ -80,7 +81,7 @@ export TRASH_DIR="${XDG_DATA_HOME}/Trash" \
        YTDLQ_DIR="${HOME}/.ytdlq"
 
 export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s'
-export MPV_OPTS="--really-quiet --force-seekable=yes --player-operation-mode=pseudo-gui"
+export MPV_OPTS="--really-quiet --force-seekable=yes"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # ▛▀▖   ▗▀▖      ▜▐   ▛▀▖                      
