@@ -7,7 +7,6 @@ ulimit -c 0
 # ▚▄ ▌ ▌▞▀▘▜▀ ▞▀▖▛▚▀▖ ▚▗▘▝▀▖▙▀▖▞▀▘
 # ▖ ▌▚▄▌▝▀▖▐ ▖▛▀ ▌▐ ▌ ▝▞ ▞▀▌▌  ▝▀▖
 # ▝▀ ▗▄▘▀▀  ▀ ▝▀▘▘▝ ▘  ▘ ▝▀▘▘  ▀▀ 
-##################export ENV=~/.kshrc
 PATH=/bin:/sbin:$PATH
 PATH=/usr/bin:/usr/sbin:/usr/X11R6/bin:$PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
@@ -69,13 +68,17 @@ export XDG_DESKTOP_DIR="${HOME}/Desktop" \
 # ▌▘▌▌ ▌ ▙▄▘▙▀▖▞▀▖▞▀▌▙▀▖▝▀▖▛▚▀▖ ▚▗▘▝▀▖▙▀▖▞▀▘
 # ▌ ▌▚▄▌ ▌  ▌  ▌ ▌▚▄▌▌  ▞▀▌▌▐ ▌ ▝▞ ▞▀▌▌  ▝▀▖
 # ▘ ▘▗▄▘ ▘  ▘  ▝▀ ▗▄▘▘  ▝▀▘▘▝ ▘  ▘ ▝▀▘▘  ▀▀ 
-export TRASH_DIR="${XDG_DATA_HOME}/Trash" \
-       MENU_PROG=menu \
+
+export ENV="${XDG_DOCUMENTS_DIR}/src/dots/shell/main.shellrc"
+
+export MENU_PROG=menu \
        TERMINAL_PROG=gnome-terminal \
        PLUMBER=opn \
+       SUBS_MENU_PROG="menu -wide -p Subs:" \
+
+export TRASH_DIR="${XDG_DATA_HOME}/Trash" \
        TASKS_FILE="${XDG_DOCUMENTS_DIR}/tasks.txt" \
        SUBS_FILE="${XDG_DOCUMENTS_DIR}/subs.txt" \
-       SUBS_MENU_PROG="menu -wide -p Subs:" \
        TWITCH_STREAM_FILE="${XDG_DOCUMENTS_DIR}/twitch.txt" \
        RADIO_STATIONS_FILE="${XDG_DOCUMENTS_DIR}/radio.txt" \
        YTDLQ_DIR="${HOME}/.ytdlq"

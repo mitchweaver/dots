@@ -1,0 +1,62 @@
+# ▛▀▖      ▌            ▙▗▌                  
+# ▙▄▘▝▀▖▞▀▖▌▗▘▝▀▖▞▀▌▞▀▖ ▌▘▌▝▀▖▛▀▖▝▀▖▞▀▌▞▀▖▙▀▖
+# ▌  ▞▀▌▌ ▖▛▚ ▞▀▌▚▄▌▛▀  ▌ ▌▞▀▌▌ ▌▞▀▌▚▄▌▛▀ ▌  
+# ▘  ▝▀▘▝▀ ▘ ▘▝▀▘▗▄▘▝▀▘ ▘ ▘▝▀▘▘ ▘▝▀▘▗▄▘▝▀▘▘  
+#
+# I like to keep a consistent syntax between machines.
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+# Crux
+if command -v crux >/dev/null ; then
+    pkg() {
+        flag=${1#-}
+        shift
+        case $flag in
+            a) sudo prt-get depinst -f -im -is -if --install-scripts "$@" ;;
+            u) sudo prt-get update  -f -im -is -if --install-scripts "$@" ;;
+            d) sudo prt-get remove "$@" ;;
+            i) prt-get info "$@" ;;
+            s) prt-get search "$@" ;;
+        esac
+    }
+# Void
+elif command -v xbps-query >/dev/null ; then
+    pkg() {
+        flag=${1#-}
+        shift
+        case $flag in
+            a|u) sudo xbps-install -Su "$@" ;;
+            d) sudo xbps-remove -R "$@" ;;
+            i) xbps-query --repository --show "$@" ;;
+            s) xbps-query --repository -s "$@" ;;
+        esac
+    }
+# Ubuntu / Debian
+elif command -v apt >/dev/null ; then
+    pkg() {
+        flag=${1#-}
+        shift
+        case $flag in
+            a) sudo apt install "$@" ;;
+            u) sudo apt update ; sudo apt upgrade "$@" ;;
+            d) sudo apt purge "$@" ;;
+            i) apt show "$@" ;;
+            s) apt search "$@" ;;
+            l) apt list "$@"
+        esac
+    }
+# OpenBSD
+elif command -v pkg_add >/dev/null ; then
+    pkg() {
+        flag=${1#-}
+        shift       
+        case $flag in
+            a) doas pkg_add "$@" ;;
+            u) doas pkg_add -u "$@" ;;
+            d) doas pkg_delete "$@" ;;
+            s) pkg_info -Q "$@" ;;
+            i) pkg_info "$@" ;;
+            l) pkg_info
+        esac
+    }
+fi

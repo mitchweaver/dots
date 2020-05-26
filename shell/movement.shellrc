@@ -1,0 +1,69 @@
+# ▙▗▌                   ▐  
+# ▌▘▌▞▀▖▌ ▌▞▀▖▛▚▀▖▞▀▖▛▀▖▜▀ 
+# ▌ ▌▌ ▌▐▐ ▛▀ ▌▐ ▌▛▀ ▌ ▌▐ ▖
+# ▘ ▘▝▀  ▘ ▝▀▘▘▝ ▘▝▀▘▘ ▘ ▀ 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+alias {..,cd..}='cd ..'
+alias ...='.. ; ..'
+alias ....='.. ; ...'
+
+# directory marking
+# usage: 'm1' = mark 1
+#        'g1' = return to m1
+for i in 1 2 3 4 5 6 7 8 9 ; do
+    eval "m${i}() { export _MARK${i}=\$PWD ; }"
+    eval "g${i}() { cd \$_MARK${i} ; }"
+done
+
+_g() { _a=$1 ; shift ; cd $_a/"$*" ; }
+
+alias gf="_g $XDG_DOCUMENTS_DIR"
+alias gi="_g $XDG_PICTURES_DIR"
+alias gm="_g $XDG_MUSIC_DIR"
+alias gv="_g $XDG_VIDEOS_DIR"
+alias gyt='_g $YTDLQ_DIR'
+alias gytc='_g $YTDLQ_DIR/completed'
+alias gW='_g $XDG_PICTURES_DIR/wallpapers'
+alias gb="_g ~/bin"
+alias gs="_g ${XDG_DOCUMENTS_DIR}/src"
+alias gk="_g ${XDG_DOCUMENTS_DIR}/books"
+alias gt="_g ~/tmp"
+alias gE='_g /etc'
+alias gM='_g /mnt'
+alias gT="_g /tmp"
+alias gV='_g /var'
+alias gss='_g ${XDG_DOCUMENTS_DIR}/src/suckless'
+alias gsd='_g ${XDG_DOCUMENTS_DIR}/src/dots'
+alias gsb='_g ${XDG_DOCUMENTS_DIR}/src/bonsai'
+alias gcf='_g ${XDG_CONFIG_DIR}'
+alias gch='_g ${XDG_CACHE_HOME}'
+alias gdsk='_g ${XDG_DESKTOP_DIR}'
+
+Yf() { cp "$@" $XDG_DOCUMENTS_DIR ; }
+Yi() { cp "$@" $XDG_PICTURES_DIR ; }
+Ym() { cp "$@" $XDG_MUSIC_DIR ; }
+Yvi(){ cp "$@" $XDG_VIDEOS_DIR ; }
+Yb() { cp "$@" ~/bin ; }
+Yk() { cp "$@" "${XDG_DOCUMENTS_DIR}/books" ; }
+Ys() { cp "$@" ${XDG_DOCUMENTS_DIR}/src ; }
+Yt() { cp "$@" ~/tmp ; }
+YT() { cp "$@" /tmp  ; }
+
+mf() { mv "$@" $XDG_DOCUMENTS_DIR ; }
+mi() { mv "$@" $XDG_PICTURES_DIR ; }
+mm() { mv "$@" $XDG_MUSIC_DIR ; }
+mvi(){ mv "$@" $XDG_VIDEOS_DIR ; }
+mW() { mv "$@" $XDG_PICTURES_DIR/wallpapers ; }
+mb() { mv "$@" ~/bin ; }
+ms() { mv "$@" ${XDG_DOCUMENTS_DIR}/src ; }
+mt() { mv "$@" ~/tmp ; }
+mT() { mv "$@" /tmp  ; }
+
+alias gd='_g ${XDG_DOWNLOAD_DIR}'
+Yd() { cp "$@" ${XDG_DOWNLOAD_DIR} ; }
+md() { mv "$@" ${XDG_DOWNLOAD_DIR} ; }
+
+mw() { mv "$@" ${XDG_DOCUMENTS_DIR}/src/wvr.sh/    ; }
+Yw() { cp -r "$@" ${XDG_DOCUMENTS_DIR}/src/wvr.sh/ ; }
+alias gw='_g ${XDG_DOCUMENTS_DIR}/src/wvr.sh'

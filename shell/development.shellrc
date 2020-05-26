@@ -1,0 +1,68 @@
+# ▛▀▖         ▜                 ▐  
+# ▌ ▌▞▀▖▌ ▌▞▀▖▐ ▞▀▖▛▀▖▛▚▀▖▞▀▖▛▀▖▜▀ 
+# ▌ ▌▛▀ ▐▐ ▛▀ ▐ ▌ ▌▙▄▘▌▐ ▌▛▀ ▌ ▌▐ ▖
+# ▀▀ ▝▀▘ ▘ ▝▀▘ ▘▝▀ ▌  ▘▝ ▘▝▀▘▘ ▘ ▀ 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+alias mk="make -j${NPROC:-1}"
+alias mkc='make clean'
+alias mki='make install'
+alias mku='make uninstall'
+alias mks='make -s install'
+alias mkt='make test'
+alias mkki='make ; make install'
+alias mka='make clean ; make ; make install'
+
+# activate my PS1 git branch detection after branch switching
+gud() { command gud "$@" ; cd . ; }
+
+# quick recompile
+rcp() {
+    case $1 in
+        bs|bonsai)
+            cd "${XDG_DOCUMENTS_DIR}"/src/bonsai
+            mkki
+            cd - >/dev/null
+            ;;
+        st|dwm|dmenu|surf|tabbed)
+            cd "${XDG_DOCUMENTS_DIR}"/src/suckless
+            sh ./build.sh "$@"
+            cd - >/dev/null
+    esac
+}
+
+scfg() {
+    ${PLUMBER:-xdg-open} \
+    "${XDG_DOCUMENTS_DIR:-${HOME}/Documents}/src/suckless/$1/cfg/config.h"
+}
+
+# watch a file and do an action as its contents changes
+iwaitdo() {
+    file=$1
+    shift
+    [ -f "$file" ] || { >&2 echo "No such file: $file" ; return 1 ; }
+    [   "$1"     ] || { >&2 echo "No action given."    ; return 1 ; }
+
+    while inotifywait -e modify "$file" ; do eval "$*" ; done
+}
+
+# editor wrapper
+v() {
+    if [ ! -f "$1" ] ; then
+        printf "File '%s' does not exist.\nCreate it? (y/n): " "$1"
+        read -r ans
+        case $ans in
+            *y*) ;;
+              *) return
+        esac
+    fi
+    case ${EDITOR:-vi} in
+        # terminal editor
+        vi|vim|nvim|nano)
+            $EDITOR -- "$@"
+            ;;
+        *)
+            # graphical editor
+            ($EDITOR "$@" >/dev/null 2>&1 &)
+    esac
+}

@@ -1,0 +1,26 @@
+# ▛▀▖   ▗▜▐  ▗     ▞▀▖            ▗   ▌      
+# ▙▄▘▌ ▌▄▐▜▀ ▄ ▛▀▖ ▌ ▌▌ ▌▞▀▖▙▀▖▙▀▖▄ ▞▀▌▞▀▖▞▀▘
+# ▌ ▌▌ ▌▐▐▐ ▖▐ ▌ ▌ ▌ ▌▐▐ ▛▀ ▌  ▌  ▐ ▌ ▌▛▀ ▝▀▖
+# ▀▀ ▝▀▘▀▘▘▀ ▀▘▘ ▘ ▝▀  ▘ ▝▀▘▘  ▘  ▀▘▝▀▘▝▀▘▀▀ 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+# fuzzy finding cd
+cd() { 
+    if [ "$1" ] ; then
+        builtin cd --  "$1"  ||
+        builtin cd --  "$1"* ||
+        builtin cd -- *"$1"  ||
+        builtin cd -- *"$1"* ||
+        builtin cd -- \
+        "$(find . -type d -maxdepth 1 -iname "*$1*" | head -n 1)"
+    else
+        builtin cd -- "${HOME}"
+    fi 2>/dev/null
+
+    # set our prompt - see prompt.shellrc for more details
+    if [ "$RANGER_LEVEL" ] ; then
+        export PS1="[ranger: $(_ps1_print)] "
+    else
+        export PS1="$(_ps1_print)"
+    fi
+}

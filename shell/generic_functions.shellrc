@@ -1,0 +1,112 @@
+# ▞▀▖            ▗     ▛▀▘        ▐  ▗          
+# ▌▄▖▞▀▖▛▀▖▞▀▖▙▀▖▄ ▞▀▖ ▙▄▌ ▌▛▀▖▞▀▖▜▀ ▄ ▞▀▖▛▀▖▞▀▘
+# ▌ ▌▛▀ ▌ ▌▛▀ ▌  ▐ ▌ ▖ ▌ ▌ ▌▌ ▌▌ ▖▐ ▖▐ ▌ ▌▌ ▌▝▀▖
+# ▝▀ ▝▀▘▘ ▘▝▀▘▘  ▀▘▝▀  ▘ ▝▀▘▘ ▘▝▀  ▀ ▀▘▝▀ ▘ ▘▀▀ 
+#
+# Functions that work on any machine with a unix userland.
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+# dynamic "c" utility
+c() { 
+    if [ -z "$1" ] ; then
+        clear
+    elif [ -d "$1" ] ; then
+        cd "$1"
+    else
+        cat "$1" || cd "$1"
+    fi
+}
+
+mkcd() { mkdir -p "$1"     && cd "$1" ; }
+mvcd() { mv -iv  "$1" "$2" && cd "$2" ; }
+cpcd() { cp -ivr "$1" "$2" && cd "$2" ; }
+
+# hack - print directories with full path name
+lsd() { printf '%s\n' "$*"/*/ ; }
+
+# du for humans
+d() {
+    if [ -d "${1:-.}" ] ; then
+        du -ahLd 1 "${1:-.}" 2>/dev/null | sort -rh | head -n 20
+    elif [ -f "$1" ] ; then
+        du -ahL "$1"
+    fi
+}
+
+# squelch output of command
+silent() { eval "$* >/dev/null 2>&1" ; }
+alias s=silent
+
+# output if command was succesful
+iif() { "$@" >/dev/null && echo yes || echo no ; }
+
+# dump contents of a file in $PATH
+cw() { cat "$(which "${1:-?}")" ; }
+
+# sum numbers in a file, with the digits one per line
+sum() { [ -f "$1" ] && paste -sd+ <"$1" | bc ; }
+
+# search for running process
+psg() { ps -auxww | grep -i -- "$*" | grep -iv -- "grep $*" ; }
+
+# print the parent process name of a given pid
+getparent() {
+    if ! ps -p "${1:-0}" 2>/dev/null ; then
+        >&2 echo 'Usage: getparent [pid]'
+        return 1
+    fi
+    ps -p "$1" -o ppid=
+}
+
+# moves a file, making dir if needed
+mkmv() {
+    usage() {
+        >&2 echo 'Usage: mkvmv [file] [directory]'
+        return 1
+    }
+    case $1 in
+        -h)
+            usage
+            ;;
+        *)
+            case $# in
+                2)
+                    mkdir -p -- "$2"
+                    mv -iv -- "$1" "$2"/
+                    ;;
+                *)
+                    usage
+            esac
+    esac
+}
+
+# grep for terms within tree of files
+# (I don't use the "fg"/"bg" commands)
+fg() {
+    usage() {
+        >&2 echo 'Usage: fg [dir] [search terms]'
+        return 1
+    }
+    case $# in
+        0) usage ;;
+        1) set -- . "$1"
+    esac
+    case $1 in
+        -h)
+            usage
+            ;;
+        *)
+            find "$1" -type f 2>/dev/null | \
+            while read -r f ; do
+                grep -i -- "$2" "$f" >/dev/null &&
+                printf '%s\n' "$f"
+            done
+    esac
+}
+
+# foo/bar.mp4 ---> foo/foo.mp4
+rename_as_parent_dir() {
+    file=${1##*/}
+    dir=${1%/$file}
+    mv -f "$1" "$dir/$dir"
+}

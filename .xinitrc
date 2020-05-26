@@ -48,4 +48,8 @@ autorotate -d &
 command -v nemo >/dev/null &&
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
+# use st as nemo terminal
+gsettings set org.cinnamon.desktop.default-applications.terminal exec stwrapper
+gsettings set org.cinnamon.desktop.default-applications.terminal exec-arg -e
+
 # vim:ft=config

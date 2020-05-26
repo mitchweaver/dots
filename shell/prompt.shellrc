@@ -1,0 +1,70 @@
+# ▛▀▖             ▐  
+# ▙▄▘▙▀▖▞▀▖▛▚▀▖▛▀▖▜▀ 
+# ▌  ▌  ▌ ▌▌▐ ▌▙▄▘▐ ▖
+# ▘  ▘  ▝▀ ▘▝ ▘▌   ▀ 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+_ps1_print_user() {
+    # print username in color palette, one color per character
+    code=1
+    printf '%s\n' "$USER" | fold -w 1 | \
+    while read -r c ; do
+        printf '%s' "\[\e[1;3${code}m\]$c"
+        code=$(( code + 1 ))
+    done
+    printf '%s' "\[\e[1;3$(( ${#USER} + 1 ))m\]"
+}
+
+_ps1_print_pwd() {
+    printf '%s' "\[\e[1;36m\]\W "
+}
+
+_ps1_print_git() {
+    # print git repo name in parenthesis, if we're inside one
+    set -f
+    set +f -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
+    [ "$1" ] && printf '(%s) ' "$1"
+}
+
+_ps1_print() {
+    case $TERM in
+        *-256color)
+            case ${PS1_STYLE:-user-pwd} in
+                user-pwd)
+                    _ps1_print_user
+                    printf ' '
+                    _ps1_print_pwd
+                    ;;
+                user)
+                    _ps1_print_user
+                    ;;
+                pwd)
+                    _ps1_print_pwd
+                    ;;
+                percent)
+                    echo '%'
+            esac
+
+            if [ "${PS1_GIT:-false}" = true ] && [ -d .git ] ; then
+                _ps1_print_git
+            fi
+
+            # clear formatting
+            printf '%s' '\[\e[1;37m\]'
+            ;;
+        dumb)
+            echo '%'
+            ;;
+        *)
+            printf '%s %s' "$USER" "${PWD##*/}"
+    esac
+
+    # add space after calculating the prompt
+    export PS1="$PS1 "
+}
+
+# check if we're in ranger
+[ "$RANGER_LEVEL" ] && clear
+
+# this activates our PS1
+cd .

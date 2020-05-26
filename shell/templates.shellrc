@@ -1,0 +1,93 @@
+# ▀▛▘         ▜    ▐        
+#  ▌▞▀▖▛▚▀▖▛▀▖▐ ▝▀▖▜▀ ▞▀▖▞▀▘
+#  ▌▛▀ ▌▐ ▌▙▄▘▐ ▞▀▌▐ ▖▛▀ ▝▀▖
+#  ▘▝▀▘▘▝ ▘▌   ▘▝▀▘ ▀ ▝▀▘▀▀ 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+helloc() {
+cat >"${1:-hello.c}"<<"EOF"
+/*
+ *
+ * http://github.com/mitchweaver
+ *
+ * [automatically generated template text]
+ * 
+ */
+
+#include <stdio.h>
+
+int main() {
+    printf("%s\n", "hi");
+    return 0;
+}
+EOF
+}
+
+# -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+
+hellopy() {
+cat >"${1:-hello.py}"<<"EOF"
+#!/usr/bin/env python3
+#
+# https://github.com/mitchweaver
+#
+# [automatically generated template text]
+#
+
+
+def main():
+    print("hi")
+
+
+if __name__ == "__main__":
+    main()
+EOF
+chmod +x "${1:-hello.py}"
+}
+
+# -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+
+hellosh() {
+cat >"${1:-hello.sh}"<<"EOF"
+#!/bin/sh
+#
+# http://github.com/mitchweaver
+#
+# [automatically generated template text]
+#
+
+usage() {
+    >&2 printf '%s\n' "Usage: ${0##*/} []"
+    exit 1
+}
+
+main() {
+    echo hi
+}
+
+main "$@"
+EOF
+chmod +x "${1:-hello.sh}"
+}
+
+# -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+
+hellomk() {
+cat >"${1:-Makefile}"<<"EOF"
+PREFIX = /usr/local
+CFLAGS = -O2 -pipe -fstack-protector-strong
+BIN = hello
+
+all:
+	:
+
+install:
+	install -D -m 0755 ${BIN} ${DESTDIR}${PREFIX}/bin/${BIN}
+
+uninstall:
+	rm ${DESTDIR}${PREFIX}/bin/${BIN}
+
+test:
+	:
+EOF
+}

@@ -8,8 +8,6 @@ install:
 	ln -sf ${DOTS_DIR}/.xinitrc ${HOME}/.xinitrc
 	ln -sf ${DOTS_DIR}/.xinitrc ${HOME}/.xsessionrc
 	ln -sf ${DOTS_DIR}/.profile    ${HOME}/.profile
-	ln -sf ${DOTS_DIR}/.shellrc ${HOME}/.bashrc
-	ln -sf ${DOTS_DIR}/.shellrc ${HOME}/.kshrc
 	xrdb load ${HOME}/.Xresources
 	mkdir -p ${HOME}/.config/nvim
 	ln -sf ${DOTS_DIR}/.config/nvim/init.vim ${HOME}/.config/nvim/init.vim

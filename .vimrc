@@ -54,9 +54,9 @@ if has('nvim')
 
     Plug 'tpope/vim-commentary' " comment toggler
         nmap <silent><leader>c :Commentary<CR>
-        autocmd FileType asm setlocal commentstring=;\ %s
-        autocmd FileType conf setlocal commentstring=#\ %s
-        autocmd FileType rc setlocal commentstring=#\ %s
+        autocmd BufNewFile,BufRead *.asm setlocal commentstring=;\ %s
+        autocmd BufNewFile,BufRead *.conf setlocal commentstring=#\ %s
+        autocmd BufNewFile,BufRead *rc setlocal commentstring=#\ %s
         autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
     Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
@@ -147,7 +147,6 @@ if has('nvim')
 
         let g:startify_bookmarks = [
             \ {'v': '~/.vimrc'},
-            \ {'c': '~/.shellrc'},
             \ ]
         let g:startify_skiplist = [
             \ 'COMMIT_EDITMSG',
@@ -243,24 +242,24 @@ noremap :W :w
 " ▖ ▌▚▄▌▌ ▌▐ ▖▞▀▌▗▚ 
 " ▝▀ ▗▄▘▘ ▘ ▀ ▝▀▘▘ ▘
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-autocmd BufNewFile,BufRead *.config set syntax=sh
-autocmd BufNewFile,BufRead *.conf set syntax=sh
-autocmd BufNewFile,BufRead *.cfg set syntax=sh
-autocmd BufNewFile,BufRead *.rc set syntax=sh
-autocmd BufNewFile,BufRead pkgfile set syntax=sh
+autocmd BufNewFile,BufRead *.config  set syntax=sh
+autocmd BufNewFile,BufRead *.conf    set syntax=sh
+autocmd BufNewFile,BufRead *.cfg     set syntax=sh
+autocmd BufNewFile,BufRead *.rc      set syntax=sh
+autocmd BufNewFile,BufRead *.shellrc set syntax=sh
+autocmd BufNewFile,BufRead pkgfile   set syntax=sh
 
-autocmd BufNewFile,BufRead *.c set syntax=c
-autocmd BufNewFile,BufRead *.patch set syntax=c
-autocmd BufNewFile,BufRead *.hs set syntax=haskell
-autocmd BufNewFile,BufRead *.py set syntax=python
-autocmd BufNewFile,BufRead *.pl set syntax=perl
-autocmd BufNewFile,BufRead *.txt set syntax=off
-autocmd BufNewFile,BufRead *.md set syntax=md
-autocmd BufNewFile,BufRead *.pad set syntax=md
+autocmd BufNewFile,BufRead *.c       set syntax=c
+autocmd BufNewFile,BufRead *.patch   set syntax=c
+autocmd BufNewFile,BufRead *.hs      set syntax=haskell
+autocmd BufNewFile,BufRead *.py      set syntax=python
+autocmd BufNewFile,BufRead *.pl      set syntax=perl
+autocmd BufNewFile,BufRead *.txt     set syntax=off
+autocmd BufNewFile,BufRead *.md      set syntax=md
+autocmd BufNewFile,BufRead *.pad     set syntax=md
+autocmd BufNewFile,BufRead *.asm     setlocal ft=nasm
 let g:is_posix = 1
 let g:asmsyntax = 'nasm'
-autocmd BufRead *.rc setlocal ft=sh
-autocmd BufRead *.asm setlocal ft=nasm
 map <silent><leader>sy :set syntax=sh<cr>
 
 " ▌  ▗        ▙ ▌       ▌           

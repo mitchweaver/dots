@@ -1,0 +1,17 @@
+# ▞▀▖         ▛▀▖▞▀▖▛▀▖
+# ▌ ▌▛▀▖▞▀▖▛▀▖▙▄▘▚▄ ▌ ▌
+# ▌ ▌▙▄▘▛▀ ▌ ▌▌ ▌▖ ▌▌ ▌
+# ▝▀ ▌  ▝▀▘▘ ▘▀▀ ▝▀ ▀▀ 
+#
+# openbsd-specific aliases
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+[ -f /var/log/pflog ] || return
+
+alias sg='sysctl | grep -i'
+alias disks='sysctl -n hw.disknames'
+alias disklabel='sudo disklabel'
+alias reboot='sudo reboot'
+alias poweroff='sudo halt -p'
+alias pfdump='sudo tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout
+alias pfdrop='sudo tcpdump -nettti pflog0 action drop'   # follow dropped

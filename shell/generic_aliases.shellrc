@@ -1,0 +1,71 @@
+# ▞▀▖            ▗     ▞▀▖▜ ▗             
+# ▌▄▖▞▀▖▛▀▖▞▀▖▙▀▖▄ ▞▀▖ ▙▄▌▐ ▄ ▝▀▖▞▀▘▞▀▖▞▀▘
+# ▌ ▌▛▀ ▌ ▌▛▀ ▌  ▐ ▌ ▖ ▌ ▌▐ ▐ ▞▀▌▝▀▖▛▀ ▝▀▖
+# ▝▀ ▝▀▘▘ ▘▝▀▘▘  ▀▘▝▀  ▘ ▘ ▘▀▘▝▀▘▀▀ ▝▀▘▀▀ 
+#
+# Aliases that work on any machine with a unix userland.
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+# determine correct priviledge escalation util
+if command -v doas >/dev/null ; then
+    alias sudo='TERM=vt100 doas'
+elif command -v sudo >/dev/null ; then
+    alias doas='TERM=vt100 sudo'
+else
+    alias {sudo,doas}='TERM=vt100 su -c'
+fi
+
+case $TERM in
+    *-256color)
+        if command -v exa >/dev/null ; then
+            alias ls='exa -F --group-directories-first'
+            alias tree='exa -F -T'
+        elif command -v colorls >/dev/null ; then
+            alias ls='colorls -G -F'
+        else
+            alias ls='ls -F'
+        fi
+        ;;
+    *)
+        alias ls='ls -F'
+        export NO_COLOR=true
+esac
+
+alias {l,sls,sl}=ls
+alias {ll,lll}='ls -l'
+alias la='ls -a'
+alias {lla,lal}='ls -al'
+alias {l1,lv}='ls -1'
+alias lsf='ls "$PWD"/*'
+alias lg='ls | grep -i'
+
+alias cp='cp -irv'
+alias mv='mv -iv'
+alias {mkdir,mkd,mkdr}='mkdir -p'
+
+alias {x,xx,xxx,q,qq,qqq,:q,:Q,:wq,:w,exi,ex}=exit
+alias {cc,cll,clear,claer,clar,clea,clera}=clear
+alias {cls,csl,cl,lc}='clear ; ls'
+alias {e,ech,eho}=echo
+alias {g,gi,gr,gre,Grep,gerp,grpe}='grep -i --color=auto'
+alias {pg,pgrpe}=pgrep
+alias ga='grep -i -A 6'
+alias ga1='grep -i -A 1'
+
+alias df='df -h'
+alias su='sudo su -'
+
+alias h='head -n 15'
+alias t='tail -n 15'
+alias h1='head -n 1'
+alias t1='tail -n 1'
+alias tf='tail -f'
+
+alias cmd=command
+alias w=which
+
+alias dm='dmesg | tail -n 20'
+alias dmg='dmesg | grep -i'
+
+alias {poweroff,shutdown}='sudo poweroff'
+alias {reboot,restart}='sudo reboot'
