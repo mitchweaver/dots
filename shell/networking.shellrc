@@ -12,7 +12,7 @@ smv() { scp -rp "${1:-?}"  "${2:-?}" && rm -r "${1:-?}" ; }
 rmv() { rsync   "${1:-?}"/ "${2:-?}" && rm -r "${1:-?}" ; }
 
 ping() {
-    command ping -L -n -s 1 -w 2 "${1:-wvr.sh}"
+    command ping -s 1 "${1:-wvr.sh}" # -L -w 10
 }
 alias p=ping
 alias p8='ping 8.8.8.8'

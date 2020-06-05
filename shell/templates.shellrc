@@ -91,3 +91,23 @@ test:
 	:
 EOF
 }
+
+# -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+
+hellohtml() {
+cat >"${1:-index.html}"<<"EOF"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Hello_World</title>
+</head>
+    <body>
+
+        hi
+
+    </body>
+</html>
+EOF
+}

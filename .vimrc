@@ -119,8 +119,9 @@ if has('nvim')
         let g:ale_sign_column_always = 1
         let g:ale_fix_on_save = 1
         " uncomment to only have ale check on file saves
-        """""let g:ale_lint_on_text_changed = 'never'
+        let g:ale_lint_on_text_changed = 'never'
         let g:airline#extensions#ale#enabled = 1
+        let g:ale_linters = {'python': ['pylint']} " flake8
         let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 
     Plug 'gyim/vim-boxdraw' " the coolest plugin you never knew you needed
@@ -483,30 +484,23 @@ nnoremap <silent><leader>r :Ranger<CR>
 " ▖ ▌▙▄▘▐ ▐▐ ▖▝▀▖
 " ▝▀ ▌   ▘▀▘▀ ▀▀ 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-" ---- cant get below working right, annoying
-"  for now, just keep using default split bindings
-"
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-" C-w-hjkl --- moving
-" C-w-v --- vertical split
-" C-w-s --- horis split
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-" func! WinMove(key)
-"     let t:curwin = winnr()
-"     exec "wincmd ".a:key
-"     if (t:curwin == winnr())
-"         if (match(a:key,'[jk]'))
-"             wincmd v
-"         else
-"             wincmd s
-"         endif
-"         exec "wincmd ".a:key
-"     endif
-" endfu
+func! WinMove(key)
+    let t:curwin = winnr()
+    exec "wincmd ".a:key
+    if (t:curwin == winnr())
+        if (match(a:key,'[jk]'))
+            wincmd v
+        else
+            wincmd s
+        endif
+        exec "wincmd ".a:key
+    endif
+endfu
  
-" nnoremap <silent><C-h> :call WinMove('h')<cr>
-" nnoremap <silent><C-j> :call WinMove('j')<cr>
-" nnoremap <silent><C-k> :call WinMove('k')<cr>
-" nnoremap <silent><C-l> :call WinMove('l')<cr>
-" set fillchars+=vert:│
+nnoremap <silent><C-h> :call WinMove('h')<cr>
+nnoremap <silent><C-j> :call WinMove('j')<cr>
+nnoremap <silent><C-k> :call WinMove('k')<cr>
+nnoremap <silent><C-l> :call WinMove('l')<cr>
+
+set fillchars+=vert:│

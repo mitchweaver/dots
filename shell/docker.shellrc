@@ -4,6 +4,13 @@
 # ▀▀ ▝▀ ▝▀ ▘ ▘▝▀▘▘  
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
+# workaround for lots of bugs...
+alias docker='env -i docker'
+alias docker-compose='env -i docker-compose'
+
+# basic
+alias compose=docker-compose
+
 # list images/containers
 alias {dli,dlsi}='docker images'
 alias {dlc,dlsc}='docker container ls -a'
@@ -22,11 +29,16 @@ dbuild() {
     docker build --tag "$1" .
 }
 
+docker_remove_networks() {
+    docker network ls | awk '$3 == "bridge" && $2 != "bridge" { print $1 }'
+}
+
 DOCKER_NUKE() {
     printf 'This will delete all images and containers, confirm? (y/n): '
     read -r ans
     [ "$ans" = y ] && {
         docker rm $(docker ps -a -q) --force
         docker rmi $(docker images -q) --force
+        docker_remove_networks
     }
 }

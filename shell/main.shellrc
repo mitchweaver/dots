@@ -12,21 +12,23 @@
 # -*-*- Options -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 SHELLRC_DIR=${XDG_DOCUMENTS_DIR}/src/dots/shell
 HISTORY_STYLE=default # [default/per-shell]
-PS1_STYLE=user-pwd    # [user-pwd/user/pwd/percent]
+PS1_STYLE=pwd         # [user-pwd/user/pwd/percent]
 PS1_GIT=true          # [true/false]
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-. "${SHELLRC_DIR}"/options.shellrc
-. "${SHELLRC_DIR}"/history.shellrc
-. "${SHELLRC_DIR}"/builtins.shellrc
-. "${SHELLRC_DIR}"/prompt.shellrc
-. "${SHELLRC_DIR}"/generic_aliases.shellrc
-. "${SHELLRC_DIR}"/generic_functions.shellrc
-. "${SHELLRC_DIR}"/movement.shellrc
-. "${SHELLRC_DIR}"/networking.shellrc
-. "${SHELLRC_DIR}"/templates.shellrc
-. "${SHELLRC_DIR}"/development.shellrc
-. "${SHELLRC_DIR}"/package_manager.shellrc
-. "${SHELLRC_DIR}"/docker.shellrc
-. "${SHELLRC_DIR}"/openbsd.shellrc
-. "${SHELLRC_DIR}"/wasteland.shellrc
+if [ -d "${SHELLRC_DIR}" ] ; then
+    . "${SHELLRC_DIR}"/options.shellrc
+    . "${SHELLRC_DIR}"/history.shellrc
+    . "${SHELLRC_DIR}"/builtins.shellrc
+    . "${SHELLRC_DIR}"/prompt.shellrc
+    . "${SHELLRC_DIR}"/generic_aliases.shellrc
+    . "${SHELLRC_DIR}"/generic_functions.shellrc
+    . "${SHELLRC_DIR}"/movement.shellrc
+    . "${SHELLRC_DIR}"/networking.shellrc
+    . "${SHELLRC_DIR}"/templates.shellrc
+    . "${SHELLRC_DIR}"/development.shellrc
+    . "${SHELLRC_DIR}"/package_manager.shellrc
+    . "${SHELLRC_DIR}"/docker.shellrc
+    . "${SHELLRC_DIR}"/openbsd.shellrc
+    . "${SHELLRC_DIR}"/wasteland.shellrc
+fi

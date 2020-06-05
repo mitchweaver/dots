@@ -2,7 +2,11 @@
 ignore=third_party
 jobs=2
 disable=
+    bad-continuation,
     missing-module-docstring,
     missing-function-docstring,
+    subprocess-run-check,
+    no-else-return,
     invalid-name,
     E305, # "expected 2 blank lines after class or function"
+    E501, # line too long

@@ -48,7 +48,7 @@ iwaitdo() {
 
 # editor wrapper
 v() {
-    if [ ! -f "$1" ] ; then
+    if [ "$1" ] && [ ! -f "$1" ] ; then
         printf "File '%s' does not exist.\nCreate it? (y/n): " "$1"
         read -r ans
         case $ans in

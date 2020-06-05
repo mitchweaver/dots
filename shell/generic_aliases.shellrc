@@ -69,3 +69,6 @@ alias dmg='dmesg | grep -i'
 
 alias {poweroff,shutdown}='sudo poweroff'
 alias {reboot,restart}='sudo reboot'
+
+# who uses dc anyway
+alias dc=cd

@@ -8,7 +8,7 @@ ulimit -c 0
 # ▖ ▌▚▄▌▝▀▖▐ ▖▛▀ ▌▐ ▌ ▝▞ ▞▀▌▌  ▝▀▖
 # ▝▀ ▗▄▘▀▀  ▀ ▝▀▘▘▝ ▘  ▘ ▝▀▘▘  ▀▀ 
 PATH=/bin:/sbin:$PATH
-PATH=/usr/bin:/usr/sbin:/usr/X11R6/bin:$PATH
+PATH=/usr/bin:/usr/sbin:$PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 PATH=$(printf '%s:' ${HOME}/bin/*/):${HOME}/bin:$PATH
 PATH=${HOME}/.local/bin:$PATH
@@ -25,16 +25,18 @@ export MANPATH="$BONSAI_ROOT/share/man:$MANPATH"
 
 export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
 
-export NPROC=$(nproc)
 export PYTHONOPTIMIZE=2 # disable docstrings, debug info
 
-[ "$NPROC" ] ||
-while read -r line ; do
-    case $line in
-        *'cpu cores'*)
-			export NPROC="${line#*: }"
-    esac
-done </proc/cpuinfo
+if command -v nproc >/dev/null ; then
+    export NPROC=$(nproc)
+else
+    while read -r line ; do
+        case $line in
+            *'cpu cores'*)
+                export NPROC="${line#*: }"
+        esac
+    done </proc/cpuinfo
+fi
 
 export LC_CTYPE='en_US.UTF-8'
 export LANG="$LC_CTYPE" \

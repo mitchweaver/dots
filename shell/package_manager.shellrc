@@ -37,14 +37,37 @@ elif command -v apt >/dev/null ; then
         flag=${1#-}
         shift
         case $flag in
-            a) sudo apt install "$@" ;;
+            a) sudo apt install --fix-broken "$@" ;;
             u) sudo apt update ; sudo apt upgrade "$@" ;;
-            d) sudo apt purge "$@" ;;
             i) apt show "$@" ;;
             s) apt search "$@" ;;
-            l) apt list "$@"
+            l) apt list --installed "$@" ;;
+            r) apt install --reinstall "$@" ;;
+            d)
+                sudo apt purge "$@"
+                yes | sudo apt autoremove
+                ;;
+            -ITS_ALL_FUCKED)
+                apt list --installed | \
+                while read -r p ; do
+                    sudo apt install --reinstall --fix-broken ${p%%/*}
+                done
         esac
     }
+# alpine
+elif command -v setup-alpine >/dev/null ; then
+    pkg() {
+        flag=${1#-}
+        shift       
+        case $flag in
+            a) sudo apk add "$@" ;;
+            u) sudo apk upgrade "$@" ;;
+            d) sudo apk del "$@" ;;
+            s) apk search "$@" ;;
+            i) apk info "$@" ;;
+            l) apk list --installed
+        esac
+    }   
 # OpenBSD
 elif command -v pkg_add >/dev/null ; then
     pkg() {

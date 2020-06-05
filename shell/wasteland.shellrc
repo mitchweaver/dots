@@ -136,8 +136,49 @@ alias py2=python2
 
 alias ytm='yt -m'
 
-nemo() {
-    [ "$1" ] || set .
-    command nemo "$@"
+nemo()     { [ "$1" ] || set . ; command nemo     "$@" & }
+nautilus() { [ "$1" ] || set . ; command nautilus "$@" & }
+alias n=nautilus
+
+cpubench() {
+    sysbench --test=cpu --cpu-max-prime=20000 \
+        --num-threads=$(nproc) run
 }
-alias n=nemo
+
+
+rm -f nohup.out 2>/dev/null ||:
+
+
+
+
+
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# ▀▛▘▌ ▌▛▀▘ ▛▀▖▞▀▖▛▀▖▞▀▖
+#  ▌ ▙▄▌▙▄  ▙▄▘▌ ▌▙▄▘▌▄▖
+#  ▌ ▌ ▌▌   ▌ ▌▌ ▌▌▚ ▌ ▌
+#  ▘ ▘ ▘▀▀▘ ▀▀ ▝▀ ▘ ▘▝▀ 
+#
+# My cluster setup
+#
+
+NUM_BORG=5
+
+borgrun() {
+    for i in $(seq $NUM_BORG) ; do
+        { 2>&3 ssh borg$i "$*" & } 3>&2 2>/dev/null
+        disown &>/dev/null
+    done
+    wait
+}
+
+borgsequential() {
+    for i in $(seq $NUM_BORG) ; do
+        ssh borg$i "$*"
+    done
+}
+
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+alias vnc='vncviewer localhost:5900'
