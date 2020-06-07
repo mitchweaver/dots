@@ -24,8 +24,17 @@ alias drun='docker run'
 alias {drunr,drunrm}='docker run --rm'
 alias dps='docker ps'
 
+alias dlogs='docker logs'
+alias dexec='docker exec'
+alias dshell='docker exec -it /bin/sh'
+
+# compose
+alias cup='compose up'
+alias cdown='compose down'
+alias cbuild='compose build'
+
 dbuild() {
-    [ "$1" ] || { >&2 'Usage: dbuild <tag>' ; exit 1 ; }
+    [ "$1" ] || { >&2 'Usage: dbuild <tag>' ; return 1 ; }
     docker build --tag "$1" .
 }
 

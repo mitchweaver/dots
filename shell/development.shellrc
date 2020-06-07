@@ -24,7 +24,7 @@ rcp() {
             mkki
             cd - >/dev/null
             ;;
-        st|dwm|dmenu|surf|tabbed)
+        st|dwm|dmenu|surf|tabbed|sent)
             cd "${XDG_DOCUMENTS_DIR}"/src/suckless
             sh ./build.sh "$@"
             cd - >/dev/null

@@ -17,9 +17,9 @@ c() {
     fi
 }
 
-mkcd() { mkdir -p "$1"     && cd "$1" ; }
-mvcd() { mv -iv  "$1" "$2" && cd "$2" ; }
-cpcd() { cp -ivr "$1" "$2" && cd "$2" ; }
+mkcd() { mkdir -p "$1"     && cd "$1" ; } ; alias mcdk=mkcd
+mvcd() { mv -iv  "$1" "$2" && cd "$2" ; } ; alias mcvd=mvcd
+cpcd() { cp -ivr "$1" "$2" && cd "$2" ; } ; alias ccpd=cpcd
 
 # hack - print directories with full path name
 lsd() { printf '%s\n' "$*"/*/ ; }

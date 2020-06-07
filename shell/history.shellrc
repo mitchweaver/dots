@@ -1,0 +1,23 @@
+# ▌ ▌▗    ▐           
+# ▙▄▌▄ ▞▀▘▜▀ ▞▀▖▙▀▖▌ ▌
+# ▌ ▌▐ ▝▀▖▐ ▖▌ ▌▌  ▚▄▌
+# ▘ ▘▀▘▀▀  ▀ ▝▀ ▘  ▗▄▘
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+export HISTCONTROL=ignoredups:ignorespace
+export HISTSIZE=500
+
+case ${HISTORY_STYLE:-default} in
+    per-shell)
+        # save hist file per shell, deleting on close
+        export HISTFILE="${XDG_CACHE_HOME:-${HOME}/.cache}/.history-$$"
+        trap '/bin/rm -f "$HISTFILE" 2>/dev/null' EXIT TERM KILL QUIT
+        ;;
+    default)
+        export HISTFILE="${XDG_CACHE_HOME:-${HOME}/.cache}/.history"
+esac
+
+# search shell history
+hg() {
+    [ "$1" ] && grep -i "$*" "$HISTFILE" | grep -v '^hg' | head -n 20
+}

@@ -88,6 +88,8 @@ export TRASH_DIR="${XDG_DATA_HOME}/Trash" \
 export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s'
 export MPV_OPTS="--really-quiet --force-seekable=yes"
 
+export WATSON_TTS_API_KEY="${XDG_DOCUMENTS_DIR}/api_keys/watson_tts_api.key"
+
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # ▛▀▖   ▗▀▖      ▜▐   ▛▀▖                      
 # ▌ ▌▞▀▖▐  ▝▀▖▌ ▌▐▜▀  ▙▄▘▙▀▖▞▀▖▞▀▌▙▀▖▝▀▖▛▚▀▖▞▀▘

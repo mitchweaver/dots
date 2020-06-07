@@ -9,6 +9,12 @@ export MOZ_GTK_TITLEBAR_DECORATION=client
 # enable touch input for firefox
 export MOZ_USE_XINPUT2=1
 
+# disable firefox telemetry
+export MOZ_DATA_REPORTING=0
+export MOZ_TELEMETRY_REPORTING=0
+export MOZ_CRASHREPORTER=0
+export MOZ_SERVICES_HEALTHREPORT=0
+
 export DIMENSIONS="$(dimensions)"
 
 # --- so, so buggy... have to let gnome handle these
