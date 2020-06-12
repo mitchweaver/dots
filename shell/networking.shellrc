@@ -14,7 +14,6 @@ rmv() { rsync   "${1:-?}"/ "${2:-?}" && rm -r "${1:-?}" ; }
 ping() {
     command ping -s 1 "${1:-wvr.sh}" # -L -w 10
 }
-alias p=ping
 alias p8='ping 8.8.8.8'
 alias cv='curl -v'
 

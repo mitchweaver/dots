@@ -136,13 +136,13 @@ alias py2=python2
 
 alias ytm='yt -m'
 
-nemo()     { [ "$1" ] || set . ; command nemo     "$@" & }
-nautilus() { [ "$1" ] || set . ; command nautilus "$@" & }
-alias n=nautilus
+# nemo()     { [ "$1" ] || set . ; command nemo     "$@" & }
+# nautilus() { [ "$1" ] || set . ; command nautilus "$@" & }
+# alias n=nautilus
+alias {p,pc}='pcmanfm --no-desktop .'
 
 cpubench() {
-    sysbench --test=cpu --cpu-max-prime=20000 \
-        --num-threads=$(nproc) run
+    sysbench cpu --cpu-max-prime=20000 --threads=$(nproc) run
 }
 
 
@@ -182,3 +182,6 @@ borgsequential() {
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 alias vnc='vncviewer localhost:5900'
+
+# I hate these stupid dirs and every program that creates them.
+rmdir Desktop Public Templates 2>/dev/null ||:

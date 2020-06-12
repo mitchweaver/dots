@@ -23,6 +23,9 @@ install:
 	ln -sf ${DOTS_DIR}/.config/ranger/rc.conf ${HOME}/.config/ranger/rc.conf
 	ln -sf ${DOTS_DIR}/.gitconfig ${HOME}/.gitconfig
 	ln -sf ${DOTS_DIR}/.config/autostart ${HOME}/.config/autostart
-	mkdir -p ${HOME}/.config/alacritty
-	ln -sf ${DOTS_DIR}/.config/alacritty/alacritty.yml ${HOME}/.config/alacritty/alacritty.yml
 	ln -sf ${DOTS_DIR}/.pylintrc ${HOME}/.pylintrc
+	mkdir -p ${HOME}/.config/sxhkd
+	ln -sf ${DOTS_DIR}/.config/sxhkd/sxhkdrc ${HOME}/.config/sxhkd/sxhkdrc
+	ln -sf ${DOTS_DIR}/.config/picom.conf ${HOME}/.config/picom.conf
+	mkdir -p ${HOME}/.config/dunst
+	ln -sf ${DOTS_DIR}/.config/dunst/dunstrc ${HOME}/.config/dunst/dunstrc

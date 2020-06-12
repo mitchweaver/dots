@@ -4,9 +4,9 @@
 # ▀▀ ▝▀ ▝▀ ▘ ▘▝▀▘▘  
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-# workaround for lots of bugs...
-alias docker='env -i docker'
-alias docker-compose='env -i docker-compose'
+# have all below run as root with clean environment
+alias docker='sudo env -i docker'
+alias docker-compose='sudo env -i docker-compose'
 
 # basic
 alias compose=docker-compose
@@ -27,6 +27,11 @@ alias dps='docker ps'
 alias dlogs='docker logs'
 alias dexec='docker exec'
 alias dshell='docker exec -it /bin/sh'
+
+dprune() {
+    docker image prune
+    docker volume rm $(docker volume ls -f dangling=true -q)
+}
 
 # compose
 alias cup='compose up'

@@ -1,12 +1,14 @@
 # programs
 alt + Return
-    st -c term -T term
-alt + shift + Return
-    tabbed -d -c -r 2 st -w ''
+    st -T 'Simple Terminal' -t 'Simple Terminal' -c 'Simple Terminal'
+alt + Shift + Return
+    stwrapper
 alt + w
-    brws
+    firefox
 alt + shift + w
-    brws -a
+    chromium
+control + alt + shift + w
+    start-tor-browser
 alt + r
     st -c ranger -e ranger --cmd='set viewmode multipane'
 alt + x
@@ -48,9 +50,9 @@ XF86MonBrightnessDown
 
 # redshift control
 alt + equal
-    xsctc i
+    sctc i
 alt + minus
-    xsctc d
+    sctc d
 
 # volume
 alt + apostrophe

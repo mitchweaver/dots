@@ -74,7 +74,7 @@ export XDG_DESKTOP_DIR="${HOME}/Desktop" \
 export ENV="${XDG_DOCUMENTS_DIR}/src/dots/shell/main.shellrc"
 
 export MENU_PROG=menu \
-       TERMINAL_PROG=gnome-terminal \
+       TERMINAL_PROG=st \
        PLUMBER=opn \
        SUBS_MENU_PROG="menu -wide -p Subs:" \
 
@@ -95,13 +95,11 @@ export WATSON_TTS_API_KEY="${XDG_DOCUMENTS_DIR}/api_keys/watson_tts_api.key"
 # ▌ ▌▞▀▖▐  ▝▀▖▌ ▌▐▜▀  ▙▄▘▙▀▖▞▀▖▞▀▌▙▀▖▝▀▖▛▚▀▖▞▀▘
 # ▌ ▌▛▀ ▜▀ ▞▀▌▌ ▌▐▐ ▖ ▌  ▌  ▌ ▌▚▄▌▌  ▞▀▌▌▐ ▌▝▀▖
 # ▀▀ ▝▀▘▐  ▝▀▘▝▀▘ ▘▀  ▘  ▘  ▝▀ ▗▄▘▘  ▝▀▘▘▝ ▘▀▀ 
-if command -v gnvim-launch >/dev/null ; then
-    export EDITOR=gnvim-launch
-elif command -v gnvim >/dev/null ; then
-    export EDITOR='gnvim --disable-ext-tabline'
-else
-    export EDITOR=nvim
-fi
+#if command -v gnvim >/dev/null && command -v gnvim-launch >/dev/null ; then
+#    export EDITOR=gnvim-launch
+#else
+export EDITOR=nvim
+# fi
 
 export BROWSER=firefox
 export PAGER=less MANPAGER=less

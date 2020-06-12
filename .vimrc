@@ -52,6 +52,8 @@ if has('nvim')
     Plug 'ap/vim-buftabline' " display buffers along top as tabs
         let g:buftabline_show = 1
 
+    Plug 'tpope/vim-sleuth' " autodetect tab indentation
+
     Plug 'tpope/vim-commentary' " comment toggler
         nmap <silent><leader>c :Commentary<CR>
         autocmd BufNewFile,BufRead *.asm setlocal commentstring=;\ %s
@@ -69,7 +71,6 @@ if has('nvim')
     Plug 'airblade/vim-gitgutter' " git diffing along the left side
         let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
         let g:gitgutter_realtime = 0 " only run gitgutter on save
-        set signcolumn=auto " yes=always, no=never, auto=ifchanges
         map <silent><leader>g :GitGutterToggle<CR>
         nmap ]h <Plug>GitGutterNextHunk
         nmap [h <Plug>GitGutterPrevHunk
@@ -116,7 +117,7 @@ if has('nvim')
         let g:termguicolors = 1
 
     Plug 'w0rp/ale'
-        let g:ale_sign_column_always = 1
+        let g:ale_sign_column_always = 0
         let g:ale_fix_on_save = 1
         " uncomment to only have ale check on file saves
         let g:ale_lint_on_text_changed = 'never'
@@ -155,11 +156,11 @@ if has('nvim')
             \ 'bundle/.*/doc',
             \ ]
 
-    Plug 'danilo-augusto/vim-afterglow' " theme based on sublime text
-        let g:afterglow_inherit_background=1 " use same background color as terminal
-        let g:afterglow_italic_comments=1
+    " Plug 'danilo-augusto/vim-afterglow' " theme based on sublime text
+    "     let g:afterglow_inherit_background=1 " use same background color as terminal
+    "     let g:afterglow_italic_comments=1
 
-    Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
+    " Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
 
     Plug 'NLKNguyen/papercolor-theme'
         let g:PaperColor_Theme_Options = {
@@ -191,7 +192,12 @@ if has('nvim')
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
         set background=light
         set t_Co=256 " fix terminal colors
-        set termguicolors
+
+        "---- IF USING GNVIM:
+        " set termguicolors
+
+        " make sign column same color as terminal background
+        hi signColumn ctermbg=NONE
     endif
 endif
 
@@ -210,7 +216,8 @@ set guifont=Hack:h12
 " ▝▀ ▝▀▘▘ ▘▝▀▘▘  ▝▀▘ ▘
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 scriptencoding utf-8
-set cursorline " highlight current line of cursor
+" set cursorline " highlight current line of cursor
+set signcolumn=auto " yes=always, no=never, auto=ifchanges
 set encoding=utf-8
 set history=200
 set backspace=indent,eol,start
