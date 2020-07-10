@@ -1,4 +1,4 @@
-DOTS_DIR = ${HOME}/Documents/src/dots
+DOTS_DIR = ${HOME}/src/dots
 
 all:
 	@>&2 echo "Use 'make install'."
@@ -8,7 +8,6 @@ install:
 	ln -sf ${DOTS_DIR}/.xinitrc ${HOME}/.xinitrc
 	ln -sf ${DOTS_DIR}/.xinitrc ${HOME}/.xsessionrc
 	ln -sf ${DOTS_DIR}/.profile    ${HOME}/.profile
-	xrdb load ${HOME}/.Xresources
 	mkdir -p ${HOME}/.config/nvim
 	ln -sf ${DOTS_DIR}/.config/nvim/init.vim ${HOME}/.config/nvim/init.vim
 	ln -sf ${DOTS_DIR}/.vimrc ${HOME}/.vimrc
@@ -29,3 +28,4 @@ install:
 	ln -sf ${DOTS_DIR}/.config/picom.conf ${HOME}/.config/picom.conf
 	mkdir -p ${HOME}/.config/dunst
 	ln -sf ${DOTS_DIR}/.config/dunst/dunstrc ${HOME}/.config/dunst/dunstrc
+	xrdb load ${HOME}/.Xresources

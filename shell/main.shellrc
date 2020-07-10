@@ -10,7 +10,7 @@
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
 # -*-*- Options -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-SHELLRC_DIR=${XDG_DOCUMENTS_DIR}/src/dots/shell
+SHELLRC_DIR=${HOME}/src/dots/shell
 HISTORY_STYLE=default # [default/per-shell]
 PS1_STYLE=pwd         # [user-pwd/user/pwd/percent]
 PS1_GIT=true          # [true/false]

@@ -25,16 +25,7 @@ w3m() {
 ddg() { w3m https://duckduckgo.com/lite/?q="$*" ; }
 alias wdump='w3m -dump'
 
-# nicely format http://wtfismyip.com output
-wtf() {
-    w3m -dump https://wtfismyip.com | head -n 15 | \
-    while read -r line ; do
-        case $line in
-            *:*|'') ;;
-            *) printf '%s\n' "$line"
-        esac
-    done
-}
+wtf() { w3m -dump https://wtfismyip.com/json | jq -r ; }
 
 weather() {
     read -r loc < "${XDG_CACHE_HOME}"/wttr
@@ -47,7 +38,6 @@ forecast() {
 
 # see: http://github.com/mitchweaver/bin for sshvpn script
 sshvpn-wvr()    { sshvpn root@$(grep -A 1 wvr    ~/.ssh/config | grep -oE '[0-9].*') ; }
-sshvpn-bonsai() { sshvpn root@$(grep -A 1 bonsai ~/.ssh/config | grep -oE '[0-9].*') ; }
 
 nfsip() {
     grep -A 1 'Host datahoarder' ~/.ssh/config | \

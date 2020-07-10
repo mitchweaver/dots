@@ -112,6 +112,20 @@ pair_mouse() {
     xset m 0 0
 }
 
+pair_headphones() {
+    id=20:03:29:08:09:18
+    bluetooth
+    bluetoothctl power on &&
+    bluetoothctl default-agent
+    bluetoothctl pairable on &&
+    bluetoothctl --timeout 2 scan on
+    bluetoothctl pair $id
+    bluetoothctl trust $id &&
+    bluetoothctl connect $id
+    unset id
+    xset m 0 0
+}
+
 mount_sdcard() {
     sudo mount -t vfat -o  uid=mitch /dev/mmcblk0 /mnt/sd
 }
@@ -161,27 +175,23 @@ rm -f nohup.out 2>/dev/null ||:
 #
 # My cluster setup
 #
-
 NUM_BORG=5
-
-borgrun() {
-    for i in $(seq $NUM_BORG) ; do
-        { 2>&3 ssh borg$i "$*" & } 3>&2 2>/dev/null
-        disown &>/dev/null
-    done
-    wait
-}
-
-borgsequential() {
-    for i in $(seq $NUM_BORG) ; do
-        ssh borg$i "$*"
-    done
-}
-
-
+borgrun() { for i in $(seq $NUM_BORG) ; do (ssh borg$i "$*" &) ; done ; }
+borgsec() { for i in $(seq $NUM_BORG) ; do ssh borg$i "$*" ; done ; }
+borgupdate() { borgrun 'apk update ; apk upgrade' ; }
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 alias vnc='vncviewer localhost:5900'
 
 # I hate these stupid dirs and every program that creates them.
-rmdir Desktop Public Templates 2>/dev/null ||:
+rmdir Desktop Public Templates Downloads 2>/dev/null ||:
+
+##### PULSE AUDIO ######
+# make a fifo you can play audio to
+alias pulsefifo='pactl load-module module-pipe-source source_name=virtmic file=/tmp/virtmic format=s16le rate=16000 channels=1'
+# here yourself through mic
+alias loopback='pactl load-module module-loopback latency_msec=1'
+alias unloopback='pactl unload-module module-loopback'
+#########################
+#
+alias sshcfg='v ~/.ssh/config'

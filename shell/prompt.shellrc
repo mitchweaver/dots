@@ -68,3 +68,5 @@ _ps1_print() {
 
 # this activates our PS1
 cd .
+
+alias ps1='export PS1="% "'

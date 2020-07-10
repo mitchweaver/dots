@@ -188,7 +188,7 @@ if has('nvim')
         " NOTE: colorschemes must be set after loading plugins
         " colorscheme afterglow
         " colorscheme onehalfdark
-        colorscheme PaperColor
+        " colorscheme PaperColor
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
         set background=light
         set t_Co=256 " fix terminal colors

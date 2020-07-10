@@ -53,11 +53,11 @@ export XDG_OPEN=opn
 export XDG_CURRENT_DESKTOP=Gnome
 
 export XDG_CONFIG_HOME="${HOME}/.config" \
-       XDG_DOWNLOAD_DIR="${HOME}/Downloads" \
-       XDG_DOCUMENTS_DIR="${HOME}/Documents" \
-       XDG_MUSIC_DIR="${HOME}/Music" \
-       XDG_PICTURES_DIR="${HOME}/Pictures" \
-       XDG_VIDEOS_DIR="${HOME}/Videos"
+       XDG_DOWNLOAD_DIR="${HOME}/downloads" \
+       XDG_DOCUMENTS_DIR="${HOME}/files" \
+       XDG_MUSIC_DIR="${HOME}/music" \
+       XDG_PICTURES_DIR="${HOME}/images" \
+       XDG_VIDEOS_DIR="${HOME}/videos"
 
 export XDG_DATA_HOME="${HOME}/.local"
 export XDG_CACHE_HOME="${HOME}/.cache"
@@ -71,7 +71,7 @@ export XDG_DESKTOP_DIR="${HOME}/Desktop" \
 # ▌ ▌▚▄▌ ▌  ▌  ▌ ▌▚▄▌▌  ▞▀▌▌▐ ▌ ▝▞ ▞▀▌▌  ▝▀▖
 # ▘ ▘▗▄▘ ▘  ▘  ▝▀ ▗▄▘▘  ▝▀▘▘▝ ▘  ▘ ▝▀▘▘  ▀▀ 
 
-export ENV="${XDG_DOCUMENTS_DIR}/src/dots/shell/main.shellrc"
+export ENV="${HOME}/src/dots/shell/main.shellrc"
 
 export MENU_PROG=menu \
        TERMINAL_PROG=st \
@@ -111,8 +111,8 @@ export LESSHISTFILE=/dev/null
 # ▙▄▘▐ ▝▀▖▛▀▖▚▄▌ ▙▄▙▀▖▞▀▖▛▚▀▖ ▌ ▌▞▀▘▞▀▖▙▀▖ ▚▄ ▛▀▖▝▀▖▞▀▖▞▀▖
 # ▌  ▐ ▞▀▌▌ ▌▖ ▌ ▌ ▌  ▌ ▌▌▐ ▌ ▌ ▌▝▀▖▛▀ ▌   ▖ ▌▙▄▘▞▀▌▌ ▖▛▀ 
 # ▘   ▘▝▀▘▘ ▘▝▀  ▘ ▘  ▝▀ ▘▝ ▘ ▝▀ ▀▀ ▝▀▘▘   ▝▀ ▌  ▝▀▘▝▀ ▝▀▘
-if [ -d "${XDG_DOCUMENTS_DIR}/src/plan9" ] ; then
-    export PLAN9="${XDG_DOCUMENTS_DIR}/src/plan9"
+if [ -d "${HOME}/src/plan9" ] ; then
+    export PLAN9="${HOME}/src/plan9"
 elif [ -d /usr/lib/plan9 ] ; then
     export PLAN9=/usr/lib/plan9
 fi

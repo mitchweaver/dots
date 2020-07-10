@@ -32,11 +32,12 @@ xmodmap ~/.xmodmaprc &
 xset +fp ~/.fonts &
 
 vol s 40 &
-bright s 60 &
+bright s 50 &
 ytdlq -d &
 torrent-queue -d &
 autorotate -d &
 clip -d &
+bar -d &
 
 # paped -l ~/Pictures/wallpapers &
 background &

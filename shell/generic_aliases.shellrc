@@ -72,3 +72,5 @@ alias {reboot,restart}='sudo reboot'
 
 # who uses dc anyway
 alias dc=cd
+
+alias 4m=rm
