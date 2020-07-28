@@ -90,6 +90,16 @@ if has('nvim')
     "     " remove single/double quotes from autopairing, causes too much headache:
     "     let g:AutoPairs = {'(':')', '[':']', '{':'}', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 
+    Plug 'vimwiki/vimwiki' " the ultimate note taking system
+        let wiki = {}
+        let g:vimwikidir = "~/files/wiki"
+        let g:vimwiki_list=[wiki]
+        let g:vimwiki_list = [
+          \{'path': '~/files/wiki', 'syntax': 'markdown', 'ext': '.vimwiki'},
+        \]
+        let g:vimwiki_ext2syntax = {'.md': 'markdown'}
+        autocmd FileType vimwiki set ft=markdown
+
     Plug 'honza/vim-snippets' " snippets repo
     Plug 'SirVer/ultisnips' " snippet driver
         let g:UltiSnipsExpandTrigger="<c-l>"
@@ -105,8 +115,10 @@ if has('nvim')
     Plug 'ervandew/supertab' " tab completion rather than <c-n>
         let g:SuperTabDefaultCompletionType = "<c-n>"
 
-    " Plug 'Yggdroot/indentLine' " show indentation lines
-    "     let g:indentLine_enabled = 1
+    Plug 'Yggdroot/indentLine' " show indentation lines
+        let g:indentLine_enabled = 0
+        nmap <leader>il :let g:indentLine_enabled = 1<CR>
+        nmap <leader>li :let g:indentLine_enabled = 0<CR>
 
     Plug 'chrisbra/Colorizer' " colorize hex codes in terminal
         autocmd VimEnter * ColorHighlight
@@ -138,18 +150,19 @@ if has('nvim')
         let g:startify_custom_header = [
             \ '                                 ',
             \ '      ⢀⣀ ⣰⡀ ⢀⣀ ⡀⣀ ⣰⡀ ⣀⡀ ⢀⣀ ⢀⡀ ⢀⡀ ',
-            \ '      ⠭⠕ ⠘⠤ ⠣⠼ ⠏   ⠘⠤ ⡧⠜ ⠣⠼ ⣑⡺ ⠣⠭',
+            \ '      ⠭⠕ ⠘⠤ ⠣⠼ ⠏  ⠘⠤ ⡧⠜ ⠣⠼ ⣑⡺ ⠣⠭ ',
             \ ]
 
-        " note: remove . getcwd() if you just want to see global MRU
         let g:startify_lists = [
-            \ { 'type': 'dir',       'header': ['   Last Updated in: '. getcwd()] },
-            \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+            \ { 'type': 'dir',       'header': ['   Last Updated: '] },
+            \ { 'type': 'bookmarks', 'header': ['   Bookmarks:']      },
             \ ]
 
         let g:startify_bookmarks = [
+            \ {'w': '~/files/wiki/index.vimwiki'},
             \ {'v': '~/.vimrc'},
             \ ]
+
         let g:startify_skiplist = [
             \ 'COMMIT_EDITMSG',
             \ escape(fnamemodify(resolve($VIMRUNTIME), ':p'), '\') .'doc',
@@ -161,6 +174,8 @@ if has('nvim')
     "     let g:afterglow_italic_comments=1
 
     " Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
+    
+    Plug 'dylanaraps/wal.vim' " if using pywal
 
     Plug 'NLKNguyen/papercolor-theme'
         let g:PaperColor_Theme_Options = {
@@ -184,14 +199,20 @@ if has('nvim')
         map <silent><leader>pi :PlugInstall<CR>
         map <silent><leader>pu :PlugUpdate<CR>
         map <silent><leader>pc :PlugClean<CR>
-        " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+
         " NOTE: colorschemes must be set after loading plugins
+        
+        " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+        " ----- If not using pywal: ---------------
         " colorscheme afterglow
         " colorscheme onehalfdark
         " colorscheme PaperColor
+        " set background=light
+        " set t_Co=256 " fix terminal colors
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
-        set background=light
-        set t_Co=256 " fix terminal colors
+        
+        " if using pywal:
+        colorscheme wal
 
         "---- IF USING GNVIM:
         " set termguicolors
@@ -237,7 +258,7 @@ set ch=1 " get rid of the wasted line at the bottom
 set cmdheight=1 " cmd output only take up 1 line
 set nostartofline " gg/G do not always go to line start
 set modeline " enable per-file custom syntax
-set mouse=a " enable mouse globally
+set mouse=a " enable mouse globally a/n
 
 " remove need to hold shift for commands
 noremap ; :

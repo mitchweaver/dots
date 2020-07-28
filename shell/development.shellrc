@@ -20,21 +20,18 @@ gud() { command gud "$@" ; cd . ; }
 rcp() {
     case $1 in
         bs|bonsai)
-            cd "${XDG_DOCUMENTS_DIR}"/src/bonsai
+            cd ~/src/bonsai
             mkki
             cd - >/dev/null
             ;;
         st|dwm|dmenu|surf|tabbed|sent)
-            cd "${XDG_DOCUMENTS_DIR}"/src/suckless
+            cd ~/src/suckless
             sh ./build.sh "$@"
             cd - >/dev/null
     esac
 }
 
-scfg() {
-    ${PLUMBER:-xdg-open} \
-    "${XDG_DOCUMENTS_DIR:-${HOME}/Documents}/src/suckless/$1/cfg/config.h"
-}
+scfg() { ${PLUMBER:-xdg-open} ~/src/suckless/$1/cfg/config.h ; }
 
 # watch a file and do an action as its contents changes
 iwaitdo() {
@@ -58,11 +55,12 @@ v() {
     fi
     case ${EDITOR:-vi} in
         # terminal editor
-        vi|vim|nvim|nano)
-            $EDITOR -- "$@"
+        vi|vim|nvim)
+            $EDITOR -n -- "$@"
             ;;
         *)
             # graphical editor
             ($EDITOR "$@" >/dev/null 2>&1 &)
     esac
 }
+# [ "$1" ] || set -- -c VimwikiIndex

@@ -9,6 +9,9 @@
 # All unsorted junk below. Who knows what's in here.         #
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
+# I hate these stupid dirs and every program that creates them.
+rmdir Desktop Public Templates Documents Downloads 2>/dev/null ||:
+
 # grab urls of any running processes
 # see: http://github.com/mitchweaver/bin for urls script
 psurls() { ps -auxww | urls ; }
@@ -153,7 +156,7 @@ alias ytm='yt -m'
 # nemo()     { [ "$1" ] || set . ; command nemo     "$@" & }
 # nautilus() { [ "$1" ] || set . ; command nautilus "$@" & }
 # alias n=nautilus
-alias {p,pc}='pcmanfm --no-desktop .'
+alias {n,pc}='pcmanfm --no-desktop .'
 
 cpubench() {
     sysbench cpu --cpu-max-prime=20000 --threads=$(nproc) run
@@ -183,9 +186,6 @@ borgupdate() { borgrun 'apk update ; apk upgrade' ; }
 
 alias vnc='vncviewer localhost:5900'
 
-# I hate these stupid dirs and every program that creates them.
-rmdir Desktop Public Templates Downloads 2>/dev/null ||:
-
 ##### PULSE AUDIO ######
 # make a fifo you can play audio to
 alias pulsefifo='pactl load-module module-pipe-source source_name=virtmic file=/tmp/virtmic format=s16le rate=16000 channels=1'
@@ -195,3 +195,19 @@ alias unloopback='pactl unload-module module-loopback'
 #########################
 #
 alias sshcfg='v ~/.ssh/config'
+
+
+mkgif() {
+    rm out.gif 2>/dev/null ||:
+    convert -delay 100 -loop 0 ./*.jpg out.gif
+}
+
+tmp() {
+    mkdir -p /tmp/$$.tmpsh
+    trap 'rm -rf /tmp/$$.tmpsh' EXIT INT TERM HUP
+    cd /tmp/$$.tmpsh
+    yes | v $$.md
+    rm -rf /tmp/$$.tmpsh 2>/dev/null ||:
+}
+
+alias img2pdf='img2pdf *jpg --output combined.pdf'

@@ -74,3 +74,5 @@ alias {reboot,restart}='sudo reboot'
 alias dc=cd
 
 alias 4m=rm
+
+p() { printf '%s/%s\n' "$PWD" "$*" ; }

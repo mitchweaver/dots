@@ -39,7 +39,7 @@ autorotate -d &
 clip -d &
 bar -d &
 
-# paped -l ~/Pictures/wallpapers &
+# paped -l ~/images/wallpapers &
 background &
 
 sxhkd &
