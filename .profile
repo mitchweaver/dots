@@ -57,13 +57,13 @@ export XDG_CONFIG_HOME="${HOME}/.config" \
        XDG_DOCUMENTS_DIR="${HOME}/files" \
        XDG_MUSIC_DIR="${HOME}/music" \
        XDG_PICTURES_DIR="${HOME}/images" \
-       XDG_VIDEOS_DIR="${HOME}/videos"
+       XDG_VIDEOS_DIR="${HOME}/videos" \
+       XDG_DESKTOP_DIR="${HOME}/desktop"
 
 export XDG_DATA_HOME="${HOME}/.local"
 export XDG_CACHE_HOME="${HOME}/.cache"
 
-export XDG_DESKTOP_DIR="${HOME}/Desktop" \
-       XDG_PUBLICSHARE_DIR="$XDG_CACHE_HOME/Public" \
+export XDG_PUBLICSHARE_DIR="$XDG_CACHE_HOME/Public" \
        XDG_TEMPLATES_DIR="$XDG_CACHE_HOME/Templates"
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # ▙▗▌    ▛▀▖                    ▌ ▌         
@@ -130,3 +130,9 @@ fi
 # empty ~/tmp
 rm -rf ~/tmp 2>/dev/null ||:
 mkdir -p ~/tmp
+
+# disable mutter/gnome vsync
+export CLUTTER_VBLANK=none
+export __GL_SYNC_TO_VBLANK=0
+
+#pgrep X >/dev/null || startx

@@ -1,7 +1,8 @@
 # programs
-alt + Return
-    st -T 'Simple Terminal' -t 'Simple Terminal' -c 'Simple Terminal'
-alt + Shift + Return
+# alt + Return
+    # st -T 'Simple Terminal' -t 'Simple Terminal' -c 'Simple Terminal'
+    #st -T 'Simple Terminal' -t 'Simple Terminal' -c 'Simple Terminal'
+alt Return
     stwrapper
 alt + w
     firefox
@@ -11,7 +12,7 @@ control + alt + shift + w
     start-tor-browser
 alt + r
     st -c ranger -e ranger --cmd='set viewmode multipane'
-alt + x
+control + alt + x
     slock
 Print
     scrap -n
@@ -32,6 +33,8 @@ alt + i
 alt + shift + i
     brws -a
 alt + u
+    dapp
+alt + y
     dmoji
 alt + c
     clip
@@ -75,3 +78,13 @@ alt + bracketright
     mmt -f
 alt + bracketleft
     mmt -b
+
+# --------- rs shit ---------------
+control + shift + F12
+    rs_autotyper.sh
+
+control + Escape
+    autotype_given.sh '::renderself'
+
+control + Insert
+    autotype_given.sh 'flash3:#rejectz on my eyelidz famalam'

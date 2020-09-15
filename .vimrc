@@ -82,6 +82,7 @@ if has('nvim')
         nmap sl yss
         vmap s S
 
+    Plug 'artoj/pgn-syntax-vim' " chess .pgn syntax highlighting
 
     " ------------ buggy and annoying af, look into later:
     " Plug 'jiangmiao/auto-pairs' " autotype brackets, parents, tags
@@ -227,9 +228,9 @@ endif
 " ▌ ▌ ▌▌ ▌▐ ▖
 " ▘ ▝▀ ▘ ▘ ▀ 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-set guifont=Hack:h12
+" set guifont=Hack:h12
 " set guifont=IBM\ Plex\ Mono:h12
-" set guifont=ShureTechMono\ Nerd\ Font:h12
+set guifont=ShureTechMono\ Nerd\ Font:h12
 
 " ▞▀▖               ▜ 
 " ▌▄▖▞▀▖▛▀▖▞▀▖▙▀▖▝▀▖▐ 

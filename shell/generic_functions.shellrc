@@ -17,9 +17,17 @@ c() {
     fi
 }
 
-mkcd() { mkdir -p "$1"     && cd "$1" ; } ; alias mcdk=mkcd
-mvcd() { mv -iv  "$1" "$2" && cd "$2" ; } ; alias mcvd=mvcd
-cpcd() { cp -ivr "$1" "$2" && cd "$2" ; } ; alias ccpd=cpcd
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+mvcd() {
+    mkdir -p "$2"
+    mv -iv  "$1" "$2" && cd "$2"
+}
+cpcd() {
+    mkdir -p "$2"
+    cp -ivr "$1" "$2" && cd "$2"
+}
 
 # hack - print directories with full path name
 lsd() { printf '%s\n' "$*"/*/ ; }
@@ -109,4 +117,11 @@ rename_as_parent_dir() {
     file=${1##*/}
     dir=${1%/$file}
     mv -f "$1" "$dir/$dir"
+}
+
+randint() {
+    LC_ALL=C \
+    tr -dc -- 0-9 < /dev/urandom | \
+    dd ibs=1 obs=1 count=1 2>/dev/null
+    echo
 }

@@ -1,6 +1,9 @@
 #!/bin/sh
 # vim:ft=config
 
+export DISPLAY=:0
+export CLUTTER_VBLANK=none
+
 # fix for bug with floating windows and java programs (ex: ghidra)
 export _JAVA_AWT_WM_NONREPARENTING=1
 
@@ -21,31 +24,40 @@ export QMLSCENE_DEVICE=softwarecontext
 
 export DIMENSIONS="$(dimensions)"
 
-###/opt/piavpn/bin/pia-client -quiet &
-###/opt/Signal/signal-desktop --start-in-tray &
-
-xset m 0 0 &
 xset b off &
 xhost +local: >/dev/null &
 xrdb load ~/.Xresources &
 xmodmap ~/.xmodmaprc &
 xset +fp ~/.fonts &
 
-vol s 40 &
+# make mouse cursor smallest
+dconf write /org/gnome/desktop/interface/cursor-size 25
+
+# disable mouse acceleration
+xset m 0 0
+
+# --output DisplayPort-0 --off --output DisplayPort-1 --off \
+#--mode 1920x1080
+# --mode 1920x1080 
+
+xrandr --output DisplayPort-2 --primary --auto --rotate normal \
+       --output HDMI-A-0 --auto --rotate normal --left-of DisplayPort-2
+
+pulseaudio --check
+pulseaudio -D
+gnome-keyring-daemon &
+vol s 50 &
 bright s 50 &
 ytdlq -d &
 torrent-queue -d &
 autorotate -d &
-clip -d &
-bar -d &
-
-# paped -l ~/images/wallpapers &
 background &
-
 sxhkd &
-xbanish -i shift -i control -i mod1 -i mod4 &
 dunst &
+clip -d &
 picom -b
-#xidle -area 6 -timeout 420 -sw -program slock &
 
-while command -v dwm ; do dwm && break || continue ; done
+if command -v dwm >/dev/null ; then
+    bar -d &
+    while command -v dwm ; do dwm && break || continue ; done
+fi

@@ -10,7 +10,8 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # I hate these stupid dirs and every program that creates them.
-rmdir Desktop Public Templates Documents Downloads 2>/dev/null ||:
+rmdir Desktop Public Templates Documents Downloads Pictures \
+    Videos Documents Music 2>/dev/null ||:
 
 # grab urls of any running processes
 # see: http://github.com/mitchweaver/bin for urls script
@@ -211,3 +212,22 @@ tmp() {
 }
 
 alias img2pdf='img2pdf *jpg --output combined.pdf'
+
+dpi() {
+    ratbagctl chanting-squirrel dpi set $1
+    xset m 0 0
+}
+
+getdpi() {
+    ratbagctl  chanting-squirrel dpi get
+}
+
+alias play_random='ls | sort -R | head -n 1 | play'
+
+alias restart_sxhkd='pkill sxhkd ; sxhkd &'
+
+alias wayland_or_x11='echo $XDG_SESSION_TYPE'
+
+alias full='clocktimer 5'
+alias half='clocktimer 3'
+alias autoclick='while sleep 1 ; do xdotool click 1; done'
