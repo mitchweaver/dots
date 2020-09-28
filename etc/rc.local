@@ -1,11 +1,26 @@
 #!/bin/sh
 
-# load commonly needed modules
+# for openvpn
 modprobe tun
 modprobe tap
+
+# for kvm
+modprobe kvm
+modprobe kvm_amd
+
+# for lvm
+modprobe raid1
+modprobe raid5
+modprobe dm-mod
 
 # disable ipv6
 sysctl -w net.ipv6.conf.all.disable_ipv6=1
 
 # remove webcam module
 rmmod uvcvideo 2>/dev/null ||:
+
+cat > /etc/resolv.conf <<EOF
+# dns = quad9.net
+nameserver 9.9.9.9
+$(cat /etc/resolv.conf.tail)
+EOF
