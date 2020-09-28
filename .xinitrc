@@ -54,7 +54,7 @@ autorotate -d &
 background &
 sxhkd &
 dunst &
-clip -d &
+# clip -d &
 picom -b
 
 if command -v dwm >/dev/null ; then

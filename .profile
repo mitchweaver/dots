@@ -101,7 +101,7 @@ export WATSON_TTS_API_KEY="${XDG_DOCUMENTS_DIR}/api_keys/watson_tts_api.key"
 export EDITOR=nvim
 # fi
 
-export BROWSER=firefox
+export BROWSER=google-chrome
 export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
 export LESS='-QRsim +Gg'

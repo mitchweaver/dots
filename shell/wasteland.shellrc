@@ -231,3 +231,5 @@ alias wayland_or_x11='echo $XDG_SESSION_TYPE'
 alias full='clocktimer 5'
 alias half='clocktimer 3'
 alias autoclick='while sleep 1 ; do xdotool click 1; done'
+
+alias nfs-space='ssh datahoarder df -h | grep -E "Avail|array"'
