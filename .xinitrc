@@ -36,12 +36,8 @@ dconf write /org/gnome/desktop/interface/cursor-size 25
 # disable mouse acceleration
 xset m 0 0
 
-# --output DisplayPort-0 --off --output DisplayPort-1 --off \
-#--mode 1920x1080
-# --mode 1920x1080 
-
-xrandr --output DisplayPort-2 --primary --auto --rotate normal \
-       --output HDMI-A-0 --auto --rotate normal --left-of DisplayPort-2
+xrandr --output DisplayPort-0 --primary --auto --rotate normal \
+       --output HDMI-A-0 --auto --rotate normal --right-of DisplayPort-0
 
 pulseaudio --check
 pulseaudio -D
@@ -53,11 +49,14 @@ torrent-queue -d &
 autorotate -d &
 background &
 sxhkd &
-dunst &
 # clip -d &
-picom -b
 
-if command -v dwm >/dev/null ; then
+pkill nm-applet 2>/dev/null ||:
+
+if ! pgrep gdm3 >/dev/null && command -v dwm >/dev/null ; then
+    dunst &
+    picom -b
     bar -d &
-    while command -v dwm ; do dwm && break || continue ; done
+    exec dwm
+    # while command -v dwm ; do dwm && break || continue ; done
 fi

@@ -75,12 +75,12 @@ handle_extension() {
         #     exit 1;;
 
         ## OpenDocument
-        odt|ods|odp|sxw)
-            ## Preview as text conversion
-            odt2txt "${FILE_PATH}" && exit 5
-            ## Preview as markdown conversion
-            pandoc -s -t markdown -- "${FILE_PATH}" && exit 5
-            exit 1;;
+        # odt|ods|odp|sxw)
+        #     ## Preview as text conversion
+        #     odt2txt "${FILE_PATH}" && exit 5
+        #     ## Preview as markdown conversion
+        #     pandoc -s -t markdown -- "${FILE_PATH}" && exit 5
+        #     exit 1;;
 
         ## XLSX
         xlsx)

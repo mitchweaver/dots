@@ -5,9 +5,9 @@
 alt Return
     stwrapper
 alt + w
-    google-chrome
-alt + shift + w
     firefox
+alt + shift + w
+    google-chrome
 control + alt + shift + w
     start-tor-browser
 alt + r
@@ -20,6 +20,8 @@ control + Print
     scrap
 alt + e
     pcmanfm
+super + e
+    pcmanfm
 alt + v
     virt-manager
 
@@ -28,8 +30,8 @@ alt + p
     menu run -p 'Run:'
 alt + o
     dedit
-# alt + i
-#     brws
+alt + i
+    brws
 # alt + shift + i
 #     brws -a
 alt + u

@@ -61,12 +61,16 @@ if has('nvim')
         autocmd BufNewFile,BufRead *rc setlocal commentstring=#\ %s
         autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
-    Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
-        let g:multi_cursor_use_default_mapping=0
-        let g:multi_cursor_next_key='<c-m>'
-        let g:multi_cursor_prev_key='<c-p>'
-        let g:multi_cursor_skip_key='<c-x>'
-        let g:multi_cursor_quit_key='<esc>'
+
+    Plug 'mg979/vim-visual-multi' " sublime-like multiple select
+        let g:VM_mouse_mappings = 0
+
+    " Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
+        " let g:multi_cursor_use_default_mapping=0
+    "     let g:multi_cursor_next_key='<c-m>'
+    "     let g:multi_cursor_prev_key='<c-p>'
+    "     let g:multi_cursor_skip_key='<c-x>'
+    "     let g:multi_cursor_quit_key='<esc>'
 
     Plug 'airblade/vim-gitgutter' " git diffing along the left side
         let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds

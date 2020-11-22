@@ -15,6 +15,7 @@ PATH=${HOME}/.local/bin:$PATH
 export PATH
 
 export MANPATH="${HOME}/.local/share/man:$MANPATH"
+export FONTCONFIG_PATH=/etc/fonts
 
 # ---- bonsai stuff --------
 export BONSAI_ROOT="${HOME}/.bonsai"
@@ -101,7 +102,7 @@ export WATSON_TTS_API_KEY="${XDG_DOCUMENTS_DIR}/api_keys/watson_tts_api.key"
 export EDITOR=nvim
 # fi
 
-export BROWSER=google-chrome
+export BROWSER=firefox
 export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
 export LESS='-QRsim +Gg'

@@ -48,6 +48,14 @@ addyt() { ytdlq -a "$1" ; }
 tfyt() { tf "$YTDLQ_DIR"/ytdlq-*.log ; }
 alias res='ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0'
 
+# removes audio from a video clip
+remove-audio() {
+    [ -f "$1" ] || return 1
+    tmp=/tmp/$RANDOM.${1##.*}
+    ffmpeg -i "$1" -c copy -an "$tmp" &&
+    mv -f "$tmp" "${2:-out.mp4}"
+}
+
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # imagemagick
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -197,12 +205,12 @@ alias unloopback='pactl unload-module module-loopback'
 #
 alias sshcfg='v ~/.ssh/config'
 
-
 mkgif() {
     rm out.gif 2>/dev/null ||:
     convert -delay 100 -loop 0 ./*.jpg out.gif
 }
 
+# temp file for scratch pad
 tmp() {
     mkdir -p /tmp/$$.tmpsh
     trap 'rm -rf /tmp/$$.tmpsh' EXIT INT TERM HUP
@@ -213,23 +221,17 @@ tmp() {
 
 alias img2pdf='img2pdf *jpg --output combined.pdf'
 
-dpi() {
-    ratbagctl chanting-squirrel dpi set $1
-    xset m 0 0
-}
-
-getdpi() {
-    ratbagctl  chanting-squirrel dpi get
-}
-
+# play random file within subdirectories of $PWD
 alias play_random='ls | sort -R | head -n 1 | play'
 
 alias restart_sxhkd='pkill sxhkd ; sxhkd &'
 
+# which am I using?!?
 alias wayland_or_x11='echo $XDG_SESSION_TYPE'
 
-alias full='clocktimer 5'
-alias half='clocktimer 3'
 alias autoclick='while sleep 1 ; do xdotool click 1; done'
 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 alias nfs-space='ssh datahoarder df -h | grep -E "Avail|array"'
+alias nfs-update='ssh datahoarder "apk update;apk upgrade"'
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
