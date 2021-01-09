@@ -34,8 +34,6 @@ alt + i
     brws
 # alt + shift + i
 #     brws -a
-alt + u
-    dapp
 alt + y
     dmoji
 alt + c
@@ -90,3 +88,6 @@ control + Escape
 
 control + Insert
     autotype_given.sh 'flash3:#rejectz on my eyelidz famalam'
+
+control + Pause
+    autotype_given.sh 'flash2:E - L O O O O O O O O O O O O O O O O L'

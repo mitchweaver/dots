@@ -61,7 +61,7 @@ elif command -v setup-alpine >/dev/null ; then
         shift       
         case $flag in
             a) sudo apk add "$@" ;;
-            u) sudo apk upgrade "$@" ;;
+            u) sudo apk update ; sudo upgrade "$@" ;;
             d) sudo apk del "$@" ;;
             s) apk search "$@" ;;
             i) apk info "$@" ;;

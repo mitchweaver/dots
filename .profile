@@ -1,6 +1,5 @@
 #!/bin/sh
 umask 022
-ulimit -c 0
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # ▞▀▖      ▐          ▌ ▌         
@@ -28,16 +27,13 @@ export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
 
 export PYTHONOPTIMIZE=2 # disable docstrings, debug info
 
-if command -v nproc >/dev/null ; then
-    export NPROC=$(nproc)
-else
-    while read -r line ; do
-        case $line in
-            *'cpu cores'*)
-                export NPROC="${line#*: }"
-        esac
-    done </proc/cpuinfo
-fi
+[ -f /proc/cpuinfo ] &&
+while read -r line ; do
+    case $line in
+        *'cpu cores'*)
+            export NPROC="${line#*: }"
+    esac
+done </proc/cpuinfo
 
 export LC_CTYPE='en_US.UTF-8'
 export LANG="$LC_CTYPE" \
@@ -51,7 +47,7 @@ export LANG="$LC_CTYPE" \
 # ▞▝▖▌ ▌▌ ▌ ▝▞ ▞▀▌▌  ▝▀▖
 # ▘ ▘▀▀ ▝▀   ▘ ▝▀▘▘  ▀▀ 
 export XDG_OPEN=opn
-export XDG_CURRENT_DESKTOP=Gnome
+#export XDG_CURRENT_DESKTOP=Gnome
 
 export XDG_CONFIG_HOME="${HOME}/.config" \
        XDG_DOWNLOAD_DIR="${HOME}/downloads" \
@@ -78,6 +74,8 @@ export MENU_PROG=menu \
        TERMINAL_PROG=st \
        PLUMBER=opn \
        SUBS_MENU_PROG="menu -wide -p Subs:" \
+       SUBS_DAEMON_INTERVAL=1500 \
+       SUBS_SLEEP_VALUE=0.05
 
 export TRASH_DIR="${XDG_DATA_HOME}/Trash" \
        TASKS_FILE="${XDG_DOCUMENTS_DIR}/tasks.txt" \
@@ -128,12 +126,14 @@ fi
 # ▞▀▖▜▀ ▛▀▖▞▀▖▙▀▖ ▞▀▘▜▀ ▌ ▌▐  ▐  
 # ▌ ▌▐ ▖▌ ▌▛▀ ▌   ▝▀▖▐ ▖▌ ▌▜▀ ▜▀ 
 # ▝▀  ▀ ▘ ▘▝▀▘▘   ▀▀  ▀ ▝▀▘▐  ▐  
+
 # empty ~/tmp
 rm -rf ~/tmp 2>/dev/null ||:
-mkdir -p ~/tmp
+mkdir -p "/tmp/tmp-$USER"
+ln -sf "/tmp/tmp-$USER" ~/tmp
 
 # disable mutter/gnome vsync
 export CLUTTER_VBLANK=none
 export __GL_SYNC_TO_VBLANK=0
 
-#pgrep X >/dev/null || startx
+pgrep X >/dev/null || startx

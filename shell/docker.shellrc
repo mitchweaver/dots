@@ -47,6 +47,11 @@ docker_remove_networks() {
     docker network ls | awk '$3 == "bridge" && $2 != "bridge" { print $1 }'
 }
 
+docker-killall() {
+    docker stop $(docker ps -a -q)
+    docker rm $(docker ps -a -q)
+}
+
 DOCKER_NUKE() {
     printf 'This will delete all images and containers, confirm? (y/n): '
     read -r ans

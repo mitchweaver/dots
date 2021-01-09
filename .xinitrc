@@ -46,12 +46,18 @@ vol s 50 &
 bright s 50 &
 ytdlq -d &
 torrent-queue -d &
+subs -d &
 autorotate -d &
 background &
 sxhkd &
 # clip -d &
 
 pkill nm-applet 2>/dev/null ||:
+
+x11vnc -viewonly -xkb -nopw -wait 5 \
+    -noxrecord -noxdamage -tightfilexfer \
+    -noxfixes -forever -shared -rfbport 5900 \
+    -display :0 &
 
 if ! pgrep gdm3 >/dev/null && command -v dwm >/dev/null ; then
     dunst &

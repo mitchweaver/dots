@@ -193,8 +193,6 @@ borgsec() { for i in $(seq $NUM_BORG) ; do ssh borg$i "$*" ; done ; }
 borgupdate() { borgrun 'apk update ; apk upgrade' ; }
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-alias vnc='vncviewer localhost:5900'
-
 ##### PULSE AUDIO ######
 # make a fifo you can play audio to
 alias pulsefifo='pactl load-module module-pipe-source source_name=virtmic file=/tmp/virtmic format=s16le rate=16000 channels=1'
@@ -214,8 +212,9 @@ mkgif() {
 tmp() {
     mkdir -p /tmp/$$.tmpsh
     trap 'rm -rf /tmp/$$.tmpsh' EXIT INT TERM HUP
-    cd /tmp/$$.tmpsh
-    yes | v $$.md
+    cd /tmp/$$.tmpsh &&
+    ${EDITOR:-vi} $$.md &&
+    cd - >/dev/null &&
     rm -rf /tmp/$$.tmpsh 2>/dev/null ||:
 }
 
@@ -232,6 +231,7 @@ alias wayland_or_x11='echo $XDG_SESSION_TYPE'
 alias autoclick='while sleep 1 ; do xdotool click 1; done'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-alias nfs-space='ssh datahoarder df -h | grep -E "Avail|array"'
-alias nfs-update='ssh datahoarder "apk update;apk upgrade"'
+alias nfs-space='ssh pi df -h | grep -E "(Avail|md0)"'
+alias nfs-update="ssh pi 'apt update ; apt upgrade -y'"
+alias wvr-update="ssh wvr 'apt update ; apt upgrade -y'"
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
