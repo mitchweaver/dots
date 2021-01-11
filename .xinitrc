@@ -7,6 +7,11 @@ export CLUTTER_VBLANK=none
 # fix for bug with floating windows and java programs (ex: ghidra)
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# ▛▀▘▗       ▗▀▖      
+# ▙▄ ▄ ▙▀▖▞▀▖▐  ▞▀▖▚▗▘
+# ▌  ▐ ▌  ▛▀ ▜▀ ▌ ▌▗▚ 
+# ▘  ▀▘▘  ▝▀▘▐  ▝▀ ▘ ▘
 # remove titlebar in firefox
 export MOZ_GTK_TITLEBAR_DECORATION=client
 
@@ -18,6 +23,7 @@ export MOZ_DATA_REPORTING=0
 export MOZ_TELEMETRY_REPORTING=0
 export MOZ_CRASHREPORTER=0
 export MOZ_SERVICES_HEALTHREPORT=0
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # monero wallet constant 100% cpu without this
 export QMLSCENE_DEVICE=softwarecontext
@@ -31,10 +37,10 @@ xmodmap ~/.xmodmaprc &
 xset +fp ~/.fonts &
 
 # make mouse cursor smallest
-dconf write /org/gnome/desktop/interface/cursor-size 25
+dconf write /org/gnome/desktop/interface/cursor-size 25 &
 
 # disable mouse acceleration
-xset m 0 0
+xset m 0 0 &
 
 xrandr --output DisplayPort-0 --primary --auto --rotate normal \
        --output HDMI-A-0 --auto --rotate normal --right-of DisplayPort-0
@@ -50,6 +56,7 @@ subs -d &
 autorotate -d &
 background &
 sxhkd &
+xbanish &
 # clip -d &
 
 pkill nm-applet 2>/dev/null ||:

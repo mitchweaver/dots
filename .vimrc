@@ -211,13 +211,13 @@ if has('nvim')
         " ----- If not using pywal: ---------------
         " colorscheme afterglow
         " colorscheme onehalfdark
-        colorscheme PaperColor
-        set background=light
+        " colorscheme PaperColor
+        " set background=light
         " set t_Co=256 " fix terminal colors
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
         
         " if using pywal:
-        " colorscheme wal
+        colorscheme wal
 
         "---- IF USING GNVIM:
         " set termguicolors
