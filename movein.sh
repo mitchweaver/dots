@@ -3,7 +3,7 @@
 # http://github.com/mitchweaver/dots
 #
 
-: ${DOTS:=${HOME}/src/dots}
+: ${DOTS:=~/src/dots}
 
 msg() { >&2 printf '%s\n' "$*" ; }
 
@@ -26,12 +26,12 @@ fi
 # ▝▞  ▙▄ ▄▐ ▞▀▖▞▀▘
 # ▞▝▖ ▌  ▐▐ ▛▀ ▝▀▖
 # ▘ ▘ ▘  ▀▘▘▝▀▘▀▀ 
-ln -sf "$DOTS"/.xinitrc ${HOME}/.xinitrc
-ln -sf "$DOTS"/.xinitrc ${HOME}/.xsessionrc
-ln -sf "$DOTS"/.profile    ${HOME}/.profile
-ln -sf "$DOTS"/.xmodmaprc ${HOME}/.xmodmaprc
-ln -sf "$DOTS"/.Xresources ${HOME}/.Xresources
-xrdb load ${HOME}/.Xresources
+ln -sf "$DOTS"/.xinitrc ~/.xinitrc
+ln -sf "$DOTS"/.xinitrc ~/.xsessionrc
+ln -sf "$DOTS"/.profile    ~/.profile
+ln -sf "$DOTS"/.xmodmaprc ~/.xmodmaprc
+ln -sf "$DOTS"/.Xresources ~/.Xresources
+xrdb load ~/.Xresources
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -39,10 +39,10 @@ xrdb load ${HOME}/.Xresources
 # ▌ ▌▄ ▛▚▀▖
 # ▐▐ ▐ ▌▐ ▌
 #  ▘ ▀▘▘▝ ▘
-mkdir -p ${HOME}/.config/nvim
-ln -sf "$DOTS"/.config/nvim/init.vim ${HOME}/.config/nvim/init.vim
-ln -sf "$DOTS"/.vimrc ${HOME}/.vimrc
-curl -fLo ${HOME}/.local/share/nvim/site/autoload/plug.vim \
+mkdir -p ~/.config/nvim
+ln -sf "$DOTS"/.config/nvim/init.vim ~/.config/nvim/init.vim
+ln -sf "$DOTS"/.vimrc ~/.vimrc
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim \
     --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -51,20 +51,20 @@ curl -fLo ${HOME}/.local/share/nvim/site/autoload/plug.vim \
 #   ▞▀▖▞▀▖▛▀▖▐  ▄ ▞▀▌
 # ▗▖▌ ▖▌ ▌▌ ▌▜▀ ▐ ▚▄▌
 # ▝▘▝▀ ▝▀ ▘ ▘▐  ▀▘▗▄▘
-mkdir -p ${HOME}/.config/mpv
-mkdir -p ${HOME}/.config/sxhkd
-mkdir -p ${HOME}/.config/cava
-mkdir -p ${HOME}/.config/ranger
-mkdir -p ${HOME}/.config/dunst
-ln -sf "$DOTS"/.config/mpv/mpv.conf ${HOME}/.config/mpv/mpv.conf
-ln -sf "$DOTS"/.config/cava/cava.conf ${HOME}/.config/cava/cava.conf
-ln -sf "$DOTS"/.config/ranger/scope.sh ${HOME}/.config/ranger/scope.sh
-ln -sf "$DOTS"/.config/ranger/rifle.conf ${HOME}/.config/ranger/rifle.conf
-ln -sf "$DOTS"/.config/ranger/rc.conf ${HOME}/.config/ranger/rc.conf
-ln -sf "$DOTS"/.config/autostart ${HOME}/.config/autostart
-ln -sf "$DOTS"/.config/sxhkd/sxhkdrc ${HOME}/.config/sxhkd/sxhkdrc
-ln -sf "$DOTS"/.config/picom.conf ${HOME}/.config/picom.conf
-ln -sf "$DOTS"/.config/dunst/dunstrc ${HOME}/.config/dunst/dunstrc
+mkdir -p ~/.config/mpv
+mkdir -p ~/.config/sxhkd
+mkdir -p ~/.config/cava
+mkdir -p ~/.config/ranger
+mkdir -p ~/.config/dunst
+ln -sf "$DOTS"/.config/mpv/mpv.conf ~/.config/mpv/mpv.conf
+ln -sf "$DOTS"/.config/cava/cava.conf ~/.config/cava/cava.conf
+ln -sf "$DOTS"/.config/ranger/scope.sh ~/.config/ranger/scope.sh
+ln -sf "$DOTS"/.config/ranger/rifle.conf ~/.config/ranger/rifle.conf
+ln -sf "$DOTS"/.config/ranger/rc.conf ~/.config/ranger/rc.conf
+ln -sf "$DOTS"/.config/autostart ~/.config/autostart
+ln -sf "$DOTS"/.config/sxhkd/sxhkdrc ~/.config/sxhkd/sxhkdrc
+ln -sf "$DOTS"/.config/picom.conf ~/.config/picom.conf
+ln -sf "$DOTS"/.config/dunst/dunstrc ~/.config/dunst/dunstrc
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -72,8 +72,9 @@ ln -sf "$DOTS"/.config/dunst/dunstrc ${HOME}/.config/dunst/dunstrc
 # ▛▚▀▖▄ ▞▀▘▞▀▖
 # ▌▐ ▌▐ ▝▀▖▌ ▖
 # ▘▝ ▘▀▘▀▀ ▝▀ 
-ln -sf "$DOTS"/.gitconfig ${HOME}/.gitconfig
-ln -sf "$DOTS"/.pylintrc ${HOME}/.pylintrc
+ln -sf "$DOTS"/.gitconfig ~/.gitconfig
+ln -sf "$DOTS"/.pylintrc ~/.pylintrc
+ln -sf "$DOTS"/shell/main.shellrc ~/.bashrc
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 msg 'done!'
