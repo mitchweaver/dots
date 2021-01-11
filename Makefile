@@ -11,6 +11,8 @@ install:
 	mkdir -p ${HOME}/.config/nvim
 	ln -sf ${DOTS_DIR}/.config/nvim/init.vim ${HOME}/.config/nvim/init.vim
 	ln -sf ${DOTS_DIR}/.vimrc ${HOME}/.vimrc
+	curl -fLo ${HOME}/.local/share/nvim/site/autoload/plug.vim \
+		--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	ln -sf ${DOTS_DIR}/.xmodmaprc ${HOME}/.xmodmaprc
 	mkdir -p ${HOME}/.config/mpv
 	ln -sf ${DOTS_DIR}/.config/mpv/mpv.conf ${HOME}/.config/mpv/mpv.conf

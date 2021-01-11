@@ -135,5 +135,3 @@ ln -sf "/tmp/tmp-$USER" ~/tmp
 # disable mutter/gnome vsync
 export CLUTTER_VBLANK=none
 export __GL_SYNC_TO_VBLANK=0
-
-pgrep X >/dev/null || startx
