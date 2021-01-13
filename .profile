@@ -93,7 +93,3 @@ export LESSHISTFILE=/dev/null
 rm -rf ~/tmp 2>/dev/null ||:
 mkdir -p "/tmp/tmp-$USER"
 ln -sf "/tmp/tmp-$USER" ~/tmp
-
-# disable mutter/gnome vsync
-export CLUTTER_VBLANK=none
-export __GL_SYNC_TO_VBLANK=0

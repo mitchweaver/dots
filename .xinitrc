@@ -1,8 +1,9 @@
 #!/bin/sh
 # vim:ft=config
 
-export DISPLAY=:0
+export DISPLAY=${DISPLAY:-:0}
 export CLUTTER_VBLANK=none
+export __GL_SYNC_TO_VBLANK=0
 
 # fix for bug with floating windows and java programs (ex: ghidra)
 export _JAVA_AWT_WM_NONREPARENTING=1
@@ -44,7 +45,6 @@ xrandr --output DisplayPort-0 --primary --auto --rotate normal \
 
 pulseaudio --check
 pulseaudio -D
-gnome-keyring-daemon &
 vol s 50 &
 bright s 50 &
 ytdlq -d &
@@ -56,17 +56,17 @@ sxhkd &
 xbanish &
 # clip -d &
 
-pkill nm-applet 2>/dev/null ||:
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# x11vnc -viewonly -xkb -nopw -wait 5 \
+#     -noxrecord -noxdamage -tightfilexfer \
+#     -noxfixes -forever -shared -rfbport 5900 \
+#     -display :0 &
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-x11vnc -viewonly -xkb -nopw -wait 5 \
-    -noxrecord -noxdamage -tightfilexfer \
-    -noxfixes -forever -shared -rfbport 5900 \
-    -display :0 &
-
-if ! pgrep gdm3 >/dev/null && command -v dwm >/dev/null ; then
+if command -v dwm >/dev/null ; then
     dunst &
-    picom -b
     bar -d &
+    picom -b
     exec dwm
     # while command -v dwm ; do dwm && break || continue ; done
 fi
