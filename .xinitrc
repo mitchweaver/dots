@@ -8,10 +8,6 @@ export CLUTTER_VBLANK=none
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# ▛▀▘▗       ▗▀▖      
-# ▙▄ ▄ ▙▀▖▞▀▖▐  ▞▀▖▚▗▘
-# ▌  ▐ ▌  ▛▀ ▜▀ ▌ ▌▗▚ 
-# ▘  ▀▘▘  ▝▀▘▐  ▝▀ ▘ ▘
 # remove titlebar in firefox
 export MOZ_GTK_TITLEBAR_DECORATION=client
 
@@ -28,6 +24,7 @@ export MOZ_SERVICES_HEALTHREPORT=0
 # monero wallet constant 100% cpu without this
 export QMLSCENE_DEVICE=softwarecontext
 
+command -v dimensions >/dev/null &&
 export DIMENSIONS="$(dimensions)"
 
 xset b off &
