@@ -134,12 +134,14 @@ ln -sf "$DOTS"/shell/main.shellrc ~/.bashrc
 
 rice
 
-#          ▐           ▌
-# ▞▀▘▌ ▌▞▀▘▜▀ ▞▀▖▛▚▀▖▞▀▌
-# ▝▀▖▚▄▌▝▀▖▐ ▖▛▀ ▌▐ ▌▌ ▌
-# ▀▀ ▗▄▘▀▀  ▀ ▝▀▘▘▝ ▘▝▀▘
-sudo systemctl disable gdm
-sudo systemctl disable gdm3
-sudo systemctl enable fail2ban
+if command -v systemctl >/dev/null ; then
+    #          ▐           ▌
+    # ▞▀▘▌ ▌▞▀▘▜▀ ▞▀▖▛▚▀▖▞▀▌
+    # ▝▀▖▚▄▌▝▀▖▐ ▖▛▀ ▌▐ ▌▌ ▌
+    # ▀▀ ▗▄▘▀▀  ▀ ▝▀▘▘▝ ▘▝▀▘
+    sudo systemctl disable gdm
+    sudo systemctl disable gdm3
+    sudo systemctl enable fail2ban
+fi
 
 msg 'done!'
