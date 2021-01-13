@@ -2,10 +2,6 @@
 umask 022
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# ▞▀▖      ▐          ▌ ▌         
-# ▚▄ ▌ ▌▞▀▘▜▀ ▞▀▖▛▚▀▖ ▚▗▘▝▀▖▙▀▖▞▀▘
-# ▖ ▌▚▄▌▝▀▖▐ ▖▛▀ ▌▐ ▌ ▝▞ ▞▀▌▌  ▝▀▖
-# ▝▀ ▗▄▘▀▀  ▀ ▝▀▘▘▝ ▘  ▘ ▝▀▘▘  ▀▀ 
 PATH=/bin:/sbin:$PATH
 PATH=/usr/bin:/usr/sbin:$PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
@@ -16,16 +12,15 @@ export PATH
 export MANPATH="${HOME}/.local/share/man:$MANPATH"
 export FONTCONFIG_PATH=/etc/fonts
 
-# ---- bonsai stuff --------
-export BONSAI_ROOT="${HOME}/.bonsai"
-export PATH="$BONSAI_ROOT/bin:$PATH"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$BONSAI_ROOT/lib"
-export MANPATH="$BONSAI_ROOT/share/man:$MANPATH"
-# --------------------------
+if command -v bs >/dev/null ; then
+    export BONSAI_ROOT="${HOME}/.bonsai"
+    export PATH="$BONSAI_ROOT/bin:$PATH"
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$BONSAI_ROOT/lib"
+    export MANPATH="$BONSAI_ROOT/share/man:$MANPATH"
+fi
 
 export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
-
-export PYTHONOPTIMIZE=2 # disable docstrings, debug info
+export PYTHONOPTIMIZE=2
 
 [ -f /proc/cpuinfo ] &&
 while read -r line ; do
@@ -42,12 +37,7 @@ export LANG="$LC_CTYPE" \
     LOCALE="$LC_CTYPE"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# ▌ ▌▛▀▖▞▀▖ ▌ ▌         
-# ▝▞ ▌ ▌▌▄▖ ▚▗▘▝▀▖▙▀▖▞▀▘
-# ▞▝▖▌ ▌▌ ▌ ▝▞ ▞▀▌▌  ▝▀▖
-# ▘ ▘▀▀ ▝▀   ▘ ▝▀▘▘  ▀▀ 
 export XDG_OPEN=opn
-#export XDG_CURRENT_DESKTOP=Gnome
 
 export XDG_CONFIG_HOME="${HOME}/.config" \
        XDG_DOWNLOAD_DIR="${HOME}/downloads" \
@@ -63,10 +53,6 @@ export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_PUBLICSHARE_DIR="$XDG_CACHE_HOME/Public" \
        XDG_TEMPLATES_DIR="$XDG_CACHE_HOME/Templates"
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# ▙▗▌    ▛▀▖                    ▌ ▌         
-# ▌▘▌▌ ▌ ▙▄▘▙▀▖▞▀▖▞▀▌▙▀▖▝▀▖▛▚▀▖ ▚▗▘▝▀▖▙▀▖▞▀▘
-# ▌ ▌▚▄▌ ▌  ▌  ▌ ▌▚▄▌▌  ▞▀▌▌▐ ▌ ▝▞ ▞▀▌▌  ▝▀▖
-# ▘ ▘▗▄▘ ▘  ▘  ▝▀ ▗▄▘▘  ▝▀▘▘▝ ▘  ▘ ▝▀▘▘  ▀▀ 
 
 export ENV="${HOME}/src/dots/shell/main.shellrc"
 
@@ -90,42 +76,18 @@ export MPV_OPTS="--really-quiet --force-seekable=yes"
 export WATSON_TTS_API_KEY="${XDG_DOCUMENTS_DIR}/api_keys/watson_tts_api.key"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# ▛▀▖   ▗▀▖      ▜▐   ▛▀▖                      
-# ▌ ▌▞▀▖▐  ▝▀▖▌ ▌▐▜▀  ▙▄▘▙▀▖▞▀▖▞▀▌▙▀▖▝▀▖▛▚▀▖▞▀▘
-# ▌ ▌▛▀ ▜▀ ▞▀▌▌ ▌▐▐ ▖ ▌  ▌  ▌ ▌▚▄▌▌  ▞▀▌▌▐ ▌▝▀▖
-# ▀▀ ▝▀▘▐  ▝▀▘▝▀▘ ▘▀  ▘  ▘  ▝▀ ▗▄▘▘  ▝▀▘▘▝ ▘▀▀ 
-#if command -v gnvim >/dev/null && command -v gnvim-launch >/dev/null ; then
-#    export EDITOR=gnvim-launch
-#else
-export EDITOR=nvim
-# fi
-
+for editor in nvim vim vi nano ; do
+    if command -v $editor >/dev/null ; then
+        export EDITOR=$editor
+        break
+    fi
+done
 export BROWSER=firefox
 export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
 export LESS='-QRsim +Gg'
 export LESSHISTFILE=/dev/null
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# ▛▀▖▜       ▞▀▖ ▛▀▘          ▌ ▌          ▞▀▖            
-# ▙▄▘▐ ▝▀▖▛▀▖▚▄▌ ▙▄▙▀▖▞▀▖▛▚▀▖ ▌ ▌▞▀▘▞▀▖▙▀▖ ▚▄ ▛▀▖▝▀▖▞▀▖▞▀▖
-# ▌  ▐ ▞▀▌▌ ▌▖ ▌ ▌ ▌  ▌ ▌▌▐ ▌ ▌ ▌▝▀▖▛▀ ▌   ▖ ▌▙▄▘▞▀▌▌ ▖▛▀ 
-# ▘   ▘▝▀▘▘ ▘▝▀  ▘ ▘  ▝▀ ▘▝ ▘ ▝▀ ▀▀ ▝▀▘▘   ▝▀ ▌  ▝▀▘▝▀ ▝▀▘
-if [ -d "${HOME}/src/plan9" ] ; then
-    export PLAN9="${HOME}/src/plan9"
-elif [ -d /usr/lib/plan9 ] ; then
-    export PLAN9=/usr/lib/plan9
-fi
-if [ "$PLAN9" ] ; then
-    export PATH="$PATH:$PLAN9/bin"
-    export font="$PLAN9/lib/font/terminus/ter-u14v.font"
-    export lfont="$PLAN9/lib/font/mntcarlo/mntcarlo.font"
-    export tabstop=4
-fi
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-#    ▐  ▌            ▐     ▗▀▖▗▀▖
-# ▞▀▖▜▀ ▛▀▖▞▀▖▙▀▖ ▞▀▘▜▀ ▌ ▌▐  ▐  
-# ▌ ▌▐ ▖▌ ▌▛▀ ▌   ▝▀▖▐ ▖▌ ▌▜▀ ▜▀ 
-# ▝▀  ▀ ▘ ▘▝▀▘▘   ▀▀  ▀ ▝▀▘▐  ▐  
 
 # empty ~/tmp
 rm -rf ~/tmp 2>/dev/null ||:
