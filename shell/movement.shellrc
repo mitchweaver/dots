@@ -70,3 +70,9 @@ md() { mv "$@" ${XDG_DOWNLOAD_DIR} ; }
 mw() { mv "$@" ${HOME}/src/wvr.sh/    ; }
 Yw() { cp -r "$@" ${HOME}/src/wvr.sh/ ; }
 alias gw='_g ${HOME}/src/wvr.sh'
+
+# suckless stuff
+alias stcfg="$EDITOR ~/src/suckless/st/cfg/config.h"
+alias dwmcfg="$EDITOR ~/src/suckless/dwm/cfg/config.h"
+alias dmenucfg="$EDITOR ~/src/suckless/dmenu/cfg/config.h"
+alias tabbedcfg="$EDITOR ~/src/suckless/tabbed/cfg/config.h"
