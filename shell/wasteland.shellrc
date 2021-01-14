@@ -234,4 +234,5 @@ alias autoclick='while sleep 1 ; do xdotool click 1; done'
 alias nfs-space='ssh pi df -h | grep -E "(Avail|md0)"'
 alias nfs-update="ssh pi 'apt update ; apt upgrade -y'"
 alias wvr-update="ssh wvr 'apt update ; apt upgrade -y'"
+alias beast1-update="ssh beast1 'apt update ; apt upgrade -y'"
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
