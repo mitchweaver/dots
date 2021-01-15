@@ -6,33 +6,8 @@
 # I like to keep a consistent syntax between machines.
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-# Crux
-if command -v crux >/dev/null ; then
-    pkg() {
-        flag=${1#-}
-        shift
-        case $flag in
-            a) sudo prt-get depinst -f -im -is -if --install-scripts "$@" ;;
-            u) sudo prt-get update  -f -im -is -if --install-scripts "$@" ;;
-            d) sudo prt-get remove "$@" ;;
-            i) prt-get info "$@" ;;
-            s) prt-get search "$@" ;;
-        esac
-    }
-# Void
-elif command -v xbps-query >/dev/null ; then
-    pkg() {
-        flag=${1#-}
-        shift
-        case $flag in
-            a|u) sudo xbps-install -Su "$@" ;;
-            d) sudo xbps-remove -R "$@" ;;
-            i) xbps-query --repository --show "$@" ;;
-            s) xbps-query --repository -s "$@" ;;
-        esac
-    }
 # Ubuntu / Debian
-elif command -v apt >/dev/null ; then
+if command -v apt >/dev/null ; then
     pkg() {
         flag=${1#-}
         shift
@@ -47,7 +22,7 @@ elif command -v apt >/dev/null ; then
                 sudo apt purge "$@"
                 yes | sudo apt autoremove
                 ;;
-            -ITS_ALL_FUCKED)
+            *ITS_ALL_FUCKED)
                 apt list --installed | \
                 while read -r p ; do
                     sudo apt install --reinstall --fix-broken ${p%%/*}
