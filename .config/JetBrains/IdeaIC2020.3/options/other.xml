@@ -1,0 +1,75 @@
+<application>
+  <component name="JdkInstallerHistory">
+    <option name="installedItems">
+      <installed-jdk>
+        <option name="fullText" value="AdoptOpenJDK (OpenJ9) 1.8.0_275" />
+        <option name="installDir" value="$USER_HOME$/.jdks/adopt-openj9-1.8.0_275" />
+        <option name="javaHomeDir" value="$USER_HOME$/.jdks/adopt-openj9-1.8.0_275" />
+        <option name="sha256" value="8bb74ff7ab2f64ced23212ee0520295c01b6f2d7558fd6e488a8ca795ced1ebd" />
+        <option name="url" value="https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u275-b01_openj9-0.23.0/OpenJDK8U-jdk_x64_linux_openj9_8u275b01_openj9-0.23.0.tar.gz" />
+        <option name="versionText" value="1.8.0_275" />
+      </installed-jdk>
+    </option>
+  </component>
+  <component name="ProjectPluginTrackerManager">
+    <option name="trackers">
+      <map>
+        <entry key="1mr53csTnwHrrjfZHb0dmTCsdBg">
+          <value>
+            <ProjectPluginTrackerState />
+          </value>
+        </entry>
+        <entry key="1n2g4LPlBGLVuLiBhVQT1pD6bNM">
+          <value>
+            <ProjectPluginTrackerState />
+          </value>
+        </entry>
+        <entry key="1n2gGg0ecZSYAdWEccUh3StGBSO">
+          <value>
+            <ProjectPluginTrackerState />
+          </value>
+        </entry>
+        <entry key="1n2qPNthilYGt0OqEPmbrYMGExY">
+          <value>
+            <ProjectPluginTrackerState />
+          </value>
+        </entry>
+        <entry key="Default (Template) Project">
+          <value>
+            <ProjectPluginTrackerState />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="MarketplacePluginsSearchHistory" value="vim&#10;/sortBy:downloads osbot&#10;/sortBy:downloads java&#10;/sortBy:featured /sortBy:downloads java&#10;/sortBy:featured /sortBy:downloads" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="NonModalCommitCustomization.IsApplied" value="true" />
+    <property name="appcds.runOnSecondStart" value="IC-203.6682.168-e3487ccc69f08a448f3712c2da8082865384c2efc6e3c3a855e1277489535ced" />
+    <property name="ask.about.ctrl.y.shortcut.v2" value="true" />
+    <property name="build.toolwindow.Build Output.selection.state" value="com.intellij.build.BuildTreeConsoleView" />
+    <property name="com.intellij.openapi.roots.ui.configuration.TabbedModuleEditor.selectedEditor" value="Dependencies" />
+    <property name="decompiler.legal.notice.accepted" value="true" />
+    <property name="defaultJdkConfigured" value="true" />
+    <property name="file.chooser.recent.files" value="$USER_HOME$/biz/docker-osbot/OSBot/Scripts&#10;/home/mitch/biz/intellij-projects/YouTubeDemo&#10;/home/mitch/biz/intellij-projects&#10;/home/mitch/src/intellij-projects/helloworld&#10;/home/mitch/src/intellij-projects" />
+    <property name="file.gist.reindex.count" value="1" />
+    <property name="fileTypeChangedCounter" value="2" />
+    <property name="got.it.tooltip.reader.mode.got.it" value="1" />
+    <property name="ide.memory.adjusted" value="true" />
+    <property name="ide.updates.previous.build.number" value="IC-203.6682.168" />
+    <property name="ideavim.statistics.timestamp" value="1610588431081" />
+    <property name="installed.kotlin.plugin.version" value="203-1.4.10-release-IJ6682.9" />
+    <property name="jdk.selected.JAVA_MODULE" value="adopt-openj9-1.8" />
+    <property name="lastSeenTip" value="neue-EditRegExp.html" />
+    <property name="lastTimeTipsWereShown" value="1610238677082" />
+    <property name="last_opened_file_path" value="$USER_HOME$/downloads/Sublime Monokai True.jar" />
+    <property name="packagesearch.endpoint.url.fulltext" value="https://package-search.services.jetbrains.com/api/search/idea/fulltext" />
+    <property name="packagesearch.endpoint.url.suggest" value="https://package-search.services.jetbrains.com/api/search/idea/suggest" />
+    <property name="packagesearch.status.updated.ts" value="1610238670634" />
+    <property name="project.wizard.group" value="JAVA_MODULE" />
+    <property name="seenTips" value="neue-ImagesLookup.html,neue-DeleteLine.html,neue-TabInLookups.html,neue-CamelPrefixesInNavigationPopups.html,neue-EditRegExp.html" />
+    <property name="tasks.pass.word.conversion.enforced" value="true" />
+  </component>
+</application>

@@ -12,6 +12,7 @@ query() {
     [ "$ans" = y ] || return 1
 }
 
+query "install apps?" &&
 if command -v apt >/dev/null ; then
     msg 'We are using Ubuntu, installing programs...'
     sudo apt update
@@ -120,6 +121,7 @@ ln -sf "$DOTS"/.config/autostart ~/.config/autostart
 ln -sf "$DOTS"/.config/sxhkd/sxhkdrc ~/.config/sxhkd/sxhkdrc
 ln -sf "$DOTS"/.config/picom.conf ~/.config/picom.conf
 ln -sf "$DOTS"/.config/dunst/dunstrc ~/.config/dunst/dunstrc
+ln -sf "$DOTS"/.config/JetBrains ~/.config/JetBrains
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -134,14 +136,14 @@ ln -sf "$DOTS"/shell/main.shellrc ~/.bashrc
 
 rice
 
-if command -v systemctl >/dev/null ; then
-    #          ▐           ▌
-    # ▞▀▘▌ ▌▞▀▘▜▀ ▞▀▖▛▚▀▖▞▀▌
-    # ▝▀▖▚▄▌▝▀▖▐ ▖▛▀ ▌▐ ▌▌ ▌
-    # ▀▀ ▗▄▘▀▀  ▀ ▝▀▘▘▝ ▘▝▀▘
-    sudo systemctl disable gdm
-    sudo systemctl disable gdm3
-    sudo systemctl enable fail2ban
-fi
+# if command -v systemctl >/dev/null ; then
+#     #          ▐           ▌
+#     # ▞▀▘▌ ▌▞▀▘▜▀ ▞▀▖▛▚▀▖▞▀▌
+#     # ▝▀▖▚▄▌▝▀▖▐ ▖▛▀ ▌▐ ▌▌ ▌
+#     # ▀▀ ▗▄▘▀▀  ▀ ▝▀▘▘▝ ▘▝▀▘
+#     sudo systemctl disable gdm
+#     sudo systemctl disable gdm3
+#     sudo systemctl enable fail2ban
+# fi
 
 msg 'done!'

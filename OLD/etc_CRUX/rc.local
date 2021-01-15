@@ -1,9 +1,0 @@
-IF=wlp0s29f7u2 
-
-ifconfig $IF up
-wpa_supplicant -B -c /etc/wpa_supplicant.conf -i $IF -D nl80211
-sleep 2
-dhcpcd
-dhcpcd
-
-unset IF

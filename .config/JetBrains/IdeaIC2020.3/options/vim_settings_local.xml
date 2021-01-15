@@ -1,0 +1,139 @@
+<application>
+  <component name="VimHistorySettings">
+    <history>
+      <history-search>
+        <entry>sleep</entry>
+      </history-search>
+      <history-cmd>
+        <entry>W</entry>
+        <entry>w</entry>
+      </history-cmd>
+      <history-expr />
+      <history-input />
+    </history>
+  </component>
+  <component name="VimMarksSettings">
+    <globalmarks />
+    <filemarks>
+      <file name="/Dummy.txt" timestamp="1610593425298">
+        <mark key="[" line="0" column="0" />
+      </file>
+      <file name="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" timestamp="1610597339351">
+        <mark key="'" line="47" column="0" />
+        <mark key="[" line="40" column="10" />
+        <mark key="]" line="40" column="10" />
+        <mark key="^" line="48" column="28" />
+        <mark key="." line="40" column="10" />
+      </file>
+      <file name="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/YouTubeDemo/YouTube.java" timestamp="1610594002866">
+        <mark key="'" line="26" column="0" />
+        <mark key="[" line="23" column="27" />
+        <mark key="]" line="23" column="28" />
+        <mark key="." line="23" column="27" />
+        <mark key="^" line="23" column="28" />
+      </file>
+      <file name="$USER_HOME$/src/intellij-projects/helloworld/src/com/example/helloworld/HelloWorld.java" timestamp="1610238959169">
+        <mark key="'" line="3" column="39" />
+        <mark key="[" line="3" column="44" />
+        <mark key="]" line="4" column="40" />
+        <mark key="." line="4" column="39" />
+        <mark key="^" line="4" column="40" />
+      </file>
+      <file name="$USER_HOME$/biz/intellij-projects/OSBot.jar!/org/osbot/rs07/script/Script.class" timestamp="1610593905447">
+        <mark key="'" line="24" column="0" />
+        <mark key="[" line="147" column="1" />
+        <mark key="]" line="147" column="1" />
+      </file>
+      <file name="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/util/ExplvSleep.java" timestamp="1610597190564">
+        <mark key="[" line="20" column="0" />
+        <mark key="]" line="20" column="0" />
+        <mark key="." line="20" column="0" />
+      </file>
+      <file name="/" timestamp="1610671469766">
+        <mark key="[" line="0" column="0" />
+      </file>
+    </filemarks>
+    <jumps>
+      <jump line="2" column="24" filename="$USER_HOME$/src/intellij-projects/helloworld/src/com/example/helloworld/HelloWorld.java" />
+      <jump line="3" column="39" filename="$USER_HOME$/src/intellij-projects/helloworld/src/com/example/helloworld/HelloWorld.java" />
+      <jump line="8" column="4" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/YouTubeDemo/YouTube.java" />
+      <jump line="24" column="0" filename="$USER_HOME$/biz/intellij-projects/OSBot.jar!/org/osbot/rs07/script/Script.class" />
+      <jump line="12" column="23" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/YouTubeDemo/YouTube.java" />
+      <jump line="20" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/YouTubeDemo/YouTube.java" />
+      <jump line="4" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/YouTubeDemo/YouTube.java" />
+      <jump line="26" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/YouTubeDemo/YouTube.java" />
+      <jump line="44" column="23" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
+      <jump line="46" column="33" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
+      <jump line="41" column="40" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
+      <jump line="51" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
+      <jump line="49" column="74" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
+      <jump line="23" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
+      <jump line="1" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
+      <jump line="0" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
+      <jump line="27" column="11" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
+      <jump line="29" column="43" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
+      <jump line="30" column="8" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
+      <jump line="32" column="68" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
+      <jump line="45" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
+      <jump line="47" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
+      <jump line="5" column="3" filename="$USER_HOME$/biz/intellij-projects/PlankLooter/src/planklooter/PlankLooter.java" />
+      <jump line="31" column="12" filename="$USER_HOME$/biz/intellij-projects/PlankLooter/src/planklooter/PlankLooter.java" />
+      <jump line="29" column="26" filename="$USER_HOME$/biz/intellij-projects/PlankLooter/src/planklooter/PlankLooter.java" />
+    </jumps>
+  </component>
+  <component name="VimRegisterSettings">
+    <registers>
+      <register name="&quot;" type="2">
+        <text encoding="base64">Cg==</text>
+      </register>
+      <register name="-" type="4">
+        <text>:walking</text>
+      </register>
+      <register name="/" type="4">
+        <text>sleep</text>
+      </register>
+      <register name="0" type="4">
+        <text encoding="base64">ICAgICAgICAvLyBvYmplY3RzLmNsb3Nlc3QoIkJhbmsgY2hlc3QiKS5pbnRlcmFjdCgiVXNlIik7Ci8vTlBDIGd1YXJkID0gbnBjcy5jbG9zZXN0KCJHdWFyZCIpOwovL2lmKGd1YXJkICE9IG51bGwpewovLyAgIGd1YXJkLmludGVyYWN0KCJBdHRhY2siKTsKLy99Ci8qaWYoIW15UGxheWVyKCkuaXNBbmltYXRpbmcoKSl7CiAgICBpZihpbnZlbnRvcnkuaXNGdWxsKCkpewogICAgICAgIGludmVudG9yeS5kcm9wQWxsKG9yZV9pZCk7CiAgICB9CiAgICBSUzJPYmplY3Qgcm9ja3MgPSBvYmplY3RzLmNsb3Nlc3Qocm9ja19pZCk7CiAgICBpZihyb2NrcyAhPSBudWxsKXsKICAgICAgICByb2Nrcy5pbnRlcmFjdCgiTWluZSIpOwogICAgICAgIHNsZWVwKHJhbmRvbSgyNSwgMzApKTsKICAgIH0KfSov</text>
+      </register>
+      <register name="1" type="2">
+        <text encoding="base64">Cg==</text>
+      </register>
+      <register name="2" type="2">
+        <text encoding="base64">Cg==</text>
+      </register>
+      <register name="3" type="2">
+        <text encoding="base64">ICAgICAgICAgICAgbG9nKCJTdGFydGluZyBjcmFmdGluZyBleHBlcmllbmNlOiAiICsgY3JhZnRpbmdTdGFydCk7Cg==</text>
+      </register>
+      <register name="4" type="2">
+        <text encoding="base64">Cg==</text>
+      </register>
+      <register name="5" type="2">
+        <text encoding="base64">ICAgICAgICAvL1RoaXMgaXMgd2hlcmUgeW91IHdpbGwgcHV0IHlvdXIgY29kZSBmb3IgcGFpbnQocykK</text>
+      </register>
+      <register name="6" type="2">
+        <text encoding="base64">Cg==</text>
+      </register>
+      <register name="7" type="2">
+        <text encoding="base64">fSovCg==</text>
+      </register>
+      <register name="8" type="2">
+        <text encoding="base64">ICAgIH0K</text>
+      </register>
+      <register name="9" type="2">
+        <text encoding="base64">ICAgICAgICBzbGVlcChyYW5kb20oMjUsIDMwKSk7Cg==</text>
+      </register>
+      <register name=":" type="4">
+        <text>w</text>
+      </register>
+    </registers>
+  </component>
+  <component name="VimSearchSettings">
+    <search>
+      <last-search>sleep</last-search>
+      <last-offset />
+      <last-pattern>sleep</last-pattern>
+      <last-dir>1</last-dir>
+      <show-last>false</show-last>
+    </search>
+  </component>
+</application>

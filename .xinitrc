@@ -37,7 +37,7 @@ xset +fp ~/.fonts &
 # one shitty way to do this is see if we have a wifi card...
 case $(interface) in
     wlan?|wlp*) ln -s ~/.Xresources-laptop ~/.Xresources ;;
-    eth?|enp*)  ln -s ~/.Xresources-laptop ~/.Xresources
+    eth?|enp*)  ln -s ~/.Xresources-desktop ~/.Xresources
 esac
 
 xrdb load ~/.Xresources

@@ -1,0 +1,33 @@
+<application>
+  <component name="RecentProjectsManager">
+    <option name="additionalInfo">
+      <map>
+        <entry key="$USER_HOME$/biz/intellij-projects/YouTubeDemo">
+          <value>
+            <RecentProjectMetaInfo frameTitle="YouTubeDemo" projectWorkspaceId="1n2gGg0ecZSYAdWEccUh3StGBSO">
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="build" value="IC-203.6682.168" />
+              <option name="buildTimestamp" value="1609240706283" />
+              <frame x="24" y="44" width="1868" height="1008" />
+              <option name="productionCode" value="IC" />
+              <option name="projectOpenTimestamp" value="1610593505843" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/biz/intellij-projects/PlankLooter">
+          <value>
+            <RecentProjectMetaInfo frameTitle="PlankLooter – PlankLooter.java" opened="true" projectWorkspaceId="1n2qPNthilYGt0OqEPmbrYMGExY">
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="build" value="IC-203.6682.168" />
+              <option name="buildTimestamp" value="1609240737030" />
+              <frame x="24" y="44" width="1868" height="1008" />
+              <option name="productionCode" value="IC" />
+              <option name="projectOpenTimestamp" value="1610598509776" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="lastProjectLocation" value="$USER_HOME$/biz/intellij-projects" />
+  </component>
+</application>
