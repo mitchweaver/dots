@@ -85,8 +85,8 @@ ln -sf "$DOTS"/.xinitrc ~/.xinitrc
 ln -sf "$DOTS"/.xinitrc ~/.xsessionrc
 ln -sf "$DOTS"/.profile    ~/.profile
 ln -sf "$DOTS"/.xmodmaprc ~/.xmodmaprc
-ln -sf "$DOTS"/.Xresources ~/.Xresources
-xrdb load ~/.Xresources
+ln -sf "$DOTS"/.Xresources-laptop ~/.Xresources-laptop
+ln -sf "$DOTS"/.Xresources-desktop ~/.Xresources-desktop
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

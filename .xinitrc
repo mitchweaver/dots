@@ -30,9 +30,17 @@ export DIMENSIONS="$(dimensions)"
 
 xset b off &
 xhost +local: >/dev/null &
-xrdb load ~/.Xresources &
 xmodmap ~/.xmodmaprc &
 xset +fp ~/.fonts &
+
+# determine if we're on desktop or laptop
+# one shitty way to do this is see if we have a wifi card...
+case $(interface) in
+    wlan?|wlp*) ln -s ~/.Xresources-laptop ~/.Xresources ;;
+    eth?|enp*)  ln -s ~/.Xresources-laptop ~/.Xresources
+esac
+
+xrdb load ~/.Xresources
 
 # make mouse cursor smallest
 dconf write /org/gnome/desktop/interface/cursor-size 25 &
