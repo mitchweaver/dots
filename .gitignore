@@ -87,3 +87,11 @@
 *vim/log
 *config/JetBrains/Idea*/tasks/*
 *config/JetBrains/Idea*/workspace/*
+*config/JetBrains/Idea*/options/vim_settings_local.xml
+*config/JetBrains/Idea*/options/actionSummary.xml
+*config/JetBrains/Idea*/options/features.usage.statistics.xml
+*config/JetBrains/Idea*/options/other.xml
+*config/JetBrains/Idea*/options/recentProjects.xml
+*config/JetBrains/Idea*/options/updates.xml
+*config/JetBrains/Idea*/options/window.state.xml
+*config/JetBrains/Idea*/port

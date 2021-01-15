@@ -1,16 +1,19 @@
 <application>
   <component name="ActionsLocalSummary">
     <e n="$Copy">
-      <i c="1" l="1610600440649" />
+      <i c="3" l="1610683399785" />
     </e>
     <e n="$Delete">
-      <i c="2" l="1610597081234" />
+      <i c="3" l="1610682313112" />
     </e>
     <e n="$SelectAll">
-      <i c="3" l="1610598754426" />
+      <i c="4" l="1610682286829" />
+    </e>
+    <e n="BraceOrQuoteOut">
+      <i c="6" l="1610687829498" />
     </e>
     <e n="BuildArtifact">
-      <i c="1" l="1610239145293" />
+      <i c="55" l="1610694054524" />
     </e>
     <e n="CheckForUpdate">
       <i c="1" l="1610592920554" />
@@ -24,32 +27,47 @@
     <e n="CommentByBlockComment">
       <i c="4" l="1610600389960" />
     </e>
+    <e n="CompileProject">
+      <i c="1" l="1610690334246" />
+    </e>
     <e n="EditorBackSpace">
-      <i c="38" l="1610598756003" />
+      <i c="45" l="1610690272040" />
     </e>
     <e n="EditorChooseLookupItem">
-      <i c="14" l="1610601366224" />
+      <i c="26" l="1610693489020" />
     </e>
     <e n="EditorChooseLookupItemReplace">
-      <i c="2" l="1610601379448" />
+      <i c="174" l="1610693781971" />
     </e>
     <e n="EditorDown">
-      <i c="18" l="1610596758465" />
+      <i c="128" l="1610693617068" />
+    </e>
+    <e n="EditorLeft">
+      <i c="1" l="1610692957350" />
     </e>
     <e n="EditorLineStart">
       <i c="1" l="1610238196455" />
     </e>
+    <e n="EditorPageDown">
+      <i c="6" l="1610688305425" />
+    </e>
+    <e n="EditorPageUp">
+      <i c="1" l="1610688305700" />
+    </e>
     <e n="EditorPaste">
-      <i c="7" l="1610601358581" />
+      <i c="20" l="1610693065695" />
     </e>
     <e n="EditorStartNewLine">
       <i c="1" l="1610238869997" />
     </e>
     <e n="EditorTab">
-      <i c="2" l="1610597249170" />
+      <i c="12" l="1610687616509" />
+    </e>
+    <e n="EditorUnindentSelection">
+      <i c="1" l="1610686650475" />
     </e>
     <e n="EditorUp">
-      <i c="10" l="1610238944820" />
+      <i c="33" l="1610691952930" />
     </e>
     <e n="Exit">
       <i c="2" l="1610603480153" />
@@ -61,22 +79,28 @@
       <i c="2" l="1610593500492" />
     </e>
     <e n="HideActiveWindow">
-      <i c="5" l="1610600384429" />
+      <i c="8" l="1610684282960" />
     </e>
     <e n="NewClass">
-      <i c="3" l="1610598535885" />
+      <i c="4" l="1610682204165" />
     </e>
     <e n="NewDir">
-      <i c="6" l="1610598554588" />
+      <i c="8" l="1610682285299" />
+    </e>
+    <e n="NewProject">
+      <i c="1" l="1610682166855" />
     </e>
     <e n="ProjectView.HideEmptyMiddlePackages">
       <i c="1" l="1610595505129" />
     </e>
+    <e n="SearchEverywhere">
+      <i c="3" l="1610689323441" />
+    </e>
     <e n="ShowIntentionActions">
-      <i c="4" l="1610598780562" />
+      <i c="19" l="1610684698209" />
     </e>
     <e n="ShowProjectStructureSettings">
-      <i c="6" l="1610600170788" />
+      <i c="8" l="1610684437182" />
     </e>
     <e n="ShowSettings">
       <i c="4" l="1610671468697" />
@@ -106,19 +130,19 @@
       <i c="1" l="1610238202554" />
     </e>
     <e n="com.intellij.notification.NotificationAction$Simple">
-      <i c="2" l="1610603250292" />
+      <i c="3" l="1610690383855" />
     </e>
     <e n="com.intellij.openapi.actionSystem.EmptyAction$MyDelegatingAction">
-      <i c="568" l="1610603403679" />
+      <i c="2329" l="1610694182425" />
     </e>
     <e n="com.intellij.openapi.fileEditor.impl.tabActions.CloseTab">
       <i c="11" l="1610598031171" />
     </e>
     <e n="com.intellij.openapi.project.DumbAwareAction$SimpleDumbAwareAction">
-      <i c="1" l="1610595449198" />
+      <i c="4" l="1610689324849" />
     </e>
     <e n="com.intellij.openapi.roots.ui.configuration.artifacts.ArtifactsStructureConfigurable$AddArtifactAction">
-      <i c="4" l="1610598752530" />
+      <i c="5" l="1610682246831" />
     </e>
     <e n="com.intellij.openapi.roots.ui.configuration.artifacts.actions.AddCompositeElementAction">
       <i c="1" l="1610598681797" />
@@ -127,13 +151,13 @@
       <i c="2" l="1610598722753" />
     </e>
     <e n="com.intellij.openapi.roots.ui.configuration.libraryEditor.CreateNewLibraryAction">
-      <i c="2" l="1610598631640" />
+      <i c="3" l="1610682237255" />
     </e>
     <e n="com.intellij.openapi.roots.ui.configuration.projectRoot.ModuleStructureConfigurable$AddModuleAction">
       <i c="1" l="1610598591890" />
     </e>
     <e n="com.intellij.openapi.wm.impl.ToolWindowHeader$HideAction">
-      <i c="1" l="1610596516110" />
+      <i c="4" l="1610690382330" />
     </e>
     <e n="com.intellij.openapi.wm.impl.ToolWindowHeader$ShowOptionsAction">
       <i c="1" l="1610595498644" />
@@ -142,13 +166,13 @@
       <i c="1" l="1610592917968" />
     </e>
     <e n="com.intellij.ui.AnActionButton$AnActionButtonWrapper">
-      <i c="15" l="1610598751450" />
+      <i c="17" l="1610682245315" />
     </e>
     <e n="com.intellij.ui.CommonActionsPanel$AddButton">
-      <i c="2" l="1610598729433" />
+      <i c="3" l="1610682222685" />
     </e>
     <e n="com.maddyhome.idea.vim.ui.ex.ExShortcutKeyAction">
-      <i c="266" l="1610603418252" />
+      <i c="1345" l="1610694185989" />
     </e>
     <e n="context.save">
       <i c="1" l="1610598617632" />
