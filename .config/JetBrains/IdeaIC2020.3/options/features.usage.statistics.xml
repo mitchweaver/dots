@@ -4,17 +4,17 @@
     <feature id="editing.completion.camelHumps" count="2" last-shown="0" last-used="1610688288721" shown-count="0" />
     <feature id="editing.completion.second.smarttype.aslist" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="codeassists.surroundwith.statement" count="0" last-shown="0" last-used="0" shown-count="0" />
-    <feature id="refactoring.rename" count="0" last-shown="0" last-used="0" shown-count="0" />
+    <feature id="refactoring.rename" count="1" last-shown="0" last-used="1610915380746" shown-count="0" />
     <feature id="navigation.popup.action" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="editing.completion.cancelByControlArrows" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="editing.completion.finishBySmartEnter" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="navigation.popup.symbol" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="find.recent.search" count="0" last-shown="0" last-used="0" shown-count="0" />
-    <feature id="editing.completion.replace" count="174" last-shown="1610682385896" last-used="1610693781977" shown-count="155" />
-    <feature id="switcher" count="0" last-shown="0" last-used="0" shown-count="0" />
+    <feature id="editing.completion.replace" count="227" last-shown="1610682385896" last-used="1610919382795" shown-count="155" />
+    <feature id="switcher" count="12" last-shown="0" last-used="1610919501733" shown-count="0" />
     <feature id="codeassists.complete.statement" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="navigation.goto.inspection" count="0" last-shown="0" last-used="0" shown-count="0" />
-    <feature id="editing.completion.variable.name" count="51" last-shown="0" last-used="1610693459075" shown-count="0" />
+    <feature id="editing.completion.variable.name" count="94" last-shown="0" last-used="1610919136273" shown-count="0" />
     <feature id="navigation.popup.file" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="codeassists.overrideimplement" count="4" last-shown="0" last-used="1610682406430" shown-count="0" />
     <feature id="editing.completion.smarttype.casting" count="0" last-shown="0" last-used="0" shown-count="0" />
@@ -43,13 +43,13 @@
     <feature id="ant.quickfix.CreateProperty" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="editing.completion.second.smarttype.toar" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="navigation.popup.camelprefix" count="0" last-shown="0" last-used="0" shown-count="0" />
-    <feature id="SearchEverywhere" count="3" last-shown="0" last-used="1610689323441" shown-count="0" />
+    <feature id="SearchEverywhere" count="4" last-shown="0" last-used="1610919176871" shown-count="0" />
     <feature id="navigation.popup.class" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="editor.delete.line" count="0" last-shown="0" last-used="0" shown-count="0" />
-    <feature id="codeassists.highlight.throws" count="44" last-shown="0" last-used="1610693452993" shown-count="0" />
+    <feature id="codeassists.highlight.throws" count="51" last-shown="0" last-used="1610919466677" shown-count="0" />
     <feature id="codeassists.quickdefinition" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="find.completion" count="0" last-shown="0" last-used="0" shown-count="0" />
-    <feature id="editing.completion.basic" count="202" last-shown="0" last-used="1610693781979" shown-count="0" />
+    <feature id="editing.completion.basic" count="258" last-shown="0" last-used="1610919382798" shown-count="0" />
     <feature id="tag.name.completion" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="editing.completion.second.smarttype.array.member" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="editing.completion.postfix" count="0" last-shown="0" last-used="0" shown-count="0" />
@@ -60,7 +60,7 @@
     <feature id="codeassists.quickjavadoc.lookup" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="ui.scheme.quickswitch" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="codeassists.highlight.implements" count="0" last-shown="0" last-used="0" shown-count="0" />
-    <feature id="editing.completion.smarttype.general" count="0" last-shown="1610693631918" last-used="0" shown-count="239" />
+    <feature id="editing.completion.smarttype.general" count="0" last-shown="1610919391308" last-used="0" shown-count="401" />
     <feature id="codeassist.inspect.batch" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="navigation.popup.file.structure" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="ant.quickfix.CreateTarget" count="0" last-shown="0" last-used="0" shown-count="0" />
@@ -73,17 +73,17 @@
     <feature id="editing.completion.changeSorting" count="0" last-shown="0" last-used="0" shown-count="0" />
     <feature id="codeassists.quickdefinition.lookup" count="0" last-shown="0" last-used="0" shown-count="0" />
     <completionStatsTag>
-      <option name="sparedCharacters" value="1498" />
-      <option name="invocations" value="164" />
+      <option name="sparedCharacters" value="1784" />
+      <option name="invocations" value="199" />
       <option name="startDate" value="1610172000000" />
-      <option name="dayCount" value="4" />
-      <option name="lastDate" value="1610690400000" />
+      <option name="dayCount" value="5" />
+      <option name="lastDate" value="1610863200000" />
     </completionStatsTag>
     <fixesStatsTag>
-      <option name="invocations" value="19" />
+      <option name="invocations" value="30" />
       <option name="startDate" value="1610517600000" />
-      <option name="dayCount" value="2" />
-      <option name="lastDate" value="1610604000000" />
+      <option name="dayCount" value="3" />
+      <option name="lastDate" value="1610863200000" />
     </fixesStatsTag>
   </component>
 </application>

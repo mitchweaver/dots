@@ -38,7 +38,7 @@ if command -v apt >/dev/null ; then
         libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev \
         libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev \
         libpcre2-dev libpcre3-dev libevdev-dev uthash-dev \
-        libev-dev libx11-xcb-dev ninja-build meson
+        libev-dev libx11-xcb-dev ninja-build meson libpam0g-dev
 
     query 'Install non-essentials?' &&
     sudo apt install -y \
@@ -73,6 +73,16 @@ if command -v apt >/dev/null ; then
     curl https://github.com/ogham/exa/releases/download/v0.9.0/exa-linux-x86_64-0.9.0.zip -O /tmp/exa.zip
     unzip /tmp/exa.zip -d /tmp
     install -D -m 0755 /tmp/exa-linux-x86_64 ~/.local/bin/exa
+
+    if query 'Install ly display manager?' ; then
+        git clone https://github.com/nullgemm/ly /tmp/ly
+        cd /tmp/ly || exit 1
+        make github
+        make -j"${NPROC:-1}"
+        sudo make install
+        command -v systemctl >/dev/null && 
+            sudo systemctl enable ly.service
+    fi
 else
     msg 'We are not using Ubuntu... Cannot install apps!'
 fi
