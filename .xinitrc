@@ -53,16 +53,26 @@ xrandr --output DisplayPort-0 --primary --auto --rotate normal \
 
 pulseaudio --check
 pulseaudio -D
-vol s 50 &
-bright s 50 &
-ytdlq -d &
-torrent-queue -d &
-subs -d &
-autorotate -d &
-background &
-sxhkd &
-xbanish &
-# clip -d &
+
+run() {
+    cmd=$1
+    shift
+    if ! pgrep $cmd >/dev/null ; then
+        $cmd "$@" &
+    fi
+}
+
+run vol s 50
+run bright s 50
+run ytdlq -d
+run torrent-queue -d
+run subs -d
+run autorotate -d
+run background
+run sxhkd
+run xbanish
+run crypto-ticker -d
+
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # x11vnc -viewonly -xkb -nopw -wait 5 \
@@ -72,9 +82,10 @@ xbanish &
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 if command -v dwm >/dev/null ; then
-    dunst &
-    bar -d &
+    run dunst
+    run bar -d
     picom -b
+    unset -f run
     #while command -v dwm ; do dwm && break || continue ; done
     exec dwm
 fi

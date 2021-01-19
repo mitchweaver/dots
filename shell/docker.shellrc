@@ -34,7 +34,7 @@ dprune() {
 }
 
 # compose
-alias cup='compose up'
+alias cup='compose up --abort-on-container-exit'
 alias cdown='compose down'
 alias cbuild='compose build'
 

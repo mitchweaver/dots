@@ -241,3 +241,9 @@ borg-update() {
     done
 }
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+btcprice() {
+    p=$(curl -Ls https://api.binance.com/api/v1/ticker/24hr | \
+    jq -cr '.[] | select(.symbol == "'"BTCUSDT"'") | .lastPrice')
+    printf '$%s\n' "${p%%000000}"
+}
