@@ -39,6 +39,11 @@
             <ProjectPluginTrackerState />
           </value>
         </entry>
+        <entry key="1nDqpvFaHFmz0B62xZwx2goUFps">
+          <value>
+            <ProjectPluginTrackerState />
+          </value>
+        </entry>
         <entry key="Default (Template) Project">
           <value>
             <ProjectPluginTrackerState />
@@ -59,7 +64,7 @@
     <property name="decompiler.legal.notice.accepted" value="true" />
     <property name="defaultJdkConfigured" value="true" />
     <property name="file.chooser.recent.files" value="$USER_HOME$/biz/docker-osbot/OSBot/Scripts&#10;/home/mitch/biz/intellij-projects/YouTubeDemo&#10;/home/mitch/biz/intellij-projects&#10;/home/mitch/src/intellij-projects/helloworld&#10;/home/mitch/src/intellij-projects" />
-    <property name="file.gist.reindex.count" value="1" />
+    <property name="file.gist.reindex.count" value="5" />
     <property name="fileTypeChangedCounter" value="2" />
     <property name="got.it.tooltip.reader.mode.got.it" value="1" />
     <property name="ide.memory.adjusted" value="true" />

@@ -6,7 +6,7 @@
     <size key="GridCell.Tab.0.bottom.0.0.1920.1080" width="1891" height="287" />
   </component>
   <component name="WindowManager">
-    <frame x="28" y="48" width="1860" height="1000" />
+    <frame x="20" y="40" width="1876" height="1016" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" order="0" />

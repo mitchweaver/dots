@@ -75,5 +75,6 @@ if command -v dwm >/dev/null ; then
     dunst &
     bar -d &
     picom -b
-    while command -v dwm ; do dwm && break || continue ; done
+    #while command -v dwm ; do dwm && break || continue ; done
+    exec dwm
 fi
