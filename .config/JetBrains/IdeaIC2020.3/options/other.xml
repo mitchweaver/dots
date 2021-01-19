@@ -39,6 +39,11 @@
             <ProjectPluginTrackerState />
           </value>
         </entry>
+        <entry key="1nDqpvFaHFmz0B62xZwx2goUFps">
+          <value>
+            <ProjectPluginTrackerState />
+          </value>
+        </entry>
         <entry key="Default (Template) Project">
           <value>
             <ProjectPluginTrackerState />
@@ -52,19 +57,19 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="NonModalCommitCustomization.IsApplied" value="true" />
-    <property name="appcds.runOnSecondStart" value="IC-203.6682.168-e3487ccc69f08a448f3712c2da8082865384c2efc6e3c3a855e1277489535ced" />
+    <property name="appcds.runOnSecondStart" value="IC-203.6682.168-2addfd83cb86847a623cfdbaa27bdcb9f058b0a00fe3bb3f199f68c64ae08801" />
     <property name="ask.about.ctrl.y.shortcut.v2" value="true" />
     <property name="build.toolwindow.Build Output.selection.state" value="com.intellij.build.BuildTreeConsoleView" />
     <property name="com.intellij.openapi.roots.ui.configuration.TabbedModuleEditor.selectedEditor" value="Dependencies" />
     <property name="decompiler.legal.notice.accepted" value="true" />
     <property name="defaultJdkConfigured" value="true" />
     <property name="file.chooser.recent.files" value="$USER_HOME$/biz/docker-osbot/OSBot/Scripts&#10;/home/mitch/biz/intellij-projects/YouTubeDemo&#10;/home/mitch/biz/intellij-projects&#10;/home/mitch/src/intellij-projects/helloworld&#10;/home/mitch/src/intellij-projects" />
-    <property name="file.gist.reindex.count" value="1" />
+    <property name="file.gist.reindex.count" value="5" />
     <property name="fileTypeChangedCounter" value="2" />
     <property name="got.it.tooltip.reader.mode.got.it" value="1" />
     <property name="ide.memory.adjusted" value="true" />
     <property name="ide.updates.previous.build.number" value="IC-203.6682.168" />
-    <property name="ideavim.statistics.timestamp" value="1610682206981" />
+    <property name="ideavim.statistics.timestamp" value="1610914457638" />
     <property name="installed.kotlin.plugin.version" value="203-1.4.10-release-IJ6682.9" />
     <property name="jdk.selected.JAVA_MODULE" value="adopt-openj9-1.8" />
     <property name="lastSeenTip" value="neue-EditRegExp.html" />
@@ -72,7 +77,7 @@
     <property name="last_opened_file_path" value="$USER_HOME$/downloads/Sublime Monokai True.jar" />
     <property name="packagesearch.endpoint.url.fulltext" value="https://package-search.services.jetbrains.com/api/search/idea/fulltext" />
     <property name="packagesearch.endpoint.url.suggest" value="https://package-search.services.jetbrains.com/api/search/idea/suggest" />
-    <property name="packagesearch.status.updated.ts" value="1610238670634" />
+    <property name="packagesearch.status.updated.ts" value="1610914452241" />
     <property name="project.wizard.group" value="JAVA_MODULE" />
     <property name="seenTips" value="neue-ImagesLookup.html,neue-DeleteLine.html,neue-TabInLookups.html,neue-CamelPrefixesInNavigationPopups.html,neue-EditRegExp.html" />
     <property name="tasks.pass.word.conversion.enforced" value="true" />

@@ -2,50 +2,65 @@
   <component name="VimHistorySettings">
     <history>
       <history-search>
+        <entry>buyBe</entry>
+        <entry>Leather</entry>
+        <entry>trainC</entry>
+        <entry>sellBee</entry>
+        <entry>buy</entry>
+        <entry>web</entry>
         <entry>sleep</entry>
-        <entry>forge</entry>
-        <entry>client</entry>
-        <entry>mitch</entry>
-        <entry>open</entry>
-        <entry>bones</entry>
-        <entry>Bones</entry>
-        <entry>beer</entry>
-        <entry>has20</entry>
-        <entry>determin</entry>
-        <entry>Withdraw</entry>
-        <entry>all</entry>
-        <entry>1920</entry>
-        <entry>1919</entry>
-        <entry>Beer glass</entry>
-        <entry>Beer gl</entry>
-        <entry>deposit</entry>
-        <entry>depo</entry>
-        <entry>withdraw</entry>
-        <entry>withdrawall</entry>
-        <entry>withdrawAl</entry>
-        <entry>Drnk</entry>
-        <entry>paint</entry>
-        <entry>Grap</entry>
-        <entry>PAINT</entry>
+        <entry>is5Cra</entry>
+        <entry>is5Craf</entry>
+        <entry>trainCra</entry>
+        <entry>5crafting</entry>
+        <entry>is5Craft</entry>
+        <entry>is5craft</entry>
+        <entry>is5crafting</entry>
+        <entry>is5cra</entry>
+        <entry>is5</entry>
+        <entry>close</entry>
+        <entry>getBank().close</entry>
+        <entry>ge</entry>
+        <entry>make</entry>
+        <entry>has20k</entry>
+        <entry>Mould</entry>
+        <entry>mould</entry>
+        <entry>buying ring</entry>
+        <entry>bartender</entry>
         <entry>camera</entry>
-        <entry>has20k()</entry>
-        <entry>bankValue</entry>
-        <entry>draw</entry>
-        <entry>drink</entry>
-        <entry>Paint</entry>
-        <entry>Drink</entry>
-        <entry>EAST</entry>
-        <entry>Beer</entry>
-        <entry>getK</entry>
-        <entry>craftR</entry>
-        <entry>start</entry>
-        <entry>Start</entry>
+        <entry>Camera</entry>
+        <entry>getCam</entry>
+        <entry>20k</entry>
+        <entry>We are over</entry>
+        <entry>we have 5</entry>
+        <entry>RING_M</entry>
+        <entry>Smelt</entry>
+        <entry>.contains</entry>
+        <entry>sell</entry>
+        <entry>sellBeer</entry>
+        <entry>walking</entry>
+        <entry>to edgeville bank</entry>
+        <entry>to edge</entry>
+        <entry>walking to edge</entry>
+        <entry>edgeville</entry>
+        <entry>edgevile</entry>
+        <entry>edgevi</entry>
+        <entry>Edgev</entry>
+        <entry>selling gold</entry>
+        <entry>selling</entry>
+        <entry>Selling</entry>
+        <entry>quanit</entry>
+        <entry>quant</entry>
+        <entry>sellItem</entry>
       </history-search>
       <history-cmd>
-        <entry>W</entry>
-        <entry>w</entry>
         <entry>wq</entry>
         <entry>q</entry>
+        <entry>we</entry>
+        <entry>ws</entry>
+        <entry>Lw</entry>
+        <entry>W</entry>
+        <entry>w</entry>
       </history-cmd>
       <history-expr />
       <history-input />
@@ -57,11 +72,11 @@
       <file name="/Dummy.txt" timestamp="1610593425298">
         <mark key="[" line="0" column="0" />
       </file>
-      <file name="$USER_HOME$/biz/intellij-projects/RingForger/src/util/MUtils.java" timestamp="1610682379124">
-        <mark key="[" line="6" column="20" />
-        <mark key="]" line="6" column="20" />
-        <mark key="." line="6" column="19" />
-        <mark key="^" line="6" column="20" />
+      <file name="$USER_HOME$/biz/intellij-projects/RingForger/src/util/MUtils.java" timestamp="1610928480761">
+        <mark key="[" line="10" column="76" />
+        <mark key="]" line="10" column="79" />
+        <mark key="^" line="10" column="79" />
+        <mark key="." line="10" column="78" />
       </file>
       <file name="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" timestamp="1610597339351">
         <mark key="'" line="47" column="0" />
@@ -70,6 +85,21 @@
         <mark key="^" line="48" column="28" />
         <mark key="." line="40" column="10" />
       </file>
+      <file name="$USER_HOME$/biz/intellij-projects/AutoMule/src/AutoMule/AutoMule.java" timestamp="1610939226751">
+        <mark key="'" line="93" column="0" />
+        <mark key="[" line="11" column="86" />
+        <mark key="]" line="11" column="95" />
+        <mark key="." line="11" column="94" />
+        <mark key="^" line="11" column="95" />
+      </file>
+      <file name="$USER_HOME$/biz/intellij-projects/OSBot.jar!/org/osbot/rs07/script/Script.class" timestamp="1610593905447">
+        <mark key="'" line="24" column="0" />
+        <mark key="[" line="147" column="1" />
+        <mark key="]" line="147" column="1" />
+      </file>
+      <file name="/" timestamp="1610671469766">
+        <mark key="[" line="0" column="0" />
+      </file>
       <file name="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/YouTubeDemo/YouTube.java" timestamp="1610594002866">
         <mark key="'" line="26" column="0" />
         <mark key="[" line="23" column="27" />
@@ -77,19 +107,26 @@
         <mark key="." line="23" column="27" />
         <mark key="^" line="23" column="28" />
       </file>
-      <file name="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" timestamp="1610694182426">
-        <mark key="'" line="43" column="26" />
-        <mark key="[" line="292" column="55" />
-        <mark key="]" line="293" column="34" />
-        <mark key="." line="293" column="33" />
-        <mark key="^" line="293" column="34" />
+      <file name="$USER_HOME$/biz/intellij-projects/RingForger/src/util/Sleep.java" timestamp="1610929114779">
+        <mark key="'" line="62" column="39" />
+        <mark key="[" line="13" column="47" />
+        <mark key="]" line="13" column="46" />
+        <mark key="." line="13" column="45" />
+        <mark key="^" line="13" column="46" />
       </file>
-      <file name="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" timestamp="1610686490416">
-        <mark key="'" line="0" column="0" />
-        <mark key="[" line="29" column="0" />
-        <mark key="]" line="29" column="0" />
-        <mark key="." line="29" column="0" />
-        <mark key="^" line="28" column="50" />
+      <file name="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" timestamp="1610940173406">
+        <mark key="'" line="314" column="33" />
+        <mark key="[" line="195" column="0" />
+        <mark key="]" line="195" column="0" />
+        <mark key="^" line="272" column="28" />
+        <mark key="." line="195" column="0" />
+      </file>
+      <file name="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" timestamp="1610934222504">
+        <mark key="'" line="22" column="43" />
+        <mark key="[" line="73" column="104" />
+        <mark key="]" line="73" column="116" />
+        <mark key="." line="73" column="115" />
+        <mark key="^" line="73" column="116" />
       </file>
       <file name="$USER_HOME$/src/intellij-projects/helloworld/src/com/example/helloworld/HelloWorld.java" timestamp="1610238959169">
         <mark key="'" line="3" column="39" />
@@ -98,118 +135,116 @@
         <mark key="." line="4" column="39" />
         <mark key="^" line="4" column="40" />
       </file>
-      <file name="$USER_HOME$/biz/intellij-projects/OSBot.jar!/org/osbot/rs07/script/Script.class" timestamp="1610593905447">
-        <mark key="'" line="24" column="0" />
-        <mark key="[" line="147" column="1" />
-        <mark key="]" line="147" column="1" />
+      <file name="/fragment.java" timestamp="1610917350590">
+        <mark key="[" line="0" column="0" />
       </file>
       <file name="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/util/ExplvSleep.java" timestamp="1610597190564">
         <mark key="[" line="20" column="0" />
         <mark key="]" line="20" column="0" />
         <mark key="." line="20" column="0" />
       </file>
-      <file name="/" timestamp="1610671469766">
-        <mark key="[" line="0" column="0" />
-      </file>
     </filemarks>
     <jumps>
-      <jump line="2" column="24" filename="$USER_HOME$/src/intellij-projects/helloworld/src/com/example/helloworld/HelloWorld.java" />
-      <jump line="3" column="39" filename="$USER_HOME$/src/intellij-projects/helloworld/src/com/example/helloworld/HelloWorld.java" />
-      <jump line="8" column="4" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/YouTubeDemo/YouTube.java" />
-      <jump line="24" column="0" filename="$USER_HOME$/biz/intellij-projects/OSBot.jar!/org/osbot/rs07/script/Script.class" />
-      <jump line="12" column="23" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/YouTubeDemo/YouTube.java" />
-      <jump line="20" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/YouTubeDemo/YouTube.java" />
-      <jump line="4" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/YouTubeDemo/YouTube.java" />
-      <jump line="26" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/YouTubeDemo/YouTube.java" />
-      <jump line="44" column="23" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
-      <jump line="46" column="33" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
-      <jump line="41" column="40" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
-      <jump line="51" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
-      <jump line="49" column="74" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
-      <jump line="23" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
-      <jump line="1" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
-      <jump line="0" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
-      <jump line="27" column="11" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
-      <jump line="29" column="43" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
-      <jump line="30" column="8" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
-      <jump line="32" column="68" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
-      <jump line="45" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
-      <jump line="47" column="0" filename="$USER_HOME$/biz/intellij-projects/YouTubeDemo/src/com/youtube/demo/YouTube.java" />
-      <jump line="5" column="3" filename="$USER_HOME$/biz/intellij-projects/PlankLooter/src/planklooter/PlankLooter.java" />
-      <jump line="31" column="12" filename="$USER_HOME$/biz/intellij-projects/PlankLooter/src/planklooter/PlankLooter.java" />
-      <jump line="29" column="26" filename="$USER_HOME$/biz/intellij-projects/PlankLooter/src/planklooter/PlankLooter.java" />
-      <jump line="5" column="12" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="26" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="10" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="28" column="4" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="31" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="9" column="8" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="29" column="4" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="62" column="24" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="50" column="15" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="86" column="17" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="58" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="56" column="28" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" />
-      <jump line="18" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" />
-      <jump line="89" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" />
-      <jump line="24" column="39" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" />
-      <jump line="87" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" />
-      <jump line="0" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" />
-      <jump line="92" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="95" column="11" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="120" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="69" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="23" column="54" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="136" column="101" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="121" column="18" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="124" column="18" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="163" column="12" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="164" column="22" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="67" column="26" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="177" column="36" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="93" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="110" column="57" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="108" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="36" column="39" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="201" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="21" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="63" column="55" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="380" column="20" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="232" column="15" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="266" column="12" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="278" column="24" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="382" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="49" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="260" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="378" column="20" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="231" column="15" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="331" column="42" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="357" column="40" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="303" column="30" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="306" column="16" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="304" column="20" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="95" column="16" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="195" column="16" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="199" column="12" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="254" column="12" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="359" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="142" column="16" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="330" column="40" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="73" column="12" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="75" column="25" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="87" column="12" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="280" column="27" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="276" column="27" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="281" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="376" column="45" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="374" column="53" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="197" column="8" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="377" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="292" column="33" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="107" column="16" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="130" column="20" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="5" column="26" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="39" column="69" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="179" column="37" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="398" column="17" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="288" column="12" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="296" column="82" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="298" column="45" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="345" column="39" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="349" column="50" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="350" column="47" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="34" column="28" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="175" column="39" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="289" column="59" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="367" column="16" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="114" column="4" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" />
+      <jump line="165" column="8" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" />
+      <jump line="386" column="67" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="282" column="12" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="83" column="27" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="84" column="39" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="162" column="18" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="190" column="24" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="208" column="32" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="235" column="33" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="237" column="33" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="242" column="30" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="246" column="30" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="267" column="32" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="295" column="77" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="299" column="76" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="300" column="83" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="305" column="37" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="325" column="40" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="334" column="38" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="339" column="39" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="356" column="28" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="363" column="49" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="391" column="42" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="72" column="27" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="291" column="45" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="287" column="16" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="96" column="20" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="118" column="16" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="24" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" />
+      <jump line="26" column="19" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" />
+      <jump line="83" column="19" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" />
+      <jump line="134" column="32" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" />
+      <jump line="153" column="4" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="322" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="40" column="29" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="164" column="16" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="283" column="31" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="85" column="55" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="116" column="39" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="22" column="43" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/util/BotUtils.java" />
+      <jump line="310" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
       <jump line="0" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="14" column="20" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="122" column="49" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="24" column="45" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="82" column="24" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="178" column="20" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="72" column="25" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="112" column="33" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="99" column="42" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="212" column="38" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="40" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="194" column="22" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="207" column="45" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="66" column="10" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="61" column="22" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="128" column="21" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="123" column="48" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="225" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="11" column="19" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="119" column="31" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="186" column="42" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="54" column="42" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="85" column="35" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="89" column="88" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="111" column="50" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="217" column="4" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="146" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="148" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="162" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="250" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="291" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="301" column="17" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="77" column="12" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="307" column="8" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="35" column="0" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
-      <jump line="43" column="26" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="157" column="48" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="312" column="33" filename="$USER_HOME$/biz/intellij-projects/RingForger/src/ringforger/RingForger.java" />
+      <jump line="22" column="0" filename="$USER_HOME$/biz/intellij-projects/AutoMule/src/AutoMule/AutoMule.java" />
+      <jump line="31" column="0" filename="$USER_HOME$/biz/intellij-projects/AutoMule/src/AutoMule/AutoMule.java" />
+      <jump line="40" column="17" filename="$USER_HOME$/biz/intellij-projects/AutoMule/src/AutoMule/AutoMule.java" />
+      <jump line="43" column="12" filename="$USER_HOME$/biz/intellij-projects/AutoMule/src/AutoMule/AutoMule.java" />
+      <jump line="16" column="44" filename="$USER_HOME$/biz/intellij-projects/AutoMule/src/AutoMule/AutoMule.java" />
+      <jump line="68" column="37" filename="$USER_HOME$/biz/intellij-projects/AutoMule/src/AutoMule/AutoMule.java" />
+      <jump line="90" column="0" filename="$USER_HOME$/biz/intellij-projects/AutoMule/src/AutoMule/AutoMule.java" />
     </jumps>
   </component>
   <component name="VimRegisterSettings">
@@ -218,51 +253,51 @@
         <text encoding="base64">ICAgICAgICAgICAgZ2V0QmFuaygpLmNsb3NlKCk7Cg==</text>
       </register>
       <register name="-" type="4">
-        <text>!</text>
+        <text>s</text>
       </register>
       <register name="/" type="4">
-        <text>Start</text>
+        <text>sellItem</text>
       </register>
       <register name="0" type="2">
-        <text encoding="base64">ICAgICAgICAgICAgZ2V0QmFuaygpLmNsb3NlKCk7Cg==</text>
+        <text encoding="base64">QFNjcmlwdE1hbmlmZXN0KGluZm89IkZvcmdlcyByaW5ncyIsIGxvZ289IiIsIHZlcnNpb249MS4wLCBhdXRob3I9Ikxlcm95IEplbmtpbnMiLCBuYW1lPSJSaW5nIEZvcmdlciIpCg==</text>
       </register>
       <register name="1" type="2">
         <text encoding="base64">ICAgICAgICAgICAgZ2V0QmFuaygpLmNsb3NlKCk7Cg==</text>
       </register>
       <register name="2" type="2">
-        <text encoding="base64">ICAgICAgICAgICAgaWYK</text>
+        <text encoding="base64">ICAgICAgICAgICAgICAgIGdldEJhbmsoKS5jbG9zZSgpOwo=</text>
       </register>
       <register name="3" type="2">
-        <text encoding="base64">ICAgICAgICAgICAgICAgICAgICAK</text>
+        <text encoding="base64">ICAgICAgICAgICAgaWYoZ2V0QmFuaygpLmlzT3BlbigpKQo=</text>
       </register>
       <register name="4" type="2">
-        <text encoding="base64">ICAgICAgICAgICAgCg==</text>
+        <text encoding="base64">ICAgICAgICAgICAgICAgIGdldEJhbmsoKS5jbG9zZSgpOwo=</text>
       </register>
       <register name="5" type="2">
-        <text encoding="base64">ICAgICAgICAgICAgd2Fsa2luZy53ZWJXYWxrKEJhbmtzLkVER0VWSUxMRSk7Cg==</text>
+        <text encoding="base64">ICAgICAgICAgICAgaWYoZ2V0QmFuaygpLmlzT3BlbigpKQo=</text>
       </register>
       <register name="6" type="2">
-        <text encoding="base64">ICAgICAgICBpZgo=</text>
+        <text encoding="base64">ICAgICAgICAgICAgbG9nKCJXZSBoYXZlIG1vcmUgdGhhbiAiICsgR09MRF9ORUVERURfVE9fU01FTFQgKyAiZ3AhIik7Cg==</text>
       </register>
-      <register name="7" type="4">
-        <text encoding="base64">ICAgICAgICBpbnQgY3JhZnRpbmdTdGFydCA9IGdldEV4cGVyaWVuY2VUcmFja2VyKCkuZ2V0R2FpbmVkWFAoU2tpbGwuQ1JBRlRJTkcpOwogICAgICAgIGlmIChjcmFmdGluZ1N0YXJ0IDwgMzg4KSB7CiAgICAgICAgICAgIGxvZygiV2UgYXJlIG5vdCBsZXZlbCA1IGNyYWZ0aW5nISIpOwogICAgICAgICAgICBsb2coIlN0YXJ0aW5nIGNyYWZ0aW5nIGV4cGVyaWVuY2U6ICIgKyBjcmFmdGluZ1N0YXJ0KTsKICAgICAgICB9IGVsc2UgewogICAgICAgICAgICBsb2coIldlIGFyZSBvdmVyIGxldmVsIDUgY3JhZnRpbmchIik7CiAgICAgICAgfQ==</text>
+      <register name="7" type="2">
+        <text encoding="base64">ICAgICAgICBTbGVlcC5zbGVlcDFUaWNrKHRoaXMpOwo=</text>
       </register>
-      <register name="8" type="4">
-        <text encoding="base64">ICAgICAgICBpZiAoY3JhZnRpbmdTdGFydCA8IDM4OCkgewogICAgICAgICAgICBsb2coIldlIGFyZSBub3QgbGV2ZWwgNSBjcmFmdGluZyEiKTsKICAgICAgICAgICAgbG9nKCJTdGFydGluZyBjcmFmdGluZyBleHBlcmllbmNlOiAiICsgY3JhZnRpbmdTdGFydCk7CiAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAgbG9nKCJXZSBhcmUgb3ZlciBsZXZlbCA1IGNyYWZ0aW5nISIpOwogICAgICAgIH0=</text>
+      <register name="8" type="2">
+        <text encoding="base64">ICAgICAgICBTbGVlcC5zbGVlcDFUaWNrcyh0aGlzKTsK</text>
       </register>
       <register name="9" type="2">
-        <text encoding="base64">ICAgICAgICBsb2coIllBWSBXRSBESUQgSVQhISEgV0UgTUFERSAyMGshISEhIHRvIGJlIGltcGxlbWVudGVkIGZ1cnRoZXIgbGF0ZXIuLi4iKTsK</text>
+        <text encoding="base64">ICAgICAgICBmaW5hbCBzdGF0aWMgaW50IFNMRUVQX0xFTkdUSCA9IDMwOwo=</text>
       </register>
       <register name=":" type="4">
-        <text>q</text>
+        <text>w</text>
       </register>
     </registers>
   </component>
   <component name="VimSearchSettings">
     <search>
-      <last-search>Start</last-search>
+      <last-search>sellItem</last-search>
       <last-offset />
-      <last-pattern>Start</last-pattern>
+      <last-pattern>sellItem</last-pattern>
       <last-dir>1</last-dir>
       <show-last>false</show-last>
     </search>

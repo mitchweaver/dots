@@ -231,8 +231,13 @@ alias wayland_or_x11='echo $XDG_SESSION_TYPE'
 alias autoclick='while sleep 1 ; do xdotool click 1; done'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-alias nfs-space='ssh pi df -h | grep -E "(Avail|md0)"'
-alias nfs-update="ssh pi 'apt update ; apt upgrade -y'"
+#alias nfs-space='ssh pi df -h | grep -E "(Avail|md0)"'
 alias wvr-update="ssh wvr 'apt update ; apt upgrade -y'"
 alias beast1-update="ssh beast1 'apt update ; apt upgrade -y'"
+alias beast2-update="ssh beast2 'apt update ; apt upgrade -y'"
+borg-update() {
+    for i in 1 2 3 4 5 ; do
+        ssh borg$i 'apt update ; apt upgrade -y'
+    done
+}
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
