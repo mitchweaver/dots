@@ -11,5 +11,5 @@ case ${0##*/} in
         set -o bgnice      # all background jobs run at lower priority
 esac
 
-set -o vi          # vim emulation mode
-set -o ignoreeof   # do not exit on EOF or ^D, require 'exit'
+set -o vi         # vim emulation mode
+set -o ignoreeof  # do not exit on EOF or ^D, require 'exit'
