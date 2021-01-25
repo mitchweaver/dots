@@ -19,8 +19,37 @@ sysctl -w net.ipv6.conf.all.disable_ipv6=1
 # remove webcam module
 rmmod uvcvideo 2>/dev/null ||:
 
-cat > /etc/resolv.conf <<EOF
-# dns = quad9.net
-nameserver 9.9.9.9
-$(cat /etc/resolv.conf.tail)
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# systemd's systemd-resolved is a mess
+# and ubuntu's resolvconf is an even dirtier hack
+#
+# normally I "chattr +i /etc/resolv.conf" to deny
+# systemd overwriting my config but i've run into
+# a few programs that error out if the file isn't
+# writable
+#
+# Okay. Fine. I'll just have it constantly update.
+#
+# TL;DR: fuck lennert poettering
+#
+if command -v systemctl >/dev/null ; then
+f=/tmp/resolvconf-updater.sh
+cat > $f <<"EEOF"
+#!/bin/sh -e
+while sleep 1 ; do
+read -r head < /etc/resolv.conf.head 2>/dev/null
+read -r tail < /etc/resolv.conf.tail 2>/dev/null
+
+cat >/etc/resolv.conf <<EOF
+$head
+$(cat /etc/resolv.conf.base 2>/dev/null)
+$tail
 EOF
+done &
+EEOF
+chmod +x $f
+$f
+rm $f
+unset f
+fi
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

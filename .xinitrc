@@ -54,6 +54,10 @@ xrandr --output DisplayPort-0 --primary --auto --rotate normal \
 pulseaudio --check
 pulseaudio -D
 
+# for bluetooth headphones
+command -v bluetoothctl >/dev/null &&
+pactl load-module module-bluetooth-discover
+
 run() {
     cmd=$1
     shift
@@ -72,7 +76,6 @@ run background
 run sxhkd
 run xbanish
 run crypto-ticker -d
-
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # x11vnc -viewonly -xkb -nopw -wait 5 \

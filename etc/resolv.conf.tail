@@ -1,8 +1,1 @@
-# appended to the end of /etc/resolv.conf
-#
-# queries are searched in order listed:
-#
-# file - search local /etc/hosts file
-# bind - search dns server
-#
 lookup file bind
