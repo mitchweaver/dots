@@ -13,6 +13,9 @@
 rmdir Desktop Public Templates Documents Downloads Pictures \
     Videos Documents Music 2>/dev/null ||:
 
+# junk useless files
+rm nohup.out *\~* 2>/dev/null ||:
+
 # grab urls of any running processes
 # see: http://github.com/mitchweaver/bin for urls script
 psurls() { ps -auxww | urls ; }
@@ -171,28 +174,6 @@ cpubench() {
     sysbench cpu --cpu-max-prime=20000 --threads=$(nproc) run
 }
 
-
-rm -f nohup.out 2>/dev/null ||:
-
-
-
-
-
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# ▀▛▘▌ ▌▛▀▘ ▛▀▖▞▀▖▛▀▖▞▀▖
-#  ▌ ▙▄▌▙▄  ▙▄▘▌ ▌▙▄▘▌▄▖
-#  ▌ ▌ ▌▌   ▌ ▌▌ ▌▌▚ ▌ ▌
-#  ▘ ▘ ▘▀▀▘ ▀▀ ▝▀ ▘ ▘▝▀ 
-#
-# My cluster setup
-#
-NUM_BORG=5
-borgrun() { for i in $(seq $NUM_BORG) ; do (ssh borg$i "$*" &) ; done ; }
-borgsec() { for i in $(seq $NUM_BORG) ; do ssh borg$i "$*" ; done ; }
-borgupdate() { borgrun 'apk update ; apk upgrade' ; }
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
 ##### PULSE AUDIO ######
 # make a fifo you can play audio to
 alias pulsefifo='pactl load-module module-pipe-source source_name=virtmic file=/tmp/virtmic format=s16le rate=16000 channels=1'
@@ -209,7 +190,7 @@ mkgif() {
 }
 
 # temp file for scratch pad
-tmp() {
+pad() {
     mkdir -p /tmp/$$.tmpsh
     trap 'rm -rf /tmp/$$.tmpsh' EXIT INT TERM HUP
     cd /tmp/$$.tmpsh &&
@@ -224,9 +205,6 @@ alias img2pdf='img2pdf *jpg --output combined.pdf'
 alias play_random='ls | sort -R | head -n 1 | play'
 
 alias restart_sxhkd='pkill sxhkd ; sxhkd &'
-
-# which am I using?!?
-alias wayland_or_x11='echo $XDG_SESSION_TYPE'
 
 alias autoclick='while sleep 1 ; do xdotool click 1; done'
 

@@ -19,6 +19,18 @@ sysctl -w net.ipv6.conf.all.disable_ipv6=1
 # remove webcam module
 rmmod uvcvideo 2>/dev/null ||:
 
+# dslr as webcam
+#modprobe v4l2loopback exclusive_caps=1 max_buffers=2
+
+# fix mouse input lag
+modprobe drm_kms_helper
+echo N > /sys/module/drm_kms_helper/parameters/poll
+
+if dmesg | grep amdgpu >/dev/null ; then
+    # fix screen flickering with amdgpu
+    echo high > /sys/class/drm/card0/device/power_dpm_force_performance_level
+fi
+
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # systemd's systemd-resolved is a mess
 # and ubuntu's resolvconf is an even dirtier hack
@@ -53,3 +65,5 @@ rm $f
 unset f
 fi
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+exit 0

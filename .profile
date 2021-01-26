@@ -22,6 +22,8 @@ fi
 export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
 export PYTHONOPTIMIZE=2
 
+export JAVA_HOME=${HOME}
+
 [ -f /proc/cpuinfo ] &&
 while read -r line ; do
     case $line in
@@ -60,7 +62,7 @@ export MENU_PROG=menu \
        TERMINAL_PROG=st \
        PLUMBER=opn \
        SUBS_MENU_PROG="menu -wide -p Subs:" \
-       SUBS_DAEMON_INTERVAL=1500 \
+       SUBS_DAEMON_INTERVAL=1800 \
        SUBS_SLEEP_VALUE=0.05
 
 export TRASH_DIR="${XDG_DATA_HOME}/Trash" \
