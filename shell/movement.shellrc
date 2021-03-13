@@ -30,7 +30,6 @@ alias gs="_g ${HOME}/src"
 alias gk="_g ${XDG_DOCUMENTS_DIR}/books"
 alias gt="_g ~/tmp"
 alias gE='_g /etc'
-alias gz='_g ~/biz'
 
 alias gM="_g ${XDG_PICTURES_DIR}/memes"
 alias gN='_g /mnt'
@@ -53,7 +52,6 @@ Yk() { cp "$@" "${XDG_DOCUMENTS_DIR}/books" ; }
 Ys() { cp "$@" ${HOME}/src ; }
 Yt() { cp "$@" ~/tmp ; }
 YT() { cp "$@" /tmp  ; }
-Yz() { cp "$@" ~/biz ; }
 
 mf() { mv "$@" $XDG_DOCUMENTS_DIR ; }
 mi() { mv "$@" $XDG_PICTURES_DIR ; }
@@ -64,7 +62,6 @@ mb() { mv "$@" ~/bin ; }
 ms() { mv "$@" ${HOME}/src ; }
 mt() { mv "$@" ~/tmp ; }
 mT() { mv "$@" /tmp  ; }
-Mz() { mv "$@" ~/biz ; }
 
 alias gd='_g ${XDG_DOWNLOAD_DIR}'
 Yd() { cp "$@" ${XDG_DOWNLOAD_DIR} ; }

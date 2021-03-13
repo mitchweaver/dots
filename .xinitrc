@@ -43,7 +43,7 @@ esac
 xrdb load ~/.Xresources
 
 # make mouse cursor smallest
-dconf write /org/gnome/desktop/interface/cursor-size 25 &
+# dconf write /org/gnome/desktop/interface/cursor-size 25 &
 
 # disable mouse acceleration
 xset m 0 0 &
@@ -68,14 +68,14 @@ run() {
 
 run vol s 50
 run bright s 50
-run ytdlq -d
-run torrent-queue -d
+# run ytdlq -d
+# run torrent-queue -d
 run subs -d
 run autorotate -d
-run background
-run sxhkd
-run xbanish
-run crypto-ticker -d
+# run background
+# run sxhkd
+# run xbanish
+# run crypto-ticker -d
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # x11vnc -viewonly -xkb -nopw -wait 5 \
@@ -84,11 +84,11 @@ run crypto-ticker -d
 #     -display :0 &
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-if command -v dwm >/dev/null ; then
-    run dunst
-    run bar -d
-    picom -b
-    unset -f run
-    #while command -v dwm ; do dwm && break || continue ; done
-    exec dwm
-fi
+#if command -v dwm >/dev/null ; then
+#    run dunst
+#    run bar -d
+#    picom -b
+#    unset -f run
+#    #while command -v dwm ; do dwm && break || continue ; done
+#    exec dwm
+#fi

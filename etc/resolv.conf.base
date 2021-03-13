@@ -1,5 +1,5 @@
 # homelab / pi-hole
-nameserver 192.168.0.100
+######nameserver 192.168.0.100
 # quad9
 nameserver 9.9.9.9
 # dns.watch

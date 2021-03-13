@@ -1,3 +1,5 @@
 [user]
     name = Mitch Weaver
     email = mitch@wvr.sh
+[pull]
+	rebase = false

@@ -78,16 +78,3 @@ alt + bracketright
     mmt -f
 alt + bracketleft
     mmt -b
-
-# --------- rs shit ---------------
-control + shift + F12
-    rs_autotyper.sh
-
-control + Escape
-    autotype_given.sh '::renderself'
-
-control + Insert
-    autotype_given.sh 'flash3:#rejectz on my eyelidz famalam'
-
-control + Pause
-    autotype_given.sh 'flash2:E - L O O O O O O O O O O O O O O O O L'
