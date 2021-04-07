@@ -47,7 +47,7 @@ alias {x,xx,xxx,q,qq,qqq,lq,:q,:Q,:wq,:w,exi,ex}=exit
 alias {cc,cll,clear,claer,clar,clea,clera}=clear
 alias {cls,csl,cl,lc}='clear ; ls'
 alias {e,ech,eho}=echo
-alias {g,gi,gr,gre,grep,Grep,gerp,grpe}='grep -i --color=auto'
+alias {g,gi,gr,gre,grep,Grep,gerp,grpe}='grep -i'
 alias {pg,pgrpe}=pgrep
 alias ga='grep -i -A 6'
 alias ga1='grep -i -A 1'

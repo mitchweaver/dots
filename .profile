@@ -12,25 +12,8 @@ export PATH
 export MANPATH="${HOME}/.local/share/man:$MANPATH"
 export FONTCONFIG_PATH=/etc/fonts
 
-if command -v bs >/dev/null ; then
-    export BONSAI_ROOT="${HOME}/.bonsai"
-    export PATH="$BONSAI_ROOT/bin:$PATH"
-    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$BONSAI_ROOT/lib"
-    export MANPATH="$BONSAI_ROOT/share/man:$MANPATH"
-fi
-
 export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
 export PYTHONOPTIMIZE=2
-
-export JAVA_HOME=${HOME}
-
-[ -f /proc/cpuinfo ] &&
-while read -r line ; do
-    case $line in
-        *'cpu cores'*)
-            export NPROC="${line#*: }"
-    esac
-done </proc/cpuinfo
 
 export LC_CTYPE='en_US.UTF-8'
 export LANG="$LC_CTYPE" \
@@ -70,16 +53,13 @@ export TRASH_DIR="${XDG_DATA_HOME}/Trash" \
        TASKS_FILE="${XDG_DOCUMENTS_DIR}/tasks.txt" \
        SUBS_FILE="${XDG_DOCUMENTS_DIR}/subs.txt" \
        TWITCH_STREAM_FILE="${XDG_DOCUMENTS_DIR}/twitch.txt" \
-       RADIO_STATIONS_FILE="${XDG_DOCUMENTS_DIR}/radio.txt" \
        YTDLQ_DIR="${HOME}/.ytdlq"
 
 export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s'
 export MPV_OPTS="--really-quiet --force-seekable=yes"
 
-export WATSON_TTS_API_KEY="${XDG_DOCUMENTS_DIR}/api_keys/watson_tts_api.key"
-
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-for editor in nvim vim vi nano ; do
+for editor in nvim vim vi ; do
     if command -v $editor >/dev/null ; then
         export EDITOR=$editor
         break
@@ -92,7 +72,8 @@ export LESS='-QRsim +Gg'
 export LESSHISTFILE=/dev/null
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-# empty ~/tmp
-rm -rf ~/tmp 2>/dev/null ||:
-mkdir -p "/tmp/tmp-$USER"
-ln -sf "/tmp/tmp-$USER" ~/tmp
+# home temp folder
+if rm -f ~/tmp >/dev/null ; then
+    mkdir -p /tmp/$USER
+    ln -sf /tmp/$USER ~/tmp
+fi

@@ -1,8 +1,11 @@
 #!/bin/sh
 # vim:ft=config
 
+# source environment variables
+[ -f ~/.profile ] && . ~/.profile
+[ -f ${ENV:-~/.kshrc} ] && . ${ENV:-~/.kshrc}
+
 export DISPLAY=${DISPLAY:-:0}
-export CLUTTER_VBLANK=none
 export __GL_SYNC_TO_VBLANK=0
 
 # fix for bug with floating windows and java programs (ex: ghidra)
@@ -33,48 +36,31 @@ xhost +local: >/dev/null &
 xmodmap ~/.xmodmaprc &
 xset +fp ~/.fonts &
 
-# determine if we're on desktop or laptop
-# one shitty way to do this is see if we have a wifi card...
-case $(interface) in
-    wlan?|wlp*) ln -s ~/.Xresources-laptop ~/.Xresources ;;
-    eth?|enp*)  ln -s ~/.Xresources-desktop ~/.Xresources
-esac
-
 xrdb load ~/.Xresources
-
-# make mouse cursor smallest
-# dconf write /org/gnome/desktop/interface/cursor-size 25 &
 
 # disable mouse acceleration
 xset m 0 0 &
 
-xrandr --output DisplayPort-0 --primary --auto --rotate normal \
-       --output HDMI-A-0 --auto --rotate normal --right-of DisplayPort-0
-
-pulseaudio --check
-pulseaudio -D
-
-# for bluetooth headphones
-command -v bluetoothctl >/dev/null &&
-pactl load-module module-bluetooth-discover
+#xrandr --output DisplayPort-0 --primary --auto --rotate normal \
+#       --output HDMI-A-0 --auto --rotate normal --right-of DisplayPort-0
 
 run() {
     cmd=$1
     shift
-    if ! pgrep $cmd >/dev/null ; then
+    if command -v $cmd >/dev/null && ! pgrep $cmd >/dev/null ; then
         $cmd "$@" &
     fi
 }
 
 run vol s 50
-run bright s 50
+run bright s 90
 # run ytdlq -d
 # run torrent-queue -d
 run subs -d
 run autorotate -d
-# run background
-# run sxhkd
-# run xbanish
+run background
+run sxhkd
+run xbanish
 # run crypto-ticker -d
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -84,11 +70,18 @@ run autorotate -d
 #     -display :0 &
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-#if command -v dwm >/dev/null ; then
-#    run dunst
-#    run bar -d
-#    picom -b
-#    unset -f run
-#    #while command -v dwm ; do dwm && break || continue ; done
-#    exec dwm
-#fi
+case $(sysctl -n hw.version) in
+    *ThinkPad*)
+        # enable scrolling with thinkpad trackpoint (openbsd)
+        xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation' 1 &
+        xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Button' 2 &
+        xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Axes' 6 7 4 5 &
+esac
+
+if command -v dwm >/dev/null ; then
+    run picom -b
+    run dunst
+    run bar -d
+    unset -f run
+    exec dwm
+fi

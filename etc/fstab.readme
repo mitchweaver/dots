@@ -1,0 +1,5 @@
+# Using 'softdep' and 'noatime' can greatly improve
+# performance, but they cannot be used on top-level root
+
+# Create a tmpfs on /tmp, (mfs is a OpenBSD's tmpfs)
+swap /tmp mfs rw,nosuid,-s=1000000 0 0

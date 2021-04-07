@@ -174,14 +174,6 @@ cpubench() {
     sysbench cpu --cpu-max-prime=20000 --threads=$(nproc) run
 }
 
-##### PULSE AUDIO ######
-# make a fifo you can play audio to
-alias pulsefifo='pactl load-module module-pipe-source source_name=virtmic file=/tmp/virtmic format=s16le rate=16000 channels=1'
-# here yourself through mic
-alias loopback='pactl load-module module-loopback latency_msec=1'
-alias unloopback='pactl unload-module module-loopback'
-#########################
-#
 alias sshcfg='v ~/.ssh/config'
 
 mkgif() {
