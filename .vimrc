@@ -114,8 +114,8 @@ if has('nvim')
         " let g:UltiSnipsJumpBackwardTrigger = '<c-j>'
         " let g:UltiSnipsJumpForwardTrigger = '<c-k>'
 
-"    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"        let g:deoplete#enable_at_startup = 1
+   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+       let g:deoplete#enable_at_startup = 1
 
     Plug 'ervandew/supertab' " tab completion rather than <c-n>
         let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -226,15 +226,6 @@ if has('nvim')
         hi signColumn ctermbg=NONE
     endif
 endif
-
-" ▛▀▘     ▐  
-" ▙▄▞▀▖▛▀▖▜▀ 
-" ▌ ▌ ▌▌ ▌▐ ▖
-" ▘ ▝▀ ▘ ▘ ▀ 
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-" set guifont=Hack:h12
-" set guifont=IBM\ Plex\ Mono:h12
-set guifont=ShureTechMono\ Nerd\ Font:h12
 
 " ▞▀▖               ▜ 
 " ▌▄▖▞▀▖▛▀▖▞▀▖▙▀▖▝▀▖▐ 

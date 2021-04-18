@@ -6,12 +6,46 @@
 # openbsd-specific aliases
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-[ -f /var/log/pflog ] || return
+command -v pkg_add >/dev/null return
 
+alias {doas,dosa,sudo}='TERM=vt100 doas'
 alias sg='sysctl | grep -i'
 alias disks='sysctl -n hw.disknames'
-alias disklabel='sudo disklabel'
-alias reboot='sudo reboot'
-alias poweroff='sudo halt -p'
-alias pfdump='sudo tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout
-alias pfdrop='sudo tcpdump -nettti pflog0 action drop'   # follow dropped
+alias disklabel='doas disklabel'
+alias reboot='doas reboot'
+alias poweroff='doas halt -p'
+alias pfdump='doas tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout
+alias pfdrop='doas tcpdump -nettti pflog0 action drop'   # follow dropped
+alias netstart='doas sh /etc/netstart'
+
+pkg() {
+    flag=${1#-}
+    shift       
+    case $flag in
+        h)
+            printf '%s\n' \
+                'pkg: [-a add] [-u update] [-d delete] [-s search] [-i info] [-f file] [-l list]'
+            ;;
+        a)
+            doas pkg_add -D snap "$@"
+            ;;
+        u)
+            doas pkg_add -D snap -Uu "$@"
+            ;;
+        d)
+            doas pkg_delete "$@"
+            doas pkg_delete -a
+            ;;
+        s)
+            pkg_info -D snap -Q "$@"
+            ;;
+        i)
+            pkg_info -D snap "$@"
+            ;;
+        f)
+            pkg_info -D snap -E "$@"
+            ;;
+        l)
+            pkg_info "$@"
+    esac
+}

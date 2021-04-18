@@ -1,5 +1,6 @@
 #!/bin/sh
 umask 022
+ulimit -c 0
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 PATH=/bin:/sbin:$PATH
@@ -25,7 +26,7 @@ export LANG="$LC_CTYPE" \
 export XDG_OPEN=opn
 
 export XDG_CONFIG_HOME="${HOME}/.config" \
-       XDG_DOWNLOAD_DIR="${HOME}/downloads" \
+       XDG_DOWNLOAD_DIR="${HOME}/Downloads" \
        XDG_DOCUMENTS_DIR="${HOME}/files" \
        XDG_MUSIC_DIR="${HOME}/music" \
        XDG_PICTURES_DIR="${HOME}/images" \
@@ -41,13 +42,14 @@ export XDG_PUBLICSHARE_DIR="$XDG_CACHE_HOME/Public" \
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 export ENV="${HOME}/src/dots/shell/main.shellrc"
+export LOCAL="${HOME}/.local"
 
 export MENU_PROG=menu \
        TERMINAL_PROG=st \
        PLUMBER=opn \
        SUBS_MENU_PROG="menu -wide -p Subs:" \
-       SUBS_DAEMON_INTERVAL=1800 \
-       SUBS_SLEEP_VALUE=0.05
+       SUBS_DAEMON_INTERVAL=3600 \
+       CRYPTO_TICKER_INTERVAL=30
 
 export TRASH_DIR="${XDG_DATA_HOME}/Trash" \
        TASKS_FILE="${XDG_DOCUMENTS_DIR}/tasks.txt" \
@@ -72,8 +74,9 @@ export LESS='-QRsim +Gg'
 export LESSHISTFILE=/dev/null
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-# home temp folder
-if rm -f ~/tmp >/dev/null ; then
-    mkdir -p /tmp/$USER
-    ln -sf /tmp/$USER ~/tmp
-fi
+# home temp folder and cache
+mkdir -p "/tmp/$USER"/cache
+ln -sf "/tmp/$USER" ~/tmp
+ln -sf "/tmp/$USER/cache" ~/.cache
+# not sure how to stop these from being created, fix later
+rm ~/tmp/"$USER" ~/tmp/cache/cache 2>/dev/null

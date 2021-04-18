@@ -1,0 +1,9 @@
+# add your user to the "staff" group:
+#
+# $ usermod -G staff mitch
+#
+# this group has fewer restrictions on processes
+# (however it doesn't grant any less secure priviledges...)
+#
+# edit /etc/login.conf and change "datasize-cur=XXXXM"
+# to a higher value, (ex: 75% of your total ram on your machine.)

@@ -16,39 +16,31 @@ alias cv='curl -v'
 
 alias speedtest='speedtest-cli --simple'
 
-w3m() {
-    command w3m -F -s -graph "${@:-https://duckduckgo.com/lite}"
-}
-ddg() { w3m https://duckduckgo.com/lite/?q="$*" ; }
-alias wdump='w3m -dump'
-
-wtf() { w3m -dump https://wtfismyip.com/json | jq -r ; }
-
-weather() {
-    read -r loc < "${XDG_CACHE_HOME}"/wttr
-    curl -s https://wttr.in/$loc?u0TQ
-}
-forecast() {
-    read -r loc < "${XDG_CACHE_HOME}"/wttr
-    curl -s https://wttr.in/"$loc"?u | tail -n 33 | head -n 31
+wtf() {
+    w3m -dump https://wtfismyip.com/json | jq -r
 }
 
-# see: http://github.com/mitchweaver/bin for sshvpn script
-sshvpn-wvr()    { sshvpn root@$(grep -A 1 wvr    ~/.ssh/config | grep -oE '[0-9].*') ; }
-
-nfsip() {
-    grep -A 1 'Host datahoarder' ~/.ssh/config | \
-    grep -oE '[0-9]+.*'
+ping() {
+    command ping "${1:-openbsd.org}"
 }
-pingnfs() { ping $(nfsip) ; }
 
-ping() { command ping "${@:-google.com}" ; }
-
-alias nmap_portscan='nmap -sT'
+# scan for open ports
+alias portscan='nmap -sT'
 
 noipv6() {
     # disable ipv6
-    sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+    case $(uname) in
+        OpenBSD)
+            doas rcctl -f stop slaacd
+            doas rcctl -f disable slaacd
+            ;;
+        Linux)
+            sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+    esac
 }
 
-alias vnc=vncviewer
+alias resolv='cat /etc/resolv.conf'
+
+# grab urls of any running processes
+# see: http://github.com/mitchweaver/bin for urls script
+psurls() { ps -auxww | urls ; }

@@ -14,10 +14,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # remove titlebar in firefox
 export MOZ_GTK_TITLEBAR_DECORATION=client
-
-# enable touch input for firefox
-export MOZ_USE_XINPUT2=1
-
 # disable firefox telemetry
 export MOZ_DATA_REPORTING=0
 export MOZ_TELEMETRY_REPORTING=0
@@ -25,21 +21,15 @@ export MOZ_CRASHREPORTER=0
 export MOZ_SERVICES_HEALTHREPORT=0
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-# monero wallet constant 100% cpu without this
-export QMLSCENE_DEVICE=softwarecontext
-
 command -v dimensions >/dev/null &&
 export DIMENSIONS="$(dimensions)"
 
-xset b off &
-xhost +local: >/dev/null &
-xmodmap ~/.xmodmaprc &
-xset +fp ~/.fonts &
-
+xset b off
+xhost +local: >/dev/null
 xrdb load ~/.Xresources
-
-# disable mouse acceleration
-xset m 0 0 &
+xmodmap ~/.xmodmaprc
+xset +fp ~/.fonts
+xset m 0 0
 
 #xrandr --output DisplayPort-0 --primary --auto --rotate normal \
 #       --output HDMI-A-0 --auto --rotate normal --right-of DisplayPort-0
@@ -47,21 +37,22 @@ xset m 0 0 &
 run() {
     cmd=$1
     shift
-    if command -v $cmd >/dev/null && ! pgrep $cmd >/dev/null ; then
+    if command -v $cmd >/dev/null && ! pgrep -f $cmd >/dev/null ; then
         $cmd "$@" &
     fi
 }
 
 run vol s 50
-run bright s 90
-# run ytdlq -d
-# run torrent-queue -d
-run subs -d
-run autorotate -d
+run bright s 100
+run ytdlq -d
 run background
 run sxhkd
 run xbanish
-# run crypto-ticker -d
+run xautolock -locker slock -time 10 -notify 15 -notifier $(command -v dunst)
+run xdimmer -p 20 -s 10 -b 1 -t 180
+run crypto-ticker -d
+# run torrent-queue -d
+# run subs -d
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # x11vnc -viewonly -xkb -nopw -wait 5 \

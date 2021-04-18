@@ -10,15 +10,11 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # I hate these stupid dirs and every program that creates them.
-rmdir Desktop Public Templates Documents Downloads Pictures \
+rmdir Desktop Public Templates Documents Pictures \
     Videos Documents Music 2>/dev/null ||:
 
 # junk useless files
-rm nohup.out *\~* 2>/dev/null ||:
-
-# grab urls of any running processes
-# see: http://github.com/mitchweaver/bin for urls script
-psurls() { ps -auxww | urls ; }
+rm nohup.out *.core *\~* 2>/dev/null ||:
 
 # search for a font name
 fcg() { fc-list | grep -i "$*" ; }
@@ -42,6 +38,19 @@ sxiv() {
     else
         command sxiv -a -N sxiv -p -q -r -s d -t . # -b
     fi 2>/dev/null
+}
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# wttr.in
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+weather() {
+    [ -f "${XDG_CACHE_HOME}"/wttr ] && read -r loc < "${XDG_CACHE_HOME}"/wttr
+    curl -Ls https://wttr.in/"$loc"?u0TQ
+}
+
+forecast() {
+    [ -f "${XDG_CACHE_HOME}"/wttr ] && read -r loc < "${XDG_CACHE_HOME}"/wttr
+    curl -Ls https://wttr.in/"$loc"?u | tail -n 33 | head -n 31
 }
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -111,36 +120,6 @@ qr() { cat "${1:-?}" | curl -sF-=\<- qrenco.de ; }
 alias mount_phone='sudo simple-mtpfs --device 1 -o allow_other /mnt/android'
 alias shck='shellcheck -s sh'
 
-pair_mouse() {
-    id=D1:4D:33:44:16:6a
-    bluetooth
-    {
-        bluetoothctl power on
-        bluetoothctl default-agent
-        bluetoothctl pairable on
-        bluetoothctl --timeout 2 scan on
-        bluetoothctl pair $id &&
-        bluetoothctl trust $id &&
-        bluetoothctl connect $id
-    } &
-    unset id
-    xset m 0 0
-}
-
-pair_headphones() {
-    id=20:03:29:08:09:18
-    bluetooth
-    bluetoothctl power on &&
-    bluetoothctl default-agent
-    bluetoothctl pairable on &&
-    bluetoothctl --timeout 2 scan on
-    bluetoothctl pair $id
-    bluetoothctl trust $id &&
-    bluetoothctl connect $id
-    unset id
-    xset m 0 0
-}
-
 mount_sdcard() {
     sudo mount -t vfat -o  uid=mitch /dev/mmcblk0 /mnt/sd
 }
@@ -164,15 +143,6 @@ alias {py,py3}=python3
 alias py2=python2
 
 alias ytm='yt -m'
-
-# nemo()     { [ "$1" ] || set . ; command nemo     "$@" & }
-# nautilus() { [ "$1" ] || set . ; command nautilus "$@" & }
-# alias n=nautilus
-alias {n,pc}='pcmanfm --no-desktop .'
-
-cpubench() {
-    sysbench cpu --cpu-max-prime=20000 --threads=$(nproc) run
-}
 
 alias sshcfg='v ~/.ssh/config'
 
@@ -199,18 +169,6 @@ alias play_random='ls | sort -R | head -n 1 | play'
 alias restart_sxhkd='pkill sxhkd ; sxhkd &'
 
 alias autoclick='while sleep 1 ; do xdotool click 1; done'
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-#alias nfs-space='ssh pi df -h | grep -E "(Avail|md0)"'
-alias wvr-update="ssh wvr 'apt update ; apt upgrade -y'"
-alias beast1-update="ssh beast1 'apt update ; apt upgrade -y'"
-alias beast2-update="ssh beast2 'apt update ; apt upgrade -y'"
-borg-update() {
-    for i in 1 2 3 4 5 ; do
-        ssh borg$i 'apt update ; apt upgrade -y'
-    done
-}
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 btcprice() {
     p=$(curl -Ls https://api.binance.com/api/v1/ticker/24hr | \

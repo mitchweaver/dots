@@ -22,8 +22,6 @@ alt + e
     pcmanfm
 super + e
     pcmanfm
-alt + v
-    virt-manager
 
 # dmenus
 alt + p

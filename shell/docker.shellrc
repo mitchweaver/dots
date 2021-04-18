@@ -4,6 +4,9 @@
 # ▀▀ ▝▀ ▝▀ ▘ ▘▝▀▘▘  
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
+# if openbsd, we do not have docker, return
+command -v docker >/dev/null || return
+
 # have all below run as root with clean environment
 alias docker='sudo env -i docker'
 alias docker-compose='sudo env -i docker-compose'

@@ -3,3 +3,4 @@ xenodm_flags=
 cron_flags=NO
 smtpd_flags=NO
 sshd_flags=NO
+slaacd_flags=NO

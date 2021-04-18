@@ -2,4 +2,13 @@
 # performance, but they cannot be used on top-level root
 
 # Create a tmpfs on /tmp, (mfs is a OpenBSD's tmpfs)
-swap /tmp mfs rw,nosuid,-s=1000000 0 0
+# note: this is for 500MB
+swap /tmp mfs rw,nodev,nosuid,-s=500m 0 0
+
+
+# The permissions of /tmp should be fixed
+# before mounting it, meaning /tmp on root
+# should be changed to 1777
+umount /tmp
+chmod 1777 /tmp
+mount /tmp

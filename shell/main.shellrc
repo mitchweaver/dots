@@ -17,13 +17,9 @@ PS1_GIT=true            # [true/false]
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 if [ -d "${SHELLRC_DIR}" ] ; then
-    for rc in \
-        options history builtins prompt generic_aliases \
-        generic_functions movement networking templates \
-        development package_manager docker wasteland
-    do
-        [ -f "${SHELLRC_DIR}/$rc.shellrc" ] &&
-        . "${SHELLRC_DIR}"/$rc.shellrc
+    for rc in "${SHELLRC_DIR}"/*.shellrc ; do
+        if [ "${rc##*/}" != main.shellrc ] ; then
+            . "$rc"
+        fi
     done
-    unset rc
 fi
