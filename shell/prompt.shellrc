@@ -16,7 +16,7 @@ _ps1_print_user() {
 }
 
 _ps1_print_pwd() {
-    printf '%s' "\[\e[1;36m\]\W "
+    printf '%s' "\[\e[1;36m\]\W"
 }
 
 _ps1_print_git() {
@@ -24,6 +24,10 @@ _ps1_print_git() {
     set -f
     set +f -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
     [ "$1" ] && printf '(%s) ' "$1"
+}
+
+_clear_formatting() {
+    printf '%s' '\[\e[1;37m\]'
 }
 
 _ps1_print() {
@@ -34,12 +38,16 @@ _ps1_print() {
                     _ps1_print_user
                     printf ' '
                     _ps1_print_pwd
+                    printf ' '
                     ;;
                 user)
                     _ps1_print_user
                     ;;
                 pwd)
+                    printf '['
                     _ps1_print_pwd
+                    _clear_formatting
+                    printf '] '
                     ;;
                 percent)
                     echo '%'
@@ -49,8 +57,7 @@ _ps1_print() {
                 _ps1_print_git
             fi
 
-            # clear formatting
-            printf '%s' '\[\e[1;37m\]'
+            _clear_formatting
             ;;
         dumb)
             echo '%'

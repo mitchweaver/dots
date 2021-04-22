@@ -11,8 +11,7 @@
 
 # -*-*- Options -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 SHELLRC_DIR=${HOME}/src/dots/shell
-HISTORY_STYLE=default   # [default/per-shell]
-PS1_STYLE=user-pwd      # [user-pwd/user/pwd/percent]
+PS1_STYLE=pwd           # [user-pwd/user/pwd/percent]
 PS1_GIT=true            # [true/false]
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 

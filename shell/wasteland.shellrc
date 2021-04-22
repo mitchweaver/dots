@@ -127,18 +127,6 @@ mount_sdcard() {
 # remove site block in /etc/hosts
 unhosts() { for i ; do sudo sed -i "s/.*$i.*//g" /etc/hosts ; done ; }
 
-alias iotop='sudo iotop -o -P'
-
-toilet() {
-    command toilet -f \
-    $(
-        ls /usr/share/figlet | \
-        while read -r font ; do
-            echo ${font%.tlf}
-        done | menu -p 'Select font:'
-    ) "$@"
-}
-
 alias {py,py3}=python3
 alias py2=python2
 
