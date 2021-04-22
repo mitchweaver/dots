@@ -174,10 +174,6 @@ if has('nvim')
             \ 'bundle/.*/doc',
             \ ]
 
-    " Plug 'danilo-augusto/vim-afterglow' " theme based on sublime text
-    "     let g:afterglow_inherit_background=1 " use same background color as terminal
-    "     let g:afterglow_italic_comments=1
-
     " Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
     
     Plug 'dylanaraps/wal.vim' " if using pywal
@@ -399,7 +395,10 @@ noremap <leader>T !!toilet -f smblock<cr>
 nmap <leader>md :!smu "%:p" >/tmp/tmp.html && $BROWSER /tmp/tmp.html<CR>
 nmap <leader>ghmd :!ghmd2html "%:p" >/tmp/tmp.html && $BROWSER /tmp/tmp.html<CR>
 
-set wildignore+=*.opus,*.flac,*.pdf,*.jpg,*.png,*.so,*.swp,*.zip,*.gzip,*.bz2,*.tar,*.xz,*.lrzip,*.lrz,*.mp3,*.ogg,*.mp4,*.gif,*.jpeg,*.webm
+set wildignore+=*.opus,*.flac,*.mp3,*.ogg,*.mp4,*.webm
+set wildignore+=*.jpg,*.png,*.gif,*.jpeg,*.pdf
+set wildignore+=*.zip,*.gzip,*.bz2,*.tar,*.xz
+set wildignore+=*.so,*.o,*.a
 
 " horizontal scrolling
 noremap <silent><C-o> 10zl
