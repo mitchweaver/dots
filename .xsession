@@ -49,7 +49,7 @@ run background
 run sxhkd
 run xbanish
 run xautolock -locker slock -time 10 -notify 15 -notifier $(command -v dunst)
-run xdimmer -p 20 -s 10 -b 1 -t 180
+run xdimmer -p 20 -s 10 -b 1 -t 570
 run crypto-ticker -d
 # run torrent-queue -d
 # run subs -d
@@ -61,12 +61,15 @@ run crypto-ticker -d
 #     -display :0 &
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-case $(sysctl -n hw.version) in
-    *ThinkPad*)
-        # enable scrolling with thinkpad trackpoint (openbsd)
-        xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation' 1 &
-        xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Button' 2 &
-        xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Axes' 6 7 4 5 &
+case $(uname) in
+    OpenBSD)
+        case $(sysctl -n hw.version) in
+            *ThinkPad*)
+                # enable scrolling with thinkpad trackpoint (openbsd)
+                xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation' 1 &
+                xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Button' 2 &
+                xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Axes' 6 7 4 5 &
+        esac
 esac
 
 if command -v dwm >/dev/null ; then
