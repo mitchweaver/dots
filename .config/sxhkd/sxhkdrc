@@ -5,13 +5,9 @@
 alt Return
     stwrapper
 alt + w
-    firefox
-alt + shift + w
-    google-chrome
-control + alt + shift + w
-    start-tor-browser
+    firefox --new-instance --profile /home/mitch/.mozilla/firefox/mitch
 alt + r
-    st -c ranger -e ranger --cmd='set viewmode multipane'
+    stwrapper -c ranger -e ranger --cmd='set viewmode multipane'
 control + alt + x
     slock
 Print
@@ -22,6 +18,8 @@ alt + e
     pcmanfm
 super + e
     pcmanfm
+alt + v
+    stwrapper -c htop -e htop
 
 # dmenus
 alt + p
@@ -34,8 +32,6 @@ alt + i
 #     brws -a
 alt + y
     dmoji
-alt + c
-    clip
 
 # misc
 control + alt + k

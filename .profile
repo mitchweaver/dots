@@ -16,11 +16,13 @@ export FONTCONFIG_PATH=/etc/fonts
 export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
 export PYTHONOPTIMIZE=2
 
-export LC_CTYPE='en_US.UTF-8'
-export LANG="$LC_CTYPE" \
-    LANGUAGE="$LC_CTYPE" \
-    LC_ALL="$LC_CTYPE" \
-    LOCALE="$LC_CTYPE"
+# using en_US.UTF-8 over C causes case-insensitive sorting
+# up to you whether the benefits outweigh the negatives
+export LC_ALL="C"
+export LC_CTYPE="$LC_ALL" \
+       LANG="$LC_ALL" \
+       LANGUAGE="$LC_ALL" \
+       LOCALE="$LC_ALL"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 export XDG_OPEN=opn
@@ -74,9 +76,7 @@ export LESS='-QRsim +Gg'
 export LESSHISTFILE=/dev/null
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-# home temp folder and cache
-mkdir -p "/tmp/$USER"/cache
+mkdir -p "/tmp/$USER"
 ln -sf "/tmp/$USER" ~/tmp
-ln -sf "/tmp/$USER/cache" ~/.cache
 # not sure how to stop these from being created, fix later
-rm ~/tmp/"$USER" ~/tmp/cache/cache 2>/dev/null
+rm ~/tmp/"$USER" 2>/dev/null

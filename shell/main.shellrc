@@ -9,6 +9,11 @@
 #
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
+# only run rc if interactive
+if [ ! -t 0 ] ; then
+    return
+fi
+
 # -*-*- Options -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 SHELLRC_DIR=${HOME}/src/dots/shell
 PS1_STYLE=pwd           # [user-pwd/user/pwd/percent]

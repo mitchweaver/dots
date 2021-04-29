@@ -127,12 +127,17 @@ mount_sdcard() {
 # remove site block in /etc/hosts
 unhosts() { for i ; do sudo sed -i "s/.*$i.*//g" /etc/hosts ; done ; }
 
-alias {py,py3}=python3
+if ! command -v python >/dev/null ; then
+    alias {python,py}=python3
+fi
+
 alias py2=python2
+alias py3=python3
 
 alias ytm='yt -m'
 
 alias sshcfg='v ~/.ssh/config'
+alias vimrc='v ~/.vimrc'
 
 mkgif() {
     rm out.gif 2>/dev/null ||:
@@ -163,3 +168,14 @@ btcprice() {
     jq -cr '.[] | select(.symbol == "'"BTCUSDT"'") | .lastPrice')
     printf '$%s\n' "${p%%000000}"
 }
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# aliases for my own scripts
+subsdl() {
+    link=$(subs -n)
+    if [ "$link" ] ; then
+        addyt "$link"
+    fi
+    printf "Added link '%s' to download queue.\n" "$link"
+}
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

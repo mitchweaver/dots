@@ -19,6 +19,7 @@ alias pfdrop='doas tcpdump -nettti pflog0 action drop'   # follow dropped
 alias netstart='doas sh /etc/netstart'
 
 pkg() {
+    [ "$1" ] || set -- h
     flag=${1#-}
     shift       
     case $flag in
@@ -49,3 +50,5 @@ pkg() {
             pkg_info "$@"
     esac
 }
+
+alias nu='doas sh /etc/netstart urtwn0'

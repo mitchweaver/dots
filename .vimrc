@@ -61,16 +61,8 @@ if has('nvim')
         autocmd BufNewFile,BufRead *rc setlocal commentstring=#\ %s
         autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
-
     Plug 'mg979/vim-visual-multi' " sublime-like multiple select
         let g:VM_mouse_mappings = 0
-
-    " Plug 'terryma/vim-multiple-cursors' " sublime-like multiple select
-        " let g:multi_cursor_use_default_mapping=0
-    "     let g:multi_cursor_next_key='<c-m>'
-    "     let g:multi_cursor_prev_key='<c-p>'
-    "     let g:multi_cursor_skip_key='<c-x>'
-    "     let g:multi_cursor_quit_key='<esc>'
 
     Plug 'airblade/vim-gitgutter' " git diffing along the left side
         let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
@@ -86,36 +78,21 @@ if has('nvim')
         nmap sl yss
         vmap s S
 
-    Plug 'artoj/pgn-syntax-vim' " chess .pgn syntax highlighting
-
-    " ------------ buggy and annoying af, look into later:
-    " Plug 'jiangmiao/auto-pairs' " autotype brackets, parents, tags
-    "     let g:AutoPairsFlyMode = 0
-    "     let g:AutoPairsShortcutBackInsert = '<M-b>'
-    "     " remove single/double quotes from autopairing, causes too much headache:
-    "     let g:AutoPairs = {'(':')', '[':']', '{':'}', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
-
     Plug 'vimwiki/vimwiki' " the ultimate note taking system
         let wiki = {}
         let g:vimwikidir = "~/files/wiki"
         let g:vimwiki_list=[wiki]
         let g:vimwiki_list = [
-          \{'path': '~/files/wiki', 'syntax': 'markdown', 'ext': '.vimwiki'},
+          \{'path': '~/files/wiki', 'syntax': 'markdown', 'ext': '.md'},
         \]
         let g:vimwiki_ext2syntax = {'.md': 'markdown'}
-        autocmd FileType vimwiki set ft=markdown
+        autocmd FileType md set ft=markdown
 
     Plug 'honza/vim-snippets' " snippets repo
     Plug 'SirVer/ultisnips' " snippet driver
         let g:UltiSnipsExpandTrigger="<c-l>"
         let g:UltiSnipsListSnippets = '<c-cr>'
         let g:UltiSnipsEditSplit="vertical"
-        """"" can't get these to work, idk why
-        " let g:UltiSnipsJumpBackwardTrigger = '<c-j>'
-        " let g:UltiSnipsJumpForwardTrigger = '<c-k>'
-
-   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-       let g:deoplete#enable_at_startup = 1
 
     Plug 'ervandew/supertab' " tab completion rather than <c-n>
         let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -125,13 +102,8 @@ if has('nvim')
         nmap <leader>il :let g:indentLine_enabled = 1<CR>
         nmap <leader>li :let g:indentLine_enabled = 0<CR>
 
-    Plug 'chrisbra/Colorizer' " colorize hex codes in terminal
-        autocmd VimEnter * ColorHighlight
-        let g:colorizer_maxlines = 2000
-        let g:colorizer_auto_color = 1 " color on file open
-        let g:colorizer_skip_comments = 1 " do not color in comments
-        let g:colorizer_colornames = 0 " only color hex codes, not names
-        let g:termguicolors = 1
+   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+       let g:deoplete#enable_at_startup = 1
 
     Plug 'w0rp/ale'
         let g:ale_sign_column_always = 0
@@ -164,7 +136,7 @@ if has('nvim')
             \ ]
 
         let g:startify_bookmarks = [
-            \ {'w': '~/files/wiki/index.vimwiki'},
+            \ {'w': '~/files/wiki/index.md'},
             \ {'v': '~/.vimrc'},
             \ ]
 
@@ -174,8 +146,8 @@ if has('nvim')
             \ 'bundle/.*/doc',
             \ ]
 
-    " Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
-    
+    Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
+    Plug 'logico/typewriter-vim' " theme
     Plug 'dylanaraps/wal.vim' " if using pywal
 
     Plug 'NLKNguyen/papercolor-theme'
@@ -193,6 +165,11 @@ if has('nvim')
         \   }
         \ }
 
+    Plug 'skywind3000/vim-keysound'
+        let g:keysound_enable = 1
+        let g:keysound_py_version = 3
+        let g:keysound_volume = 500
+
     call plug#end()
     filetype indent plugin on
 
@@ -205,18 +182,15 @@ if has('nvim')
         
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
         " ----- If not using pywal: ---------------
-        " colorscheme afterglow
         " colorscheme onehalfdark
         " colorscheme PaperColor
+        " colorscheme typewriter
         " set background=light
         " set t_Co=256 " fix terminal colors
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
         
         " if using pywal:
         colorscheme wal
-
-        "---- IF USING GNVIM:
-        " set termguicolors
 
         " make sign column same color as terminal background
         hi signColumn ctermbg=NONE
@@ -258,9 +232,9 @@ noremap ; :
 noremap :W :w
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-" ▞▀▖      ▐        
+" ▞▀▖      ▐
 " ▚▄ ▌ ▌▛▀▖▜▀ ▝▀▖▚▗▘
-" ▖ ▌▚▄▌▌ ▌▐ ▖▞▀▌▗▚ 
+" ▖ ▌▚▄▌▌ ▌▐ ▖▞▀▌▗▚
 " ▝▀ ▗▄▘▘ ▘ ▀ ▝▀▘▘ ▘
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 autocmd BufNewFile,BufRead *.config  set syntax=sh
@@ -283,10 +257,10 @@ let g:is_posix = 1
 let g:asmsyntax = 'nasm'
 map <silent><leader>sy :set syntax=sh<cr>
 
-" ▌  ▗        ▙ ▌       ▌           
+" ▌  ▗        ▙ ▌       ▌
 " ▌  ▄ ▛▀▖▞▀▖ ▌▌▌▌ ▌▛▚▀▖▛▀▖▞▀▖▙▀▖▞▀▘
 " ▌  ▐ ▌ ▌▛▀  ▌▝▌▌ ▌▌▐ ▌▌ ▌▛▀ ▌  ▝▀▖
-" ▀▀▘▀▘▘ ▘▝▀▘ ▘ ▘▝▀▘▘▝ ▘▀▀ ▝▀▘▘  ▀▀ 
+" ▀▀▘▀▘▘ ▘▝▀▘ ▘ ▘▝▀▘▘▝ ▘▀▀ ▝▀▘▘  ▀▀
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 map <silent><leader>ln :set number!<cr>
 map <silent><leader>nl :set relativenumber!<cr>
