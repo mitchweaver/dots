@@ -1,0 +1,4 @@
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
+text/x-diff;  cat %s | colordiff; copiousoutput;
+text/x-patch; cat %s | colordiff; copiousoutput;
+image/*; sxiv %s; copiousoutput;
