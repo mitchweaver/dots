@@ -14,7 +14,7 @@ rmv() { rsync   "${1:-?}"/ "${2:-?}" && rm -r "${1:-?}" ; }
 alias p8='ping 8.8.8.8'
 alias cv='curl -v'
 
-alias speedtest='speedtest-cli --simple'
+alias speedtest='speedtest-cli --simple --secure --no-pre-allocate'
 
 wtf() {
     w3m -dump https://wtfismyip.com/json | jq -r
@@ -44,3 +44,44 @@ alias resolv='cat /etc/resolv.conf'
 # grab urls of any running processes
 # see: http://github.com/mitchweaver/bin for urls script
 psurls() { ps -auxww | urls ; }
+
+
+getint() {
+    case $(uname) in
+        OpenBSD)
+            # get correct interface
+            for i in urtwn0 iwm0 iwn0 iwx0 em0 ; do
+                if ifconfig | grep $i >/dev/null ; then
+                    echo $i
+                    break
+                fi
+            done
+    esac
+}
+
+isconnected() {
+    if ifconfig $int | grep 'no network' >/dev/null ; then
+        return 1
+    fi
+}
+
+getlocalip() {
+    case $(uname) in
+        OpenBSD)
+            int=$(getint)
+            if isconnected $int ; then
+                ifconfig $int | \
+                while read -r line ; do
+                    case $line in
+                        *inet*)
+                            line=${line#*inet }
+                            line=${line% netmask*}
+                            echo $line
+                            break
+                    esac
+                done
+            else
+                return 1
+            fi
+    esac
+}
