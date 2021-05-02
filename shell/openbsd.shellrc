@@ -8,15 +8,15 @@
 
 command -v pkg_add >/dev/null return
 
-alias {doas,dosa,sudo}='TERM=vt100 doas'
+alias {doas,dosa,daos,sudo}='TERM=vt100 doas'
 alias sg='sysctl | grep -i'
 alias disks='sysctl -n hw.disknames'
 alias disklabel='doas disklabel'
-alias reboot='doas reboot'
-alias poweroff='doas halt -p'
 alias pfdump='doas tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout
 alias pfdrop='doas tcpdump -nettti pflog0 action drop'   # follow dropped
 alias netstart='doas sh /etc/netstart'
+alias reboot='doas reboot'
+alias poweroff='doas halt -p'
 
 pkg() {
     [ "$1" ] || set -- h
@@ -52,3 +52,25 @@ pkg() {
 }
 
 alias nu='doas sh /etc/netstart urtwn0'
+alias pftop='doas pftop'
+
+# ▛▀▖      ▐     
+# ▙▄▘▞▀▖▙▀▖▜▀ ▞▀▘
+# ▌  ▌ ▌▌  ▐ ▖▝▀▖
+# ▘  ▝▀ ▘   ▀ ▀▀ 
+alias dmi='doas make install'
+alias portcheck=/usr/ports/infrastructure/bin/portcheck
+alias porttemplate='cp /usr/ports/infrastructure/templates/Makefile.template Makefile'
+alias cdwrksrc='cd $(make show=WRKSRC)'
+
+pledgesnippet() {
+cat <<"EOF"
+if (pledge("stdio rpath", NULL) == -1)
+{
+    fprintf (stderr, "%s: pledge\n", "PROGRAM_NAME");
+    exit ( 1 );
+}
+EOF
+}
+
+alias puffy="printf '%s\n' '🐡' | tee | xsel -ib"
