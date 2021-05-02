@@ -167,8 +167,10 @@ if has('nvim')
 
     Plug 'skywind3000/vim-keysound'
         let g:keysound_enable = 1
+        let g:keysound_theme = "default"
+        " let g:keysound_theme = "typewriter"
         let g:keysound_py_version = 3
-        let g:keysound_volume = 500
+        let g:keysound_volume = 1000 " 0-1000
 
     call plug#end()
     filetype indent plugin on
@@ -330,7 +332,6 @@ map <silent><C-d> :bd<cr>
 map <silent>tk :bnext<CR>
 map <silent>tj :bprev<CR>
 map <silent>td :bd<cr>
-
 
 " make < and > retain selection
 vnoremap < <gv

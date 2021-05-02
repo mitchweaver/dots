@@ -19,19 +19,16 @@ gud() { command gud "$@" ; cd . ; }
 # quick recompile
 rcp() {
     case $1 in
-        bs|bonsai)
-            cd ~/src/bonsai
-            mkki
-            cd - >/dev/null
-            ;;
         st|dwm|dmenu|surf|tabbed|sent)
-            cd ~/src/suckless
-            sh ./build.sh "$@"
+            cd ~/src/suckless &&
+            sh ./build.sh "$@" &&
             cd - >/dev/null
     esac
 }
 
-scfg() { ${PLUMBER:-xdg-open} ~/src/suckless/$1/cfg/config.h ; }
+scfg() {
+    ${PLUMBER:-${EDITOR:-vi}} ~/src/suckless/$1/cfg/config.h
+}
 
 # watch a file and do an action as its contents changes
 iwaitdo() {
@@ -63,4 +60,11 @@ v() {
             ($EDITOR "$@" >/dev/null 2>&1 &)
     esac
 }
-# [ "$1" ] || set -- -c VimwikiIndex
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# web development
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# serve site on localhost
+alias hs='hugo server -D'
+# serve site on local LAN
+alias hslocal='hugo server -D --bind $(getlocalip) --baseURL http://$(getlocalip)'

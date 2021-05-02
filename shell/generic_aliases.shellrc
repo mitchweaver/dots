@@ -63,15 +63,8 @@ alias tf='tail -f'
 
 alias cmd=command
 alias w=which
+alias {dc,ccd}=cd
+alias 4m=rm
 
 alias dm='dmesg | tail -n 20'
 alias dmg='dmesg | grep -i'
-
-alias {poweroff,shutdown}='sudo poweroff'
-alias {reboot,restart}='sudo reboot'
-
-alias {dc,ccd}=cd
-
-alias 4m=rm
-
-p() { printf '%s/%s\n' "$PWD" "$*" ; }

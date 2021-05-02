@@ -14,6 +14,8 @@ if [ ! -t 0 ] ; then
     return
 fi
 
+umask 022
+
 # -*-*- Options -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 SHELLRC_DIR=${HOME}/src/dots/shell
 PS1_STYLE=pwd           # [user-pwd/user/pwd/percent]

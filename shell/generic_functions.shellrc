@@ -125,3 +125,13 @@ randint() {
     dd ibs=1 obs=1 count=1 2>/dev/null
     echo
 }
+
+# appends text onto a filename
+append() {
+    if [ -f "$1" ] && [ "$2" ] ; then
+        mv "$1" "$1$2"
+    else
+        echo "Usage: append [filename] [text]"
+        return 1
+    fi
+}

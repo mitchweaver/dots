@@ -12,7 +12,6 @@
 *ridium*
 *w3m*
 *config/wal
-*config/neofetch
 *config/keys
 *config/QtProject.conf
 *config/GIMP*
@@ -30,8 +29,6 @@
 *token*
 *dconf*
 *autostart*
-*mimeapps*
-*menus*
 *menus*
 *torbrowser*
 *tor-browser*
@@ -89,3 +86,4 @@
 *config/xfce4
 *Thunar*
 *.core
+*geany*

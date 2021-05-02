@@ -1,4 +1,5 @@
 #!/bin/sh
+
 umask 022
 ulimit -c 0
 
@@ -51,7 +52,7 @@ export MENU_PROG=menu \
        PLUMBER=opn \
        SUBS_MENU_PROG="menu -wide -p Subs:" \
        SUBS_DAEMON_INTERVAL=3600 \
-       CRYPTO_TICKER_INTERVAL=30
+       CRYPTO_TICKER_INTERVAL=60
 
 export TRASH_DIR="${XDG_DATA_HOME}/Trash" \
        TASKS_FILE="${XDG_DOCUMENTS_DIR}/tasks.txt" \
@@ -61,6 +62,20 @@ export TRASH_DIR="${XDG_DATA_HOME}/Trash" \
 
 export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s'
 export MPV_OPTS="--really-quiet --force-seekable=yes"
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# hide GOPATH to ~/.go instead of ~/go
+export GOPATH=${HOME}/.go
+
+# try to catch either 11 or 8 openjdk version
+# note: this path is for OpenBSD
+for i in 11 8 ; do
+    if [ -d /usr/local/jdk-$i ] ; then
+        export JAVA_HOME=/usr/local/jdk-$i
+        export PATH=$PATH:$JAVA_HOME/bin
+        break
+    fi
+done
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 for editor in nvim vim vi ; do
@@ -78,5 +93,7 @@ export LESSHISTFILE=/dev/null
 
 mkdir -p "/tmp/$USER"
 ln -sf "/tmp/$USER" ~/tmp
-# not sure how to stop these from being created, fix later
+ln -sf ~/tmp/mozilla_cache ~/.cache/mozilla
+mkdir -p ~/tmp/mozilla_cache
+# not sure how to stop this from being created, fix later
 rm ~/tmp/"$USER" 2>/dev/null

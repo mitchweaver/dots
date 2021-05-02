@@ -74,6 +74,8 @@ run sxhkd
 run xbanish
 run crypto-ticker -d
 run torrent-queue -d
+run sctc 6500
+run batmon
 # run subs -d
 
 if command -v dwm >/dev/null ; then

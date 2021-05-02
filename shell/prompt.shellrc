@@ -33,6 +33,8 @@ _clear_formatting() {
 _ps1_print() {
     case $TERM in
         *-256color)
+            _clear_formatting
+
             case ${PS1_STYLE:-user-pwd} in
                 user-pwd)
                     _ps1_print_user
