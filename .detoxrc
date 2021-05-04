@@ -10,6 +10,7 @@ ignore {
 	filename ".mozilla";
 	filename ".themes";
     filename ".git";
+    filename "README.md";
     filename "CVS";
 	filename "{arch}";
 };
