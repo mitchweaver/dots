@@ -1,0 +1,13 @@
+sequence default {
+    utf_8;
+	safe;
+	wipeup;
+    lower;
+};
+
+ignore {
+	filename ".arch-params";
+	filename ".mozilla";
+	filename ".themes";
+	filename "{arch}";
+};
