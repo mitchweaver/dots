@@ -24,7 +24,7 @@ pkg() {
     shift       
     case $flag in
         h)
-            printf '%s\n' \
+            >&2 printf '%s\n' \
                 'pkg: [-a add] [-u update] [-d delete] [-s search] [-i info] [-f file] [-l list]'
             ;;
         a)
@@ -74,3 +74,15 @@ EOF
 }
 
 alias puffy="printf '%s\n' '🐡' | tee | xsel -ib"
+
+ports() {
+    case ${1#-} in
+        h)
+            >&2 printf '%s\n' \
+                'ports: [-s search]'
+            ;;
+        s)
+            make -f /usr/ports/Makefile search name=$2 | \
+            grep 'Port:'
+    esac
+}

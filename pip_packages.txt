@@ -1,4 +1,0 @@
-# pipe packages because I'm too lazy to make ports for them
-pysdl2
-diceware
-wallstreet

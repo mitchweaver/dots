@@ -45,14 +45,15 @@ if has('nvim')
 
     Plug 'tpope/vim-repeat' " allows '.' to do more things
     Plug 'tpope/vim-speeddating' " allows C-a to increment dates and times
+    Plug 'tpope/vim-eunuch' " wrapper around common unix shell commands
+    Plug 'tpope/vim-sleuth' " autodetect tab indentation
+
     Plug 'godlygeek/tabular' " tab alignment
     Plug 'sheerun/vim-polyglot' " syntax highlighting
     Plug 'ekalinin/Dockerfile.vim' " syntax for dockerfiles
 
     Plug 'ap/vim-buftabline' " display buffers along top as tabs
         let g:buftabline_show = 1
-
-    Plug 'tpope/vim-sleuth' " autodetect tab indentation
 
     Plug 'tpope/vim-commentary' " comment toggler
         nmap <silent><leader>c :Commentary<CR>
@@ -86,6 +87,7 @@ if has('nvim')
           \{'path': '~/files/wiki', 'syntax': 'markdown', 'ext': '.md'},
         \]
         let g:vimwiki_ext2syntax = {'.md': 'markdown'}
+        let g:vimwiki_global_ext = 0
         autocmd FileType md set ft=markdown
 
     Plug 'honza/vim-snippets' " snippets repo
@@ -115,7 +117,6 @@ if has('nvim')
         let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 
     Plug 'gyim/vim-boxdraw' " the coolest plugin you never knew you needed
-
     Plug 'ryanoasis/vim-devicons' " adds icons to plugins
 
     Plug 'mhinz/vim-startify'
@@ -149,7 +150,6 @@ if has('nvim')
     Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
     Plug 'logico/typewriter-vim' " theme
     Plug 'dylanaraps/wal.vim' " if using pywal
-
     Plug 'NLKNguyen/papercolor-theme'
         let g:PaperColor_Theme_Options = {
         \   'language': {
@@ -165,12 +165,12 @@ if has('nvim')
         \   }
         \ }
 
-    Plug 'skywind3000/vim-keysound'
-        let g:keysound_enable = 1
-        let g:keysound_theme = "default"
-        " let g:keysound_theme = "typewriter"
-        let g:keysound_py_version = 3
-        let g:keysound_volume = 1000 " 0-1000
+    " Plug 'skywind3000/vim-keysound'
+    "     let g:keysound_enable = 1
+    "     let g:keysound_theme = "default"
+    "     " let g:keysound_theme = "typewriter"
+    "     let g:keysound_py_version = 3
+    "     let g:keysound_volume = 1000 " 0-1000
 
     call plug#end()
     filetype indent plugin on
@@ -181,7 +181,6 @@ if has('nvim')
         map <silent><leader>pc :PlugClean<CR>
 
         " NOTE: colorschemes must be set after loading plugins
-        
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
         " ----- If not using pywal: ---------------
         " colorscheme onehalfdark
@@ -205,7 +204,6 @@ endif
 " ▝▀ ▝▀▘▘ ▘▝▀▘▘  ▝▀▘ ▘
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 scriptencoding utf-8
-" set cursorline " highlight current line of cursor
 set signcolumn=auto " yes=always, no=never, auto=ifchanges
 set encoding=utf-8
 set history=200
@@ -227,6 +225,7 @@ set cmdheight=1 " cmd output only take up 1 line
 set nostartofline " gg/G do not always go to line start
 set modeline " enable per-file custom syntax
 set mouse=a " enable mouse globally a/n
+" set cursorline " highlight current line of cursor
 
 " remove need to hold shift for commands
 noremap ; :

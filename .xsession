@@ -40,21 +40,6 @@ xset b off
 #xrandr --output DisplayPort-0 --primary --auto --rotate normal \
 #       --output HDMI-A-0 --auto --rotate normal --right-of DisplayPort-0
 
-run() {
-    cmd=$1
-    shift
-    if command -v $cmd >/dev/null && ! pgrep -f $cmd >/dev/null ; then
-        $cmd "$@" &
-    fi
-}
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# run x11vnc -viewonly -xkb -nopw -wait 5 \
-#     -noxrecord -noxdamage -tightfilexfer \
-#     -noxfixes -forever -shared -rfbport 5900 \
-#     -display :0 &
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
 case $(uname) in
     OpenBSD)
         case $(sysctl -n hw.version) in
@@ -66,6 +51,14 @@ case $(uname) in
         esac
 esac
 
+run() {
+    cmd=$1
+    shift
+    if command -v $cmd >/dev/null && ! pgrep -f $cmd >/dev/null ; then
+        $cmd "$@" &
+    fi
+}
+
 run vol s 50
 run bright s 100
 run ytdlq -d
@@ -73,6 +66,7 @@ run background
 run sxhkd
 run xbanish
 run crypto-ticker -d
+run stock-ticker -d
 run torrent-queue -d
 run sctc 6500
 run batmon
@@ -83,7 +77,7 @@ if command -v dwm >/dev/null ; then
     run picom -b
     run dunst
     run xdimmer -p 20 -s 10 -b 1 -t 570
-    run xautolock -locker slock -time 10 -notify 15 -notifier $(command -v dunst)
+    run xautolock -locker slock -time 10 -notify 15 -notifier notify-send
     unset -f run
     exec dwm
 fi

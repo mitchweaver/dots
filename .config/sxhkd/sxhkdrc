@@ -5,7 +5,7 @@
 alt Return
     stwrapper
 alt + w
-    firefox --new-instance --profile /home/mitch/.mozilla/firefox/mitch
+    brws
 alt + r
     stwrapper -c ranger -e ranger --cmd='set viewmode multipane'
 control + alt + x

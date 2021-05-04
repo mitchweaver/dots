@@ -19,7 +19,7 @@ gud() { command gud "$@" ; cd . ; }
 # quick recompile
 rcp() {
     case $1 in
-        st|dwm|dmenu|surf|tabbed|sent)
+        st|dwm|dmenu|surf|tabbed|sent|slock)
             cd ~/src/suckless &&
             sh ./build.sh "$@" &&
             cd - >/dev/null
@@ -60,6 +60,8 @@ v() {
             ($EDITOR "$@" >/dev/null 2>&1 &)
     esac
 }
+
+alias vw='nvim -c VimwikiIndex'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # web development

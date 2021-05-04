@@ -14,7 +14,7 @@ rmdir Desktop Public Templates Documents Pictures \
     Videos Documents Music 2>/dev/null ||:
 
 # junk useless files
-rm nohup.out *.core *\~* 2>/dev/null ||:
+rm nohup.out *.core *\~* \:w 2>/dev/null ||:
 
 # search for a font name
 fcg() { fc-list | grep -i "$*" ; }
@@ -173,9 +173,26 @@ btcprice() {
 # aliases for my own scripts
 subsdl() {
     link=$(subs -n)
-    if [ "$link" ] ; then
+    if [ ! -z "$link" ] ; then
         addyt "$link"
     fi
     printf "Added link '%s' to download queue.\n" "$link"
 }
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+clip() {
+    case ${1#-} in
+        h)
+            echo 'Usage: clip [-i] [-o]'
+            ;;
+        i)
+            xsel -ib
+            ;;
+        *)
+            xsel -ob
+    esac
+}
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+alias detox='detox -v'

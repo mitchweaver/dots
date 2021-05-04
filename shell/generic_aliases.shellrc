@@ -39,6 +39,8 @@ alias {l1,lv}='ls -1'
 alias lsf='ls "$PWD"/*'
 alias lg='ls | grep -i'
 
+alias t=tree
+
 alias cp='cp -irv'
 alias mv='mv -iv'
 alias {mkdir,mkd,mkdr}='mkdir -p'
@@ -55,10 +57,10 @@ alias ga1='grep -i -A 1'
 alias df='df -h'
 alias su='sudo su -'
 
-alias h='head -n 15'
-alias t='tail -n 15'
 alias h1='head -n 1'
+alias h5='head -n 5'
 alias t1='tail -n 1'
+alias t5='tail -n 5'
 alias tf='tail -f'
 
 alias cmd=command

@@ -10,17 +10,24 @@ cd() {
         \?)
             if [ -f "${XDG_CACHE_HOME:-${HOME}/.cache}"/last_dir ] ; then
                 read -r loc < "${XDG_CACHE_HOME:-${HOME}/.cache}"/last_dir
-                cd "$loc"
+                [ "$loc" ] && cd "$loc"
             fi
             ;;
         *)
             if [ "$1" ] ; then
+                # try any globs of the arg
                 builtin cd --  "$1"  ||
                 builtin cd --  "$1"* ||
                 builtin cd -- *"$1"  ||
                 builtin cd -- *"$1"* ||
-                builtin cd -- \
-                "$(find . -type d -maxdepth 1 -iname "*$1*" | head -n 1)"
+                for _i in 1 2 3 4 ; do
+                    _cddir="$(find . -type d -maxdepth $_i -iname "*$1*" | head -n 1)"
+                    if [ "$_cddir" ] ; then
+                        builtin cd -- "$_cddir"
+                        break
+                    fi
+                done
+                unset _i
             else
                 builtin cd -- "${HOME}"
             fi 2>/dev/null

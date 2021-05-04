@@ -52,7 +52,8 @@ export MENU_PROG=menu \
        PLUMBER=opn \
        SUBS_MENU_PROG="menu -wide -p Subs:" \
        SUBS_DAEMON_INTERVAL=3600 \
-       CRYPTO_TICKER_INTERVAL=60
+       CRYPTO_TICKER_INTERVAL=60 \
+       STOCK_TICKER_INTERVAL=60
 
 export TRASH_DIR="${XDG_DATA_HOME}/Trash" \
        TASKS_FILE="${XDG_DOCUMENTS_DIR}/tasks.txt" \
@@ -61,7 +62,6 @@ export TRASH_DIR="${XDG_DATA_HOME}/Trash" \
        YTDLQ_DIR="${HOME}/.ytdlq"
 
 export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s'
-export MPV_OPTS="--really-quiet --force-seekable=yes"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # hide GOPATH to ~/.go instead of ~/go
@@ -84,7 +84,11 @@ for editor in nvim vim vi ; do
         break
     fi
 done
-export BROWSER=firefox
+if command -v brws >/dev/null ; then
+    export BROWSER=brws
+else
+    export BROWSER=firefox
+fi
 export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
 export LESS='-QRsim +Gg'

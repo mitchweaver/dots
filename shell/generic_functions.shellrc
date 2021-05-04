@@ -55,7 +55,10 @@ cw() { cat "$(which "${1:-?}")" ; }
 sum() { [ -f "$1" ] && paste -sd+ <"$1" | bc ; }
 
 # search for running process
-psg() { ps -auxww | grep -i -- "$*" | grep -iv -- "grep $*" ; }
+psgrep() {
+    ps -auxww | grep -i -- "$*" | grep -iv -- "grep $*"
+}
+alias psg=psgrep
 
 # print the parent process name of a given pid
 getparent() {
@@ -134,4 +137,9 @@ append() {
         echo "Usage: append [filename] [text]"
         return 1
     fi
+}
+
+# converts piped text to image
+text2image() {
+    convert label:@- out.png
 }
