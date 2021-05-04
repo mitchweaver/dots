@@ -9,5 +9,7 @@ ignore {
 	filename ".arch-params";
 	filename ".mozilla";
 	filename ".themes";
+    filename ".git";
+    filename "CVS";
 	filename "{arch}";
 };
