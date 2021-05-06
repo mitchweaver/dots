@@ -48,10 +48,13 @@ export ENV="${HOME}/src/dots/shell/main.shellrc"
 export LOCAL="${HOME}/.local"
 
 export MENU_PROG=menu \
-       TERMINAL_PROG=st \
+       TERMINAL_PROG=stwrapper \
        PLUMBER=opn \
        SUBS_MENU_PROG="menu -wide -p Subs:" \
        SUBS_DAEMON_INTERVAL=3600 \
+       MAILD_ACCOUNT=wvr \
+       MAILD_MAILBOX=Inbox \
+       MAILD_CHECK_INTERVAL=15 \
        CRYPTO_TICKER_INTERVAL=60 \
        STOCK_TICKER_INTERVAL=60
 
@@ -93,6 +96,22 @@ export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
 export LESS='-QRsim +Gg'
 export LESSHISTFILE=/dev/null
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# Permissions
+chmod 0755 ~
+if [ -d ~/.gnupg ] ; then
+    chmod 0700 ~/.gnupg
+    chmod 0600 ~/.gnupg/*
+fi
+if [ -d ~/.ssh ] ; then
+    chmod 0700 ~/.ssh
+    chmod 0600 ~/.ssh/id_rsa
+    chmod 0644 ~/.ssh/id_rsa.pub
+    chmod 0600 ~/.ssh/config
+    if [ -f ~/.ssh/authorized_keys ] ; then
+        chmod 0600 ~/.ssh/authorized_keys
+    fi
+fi
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 mkdir -p "/tmp/$USER"
