@@ -1,31 +1,12 @@
 " http://github.com/mitchweaver/dots
-"          ____                    _____                    _____          
-"        /\    \                  /\    \                  /\    \         
-"       /::\____\                /::\    \                /::\____\        
-"      /:::/    /                \:::\    \              /::::|   |        
-"     /:::/    /                  \:::\    \            /:::::|   |        
-"    /:::/    /                    \:::\    \          /::::::|   |        
-"   /:::/____/                      \:::\    \        /:::/|::|   |        
-"   |::|    |                       /::::\    \      /:::/ |::|   |        
-"   |::|    |     _____    ____    /::::::\    \    /:::/  |::|___|______  
-"   |::|    |    /\    \  /\   \  /:::/\:::\    \  /:::/   |::::::::\    \ 
-"   |::|    |   /::\____\/::\   \/:::/  \:::\____\/:::/    |:::::::::\____\
-"   |::|    |  /:::/    /\:::\  /:::/    \::/    /\::/    / ~~~~~/:::/    /
-"   |::|    | /:::/    /  \:::\/:::/    / \/____/  \/____/      /:::/    / 
-"   |::|____|/:::/    /    \::::::/    /                       /:::/    /  
-"   |:::::::::::/    /      \::::/____/                       /:::/    /   
-"   \::::::::::/____/        \:::\    \                      /:::/    /    
-"    ~~~~~~~~~~               \:::\    \                    /:::/    /     
-"                              \:::\    \                  /:::/    /      
-"                               \:::\____\                /:::/    /       
-"                                \::/    /                \::/    /        
-"                                 \/____/                  \/____/
-"
+" -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 
-" ▜▘   ▗▐  
-" ▐ ▛▀▖▄▜▀ 
-" ▐ ▌ ▌▐▐ ▖
-" ▀▘▘ ▘▀▘▀ 
+" ██╗███╗   ██╗██╗████████╗
+" ██║████╗  ██║██║╚══██╔══╝
+" ██║██╔██╗ ██║██║   ██║   
+" ██║██║╚██╗██║██║   ██║   
+" ██║██║ ╚████║██║   ██║   
+" ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝   
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
@@ -33,10 +14,12 @@ let &packpath = &runtimepath
 nnoremap <silent><SPACE> <nop>
 let mapleader=" "
 
-" ▛▀▖▜       ▗       
-" ▙▄▘▐ ▌ ▌▞▀▌▄ ▛▀▖▞▀▘
-" ▌  ▐ ▌ ▌▚▄▌▐ ▌ ▌▝▀▖
-" ▘   ▘▝▀▘▗▄▘▀▘▘ ▘▀▀ 
+" ██████╗ ██╗     ██╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗
+" ██╔══██╗██║     ██║   ██║██╔════╝ ██║████╗  ██║██╔════╝
+" ██████╔╝██║     ██║   ██║██║  ███╗██║██╔██╗ ██║███████╗
+" ██╔═══╝ ██║     ██║   ██║██║   ██║██║██║╚██╗██║╚════██║
+" ██║     ███████╗╚██████╔╝╚██████╔╝██║██║ ╚████║███████║
+" ╚═╝     ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝╚═╝  ╚═══╝╚══════╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 if has('nvim')
     set nocompatible
@@ -64,7 +47,18 @@ if has('nvim')
         autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
     Plug 'mg979/vim-visual-multi' " sublime-like multiple select
+        let g:VM_default_mappings = 0
         let g:VM_mouse_mappings = 0
+        let g:VM_maps = {}
+        " let g:VM_maps["Undo"] = 'u'
+        " let g:VM_maps["Redo"] = '<C-r>'
+        " let g:VM_maps['Select All']  = '<M-n>'
+        " let g:VM_maps['Visual All']  = '<M-n>'
+        let g:VM_maps['Find Under']         = '<C-d>'
+        let g:VM_maps['Find Subword Under'] = '<C-d>'
+        let g:VM_maps['Skip Region'] = '<C-x>'
+        " let g:VM_maps["Select Cursor Down"] = '<M-C-Down>'
+        " let g:VM_maps["Select Cursor Up"]   = '<M-C-Up>'
 
     Plug 'airblade/vim-gitgutter' " git diffing along the left side
         let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
@@ -148,6 +142,22 @@ if has('nvim')
             \ 'bundle/.*/doc',
             \ ]
 
+    Plug 'preservim/nerdtree'
+        nnoremap <C-n> :NERDTreeFocus<CR>
+        """""" nnoremap <C-n> :NERDTree<CR>
+        """""" nnoremap <C-t> :NERDTreeToggle<CR>
+        """""" nnoremap <C-f> :NERDTreeFind<CR>
+        " Exit Vim if NERDTree is the only window left.
+        autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+            \ quit | endif
+        " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+        autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+            \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+        " Open the existing NERDTree on each new tab.
+        autocmd BufWinEnter * silent NERDTreeMirror
+        let g:NERDTreeDirArrowExpandable = '▸'
+        let g:NERDTreeDirArrowCollapsible = '▾'
+
     Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
     Plug 'logico/typewriter-vim' " theme
     Plug 'dylanaraps/wal.vim' " if using pywal
@@ -165,6 +175,8 @@ if has('nvim')
         \     }
         \   }
         \ }
+
+    Plug 'dstein64/vim-startuptime' " useful for debugging slow plugins
 
     " Plug 'skywind3000/vim-keysound'
     "     let g:keysound_enable = 1
@@ -199,14 +211,16 @@ if has('nvim')
     endif
 endif
 
-" ▞▀▖               ▜ 
-" ▌▄▖▞▀▖▛▀▖▞▀▖▙▀▖▝▀▖▐ 
-" ▌ ▌▛▀ ▌ ▌▛▀ ▌  ▞▀▌▐ 
-" ▝▀ ▝▀▘▘ ▘▝▀▘▘  ▝▀▘ ▘
+"  ██████╗ ███████╗███╗   ██╗███████╗██████╗  █████╗ ██╗     
+" ██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔══██╗██╔══██╗██║     
+" ██║  ███╗█████╗  ██╔██╗ ██║█████╗  ██████╔╝███████║██║     
+" ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ██╔══██╗██╔══██║██║     
+" ╚██████╔╝███████╗██║ ╚████║███████╗██║  ██║██║  ██║███████╗
+"  ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 scriptencoding utf-8
 set signcolumn=auto " yes=always, no=never, auto=ifchanges
-set encoding=utf-8
+set encoding=UTF-8
 set history=200
 set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
@@ -237,10 +251,12 @@ noremap :Q :q
 noremap :Q! :q!
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-" ▞▀▖      ▐
-" ▚▄ ▌ ▌▛▀▖▜▀ ▝▀▖▚▗▘
-" ▖ ▌▚▄▌▌ ▌▐ ▖▞▀▌▗▚
-" ▝▀ ▗▄▘▘ ▘ ▀ ▝▀▘▘ ▘
+" ███████╗██╗   ██╗███╗   ██╗████████╗ █████╗ ██╗  ██╗
+" ██╔════╝╚██╗ ██╔╝████╗  ██║╚══██╔══╝██╔══██╗╚██╗██╔╝
+" ███████╗ ╚████╔╝ ██╔██╗ ██║   ██║   ███████║ ╚███╔╝ 
+" ╚════██║  ╚██╔╝  ██║╚██╗██║   ██║   ██╔══██║ ██╔██╗ 
+" ███████║   ██║   ██║ ╚████║   ██║   ██║  ██║██╔╝ ██╗
+" ╚══════╝   ╚═╝   ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 autocmd BufNewFile,BufRead *.config  set syntax=sh
 autocmd BufNewFile,BufRead *.conf    set syntax=sh
@@ -268,10 +284,10 @@ let g:is_posix = 1
 let g:asmsyntax = 'nasm'
 map <silent><leader>sy :set syntax=sh<cr>
 
-" ▌  ▗        ▙ ▌       ▌
-" ▌  ▄ ▛▀▖▞▀▖ ▌▌▌▌ ▌▛▚▀▖▛▀▖▞▀▖▙▀▖▞▀▘
-" ▌  ▐ ▌ ▌▛▀  ▌▝▌▌ ▌▌▐ ▌▌ ▌▛▀ ▌  ▝▀▖
-" ▀▀▘▀▘▘ ▘▝▀▘ ▘ ▘▝▀▘▘▝ ▘▀▀ ▝▀▘▘  ▀▀
+" ▜ ▗                  ▌           
+" ▐ ▄ ▛▀▖▞▀▖ ▛▀▖▌ ▌▛▚▀▖▛▀▖▞▀▖▙▀▖▞▀▘
+" ▐ ▐ ▌ ▌▛▀  ▌ ▌▌ ▌▌▐ ▌▌ ▌▛▀ ▌  ▝▀▖
+"  ▘▀▘▘ ▘▝▀▘ ▘ ▘▝▀▘▘▝ ▘▀▀ ▝▀▘▘  ▀▀ 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 map <silent><leader>ln :set number!<cr>
 map <silent><leader>nl :set relativenumber!<cr>
@@ -300,10 +316,12 @@ set formatoptions+=o    " continue comments new lines
 set synmaxcol=512
 set nowrap
 
-" ▞▀▖▐     ▜    
-" ▚▄ ▜▀ ▌ ▌▐ ▞▀▖
-" ▖ ▌▐ ▖▚▄▌▐ ▛▀ 
-" ▝▀  ▀ ▗▄▘ ▘▝▀▘
+" ███████╗████████╗██╗   ██╗██╗     ███████╗
+" ██╔════╝╚══██╔══╝╚██╗ ██╔╝██║     ██╔════╝
+" ███████╗   ██║    ╚████╔╝ ██║     █████╗  
+" ╚════██║   ██║     ╚██╔╝  ██║     ██╔══╝  
+" ███████║   ██║      ██║   ███████╗███████╗
+" ╚══════╝   ╚═╝      ╚═╝   ╚══════╝╚══════╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set tabstop=4
 set shiftwidth=4
@@ -314,10 +332,12 @@ set shiftround        " tab / shifting moves to closest tabstop
 set autoindent        " match indents on new lines
 set smartindent
 
-" ▞▀▖            ▗                                
-" ▙▄▌▛▀▖▛▀▖▞▀▖▌ ▌▄ ▛▀▖▞▀▌ ▛▀▖▞▀▖▛▀▖▞▀▘▞▀▖▛▀▖▞▀▘▞▀▖
-" ▌ ▌▌ ▌▌ ▌▌ ▌▚▄▌▐ ▌ ▌▚▄▌ ▌ ▌▌ ▌▌ ▌▝▀▖▛▀ ▌ ▌▝▀▖▛▀ 
-" ▘ ▘▘ ▘▘ ▘▝▀ ▗▄▘▀▘▘ ▘▗▄▘ ▘ ▘▝▀ ▘ ▘▀▀ ▝▀▘▘ ▘▀▀ ▝▀▘
+" ███╗   ██╗ ██████╗ ███╗   ██╗███████╗███████╗███╗   ██╗███████╗███████╗
+" ████╗  ██║██╔═══██╗████╗  ██║██╔════╝██╔════╝████╗  ██║██╔════╝██╔════╝
+" ██╔██╗ ██║██║   ██║██╔██╗ ██║███████╗█████╗  ██╔██╗ ██║███████╗█████╗  
+" ██║╚██╗██║██║   ██║██║╚██╗██║╚════██║██╔══╝  ██║╚██╗██║╚════██║██╔══╝  
+" ██║ ╚████║╚██████╔╝██║ ╚████║███████║███████╗██║ ╚████║███████║███████╗
+" ╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚══════╝╚═╝  ╚═══╝╚══════╝╚══════╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set vb                   " disable audible bell
 set novisualbell         " kill the visual bell too
@@ -326,10 +346,12 @@ set nobackup             " we have vcs, we don't need backups.
 set nowritebackup        " we have vcs, we don't need backups.
 set noswapfile           " annoying
 
-" ▛▀▖   ▗▀▖▗▀▖         
-" ▙▄▘▌ ▌▐  ▐  ▞▀▖▙▀▖▞▀▘
-" ▌ ▌▌ ▌▜▀ ▜▀ ▛▀ ▌  ▝▀▖
-" ▀▀ ▝▀▘▐  ▐  ▝▀▘▘  ▀▀ 
+" ██████╗ ██╗   ██╗███████╗███████╗███████╗██████╗ ███████╗
+" ██╔══██╗██║   ██║██╔════╝██╔════╝██╔════╝██╔══██╗██╔════╝
+" ██████╔╝██║   ██║█████╗  █████╗  █████╗  ██████╔╝███████╗
+" ██╔══██╗██║   ██║██╔══╝  ██╔══╝  ██╔══╝  ██╔══██╗╚════██║
+" ██████╔╝╚██████╔╝██║     ██║     ███████╗██║  ██║███████║
+" ╚═════╝  ╚═════╝ ╚═╝     ╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set hidden        " allow buffers with unsaved changes
 set autoread      " reload files if changed on disk
@@ -361,10 +383,12 @@ nnoremap <silent><leader><leader> :let @/ = ""<CR>:noh<CR>
 " Search and Replace
 nmap <leader>s :%s//g<Left><Left>
 
-" ▌ ▌      ▌     
-" ▙▄▌▝▀▖▞▀▖▌▗▘▞▀▘
-" ▌ ▌▞▀▌▌ ▖▛▚ ▝▀▖
-" ▘ ▘▝▀▘▝▀ ▘ ▘▀▀ 
+" ██╗  ██╗ █████╗  ██████╗██╗  ██╗███████╗
+" ██║  ██║██╔══██╗██╔════╝██║ ██╔╝██╔════╝
+" ███████║███████║██║     █████╔╝ ███████╗
+" ██╔══██║██╔══██║██║     ██╔═██╗ ╚════██║
+" ██║  ██║██║  ██║╚██████╗██║  ██╗███████║
+" ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " execute line as shell command and replace it with output
 noremap <leader>W !!sh<cr>
@@ -373,7 +397,8 @@ noremap F !!fmt<cr>
 " prepend '> ' to lines as if to block quote
 noremap Q :norm 0i> <esc>$
 
-noremap <leader>T !!toilet -f smblock<cr>
+""""" noremap <leader>T !!toilet -f smblock<cr>
+noremap <leader>T !!toiletmenu -f<cr>
 
 " view open file in rendered markdown
 nmap <leader>md :!ghmd2html "%:p" >/tmp/tmp.html && $BROWSER /tmp/tmp.html<CR>
@@ -408,11 +433,12 @@ augroup resCur "reopen vim at previous cursor point
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup END
 
-
-" ▌ ▌  ▗    ▌  
-" ▝▞▞▀▖▄ ▛▀▖▌▗▘
-"  ▌▌ ▌▐ ▌ ▌▛▚ 
-"  ▘▝▀ ▀▘▘ ▘▘ ▘
+" ██╗   ██╗ ██████╗ ██╗███╗   ██╗██╗  ██╗
+" ╚██╗ ██╔╝██╔═══██╗██║████╗  ██║██║ ██╔╝
+"  ╚████╔╝ ██║   ██║██║██╔██╗ ██║█████╔╝ 
+"   ╚██╔╝  ██║   ██║██║██║╚██╗██║██╔═██╗ 
+"    ██║   ╚██████╔╝██║██║ ╚████║██║  ██╗
+"    ╚═╝    ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 nmap <c-[> <plug>(YoinkPostPasteSwapBack)
 nmap <c-]> <plug>(YoinkPostPasteSwapForward)
@@ -424,10 +450,12 @@ nmap P <plug>(YoinkPaste_P)
 nmap gp <plug>(YoinkPaste_gp)
 nmap gP <plug>(YoinkPaste_gP)
 
-" ▛▀▖               
-" ▙▄▘▝▀▖▛▀▖▞▀▌▞▀▖▙▀▖
-" ▌▚ ▞▀▌▌ ▌▚▄▌▛▀ ▌  
-" ▘ ▘▝▀▘▘ ▘▗▄▘▝▀▘▘  
+" ██████╗  █████╗ ███╗   ██╗ ██████╗ ███████╗██████╗ 
+" ██╔══██╗██╔══██╗████╗  ██║██╔════╝ ██╔════╝██╔══██╗
+" ██████╔╝███████║██╔██╗ ██║██║  ███╗█████╗  ██████╔╝
+" ██╔══██╗██╔══██║██║╚██╗██║██║   ██║██╔══╝  ██╔══██╗
+" ██║  ██║██║  ██║██║ ╚████║╚██████╔╝███████╗██║  ██║
+" ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 if has('nvim')
     function! s:Ranger(...)
@@ -501,10 +529,12 @@ endif
 let g:ranger_map_keys = 0
 nnoremap <silent><leader>r :Ranger<CR>
 
-" ▞▀▖   ▜ ▗▐     
-" ▚▄ ▛▀▖▐ ▄▜▀ ▞▀▘
-" ▖ ▌▙▄▘▐ ▐▐ ▖▝▀▖
-" ▝▀ ▌   ▘▀▘▀ ▀▀ 
+" ███████╗██████╗ ██╗     ██╗████████╗███████╗
+" ██╔════╝██╔══██╗██║     ██║╚══██╔══╝██╔════╝
+" ███████╗██████╔╝██║     ██║   ██║   ███████╗
+" ╚════██║██╔═══╝ ██║     ██║   ██║   ╚════██║
+" ███████║██║     ███████╗██║   ██║   ███████║
+" ╚══════╝╚═╝     ╚══════╝╚═╝   ╚═╝   ╚══════╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 func! WinMove(key)

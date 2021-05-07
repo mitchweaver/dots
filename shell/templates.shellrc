@@ -57,7 +57,7 @@ cat >"${1:-hello.sh}"<<"EOF"
 #
 
 usage() {
-    >&2 printf '%s\n' "Usage: ${0##*/} []"
+    >&2 printf 'Usage: %s []\n' "${0##*/}"
     exit 1
 }
 
