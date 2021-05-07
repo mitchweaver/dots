@@ -4,7 +4,7 @@
 # a theme by http://github.com/mitchweaver
 #
 
-color0='#444444'
+color0='#d9d5ba'
 color1='#825b69'
 color2='#69825b'
 color3='#82755b'

@@ -24,11 +24,9 @@ r() { ranger "$@" ; clear ; }
 
 alias mpv="mpv $MPV_OPTS"
 alias mupdf="mupdf $MUPDF_OPTS"
-alias ytdl="youtube-dl -c -R 50 --geo-bypass --prefer-ffmpeg"
-alias ytdlm="youtube-dl -x -c -R 50 --geo-bypass --prefer-ffmpeg"
 
 alias hme='htop -u mitch'
-alias hrt='htop -u root'
+alias hroot='htop -u root'
 
 sxiv() {
     # if arguments, view files
@@ -65,7 +63,6 @@ forecast() {
 # youtube-dl / ffmpeg
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 addyt() { ytdlq -a "$1" ; }
-tfyt() { tf "$YTDLQ_DIR"/ytdlq-*.log ; }
 alias res='ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0'
 
 # removes audio from a video clip

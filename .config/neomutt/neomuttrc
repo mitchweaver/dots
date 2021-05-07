@@ -39,6 +39,7 @@ set record = +/wvr/Sent
 set trash = +/wvr/Trash
 named-mailboxes "Inbox" =/wvr/Inbox
 named-mailboxes "Sent"  =/wvr/Sent
+named-mailboxes "Save" =/wvr/Save
 named-mailboxes "Spam" =/wvr/Spam
 named-mailboxes "Trash" =/wvr/Trash
 named-mailboxes "Drafts" =/wvr/Drafts
@@ -71,6 +72,8 @@ set wrap=78
 set status_on_top
 set ts_enabled      # set terminal status and icon name
 unset markers       # Disables the `+` displayed at line wraps
+# set arrow_cursor    # use an arrow instead of highlight for cursor
+# set arrow_string = "->"
 
 # general quality of life
 set abort_backspace     # cancel prompts when backspace on empty buffer
@@ -112,6 +115,7 @@ macro index gs "<change-folder>=/wvr/Sent<enter>" "go to sent"
 macro index gd "<change-folder>=/wvr/Drafts<enter>" "go to drafts"
 macro index gt "<change-folder>=/wvr/Trash<enter>" "go to trash"
 macro index gp "<change-folder>=/wvr/Spam<enter>" "go to spam"
+macro index gv "<change-folder>=/wvr/Save<enter>" "go to save"
 
 # reply bindings
 bind index r reply
@@ -147,9 +151,10 @@ bind editor <Tab> complete-query
 # ▝▀▖▐ ▌ ▌▛▀ ▌ ▌▞▀▌▌  
 # ▀▀ ▀▘▝▀▘▝▀▘▀▀ ▝▀▘▘  
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# set sidebar_visible           # start with sidebar shown
+unset sidebar_visible       # start with sidebar hidden
 unset sidebar_new_mail_only   # always show folders in sidebar
 unset sidebar_folder_indent   # do not indent folders
-set sidebar_visible
 set sidebar_width = 20
 set sidebar_short_path
 set sidebar_next_new_wrap
@@ -182,6 +187,7 @@ color index yellow default '.*'
 color index_author red default '.*'
 color index_number blue default
 color index_subject cyan default '.*'
+
 # Other colors and aesthetic settings:
 mono bold bold
 mono underline underline
@@ -193,7 +199,6 @@ color sidebar_highlight red default
 color sidebar_divider brightblack black
 color sidebar_flagged red black
 color sidebar_new green black
-color normal brightyellow default
 color error red default
 color tilde black default
 color message cyan default

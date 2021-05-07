@@ -230,8 +230,11 @@ set mouse=a             " enable mouse globally a/n
 
 " remove need to hold shift for commands
 noremap ; :
-" make :W still save
+" allow operations if we accidentally held shift
 noremap :W :w
+noremap :W! :w!
+noremap :Q :q
+noremap :Q! :q!
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 " ▞▀▖      ▐
@@ -373,8 +376,7 @@ noremap Q :norm 0i> <esc>$
 noremap <leader>T !!toilet -f smblock<cr>
 
 " view open file in rendered markdown
-nmap <leader>md :!smu "%:p" >/tmp/tmp.html && $BROWSER /tmp/tmp.html<CR>
-nmap <leader>ghmd :!ghmd2html "%:p" >/tmp/tmp.html && $BROWSER /tmp/tmp.html<CR>
+nmap <leader>md :!ghmd2html "%:p" >/tmp/tmp.html && $BROWSER /tmp/tmp.html<CR>
 
 set wildignore+=*.opus,*.flac,*.mp3,*.ogg,*.mp4,*.webm
 set wildignore+=*.jpg,*.png,*.gif,*.jpeg,*.pdf
