@@ -30,6 +30,7 @@ if has('nvim')
     Plug 'tpope/vim-speeddating'   " allows C-a to increment dates and times
     Plug 'tpope/vim-eunuch'        " wrapper around common unix shell commands
     Plug 'tpope/vim-sleuth'        " autodetect tab indentation
+    Plug 'tpope/vim-abolish'       " bracket {,} expansion in substitution
 
     Plug 'godlygeek/tabular'       " tab alignment
     Plug 'sheerun/vim-polyglot'    " syntax highlighting
@@ -63,11 +64,19 @@ if has('nvim')
     Plug 'airblade/vim-gitgutter' " git diffing along the left side
         let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
         let g:gitgutter_realtime = 0 " only run gitgutter on save
+        let g:gitgutter_earer = 1
+        let g:gitgutter_max_signs = 1000
+        let g:gitgutter_diff_args = '-w'
+        let g:gitgutter_sign_added = '+'
+        let g:gitgutter_sign_modified = '~'
+        let g:gitgutter_sign_removed = '-'
+        let g:gitgutter_sign_removed_first_line = '^'
+        let g:gitgutter_sign_modified_removed = ':'
         map <silent><leader>g :GitGutterToggle<CR>
-        nmap ]h <Plug>GitGutterNextHunk
-        nmap [h <Plug>GitGutterPrevHunk
-        nmap <Leader>hs <Plug>GitGutterStageHunk
-        nmap <Leader>hr <Plug>GitGutterUndoHunk
+        " nmap ]h <Plug>GitGutterNextHunk
+        " nmap [h <Plug>GitGutterPrevHunk
+        " nmap <Leader>hs <Plug>GitGutterStageHunk
+        " nmap <Leader>hr <Plug>GitGutterUndoHunk
 
     Plug 'tpope/vim-surround' " surround stuff with stuff
         nmap ss ysiw
@@ -177,6 +186,8 @@ if has('nvim')
         \ }
 
     Plug 'dstein64/vim-startuptime' " useful for debugging slow plugins
+    Plug 'powerman/vim-plugin-AnsiEsc' " make ansi codes not look terrible
+    Plug 'chrisbra/unicode.vim' " easily search and copy unicode chars
 
     " Plug 'skywind3000/vim-keysound'
     "     let g:keysound_enable = 1
@@ -239,6 +250,7 @@ set cmdheight=1         " cmd output only take up 1 line
 set nostartofline       " gg/G do not always go to line start
 set modeline            " enable per-file custom syntax
 set mouse=a             " enable mouse globally a/n
+set shortmess+=I        " disable startup message
 " set noshowmode        " don't show 'insert' or etc on bottom left
 " set cursorline " highlight current line of cursor
 
@@ -283,6 +295,7 @@ augroup END
 let g:is_posix = 1
 let g:asmsyntax = 'nasm'
 map <silent><leader>sy :set syntax=sh<cr>
+filetype plugin on       " vim plugin syntax
 
 " ▜ ▗                  ▌           
 " ▐ ▄ ▛▀▖▞▀▖ ▛▀▖▌ ▌▛▚▀▖▛▀▖▞▀▖▙▀▖▞▀▘
@@ -331,6 +344,10 @@ set smarttab          " soft tab creation / deletion
 set shiftround        " tab / shifting moves to closest tabstop
 set autoindent        " match indents on new lines
 set smartindent
+set breakindent       " set indents when wrapped
+" darken inactive panes --- taken from xero.nu
+" hi ActiveWindow ctermbg=0 | hi InactiveWindow ctermbg=234
+" set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
 
 " ███╗   ██╗ ██████╗ ███╗   ██╗███████╗███████╗███╗   ██╗███████╗███████╗
 " ████╗  ██║██╔═══██╗████╗  ██║██╔════╝██╔════╝████╗  ██║██╔════╝██╔════╝
@@ -432,6 +449,20 @@ augroup resCur "reopen vim at previous cursor point
   autocmd!
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup END
+
+" ██╗███╗   ██╗██╗   ██╗██╗███████╗██╗██████╗ ██╗     ███████╗███████╗
+" ██║████╗  ██║██║   ██║██║██╔════╝██║██╔══██╗██║     ██╔════╝██╔════╝
+" ██║██╔██╗ ██║██║   ██║██║███████╗██║██████╔╝██║     █████╗  ███████╗
+" ██║██║╚██╗██║╚██╗ ██╔╝██║╚════██║██║██╔══██╗██║     ██╔══╝  ╚════██║
+" ██║██║ ╚████║ ╚████╔╝ ██║███████║██║██████╔╝███████╗███████╗███████║
+" ╚═╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚══════╝╚═╝╚═════╝ ╚══════╝╚══════╝╚══════╝
+set list
+set listchars=
+set listchars+=tab:·\ 
+set listchars+=trail:·
+set listchars+=extends:»
+set listchars+=precedes:«
+set listchars+=nbsp:░
 
 " ██╗   ██╗ ██████╗ ██╗███╗   ██╗██╗  ██╗
 " ╚██╗ ██╔╝██╔═══██╗██║████╗  ██║██║ ██╔╝
@@ -554,5 +585,4 @@ nnoremap <silent><C-h> :call WinMove('h')<cr>
 nnoremap <silent><C-j> :call WinMove('j')<cr>
 nnoremap <silent><C-k> :call WinMove('k')<cr>
 nnoremap <silent><C-l> :call WinMove('l')<cr>
-
 set fillchars+=vert:│
