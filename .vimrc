@@ -43,14 +43,15 @@ if has('nvim')
     filetype off
     call plug#begin('~/.vim/vim-plug')
 
-    Plug 'tpope/vim-repeat' " allows '.' to do more things
-    Plug 'tpope/vim-speeddating' " allows C-a to increment dates and times
-    Plug 'tpope/vim-eunuch' " wrapper around common unix shell commands
-    Plug 'tpope/vim-sleuth' " autodetect tab indentation
+    Plug 'tpope/vim-repeat'        " allows '.' to do more things
+    Plug 'tpope/vim-speeddating'   " allows C-a to increment dates and times
+    Plug 'tpope/vim-eunuch'        " wrapper around common unix shell commands
+    Plug 'tpope/vim-sleuth'        " autodetect tab indentation
 
-    Plug 'godlygeek/tabular' " tab alignment
-    Plug 'sheerun/vim-polyglot' " syntax highlighting
+    Plug 'godlygeek/tabular'       " tab alignment
+    Plug 'sheerun/vim-polyglot'    " syntax highlighting
     Plug 'ekalinin/Dockerfile.vim' " syntax for dockerfiles
+    Plug 'svermeulen/vim-yoink'    " emacs killring for vim
 
     Plug 'ap/vim-buftabline' " display buffers along top as tabs
         let g:buftabline_show = 1
@@ -211,20 +212,20 @@ set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
 set updatetime=750
 set clipboard=unnamedplus
-set lazyredraw " whether to redraw screen after macros
-set mat=2 " how fast to blink matched brackets
-set textwidth=0 " very annoying warning
-set backspace=2 " allow backspace to go over new lines
-set title " keep window name updated with current file
-set noruler " don't show file position in the bottom right
-set noshowmode " don't show 'insert' or etc on bottom left
-set laststatus=0 " Disable bottom status line / statusbar
-set noshowcmd " don't print the last run command
-set ch=1 " get rid of the wasted line at the bottom
-set cmdheight=1 " cmd output only take up 1 line
-set nostartofline " gg/G do not always go to line start
-set modeline " enable per-file custom syntax
-set mouse=a " enable mouse globally a/n
+set lazyredraw          " whether to redraw screen after macros
+set mat=2               " how fast to blink matched brackets
+set textwidth=0         " very annoying warning
+set backspace=2         " allow backspace to go over new lines
+set title               " keep window name updated with current file
+set noruler             " don't show file position in the bottom right
+set laststatus=0        " Disable bottom status line / statusbar
+set noshowcmd           " don't print the last run command
+set ch=1                " get rid of the wasted line at the bottom
+set cmdheight=1         " cmd output only take up 1 line
+set nostartofline       " gg/G do not always go to line start
+set modeline            " enable per-file custom syntax
+set mouse=a             " enable mouse globally a/n
+" set noshowmode        " don't show 'insert' or etc on bottom left
 " set cursorline " highlight current line of cursor
 
 " remove need to hold shift for commands
@@ -288,11 +289,11 @@ function! s:ToggleColorColumn()
 endfunction
 nnoremap <silent><leader>ll :call <SID>ToggleColorColumn()<cr>
 
-set showmatch " show matching parens
-set scrolloff=8 " pad X lines when scrolling
-set fillchars=""  " extremely annoying
-set diffopt+=iwhite " disable white space diffing
-set formatoptions+=o " continue comments new lines
+set showmatch           " show matching parens
+set scrolloff=8         " pad X lines when scrolling
+set fillchars=""        " extremely annoying
+set diffopt+=iwhite     " disable white space diffing
+set formatoptions+=o    " continue comments new lines
 set synmaxcol=512
 set nowrap
 
@@ -304,10 +305,10 @@ set nowrap
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set expandtab " use spaces instead of tabs.
-set smarttab " soft tab creation / deletion
-set shiftround " tab / shifting moves to closest tabstop.
-set autoindent " match indents on new lines.
+set expandtab         " use spaces instead of tabs
+set smarttab          " soft tab creation / deletion
+set shiftround        " tab / shifting moves to closest tabstop
+set autoindent        " match indents on new lines
 set smartindent
 
 " ▞▀▖            ▗                                
@@ -315,20 +316,20 @@ set smartindent
 " ▌ ▌▌ ▌▌ ▌▌ ▌▚▄▌▐ ▌ ▌▚▄▌ ▌ ▌▌ ▌▌ ▌▝▀▖▛▀ ▌ ▌▝▀▖▛▀ 
 " ▘ ▘▘ ▘▘ ▘▝▀ ▗▄▘▀▘▘ ▘▗▄▘ ▘ ▘▝▀ ▘ ▘▀▀ ▝▀▘▘ ▘▀▀ ▝▀▘
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-set vb " disable audible bell
-set novisualbell " kill the visual bell too
-set noerrorbells " did I mention I hate bells?
-set nobackup " we have vcs, we don't need backups.
-set nowritebackup " we have vcs, we don't need backups.
-set noswapfile " annoying
+set vb                   " disable audible bell
+set novisualbell         " kill the visual bell too
+set noerrorbells         " did I mention I hate bells?
+set nobackup             " we have vcs, we don't need backups.
+set nowritebackup        " we have vcs, we don't need backups.
+set noswapfile           " annoying
 
 " ▛▀▖   ▗▀▖▗▀▖         
 " ▙▄▘▌ ▌▐  ▐  ▞▀▖▙▀▖▞▀▘
 " ▌ ▌▌ ▌▜▀ ▜▀ ▛▀ ▌  ▝▀▖
 " ▀▀ ▝▀▘▐  ▐  ▝▀▘▘  ▀▀ 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-set hidden " allow buffers with unsaved changes
-set autoread " reload files if changed on disk
+set hidden        " allow buffers with unsaved changes
+set autoread      " reload files if changed on disk
 
 " b <num> = go to $buffer
 nnoremap <Leader>b :b 
@@ -404,6 +405,22 @@ augroup resCur "reopen vim at previous cursor point
   autocmd!
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup END
+
+
+" ▌ ▌  ▗    ▌  
+" ▝▞▞▀▖▄ ▛▀▖▌▗▘
+"  ▌▌ ▌▐ ▌ ▌▛▚ 
+"  ▘▝▀ ▀▘▘ ▘▘ ▘
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+nmap <c-[> <plug>(YoinkPostPasteSwapBack)
+nmap <c-]> <plug>(YoinkPostPasteSwapForward)
+
+nmap p <plug>(YoinkPaste_p)
+nmap P <plug>(YoinkPaste_P)
+
+" Also replace the default gp with yoink paste so we can toggle paste in this case too
+nmap gp <plug>(YoinkPaste_gp)
+nmap gP <plug>(YoinkPaste_gP)
 
 " ▛▀▖               
 " ▙▄▘▝▀▖▛▀▖▞▀▌▞▀▖▙▀▖
