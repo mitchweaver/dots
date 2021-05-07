@@ -6,10 +6,7 @@
 
 alias rsync='rsync -rvhtu --progress --delete --partial --links'
 alias fatsync='rsync -rvhu --progress --delete --partial' # for fat32
-
 alias scp='scp -rp'
-smv() { scp -rp "${1:-?}"  "${2:-?}" && rm -r "${1:-?}" ; }
-rmv() { rsync   "${1:-?}"/ "${2:-?}" && rm -r "${1:-?}" ; }
 
 alias p8='ping 8.8.8.8'
 alias cv='curl -v'
@@ -85,3 +82,5 @@ getlocalip() {
             fi
     esac
 }
+
+alias sendmail='msmtp -a wvr --'

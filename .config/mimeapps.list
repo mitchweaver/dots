@@ -3,8 +3,10 @@
 [Added Associations]
 image/png=userapp-opn-Q22K20.desktop;
 text/plain=userapp-opn-3T0J20.desktop;
+image/gif=userapp-opn-M87A30.desktop;
 
 [Default Applications]
 image/png=userapp-opn-Q22K20.desktop
 image/jpeg=userapp-opn-MRAO20.desktop
 text/plain=userapp-opn-3T0J20.desktop
+image/gif=userapp-opn-M87A30.desktop

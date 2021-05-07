@@ -12,19 +12,6 @@ export DISPLAY=${DISPLAY:-:0}
 # fix for bug with floating windows and java programs (ex: ghidra)
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# remove titlebar in firefox
-export MOZ_GTK_TITLEBAR_DECORATION=client
-# disable firefox telemetry
-export MOZ_DATA_REPORTING=0
-export MOZ_TELEMETRY_REPORTING=0
-export MOZ_CRASHREPORTER=0
-export MOZ_SERVICES_HEALTHREPORT=0
-# greatly increases page rendering speed on openbsd
-export MOZ_ACCELERATED=1
-export MOZ_WEBRENDER=1
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
 if command -v dimensions >/dev/null ; then
     export DIMENSIONS="$(dimensions)"
 fi
@@ -37,8 +24,11 @@ xset +fp ~/.fonts
 xset m 0 0
 xset b off
 
-#xrandr --output DisplayPort-0 --primary --auto --rotate normal \
-#       --output HDMI-A-0 --auto --rotate normal --right-of DisplayPort-0
+if xrandr --nograb --current | grep 'HDMI2 connected' >/dev/null ; then
+    xrandr --output HDMI2 --primary --auto --rotate normal \
+        --output eDP1 --off
+            # --auto --rotate normal --right-of HDMI2
+fi
 
 case $(uname) in
     OpenBSD)
@@ -60,13 +50,15 @@ run() {
 }
 
 run vol s 50
-run bright s 100
+run bright s 90
 run ytdlq -d
 run background
 run sxhkd
 run xbanish
-run crypto-ticker -d
-run stock-ticker -d
+run maild -d
+run weatherd -d
+# run crypto-ticker -d
+# run stock-ticker -d
 run torrent-queue -d
 run sctc 6500
 run batmon

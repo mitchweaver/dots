@@ -19,15 +19,16 @@ alt + e
 super + e
     pcmanfm
 alt + v
-    stwrapper -c htop -e htop
+    stwrapper -c 'Vim Wiki' -e nvim -c VimwikiIndex
+alt + m
+    stwrapper -c neomutt -e neomutt
+
 
 # dmenus
 alt + p
     menu run -p 'Run:'
 alt + o
     dedit
-alt + i
-    brws
 # alt + shift + i
 #     brws -a
 alt + y

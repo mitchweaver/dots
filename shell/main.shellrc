@@ -17,15 +17,24 @@ fi
 umask 022
 
 # -*-*- Options -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-SHELLRC_DIR=${HOME}/src/dots/shell
-PS1_STYLE=pwd           # [user-pwd/user/pwd/percent]
+SHELLRC_DIR=~/src/dots/shell
+PS1_STYLE=user-pwd      # [user-pwd/user/pwd/percent]
 PS1_GIT=true            # [true/false]
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 if [ -d "${SHELLRC_DIR}" ] ; then
-    for rc in "${SHELLRC_DIR}"/*.shellrc ; do
-        if [ "${rc##*/}" != main.shellrc ] ; then
-            . "$rc"
-        fi
-    done
+    . "${SHELLRC_DIR}/builtins.shellrc"
+    . "${SHELLRC_DIR}/development.shellrc"
+    . "${SHELLRC_DIR}/docker.shellrc"
+    . "${SHELLRC_DIR}/generic_aliases.shellrc"
+    . "${SHELLRC_DIR}/generic_functions.shellrc"
+    . "${SHELLRC_DIR}/history.shellrc"
+    . "${SHELLRC_DIR}/movement.shellrc"
+    . "${SHELLRC_DIR}/networking.shellrc"
+    . "${SHELLRC_DIR}/openbsd.shellrc"
+    . "${SHELLRC_DIR}/options.shellrc"
+    . "${SHELLRC_DIR}/prompt.shellrc"
+    . "${SHELLRC_DIR}/templates.shellrc"
+    . "${SHELLRC_DIR}/wasteland.shellrc"
+    unset SHELLRC_DIR
 fi

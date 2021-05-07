@@ -18,6 +18,8 @@ alias netstart='doas sh /etc/netstart'
 alias reboot='doas reboot'
 alias poweroff='doas halt -p'
 
+alias diskstat='systat iostat'
+
 pkg() {
     [ "$1" ] || set -- h
     flag=${1#-}

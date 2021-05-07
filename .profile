@@ -53,8 +53,6 @@ export MENU_PROG=menu \
        SUBS_MENU_PROG="menu -wide -p Subs:" \
        SUBS_DAEMON_INTERVAL=3600 \
        MAILD_ACCOUNT=wvr \
-       MAILD_MAILBOX=Inbox \
-       MAILD_CHECK_INTERVAL=15 \
        CRYPTO_TICKER_INTERVAL=60 \
        STOCK_TICKER_INTERVAL=60
 
@@ -111,6 +109,9 @@ if [ -d ~/.ssh ] ; then
     if [ -f ~/.ssh/authorized_keys ] ; then
         chmod 0600 ~/.ssh/authorized_keys
     fi
+fi
+if [ -f ~/.config/neomutt/password ] ; then
+    chmod 0400 ~/.config/neomutt/password
 fi
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 

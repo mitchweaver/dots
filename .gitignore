@@ -1,22 +1,38 @@
-# ----------------------------------
-# vi needs to stop this nonsense
+# ----- garbage --------------------
 *~*
 *~
+*.core
+*__pycache__*
+*.out
+*.o
 # ----------------------------------
 
+# ---- important --------
+*.log
+*.key
+*.pem
+*.crt
+*.pub
+*password
+*netsurf*
+*config/mpv/watch_later
+*w3m*
+*token*
+*cookie*
+*cache*
+# ----------------------------------
+
+# junk
 *gtk-2.0*
 *gtk-3.0*
 *glib*
 *wireshark*
 *shada*
 *ridium*
-*w3m*
-*config/netsurf*
 *config/wal
 *config/keys
 *config/QtProject.conf
 *config/GIMP*
-*config/mpv/watch_later
 *config/menus
 *config/GIMP*
 *config/neofetch
@@ -27,7 +43,6 @@
 *config/libfm
 *config/enchant
 *vim-plug*
-*token*
 *dconf*
 *autostart*
 *menus*
@@ -50,7 +65,6 @@
 *ranger/tagged
 *dconf*
 *mozilla*
-*discord*
 *deluge*
 *iscord*
 *ibreoffice*
@@ -64,27 +78,20 @@
 *google-chrome*
 *chrome*
 *surf*
-*cookie*
-*cache*
 *obs-studio*
 *obs*
-*.o*
 *blender
-*.o
-*.out
 *.bak
 *.cache
 *.tmp
 *.temp
-*__pycache__*
 *TODO*
 *FAQ*
-*krunker*
 *unity3d
 *vim/.netrwhist
 *vim/log
 *config/JetBrains
 *config/xfce4
 *Thunar*
-*.core
 *geany*
+*cataclysm-dda/debug.log

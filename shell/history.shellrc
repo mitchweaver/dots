@@ -15,8 +15,12 @@ case ${HISTORY_STYLE:-default} in
         trap '/bin/rm -f "$HISTFILE" 2>/dev/null' EXIT TERM KILL QUIT
         ;;
     default)
-        export HISTFILE="${XDG_CACHE_HOME:-${HOME}/.cache}/.history"
+        export HISTFILE="${XDG_CACHE_HOME:-${HOME}/.cache}/history"
 esac
 
 # hist-grep: search shell history
-hg() { [ "$1" ] && grep -i "$*" "$HISTFILE" | grep -v '^hg' | head -n 20 ; }
+hg() {
+    if [ "$1" ] ; then
+        grep -i "$*" "$HISTFILE" | grep -v '^hg' | head -n 20
+    fi
+}

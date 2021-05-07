@@ -254,6 +254,12 @@ autocmd BufNewFile,BufRead *.txt     set syntax=off
 autocmd BufNewFile,BufRead *.md      set syntax=md
 autocmd BufNewFile,BufRead *.pad     set syntax=md
 autocmd BufNewFile,BufRead *.asm     setlocal ft=nasm
+
+autocmd BufNewFile,BufRead /tmp/mutt-* set tw=72
+augroup filetypedetect
+  autocmd BufRead,BufNewFile *mutt-*   setfiletype mail
+augroup END
+
 let g:is_posix = 1
 let g:asmsyntax = 'nasm'
 map <silent><leader>sy :set syntax=sh<cr>
