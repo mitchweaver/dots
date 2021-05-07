@@ -1,0 +1,6 @@
+*.log
+*.key
+*.pem
+*.crt
+*.pub
+*password

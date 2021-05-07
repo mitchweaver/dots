@@ -1,0 +1,16 @@
+# html
+text/html; ${BROWSER} %s;
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
+
+# plain text (outside of html which matches first)
+text/*; w3m -I %{charset} -T text/plain; copiousoutput;
+
+# files
+image/*; opn %s;
+application/pdf; opn %s pdf;
+
+# office docs
+application/msword; libreoffice -writer %s
+application/vnd.oasis.opendocument.text; libreoffice -writer %s
+application/vnd.ms-excel; libreoffice -calc %s
+application/vnd.openxmlformats-officedocument.presentationml.presentation; libreoffice -calc %s
