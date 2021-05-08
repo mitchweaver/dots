@@ -84,8 +84,8 @@ set forward_format = "Fwd: %s" # subject when forwarding
 set forward_quote              # include message in forwards
 
 # dealing with threads
-set collapse_all
-# set collapse_unread
+# set collapse_all
+set collapse_unread
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # ▌        ▌  ▗      ▌   

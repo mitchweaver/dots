@@ -113,11 +113,25 @@ fi
 if [ -f ~/.config/neomutt/password ] ; then
     chmod 0400 ~/.config/neomutt/password
 fi
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# --------------- cache in tmpfs -----------------------------
 mkdir -p "/tmp/$USER"
-ln -sf "/tmp/$USER" ~/tmp
-ln -sf ~/tmp/mozilla_cache ~/.cache/mozilla
-mkdir -p ~/tmp/mozilla_cache
-# not sure how to stop this from being created, fix later
-rm ~/tmp/"$USER" 2>/dev/null
+if [ -d ~/tmp ] ; then
+    rm -rf ~/tmp
+fi
+if [ "$(readlink ~/tmp)" != "/tmp/$USER" ] ; then
+    ln -sf "/tmp/$USER" ~/tmp
+fi
+mkdir -p ~/tmp/.cache
+if [ "$(readlink ~/.cache)" != ~/tmp/.cache ] ; then
+    if [ -d ~/.cache ] ; then
+        rm -r ~/.cache
+    fi
+    ln -sf ~/tmp/.cache ~/.cache
+fi
+if [ -d ~/.terminfo ] ; then
+    rm -r ~/.terminfo
+    ln -sf ~/tmp/.terminfo ~/.terminfo
+fi
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

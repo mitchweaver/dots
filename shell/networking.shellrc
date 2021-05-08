@@ -4,7 +4,7 @@
 # ▘ ▘▝▀▘ ▀  ▘▘ ▝▀ ▘  ▘ ▘▀▘▘ ▘▗▄▘
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-alias rsync='rsync -rvhtu --progress --delete --partial --links'
+alias rsync='rsync -avhu --progress --delete --partial --links'
 alias fatsync='rsync -rvhu --progress --delete --partial' # for fat32
 alias scp='scp -rp'
 
@@ -84,3 +84,12 @@ getlocalip() {
 }
 
 alias sendmail='msmtp -a wvr --'
+
+# ----------------------- tor -------------------------------
+alias torsocks='torsocks -i'
+alias torsockscheck="\
+    torsocks -i \
+    curl -sL https://check.torproject.org | \
+    grep -E '(Congratulations|Sorry)' | \
+    head -n 1"
+# -----------------------------------------------------------

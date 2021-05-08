@@ -186,7 +186,6 @@ if has('nvim')
         \ }
 
     Plug 'dstein64/vim-startuptime' " useful for debugging slow plugins
-    Plug 'powerman/vim-plugin-AnsiEsc' " make ansi codes not look terrible
     Plug 'chrisbra/unicode.vim' " easily search and copy unicode chars
 
     " Plug 'skywind3000/vim-keysound'

@@ -203,3 +203,5 @@ clip() {
 alias pcm='nohup pcmanfm . >/dev/null 2>&1 &'
 alias detox='detox -v'
 alias mutt=neomutt
+
+alias matrix='cmatrix -b -s'
