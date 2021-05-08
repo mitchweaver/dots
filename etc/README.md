@@ -16,6 +16,17 @@ this group has fewer restrictions on processes
 Also edit /etc/login.conf and change "datasize-cur=XXXXM"
 to a higher value, (example: 75% of your total ram on your machine.)
 
+## `$ /etc/login.conf`
+
+if you use tor, make sure the tor user can open enough
+files handling connections as well as daemonize
+
+```
+tor:\
+    :openfiles-max=16384:\
+    :tc=daemon:
+```
+
 ## `$ /etc/fstab`
 
 Using 'softdep' and 'noatime' can greatly improve performance,  
