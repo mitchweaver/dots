@@ -1,6 +1,8 @@
+tor_flags="-f /etc/tor/torrc"
 apmd_flags=-A
-xenodm_flags=
 cron_flags=NO
+pkg_scripts=dnscrypt_proxy
+slaacd_flags=NO
 smtpd_flags=NO
 sshd_flags=NO
-slaacd_flags=NO
+xenodm_flags=
