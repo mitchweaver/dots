@@ -17,8 +17,8 @@ alias pfdrop='doas tcpdump -nettti pflog0 action drop'   # follow dropped
 alias netstart='doas sh /etc/netstart'
 alias reboot='doas reboot'
 alias poweroff='doas halt -p'
-
 alias diskstat='systat iostat'
+alias shred='rm -P'
 
 pkg() {
     [ "$1" ] || set -- h
