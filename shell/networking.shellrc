@@ -86,7 +86,8 @@ getlocalip() {
 alias sendmail='msmtp -a wvr --'
 
 # ----------------------- tor -------------------------------
-alias torsocks='torsocks -i'
+alias {torsocks,ts}='torsocks -i'
+alias torshell='torsocks -i --shell'
 alias torsockscheck="\
     torsocks -i \
     curl -sL https://check.torproject.org | \

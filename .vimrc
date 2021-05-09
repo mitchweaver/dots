@@ -229,12 +229,13 @@ endif
 "  ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 scriptencoding utf-8
-set signcolumn=auto " yes=always, no=never, auto=ifchanges
-set encoding=UTF-8
+set encoding=utf-8
+set mouse=a             " a=all,'unset mouse'=disable
+set signcolumn=auto     " yes=always, no=never, auto=ifchanges
 set history=200
 set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
-set updatetime=750
+set updatetime=500
 set clipboard=unnamedplus
 set lazyredraw          " whether to redraw screen after macros
 set mat=2               " how fast to blink matched brackets
@@ -248,7 +249,6 @@ set ch=1                " get rid of the wasted line at the bottom
 set cmdheight=1         " cmd output only take up 1 line
 set nostartofline       " gg/G do not always go to line start
 set modeline            " enable per-file custom syntax
-set mouse=a             " enable mouse globally a/n
 set shortmess+=I        " disable startup message
 " set noshowmode        " don't show 'insert' or etc on bottom left
 " set cursorline " highlight current line of cursor
@@ -260,7 +260,6 @@ noremap :W :w
 noremap :W! :w!
 noremap :Q :q
 noremap :Q! :q!
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 " ███████╗██╗   ██╗███╗   ██╗████████╗ █████╗ ██╗  ██╗
 " ██╔════╝╚██╗ ██╔╝████╗  ██║╚══██╔══╝██╔══██╗╚██╗██╔╝
@@ -417,7 +416,7 @@ noremap Q :norm 0i> <esc>$
 noremap <leader>T !!toiletmenu -f<cr>
 
 " view open file in rendered markdown
-nmap <leader>md :!ghmd2html "%:p" >/tmp/tmp.html && $BROWSER /tmp/tmp.html<CR>
+nmap <leader>md :!a=$(rgen) ; ghmd2html "%:p" >/tmp/$a.html && $BROWSER /tmp/$a.html<CR>
 
 set wildignore+=*.opus,*.flac,*.mp3,*.ogg,*.mp4,*.webm
 set wildignore+=*.jpg,*.png,*.gif,*.jpeg,*.pdf
@@ -458,7 +457,7 @@ augroup END
 set list
 set listchars=
 set listchars+=tab:·\ 
-set listchars+=trail:·
+set listchars+=trail:░
 set listchars+=extends:»
 set listchars+=precedes:«
 set listchars+=nbsp:░
