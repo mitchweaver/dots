@@ -14,12 +14,17 @@ export PATH
 export MANPATH="${HOME}/.local/share/man:$MANPATH"
 export FONTCONFIG_PATH=/etc/fonts
 
-export CFLAGS='-O2 -pipe -fstack-protector-strong -fexceptions'
 export PYTHONOPTIMIZE=2
+export CFLAGS='-pipe -fstack-protector-strong -fexceptions'
+if command -v clang >/dev/null ; then
+    export CC=clang cc=clang
+elif command -v gcc >/dev/null ; then
+    export CC=gcc cc=gcc
+fi
 
 # using en_US.UTF-8 over C causes case-insensitive sorting
 # up to you whether the benefits outweigh the negatives
-export LC_ALL="C"
+export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="$LC_ALL" \
        LANG="$LC_ALL" \
        LANGUAGE="$LC_ALL" \
@@ -51,7 +56,7 @@ export MENU_PROG=menu \
        TERMINAL_PROG=stwrapper \
        PLUMBER=opn \
        SUBS_MENU_PROG="menu -wide -p Subs:" \
-       SUBS_DAEMON_INTERVAL=3600 \
+       SUBS_DAEMON_INTERVAL=1800 \
        MAILD_ACCOUNT=wvr \
        CRYPTO_TICKER_INTERVAL=60 \
        STOCK_TICKER_INTERVAL=60

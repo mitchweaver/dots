@@ -3,6 +3,8 @@
 # https://github.com/NLKNguyen/papercolor-theme
 #
 
+ln -sf ~/src/dots/themes/papercolor.sh ~/src/dots/themes/current
+
 color0='#eeeeee'
 color1='#af0000'
 color2='#008700'

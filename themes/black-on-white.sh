@@ -2,6 +2,8 @@
 # a little black on white makes a happy rob pike
 #
 
+ln -sf ~/src/dots/themes/black-on-white.sh ~/src/dots/themes/current
+
 color0='#ffffff'
 color1='#000000'
 color2='#111111'

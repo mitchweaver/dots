@@ -26,19 +26,25 @@ if has('nvim')
     filetype off
     call plug#begin('~/.vim/vim-plug')
 
-    Plug 'tpope/vim-repeat'        " allows '.' to do more things
-    Plug 'tpope/vim-speeddating'   " allows C-a to increment dates and times
-    Plug 'tpope/vim-eunuch'        " wrapper around common unix shell commands
-    Plug 'tpope/vim-sleuth'        " autodetect tab indentation
-    Plug 'tpope/vim-abolish'       " bracket {,} expansion in substitution
+    Plug 'tpope/vim-repeat'          " allows '.' to do more things
+    Plug 'tpope/vim-speeddating'     " allows C-a to increment dates and times
+    Plug 'tpope/vim-eunuch'          " wrapper around common unix shell commands
+    Plug 'tpope/vim-sleuth'          " autodetect tab indentation
+    Plug 'tpope/vim-abolish'         " bracket {,} expansion in substitution
 
-    Plug 'godlygeek/tabular'       " tab alignment
-    Plug 'sheerun/vim-polyglot'    " syntax highlighting
-    Plug 'ekalinin/Dockerfile.vim' " syntax for dockerfiles
-    Plug 'svermeulen/vim-yoink'    " emacs killring for vim
+    Plug 'godlygeek/tabular'         " tab alignment
+    Plug 'sheerun/vim-polyglot'      " syntax highlighting
+    Plug 'ekalinin/Dockerfile.vim'   " syntax for dockerfiles
+    Plug 'svermeulen/vim-yoink'      " emacs killring for vim
+    Plug 'dstein64/vim-startuptime'  " useful for debugging slow plugins
+    Plug 'chrisbra/unicode.vim'      " easily search and copy unicode chars
+    Plug 'gyim/vim-boxdraw'          " the coolest plugin you never knew you needed
+    Plug 'ryanoasis/vim-devicons'    " adds icons to plugins
+    Plug 'psliwka/vim-smoothie'      " smooth scrolling done right
 
     Plug 'ap/vim-buftabline' " display buffers along top as tabs
-        let g:buftabline_show = 1
+        " uncomment to hide when only one buffer
+        " let g:buftabline_show = 1
 
     Plug 'tpope/vim-commentary' " comment toggler
         nmap <silent><leader>c :Commentary<CR>
@@ -120,9 +126,6 @@ if has('nvim')
         let g:ale_linters = {'python': ['pylint']} " flake8
         let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 
-    Plug 'gyim/vim-boxdraw' " the coolest plugin you never knew you needed
-    Plug 'ryanoasis/vim-devicons' " adds icons to plugins
-
     Plug 'mhinz/vim-startify'
         let g:startify_files_number = 10
         " 0: recently-used files update on vim exit, 1: immediate
@@ -168,6 +171,7 @@ if has('nvim')
         let g:NERDTreeDirArrowCollapsible = '▾'
 
     Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
+    Plug 'sainnhe/everforest' " theme
     Plug 'logico/typewriter-vim' " theme
     Plug 'dylanaraps/wal.vim' " if using pywal
     Plug 'NLKNguyen/papercolor-theme'
@@ -184,9 +188,6 @@ if has('nvim')
         \     }
         \   }
         \ }
-
-    Plug 'dstein64/vim-startuptime' " useful for debugging slow plugins
-    Plug 'chrisbra/unicode.vim' " easily search and copy unicode chars
 
     " Plug 'skywind3000/vim-keysound'
     "     let g:keysound_enable = 1
@@ -427,16 +428,12 @@ set wildignore+=*.so,*.o,*.a
 noremap <silent><C-o> 10zl
 noremap <silent><C-i> 10zh
 
-" swap f/b -- i know, i'm a madman
-noremap <silent><C-f> <C-b>
-noremap <silent><C-b> <C-f>
-
 map <silent><leader>w :w<CR>
 map <silent><leader>q :q<CR>
 
 " print a 60-char line separator, commented
 map <C-s> 30i-*<ESC>:Commentary<CR>
-map <C-d> 30i-/<ESC>:Commentary<CR>
+" map <C-s> 30i-/<ESC>:Commentary<CR>
 
 " conflicts with st/tabbed:
 map  <silent><c-=> <nop>

@@ -50,26 +50,26 @@ run() {
 }
 
 run vol s 50
-run bright s 90
-run ytdlq -d
+run bright s 80
 run background
 run sxhkd
 run xbanish
 run maild -d
 run weatherd -d
-# run crypto-ticker -d
-# run stock-ticker -d
+run ytdlq -d
 run torrent-queue -d
 run sctc 6500
 run batmon
-# run subs -d
+
+# run crypto-ticker -d
+# run stock-ticker -d
+run subs -d
 
 if command -v dwm >/dev/null ; then
     run bar -d
     run picom -b
-    run dunst
     run xdimmer -p 20 -s 10 -b 1 -t 570
     run xautolock -locker slock -time 10 -notify 15 -notifier notify-send
     unset -f run
-    exec dwm
+    exec dwm > ~/.cache/dwm.log 2>&1
 fi

@@ -87,7 +87,15 @@ png2jpg() {
         esac
     done
 }
-alias jpg='find . -type f -iname "*.jp*" -exec jpegoptim -s {} \;'
+
+jpg() {
+    if [ -f "$1" ] ; then
+        jpegoptim -s "$1"
+    elif [ -d "${1:-.}" ] ; then
+        find "${1:-.}" -type f -iname "*.jp*" -exec jpegoptim -s {} \;
+    fi
+}
+
 cover() { curl -q -# -L "$1" -o cover.jpg ; jpg ; }
 band()  { curl -q -# -L "$1" -o band.jpg  ; jpg ; }
 logo()  { curl -q -# -L "$1" -o logo.jpg  ; jpg ; }
