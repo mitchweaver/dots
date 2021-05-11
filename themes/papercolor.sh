@@ -3,7 +3,11 @@
 # https://github.com/NLKNguyen/papercolor-theme
 #
 
-ln -sf ~/src/dots/themes/papercolor.sh ~/src/dots/themes/current
+case ${1#--} in
+    link|l)
+        ln -sf ~/src/dots/themes/"${0##*/}" ~/src/dots/themes/current
+        ;;
+esac
 
 color0='#eeeeee'
 color1='#af0000'

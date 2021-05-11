@@ -30,8 +30,8 @@ alt + p
     menu run -p 'Run:'
 alt + o
     dedit
-# alt + shift + i
-#     brws -a
+alt + i
+    opn --menu
 alt + y
     dmoji
 

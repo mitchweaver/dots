@@ -42,8 +42,8 @@ sxiv() {
 # wttr.in
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 weather() {
-    if [ -f "${WEATHERD_OUTPUT_FILE:-${XDG_CACHE_HOME:-${HOME}/.cache}/weatherd/location}" ] ; then
-        read -r loc < "${WEATHERD_OUTPUT_FILE:-${XDG_CACHE_HOME:-${HOME}/.cache}/weatherd/location}"
+    if [ -f "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}" ] ; then
+        read -r loc < "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}"
         if [ "$loc" ] ; then
             curl -Ls https://wttr.in/"$loc"?u0TQ
         fi
@@ -51,8 +51,8 @@ weather() {
 }
 
 forecast() {
-    if [ -f "${WEATHERD_OUTPUT_FILE:-${XDG_CACHE_HOME:-${HOME}/.cache}/weatherd/location}" ] ; then
-        read -r loc < "${WEATHERD_OUTPUT_FILE:-${XDG_CACHE_HOME:-${HOME}/.cache}/weatherd/location}"
+    if [ -f "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}" ] ; then
+        read -r loc < "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}"
         if [ "$loc" ] ; then
             curl -Ls https://wttr.in/"$loc"?u | tail -n 33 | head -n 31
         fi
@@ -196,10 +196,10 @@ btcprice() {
 # aliases for my own scripts
 subsdl() {
     link=$(subs -n)
-    if [ ! -z "$link" ] ; then
+    if [ "$link" ] ; then
         addyt "$link"
+        printf "Added link '%s' to download queue.\n" "$link"
     fi
-    printf "Added link '%s' to download queue.\n" "$link"
 }
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -221,5 +221,3 @@ clip() {
 alias pcm='nohup pcmanfm . >/dev/null 2>&1 &'
 alias detox='detox -v'
 alias mutt=neomutt
-
-alias matrix='cmatrix -b -s'

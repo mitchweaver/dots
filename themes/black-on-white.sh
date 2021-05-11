@@ -2,7 +2,11 @@
 # a little black on white makes a happy rob pike
 #
 
-ln -sf ~/src/dots/themes/black-on-white.sh ~/src/dots/themes/current
+case ${1#--} in
+    link|l)
+        ln -sf ~/src/dots/themes/"${0##*/}" ~/src/dots/themes/current
+        ;;
+esac
 
 color0='#ffffff'
 color1='#000000'

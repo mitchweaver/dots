@@ -93,4 +93,5 @@ alias torsockscheck="\
     curl -sL https://check.torproject.org | \
     grep -E '(Congratulations|Sorry)' | \
     head -n 1"
+alias torget='torsocks -i wget'
 # -----------------------------------------------------------

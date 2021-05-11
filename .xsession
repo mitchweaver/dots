@@ -63,7 +63,7 @@ run batmon
 
 # run crypto-ticker -d
 # run stock-ticker -d
-run subs -d
+# run subs -d
 
 if command -v dwm >/dev/null ; then
     run bar -d

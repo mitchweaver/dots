@@ -1,8 +1,13 @@
+#!/bin/sh
 #
 # ashes
 #
 
-ln -sf ~/src/dots/themes/ashes.sh ~/src/dots/themes/current
+case ${1#--} in
+    link|l)
+        ln -sf ~/src/dots/themes/"${0##*/}" ~/src/dots/themes/current
+        ;;
+esac
 
 color0='#1c2023'
 color1='#c7ae95'

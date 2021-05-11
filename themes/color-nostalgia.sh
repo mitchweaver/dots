@@ -4,7 +4,11 @@
 # a theme by http://github.com/mitchweaver
 #
 
-ln -sf ~/src/dots/themes/color-nostalgia.sh ~/src/dots/themes/current
+case ${1#--} in
+    link|l)
+        ln -sf ~/src/dots/themes/"${0##*/}" ~/src/dots/themes/current
+        ;;
+esac
 
 color0='#d9d5ba'
 color1='#825b69'

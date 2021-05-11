@@ -1,2 +1,6 @@
 #!/bin/sh
-ln -sf ~/.cache/wal/colors.sh ~/src/dots/themes/current
+case ${1#--} in
+    link|l)
+        ln -sf ~/.cache/wal/colors.sh ~/src/dots/themes/current
+        ;;
+esac

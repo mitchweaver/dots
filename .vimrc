@@ -3,10 +3,10 @@
 
 " ██╗███╗   ██╗██╗████████╗
 " ██║████╗  ██║██║╚══██╔══╝
-" ██║██╔██╗ ██║██║   ██║   
-" ██║██║╚██╗██║██║   ██║   
-" ██║██║ ╚████║██║   ██║   
-" ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝   
+" ██║██╔██╗ ██║██║   ██║
+" ██║██║╚██╗██║██║   ██║
+" ██║██║ ╚████║██║   ██║
+" ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
@@ -215,7 +215,7 @@ if has('nvim')
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
         
         " if using pywal:
-        colorscheme wal
+        " colorscheme wal
 
         " make sign column same color as terminal background
         hi signColumn ctermbg=NONE
@@ -575,7 +575,7 @@ func! WinMove(key)
         exec "wincmd ".a:key
     endif
 endfu
- 
+
 nnoremap <silent><C-h> :call WinMove('h')<cr>
 nnoremap <silent><C-j> :call WinMove('j')<cr>
 nnoremap <silent><C-k> :call WinMove('k')<cr>
