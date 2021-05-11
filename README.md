@@ -4,6 +4,8 @@ My personal dotfiles and [OpenBSD](http://openbsd.org) `/etc` configs.
 
 ------
 
+![obsd_color_nostalgia](https://i.imgur.com/bfhHBzQ.png)
+
 ![obsd_sepia_rice](https://i.imgur.com/C1zSkJM.png)
 
 ![obsd_sepia_rice2](https://i.imgur.com/ecCsAkD.png)
