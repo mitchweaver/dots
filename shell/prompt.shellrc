@@ -1,9 +1,10 @@
-# ▛▀▖             ▐  
-# ▙▄▘▙▀▖▞▀▖▛▚▀▖▛▀▖▜▀ 
-# ▌  ▌  ▌ ▌▌▐ ▌▙▄▘▐ ▖
-# ▘  ▘  ▝▀ ▘▝ ▘▌   ▀ 
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
+# ██████╗ ██████╗  ██████╗ ███╗   ███╗██████╗ ████████╗
+# ██╔══██╗██╔══██╗██╔═══██╗████╗ ████║██╔══██╗╚══██╔══╝
+# ██████╔╝██████╔╝██║   ██║██╔████╔██║██████╔╝   ██║   
+# ██╔═══╝ ██╔══██╗██║   ██║██║╚██╔╝██║██╔═══╝    ██║   
+# ██║     ██║  ██║╚██████╔╝██║ ╚═╝ ██║██║        ██║   
+# ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝        ╚═╝   
+                                                     
 _ps1_print_user() {
     # print username in color palette, one color per character
     code=1
@@ -21,9 +22,14 @@ _ps1_print_pwd() {
 
 _ps1_print_git() {
     # print git repo name in parenthesis, if we're inside one
-    set -f
-    set +f -- $(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
-    [ "$1" ] && printf '(%s) ' "$1"
+    if [ -d .git ] ; then
+        set -- "$(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)"
+        if [ "$1" ] ; then
+            printf '(%s) ' "$1"
+        else
+            printf '(%s) ' "no branch"
+        fi
+    fi
 }
 
 _clear_formatting() {
