@@ -4,6 +4,8 @@
     #st -T 'Simple Terminal' -t 'Simple Terminal' -c 'Simple Terminal'
 alt Return
     stwrapper
+alt + shift + Return
+    stwrapper -t
 alt + w
     brws
 alt + r
