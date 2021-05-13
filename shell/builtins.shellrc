@@ -15,6 +15,10 @@ cd() {
             ;;
         *)
             if [ "$1" ] ; then
+                if [ -f "$1" ] ; then
+                    # if given a file, go to its directory
+                    set -- "${1%/*}"
+                fi
                 # try any globs of the arg
                 builtin cd --  "$1"  ||
                 builtin cd --  "$1"* ||
