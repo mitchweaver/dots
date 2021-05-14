@@ -181,18 +181,16 @@ color index_subject brightcyan black "~N"
 # -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 # below color settings taken from: https://git.jonathanh.co.uk
 # -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
-
-# Default index colors:
 color index yellow default '.*'
 color index_author red default '.*'
 color index_number blue default
 color index_subject cyan default '.*'
 
-# Other colors and aesthetic settings:
 mono bold bold
 mono underline underline
 mono indicator reverse
 mono error bold
+color status default default
 color normal default default
 color indicator brightblack white
 color sidebar_highlight red default
@@ -205,7 +203,6 @@ color message cyan default
 color markers red white
 color attachment white default
 color search brightmagenta default
-color status brightyellow black
 color hdrdefault brightgreen default
 color quoted green default
 color quoted1 blue default
