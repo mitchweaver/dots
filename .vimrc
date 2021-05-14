@@ -31,6 +31,17 @@ if has('nvim')
     Plug 'tpope/vim-eunuch'          " wrapper around common unix shell commands
     Plug 'tpope/vim-sleuth'          " autodetect tab indentation
     Plug 'tpope/vim-abolish'         " bracket {,} expansion in substitution
+    Plug 'tpope/vim-unimpaired'      " pairing of binds with '[' and ']'
+    Plug 'tpope/vim-surround'        " surround stuff with stuff
+        nmap ss ysiw
+        nmap sl yss
+        vmap s S
+    Plug 'tpope/vim-commentary'      " comment toggler
+        nmap <silent><leader>c :Commentary<CR>
+        autocmd BufNewFile,BufRead *.asm setlocal commentstring=;\ %s
+        autocmd BufNewFile,BufRead *.conf setlocal commentstring=#\ %s
+        autocmd BufNewFile,BufRead *rc setlocal commentstring=#\ %s
+        autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
     Plug 'godlygeek/tabular'         " tab alignment
     Plug 'sheerun/vim-polyglot'      " syntax highlighting
@@ -38,20 +49,12 @@ if has('nvim')
     Plug 'svermeulen/vim-yoink'      " emacs killring for vim
     Plug 'dstein64/vim-startuptime'  " useful for debugging slow plugins
     Plug 'chrisbra/unicode.vim'      " easily search and copy unicode chars
-    Plug 'gyim/vim-boxdraw'          " the coolest plugin you never knew you needed
     Plug 'ryanoasis/vim-devicons'    " adds icons to plugins
     Plug 'psliwka/vim-smoothie'      " smooth scrolling done right
 
     Plug 'ap/vim-buftabline' " display buffers along top as tabs
-        " uncomment to hide when only one buffer
+        " uncomment to hide tab if there is only one buffer
         " let g:buftabline_show = 1
-
-    Plug 'tpope/vim-commentary' " comment toggler
-        nmap <silent><leader>c :Commentary<CR>
-        autocmd BufNewFile,BufRead *.asm setlocal commentstring=;\ %s
-        autocmd BufNewFile,BufRead *.conf setlocal commentstring=#\ %s
-        autocmd BufNewFile,BufRead *rc setlocal commentstring=#\ %s
-        autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
     Plug 'mg979/vim-visual-multi' " sublime-like multiple select
         let g:VM_default_mappings = 0
@@ -83,11 +86,6 @@ if has('nvim')
         " nmap [h <Plug>GitGutterPrevHunk
         " nmap <Leader>hs <Plug>GitGutterStageHunk
         " nmap <Leader>hr <Plug>GitGutterUndoHunk
-
-    Plug 'tpope/vim-surround' " surround stuff with stuff
-        nmap ss ysiw
-        nmap sl yss
-        vmap s S
 
     Plug 'vimwiki/vimwiki' " the ultimate note taking system
         let wiki = {}
@@ -174,20 +172,10 @@ if has('nvim')
     Plug 'sainnhe/everforest' " theme
     Plug 'logico/typewriter-vim' " theme
     Plug 'dylanaraps/wal.vim' " if using pywal
-    Plug 'NLKNguyen/papercolor-theme'
-        let g:PaperColor_Theme_Options = {
-        \   'language': {
-        \     'python': {
-        \       'highlight_builtins' : 1
-        \     },
-        \     'cpp': {
-        \       'highlight_standard_library': 1
-        \     },
-        \     'c': {
-        \       'highlight_builtins' : 1
-        \     }
-        \   }
-        \ }
+
+    Plug 'gyim/vim-boxdraw' " the coolest plugin you never knew you needed
+        " NOTE: this is toggled by ']ov' if you tpope's vim-unimpaired
+        set virtualedit+=all " allows you to select empty space in visual
 
     " Plug 'skywind3000/vim-keysound'
     "     let g:keysound_enable = 1
@@ -208,24 +196,23 @@ if has('nvim')
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
         " ----- If not using pywal: ---------------
         " colorscheme onehalfdark
-        " colorscheme PaperColor
         " colorscheme typewriter
         " set background=light
         " set t_Co=256 " fix terminal colors
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
-        
+
         " if using pywal:
-        " colorscheme wal
+        colorscheme wal
 
         " make sign column same color as terminal background
         hi signColumn ctermbg=NONE
     endif
 endif
 
-"  ██████╗ ███████╗███╗   ██╗███████╗██████╗  █████╗ ██╗     
-" ██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔══██╗██╔══██╗██║     
-" ██║  ███╗█████╗  ██╔██╗ ██║█████╗  ██████╔╝███████║██║     
-" ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ██╔══██╗██╔══██║██║     
+"  ██████╗ ███████╗███╗   ██╗███████╗██████╗  █████╗ ██╗
+" ██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔══██╗██╔══██╗██║
+" ██║  ███╗█████╗  ██╔██╗ ██║█████╗  ██████╔╝███████║██║
+" ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ██╔══██╗██╔══██║██║
 " ╚██████╔╝███████╗██║ ╚████║███████╗██║  ██║██║  ██║███████╗
 "  ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
