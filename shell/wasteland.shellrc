@@ -162,16 +162,6 @@ pad() {
     mkdir -p /tmp/$$.tmpsh
     trap 'rm -rf /tmp/$$.tmpsh' EXIT INT TERM HUP
     cd /tmp/$$.tmpsh &&
-cat > /tmp/$$.tmpsh/$$.md <<EOF
-██████╗  █████╗ ██████╗ 
-██╔══██╗██╔══██╗██╔══██╗
-██████╔╝███████║██║  ██║
-██╔═══╝ ██╔══██║██║  ██║
-██║     ██║  ██║██████╔╝
-╚═╝     ╚═╝  ╚═╝╚═════╝ 
-
-
-EOF
     ${EDITOR:-vi} $$.md &&
     cd - >/dev/null &&
     rm -rf /tmp/$$.tmpsh 2>/dev/null ||:

@@ -49,10 +49,12 @@ run() {
     fi
 }
 
-sctc -s 6000
-vol s 50
-bright s 80
-background
+{
+    sctc s 6000
+    vol s 50
+    bright s 80
+    background
+} &
 
 run sxhkd
 run xbanish
@@ -68,6 +70,7 @@ run batmon
 if command -v dwm >/dev/null ; then
     run bar -d
     run picom -b
+    # run picom --experimental-backends -b
     run xdimmer -p 20 -s 10 -b 1 -t 570
     run xautolock -locker slock -time 10 -notify 15 -notifier notify-send
     unset -f run
