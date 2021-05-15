@@ -62,7 +62,11 @@ run maild -d
 run weatherd -d
 run ytdlq -d
 run torrent-queue -d
-run batmon
+
+if [ "$(uname)" = OpenBSD ] ; then
+    run batmon
+fi
+
 # run crypto-ticker -d
 # run stock-ticker -d
 # run subs -d

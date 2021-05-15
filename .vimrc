@@ -153,10 +153,9 @@ if has('nvim')
             \ ]
 
     Plug 'preservim/nerdtree'
-        nnoremap <C-n> :NERDTreeFocus<CR>
-        """""" nnoremap <C-n> :NERDTree<CR>
-        """""" nnoremap <C-t> :NERDTreeToggle<CR>
-        """""" nnoremap <C-f> :NERDTreeFind<CR>
+        nnoremap <C-n> :NERDTreeToggle<CR>
+        nnoremap <leader>n :NERDTreeToggle<CR>
+        nnoremap <leader>f :NERDTreeFind<CR>
         " Exit Vim if NERDTree is the only window left.
         autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
             \ quit | endif
@@ -175,7 +174,7 @@ if has('nvim')
 
     Plug 'gyim/vim-boxdraw' " the coolest plugin you never knew you needed
         " NOTE: this is toggled by ']ov' if you tpope's vim-unimpaired
-        set virtualedit+=all " allows you to select empty space in visual
+        " set virtualedit+=all " allows you to select empty space in visual
 
     " Plug 'skywind3000/vim-keysound'
     "     let g:keysound_enable = 1
