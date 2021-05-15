@@ -9,3 +9,7 @@ Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 Xcursor.theme: plan9
 Xcursor.size: 16
+
+*foreground: #ffffff
+*background: #000000
+*font: spleen
