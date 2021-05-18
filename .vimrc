@@ -53,6 +53,13 @@ if has('nvim')
     Plug 'ryanoasis/vim-devicons'    " adds icons to plugins
     Plug 'psliwka/vim-smoothie'      " smooth scrolling done right
 
+    Plug 'preservim/vim-wordy'       " make me write gooder
+        noremap <silent><F8> :<C-u>NextWordy<cr>
+        xnoremap <silent><F8> :<C-u>NextWordy<cr>
+        inoremap <silent><F8> <C-o>:NextWordy<cr>
+        if !&wildcharm | set wildcharm=<C-z> | endif
+        execute 'nnoremap <leader>w :Wordy<space>'.nr2char(&wildcharm)
+
     Plug 'ap/vim-buftabline' " display buffers along top as tabs
         " uncomment to hide tab if there is only one buffer
         " let g:buftabline_show = 1
@@ -335,6 +342,18 @@ set breakindent       " set indents when wrapped
 " hi ActiveWindow ctermbg=0 | hi InactiveWindow ctermbg=234
 " set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
 
+" textwidth
+augroup textwidth
+	autocmd!
+	autocmd FileType text,mail,markdown,gmi setlocal textwidth=72
+augroup END
+
+" spellcheck
+augroup spelling
+	autocmd!
+	autocmd FileType text,mail,markdown,gmi setlocal spell
+augroup END
+
 " ███╗   ██╗ ██████╗ ███╗   ██╗███████╗███████╗███╗   ██╗███████╗███████╗
 " ████╗  ██║██╔═══██╗████╗  ██║██╔════╝██╔════╝████╗  ██║██╔════╝██╔════╝
 " ██╔██╗ ██║██║   ██║██╔██╗ ██║███████╗█████╗  ██╔██╗ ██║███████╗█████╗  
@@ -394,6 +413,7 @@ nmap <leader>s :%s//g<Left><Left>
 " ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " execute line as shell command and replace it with output
+" notice: capital W
 noremap <leader>W !!sh<cr>
 " pipe line to fmt and replace current line
 noremap F !!fmt<cr>
@@ -414,9 +434,6 @@ set wildignore+=*.so,*.o,*.a
 " horizontal scrolling
 noremap <silent><C-o> 10zl
 noremap <silent><C-i> 10zh
-
-map <silent><leader>w :w<CR>
-map <silent><leader>q :q<CR>
 
 " print a 60-char line separator, commented
 map <C-s> 30i-*<ESC>:Commentary<CR>
