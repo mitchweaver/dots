@@ -66,9 +66,10 @@ run weatherd -d
 run ytdlq -d
 run torrent-queue -d
 
-if [ "$(uname)" = OpenBSD ] ; then
-    run batmon
-fi
+case $(apm -m 2>/dev/null) in
+    0|1|2|3)
+        run batmon
+esac
 
 # run crypto-ticker -d
 # run stock-ticker -d
