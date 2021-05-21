@@ -8,6 +8,9 @@
 
 command -v pkg_add >/dev/null return
 
+# stop .core file generation
+ulimit -c 0
+
 alias {doas,dosa,daos,sudo}='TERM=vt100 doas'
 alias sg='sysctl | grep -i'
 alias disks='sysctl -n hw.disknames'
