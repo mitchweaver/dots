@@ -10,8 +10,8 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # I hate these stupid dirs and every program that creates them.
-rmdir Desktop Public Templates Documents Pictures \
-    Videos Documents Music 2>/dev/null ||:
+# rmdir Desktop Public Templates Documents Pictures \
+#     Videos Documents Music 2>/dev/null ||:
 
 # junk useless files
 rm nohup.out *.core *\~* \:w 2>/dev/null ||:
@@ -37,6 +37,7 @@ sxiv() {
         command sxiv -a -N sxiv -p -q -r -s d -t . # -b
     fi 2>/dev/null
 }
+alias s=sxiv
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # wttr.in
@@ -211,3 +212,13 @@ clip() {
 alias pcm='nohup pcmanfm . >/dev/null 2>&1 &'
 alias detox='detox -v'
 alias mutt=neomutt
+
+pvmv() {
+    [ $# -eq 2 ] || return 1
+    : > "$2" || return 1
+    pv < "$1" > "$2" && rm -f -- "$1"
+}
+
+docx2pdf() {
+    libreoffice --convert-to pdf "$1" 2>/dev/null
+}

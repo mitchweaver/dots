@@ -6,7 +6,7 @@ umask 022
 PATH=/bin:/sbin:$PATH
 PATH=/usr/bin:/usr/sbin:$PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
-PATH=$(printf '%s:' ${HOME}/bin/*/ | grep -v openbsd):${HOME}/bin:$PATH
+PATH=$(printf '%s:' ${HOME}/bin/*/):${HOME}/bin:$PATH
 if [ "$(uname)" = OpenBSD ] ; then
     export PATH=${HOME}/bin/openbsd:$PATH
 fi

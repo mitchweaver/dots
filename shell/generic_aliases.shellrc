@@ -37,7 +37,7 @@ alias la='ls -a'
 alias {lla,lal}='ls -al'
 alias {l1,lv}='ls -1'
 alias lsf='ls "$PWD"/*'
-alias lg='ls | grep -i'
+alias {lsg,lg}='ls | grep -i'
 
 alias t=tree
 

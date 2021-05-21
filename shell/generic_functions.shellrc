@@ -43,7 +43,6 @@ d() {
 
 # squelch output of command
 silent() { eval "$* >/dev/null 2>&1" ; }
-alias s=silent
 
 # output if command was succesful
 iif() { "$@" >/dev/null && echo yes || echo no ; }
