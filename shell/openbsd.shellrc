@@ -1,7 +1,7 @@
 # openbsd-specific aliases
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-command -v pkg_add >/dev/null return
+command -v pkg_add >/dev/null || return
 
 # stop .core file generation
 ulimit -c 0
