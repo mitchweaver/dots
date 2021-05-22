@@ -13,6 +13,10 @@ all:
 	#
 	sudo systemctl enable tor
 	sudo systemctl start tor
-	#
-	sudo systemctl enable ntpd
-	sudo systemctl start ntpd
+	# openntpd from OpenBSD
+	sudo cp -f ntpd.conf /etc/
+	sudo systemctl enable openntpd
+	sudo systemctl start openntpd
+	# xorg.conf.d
+	sudo mkdir -p /etc/X11/xorg.conf.d
+	sudo cp -f X11/xorg.conf.d/10-libinput.conf /etc/X11/xorg.conf.d/

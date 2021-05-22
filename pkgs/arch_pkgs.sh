@@ -48,9 +48,10 @@ pacman -Sy \
     nmap \
     noto-fonts-cjk \
     noto-fonts-emoji \
+    openntpd \
     openvpn \
+    openresolv \
     p7zip \
-    pandoc \
     pcmanfm \
     picom \
     pv \
@@ -62,7 +63,6 @@ pacman -Sy \
     ranger \
     rdesktop \
     imagemagick \
-    shellcheck \
     slock \
     slop \
     speedtest-cli \
@@ -91,6 +91,12 @@ pacman -Sy \
     youtube-dl \
     zathura-pdf-mupdf \
     zip
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# not available in arm64 repos
+# pandoc \
+# shellcheck \
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 pacman -Sy yay
 
