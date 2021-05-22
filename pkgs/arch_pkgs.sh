@@ -62,6 +62,7 @@ pacman -Sy \
     python-pywal \
     ranger \
     rdesktop \
+    rsync \
     imagemagick \
     slock \
     slop \
@@ -85,8 +86,11 @@ pacman -Sy \
     xdotool \
     xsel \
     xterm \
+    xorg-xbacklight \
     xorg-xsetroot \
     xorg-xinput \
+    xorg-mkfontdir \
+    xorg-mkfontscale \
     xwallpaper \
     youtube-dl \
     zathura-pdf-mupdf \

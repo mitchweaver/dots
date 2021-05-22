@@ -43,11 +43,14 @@ control + alt + k
 shift + Delete
     xsel -o
 
+
+# ------------ this does not work on pinebook pro ---------
 # brightness
-XF86MonBrightnessUp
-    bright i
-XF86MonBrightnessDown
-    bright d
+# XF86MonBrightnessUp
+    # bright i
+# XF86MonBrightnessDown
+    # bright d
+# --------------------------------------------------------
 
 # redshift control
 alt + equal
