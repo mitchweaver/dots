@@ -94,7 +94,7 @@ alias sendmail='msmtp -a wvr --'
 # ----------------------- tor -------------------------------
 alias {torsocks,ts}='torsocks -i'
 alias torshell='torsocks -i --shell'
-alias torsockscheck="\
+alias torcheck="\
     torsocks -i \
     curl -sL https://check.torproject.org | \
     grep -E '(Congratulations|Sorry)' | \
