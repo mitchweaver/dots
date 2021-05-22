@@ -95,6 +95,7 @@ sudo -u mitch yay -Sy \
 abook \
 herbe \
 farbfeld \
+oksh \
 sct \
 skroll \
 toilet \
@@ -102,6 +103,8 @@ tor-browser \
 xbanish \
 spleen-font \
 text2pdf
+
+chsh -s $(which oksh) mitch
 
 # make login screen thing
 mkdir -p /usr/share/xsessions
