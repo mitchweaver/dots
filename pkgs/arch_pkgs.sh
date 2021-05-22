@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -ex
 
 echo "run me as root, ok?"
 read -r blank
@@ -92,6 +92,7 @@ pacman -Sy \
 
 pacman -Sy yay
 
+# warning: not all below aur packages have arm64 available
 yay -Syy
 
 sudo -u mitch yay -Sy \
@@ -109,7 +110,9 @@ sudo -u mitch yay -Sy \
     spleen-font \
     text2pdf
 
-chsh -s $(which oksh) mitch
+if command -v oksh >/dev/null ; then
+    chsh -s $(which oksh) mitch
+fi
 
 # make login screen thing because new linux is stupid
 mkdir -p /usr/share/xsessions
