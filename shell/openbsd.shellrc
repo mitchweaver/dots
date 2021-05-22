@@ -1,8 +1,3 @@
-# ▞▀▖         ▛▀▖▞▀▖▛▀▖
-# ▌ ▌▛▀▖▞▀▖▛▀▖▙▄▘▚▄ ▌ ▌
-# ▌ ▌▙▄▘▛▀ ▌ ▌▌ ▌▖ ▌▌ ▌
-# ▝▀ ▌  ▝▀▘▘ ▘▀▀ ▝▀ ▀▀ 
-#
 # openbsd-specific aliases
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -26,7 +21,7 @@ alias shred='rm -P'
 pkg() {
     [ "$1" ] || set -- h
     flag=${1#-}
-    shift       
+    shift
     case $flag in
         h)
             >&2 printf '%s\n' \
@@ -56,14 +51,6 @@ pkg() {
     esac
 }
 
-alias nu='doas sh /etc/netstart urtwn0'
-alias pftop='doas pftop'
-
-# ▛▀▖      ▐     
-# ▙▄▘▞▀▖▙▀▖▜▀ ▞▀▘
-# ▌  ▌ ▌▌  ▐ ▖▝▀▖
-# ▘  ▝▀ ▘   ▀ ▀▀ 
-alias dmi='doas make install'
 alias portcheck=/usr/ports/infrastructure/bin/portcheck
 alias porttemplate='cp /usr/ports/infrastructure/templates/Makefile.template Makefile'
 alias cdwrksrc='cd $(make show=WRKSRC)'
