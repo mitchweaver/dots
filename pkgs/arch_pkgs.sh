@@ -85,6 +85,8 @@ pacman -Sy \
     xdotool \
     xsel \
     xterm \
+    xorg-xsetroot \
+    xorg-xinput \
     xwallpaper \
     youtube-dl \
     zathura-pdf-mupdf \
@@ -105,8 +107,6 @@ sudo -u mitch yay -Sy \
     toilet \
     tor-browser \
     xbanish \
-    xorg-xsetroot \
-    xorg-xinput \
     spleen-font \
     text2pdf
 
