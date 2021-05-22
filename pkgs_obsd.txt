@@ -15,7 +15,6 @@ firefox
 freetype
 gimp
 git
-glances
 gmake
 go
 gocr
@@ -26,7 +25,6 @@ inotify
 ipmitool
 ipw
 isync
-jdk
 jpegoptim
 jq
 libreoffice
