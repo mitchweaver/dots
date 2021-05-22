@@ -14,6 +14,9 @@ if [ ! -t 0 ] ; then
     return
 fi
 
+# stop .core file generation
+ulimit -c 0
+
 umask 022
 
 # -*-*- Options -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -31,7 +34,10 @@ if [ -d "${SHELLRC_DIR}" ] ; then
     . "${SHELLRC_DIR}/history.shellrc"
     . "${SHELLRC_DIR}/movement.shellrc"
     . "${SHELLRC_DIR}/networking.shellrc"
+
+    . "${SHELLRC_DIR}/arch.shellrc"
     . "${SHELLRC_DIR}/openbsd.shellrc"
+
     . "${SHELLRC_DIR}/options.shellrc"
     . "${SHELLRC_DIR}/prompt.shellrc"
     . "${SHELLRC_DIR}/templates.shellrc"

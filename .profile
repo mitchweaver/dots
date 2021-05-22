@@ -137,8 +137,4 @@ if [ "$(readlink ~/.cache)" != ~/tmp/.cache ] ; then
     fi
     ln -sf ~/tmp/.cache ~/.cache
 fi
-if [ -d ~/.terminfo ] ; then
-    rm -r ~/.terminfo
-    ln -sf ~/tmp/.terminfo ~/.terminfo
-fi
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

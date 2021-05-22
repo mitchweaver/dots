@@ -43,6 +43,7 @@ mupdf \
 neofetch \
 neomutt \
 neovim \
+net-tools \
 notmuch \
 nmap \
 noto-fonts-cjk \
@@ -57,6 +58,7 @@ python-pynvim \
 python-setuptools \
 python-pip \
 python-pylint \
+python-pywal \
 ranger \
 rdesktop \
 imagemagick \
@@ -82,6 +84,7 @@ x11vnc \
 xautolock \
 xdotool \
 xsel \
+xterm \
 xwallpaper \
 youtube-dl \
 zathura-pdf-mupdf \
@@ -101,19 +104,21 @@ skroll \
 toilet \
 tor-browser \
 xbanish \
+xorg-xsetroot \
+xorg-xinput \
 spleen-font \
 text2pdf
 
 chsh -s $(which oksh) mitch
 
-# make login screen thing
+# make login screen thing because new linux is stupid
 mkdir -p /usr/share/xsessions
 cat > /usr/share/xsessions/dwm.desktop <<EOF
 [Desktop Entry]
 Encoding=UTF-8
-Name=DWM
-Comment=Dynamic Window Manager
-Exec=/home/mitch/.local/bin/dwm
+Name=xinitrc
+Comment=xinitrc
+Exec=/home/mitch/.xinitrc
 Icon=
 Type=Application
 EOF

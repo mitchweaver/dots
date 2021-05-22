@@ -1,0 +1,68 @@
+# pacman-specific aliases
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+command -v pacman >/dev/null || return
+
+pkg() {
+    [ "$1" ] || set -- h
+    flag=${1#-}
+    shift
+    case $flag in
+        h)
+            >&2 printf '%s\n' \
+                'pkg: [-a add] [-u update] [-d delete] [-s search] [-i info] [-f file] [-l list]'
+            ;;
+        a)
+            sudo pacman -Sy "$@"
+            ;;
+        u)
+            sudo pacman -Syu "$@"
+            ;;
+        d)
+            sudo pacman -Rs "$@"
+            ;;
+        s)
+            pacman -Ss "$@"
+            ;;
+        i)
+            pacman -Si "$@"
+            ;;
+        # f)
+        #     pkg_info -D snap -E "$@"
+        #     ;;
+        l)
+            pacman -Q "$@"
+    esac
+}
+
+yaypkg() {
+    [ "$1" ] || set -- h
+    flag=${1#-}
+    shift
+    case $flag in
+        h)
+            >&2 printf '%s\n' \
+                'yaypkg: [-a add] [-u update] [-d delete] [-s search] [-i info] [-f file] [-l list]'
+            ;;
+        a)
+            yay -Sy "$@"
+            ;;
+        u)
+            yay -Syu "$@"
+            ;;
+        d)
+            yay -Rs "$@"
+            ;;
+        s)
+            yay -Ss "$@"
+            ;;
+        i)
+            yay -Si "$@"
+            ;;
+        # f)
+        #     pkg_info -D snap -E "$@"
+        #     ;;
+        l)
+            yay -Q "$@"
+    esac
+}
