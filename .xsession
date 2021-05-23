@@ -67,9 +67,12 @@ run weatherd -d
 run ytdlq -d
 run torrent-queue -d
 
-case $(apm -m 2>/dev/null) in
-    0|1|2|3)
-        run batmon
+case $(uname) in
+    OpenBSD)
+        case $(apm -m 2>/dev/null) in
+            0|1|2|3)
+                run batmon
+        esac
 esac
 
 # run crypto-ticker -d

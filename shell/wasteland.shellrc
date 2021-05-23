@@ -222,3 +222,10 @@ pvmv() {
 docx2pdf() {
     libreoffice --convert-to pdf "$1" 2>/dev/null
 }
+
+
+##### fix this later
+# pinebook pro brightness, max=4096
+alias lowbr='echo 1150 | sudo tee /sys/class/backlight/*/brightness'
+alias medbr='echo 2100 | sudo tee /sys/class/backlight/*/brightness'
+alias highbr='echo 3600 | sudo tee /sys/class/backlight/*/brightness'

@@ -47,9 +47,9 @@ shift + Delete
 # ------------ this does not work on pinebook pro ---------
 # brightness
 # XF86MonBrightnessUp
-    # bright i
+#     bright i
 # XF86MonBrightnessDown
-    # bright d
+#     bright d
 # --------------------------------------------------------
 
 # redshift control

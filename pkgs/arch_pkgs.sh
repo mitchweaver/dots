@@ -12,6 +12,8 @@ pacman -Sy \
     arandr \
     aria2 \
     base-devel \
+    bluez-utils \
+    bluez-tools \
     cataclysm-dda \
     clamav \
     curl \
@@ -79,6 +81,7 @@ pacman -Sy \
     bdf-unifont \
     unrar \
     unzip \
+    vi \
     w3m \
     wget \
     wireshark-cli \
@@ -113,14 +116,16 @@ sudo -u mitch yay -Sy \
     abook \
     herbe \
     farbfeld \
+    gotop \
     oksh \
     sct \
     skroll \
     toilet \
-    tor-browser \
     xbanish \
     spleen-font \
     text2pdf
+
+# tor-browser / tor-browser-arm
 
 if command -v oksh >/dev/null ; then
     chsh -s $(which oksh) mitch

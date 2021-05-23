@@ -19,7 +19,7 @@ all:
 	sudo systemctl start openntpd
 	# xorg.conf.d
 	sudo mkdir -p /etc/X11/xorg.conf.d
-	sudo cp -f X11/xorg.conf.d/10-libinput.conf /etc/X11/xorg.conf.d/
+	sudo cp -f X11/xorg.conf.d/10-synaptics.conf /etc/X11/xorg.conf.d/
 	# no ipv6
 	sudo mkdir -p /etc/sysctl.d
 	sudo cp -f sysctl.d/40-no_ipv6.conf /etc/sysctl.d/
