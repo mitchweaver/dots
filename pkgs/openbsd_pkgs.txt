@@ -67,6 +67,7 @@ spleen
 ssh-copy-id
 sxhkd
 sxiv
+syncthing
 terminus-font
 termshark
 text2pdf

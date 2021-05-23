@@ -59,6 +59,7 @@ run() {
     fi
 }
 
+run syncthing -no-browser
 run sxhkd
 run xbanish
 run maild -d

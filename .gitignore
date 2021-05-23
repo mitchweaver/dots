@@ -100,3 +100,5 @@ themes/current
 *config/pulse
 */pavucontrol.ini
 *config/user-dirs.locale
+*config/syncd
+*config/syncthing

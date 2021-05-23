@@ -51,6 +51,7 @@ pacman -Sy \
     openntpd \
     openvpn \
     openresolv \
+    openbsd-netcat \
     p7zip \
     pcmanfm \
     picom \
@@ -62,12 +63,14 @@ pacman -Sy \
     python-pywal \
     ranger \
     rdesktop \
+    rsync \
     imagemagick \
     slock \
     slop \
     speedtest-cli \
     sxhkd \
     sxiv \
+    syncthing \
     terminus-font \
     termshark \
     tor \
