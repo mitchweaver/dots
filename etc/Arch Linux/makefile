@@ -23,4 +23,6 @@ all:
 	# no ipv6
 	sudo mkdir -p /etc/sysctl.d
 	sudo cp -f sysctl.d/40-no_ipv6.conf /etc/sysctl.d/
+	sudo ln -sf /etc/sysctl.d/40-no_ipv6.conf /etc/sysctl.conf
 	sudo systemctl restart systemd-sysctl
+	sudo sysctl -p
