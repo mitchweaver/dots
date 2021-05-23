@@ -82,7 +82,7 @@ all:
 	:
 
 install:
-	install -D -m 0755 ${BIN} ${DESTDIR}${PREFIX}/bin/${BIN}
+	install -Dm0755 ${BIN} ${DESTDIR}${PREFIX}/bin/${BIN}
 
 uninstall:
 	rm ${DESTDIR}${PREFIX}/bin/${BIN}

@@ -43,7 +43,7 @@ alias gV='_g /var'
 alias gss='_g ${HOME}/src/suckless'
 alias gsd='_g ${HOME}/src/dots'
 alias gsb='_g ${HOME}/src/bonsai'
-alias gcf='_g ${XDG_CONFIG_DIR}'
+alias gcf='_g ${XDG_CONFIG_HOME}'
 alias gch='_g ${XDG_CACHE_HOME}'
 alias gdsk='_g ${XDG_DESKTOP_DIR}'
 
