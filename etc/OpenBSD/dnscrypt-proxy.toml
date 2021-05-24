@@ -1,6 +1,5 @@
 listen_addresses = ['127.0.0.1:53']
 max_clients = 250
-user_name = '_dnscrypt-proxy'
 
 ipv4_servers = true
 ipv6_servers = false
@@ -23,32 +22,39 @@ cert_refresh_delay = 240
 dnscrypt_ephemeral_keys = true
 tls_disable_session_tickets = true
 
+# note: this is needed for the initial fetch of the resolver list
 fallback_resolver = '9.9.9.9:53'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # Anonymized DNS relays
-# Works similar to DNSCrypt over Tor, but without tor!
+# Works similar to DNSCrypt over Tor, but without tor
 #
 # see: https://github.com/DNSCrypt/dnscrypt-proxy/wiki/Anonymized-DNS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-[sources]
-  [sources.'anonymized_dns']
-    urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/relays.md',
-            'https://download.dnscrypt.info/resolvers-list/v3/relays.md',
-            'https://ipv6.download.dnscrypt.info/resolvers-list/v3/relays.md']
-    cache_file = 'relays.md'
-    minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
-    refresh_delay = 72
-    prefix = ''
+# [anonymized_dns]
+    # routes = [
+        # { server_name='*', via=['insert relays here'] }
+    # ]
+
+# [sources.'anonymized_dns']
+#     urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/relays.md',
+#             'https://download.dnscrypt.info/resolvers-list/v3/relays.md',
+#             'https://ipv6.download.dnscrypt.info/resolvers-list/v3/relays.md']
+#     cache_file = 'relays.md'
+#     minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
+#     refresh_delay = 72
+#     prefix = ''
+#     skip_incompatible = true
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # For regular DNSCrypt public resolvers
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* 
-# [sources.'public-resolvers']
-# urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md',
-#         'https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md',
-#         'https://ipv6.download.dnscrypt.info/resolvers-list/v3/public-resolvers.md']
-# cache_file = 'public-resolvers.md'
-# minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
-# refresh_delay = 72
-# prefix = ''
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+[sources]
+[sources.'public-resolvers']
+    urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md',
+            'https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md',
+            'https://ipv6.download.dnscrypt.info/resolvers-list/v3/public-resolvers.md']
+    cache_file = 'public-resolvers.md'
+    minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
+    refresh_delay = 72
+    prefix = ''

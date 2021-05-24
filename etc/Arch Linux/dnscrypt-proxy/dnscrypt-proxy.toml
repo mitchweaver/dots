@@ -22,9 +22,8 @@ cert_refresh_delay = 240
 dnscrypt_ephemeral_keys = true
 tls_disable_session_tickets = true
 
-# set fallback to 0.0.0.0 to force all dns through dnscrypt
-fallback_resolver = '0.0.0.0:0'
-# fallback_resolver = '9.9.9.9:53'
+# note: this is needed for the initial fetch of the resolver list
+fallback_resolver = '9.9.9.9:53'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # Anonymized DNS relays
