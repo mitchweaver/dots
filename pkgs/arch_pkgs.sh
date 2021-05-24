@@ -19,6 +19,7 @@ pacman -Sy \
     curl \
     detox \
     dnscrypt-proxy \
+    dnsutils \
     dosbox \
     exa \
     ffmpegthumbnailer \

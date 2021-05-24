@@ -229,3 +229,12 @@ docx2pdf() {
 alias lowbr='echo 1150 | sudo tee /sys/class/backlight/*/brightness'
 alias medbr='echo 2100 | sudo tee /sys/class/backlight/*/brightness'
 alias highbr='echo 3600 | sudo tee /sys/class/backlight/*/brightness'
+
+
+steam() {
+    sudo mdadm --assemble --scan
+    sudo mount /dev/md127p1 /mnt/500GB_RAID0
+    sudo chown -R mitch $_
+    sudo chmod -R 777 $_
+    /usr/bin/steam
+}

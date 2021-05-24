@@ -17,6 +17,8 @@ config:
 	ln -sf ~/src/dots/.config/mpv ~/.config/mpv
 	ln -sf ~/src/dots/.config/cataclysm-dda ~/.config/cataclysm-dda
 	ln -sf ~/src/dots/.config/neomutt ~/.config/neomutt
+	ln -sf ~/src/dots/.config/nvim ~/.config/nvim
 	ln -sf ~/src/dots/.config/ranger ~/.config/ranger
 	ln -sf ~/src/dots/.config/sxhkd ~/.config/sxhkd
 	ln -sf ~/src/dots/.config/zathura ~/.config/zathura
+	ln -sf ~/src/dots/.config/picom.conf ~/.config/picom.conf
