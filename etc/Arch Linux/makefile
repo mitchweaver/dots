@@ -5,7 +5,10 @@ all:
 	sudo mkdir -p /etc/NetworkManager/conf.d
 	sudo cp -f NetworkManager/conf.d/20-rc-manager.conf /etc/NetworkManager/conf.d/
 	sudo cp -f NetworkManager/conf.d/99-stay-away-from-my-dns-poettering.conf /etc/NetworkManager/conf.d/
-	#
+	# important: disable systemd-resolved as to force usage of /etc/resolv.conf
+	sudo systemctl disable systemd-resolved
+	sudo systemctl stop systemd-resolved
+	# dnscrypt
 	sudo rm -rf /etc/dnscrypt-proxy
 	sudo cp -rf dnscrypt-proxy /etc/
 	sudo systemctl enable dnscrypt-proxy
