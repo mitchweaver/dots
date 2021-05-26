@@ -17,12 +17,15 @@ export MANPATH="${HOME}/.local/share/man:$MANPATH"
 export FONTCONFIG_PATH=/etc/fonts
 
 export PYTHONOPTIMIZE=2
+
 export CFLAGS='-pipe -fstack-protector-strong -fexceptions'
-if command -v clang >/dev/null ; then
-    export CC=clang cc=clang
-elif command -v gcc >/dev/null ; then
-    export CC=gcc cc=gcc
-fi
+case $(uname) in
+    OpenBSD)
+        export CC=clang cc=clang
+        ;;
+    Linux)
+        export CC=gcc cc=gcc
+esac
 
 # using en_US.UTF-8 over C causes case-insensitive sorting
 # up to you whether the benefits outweigh the negatives
@@ -77,13 +80,16 @@ export GOPATH=${HOME}/.go
 
 # try to catch either 11 or 8 openjdk version
 # note: this path is for OpenBSD
-for i in 11 8 ; do
-    if [ -d /usr/local/jdk-$i ] ; then
-        export JAVA_HOME=/usr/local/jdk-$i
-        export PATH=$PATH:$JAVA_HOME/bin
-        break
-    fi
-done
+case $(uname) in
+    OpenBSD)
+    for i in 11 8 ; do
+        if [ -d /usr/local/jdk-$i ] ; then
+            export JAVA_HOME=/usr/local/jdk-$i
+            export PATH=$PATH:$JAVA_HOME/bin
+            break
+        fi
+    done
+esac
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 for editor in nvim vim vi ; do
