@@ -17,7 +17,7 @@ alias scp='scp -rp'
 alias p8='ping 8.8.8.8'
 alias cv='curl -v'
 
-alias speedtest='speedtest-cli --simple --secure --no-pre-allocate'
+alias speedtest='speedtest-cli --secure --no-pre-allocate'
 
 wtf() {
     w3m -dump https://wtfismyip.com/json | jq -r

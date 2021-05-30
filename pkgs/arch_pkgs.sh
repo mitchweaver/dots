@@ -24,6 +24,11 @@ pacman -Sy \
     exa \
     ffmpegthumbnailer \
     firefox \
+    firefox-extension-https-everywhere \
+    firefox-temporary-containers \
+    firefox-noscript \
+    firefox-ublock-origin \
+    firefox-clearurls \
     freetype2 \
     gimp \
     git \
@@ -68,7 +73,6 @@ pacman -Sy \
     rdesktop \
     rsync \
     imagemagick \
-    slock \
     slop \
     speedtest-cli \
     sxhkd \
@@ -87,6 +91,7 @@ pacman -Sy \
     wget \
     wireshark-cli \
     wireshark-qt \
+    wireless_tools \
     x11vnc \
     xautolock \
     xdotool \
@@ -124,7 +129,11 @@ sudo -u mitch yay -Sy \
     toilet \
     xbanish \
     spleen-font \
-    text2pdf
+    text2pdf \
+    firefox-extension-greasemonkey \
+    firefox-extension-multi-account-containers \
+    firefox-extension-privacy-redirect \
+    firefox-extension-localcdn
 
 # tor-browser / tor-browser-arm
 

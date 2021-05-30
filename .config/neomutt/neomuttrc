@@ -130,7 +130,7 @@ macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 
 # notification on new mail
-set new_mail_command="notify-send 'New Email' '%n new messages, %u unread.' &"
+####### set new_mail_command="notify-send 'New Email' '%n new messages, %u unread.' &"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 #          ▐        ▐     

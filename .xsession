@@ -80,7 +80,7 @@ esac
 # run subs -d
 
 if command -v dwm >/dev/null ; then
-    run bar -d
+    run mmbar -d
     run picom -b
     # run picom --experimental-backends -b
     run xdimmer -p 20 -s 10 -b 1 -t 570

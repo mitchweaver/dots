@@ -128,7 +128,6 @@ if [ -f ~/.config/neomutt/password ] ; then
 fi
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# --------------- cache in tmpfs -----------------------------
 mkdir -p "/tmp/$USER"
 if [ -d ~/tmp ] ; then
     rm -rf ~/tmp
@@ -136,11 +135,10 @@ fi
 if [ "$(readlink ~/tmp)" != "/tmp/$USER" ] ; then
     ln -sf "/tmp/$USER" ~/tmp
 fi
-mkdir -p ~/tmp/.cache
-if [ "$(readlink ~/.cache)" != ~/tmp/.cache ] ; then
-    if [ -d ~/.cache ] ; then
-        rm -r ~/.cache
-    fi
-    ln -sf ~/tmp/.cache ~/.cache
-fi
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# mkdir -p ~/tmp/.cache
+# if [ "$(readlink ~/.cache)" != ~/tmp/.cache ] ; then
+#     if [ -d ~/.cache ] ; then
+#         rm -r ~/.cache
+#     fi
+#     ln -sf ~/tmp/.cache ~/.cache
+# fi

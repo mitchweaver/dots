@@ -32,12 +32,12 @@ cpcd() {
 # hack - print directories with full path name
 lsd() { printf '%s\n' "$*"/*/ ; }
 
-# du for humans
+# du for humans, note: -L for links
 d() {
     if [ -d "${1:-.}" ] ; then
-        du -ahLd 1 "${1:-.}" 2>/dev/null | sort -rh | head -n 20
+        du -ahd 1 "${1:-.}" 2>/dev/null | sort -rh | head -n 20
     elif [ -f "$1" ] ; then
-        du -ahL "$1"
+        du -ah "$1"
     fi
 }
 
