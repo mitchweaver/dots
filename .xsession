@@ -84,7 +84,7 @@ if command -v dwm >/dev/null ; then
     run picom -b
     # run picom --experimental-backends -b
     run xdimmer -p 20 -s 10 -b 1 -t 570
-    run xautolock -locker slock -time 10 -notify 15 -notifier notify-send
+    run xautolock -locker slock -time 15 -notify 15 -notifier notify-send
     unset -f run
     exec dwm
 fi

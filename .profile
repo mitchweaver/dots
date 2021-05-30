@@ -6,10 +6,22 @@ umask 022
 PATH=/bin:/sbin:$PATH
 PATH=/usr/bin:/usr/sbin:$PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
-PATH=$(printf '%s:' ${HOME}/bin/*/):${HOME}/bin:$PATH
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+for dir in \
+    application daemon devel ffmpeg \
+    media misc net non-shell rice \
+    security utility wrapper
+do
+    if [ -d ~/bin/$dir ] ; then
+        export PATH=$PATH:${HOME}/bin/$dir
+    fi
+done
+
 if [ "$(uname)" = OpenBSD ] ; then
     export PATH=${HOME}/bin/openbsd:$PATH
 fi
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
 PATH=${HOME}/.local/bin:$PATH
 export PATH
 
