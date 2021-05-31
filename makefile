@@ -1,6 +1,4 @@
-all: config
-
-main:
+all: 
 	ln -sf ~/src/dots/.detoxrc ~/.detoxrc
 	ln -sf ~/src/dots/.gitconfig ~/.gitconfig
 	ln -sf ~/src/dots/.msmtprc ~/.msmtprc
@@ -11,8 +9,11 @@ main:
 	ln -sf ~/src/dots/.Xresources ~/.Xresources
 	ln -sf ~/src/dots/.xsession ~/.xsession
 	ln -sf ~/src/dots/.xsession ~/.xinitrc
-
-config:
+	# --------------------------------------
+	ln -sf ~/src/dots/shell/main.shellrc ~/.bashrc
+	ln -sf ~/src/dots/shell/main.shellrc ~/.kshrc 
+	ln -sf ~/src/dots/.bash_profile ~/.bash_profile
+	# --------------------------------------
 	mkdir -p ~/.config
 	ln -sf ~/src/dots/.config/mpv ~/.config/mpv
 	ln -sf ~/src/dots/.config/cataclysm-dda ~/.config/cataclysm-dda
