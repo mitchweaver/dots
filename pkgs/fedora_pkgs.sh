@@ -32,6 +32,8 @@ sudo yum install \
     freetype-devel \
     gimp \
     git \
+    gconf-editor \
+    gnome-extensions-app \
     go \
     gocr \
     htop \
@@ -58,6 +60,7 @@ sudo yum install \
     openvpn \
     openresolv \
     netcat \
+    patch \
     p7zip \
     pcmanfm \
     picom \
@@ -98,12 +101,25 @@ sudo yum install \
     xbacklight \
     xsetroot \
     xinput \
+    libXft-devel \
+    libXinerama-devel \
     mkfontdir \
     mkfontscale \
     youtube-dl \
     zathura-pdf-mupdf \
     zip
 
-    # xwallpaper \
+# use xinitrc insetad of stupid .desktop files
+cat > /dev/stdout | sudo tee /usr/share/applications/xinitrc.desktop <<EOF
+[Desktop Entry]
+Encoding=UTF-8
+Name=xinitrc
+Comment=xinitrc
+Exec=/home/mitch/.xinitrc
+TryExec=/home/mitch/.xinitrc
+Type=Application
+EOF
+
+# xwallpaper \
 # fedora-specific naming differences
 # yum install \
