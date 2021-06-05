@@ -57,8 +57,7 @@ export XDG_CONFIG_HOME="${HOME}/.config" \
        XDG_PICTURES_DIR="${HOME}/images" \
        XDG_VIDEOS_DIR="${HOME}/videos"
 
-# export XDG_DESKTOP_DIR="${HOME}/Desktop"
-
+export XDG_DESKTOP_DIR="${HOME}/Desktop"
 export XDG_DATA_HOME="${HOME}/.local"
 export XDG_CACHE_HOME="${HOME}/.cache"
 
@@ -67,7 +66,6 @@ export XDG_PUBLICSHARE_DIR="$XDG_CACHE_HOME/Public" \
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 export ENV="${HOME}/src/dots/shell/main.shellrc"
-export LOCAL="${HOME}/.local"
 
 export MENU_PROG=menu \
        TERMINAL_PROG=stwrapper \

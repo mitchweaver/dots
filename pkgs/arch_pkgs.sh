@@ -83,6 +83,7 @@ pacman -Sy \
     tor \
     torsocks \
     translate-shell \
+    tmux \
     bdf-unifont \
     unrar \
     unzip \

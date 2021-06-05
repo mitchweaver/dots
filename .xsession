@@ -27,11 +27,11 @@ case $(uname) in
         case $(sysctl -n hw.version) in
             ThinkPad*)
                 # enable scrolling with thinkpad trackpoint on OpenBSD
-                xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation' 1
-                xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Button' 2
-                xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Axes' 6 7 4 5
+                xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation' 1 &
+                xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Button' 2 &
+                xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Axes' 6 7 4 5 &
         esac
-esac &
+esac
 
 # one-shot commands
 {
@@ -41,13 +41,10 @@ esac &
     xset +fp ~/.fonts
     xset m 0 0
     xset b off
-
     sctc s 6000
     vol s 50
     bright s 80
-    background
 } &
-
 
 # daemon commands
 run() {
@@ -61,11 +58,10 @@ run() {
 
 run syncthing -no-browser
 run sxhkd
-run xbanish
-run maild -d
-run weatherd -d
+# run xbanish
 run ytdlq -d
 run torrent-queue -d
+run maild -d
 
 case $(uname) in
     OpenBSD)
@@ -75,14 +71,22 @@ case $(uname) in
         esac
 esac
 
+run weatherd -d
 # run crypto-ticker -d
 # run stock-ticker -d
 # run subs -d
 
+case $(uname) in
+    OpenBSD)
+        ;;
+    Linux)
+        pulseaudio --start
+esac
+
 if command -v dwm >/dev/null ; then
+    background &
     run mmbar -d
-    run picom -b
-    # run picom --experimental-backends -b
+    run picom --experimental-backends -b
     run xdimmer -p 20 -s 10 -b 1 -t 570
     run xautolock -locker slock -time 15 -notify 15 -notifier notify-send
     unset -f run

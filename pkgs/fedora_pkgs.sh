@@ -3,6 +3,7 @@
 sudo dnf update
 sudo dnf install -y dnf-plugins-core
 sudo dnf copr enable flatcap/neomutt
+sudo yum groupinstall -y "Development Tools"
 
 # programs
 sudo dnf install -y \
@@ -61,6 +62,10 @@ sudo dnf install -y \
     pcmanfm \
     picom \
     pv \
+    pavucontrol \
+    pulseaudio \
+    pulseaudio-utils \
+    pipewire-pulseaudio \
     python3-neovim \
     python3-setuptools \
     python3-pip \
@@ -82,6 +87,7 @@ sudo dnf install -y \
     tor \
     torsocks \
     translate-shell \
+    tmux \
     unifont \
     unzip \
     vi \
@@ -100,6 +106,7 @@ sudo dnf install -y \
     xsetroot \
     xinput \
     xournal \
+    xset \
     mkfontdir \
     mkfontscale \
     youtube-dl \
@@ -107,6 +114,10 @@ sudo dnf install -y \
     zip \
     mpv \
     ffmpegthumbnailer
+
+# printing
+sudo dnf install -y \
+    cups cups-client cups-lpd cups-pdf
 
 # libs
 sudo dnf install -y \
@@ -122,7 +133,7 @@ sudo dnf install -y \
     xcb-util-devel \
     xcb-util-image-devel \
     libXft-devel \
-    libXinerama-devel \
+    libXinerama-devel
 
 
 # use xinitrc insetad of stupid .desktop files

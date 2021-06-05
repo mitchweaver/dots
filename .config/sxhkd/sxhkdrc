@@ -19,8 +19,6 @@ control + Print
     scrap
 alt + e
     pcmanfm
-super + e
-    pcmanfm
 alt + v
     stwrapper -c 'Vim Wiki' -e nvim -c VimwikiIndex
 alt + m
