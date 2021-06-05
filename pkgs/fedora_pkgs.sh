@@ -1,21 +1,16 @@
 #!/bin/sh
 
-# sudo yum update
+sudo dnf update
+sudo dnf install -y dnf-plugins-core
+sudo dnf copr enable flatcap/neomutt
 
-# fedora specific
-# sudo yum install \
-    # libcxxabi \
-    # libatomic
-
-    # xournal
-# generic
-#    mpv \
-    # neomutt \
-    # ffmpegthumbnailer \
-sudo yum install \
+# programs
+sudo dnf install -y \
     abook \
     arandr \
     aria2 \
+    autoconf \
+    automake \
     bluez \
     bluez-libs \
     bluez-tools \
@@ -25,11 +20,11 @@ sudo yum install \
     dnscrypt-proxy \
     dnsutils \
     dosbox \
+    docker \
+    docker-compose \
     exa \
     figlet \
     firefox \
-    freetype \
-    freetype-devel \
     gimp \
     git \
     gconf-editor \
@@ -50,6 +45,7 @@ sudo yum install \
     mupdf \
     neofetch \
     neovim \
+    neomutt \
     net-tools \
     notmuch \
     nmap \
@@ -69,10 +65,12 @@ sudo yum install \
     python3-setuptools \
     python3-pip \
     python3-pylint \
+    python3-docker \
     pylint \
     ranger \
     rdesktop \
     rsync \
+    rpm-build \
     ImageMagick \
     slop \
     speedtest-cli \
@@ -101,16 +99,34 @@ sudo yum install \
     xbacklight \
     xsetroot \
     xinput \
-    libXft-devel \
-    libXinerama-devel \
+    xournal \
     mkfontdir \
     mkfontscale \
     youtube-dl \
     zathura-pdf-mupdf \
-    zip
+    zip \
+    mpv \
+    ffmpegthumbnailer
+
+# libs
+sudo dnf install -y \
+    libcxx \
+    libcxx-devel \
+    libcxxabi \
+    libcxxabi-devel \
+    libatomic \
+    freetype \
+    freetype-devel \
+    pixman \
+    pixman-devel \
+    xcb-util-devel \
+    xcb-util-image-devel \
+    libXft-devel \
+    libXinerama-devel \
+
 
 # use xinitrc insetad of stupid .desktop files
-cat > /dev/stdout | sudo tee /usr/share/applications/xinitrc.desktop <<EOF
+sudo tee /usr/share/applications/xinitrc.desktop <<EOF
 [Desktop Entry]
 Encoding=UTF-8
 Name=xinitrc
@@ -120,6 +136,18 @@ TryExec=/home/mitch/.xinitrc
 Type=Application
 EOF
 
-# xwallpaper \
-# fedora-specific naming differences
-# yum install \
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+wget \
+    https://github.com/cjbassi/gotop/releases/download/3.0.0/gotop_3.0.0_linux_amd64.rpm \
+    -O /tmp/gotop.rpm
+sudo rpm -i /tmp/gotop.rpm
+rm /tmp/gotop.rpm
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+git clone https://github.com/stoeckmann/xwallpaper.git /tmp/xwallpaper
+cd /tmp/xwallpaper ||:
+./autogen.sh
+./configure
+make
+sudo make install
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
