@@ -133,7 +133,9 @@ sudo dnf install -y \
     libXft-devel \
     libXinerama-devel \
     libXrandr \
-    libXrandr-devel
+    libXrandr-devel \
+    libjpeg-devel \
+    turbojpeg-devel
 
 sudo dnf copr enable -y flatcap/neomutt
 sudo dnf install -y neomutt
