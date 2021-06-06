@@ -35,8 +35,13 @@ if [ -d "${SHELLRC_DIR}" ] ; then
     . "${SHELLRC_DIR}/movement.shellrc"
     . "${SHELLRC_DIR}/networking.shellrc"
 
-    . "${SHELLRC_DIR}/arch.shellrc"
-    . "${SHELLRC_DIR}/openbsd.shellrc"
+    if command -v dnf >/dev/null ; then
+        . "${SHELLRC_DIR}/redhat.shellrc"
+    elif command -v pacman >/dev/null ; then
+        . "${SHELLRC_DIR}/arch.shellrc"
+    elif command -v pkg_add >/dev/null ; then
+        . "${SHELLRC_DIR}/openbsd.shellrc"
+    fi
 
     . "${SHELLRC_DIR}/options.shellrc"
     . "${SHELLRC_DIR}/prompt.shellrc"

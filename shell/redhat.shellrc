@@ -1,0 +1,36 @@
+# fedora-specific aliases
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+pkg() {
+    [ "$1" ] || set -- h
+    flag=${1#-}
+    shift
+    case $flag in
+        h)
+            >&2 printf '%s\n' \
+                'pkg: [-a add] [-u update] [-d delete] [-s search] [-i info] [-f file] [-l list]'
+            ;;
+        a)
+            sudo dnf install -y "$@"
+            ;;
+        u)
+            sudo dnf update -y "$@"
+            ;;
+        d)
+            sudo dnf remove -y "$@"
+            ;;
+        s)
+            dnf search "$@"
+            ;;
+        i)
+            dnf info "$@"
+            ;;
+        f)
+            dnf provides "$@"
+            ;;
+        l)
+            dnf list "$@"
+    esac
+}
+
+

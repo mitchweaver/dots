@@ -1,7 +1,5 @@
-# pacman-specific aliases
+# arch-specific aliases
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-command -v pacman >/dev/null || return
 
 pkg() {
     [ "$1" ] || set -- h

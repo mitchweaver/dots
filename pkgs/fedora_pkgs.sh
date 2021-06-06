@@ -2,7 +2,6 @@
 
 sudo dnf update
 sudo dnf install -y dnf-plugins-core
-sudo dnf copr enable flatcap/neomutt
 sudo yum groupinstall -y "Development Tools"
 
 # programs
@@ -46,7 +45,6 @@ sudo dnf install -y \
     mupdf \
     neofetch \
     neovim \
-    neomutt \
     net-tools \
     notmuch \
     nmap \
@@ -133,11 +131,19 @@ sudo dnf install -y \
     xcb-util-devel \
     xcb-util-image-devel \
     libXft-devel \
-    libXinerama-devel
+    libXinerama-devel \
+    libXrandr \
+    libXrandr-devel
+
+sudo dnf copr enable -y flatcap/neomutt
+sudo dnf install -y neomutt
+
+sudo dnf copr enable -y luminoso/Signal-Desktop
+sudo dnf install -y signal-desktop
 
 
-# use xinitrc insetad of stupid .desktop files
-sudo tee /usr/share/applications/xinitrc.desktop <<EOF
+# use xinitrc because new linux is stupid
+cat <<EOF | sudo tee /usr/share/xsessions/xinitrc.desktop
 [Desktop Entry]
 Encoding=UTF-8
 Name=xinitrc
@@ -147,6 +153,8 @@ TryExec=/home/mitch/.xinitrc
 Type=Application
 EOF
 
+# in fact lets just not use display manager
+sudo systemctl disable gdm
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 wget \
@@ -160,5 +168,10 @@ cd /tmp/xwallpaper ||:
 ./autogen.sh
 ./configure
 make
-sudo make install
+sudo make PREFIX=/usr/local install
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+git clone https://github.com/dudik/herbe /tmp/herbe
+cd /tmp/herbe
+make
+sudo make PREFIX=/usr/local install
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

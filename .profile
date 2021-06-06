@@ -13,7 +13,7 @@ for dir in \
     security utility wrapper
 do
     if [ -d ~/bin/$dir ] ; then
-        export PATH=$PATH:${HOME}/bin/$dir
+        export PATH=${HOME}/bin/$dir:$PATH
     fi
 done
 
