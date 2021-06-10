@@ -99,6 +99,7 @@ sudo dnf install -y \
     xautolock \
     xdotool \
     xsel \
+    xclip \
     xterm \
     xbacklight \
     xsetroot \
@@ -177,3 +178,11 @@ cd /tmp/herbe
 make
 sudo make PREFIX=/usr/local install
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+# stop messing with my dns
+sudo rm /etc/resolv.conf
+cat <<EOF | sudo tee /etc/resolv.conf
+nameserver 9.9.9.9
+lookup file bind
+EOF
+sudo chattr +i /etc/resolv.conf
