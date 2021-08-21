@@ -67,7 +67,7 @@ addyt() { ytdlq -a "$1" ; }
 alias res='ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0'
 
 # removes audio from a video clip
-remove-audio() {
+removeaudio() {
     [ -f "$1" ] || return 1
     tmp=/tmp/$RANDOM.${1##.*}
     ffmpeg -i "$1" -c copy -an "$tmp" &&
@@ -247,3 +247,10 @@ amdproporfree() {
 }
 
 alias wayland_or_x11='loginctl show-session "$XDG_SESSION_ID" -p Type'
+
+fixpulseaudio() {
+    pkill -9 pulseaudio
+    systemctl enable --user pulseaudio
+    systemctl start --user pulseaudio || \
+    systemctl restart --user pulseaudio
+}

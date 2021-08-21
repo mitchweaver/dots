@@ -43,7 +43,7 @@ if has('nvim')
         autocmd BufNewFile,BufRead *rc setlocal commentstring=#\ %s
         autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
-    Plug 'unblevable/quick-scope'    " make f F t T ; and , useable 
+    " Plug 'unblevable/quick-scope'    " make f F t T ; and , useable 
     Plug 'godlygeek/tabular'         " tab alignment
     Plug 'sheerun/vim-polyglot'      " syntax highlighting
     Plug 'ekalinin/Dockerfile.vim'   " syntax for dockerfiles

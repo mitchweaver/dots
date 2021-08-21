@@ -16,12 +16,6 @@ if command -v dimensions >/dev/null ; then
     export DIMENSIONS="$(dimensions)"
 fi
 
-# if xrandr --nograb --current | grep 'HDMI2 connected' >/dev/null ; then
-#     xrandr --output HDMI2 --primary --auto --rotate normal \
-#         --output eDP1 --off
-#             # --auto --rotate normal --right-of HDMI2
-# fi
-
 case $(uname) in
     OpenBSD)
         case $(sysctl -n hw.version) in
@@ -71,24 +65,25 @@ case $(uname) in
         esac
 esac
 
-run weatherd -d
+# run weatherd -d
 # run crypto-ticker -d
 # run stock-ticker -d
 # run subs -d
 
-case $(uname) in
-    OpenBSD)
-        ;;
-    Linux)
-        pulseaudio --start
-esac
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-0 --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+if pgrep xfce >/dev/null ; then
+    volumeicon &
+fi
 
 if command -v dwm >/dev/null ; then
     background &
     run mmbar -d
-    run picom --experimental-backends -b
+    # run picom -b
     run xdimmer -p 20 -s 10 -b 1 -t 570
-    run xautolock -locker slock -time 15 -notify 15 -notifier notify-send
+    run xautolock -locker slock -time 30 -notify 15 -notifier notify-send
     unset -f run
     exec dwm
 fi

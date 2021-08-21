@@ -77,3 +77,6 @@ alt + bracketright
     mmt -f
 alt + bracketleft
     mmt -b
+
+shift + Insert
+    /home/mitch/src/personal/bin/autotyper.sh

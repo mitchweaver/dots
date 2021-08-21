@@ -2,6 +2,7 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 pkg() {
+    export TERM=xterm
     [ "$1" ] || set -- h
     flag=${1#-}
     shift
@@ -11,25 +12,26 @@ pkg() {
                 'pkg: [-a add] [-u update] [-d delete] [-s search] [-i info] [-f file] [-l list]'
             ;;
         a)
-            sudo dnf install -y "$@"
+            sudo apt install -y "$@"
             ;;
         u)
-            sudo dnf update -y "$@"
+            sudo apt update -y "$@"
+            sudo apt upgrade -y "$@"
             ;;
         d)
-            sudo dnf remove -y "$@"
+            sudo apt purge -y "$@"
             ;;
         s)
-            dnf search "$@"
+            apt search "$@"
             ;;
         i)
-            dnf info "$@"
+            apt info "$@"
             ;;
         f)
-            dnf provides "$@"
+            apt provides "$@"
             ;;
         l)
-            dnf list "$@"
+            apt list "$@"
     esac
 }
 

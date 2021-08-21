@@ -35,7 +35,9 @@ if [ -d "${SHELLRC_DIR}" ] ; then
     . "${SHELLRC_DIR}/movement.shellrc"
     . "${SHELLRC_DIR}/networking.shellrc"
 
-    if command -v dnf >/dev/null ; then
+    if command -v apt >/dev/null ; then
+        . "${SHELLRC_DIR}/debian.shellrc"
+    elif command -v dnf >/dev/null ; then
         . "${SHELLRC_DIR}/redhat.shellrc"
     elif command -v pacman >/dev/null ; then
         . "${SHELLRC_DIR}/arch.shellrc"

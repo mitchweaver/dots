@@ -136,7 +136,7 @@ sudo -u mitch yay -Sy \
     firefox-extension-privacy-redirect \
     firefox-extension-localcdn
 
-# tor-browser / tor-browser-arm
+# tor-browser
 
 if command -v oksh >/dev/null ; then
     chsh -s $(which oksh) mitch

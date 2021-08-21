@@ -1,18 +1,25 @@
-#!/bin/sh
+#!/bin/sh -ex
 
-sudo dnf update
-sudo dnf install -y dnf-plugins-core
-sudo yum groupinstall -y "Development Tools"
+# sudo apt update
+# sudo apt upgrade -y
+
+wget https://github.com/ogham/exa/releases/download/v0.10.0/exa-linux-x86_64-v0.10.0.zip -O /tmp/exa.zip
+
+cd /tmp
+sudo apt install -y unzip
+unzip exa.zip
+
+install -Dm0755 bin/exa ~/.local/bin/exa
 
 # programs
-sudo dnf install -y \
+sudo apt install -y \
+    build-essential \
     abook \
     arandr \
     aria2 \
     autoconf \
     automake \
     bluez \
-    bluez-libs \
     bluez-tools \
     clamav \
     curl \
@@ -23,14 +30,12 @@ sudo dnf install -y \
     docker \
     docker-compose \
     dstat \
-    exa \
     figlet \
     firefox \
     gimp \
     git \
     gconf-editor \
-    gnome-extensions-app \
-    go \
+    golang \
     gocr \
     htop \
     hugo \
@@ -49,39 +54,35 @@ sudo dnf install -y \
     net-tools \
     notmuch \
     nmap \
-    google-noto-cjk-fonts \
-    google-noto-emoji-fonts \
-    google-noto-emoji-color-fonts \
-    oksh \
+    fonts-noto-cjk \
+    fonts-noto-color-emoji \
     openvpn \
     openresolv \
     netcat \
     patch \
     p7zip \
     pcmanfm \
-    picom \
     pv \
     pavucontrol \
     pulseaudio \
     pulseaudio-utils \
-    pipewire-pulseaudio \
+    pipewire \
     python3-neovim \
     python3-setuptools \
     python3-pip \
-    python3-pylint \
+    pylint \
     python3-docker \
     pylint \
     ranger \
     rdesktop \
     rsync \
-    rpm-build \
-    ImageMagick \
+    imagemagick \
     slop \
     speedtest-cli \
     sxhkd \
     sxiv \
     syncthing \
-    terminus-fonts \
+    xfonts-terminus \
     toilet \
     tor \
     torsocks \
@@ -89,61 +90,52 @@ sudo dnf install -y \
     tmux \
     unifont \
     unzip \
-    vi \
+    nvi \
     w3m \
     wget \
     wireshark \
-    wireshark-cli \
     wireless-tools \
     x11vnc \
-    xbanish \
     xautolock \
     xdotool \
     xsel \
     xclip \
     xterm \
     xbacklight \
-    xsetroot \
     xinput \
     xournal \
-    xset \
-    mkfontdir \
-    mkfontscale \
+    x11-xserver-utils \
     youtube-dl \
-    zathura-pdf-mupdf \
+    zathura \
     zip \
     mpv \
     ffmpegthumbnailer
 
 # printing
-sudo dnf install -y \
-    cups cups-client cups-lpd cups-pdf
+sudo apt install -y \
+    cups cups-client cups-pdf
 
 # libs
-sudo dnf install -y \
-    libcxx \
-    libcxx-devel \
-    libcxxabi \
-    libcxxabi-devel \
-    libatomic \
-    freetype \
-    freetype-devel \
-    pixman \
-    pixman-devel \
-    xcb-util-devel \
-    xcb-util-image-devel \
-    libXft-devel \
-    libXinerama-devel \
-    libXrandr \
-    libXrandr-devel \
-    libjpeg-devel \
-    turbojpeg-devel
+sudo apt install -y \
+    libcxxtools-dev \
+    libatomic1 \
+    libfreetype-dev \
+    libpixman-1-dev \
+    libxcb-util-dev \
+    libxft-dev \
+    libxinerama-dev \
+    libxrandr-dev \
+    libjpeg-dev \
+    libturbojpeg \
+    ubuntu-restricted-extras \
+    libavcodec-extra
 
-sudo dnf copr enable -y flatcap/neomutt
-sudo dnf install -y neomutt
 
-sudo dnf copr enable -y luminoso/Signal-Desktop
-sudo dnf install -y signal-desktop
+# sudo dnf copr enable -y flatcap/neomutt
+# sudo dnf install -y neomutt
+
+# sudo dnf copr enable -y luminoso/Signal-Desktop
+# sudo dnf install -y signal-desktop
 
 
 # use xinitrc because new linux is stupid
@@ -158,15 +150,16 @@ Type=Application
 EOF
 
 # in fact lets just not use display manager
-sudo systemctl disable gdm
+###sudo systemctl disable gdm
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-wget \
-    https://github.com/cjbassi/gotop/releases/download/3.0.0/gotop_3.0.0_linux_amd64.rpm \
-    -O /tmp/gotop.rpm
-sudo rpm -i /tmp/gotop.rpm
-rm /tmp/gotop.rpm
+# wget \
+#     https://github.com/cjbassi/gotop/releases/download/3.0.0/gotop_3.0.0_linux_amd64.rpm \
+#     -O /tmp/gotop.rpm
+# sudo rpm -i /tmp/gotop.rpm
+# rm /tmp/gotop.rpm
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+sudo apt install -y libxcb-image0-dev
 git clone https://github.com/stoeckmann/xwallpaper.git /tmp/xwallpaper
 cd /tmp/xwallpaper ||:
 ./autogen.sh
@@ -174,10 +167,10 @@ cd /tmp/xwallpaper ||:
 make
 sudo make PREFIX=/usr/local install
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-git clone https://github.com/dudik/herbe /tmp/herbe
-cd /tmp/herbe
-make
-sudo make PREFIX=/usr/local install
+# git clone https://github.com/dudik/herbe /tmp/herbe
+# cd /tmp/herbe
+# make
+# sudo make PREFIX=/usr/local install
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # stop messing with my dns
@@ -187,3 +180,5 @@ nameserver 9.9.9.9
 lookup file bind
 EOF
 sudo chattr +i /etc/resolv.conf
+# oksh \
+# xbanish \

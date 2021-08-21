@@ -6,6 +6,7 @@ umask 022
 PATH=/bin:/sbin:$PATH
 PATH=/usr/bin:/usr/sbin:$PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
+PATH=/home/mitch/.bonsai/bin:$PATH
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 for dir in \
     application daemon devel ffmpeg \
@@ -27,8 +28,6 @@ export PATH
 
 export MANPATH="${HOME}/.local/share/man:$MANPATH"
 export FONTCONFIG_PATH=/etc/fonts
-
-export PYTHONOPTIMIZE=2
 
 export CFLAGS='-pipe -fstack-protector-strong -fexceptions'
 case $(uname) in
@@ -102,6 +101,8 @@ case $(uname) in
 esac
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# mouse dpi
+export DPI=400
 for editor in nvim vim vi ; do
     if command -v $editor >/dev/null ; then
         export EDITOR=$editor
