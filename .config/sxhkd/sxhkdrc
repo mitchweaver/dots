@@ -6,8 +6,9 @@ alt Return
     stwrapper
 alt + shift + Return
     stwrapper -t
+# brws
 alt + w
-    brws
+    chromium
 alt + r
     stwrapper -c ranger -e ranger
     # stwrapper -c ranger -e ranger --cmd='set viewmode multipane'
@@ -78,5 +79,5 @@ alt + bracketright
 alt + bracketleft
     mmt -b
 
-shift + Insert
+control + shift + Insert
     /home/mitch/src/personal/bin/autotyper.sh

@@ -1,15 +1,7 @@
 #!/bin/sh -ex
 
-# sudo apt update
-# sudo apt upgrade -y
-
-wget https://github.com/ogham/exa/releases/download/v0.10.0/exa-linux-x86_64-v0.10.0.zip -O /tmp/exa.zip
-
-cd /tmp
-sudo apt install -y unzip
-unzip exa.zip
-
-install -Dm0755 bin/exa ~/.local/bin/exa
+sudo apt update
+sudo apt upgrade -y
 
 # programs
 sudo apt install -y \
@@ -109,7 +101,8 @@ sudo apt install -y \
     zathura \
     zip \
     mpv \
-    ffmpegthumbnailer
+    ffmpegthumbnailer \
+    x11-utils
 
 # printing
 sudo apt install -y \
@@ -130,15 +123,43 @@ sudo apt install -y \
     ubuntu-restricted-extras \
     libavcodec-extra
 
+# -------- gaming ----------------
+# force evdev because libinput is AWFUL for
+# consistent mouse movement
+sudo apt install -y \
+    libevdev-dev \
+    libevdev2 \
+    python3-evdev \
+    xserver-xorg-input-evdev \
+    xserver-xorg-input-evdev-dev \
+    xserver-xorg-input-mouse
 
-# sudo dnf copr enable -y flatcap/neomutt
-# sudo dnf install -y neomutt
+sudo mkdir -p /etc/X11/xorg.conf.d
+cat > /etc/X11/xorg.conf.d/20-evdev.conf <<"EOF"
+Section "InputClass"
+    Identifier "evdev pointer catchall"
+    MatchIsPointer "on"
+    Driver "evdev"
+    MatchDevicePath "/dev/input/event*"
+    # 1 1 0 = no mouse acceleration
+    Option "AccelerationNumerator" "1"
+    Option "AccelerationDenominator" "1"
+    Option "AccelerationThreshold" "0"
+EndSection
+EOF
+# ---------------------------------
 
-# sudo dnf copr enable -y luminoso/Signal-Desktop
-# sudo dnf install -y signal-desktop
+if ! command -v exa >/dev/null ; then
+    wget https://github.com/ogham/exa/releases/download/v0.10.0/exa-linux-x86_64-v0.10.0.zip -O /tmp/exa.zip
+    cd /tmp
+    sudo apt install -y unzip
+    unzip exa.zip
+    install -Dm0755 bin/exa ~/.local/bin/exa
+fi
 
 
 # use xinitrc because new linux is stupid
+if [ ! -f /usr/share/xsessions/xinitrc.desktop ] ; then
 cat <<EOF | sudo tee /usr/share/xsessions/xinitrc.desktop
 [Desktop Entry]
 Encoding=UTF-8
@@ -148,17 +169,12 @@ Exec=/home/mitch/.xinitrc
 TryExec=/home/mitch/.xinitrc
 Type=Application
 EOF
+fi
 
 # in fact lets just not use display manager
-###sudo systemctl disable gdm
+sudo systemctl disable gdm
 
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# wget \
-#     https://github.com/cjbassi/gotop/releases/download/3.0.0/gotop_3.0.0_linux_amd64.rpm \
-#     -O /tmp/gotop.rpm
-# sudo rpm -i /tmp/gotop.rpm
-# rm /tmp/gotop.rpm
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+if ! command -v xwallpaper >/dev/null ; then
 sudo apt install -y libxcb-image0-dev
 git clone https://github.com/stoeckmann/xwallpaper.git /tmp/xwallpaper
 cd /tmp/xwallpaper ||:
@@ -166,19 +182,22 @@ cd /tmp/xwallpaper ||:
 ./configure
 make
 sudo make PREFIX=/usr/local install
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# git clone https://github.com/dudik/herbe /tmp/herbe
-# cd /tmp/herbe
-# make
-# sudo make PREFIX=/usr/local install
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+fi
+
+if ! command -v herbe >/dev/null ; then
+    git clone https://github.com/dudik/herbe /tmp/herbe
+    cd /tmp/herbe
+    make
+    sudo make PREFIX=/usr/local install
+fi
 
 # stop messing with my dns
-sudo rm /etc/resolv.conf
+sudo rm /etc/resolv.conf ||:
 cat <<EOF | sudo tee /etc/resolv.conf
 nameserver 9.9.9.9
+nameserver 8.8.8.8
 lookup file bind
 EOF
 sudo chattr +i /etc/resolv.conf
-# oksh \
-# xbanish \
+
+echo 'DONE!'

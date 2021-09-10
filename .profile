@@ -109,11 +109,14 @@ for editor in nvim vim vi ; do
         break
     fi
 done
-if command -v brws >/dev/null ; then
-    export BROWSER=brws
-else
-    export BROWSER=firefox
-fi
+
+export BROWSER=chromium
+# if command -v brws >/dev/null ; then
+#     export BROWSER=brws
+# else
+#     export BROWSER=firefox
+# fi
+
 export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
 export LESS='-QRsim +Gg'

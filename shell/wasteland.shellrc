@@ -254,3 +254,7 @@ fixpulseaudio() {
     systemctl start --user pulseaudio || \
     systemctl restart --user pulseaudio
 }
+
+mousexy() { 
+    while sleep 0.5; do clear ;xinput --query-state 9 | grep -E 'valuator(\[0\]|\[1\])'; done
+}

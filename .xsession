@@ -16,16 +16,16 @@ if command -v dimensions >/dev/null ; then
     export DIMENSIONS="$(dimensions)"
 fi
 
-case $(uname) in
-    OpenBSD)
-        case $(sysctl -n hw.version) in
-            ThinkPad*)
-                # enable scrolling with thinkpad trackpoint on OpenBSD
-                xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation' 1 &
-                xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Button' 2 &
-                xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Axes' 6 7 4 5 &
-        esac
-esac
+# case $(uname) in
+#     OpenBSD)
+#         case $(sysctl -n hw.version) in
+#             ThinkPad*)
+#                 # enable scrolling with thinkpad trackpoint on OpenBSD
+#                 xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation' 1 &
+#                 xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Button' 2 &
+#                 xinput set-prop /dev/wsmouse 'WS Pointer Wheel Emulation Axes' 6 7 4 5 &
+#         esac
+# esac
 
 # one-shot commands
 {
@@ -40,6 +40,11 @@ esac
     bright s 80
 } &
 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+##### allow line-in to be monitored
+# pacmd load-module module-loopback latency_msec=5
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
 # daemon commands
 run() {
     cmd=$1
@@ -52,31 +57,9 @@ run() {
 
 # run syncthing -no-browser
 run sxhkd
-# run xbanish
-run ytdlq -d
-run torrent-queue -d
-run maild -d
-
-case $(uname) in
-    OpenBSD)
-        case $(apm -m 2>/dev/null) in
-            0|1|2|3)
-                run batmon
-        esac
-esac
-
-# run weatherd -d
-# run crypto-ticker -d
-# run stock-ticker -d
-# run subs -d
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-0 --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-if pgrep xfce >/dev/null ; then
-    volumeicon &
-fi
+# run ytdlq -d
+# run torrent-queue -d
+# run maild -d
 
 if command -v dwm >/dev/null ; then
     background &
