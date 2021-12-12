@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Ghidra
-Comment=Software reverse engineering framework
-Icon=/home/<USER>/.local/share/icons/ghidra.svg
-Exec=ghidra
-Terminal=false
-Categories=Utility;
-StartupWMClass=Ghidra

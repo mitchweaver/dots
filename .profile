@@ -6,7 +6,6 @@ umask 022
 PATH=/bin:/sbin:$PATH
 PATH=/usr/bin:/usr/sbin:$PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
-PATH=/home/mitch/.bonsai/bin:$PATH
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 for dir in \
     application daemon devel ffmpeg \
@@ -18,9 +17,13 @@ do
     fi
 done
 
-if [ "$(uname)" = OpenBSD ] ; then
-    export PATH=${HOME}/bin/openbsd:$PATH
-fi
+case $(uname) in
+	OpenBSD)
+	    export PATH=${HOME}/bin/openbsd:$PATH
+        ;;
+    Darwin)
+        export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
+esac
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 PATH=${HOME}/.local/bin:$PATH
@@ -29,12 +32,11 @@ export PATH
 export MANPATH="${HOME}/.local/share/man:$MANPATH"
 export FONTCONFIG_PATH=/etc/fonts
 
-export CFLAGS='-pipe -fstack-protector-strong -fexceptions'
 case $(uname) in
-    OpenBSD)
+    OpenBSD|Darwin)
         export CC=clang cc=clang
         ;;
-    Linux)
+    Linux|FreeBSD)
         export CC=gcc cc=gcc
 esac
 
@@ -51,10 +53,10 @@ export XDG_OPEN=opn
 
 export XDG_CONFIG_HOME="${HOME}/.config" \
        XDG_DOWNLOAD_DIR="${HOME}/Downloads" \
-       XDG_DOCUMENTS_DIR="${HOME}/files" \
-       XDG_MUSIC_DIR="${HOME}/music" \
-       XDG_PICTURES_DIR="${HOME}/images" \
-       XDG_VIDEOS_DIR="${HOME}/videos"
+       XDG_DOCUMENTS_DIR="${HOME}/Documents" \
+       XDG_MUSIC_DIR="${HOME}/Music" \
+       XDG_PICTURES_DIR="${HOME}/Pictures" \
+       XDG_VIDEOS_DIR="${HOME}/Videos"
 
 export XDG_DESKTOP_DIR="${HOME}/Desktop"
 export XDG_DATA_HOME="${HOME}/.local"
@@ -75,9 +77,8 @@ export MENU_PROG=menu \
        CRYPTO_TICKER_INTERVAL=60 \
        STOCK_TICKER_INTERVAL=60
 
-export TRASH_DIR="${XDG_DATA_HOME}/Trash" \
-       TASKS_FILE="${XDG_DOCUMENTS_DIR}/tasks.txt" \
-       SUBS_FILE="${XDG_DOCUMENTS_DIR}/subs.txt" \
+#####export TRASH_DIR="${XDG_DATA_HOME}/Trash"
+export SUBS_FILE="${XDG_DOCUMENTS_DIR}/subs.txt" \
        TWITCH_STREAM_FILE="${XDG_DOCUMENTS_DIR}/twitch.txt" \
        YTDLQ_DIR="${HOME}/.ytdlq"
 
@@ -110,12 +111,13 @@ for editor in nvim vim vi ; do
     fi
 done
 
-export BROWSER=chromium
-# if command -v brws >/dev/null ; then
-#     export BROWSER=brws
-# else
-#     export BROWSER=firefox
-# fi
+case $(uname) in
+	Linux|OpenBSD)
+		export BROWSER=firefox
+		;;
+	Darwin)
+		export BROWSER=/opt/homebrew/Caskroom/firefox-nightly
+esac
 
 export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
@@ -142,17 +144,14 @@ if [ -f ~/.config/neomutt/password ] ; then
 fi
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-mkdir -p "/tmp/$USER"
-if [ -d ~/tmp ] ; then
-    rm -rf ~/tmp
-fi
-if [ "$(readlink ~/tmp)" != "/tmp/$USER" ] ; then
-    ln -sf "/tmp/$USER" ~/tmp
-fi
-# mkdir -p ~/tmp/.cache
-# if [ "$(readlink ~/.cache)" != ~/tmp/.cache ] ; then
-#     if [ -d ~/.cache ] ; then
-#         rm -r ~/.cache
-#     fi
-#     ln -sf ~/tmp/.cache ~/.cache
-# fi
+
+# ------------- MacOS ------------------
+# don't print last login on every terminal
+:> ~/.hushlogin
+
+# stop creating junk everywhere, especially remotely
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+
+# refresh ~/tmp
+rm -r ~/tmp
+mkdir -p ~/tmp

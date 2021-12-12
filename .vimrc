@@ -178,7 +178,7 @@ if has('nvim')
     Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
     Plug 'sainnhe/everforest' " theme
     Plug 'logico/typewriter-vim' " theme
-    Plug 'dylanaraps/wal.vim' " if using pywal
+"    Plug 'dylanaraps/wal.vim' " if using pywal
 
     Plug 'gyim/vim-boxdraw' " the coolest plugin you never knew you needed
         " NOTE: this is toggled by ']ov' if you tpope's vim-unimpaired
@@ -210,7 +210,7 @@ if has('nvim')
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 
         " if using pywal:
-        colorscheme wal
+        " colorscheme wal
 
         " make sign column same color as terminal background
         hi signColumn ctermbg=NONE
@@ -586,3 +586,21 @@ nnoremap <silent><C-j> :call WinMove('j')<cr>
 nnoremap <silent><C-k> :call WinMove('k')<cr>
 nnoremap <silent><C-l> :call WinMove('l')<cr>
 set fillchars+=vert:│
+
+
+
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" make vim start up faster on macos
+" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+let g:clipboard = {
+  \ 'name': 'pbcopy',
+  \ 'copy': {
+  \    '+': 'pbcopy',
+  \    '*': 'pbcopy',
+  \  },
+  \ 'paste': {
+  \    '+': 'pbpaste',
+  \    '*': 'pbpaste',
+  \ },
+  \ 'cache_enabled': 0,
+  \ }
