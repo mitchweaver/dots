@@ -1,6 +1,8 @@
 # STOP LEAVING JUNK EVERYWHERE WHAT ARE YOU DOING TIM COOK
 [ -f .DS_Store ] && rm .DS_Store 2>/dev/null ||:
 
+alias cleanup='find . -type f -name .DS_Store -delete 2>/dev/null'
+
 alias pkg=brew
 
 brew() {
@@ -8,8 +10,8 @@ brew() {
     arg=$1
     shift
     case ${arg#-} in
-        a|add)
-            command brew install $@
+        a|add|install)
+            command brew install --no-quarantine $@
             ;;
         d|del)
             command brew remove $@
@@ -27,7 +29,10 @@ brew() {
         l|list)
             command brew list $@
             ;;
+        c|cleanup)
+            brew cleanup "$@"
+            ;;
         *)
-            >&2 echo 'brew: [a,d,u,s,i,l]'
+            >&2 echo 'brew: [a,d,u,s,i,l,c]'
     esac
 }

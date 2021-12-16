@@ -23,6 +23,14 @@ case $(uname) in
         ;;
     Darwin)
         export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
+        # gnu coreutils
+        export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
+        # gnu sed
+        export PATH=/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH
+        # gnu find + xargs
+        export PATH=/opt/homebrew/opt/findutils/libexec/gnubin:$PATH
+        # gnu grep
+        export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
 esac
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -104,12 +112,7 @@ esac
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # mouse dpi
 export DPI=400
-for editor in nvim vim vi ; do
-    if command -v $editor >/dev/null ; then
-        export EDITOR=$editor
-        break
-    fi
-done
+export EDITOR=nvim
 
 case $(uname) in
 	Linux|OpenBSD)
@@ -139,9 +142,6 @@ if [ -d ~/.ssh ] ; then
         chmod 0600 ~/.ssh/authorized_keys
     fi
 fi
-if [ -f ~/.config/neomutt/password ] ; then
-    chmod 0400 ~/.config/neomutt/password
-fi
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -152,6 +152,13 @@ fi
 # stop creating junk everywhere, especially remotely
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
 
-# refresh ~/tmp
-rm -r ~/tmp
+# allow time machine to backup to samba/nfs
+defaults write com.apple.systempreferences TMShowUnsupportedNetworkVolumes 1
+
+# save to disk (not iCloud) by default
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# automatically quit printer app once the print jobs complete
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
 mkdir -p ~/tmp
