@@ -1,4 +1,3 @@
-[MASTER]
 ignore=third_party
 jobs=2
 disable=
