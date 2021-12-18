@@ -52,6 +52,7 @@ if has('nvim')
     Plug 'chrisbra/unicode.vim'      " easily search and copy unicode chars
     Plug 'ryanoasis/vim-devicons'    " adds icons to plugins
     Plug 'psliwka/vim-smoothie'      " smooth scrolling done right
+    Plug 'https://github.com/farmergreg/vim-lastplace' " remember last place in files
 
     Plug 'preservim/vim-wordy'       " make me write gooder
         noremap <silent><F8> :<C-u>NextWordy<cr>
@@ -184,13 +185,6 @@ if has('nvim')
         " NOTE: this is toggled by ']ov' if you tpope's vim-unimpaired
         " set virtualedit+=all " allows you to select empty space in visual
 
-    " Plug 'skywind3000/vim-keysound'
-    "     let g:keysound_enable = 1
-    "     let g:keysound_theme = "default"
-    "     " let g:keysound_theme = "typewriter"
-    "     let g:keysound_py_version = 3
-    "     let g:keysound_volume = 1000 " 0-1000
-
     call plug#end()
     filetype indent plugin on
 
@@ -204,16 +198,14 @@ if has('nvim')
         " ----- If not using pywal: ---------------
         " colorscheme onehalfdark
         " colorscheme typewriter
+        colorscheme everforest
         " set background=light
         " set background=dark
         " set t_Co=256 " fix terminal colors
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 
-        " if using pywal:
-        " colorscheme wal
-
         " make sign column same color as terminal background
-        hi signColumn ctermbg=NONE
+        """""" hi signColumn ctermbg=NONE
     endif
 endif
 
@@ -381,7 +373,6 @@ set autoread      " reload files if changed on disk
 
 " b <num> = go to $buffer
 nnoremap <Leader>b :b 
-
 map <silent><C-d> :bd<cr>
 map <silent>tk :bnext<CR>
 map <silent>tj :bprev<CR>
@@ -439,11 +430,6 @@ noremap <silent><C-i> 10zh
 " print a 60-char line separator, commented
 map <C-s> 30i-*<ESC>:Commentary<CR>
 " map <C-s> 30i-/<ESC>:Commentary<CR>
-
-" conflicts with st/tabbed:
-map  <silent><c-=> <nop>
-map  <silent><c--> <nop>
-" map  <silent><C-w> <nop>
 
 augroup resCur "reopen vim at previous cursor point
   autocmd!
@@ -581,13 +567,38 @@ func! WinMove(key)
     endif
 endfu
 
-nnoremap <silent><C-h> :call WinMove('h')<cr>
-nnoremap <silent><C-j> :call WinMove('j')<cr>
-nnoremap <silent><C-k> :call WinMove('k')<cr>
-nnoremap <silent><C-l> :call WinMove('l')<cr>
+nnoremap <silent><C-h> :call WinMove('h')<CR>
+nnoremap <silent><C-j> :call WinMove('j')<CR>
+nnoremap <silent><C-k> :call WinMove('k')<CR>
+nnoremap <silent><C-l> :call WinMove('l')<CR>
 set fillchars+=vert:│
 
+" open new split panes to right and bottom
+" feels more natural than vim’s default
+set splitbelow
+set splitright
 
+" resize split vertically
+nnoremap <silent><C--> :resize -5<CR>
+nnoremap <silent><C-=> :resize +5<CR>
+
+" resize split horizontally
+nnoremap <silent><C-[> :vertical resize +5<CR>
+nnoremap <silent><C-]> :vertical resize -5<CR>
+
+" allow leaving terminal mode to move between splits (LIFESAVER!)
+tnoremap <silent><C-m> <C-\><C-n>
+
+" start insert automatically when entering terminal
+" (so you don't have to press 'i'), only works with neovim
+if has('nvim')
+    augroup nvim_terminal | au!
+        " entering terminal buffer for the first time
+        autocmd TermEnter term://* startinsert
+        " switching to terminal window/buffer
+        autocmd BufEnter term://* startinsert
+    augroup end
+endif
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " make vim start up faster on macos

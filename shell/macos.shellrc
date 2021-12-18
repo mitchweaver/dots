@@ -15,6 +15,7 @@ brew() {
             ;;
         d|del)
             command brew remove $@
+            command brew cleanup
             ;;
         u|update|upgrade)
             command brew update $@ &&
@@ -30,9 +31,9 @@ brew() {
             command brew list $@
             ;;
         c|cleanup)
-            brew cleanup "$@"
+            command brew cleanup $@
             ;;
         *)
-            >&2 echo 'brew: [a,d,u,s,i,l,c]'
+            command brew $arg $@
     esac
 }
