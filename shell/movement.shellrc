@@ -39,7 +39,7 @@ alias gM="_g ${XDG_PICTURES_DIR}/memes"
 alias gN='_g /mnt'
 
 alias gT="_g /tmp"
-alias gV='_g /var'
+alias gV='_g /Volumes'
 alias gss='_g ${HOME}/src/suckless'
 alias gsd='_g ${HOME}/src/dots'
 alias gsb='_g ${HOME}/src/bonsai'

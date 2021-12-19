@@ -43,7 +43,9 @@ if has('nvim')
         autocmd BufNewFile,BufRead *rc setlocal commentstring=#\ %s
         autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
-    " Plug 'unblevable/quick-scope'    " make f F t T ; and , useable 
+    Plug 'unblevable/quick-scope'    " make f F t T ; and , useable 
+        " trigger highlight only with 'f' and 'F'
+        let g:qs_highlight_on_keys = ['f', 'F']
     Plug 'godlygeek/tabular'         " tab alignment
     Plug 'sheerun/vim-polyglot'      " syntax highlighting
     Plug 'ekalinin/Dockerfile.vim'   " syntax for dockerfiles
@@ -179,7 +181,6 @@ if has('nvim')
     Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
     Plug 'sainnhe/everforest' " theme
     Plug 'logico/typewriter-vim' " theme
-"    Plug 'dylanaraps/wal.vim' " if using pywal
 
     Plug 'gyim/vim-boxdraw' " the coolest plugin you never knew you needed
         " NOTE: this is toggled by ']ov' if you tpope's vim-unimpaired
@@ -195,7 +196,6 @@ if has('nvim')
 
         " NOTE: colorschemes must be set after loading plugins
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
-        " ----- If not using pywal: ---------------
         " colorscheme onehalfdark
         " colorscheme typewriter
         colorscheme everforest
@@ -405,10 +405,12 @@ nmap <leader>s :%s//g<Left><Left>
 " ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 " execute line as shell command and replace it with output
-" notice: capital W
+" notice: capital Wk
 noremap <leader>W !!sh<cr>
+
 " pipe line to fmt and replace current line
-noremap F !!fmt<cr>
+"""""""TODO: this interferes with quickscope, fix later noremap <F> !!fmt<cr>
+"
 " prepend '> ' to lines as if to block quote
 noremap Q :norm 0i> <esc>$
 
@@ -601,17 +603,20 @@ if has('nvim')
 endif
 
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-" make vim start up faster on macos
+" make vim start up faster on macos by hardcoding
+" the clipboard tool
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-let g:clipboard = {
-  \ 'name': 'pbcopy',
-  \ 'copy': {
-  \    '+': 'pbcopy',
-  \    '*': 'pbcopy',
-  \  },
-  \ 'paste': {
-  \    '+': 'pbpaste',
-  \    '*': 'pbpaste',
-  \ },
-  \ 'cache_enabled': 0,
-  \ }
+if has('macunix')
+    let g:clipboard = {
+    \ 'name': 'pbcopy',
+    \ 'copy': {
+    \    '+': 'pbcopy',
+    \    '*': 'pbcopy',
+    \  },
+    \ 'paste': {
+    \    '+': 'pbpaste',
+    \    '*': 'pbpaste',
+    \ },
+    \ 'cache_enabled': 0,
+    \ }
+endif
