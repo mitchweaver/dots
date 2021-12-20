@@ -8,9 +8,7 @@ PATH=/usr/bin:/usr/sbin:$PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 for dir in \
-    application daemon devel ffmpeg \
-    media misc net non-shell rice \
-    security utility wrapper
+    bin non-shell
 do
     if [ -d ~/bin/$dir ] ; then
         export PATH=${HOME}/bin/$dir:$PATH

@@ -589,7 +589,7 @@ nnoremap <silent><C-[> :vertical resize +5<CR>
 nnoremap <silent><C-]> :vertical resize -5<CR>
 
 " allow leaving terminal mode to move between splits (LIFESAVER!)
-tnoremap <silent><C-m> <C-\><C-n>
+tnoremap <silent><C-\> <C-\><C-n>
 
 " start insert automatically when entering terminal
 " (so you don't have to press 'i'), only works with neovim

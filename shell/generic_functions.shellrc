@@ -32,15 +32,6 @@ cpcd() {
 # hack - print directories with full path name
 lsd() { printf '%s\n' "$*"/*/ ; }
 
-# du for humans, note: -L for links
-d() {
-    if [ -d "${1:-.}" ] ; then
-        du -ahd 1 "${1:-.}" 2>/dev/null | sort -rh | head -n 20
-    elif [ -f "$1" ] ; then
-        du -ah "$1"
-    fi
-}
-
 # squelch output of command
 silent() { eval "$* >/dev/null 2>&1" ; }
 
@@ -58,15 +49,6 @@ psgrep() {
     ps -auxww | grep -i -- "$*" | grep -iv -- "grep $*"
 }
 alias psg=psgrep
-
-# print the parent process name of a given pid
-getparent() {
-    if ! ps -p "${1:-0}" 2>/dev/null ; then
-        >&2 echo 'Usage: getparent [pid]'
-        return 1
-    fi
-    ps -p "$1" -o ppid=
-}
 
 # moves a file, making dir if needed
 mkmv() {

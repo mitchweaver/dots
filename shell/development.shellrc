@@ -53,7 +53,8 @@ v() {
     case ${EDITOR:-vi} in
         # terminal editor
         vi|vim|nvim)
-            $EDITOR -n -- "$@"
+            $EDITOR -n -- "$@" &&
+            clear
             ;;
         *)
             # graphical editor

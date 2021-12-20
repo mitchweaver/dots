@@ -77,17 +77,6 @@ removeaudio() {
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # imagemagick
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-png2jpg() {
-    for i ; do
-        [ -f "$i" ] || continue
-        case $i in
-            *.png)
-                convert "$i" "${i%png}"jpg || exit 1
-                jpegoptim -s "${i%png}"jpg || exit 1
-                /bin/rm "$i"
-        esac
-    done
-}
 
 jpg() {
     if [ -f "$1" ] ; then
