@@ -91,4 +91,7 @@ disable=
     invalid-name,
     bad-whitespace,
     consider-using-enumerate,
-    consider-using-f-string
+    consider-using-f-string,
+    line-too-long,
+    protected-access,
+    no-self-use
