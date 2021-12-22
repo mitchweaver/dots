@@ -20,6 +20,7 @@ int main() {
     printf("%s\n", "hi");
     return 0;
 }
+
 EOF
 }
 
@@ -34,13 +35,13 @@ cat >"${1:-hello.py}"<<"EOF"
 # [automatically generated template text]
 #
 
-
 def main():
     print("hi")
 
 
 if __name__ == "__main__":
     main()
+
 EOF
 chmod +x "${1:-hello.py}"
 }
@@ -66,6 +67,7 @@ main() {
 }
 
 main "$@"
+
 EOF
 chmod +x "${1:-hello.sh}"
 }
@@ -89,6 +91,7 @@ uninstall:
 
 test:
 	:
+
 EOF
 }
 
@@ -109,5 +112,6 @@ cat >"${1:-index.html}"<<"EOF"
 
     </body>
 </html>
+
 EOF
 }

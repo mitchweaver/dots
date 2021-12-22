@@ -18,7 +18,7 @@ brew() {
             command brew cleanup
             ;;
         u|update|upgrade)
-            command brew update $@ &&
+            command brew update $@
             command brew upgrade $@
             ;;
         s|search)

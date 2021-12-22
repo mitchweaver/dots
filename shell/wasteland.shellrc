@@ -130,9 +130,6 @@ mount_sdcard() {
 # remove site block in /etc/hosts
 unhosts() { for i ; do sudo sed -i "s/.*$i.*//g" /etc/hosts ; done ; }
 
-alias py2=python2
-alias {py3,py,python}=python3
-
 alias ytm='yt -m'
 
 alias sshcfg='v ~/.ssh/config'
