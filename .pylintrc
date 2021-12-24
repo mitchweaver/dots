@@ -94,4 +94,8 @@ disable=
     consider-using-f-string,
     line-too-long,
     protected-access,
-    no-self-use
+    no-self-use,
+    unused-import,
+    wrong-import-order,
+    disallowed-name,
+    unused-argument
