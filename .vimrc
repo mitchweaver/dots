@@ -82,6 +82,7 @@ if has('nvim')
         " let g:VM_maps["Select Cursor Up"]   = '<M-C-Up>'
 
     Plug 'airblade/vim-gitgutter' " git diffing along the left side
+        let g:gitgutter_enabled = 0 " disable on startup, toggle with leader+g
         let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
         let g:gitgutter_realtime = 0 " only run gitgutter on save
         let g:gitgutter_earer = 1
@@ -178,13 +179,14 @@ if has('nvim')
         let g:NERDTreeDirArrowExpandable = '▸'
         let g:NERDTreeDirArrowCollapsible = '▾'
 
-    Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
-    Plug 'sainnhe/everforest' " theme
-    Plug 'logico/typewriter-vim' " theme
-
     Plug 'gyim/vim-boxdraw' " the coolest plugin you never knew you needed
         " NOTE: this is toggled by ']ov' if you tpope's vim-unimpaired
         " set virtualedit+=all " allows you to select empty space in visual
+
+    Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
+    Plug 'sainnhe/everforest' " theme
+    Plug 'logico/typewriter-vim' " theme
+    Plug 'https://github.com/NLKNguyen/papercolor-theme' " theme
 
     call plug#end()
     filetype indent plugin on
@@ -198,14 +200,14 @@ if has('nvim')
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
         " colorscheme onehalfdark
         " colorscheme typewriter
-        colorscheme everforest
+        " colorscheme everforest
+        colorscheme papercolor
         " set background=light
-        " set background=dark
-        " set t_Co=256 " fix terminal colors
+        set background=dark
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 
         " make sign column same color as terminal background
-        """""" hi signColumn ctermbg=NONE
+        hi signColumn ctermbg=NONE
     endif
 endif
 
