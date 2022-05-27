@@ -1,5 +1,0 @@
-up
--inet6
-lladdr random
-join MY_SSID wpakey MY_SECRET_PASS
-dhcp
