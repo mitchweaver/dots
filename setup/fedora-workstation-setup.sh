@@ -42,7 +42,13 @@ dnf install -y dnf-plugins-core
 # ===================================================================
 dnf install -y \
 	gnome-tweaks gconf-editor gnome-extensions-app \
-	gnome-shell-extension-appindicator
+	gnome-shell-extension-appindicator \
+	gnome-shell-extension-caffeine \
+	gnome-shell-extension-dash-to-dock \
+	gnome-shell-extension-user-theme \
+	gnome-shell-extension-no-overview \
+	gnome-shell-extension-frippery-move-clock
+
 
 # ===================================================================
 # packages
