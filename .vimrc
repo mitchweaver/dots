@@ -200,8 +200,8 @@ if has('nvim')
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
         " colorscheme onehalfdark
         " colorscheme typewriter
-        " colorscheme everforest
-        colorscheme papercolor
+        colorscheme everforest
+        " colorscheme papercolor
         " set background=light
         set background=dark
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
@@ -602,23 +602,4 @@ if has('nvim')
         " switching to terminal window/buffer
         autocmd BufEnter term://* startinsert
     augroup end
-endif
-
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-" make vim start up faster on macos by hardcoding
-" the clipboard tool
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-if has('macunix')
-    let g:clipboard = {
-    \ 'name': 'pbcopy',
-    \ 'copy': {
-    \    '+': 'pbcopy',
-    \    '*': 'pbcopy',
-    \  },
-    \ 'paste': {
-    \    '+': 'pbpaste',
-    \    '*': 'pbpaste',
-    \ },
-    \ 'cache_enabled': 0,
-    \ }
 endif
