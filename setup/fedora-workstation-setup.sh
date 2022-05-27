@@ -135,16 +135,19 @@ dnf install -y pipewire-pulseaudio pulseaudio-utils pavucontrol
 # ===================================================================
 # user space
 # ===================================================================
-dnf install -y ranger
-dnf install -y firefox
-dnf install -y torbrowser-launcher
-dnf install -y mpv
-dnf install -y libreoffice
-dnf install -y obs-studio
-dnf install -y shotcut
-dnf install -y zathura-pdf-mupdf
-dnf install -y xournal
-dnf install -y discord
+dnf install -y \
+	ranger \
+	firefox \
+	torbrowser-launcher \
+	mpv \
+	libreoffice \
+	obs-studio \
+	shotcut \
+	zathura-pdf-mupdf \
+	xournal \
+	discord \
+	qbittorrent
+
 dnf install -y lpf-spotify-client
 lpf update
 rpm -i /root/rpmbuild/RPMS/x86_64/spotify-client*.rpm
