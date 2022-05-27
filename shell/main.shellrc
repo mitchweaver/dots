@@ -33,8 +33,8 @@ if [ -d "${SHELLRC_DIR}" ] ; then
     . "${SHELLRC_DIR}/prompt.shellrc"
     . "${SHELLRC_DIR}/templates.shellrc"
     . "${SHELLRC_DIR}/wasteland.shellrc"
-    if type macbinary >/dev/null ; then
-        . "${SHELLRC_DIR}/macos.shellrc"
+    if command -v dnf >/dev/null 2>&1 ; then
+        . "${SHELLRC_DIR}/redhat.shellrc"
     fi
     unset SHELLRC_DIR
 fi
