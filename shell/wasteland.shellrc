@@ -48,6 +48,8 @@ weather() {
         if [ "$loc" ] ; then
             curl -Ls https://wttr.in/"$loc"?u0TQ
         fi
+    else
+        >&2 echo 'Need to set "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}"'
     fi
 }
 
@@ -57,6 +59,8 @@ forecast() {
         if [ "$loc" ] ; then
             curl -Ls https://wttr.in/"$loc"?u | tail -n 33 | head -n 31
         fi
+    else
+        >&2 echo 'Need to set "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}"'
     fi
 }
 

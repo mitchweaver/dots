@@ -1,0 +1,2 @@
+# enable tap to click on laptop touchpads
+wsconsctl mouse.tp.tapping=1
