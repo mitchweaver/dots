@@ -88,10 +88,20 @@ dnf install -y \
 dnf install -y \
 	mkfontdir \
 	mkfontscale \
-	terminus-fonts unifont \
+	terminus-fonts \
+	unifont \
+	fira-code-fonts \
+	levien-inconsolata-fonts \
 	google-noto-cjk-fonts \
 	google-noto-emoji-fonts \
-	google-noto-emoji-color-fonts
+	google-noto-emoji-color-fonts \
+	google-roboto-mono-fonts \
+	google-roboto-fonts \
+	roboto-fontface-fonts \
+	ibm-plex-mono-fonts \
+	dejavu-sans-fonts \
+	dejavu-sans-mono-fonts
+
 
 dnf install -y cabextract xorg-x11-font-utils fontconfig
 rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
