@@ -53,6 +53,7 @@ dnf install -y \
 	git git-lfs make neovim python3-neovim jq \
 	patch tmux docker docker-compose pylint \
 	ShellCheck autoconf automake oksh \
+	gawk gdb ruby perl \
 	python3-setuptools \
 	python3-pip \
 	python3-pylint \
@@ -69,7 +70,7 @@ systemctl enable fail2ban
 systemctl start fail2ban
 
 # misc
-dnf install -y pv neofetch slop translate-shell exa 
+dnf install -y pv tree neofetch slop translate-shell exa 
 
 # networking
 dnf install -y \
@@ -115,12 +116,16 @@ dnf install -y pipewire-pulseaudio pulseaudio-utils pavucontrol
 # ===================================================================
 dnf install -y ranger
 dnf install -y firefox
+dnf install -y torbrowser-launcher
+dnf install -y mpv
 dnf install -y libreoffice
 dnf install -y obs-studio
-dnf install -y mpv
+dnf install -y shotcut
 dnf install -y zathura-pdf-mupdf
 dnf install -y xournal
-
+dnf install -y discord
+dnf install -y lpf-spotify-client
+lpf update
 
 # ===================================================================
 # libraries
@@ -154,16 +159,22 @@ dnf install -y \
 # ===================================================================
 # non-repo packages
 # ===================================================================
-if ! type gotop >/dev/null 2>&1 ; then
+if ! command -v gotop >/dev/null 2>&1 ; then
 	wget 'https://github.com/xxxserxxx/gotop/releases/download/v4.1.3/gotop_v4.1.3_linux_amd64.rpm' -O /tmp/gotop.rpm
 	rpm -i /tmp/gotop.rpm
 	rm -f /tmp/gotop.rpm
 fi
 
-if ! type bitwarden >/dev/null 2>&1 ; then
+if ! command -v bitwarden >/dev/null 2>&1 ; then
 	wget 'https://vault.bitwarden.com/download/?app=desktop&platform=linux&variant=rpm' -O  /tmp/bitwarden.rpm
 	rpm -i /tmp/bitwarden.rpm
 	rm -f /tmp/bitwarden.rpm
+fi
+
+if ! command -v pfetch >/dev/null 2>&1 ; then
+	git clone https://github.com/dylanaraps/pfetch /tmp/pfetch
+	sudo install -D -m 0755 /tmp/pfetch/pfetch /usr/local/bin/pfetch
+	rm -rf /tmp/pfetch
 fi
 
 # ===================================================================
