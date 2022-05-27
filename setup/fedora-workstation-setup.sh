@@ -126,6 +126,7 @@ dnf install -y xournal
 dnf install -y discord
 dnf install -y lpf-spotify-client
 lpf update
+rpm -i /root/rpmbuild/RPMS/x86_64/spotify-client*.rpm
 
 # ===================================================================
 # libraries
