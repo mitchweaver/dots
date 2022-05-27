@@ -146,7 +146,8 @@ dnf install -y \
 	zathura-pdf-mupdf \
 	xournal \
 	discord \
-	qbittorrent
+	qbittorrent \
+	evolution
 
 dnf install -y lpf-spotify-client
 lpf update
@@ -200,6 +201,17 @@ if ! command -v pfetch >/dev/null 2>&1 ; then
 	git clone https://github.com/dylanaraps/pfetch /tmp/pfetch
 	sudo install -D -m 0755 /tmp/pfetch/pfetch /usr/local/bin/pfetch
 	rm -rf /tmp/pfetch
+fi
+
+# ===================================================================
+# snaps
+# ===================================================================
+if ! command -v snap >/dev/null 2>&1 || ! [ -e /snap ] ; then
+	dnf install -y snapd
+	ln -s /var/lib/snapd/snap /snap
+fi
+if ! command -v tradingview >/dev/null 2>&1 ; then
+	snap install tradingview
 fi
 
 # ===================================================================
