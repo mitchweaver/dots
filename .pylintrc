@@ -106,4 +106,7 @@ disable=
     unspecified-encoding,
     import-outside-toplevel,
     consider-using-with,
-    consider-using-in
+    consider-using-in,
+    wildcard-import,
+    unused-wildcard-import,
+    useless-super-delegation
