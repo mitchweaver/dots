@@ -65,6 +65,8 @@ dnf install -y \
 	python3-pylint \
 	python3-docker
 
+pip3 install --upgrade pip
+
 # archive
 dnf install -y pigz zip unzip unrar p7zip
 
@@ -76,7 +78,8 @@ systemctl enable fail2ban
 systemctl start fail2ban
 
 # misc
-dnf install -y pv tree neofetch slop translate-shell exa 
+dnf install -y pv tree neofetch slop translate-shell exa \
+	xsel xclip
 
 # networking
 dnf install -y \
@@ -88,7 +91,7 @@ dnf install -y \
 # media
 dnf install -y \
 	gimp ImageMagick ffmpeg ffmpegthumbnailer youtube-dl \
-	jpegoptim 
+	jpegoptim gyazo
 
 # fonts
 dnf install -y \
@@ -171,7 +174,7 @@ dnf install -y \
 # ===================================================================
 # xorg stuff (not applicable on wayland)
 # ===================================================================
-#######    xbanish xautolock xdotool xsel xclip xterm xbacklight 
+#######    xbanish xautolock xdotool xterm xbacklight 
 #######    xsetroot xinput xset sxhkd arandr picom
 
 
