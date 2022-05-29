@@ -47,8 +47,8 @@ dnf install -y \
 	gnome-shell-extension-dash-to-dock \
 	gnome-shell-extension-user-theme \
 	gnome-shell-extension-no-overview \
-	gnome-shell-extension-frippery-move-clock
-
+	gnome-shell-extension-frippery-move-clock \
+	gnome-shell-theme-flat-remix
 
 # ===================================================================
 # packages
@@ -79,7 +79,7 @@ systemctl start fail2ban
 
 # misc
 dnf install -y pv tree neofetch slop translate-shell exa \
-	xsel xclip
+	xsel xclip xset
 
 # networking
 dnf install -y \
@@ -154,6 +154,12 @@ lpf update
 rpm -i /root/rpmbuild/RPMS/x86_64/spotify-client*.rpm
 
 # ===================================================================
+# devices
+# ===================================================================
+# for logitech mice dpi control
+dnf install -y libratbag-ratbagd
+
+# ===================================================================
 # libraries
 # ===================================================================
 dnf install -y \
@@ -179,7 +185,7 @@ dnf install -y \
 # xorg stuff (not applicable on wayland)
 # ===================================================================
 #######    xbanish xautolock xdotool xterm xbacklight 
-#######    xsetroot xinput xset sxhkd arandr picom
+#######    xsetroot xinput sxhkd arandr picom
 
 
 # ===================================================================

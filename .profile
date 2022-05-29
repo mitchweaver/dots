@@ -81,6 +81,7 @@ done
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 export EDITOR=nvim
 export BROWSER=firefox
+export MOZ_ENABLE_WAYLAND=1
 export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
 export LESS='-QRsim +Gg'

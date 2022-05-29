@@ -10,8 +10,10 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # I hate these stupid dirs and every program that creates them.
-# rmdir Desktop Public Templates Documents Pictures \
-#     Videos Documents Music 2>/dev/null ||:
+rmdir Public Templates  Videos Music 2>/dev/null ||:
+#####Desktop 
+######Documents
+#######Pictures
 
 # junk useless files
 rm nohup.out *.core *\~* \:w 2>/dev/null ||:
@@ -247,4 +249,11 @@ fixpulseaudio() {
 
 mousexy() { 
     while sleep 0.5; do clear ;xinput --query-state 9 | grep -E 'valuator(\[0\]|\[1\])'; done
+}
+
+backup-firefox() {
+    dir="firefox-backup-$(date +'%Y%m%d_%H%M%S')"
+    mkdir -p "$dir"
+    cp -r ~/.mozilla "$dir"/
+    tar -cvJpf "$dir".tar.xz "$dir" && rm -r "$dir"
 }
