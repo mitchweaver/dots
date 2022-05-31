@@ -73,7 +73,7 @@ dnf install -y pigz zip unzip unrar p7zip
 # system
 dnf install -y \
 	util-linux-user fail2ban clamav htop detox \
-	inotify-tools lm_sensors
+	inotify-tools lm_sensors hwinfo
 systemctl enable fail2ban
 systemctl start fail2ban
 
@@ -147,7 +147,9 @@ dnf install -y \
 	xournal \
 	discord \
 	qbittorrent \
-	evolution
+	geary \
+	gedit \
+	gedit-plugins
 
 dnf install -y lpf-spotify-client
 lpf update
