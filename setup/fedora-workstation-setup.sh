@@ -48,7 +48,9 @@ dnf install -y \
 	gnome-shell-extension-user-theme \
 	gnome-shell-extension-no-overview \
 	gnome-shell-extension-frippery-move-clock \
-	gnome-shell-theme-flat-remix
+	gnome-shell-theme-flat-remix \
+	gnome-shell-extension-screenshot-window-sizer \
+	gnome-screenshot
 
 # ===================================================================
 # packages
@@ -73,13 +75,13 @@ dnf install -y pigz zip unzip unrar p7zip
 # system
 dnf install -y \
 	util-linux-user fail2ban clamav htop detox \
-	inotify-tools lm_sensors hwinfo
+	inotify-tools lm_sensors hwinfo lshw
 systemctl enable fail2ban
 systemctl start fail2ban
 
 # misc
 dnf install -y pv tree neofetch slop translate-shell exa \
-	xsel xclip xset
+	xsel xclip xset ncdu
 
 # networking
 dnf install -y \
@@ -147,6 +149,7 @@ dnf install -y \
 	xournal \
 	discord \
 	qbittorrent \
+	qbittorrent-nox \
 	geary \
 	gedit \
 	gedit-plugins
@@ -160,6 +163,11 @@ rpm -i /root/rpmbuild/RPMS/x86_64/spotify-client*.rpm
 # ===================================================================
 # for logitech mice dpi control
 dnf install -y libratbag-ratbagd
+
+# ===================================================================
+# build crap
+# ===================================================================
+dnf install -y ninja-build samurai cmake libtool yasm automake autoconf
 
 # ===================================================================
 # libraries
@@ -181,7 +189,31 @@ dnf install -y \
     libXrandr \
     libXrandr-devel \
     libjpeg-devel \
-    turbojpeg-devel
+    turbojpeg-devel \
+    harfbuzz-devel \
+    fontconfig \
+    libX11-devel \
+    libXrandr-devel \
+    libvdpau-devel \
+    libva-devel \
+    mesa-libGL-devel \
+    mesa-libEGL-devel \
+    alsa-lib-devel \
+    pulseaudio-libs-devel \
+    libchardet-devel \
+    uchardet \
+    zlib-devel \
+    zlib-ng-devel \
+    zlibrary-devel \
+    fribidi-devel \
+    gnutls-devel \
+    SDL2-devel \
+    qt5-qtwebengine-devel \
+    qt5-qtquickcontrols2-devel \
+    qt5-qtx11extras-devel \
+    libcec-devel \
+    gstreamer1-plugins-good-qt \
+    qt5-qtbase-private-devel
 
 # ===================================================================
 # xorg stuff (not applicable on wayland)
