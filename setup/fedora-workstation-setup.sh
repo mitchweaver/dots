@@ -74,8 +74,9 @@ dnf install -y pigz zip unzip unrar p7zip
 
 # system
 dnf install -y \
-	util-linux-user fail2ban clamav htop detox \
-	inotify-tools lm_sensors hwinfo lshw
+	util-linux-user fail2ban htop detox \
+	inotify-tools lm_sensors hwinfo lshw \
+	clamav clamav-data clamav-update lsof
 systemctl enable fail2ban
 systemctl start fail2ban
 
@@ -88,7 +89,7 @@ dnf install -y \
 	openssh-server openssh openvpn rdesktop rsync wget \
 	curl aria2 wireshark net-tools nmap netcat speedtest-cli \
 	tor torsocks tigervnc dnsutils bluez bluez-libs bluez-tools \
-	openssl w3m
+	openssl w3m socat dnstop
 
 # media
 dnf install -y \
@@ -142,6 +143,11 @@ dnf install -y \
 	firefox \
 	torbrowser-launcher \
 	mpv \
+	shntool \
+	cuetools \
+	flac \
+	wavpack \
+	vorbis-tools \
 	libreoffice \
 	obs-studio \
 	shotcut \
