@@ -200,10 +200,10 @@ if has('nvim')
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
         " colorscheme onehalfdark
         " colorscheme typewriter
-        colorscheme everforest
+        " colorscheme everforest
         " colorscheme papercolor
-        " set background=light
-        set background=dark
+        set background=light
+        " set background=dark
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 
         " make sign column same color as terminal background
@@ -343,11 +343,11 @@ augroup textwidth
 	autocmd FileType text,mail,markdown,gmi setlocal textwidth=72
 augroup END
 
-" spellcheck
-augroup spelling
-	autocmd!
-	autocmd FileType text,mail,markdown,gmi setlocal spell
-augroup END
+" " spellcheck
+" augroup spelling
+" 	autocmd!
+" 	autocmd FileType text,mail,markdown,gmi setlocal spell
+" augroup END
 
 " ███╗   ██╗ ██████╗ ███╗   ██╗███████╗███████╗███╗   ██╗███████╗███████╗
 " ████╗  ██║██╔═══██╗████╗  ██║██╔════╝██╔════╝████╗  ██║██╔════╝██╔════╝

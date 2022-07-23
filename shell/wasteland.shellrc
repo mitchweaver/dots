@@ -69,8 +69,10 @@ forecast() {
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # youtube-dl / ffmpeg
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-addyt() { ytdlq -a "$1" ; }
 alias res='ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0'
+ytdl() {
+    youtube-dl --no-playlist "$@"
+}
 
 # removes audio from a video clip
 removeaudio() {
@@ -223,11 +225,6 @@ alias subsgu='subs -g ; subs -u'
 
 alias mouse='ratbagctl cheering-viscacha dpi set 400 ; xset m 0 0'
 
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# delete me
-alias vnc1='vncviewer dell1 & q'
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-#
 amdproporfree() {
     case $(glxinfo | grep "OpenGL vendor string" | cut -f2 -d":" | xargs) in
         AMD)
@@ -257,3 +254,29 @@ backup-firefox() {
     cp -r ~/.mozilla "$dir"/
     tar -cvJpf "$dir".tar.xz "$dir" && rm -r "$dir"
 }
+
+alias htpo=htop
+
+cuesplit() {
+    case $1 in
+        *h|*help)
+            >&2 echo 'usage: cuesplit file.cue file.flac'
+            break
+            ;;
+        *.cue)
+            ;;
+        *)
+            break
+    esac
+    case $2 in
+        *.flac|*.wav)
+            ;;
+        *)
+            break
+    esac
+    shnsplit -f "$1" -o "flac flac -s -8 -o %f -" "$2" &&
+    mv -v "$2" /tmp/ &&
+    cuetag.sh "$1" *.flac
+}
+
+alias progress='progress -w -M'

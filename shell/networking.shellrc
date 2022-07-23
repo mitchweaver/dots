@@ -4,12 +4,7 @@
 # ▘ ▘▝▀▘ ▀  ▘▘ ▝▀ ▘  ▘ ▘▀▘▘ ▘▗▄▘
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-if command -v pkg_add >/dev/null ; then
-    # OpenBSD
-    alias {rsync,openrsync}='openrsync -avlprt --del'
- else
-    alias rsync='rsync -avhu --progress --delete --partial --links'
-fi
+alias rsync='rsync -avhu --progress --delete --partial --links'
 
 # alias fatsync='rsync -rvhu --progress --delete --partial' # for fat32
 alias scp='scp -rp'

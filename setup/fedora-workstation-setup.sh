@@ -65,7 +65,9 @@ dnf install -y \
 	python3-setuptools \
 	python3-pip \
 	python3-pylint \
-	python3-docker
+	python3-docker \
+	golang \
+	hugo
 
 pip3 install --upgrade pip
 
@@ -76,13 +78,14 @@ dnf install -y pigz zip unzip unrar p7zip
 dnf install -y \
 	util-linux-user fail2ban htop detox \
 	inotify-tools lm_sensors hwinfo lshw \
-	clamav clamav-data clamav-update lsof
+	clamav clamav-data clamav-update lsof \
+	timeshift
 systemctl enable fail2ban
 systemctl start fail2ban
 
 # misc
-dnf install -y pv tree neofetch slop translate-shell exa \
-	xsel xclip xset ncdu
+dnf install -y pv progress tree neofetch slop translate-shell exa \
+	xsel xclip xset ncdu diceware
 
 # networking
 dnf install -y \
@@ -94,7 +97,7 @@ dnf install -y \
 # media
 dnf install -y \
 	gimp ImageMagick ffmpeg ffmpegthumbnailer youtube-dl \
-	jpegoptim gyazo
+	jpegoptim gyazo audacity-freeworld
 
 # fonts
 dnf install -y \
@@ -158,7 +161,11 @@ dnf install -y \
 	qbittorrent-nox \
 	geary \
 	gedit \
-	gedit-plugins
+	gedit-plugins \
+	evince \
+	evince-thumbnailer \
+	evince-previewer \
+	evince-nautilus
 
 dnf install -y lpf-spotify-client
 lpf update
@@ -219,7 +226,8 @@ dnf install -y \
     qt5-qtx11extras-devel \
     libcec-devel \
     gstreamer1-plugins-good-qt \
-    qt5-qtbase-private-devel
+    qt5-qtbase-private-devel \
+    glibc-devel
 
 # ===================================================================
 # xorg stuff (not applicable on wayland)
