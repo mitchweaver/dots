@@ -280,3 +280,5 @@ cuesplit() {
 }
 
 alias progress='progress -w -M'
+
+alias gputemp="nvidia-smi  -q | grep 'GPU Current Temp' | trim"
