@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -e
-
 # ===================================================================
 # initial setup
 # ===================================================================
@@ -85,7 +83,7 @@ systemctl start fail2ban
 
 # misc
 dnf install -y pv progress tree neofetch slop translate-shell exa \
-	xsel xclip xset ncdu diceware
+	xsel xclip xset ncdu diceware hdparm iozone
 
 # networking
 dnf install -y \
@@ -159,7 +157,6 @@ dnf install -y \
 	discord \
 	qbittorrent \
 	qbittorrent-nox \
-	geary \
 	gedit \
 	gedit-plugins \
 	evince \
@@ -245,11 +242,11 @@ if ! command -v gotop >/dev/null 2>&1 ; then
 	rm -f /tmp/gotop.rpm
 fi
 
-if ! command -v bitwarden >/dev/null 2>&1 ; then
-	wget 'https://vault.bitwarden.com/download/?app=desktop&platform=linux&variant=rpm' -O  /tmp/bitwarden.rpm
-	rpm -i /tmp/bitwarden.rpm
-	rm -f /tmp/bitwarden.rpm
-fi
+#if ! command -v bitwarden >/dev/null 2>&1 ; then
+#	wget 'https://vault.bitwarden.com/download/?app=desktop&platform=linux&variant=rpm' -O  /tmp/bitwarden.rpm
+#	rpm -i /tmp/bitwarden.rpm
+#	rm -f /tmp/bitwarden.rpm
+#fi
 
 if ! command -v pfetch >/dev/null 2>&1 ; then
 	git clone https://github.com/dylanaraps/pfetch /tmp/pfetch
@@ -260,13 +257,10 @@ fi
 # ===================================================================
 # snaps
 # ===================================================================
-if ! command -v snap >/dev/null 2>&1 || ! [ -e /snap ] ; then
-	dnf install -y snapd
-	ln -s /var/lib/snapd/snap /snap
-fi
-if ! command -v tradingview >/dev/null 2>&1 ; then
-	snap install tradingview
-fi
+#if ! command -v snap >/dev/null 2>&1 || ! [ -e /snap ] ; then
+#	dnf install -y snapd
+#	ln -s /var/lib/snapd/snap /snap
+#fi
 
 # ===================================================================
 # if using xorg
