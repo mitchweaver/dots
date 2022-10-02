@@ -141,7 +141,6 @@ dnf install -y pipewire-pulseaudio pulseaudio-utils pavucontrol
 # ===================================================================
 dnf install -y \
 	ranger \
-	firefox \
 	torbrowser-launcher \
 	mpv \
 	shntool \
@@ -232,6 +231,17 @@ dnf install -y \
 #######    xbanish xautolock xdotool xterm xbacklight 
 #######    xsetroot xinput sxhkd arandr picom
 
+# ===================================================================
+# firefox
+# ===================================================================
+if ! command -v firefox-nightly >/dev/null 2>&1 ; then
+	sudo dnf remove -y firefox
+	sudo dnf copr enable proletarius101/firefox-nightly -y
+	sudo dnf update -y
+	sudo dnf install -y firefox-nightly
+	mkdir -p /usr/local/bin
+	ln -sf "$(which firefox-nightly)" /usr/local/bin/firefox
+fi
 
 # ===================================================================
 # non-repo packages
