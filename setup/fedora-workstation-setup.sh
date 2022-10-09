@@ -83,7 +83,7 @@ systemctl start fail2ban
 
 # misc
 dnf install -y pv progress tree neofetch slop translate-shell exa \
-	xsel xclip xset ncdu diceware hdparm iozone
+	xsel xclip xset ncdu diceware hdparm iozone gocr
 
 # networking
 dnf install -y \

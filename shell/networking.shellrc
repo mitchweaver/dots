@@ -112,3 +112,9 @@ alias torcheck="\
     head -n 1"
 alias torget='torsocks -i wget'
 # -----------------------------------------------------------
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+#### LAPTOP WIREGUARD --- for when im out, back to my homelab
+alias vpnup='nmcli connection up laptop'
+alias vpndown='nmcli connection down laptop'
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
