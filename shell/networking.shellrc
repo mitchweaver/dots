@@ -12,6 +12,8 @@ alias scp='scp -rp'
 alias p8='ping 8.8.8.8'
 alias cv='curl -v'
 
+alias ssh='TERM=xterm-256color ssh'
+
 wtf() {
     w3m -dump https://wtfismyip.com/json | jq -r
 }
