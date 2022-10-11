@@ -35,20 +35,27 @@ dnf groupupdate core
 dnf install -y rpmfusion-free-release-tainted
 dnf install -y dnf-plugins-core
 
+# # ===================================================================
+# # gnome
+# # ===================================================================
+# dnf install -y \
+# 	gnome-tweaks gconf-editor gnome-extensions-app \
+# 	gnome-shell-extension-appindicator \
+# 	gnome-shell-extension-caffeine \
+# 	gnome-shell-extension-dash-to-dock \
+# 	gnome-shell-extension-user-theme \
+# 	gnome-shell-extension-no-overview \
+# 	gnome-shell-extension-frippery-move-clock \
+# 	gnome-shell-theme-flat-remix \
+# 	gnome-shell-extension-screenshot-window-sizer \
+# 	gnome-screenshot
+
+
+
 # ===================================================================
-# gnome
+# dwm
 # ===================================================================
-dnf install -y \
-	gnome-tweaks gconf-editor gnome-extensions-app \
-	gnome-shell-extension-appindicator \
-	gnome-shell-extension-caffeine \
-	gnome-shell-extension-dash-to-dock \
-	gnome-shell-extension-user-theme \
-	gnome-shell-extension-no-overview \
-	gnome-shell-extension-frippery-move-clock \
-	gnome-shell-theme-flat-remix \
-	gnome-shell-extension-screenshot-window-sizer \
-	gnome-screenshot
+dnf install -y picom sxhkd
 
 # ===================================================================
 # packages
@@ -78,12 +85,15 @@ dnf install -y \
 	inotify-tools lm_sensors hwinfo lshw \
 	clamav clamav-data clamav-update lsof \
 	timeshift
+
 systemctl enable fail2ban
 systemctl start fail2ban
+systemctl enable sshd
+systemctl start sshd
 
 # misc
 dnf install -y pv progress tree neofetch slop translate-shell exa \
-	xsel xclip xset ncdu diceware hdparm iozone gocr
+	xsel xclip xset ncdu diceware hdparm iozone gocr toilet
 
 # networking
 dnf install -y \
@@ -91,6 +101,9 @@ dnf install -y \
 	curl aria2 wireshark net-tools nmap netcat speedtest-cli \
 	tor torsocks tigervnc dnsutils bluez bluez-libs bluez-tools \
 	openssl w3m socat dnstop
+
+# taskwarrior
+dnf install -y task taskopen tasksh vit
 
 # media
 dnf install -y \
@@ -114,6 +127,11 @@ dnf install -y \
 	ibm-plex-mono-fonts \
 	dejavu-sans-fonts \
 	dejavu-sans-mono-fonts
+
+dnf copr enable peterwu/iosevka -y
+dnf install -y \
+	iosevka-term-fonts \
+	iosevka-fonts
 
 # load fonts after
 fc-cache -vf
@@ -251,12 +269,6 @@ if ! command -v gotop >/dev/null 2>&1 ; then
 	rpm -i /tmp/gotop.rpm
 	rm -f /tmp/gotop.rpm
 fi
-
-#if ! command -v bitwarden >/dev/null 2>&1 ; then
-#	wget 'https://vault.bitwarden.com/download/?app=desktop&platform=linux&variant=rpm' -O  /tmp/bitwarden.rpm
-#	rpm -i /tmp/bitwarden.rpm
-#	rm -f /tmp/bitwarden.rpm
-#fi
 
 if ! command -v pfetch >/dev/null 2>&1 ; then
 	git clone https://github.com/dylanaraps/pfetch /tmp/pfetch
