@@ -1,0 +1,15 @@
+Xft.dpi: 144
+/* Xft.dpi: 120 */
+/* Xft.dpi: 96 */
+Xft.antialias: true
+Xft.autohint: true
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+Xft.rgba: rgb
+Xcursor.theme: plan9
+Xcursor.size: 16
+
+*foreground: #ffffff
+*background: #000000
+*font: spleen
