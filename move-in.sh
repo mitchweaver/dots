@@ -25,15 +25,17 @@ read -r ans
 
 for folder in \
 	.config/i3 \
+	.config/i3blocks \
 	.config/kitty \
 	.config/mpv \
 	.config/nvim \
+	.config/parcellite \
 	.config/picom \
 	.config/ranger \
 	.config/sway \
 	.config/sxhkd ; do
 
-	rm -rfv "${HOME}/$folder"
+	rm -rfv "${HOME:?}/$folder"
 	ln -sv "$DOTS_DIR/$folder" "${HOME}/$folder"
 
 done

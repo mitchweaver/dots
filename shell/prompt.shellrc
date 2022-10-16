@@ -6,8 +6,22 @@
 # ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝        ╚═╝   
                                                      
 
+# print username in color palette, one color per character
 _ps1_print_user() {
-    # print username in color palette, one color per character
+    printf '%s' "\[\e[1;32m\]$USER"
+}
+
+_ps1_print_host() {
+    if [ -f /etc/hostname ] ; then
+        read -r _hostname < /etc/hostname
+        printf '%s' "\[\e[1;34m\]$_hostname"
+    else
+        printf '%s' 'UNKNOWN'
+    fi
+}
+
+# print username in color palette, one color per character
+_ps1_print_rainbow_user() {
     code=1
     printf '%s\n' "$USER" | fold -w 1 | \
     while read -r c ; do
@@ -18,7 +32,22 @@ _ps1_print_user() {
 }
 
 _ps1_print_pwd() {
+    printf '['
     printf '%s' "\[\e[1;36m\]\W"
+    _clear_formatting
+    printf ']'
+}
+
+_ps1_print_prompt() {
+    printf '%s' "\[\e[1;33m\]"
+    case $TERM in
+        *-256color|*-kitty)
+            printf '%s ' ' '
+            # 
+            ;;
+        *)
+            printf '%s ' ' $'
+    esac
 }
 
 _ps1_print_git() {
@@ -26,9 +55,9 @@ _ps1_print_git() {
     if [ -d .git ] ; then
         set -- "$(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)"
         if [ "$1" ] ; then
-            printf '(%s) ' "$1"
+            printf '(%s)' " $1"
         else
-            printf '(%s) ' "no branch"
+            printf '(%s)' " no branch"
         fi
     fi
 }
@@ -43,6 +72,15 @@ _ps1_print() {
             _clear_formatting
 
             case ${PS1_STYLE:-user-pwd} in
+                user-host-pwd)
+                    _ps1_print_user
+                    _clear_formatting
+                    printf '@'
+                    _ps1_print_host
+                    printf ' '
+                    _clear_formatting
+                    _ps1_print_pwd
+                    ;;
                 user-pwd)
                     _ps1_print_user
                     printf ' '
@@ -52,14 +90,11 @@ _ps1_print() {
                 user)
                     _ps1_print_user
                     ;;
-                pwd)
-                    printf '['
+                pwd|pwd-no-prompt)
                     _ps1_print_pwd
-                    _clear_formatting
-                    printf '] '
                     ;;
                 percent)
-                    echo '%'
+                    printf '%'
             esac
 
             if [ "${PS1_GIT:-false}" = true ] && [ -d .git ] ; then
@@ -67,9 +102,15 @@ _ps1_print() {
             fi
 
             _clear_formatting
+            if [ "$PS1_STYLE" != pwd-no-prompt ] ; then
+                _ps1_print_prompt
+            else
+                printf ' '
+            fi
+            _clear_formatting
             ;;
         dumb)
-            echo '%'
+            printf '%'
             ;;
         *)
             printf '%s %s $ ' "$USER" "$PWD"

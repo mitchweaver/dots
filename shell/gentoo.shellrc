@@ -1,3 +1,4 @@
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # gentoo specific aliases
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -11,15 +12,17 @@ pkg() {
             emerge $def_opts --search "$@"
             ;;
         a)
-            sudo emerge $_def_opts "$@"
+            sudo emerge $_def_opts --noreplace "$@"
             ;;
         u)
             [ "$1" ] || set -- '@world'
             sudo emerge $_def_opts --update --newuse --deep --with-bdeps=y "$@"
             ;;
         d)
-            sudo emerge $_def_opts --unmerge "$@"
-            printf '\n%s\n\n' 'Would you also like to depclean? (y/n): '
+            if [ "$1" ] ; then
+                sudo emerge $_def_opts --unmerge "$@"
+            fi
+            printf '\n%s ' 'Would you also like to depclean? (y/n):'
             read -r ans
             [ "$ans" == y ] && sudo emerge $_def_opts --depclean
             ;;
@@ -28,3 +31,9 @@ pkg() {
     esac
     unset _def_opts
 }
+
+alias lessworld='less /var/lib/portage/world'
+alias editworld='sudo ${EDITOR} /var/lib/portage/world'
+
+alias packages='${BROWSER} https://packages.gentoo.org'
+alias overlays='${BROWSER} https://gpo.zugaina.org/'

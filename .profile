@@ -76,7 +76,6 @@ elif command -v vim >/dev/null 2>&1 ; then
 	export EDITOR=vim
 fi
 
-export MOZ_ENABLE_WAYLAND=0
 if command -v firefox >/dev/null 2>&1 ; then
 	export BROWSER=firefox
 elif command -v firefox-bin >/dev/null 2>&1 ; then

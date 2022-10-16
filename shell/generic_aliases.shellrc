@@ -7,7 +7,7 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 case $TERM in
-    *-256color)
+    *-256color|xterm-kitty)
         if command -v exa >/dev/null ; then
             alias ls='exa -F --group-directories-first'
             alias tree='exa -F -T'

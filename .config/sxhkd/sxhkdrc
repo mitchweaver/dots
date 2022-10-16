@@ -1,62 +1,45 @@
 # programs
-# alt + Return
-    # st -T 'Simple Terminal' -t 'Simple Terminal' -c 'Simple Terminal'
-    #st -T 'Simple Terminal' -t 'Simple Terminal' -c 'Simple Terminal'
 alt Return
-    stwrapper
-alt + shift + Return
-    stwrapper -t
+    kitty --single-instance
 alt + w
-    brws
-alt + r
-    stwrapper -c ranger -e ranger
-    # stwrapper -c ranger -e ranger --cmd='set viewmode multipane'
-control + alt + x
-    slock
+    firefox-bin
+# alt + r
+#     kitty --single-instance ranger
+
+#control + alt + x
+#    slock
+
 Print
     scrap -n
 control + Print
     scrap
-alt + e
-    pcmanfm
-super + e
-    pcmanfm
-alt + v
-    stwrapper -c 'Vim Wiki' -e nvim -c VimwikiIndex
-alt + m
-    stwrapper -c neomutt -e neomutt
 
+#alt + e
+    # pcmanfm
+# super + e
+    # pcmanfm
 
 # dmenus
-alt + p
-    menu run -p 'Run:'
-alt + o
-    dedit
-alt + i
-    opn --menu
-alt + y
-    dmoji
+# alt + p
+#     menu run -p 'Run:'
+# alt + o
+#     dedit
+# alt + i
+#     opn --menu
+# alt + y
+    # dmoji
 
-# misc
-control + alt + k
-    keys
-shift + Delete
-    xsel -o
-
-
-# ------------ this does not work on pinebook pro ---------
 # brightness
-# XF86MonBrightnessUp
-    # bright i
-# XF86MonBrightnessDown
-    # bright d
-# --------------------------------------------------------
+XF86MonBrightnessUp
+    bright i
+XF86MonBrightnessDown
+    bright d
 
 # redshift control
-alt + equal
-    sctc i
-alt + minus
-    sctc d
+# alt + equal
+#     sctc i
+# alt + minus
+#     sctc d
 
 # volume
 alt + apostrophe
@@ -69,13 +52,13 @@ XF86VolumeDown
     vol d
 
 # media / mpv
-alt + slash
-    mmt -t
-alt + period
-    mmt -n
-alt + comma
-    mmt -p
-alt + bracketright
-    mmt -f
-alt + bracketleft
-    mmt -b
+# alt + slash
+#     mmt -t
+# alt + period
+#     mmt -n
+# alt + comma
+#     mmt -p
+# alt + bracketright
+#     mmt -f
+# alt + bracketleft
+#     mmt -b

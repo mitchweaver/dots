@@ -10,13 +10,8 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # I hate these stupid dirs and every program that creates them.
-rmdir Public Templates  Videos Music 2>/dev/null ||:
-#####Desktop 
-######Documents
-#######Pictures
-
-# junk useless files
-rm nohup.out *.core *\~* \:w 2>/dev/null ||:
+rmdir Desktop Downloads Pictures Public \
+        Templates Videos Music 2>/dev/null ||:
 
 # search for a font name
 fcg() { fc-list | grep -i "$*" ; }
@@ -86,7 +81,6 @@ removeaudio() {
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # imagemagick
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
 jpg() {
     if [ -f "$1" ] ; then
         jpegoptim -s "$1"
@@ -94,10 +88,6 @@ jpg() {
         find "${1:-.}" -type f -iname "*.jp*" -exec jpegoptim -s {} \;
     fi
 }
-
-cover() { curl -q -# -L "$1" -o cover.jpg ; jpg ; }
-band()  { curl -q -# -L "$1" -o band.jpg  ; jpg ; }
-logo()  { curl -q -# -L "$1" -o logo.jpg  ; jpg ; }
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # mupdf
@@ -115,29 +105,6 @@ trans() { command trans -no-auto -b "$*" 2>/dev/null ; }
 rtrans() { c=$1 ; shift ; command trans -from en -to $c "$*" 2>/dev/null ; }
 rde() { rtrans de "$*" ; }
 rja() { rtrans ja "$*" ; }
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# irc shenanigans
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-alias shrug="printf '%s\n' '¯\\_(ツ)_/¯' | tee /dev/tty | clip -i"
-alias heart='printf "%b\n" "\xe2\x9d\xa4"'
-alias tm="printf '%s\n' '™'"
-alias copyright="printf '%s\n' '©'"
-# -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
-
-cheat() { curl -s cheat.sh/$1 ; }
-
-qr() { cat "${1:-?}" | curl -sF-=\<- qrenco.de ; }
-
-alias mount_phone='sudo simple-mtpfs --device 1 -o allow_other /mnt/android'
-alias shck='shellcheck -s sh'
-
-mount_sdcard() {
-    sudo mount -t vfat -o  uid=mitch /dev/mmcblk0 /mnt/sd
-}
-
-# remove site block in /etc/hosts
-unhosts() { for i ; do sudo sed -i "s/.*$i.*//g" /etc/hosts ; done ; }
 
 alias ytm='yt -m'
 
@@ -161,11 +128,6 @@ pad() {
 
 alias img2pdf='img2pdf *jpg --output combined.pdf'
 
-# play random file within subdirectories of $PWD
-alias play_random='ls | sort -R | head -n 1 | play'
-
-alias restart_sxhkd='pkill sxhkd ; sxhkd &'
-
 alias autoclick='while sleep 1 ; do xdotool click 1; done'
 
 btcprice() {
@@ -174,41 +136,7 @@ btcprice() {
     printf '$%s\n' "${p%%000000}"
 }
 
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# aliases for my own scripts
-subsdl() {
-    link=$(subs -n)
-    if [ "$link" ] ; then
-        addyt "$link"
-        printf "Added link '%s' to download queue.\n" "$link"
-    fi
-}
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-clip() {
-    case ${1#-} in
-        h)
-            echo 'Usage: clip [-i] [-o]'
-            ;;
-        i)
-            xsel -ib
-            ;;
-        *)
-            xsel -ob
-    esac
-}
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-alias pcm='nohup pcmanfm . >/dev/null 2>&1 &'
 alias detox='detox -v'
-alias mutt=neomutt
-
-pvmv() {
-    [ $# -eq 2 ] || return 1
-    : > "$2" || return 1
-    pv < "$1" > "$2" && rm -f -- "$1"
-}
 
 docx2pdf() {
     libreoffice --convert-to pdf "$1" 2>/dev/null
@@ -281,5 +209,16 @@ cuesplit() {
 }
 
 alias progress='progress -w -M'
-
 alias gputemp="nvidia-smi  -q | grep 'GPU Current Temp' | trim"
+
+pvmv() {
+    [ $# -eq 2 ] || return 1
+    : > "$2" || return 1
+    pv < "$1" > "$2" && rm -f -- "$1"
+}
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# temp
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+alias i3cfg='nvim ~/.config/i3/config'
+alias kcfg='nvim ~/.config/kitty/kitty.conf'

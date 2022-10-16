@@ -23,6 +23,7 @@ pgrep -f pipewire   || gentoo-pipewire-launcher &
 pgrep -f parcellite || parcellite &
 pgrep -f nextcloud  || nextcloud &
 pgrep -f sxhkd      || sxhkd &
+pgrep -f xbanish    || xbanish-t 10 &
 pgrep -f picom      || picom -b
 
 background &
