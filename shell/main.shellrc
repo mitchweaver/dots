@@ -33,7 +33,9 @@ if [ -d "${SHELLRC_DIR}" ] ; then
     . "${SHELLRC_DIR}/prompt.shellrc"
     . "${SHELLRC_DIR}/templates.shellrc"
     . "${SHELLRC_DIR}/wasteland.shellrc"
-    if command -v dnf >/dev/null 2>&1 ; then
+    if command -v emerge >/dev/null 2>&1 ; then
+        . "${SHELLRC_DIR}/gentoo.shellrc"
+    elif command -v dnf >/dev/null 2>&1 ; then
         . "${SHELLRC_DIR}/redhat.shellrc"
     fi
     unset SHELLRC_DIR

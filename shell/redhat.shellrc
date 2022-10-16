@@ -32,5 +32,3 @@ pkg() {
             dnf list "$@"
     esac
 }
-
-

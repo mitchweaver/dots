@@ -1,0 +1,30 @@
+# gentoo specific aliases
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+pkg() {
+    _def_opts="--ask --ask-enter-invalid --verbose"
+    [ "$1" ] || set -- h
+    flag=${1#-}
+    shift
+    case $flag in
+        s)
+            emerge $def_opts --search "$@"
+            ;;
+        a)
+            sudo emerge $_def_opts "$@"
+            ;;
+        u)
+            [ "$1" ] || set -- '@world'
+            sudo emerge $_def_opts --update --newuse --deep --with-bdeps=y "$@"
+            ;;
+        d)
+            sudo emerge $_def_opts --unmerge "$@"
+            printf '\n%s\n\n' 'Would you also like to depclean? (y/n): '
+            read -r ans
+            [ "$ans" == y ] && sudo emerge $_def_opts --depclean
+            ;;
+        -sync)
+            sudo emerge $_def_opts --sync "$@"
+    esac
+    unset _def_opts
+}
