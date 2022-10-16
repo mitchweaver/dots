@@ -1,16 +1,16 @@
 sequence default {
     utf_8;
-	safe;
-	wipeup;
+    safe;
+    wipeup;
     lower;
 };
 
 ignore {
-	filename ".arch-params";
-	filename ".mozilla";
-	filename ".themes";
+    filename ".arch-params";
+    filename ".mozilla";
+    filename ".themes";
     filename ".git";
     filename "README.md";
     filename "CVS";
-	filename "{arch}";
+    filename "{arch}";
 };
