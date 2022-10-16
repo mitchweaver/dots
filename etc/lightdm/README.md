@@ -20,6 +20,16 @@ autologin-user = mitch
 autologin-user-timeout = 0
 ```
 
+------
+
+# Gentoo
+
+## init.d service
+
+Remember to install `display-manager-init` and enable the service
+
+Then set `/etc/conf.d/display-manager` to be lightdm
+
 ## branding
 
-on gentoo use the `branding` USE flag for gentoo logo
+on Gentoo use the `branding` USE flag for gentoo logo

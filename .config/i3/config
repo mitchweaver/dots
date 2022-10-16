@@ -1,15 +1,5 @@
 set $mod Mod1
 
-# --- note: program launching is handled by sxhkd
-######bindsym $mod+Return exec kitty --single-instance
-######bindsym $mod+w exec firefox-bin
-
-# start dmenu (a program launcher)
-bindsym $mod+p exec --no-startup-id dmenu_run -p 'Run:'
-# A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
 # Mouse+$mod drag floating
 floating_modifier $mod
 
@@ -25,8 +15,8 @@ focus_follows_mouse no
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # SCRATCHPAD
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-for_window [instance="scratchpad"] move to scratchpad, sticky enable
-exec kitty --single-instance --name scratchpad
+# for_window [instance="scratchpad"] move to scratchpad, sticky enable
+# exec kitty --single-instance --name scratchpad
 # bindsym $mod+space [instance="scratchpad"] scratchpad show
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

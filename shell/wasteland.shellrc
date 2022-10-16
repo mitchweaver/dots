@@ -20,7 +20,6 @@ unalias r 2>/dev/null
 r() { ranger "$@" ; clear ; }
 
 alias mpv="mpv $MPV_OPTS"
-alias mupdf="mupdf $MUPDF_OPTS"
 
 alias hme='htop -u mitch'
 alias hroot='htop -u root'

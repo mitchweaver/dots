@@ -2,7 +2,7 @@
 alt Return
     kitty --single-instance
 alt + w
-    firefox-bin
+    brws
 # alt + r
 #     kitty --single-instance ranger
 
@@ -20,12 +20,11 @@ control + Print
     # pcmanfm
 
 # dmenus
-# alt + p
-#     menu run -p 'Run:'
-# alt + o
-#     dedit
-# alt + i
-#     opn --menu
+alt + p
+    dmenu_run -p 'Run:'
+    # menu run -p 'Run:'
+alt + o
+    dedit
 # alt + y
     # dmoji
 
