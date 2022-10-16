@@ -21,27 +21,19 @@ _g() { _a=$1 ; shift ; cd $_a/"$*" ; }
 alias gf="_g $XDG_DOCUMENTS_DIR"
 alias gi="_g $XDG_PICTURES_DIR"
 alias gm="_g $XDG_MUSIC_DIR"
-alias gv="_g $XDG_VIDEOS_DIR"
-
-alias gyt='_g $YTDLQ_DIR'
-alias gytc='_g $YTDLQ_DIR/completed'
-alias gtor='_g ~/.torrents'
-alias gtorc='_g ~/.torrents/completed'
 
 alias gW="_g $XDG_PICTURES_DIR/wallpapers"
 
 alias gb="_g ${HOME}/src/bin"
+alias gsb="_g ${HOME}/src/bin"
 alias gs="_g ${HOME}/src"
 
-alias gk="_g ${XDG_DOCUMENTS_DIR}/books"
 alias gt="_g ~/tmp"
+
 alias gE='_g /etc'
-
-alias gM="_g ${XDG_PICTURES_DIR}/memes"
-alias gN='_g /mnt'
-
+alias gM='_g /mnt'
 alias gT="_g /tmp"
-alias gV='_g /Volumes'
+alias gV='_g /var'
 
 alias gss='_g ${HOME}/src/suckless'
 alias gsd='_g ${HOME}/src/dots'
@@ -53,7 +45,6 @@ Yf() { cp "$@" $XDG_DOCUMENTS_DIR ; }
 Yi() { cp "$@" $XDG_PICTURES_DIR ; }
 Ym() { cp "$@" $XDG_MUSIC_DIR ; }
 Yvi(){ cp "$@" $XDG_VIDEOS_DIR ; }
-Yk() { cp "$@" "${XDG_DOCUMENTS_DIR}/books" ; }
 Ys() { cp "$@" ${HOME}/src ; }
 Yt() { cp "$@" ~/tmp ; }
 YT() { cp "$@" /tmp  ; }
@@ -70,7 +61,3 @@ mT() { mv "$@" /tmp  ; }
 alias gd='_g ${XDG_DOWNLOAD_DIR}'
 Yd() { cp "$@" ${XDG_DOWNLOAD_DIR} ; }
 md() { mv "$@" ${XDG_DOWNLOAD_DIR} ; }
-
-mw() { mv "$@" ${HOME}/src/wvr.sh/    ; }
-Yw() { cp -r "$@" ${HOME}/src/wvr.sh/ ; }
-alias gw='_g ${HOME}/src/wvr.sh'
