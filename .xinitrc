@@ -5,7 +5,6 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 export DISPLAY="${DISPLAY:-:0}"
 export _JAVA_AWT_WM_NONREPARENTING=1
-export MOZ_ENABLE_WAYLAND=0
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # XORG SETTINGS
@@ -25,10 +24,16 @@ pgrep -f nextcloud  || nextcloud &
 pgrep -f sxhkd      || sxhkd &
 pgrep -f xbanish    || xbanish-t 10 &
 pgrep -f picom      || picom -b
+pgrep -f xautolock  || xautolock \
+    -locker 'i3lock-fancy-rapid 20 pixel' \
+    -secure \
+    -time 10 \
+    -notify 15 \
+    -notifier notify-send &
+
+pgrep -f redshift || \
+    redshift -v -l '36.15398:-95.99277' >~/.cache/redshift.log 2>&1 &
 
 background &
-
-#run xdimmer -p 20 -s 10 -b 1 -t 570
-#run xautolock -locker slock -time 30 -notify 15 -notifier notify-send
 
 exec i3 -d all > "$XDG_CACHE_HOME"/i3.log 2>&1

@@ -32,6 +32,7 @@ for folder in \
 	.config/parcellite \
 	.config/picom \
 	.config/ranger \
+	.config/redshift \
 	.config/sway \
 	.config/sxhkd ; do
 
