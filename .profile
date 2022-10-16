@@ -8,14 +8,6 @@ PATH=/usr/bin:/usr/sbin:$PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-for dir in \
-    bin non-shell
-do
-    if [ -d ~/bin/$dir ] ; then
-        export PATH="${HOME}/bin/$dir:$PATH"
-    fi
-done
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 PATH=${HOME}/.local/bin:$PATH
 export PATH
@@ -25,10 +17,10 @@ export FONTCONFIG_PATH=/etc/fonts
 
 case $(uname) in
     OpenBSD|Darwin)
-        export CC=clang cc=clang
+        export CC=${CC:-clang} cc=${cc:-clang}
         ;;
     Linux|FreeBSD)
-        export CC=gcc cc=gcc
+        export CC=${CC:-gcc} cc=${cc:-gcc}
 esac
 
 # using en_US.UTF-8 over C causes case-insensitive sorting
@@ -40,35 +32,33 @@ export LC_CTYPE="$LC_ALL" \
        LOCALE="$LC_ALL"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-export XDG_OPEN=opn
+export XDG_OPEN=opn PLUMBER=opn
 
 export XDG_CONFIG_HOME="${HOME}/.config" \
-       XDG_DOWNLOAD_DIR="${HOME}/Downloads" \
-       XDG_DOCUMENTS_DIR="${HOME}/Documents" \
-       XDG_MUSIC_DIR="${HOME}/Music" \
-       XDG_PICTURES_DIR="${HOME}/Pictures"
+       XDG_DOWNLOAD_DIR="${HOME}/downloads" \
+       XDG_DOCUMENTS_DIR="${HOME}/files" \
+       XDG_PICTURES_DIR="${HOME}/images"
 
 export XDG_DESKTOP_DIR="${HOME}/Desktop"
 export XDG_DATA_HOME="${HOME}/.local"
 export XDG_CACHE_HOME="${HOME}/.cache"
 
-# i dont use these
-export XDG_PUBLICSHARE_DIR="$XDG_CACHE_HOME/Public" \
-       XDG_TEMPLATES_DIR="$XDG_CACHE_HOME/Templates" \
-       XDG_VIDEOS_DIR="$XDG_CACHE_HOME/Videos"
+# i dont use these but some programs complain
+# if they can't write to them
+export XDG_PUBLICSHARE_DIR="$XDG_CACHE_HOME/null" \
+       XDG_TEMPLATES_DIR="$XDG_CACHE_HOME/null" \
+       XDG_VIDEOS_DIR="$XDG_CACHE_HOME/null" \
+       XDG_MUSIC_DIR="$XDG_CACHE_HOME/null"
+mkdir -p "$XDG_CACHE_HOME/null"
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 export ENV="${HOME}/src/dots/shell/main.shellrc"
-
-export MENU_PROG=menu \
-       TERMINAL_PROG=stwrapper \
-       PLUMBER=opn
-
+export MENU_PROG=menu
 export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# hide GOPATH to ~/.go instead of ~/go
-export GOPATH=${HOME}/.go
+# hide GOPATH to ~/.local/go instead of ~/go
+export GOPATH=${HOME}/.local/go
 
 # try to catch either 11 or 8 openjdk version
 for i in 11 8 ; do
@@ -80,9 +70,19 @@ for i in 11 8 ; do
 done
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-export EDITOR=nvim
-export BROWSER=firefox
-export MOZ_ENABLE_WAYLAND=1
+if command -v nvim >/dev/null 2>&1 ; then
+	export EDITOR=nvim
+elif command -v vim >/dev/null 2>&1 ; then
+	export EDITOR=vim
+fi
+
+export MOZ_ENABLE_WAYLAND=0
+if command -v firefox >/dev/null 2>&1 ; then
+	export BROWSER=firefox
+elif command -v firefox-bin >/dev/null 2>&1 ; then
+	export BROWSER=firefox-bin
+fi
+
 export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
 export LESS='-QRsim +Gg'
@@ -104,7 +104,6 @@ if [ -d ~/.ssh ] ; then
         chmod 0600 ~/.ssh/authorized_keys
     fi
 fi
-
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 rm -f ~/tmp

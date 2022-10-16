@@ -1,6 +1,6 @@
 [user]
 	name = wvr
-    email = mitch@wvr.sh
+	email = mitch@wvr.sh
 [pull]
 	rebase = false
 [filter "lfs"]

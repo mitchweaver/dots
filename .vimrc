@@ -183,6 +183,8 @@ if has('nvim')
         " NOTE: this is toggled by ']ov' if you tpope's vim-unimpaired
         " set virtualedit+=all " allows you to select empty space in visual
 
+    Plug 'fladson/vim-kitty' " kitty.conf syntax
+
     Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
     Plug 'sainnhe/everforest' " theme
     Plug 'logico/typewriter-vim' " theme
