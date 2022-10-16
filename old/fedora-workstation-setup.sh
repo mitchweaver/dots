@@ -50,12 +50,14 @@ dnf install -y dnf-plugins-core
 # 	gnome-shell-extension-screenshot-window-sizer \
 # 	gnome-screenshot
 
-
-
 # ===================================================================
-# dwm
+# sway
 # ===================================================================
-dnf install -y picom sxhkd
+dnf install -y \
+	wlroots sway sway-systemd
+	# swaybg swayidle swaylock
+	# grim grimshot slurp waybar wlsunset
+	# wofi
 
 # ===================================================================
 # packages
@@ -246,8 +248,8 @@ dnf install -y \
 # ===================================================================
 # xorg stuff (not applicable on wayland)
 # ===================================================================
-#######    xbanish xautolock xdotool xterm xbacklight 
-#######    xsetroot xinput sxhkd arandr picom
+dnf install -y xhost xbanish xdotool xterm xbacklight xsetroot xinput arandr picom sxhkd xautolock
+# xdimmer
 
 # ===================================================================
 # firefox
