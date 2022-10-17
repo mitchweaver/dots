@@ -34,7 +34,8 @@ for folder in \
 	.config/ranger \
 	.config/redshift \
 	.config/sway \
-	.config/sxhkd ; do
+	.config/sxhkd \
+	.config/gtk-3.0 ; do
 
 	rm -rfv "${HOME:?}/$folder"
 	ln -sv "$DOTS_DIR/$folder" "${HOME}/$folder"
@@ -45,7 +46,8 @@ for file in \
 	.detoxrc .gitconfig \
 	.profile .pylintrc .vimrc \
 	.xmodmaprc .xinitrc .Xresources \
-	.config/redshift.conf ; do
+	.config/redshift.conf \
+	.gtkrc-2.0 ; do
 
 	rm -fv "${HOME}/$file"
 	ln -sv "$DOTS_DIR/$file" "${HOME}/$file"
