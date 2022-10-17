@@ -172,6 +172,7 @@ if has('nvim')
         " set virtualedit+=all " allows you to select empty space in visual
 
     Plug 'fladson/vim-kitty' " kitty.conf syntax
+    Plug 'gentoo/gentoo-syntax' " gentoo ebuild syntax
 
     Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
     Plug 'sainnhe/everforest' " theme
