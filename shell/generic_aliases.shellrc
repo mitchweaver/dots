@@ -57,7 +57,14 @@ alias tf='tail -f'
 alias cmd=command
 alias w=which
 alias {dc,ccd}=cd
-alias 4m=rm
 
 alias dt='dmesg | tail -n 20'
 alias dmg='dmesg | grep -i'
+
+if command -v trash >/dev/null ; then
+    alias rm=trash
+    alias rmdir=trash
+else
+    alias rm='rm -v'
+    alias rmdir='rm -v'
+fi
