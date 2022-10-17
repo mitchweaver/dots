@@ -18,7 +18,6 @@ xset b off
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # PROGRAMS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-pgrep -f pipewire   || gentoo-pipewire-launcher &
 pgrep -f parcellite || parcellite &
 pgrep -f nextcloud  || nextcloud &
 pgrep -f sxhkd      || sxhkd &
@@ -33,6 +32,9 @@ pgrep -f xautolock  || xautolock \
 
 pgrep -f redshift || \
     redshift -v -l '36.15398:-95.99277' >~/.cache/redshift.log 2>&1 &
+
+# note: sleep here seems to avoid "dummy output" bug
+pgrep -f pipewire   || { sleep 5 ; gentoo-pipewire-launcher ; } &
 
 background &
 

@@ -1,137 +1,68 @@
-# List of valid properties:
-#
-# align
-# color
-# command
-# full_text
-# instance
-# interval
-# label
-# min_width
-# name
-# separator
-# separator_block_width
-# short_text
-# signal
-# urgent
-
 # ----------- GLOBAL -------------------
-# /usr/libexec/i3blocks ==== gentoo location
+SCRIPT_DIR=/usr/libexec/i3blocks
+IFACE=wlp0s20f3
 command=/usr/libexec/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
-# Volume indicator
-#
-# The first parameter sets the step (and units to display)
-# The second parameter overrides the mixer selection
-# See the script for details.
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# [i3-focusedwindow]
+# label= 
+# command=$SCRIPT_DIR/i3-focusedwindow 20
+# interval=persist
 
-# Date Time
-[time]
-command=date '+%m-%d %H:%M'
-interval=5
+[essid]
+command=$SCRIPT_DIR/ssid
+INTERFACE=$IFACE
+interval=30
 
-[volume]
-label=VOL 
-interval=once
-signal=10
-STEP=5%
+# [wlan-dbm]
+# command=$SCRIPT_DIR/wlan-dbm
+# IFACE=$IFACE
+# USE_PERCENT=1
+
+[bandwidth]
+command=$SCRIPT_DIR/bandwidth2
+interval=persist
+markup=pango
+LABEL=
+
+[load_average]
+LABEL=LOAD: 
+command=$SCRIPT_DIR/load_average
+interval=3
+
+# [cpu_usage2]
+# LABEL=CPU 
+# command=$SCRIPT_DIR/cpu_usage2
+# markup=pango
+# interval=persist
+# REFRESH_TIME=1
+# DECIMALS=1
+#min_width=CPU 100.0%
 
 [memory]
-label=MEM 
-separator=false
+label= 
+separator=true
 interval=30
 
-[battery]
-label=BAT
-label=⚡
+[battery2]
+command=$SCRIPT_DIR/battery2
+markup=pango
 interval=30
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-# Disk usage
-#
-# The directory defaults to $HOME if the instance is not specified.
-# The script may be called with a optional argument to set the alert
-# (defaults to 10 for 10%).
-# [disk]
-# label=HOME
-#DIR=/mnt/data
-# interval=30
-
-# Network interface monitoring
-#
-# If the instance is not specified, use the interface used for default route.
-# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
-# [iface]
-#IFACE=wlan0
-# color=#00FF00
-# interval=10
-# separator=false
-
-# [wifi]
-#INTERFACE=wlp3s0
-# label=wifi:
-# interval=10
-# separator=false
-
-# [bandwidth]
-#INTERFACE=eth0
-# interval=5
-
-# CPU usage
-#
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
-# [cpu_usage]
-# label=CPU 
-# interval=10
-#min_width=CPU 100.00%
-# separator=false
-
-# [load_average]
-# label=LOAD
-# interval=10
-
-# Generic media player support
-#
-# This displays "ARTIST - SONG" if a music is playing.
-# Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
-# Set to %any to automatically pick (Requires playerctl >=2.1.1)
-#[mediaplayer]
-# This picks any player, with vlc as first, and spotify as last choice
-#instance=vlc,%any,spotify
-#interval=5
-#signal=10
-
-# OpenVPN support
-#
-# Support multiple VPN, with colors.
-#[openvpn]
-#interval=20
-
-# Temperature
-#
-# Support multiple chips, though lm-sensors.
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
-#[temperature]
-#label=TEMP
-#interval=10
-
-# Key indicators
-#
-# Add the following bindings to i3 config file:
-#
-# bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
-# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
-#[keyindicator]
-#KEY=CAPS
-#markup=pango
+[volume-pipewire]
+command=$SCRIPT_DIR/volume-pipewire
+SUBSCRIBE=1
+interval=persist
+LONG_FORMAT="${SYMB} ${VOL}%"
+SHORT_FORMAT="${SYMB} ${VOL}%"
 #interval=once
-#signal=11
+#signal=1
 
-#[keyindicator]
-#KEY=NUM
-#markup=pango
-#interval=once
-#signal=11
+[time]
+label=
+command=date +'%A %B %m %I:%M'
+interval=5
+

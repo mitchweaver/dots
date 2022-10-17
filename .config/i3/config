@@ -23,10 +23,11 @@ focus_follows_mouse no
 # AESTHETICS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 hide_edge_borders smart
-# hide_edge_borders both
 # for_window [class="kitty*"] border pixel 1
-# new_window 1pixel
-# for_window [class="^.*"] border pixel 0
+
+# remove window title bars
+for_window [class="^.*"] border pixel 1
+
 # Font for window titles
 font pango:TerminessTTF Nerd Font Mono 12
 ####for_window [class="^.*"] default_floating_border pixel 0
@@ -34,7 +35,8 @@ font pango:TerminessTTF Nerd Font Mono 12
 gaps inner 12
 gaps outer 6
 bar {
-        font pango:TerminessTTF Nerd Font Mono 12
+        font pango:ShureTechMono Nerd Font Mono 12
+        # font pango:TerminessTTF Nerd Font Mono 12
         status_command i3blocks
         position top
 }
@@ -169,6 +171,7 @@ for_window [window_role="task_dialog"] floating enable
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 assign [class="Discord"] → $ws10
 assign [class="discord"] → $ws10
+assign [class="firefox"] → $ws1
 
 # default_orientation horizontal
 # workspace_layout tabbed

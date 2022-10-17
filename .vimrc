@@ -413,7 +413,7 @@ nmap <leader>s :%s//g<Left><Left>
 noremap <leader>W !!sh<cr>
 
 " pipe line to fmt and replace current line
-"""""""TODO: this interferes with quickscope, fix later noremap <F> !!fmt<cr>
+noremap <F> !!fmt<cr>
 "
 " prepend '> ' to lines as if to block quote
 noremap Q :norm 0i> <esc>$
