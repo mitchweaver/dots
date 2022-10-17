@@ -16,24 +16,29 @@ xset m 0 0
 xset b off
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# PROGRAMS
+# ONE SHOT COMMANDS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-pgrep -f parcellite || parcellite &
-pgrep -f nextcloud  || nextcloud &
-pgrep -f sxhkd      || sxhkd &
-pgrep -f xbanish    || xbanish-t 10 &
-pgrep -f picom      || picom -b
-pgrep -f xautolock  || xautolock \
-    -locker 'i3lock-fancy-rapid 20 pixel' \
-    -secure \
-    -time 10 \
-    -notify 15 \
-    -notifier notify-send &
-
-pgrep -f redshift || redshift -v >~/.cache/redshift.log 2>&1 &
-
-# pgrep -f pipewire   || gentoo-pipewire-launcher &
-
 background &
 
-exec i3 -d all > "$XDG_CACHE_HOME"/i3.log 2>&1
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# DAEMONS
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+pgrep -f parcellite || parcellite >~/.cache/parcellite.log 2>&1 &
+pgrep -f nextcloud  || nextcloud >~/.cache/nextcloud.log 2>&1 &
+pgrep -f sxhkd      || sxhkd >~/.cache/sxhkd.log 2>&1 &
+pgrep -f redshift   || redshift -v >~/.cache/redshift.log 2>&1 &
+pgrep -f xbanish    || xbanish -t 10 &
+pgrep -f picom      || picom -b
+pgrep -f pipewire   || gentoo-pipewire-launcher &
+pgrep -f xautolock  || xautolock \
+    -locker 'i3lock-fancy-rapid 20 pixel' \
+    -time 10 \
+    -notify 15 \
+    -notifier notify-send >~/.cache/xautolock.log 2>&1 &
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# APPLICATIONS
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+sylpheed >~/.cache/sylpheed.log 2>&1 &
+
+exec i3 -d all >~/.cache/i3.log 2>&1

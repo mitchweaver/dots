@@ -32,8 +32,8 @@ for_window [class="^.*"] border pixel 1
 font pango:TerminessTTF Nerd Font Mono 12
 ####for_window [class="^.*"] default_floating_border pixel 0
 
-gaps inner 12
-gaps outer 6
+gaps inner 10
+gaps outer 10
 bar {
         font pango:ShureTechMono Nerd Font Mono 12
         # font pango:TerminessTTF Nerd Font Mono 12
@@ -169,9 +169,12 @@ for_window [window_role="task_dialog"] floating enable
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # Assignments
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+assign [class="firefox"] → $ws1
+assign [class="Firefox"] → $ws1
+assign [class="Navigator"] → $ws1
+assign [class="Sylpheed"] → $ws9
 assign [class="Discord"] → $ws10
 assign [class="discord"] → $ws10
-assign [class="firefox"] → $ws1
 
 # default_orientation horizontal
 # workspace_layout tabbed

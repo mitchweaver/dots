@@ -99,17 +99,6 @@ if has('nvim')
         " nmap <Leader>hs <Plug>GitGutterStageHunk
         " nmap <Leader>hr <Plug>GitGutterUndoHunk
 
-    Plug 'vimwiki/vimwiki' " the ultimate note taking system
-        let wiki = {}
-        let g:vimwikidir = "~/files/wiki"
-        let g:vimwiki_list=[wiki]
-        let g:vimwiki_list = [
-          \{'path': '~/files/wiki', 'syntax': 'markdown', 'ext': '.md'},
-        \]
-        let g:vimwiki_ext2syntax = {'.md': 'markdown'}
-        let g:vimwiki_global_ext = 0
-        autocmd FileType md set ft=markdown
-
     Plug 'honza/vim-snippets' " snippets repo
     Plug 'SirVer/ultisnips' " snippet driver
         let g:UltiSnipsExpandTrigger="<c-l>"
@@ -154,7 +143,6 @@ if has('nvim')
             \ ]
 
         let g:startify_bookmarks = [
-            \ {'w': '~/files/wiki/index.md'},
             \ {'v': '~/.vimrc'},
             \ ]
 
@@ -202,9 +190,9 @@ if has('nvim')
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
         " colorscheme onehalfdark
         " colorscheme typewriter
-        " colorscheme everforest
+        colorscheme everforest
         " colorscheme papercolor
-        set background=light
+        " set background=light
         " set background=dark
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 

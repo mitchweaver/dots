@@ -122,7 +122,7 @@ pad() {
     cd /tmp/$$.tmpsh &&
     ${EDITOR:-vi} $$.md &&
     cd - >/dev/null &&
-    rm -rf /tmp/$$.tmpsh 2>/dev/null ||:
+    /bin/rm -rf /tmp/$$.tmpsh 2>/dev/null ||:
 }
 
 alias img2pdf='img2pdf *jpg --output combined.pdf'

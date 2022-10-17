@@ -6,8 +6,8 @@ alt + w
 # alt + r
 #     kitty --single-instance ranger
 
-#control + alt + x
-#    slock
+super + l
+    xautolock -locknow -locker 'i3lock-fancy-rapid 20 pixel'
 
 Print
     scrap -n

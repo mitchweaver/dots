@@ -28,7 +28,8 @@ interval=15
 # LABEL=
 
 [load_average]
-LABEL=LOAD: 
+separator=true
+label=LOAD: 
 command=$SCRIPT_DIR/load_average
 interval=3
 
