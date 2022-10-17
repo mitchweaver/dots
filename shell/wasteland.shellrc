@@ -10,7 +10,7 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # I hate these stupid dirs and every program that creates them.
-rmdir Desktop Downloads Pictures Public \
+/bin/rmdir Desktop Downloads Pictures Public \
         Templates Videos Music 2>/dev/null ||:
 
 # search for a font name

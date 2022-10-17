@@ -23,17 +23,15 @@ focus_follows_mouse no
 # AESTHETICS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 hide_edge_borders smart
-# for_window [class="kitty*"] border pixel 1
+gaps inner 10
+gaps outer 10
 
 # remove window title bars
 for_window [class="^.*"] border pixel 1
 
 # Font for window titles
 font pango:TerminessTTF Nerd Font Mono 12
-####for_window [class="^.*"] default_floating_border pixel 0
 
-gaps inner 10
-gaps outer 10
 bar {
         font pango:ShureTechMono Nerd Font Mono 12
         # font pango:TerminessTTF Nerd Font Mono 12
@@ -74,7 +72,7 @@ bindsym $mod+Shift+Right move right
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # SPLITS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-bindsym $mod+c split h
+bindsym $mod+g split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
@@ -84,9 +82,9 @@ bindsym $mod+v split v
 # LAYOUTS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # change container layout (stacked, tabbed, toggle split)
+bindsym $mod+t layout toggle split
+bindsym $mod+e layout tabbed
 bindsym $mod+s layout stacking
-bindsym $mod+e layout toggle split
-bindsym $mod+t layout tabbed
 
 # toggle tiling / floating
 bindsym $mod+f floating toggle
@@ -94,16 +92,16 @@ bindsym $mod+f floating toggle
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # WORKSPACES
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws1 "1.  Firefox"
+set $ws2 "2.  Terminal"
+set $ws3 "3.  Terminal"
+set $ws4 "4.  Terminal"
+set $ws5 "5. Misc"
+set $ws6 "6. Misc"
+set $ws7 "7.  Spotify"
+set $ws8 "8.  Joplin"
+set $ws9 "9.  Email"
+set $ws10 "10.  Discord"
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
@@ -131,20 +129,14 @@ bindsym $mod+Shift+BackSpace move container to workspace number $ws10
 # RESIZING
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 25 px or 25 ppt
+        bindsym j resize grow height 25 px or 25 ppt
+        bindsym k resize shrink height 25 px or 25 ppt
+        bindsym l resize grow width 25 px or 25 ppt
+        bindsym Left resize shrink width 25 px or 25 ppt
+        bindsym Down resize grow height 25 px or 25 ppt
+        bindsym Up resize shrink height 25 px or 25 ppt
+        bindsym Right resize grow width 25 px or 25 ppt
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -172,7 +164,11 @@ for_window [window_role="task_dialog"] floating enable
 assign [class="firefox"] → $ws1
 assign [class="Firefox"] → $ws1
 assign [class="Navigator"] → $ws1
-assign [class="Sylpheed"] → $ws9
+assign [class="Joplin"] → $ws7
+assign [class="joplin"] → $ws7
+assign [class="spotify"] → $ws8
+assign [class="Spotify"] → $ws8
+assign [class="Mailspring"] → $ws9
 assign [class="Discord"] → $ws10
 assign [class="discord"] → $ws10
 

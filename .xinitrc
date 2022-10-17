@@ -29,9 +29,10 @@ pgrep -f parcellite || parcellite >~/.cache/parcellite.log 2>&1 &
 pgrep -f nextcloud  || nextcloud >~/.cache/nextcloud.log 2>&1 &
 pgrep -f sxhkd      || sxhkd >~/.cache/sxhkd.log 2>&1 &
 pgrep -f redshift   || redshift -v >~/.cache/redshift.log 2>&1 &
+pgrep -f pipewire   || gentoo-pipewire-launcher &
 pgrep -f xbanish    || xbanish -t 10 &
 pgrep -f picom      || picom -b
-pgrep -f pipewire   || gentoo-pipewire-launcher &
+pgrep -f dunst      || dunst >~/.cache/dunst.log 2>&1 &
 pgrep -f xautolock  || xautolock \
     -locker 'i3lock-fancy-rapid 20 pixel' \
     -time 10 \
