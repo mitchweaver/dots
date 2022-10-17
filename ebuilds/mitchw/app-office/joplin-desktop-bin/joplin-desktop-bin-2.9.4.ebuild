@@ -12,7 +12,9 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
 
-DEPEND=""
+# need sys-fs/fuse:0 for libfuse.so.2
+# in main tree sys-fs/fuse is version 3.0
+DEPEND="sys-fs/fuse sys-fs/fuse:0"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
