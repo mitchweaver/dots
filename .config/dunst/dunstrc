@@ -1,0 +1,43 @@
+[global]
+  corner_radius = 4
+  follow = mouse
+  font = "Shure Tech Mono Nerd Font Complete Mono 12"
+  format = "<b>%s</b>\n<span font='12'>%b</span>"
+  frame_color = "#cccccc"
+  frame_width = 2
+  geometry = "400x5-6-30"
+  history = ctrl+grave
+  history_length = 10
+  horizontal_padding = 12
+  padding = 10
+  icon_position = left
+  max_icon_size = 24
+  icon_path = /usr/share/icons/Paper/48x48/status/:/usr/share/icons/gnome/48x48/devices/
+  idle_threshold = 120
+  ignore_newline = no
+  indicate_hidden = yes
+  line_height = 0
+  markup = full
+  separator_color = "#585858"
+  separator_height = 2
+  show_age_threshold = 30
+  sort = yes
+  stack_duplicates = true
+  transparency = 20
+  word_wrap = yes
+
+[urgency_low]
+  background = "#181818"
+  foreground = "#787878"
+  timeout = 5
+
+[urgency_normal]
+  background = "#181818"
+  foreground = "#e8e8e8"
+  timeout = 20
+
+[urgency_critical]
+  background = "#9b3648"
+  foreground = "#e8e8e8"
+  icon = /usr/share/icons/Paper/48x48/status/stock_dialog-warning.png
+  timeout = 0
