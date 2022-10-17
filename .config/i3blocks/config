@@ -12,20 +12,20 @@ markup=none
 # interval=persist
 
 [essid]
-command=$SCRIPT_DIR/ssid
+command=$SCRIPT_DIR/essid
 INTERFACE=$IFACE
-interval=30
+interval=15
 
 # [wlan-dbm]
 # command=$SCRIPT_DIR/wlan-dbm
 # IFACE=$IFACE
 # USE_PERCENT=1
 
-[bandwidth]
-command=$SCRIPT_DIR/bandwidth2
-interval=persist
-markup=pango
-LABEL=
+# [bandwidth]
+# command=$SCRIPT_DIR/bandwidth2
+# interval=persist
+# markup=pango
+# LABEL=
 
 [load_average]
 LABEL=LOAD: 

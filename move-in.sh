@@ -44,7 +44,8 @@ done
 for file in \
 	.detoxrc .gitconfig \
 	.profile .pylintrc .vimrc \
-	.xmodmaprc .xinitrc .Xresources ; do
+	.xmodmaprc .xinitrc .Xresources \
+	.config/redshift.conf ; do
 
 	rm -fv "${HOME}/$file"
 	ln -sv "$DOTS_DIR/$file" "${HOME}/$file"

@@ -30,11 +30,9 @@ pgrep -f xautolock  || xautolock \
     -notify 15 \
     -notifier notify-send &
 
-pgrep -f redshift || \
-    redshift -v -l '36.15398:-95.99277' >~/.cache/redshift.log 2>&1 &
+pgrep -f redshift || redshift -v >~/.cache/redshift.log 2>&1 &
 
-# note: sleep here seems to avoid "dummy output" bug
-pgrep -f pipewire   || { sleep 5 ; gentoo-pipewire-launcher ; } &
+# pgrep -f pipewire   || gentoo-pipewire-launcher &
 
 background &
 
