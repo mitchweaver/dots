@@ -1,0 +1,112 @@
+# =/=/=/=/= my flags /=/=/=/=/=/=/=/=/=/=/=/=/=
+sys-boot/grub:2 device-mapper
+www-client/firefox hwaccel gmp-autoupdate
+www-client/firefox-bin hwaccel gmp-autoupdate
+net-analyzer/wireshark wifi
+media-video/ffmpeg x264
+x11-misc/picom config-file opengl
+net-misc/nextcloud-client -dolphin -nautilus
+x11-misc/slop -opengl
+# note: ads === active directory
+net-fs/cifs-utils -ads -acl -creds
+net-fs/samba -regedit -ads -acl -ceph -cluster -glusterfs -profiling-data -quota -spotlight
+# note: gdata ==== gmail
+mail-client/claws-mail -bogofilter -spamassassin -spam-report -sieve -dillo -gdata
+media-gfx/imagemagick jpeg jpeg2k png tiff webp
+x11-misc/dmenu xinerama -savedconfig
+x11-misc/i3blocks contrib
+
+app-admin/sysstat lm-sensors
+
+# png needed to render emoji fonts
+media-libs/freetype X png
+
+# for images in kitty
+dev-python/pillow jpeg jpeg2k tiff webp
+media-libs/tiff jpeg
+
+# drop priv
+x11-misc/lightdm non-root -introspection
+# =/=/=/=/= my flags /=/=/=/=/=/=/=/=/=/=/=/=/=
+
+# =========== audio =======================
+# to get battery levels via bluetooth
+net-wireless/bluez experimental
+# to let pipewire work w/o pulseaudio
+media-video/pipewire bluetooth dbus pipewire-alsa sound-server -jack-sdk -jack-client
+# pulseaudio for APIs, but the server will be pipewire
+media-sound/pulseaudio glib -daemon
+media-libs/libpulse glib
+# needed for pavucontrol
+x11-libs/cairo X svg glib
+dev-cpp/cairomm X
+dev-cpp/gtkmm X
+dev-cpp/cairo glib
+dev-libs/libical intropection glib
+# =========== audio =======================
+
+# ---------- junk cleaning -------------------
+dev-lang/python -bluetooth
+dev-libs/boost -numpy
+dev-libs/liborcus -spreadsheet-model
+app-admin/sudo -offensive
+net-clean/cups -usb
+sys-devel/clang -static-analyzer
+
+# not needed for single user system
+sys-auth/pambase -passwdqc
+# =/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=
+
+#======== ========= NERD FONTS from zh-gentoo Overlay ======================
+# annoyingly no way to wrap lines in this file...
+media-fonts/nerd-fonts X dejavusansmono hack ibmplexmono terminus robotomono sharetechmono sourcecodepro profont -anonymouspro -arimo -aurulentsansmono -bigblueterminal -bitstreamverasansmono -cascadiacode -codenewroman -cousine -daddytimemono -droidsansmono -fantasquesansmono -firacode -firamono -go-mono -gohu -hasklig -heavydata -hermit -ia-writer -inconsolata -inconsolatago -inconsolatalgc -jetbrainsmono -lekton -liberationmono -lilex -meslo -monofur -monoid -mononoki -mplus -noto -opendyslexic -overpass -proggyclean -spacemono -symbols -symbolsmono -tinos -ubuntu -ubuntumono -victormono -agave -iosevka 
+#======== ========= NERD FONTS from zh-gentoo Overlay ======================
+
+
+# ========= WAYLAND =============
+###########sys-auth/seatd server
+###########gui-apps/foot -grapheme-clustering
+###########gui-wm/hyprland X
+###########gui-wm/sway X
+###########dev-libs/weston xwayland
+###########dev-qt/qtgui egl
+###########media-libs/mesa wayland
+###########gui-libs/wlroots X x11-backend
+###########x11-libs/gtk+ wayland
+# ========= WAYLAND =============
+
+# ========= SHOTCUT =============
+media-libs/mlt xml sdl frei0r qt5 jack opengl ffmpeg
+media-libs/opencv contribdnn contrib
+# ========= SHOTCUT ===============
+
+# ========= LIBREOFFICE ===============
+media-libs/harfbuzz icu
+dev-libs/xmlsec nss
+sys-apps/dbus X
+# ========= LIBREOFFICE ===============
+
+# ========= XORG CRAP ==============
+media-libs/libsdl2 X opengl gles2
+x11-libs/pango X
+x11-apps/xinit -twm
+x11-base/xorg-drivers -wacom
+# NOTE: if using wayland you can delete this:
+sys-auth/pambase elogind
+# ========= XORG CRAP ==============
+
+# ========= MISC =============
+app-text/xmlto text
+app-text/ghostscript-gpl cups
+app-text/poppler cairo
+media-libs/libglvnd X
+media-libs/gegl cairo
+sys-libs/zlib minizip
+x11-libs/libxkbcommon X
+x11-libs/gdk-pixbuf jpeg
+
+# only thing on system needing berkdb, required by python
+sys-libs/gdbm berkdb
+# needed for firefox
+media-libs/libvpx postproc
+# ========= MISC =============
