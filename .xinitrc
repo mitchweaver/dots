@@ -19,6 +19,8 @@ xset b off
 # ONE SHOT COMMANDS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 background &
+dbus-update-activation-environment --all
+gnome-keyring-daemon --start --components=secrets
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # DAEMONS
@@ -39,6 +41,8 @@ pgrep -f xautolock  || xautolock \
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # APPLICATIONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-sylpheed >~/.cache/sylpheed.log 2>&1 &
+mailspring >~/.cache/mailspring.log 2>&1 &
+# joplin-desktop-bin >~/.cache/joplin.log 2>&1 &
+# spotify >~/.cache/spotify.log 2>&1 &
 
 exec i3 -d all >~/.cache/i3.log 2>&1
