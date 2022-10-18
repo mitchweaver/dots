@@ -40,10 +40,14 @@ pgrep -f xautolock  || xautolock \
     -notify 15 \
     -notifier notify-send >~/.cache/xautolock.log 2>&1 &
 
+polybar-msg cmd quit
+polybar mybar >~/.cache/polybar.log 2>&1 &
+
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # APPLICATIONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 mailspring >~/.cache/mailspring.log 2>&1 &
+firejail-discord.sh >~/.cache/discord.log 2>&1 &
 # joplin-desktop-bin >~/.cache/joplin.log 2>&1 &
 # spotify >~/.cache/spotify.log 2>&1 &
 
