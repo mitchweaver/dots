@@ -215,3 +215,5 @@ pvmv() {
     : > "$2" || return 1
     pv < "$1" > "$2" && rm -f -- "$1"
 }
+
+alias fjl='firejail --list'

@@ -23,8 +23,20 @@ focus_follows_mouse no
 # AESTHETICS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 hide_edge_borders smart
-gaps inner 10
-gaps outer 10
+# hide_edge_borders yes
+
+gaps inner 16
+gaps outer 20
+
+# setting these all to zero keeps gaps symmetrical
+# for a more "dwm" look
+gaps top 0
+gaps left 0
+gaps bottom 0
+gaps right 0
+
+# hide gaps if only one window on workspace
+smart_gaps on
 
 # remove window title bars
 for_window [class="^.*"] border pixel 1

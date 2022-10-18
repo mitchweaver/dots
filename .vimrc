@@ -191,9 +191,9 @@ if has('nvim')
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
         " colorscheme onehalfdark
         " colorscheme typewriter
-        colorscheme everforest
+        " colorscheme everforest
         " colorscheme papercolor
-        " set background=light
+        set background=light
         " set background=dark
         " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 

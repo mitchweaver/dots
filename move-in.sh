@@ -24,6 +24,7 @@ read -r ans
 
 
 for folder in \
+	.firejail \
 	.config/i3 \
 	.config/i3blocks \
 	.config/kitty \

@@ -34,6 +34,7 @@ pgrep -f xbanish    || xbanish -t 10 &
 pgrep -f picom      || picom -b
 pgrep -f dunst      || dunst >~/.cache/dunst.log 2>&1 &
 pgrep -f xautolock  || xautolock \
+    -detectsleep \
     -locker 'i3lock-fancy-rapid 20 pixel' \
     -time 10 \
     -notify 15 \
