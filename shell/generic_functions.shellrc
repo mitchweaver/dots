@@ -124,3 +124,11 @@ append() {
 text2image() {
     convert label:@- out.png
 }
+
+load() {
+    if [ -e /proc/loadavg ] ; then
+        read -r _load < /proc/loadavg
+        set -- $_load
+        printf '%s %s %s\n' "$1" "$2" "$3"
+    fi
+}
