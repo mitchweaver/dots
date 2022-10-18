@@ -10,13 +10,13 @@ x11-misc/slop -opengl
 # note: ads === active directory
 net-fs/cifs-utils -ads -acl -creds
 net-fs/samba -regedit -ads -acl -ceph -cluster -glusterfs -profiling-data -quota -spotlight
-# note: gdata ==== gmail
-mail-client/claws-mail -bogofilter -spamassassin -spam-report -sieve -dillo -gdata
-media-gfx/imagemagick jpeg jpeg2k png tiff webp
+media-gfx/imagemagick X jpeg jpeg2k png tiff webp
 x11-misc/dmenu xinerama -savedconfig
-x11-misc/i3blocks contrib
-
 app-admin/sysstat lm-sensors
+dev-libs/glib -dbus
+
+x11-misc/polybar i3wm curl network ipc -mpd
+#########x11-misc/i3blocks contrib
 
 # png needed to render emoji fonts
 media-libs/freetype X png
@@ -27,6 +27,14 @@ media-libs/tiff jpeg
 
 # drop priv
 x11-misc/lightdm non-root -introspection
+net-libs/webkit-gtk X
+
+# mailspring
+gnome-base/gnome-keyring -ssh-agent
+app-crypt/gcr gtk -vala
+
+# pcmanfm
+x11-libs/libfm gtk -automount
 # =/=/=/=/= my flags /=/=/=/=/=/=/=/=/=/=/=/=/=
 
 # =========== audio =======================
@@ -110,3 +118,8 @@ sys-libs/gdbm berkdb
 # needed for firefox
 media-libs/libvpx postproc
 # ========= MISC =============
+
+# ************************************************
+# INACTIVE
+# ************************************************
+######mail-client/claws-mail -bogofilter -spamassassin -spam-report -sieve -dillo -gdata
