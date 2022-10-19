@@ -33,9 +33,10 @@ pgrep -f pipewire   || gentoo-pipewire-launcher &
 pgrep -f xbanish    || xbanish -t 10 &
 pgrep -f picom      || picom -b
 pgrep -f dunst      || dunst >~/.cache/dunst.log 2>&1 &
+
+####### -detectsleep \
 pgrep -f xautolock  || xautolock \
-    -detectsleep \
-    -locker 'i3lock-fancy-rapid 20 pixel' \
+    -locker 'i3lock-fancy-rapid 15 pixel' \
     -time 10 \
     -notify 15 \
     -notifier notify-send >~/.cache/xautolock.log 2>&1 &

@@ -22,11 +22,14 @@ focus_follows_mouse no
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # AESTHETICS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-hide_edge_borders smart
+# hide_edge_borders smart
 # hide_edge_borders yes
 
+# Hide edge borders only if there is one window with no gaps
+hide_edge_borders smart_no_gaps
+
 gaps inner 16
-gaps outer 20
+# gaps outer 10
 
 # setting these all to zero keeps gaps symmetrical
 # for a more "dwm" look
@@ -35,8 +38,11 @@ gaps left 0
 gaps bottom 0
 gaps right 0
 
+# enable outer gaps only when there is exactly one container
+# smart_gaps inverse_outer
+
 # hide gaps if only one window on wrorkspace
-# smart_gaps on
+smart_gaps on
 
 # remove window title bars
 for_window [class="^.*"] border pixel 1
@@ -95,8 +101,8 @@ bindsym $mod+v split v
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+t layout toggle split
-bindsym $mod+e layout tabbed
 bindsym $mod+s layout stacking
+# bindsym $mod+e layout tabbed
 
 # toggle tiling / floating
 bindsym $mod+f floating toggle
@@ -104,6 +110,10 @@ bindsym $mod+f floating toggle
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # WORKSPACES
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# smaller gaps on firefox workspace
+workspace $ws1 gaps inner 10
+workspace $ws1 gaps outer 10
+
 set $ws1 "1.  Firefox"
 set $ws2 "2.  Terminal"
 set $ws3 "3.  Terminal"
@@ -140,21 +150,21 @@ bindsym $mod+Shift+BackSpace move container to workspace number $ws10
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # RESIZING
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-mode "resize" {
-        bindsym h resize shrink width 25 px or 25 ppt
-        bindsym j resize grow height 25 px or 25 ppt
-        bindsym k resize shrink height 25 px or 25 ppt
-        bindsym l resize grow width 25 px or 25 ppt
-        bindsym Left resize shrink width 25 px or 25 ppt
-        bindsym Down resize grow height 25 px or 25 ppt
-        bindsym Up resize shrink height 25 px or 25 ppt
-        bindsym Right resize grow width 25 px or 25 ppt
+# mode "resize" {
+#         bindsym h resize shrink width 25 px or 25 ppt
+#         bindsym j resize grow height 25 px or 25 ppt
+#         bindsym k resize shrink height 25 px or 25 ppt
+#         bindsym l resize grow width 25 px or 25 ppt
+#         bindsym Left resize shrink width 25 px or 25 ppt
+#         bindsym Down resize grow height 25 px or 25 ppt
+#         bindsym Up resize shrink height 25 px or 25 ppt
+#         bindsym Right resize grow width 25 px or 25 ppt
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-bindsym $mod+r mode "resize"
+#         bindsym Return mode "default"
+#         bindsym Escape mode "default"
+#         bindsym $mod+r mode "default"
+# }
+# bindsym $mod+r mode "resize"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # RULES
@@ -176,10 +186,10 @@ for_window [window_role="task_dialog"] floating enable
 assign [class="firefox"] → $ws1
 assign [class="Firefox"] → $ws1
 assign [class="Navigator"] → $ws1
-assign [class="Joplin"] → $ws7
-assign [class="joplin"] → $ws7
-assign [class="spotify"] → $ws8
-assign [class="Spotify"] → $ws8
+assign [class="Joplin"] → $ws8
+assign [class="joplin"] → $ws8
+assign [class="spotify"] → $ws7
+assign [class="Spotify"] → $ws7
 assign [class="Mailspring"] → $ws9
 assign [class="Discord"] → $ws10
 assign [class="discord"] → $ws10

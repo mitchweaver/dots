@@ -217,3 +217,4 @@ pvmv() {
 }
 
 alias fjl='firejail --list'
+alias pbrestart='polybar-msg cmd restart'

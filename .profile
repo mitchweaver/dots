@@ -6,21 +6,21 @@ umask 022
 PATH=/bin:/sbin:$PATH
 PATH=/usr/bin:/usr/sbin:$PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
+PATH=${HOME}/.local/bin:$PATH
 LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH
+export PATH
+export LD_LIBRARY_PATH
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-PATH=${HOME}/.local/bin:$PATH
-export PATH
-
 export MANPATH="${HOME}/.local/share/man:$MANPATH"
-export FONTCONFIG_PATH=/etc/fonts
+export FONTCONFIG_PATH="/etc/fonts:${HOME}/.fonts"
 
 case $(uname) in
     OpenBSD|Darwin)
-        export CC=${CC:-clang} cc=${cc:-clang}
+        export CC="${CC:-clang}" cc="${cc:-clang}"
         ;;
     Linux|FreeBSD)
-        export CC=${CC:-gcc} cc=${cc:-gcc}
+        export CC="${CC:-gcc}" cc="${cc:-gcc}"
 esac
 
 # using en_US.UTF-8 over C causes case-insensitive sorting

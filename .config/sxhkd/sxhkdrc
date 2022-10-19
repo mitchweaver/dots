@@ -3,21 +3,19 @@ alt Return
     kitty --single-instance
 alt + w
     brws
-# alt + r
-#     kitty --single-instance ranger
+alt + r
+    kitty --single-instance ranger
 
 super + l
-    xautolock -locknow -locker 'i3lock-fancy-rapid 20 pixel'
+    xautolock -locknow -locker 'i3lock-fancy-rapid 15 pixel'
 
 Print
     scrap -n
 control + Print
     scrap
 
-#alt + e
-    # pcmanfm
-# super + e
-    # pcmanfm
+alt + e
+    pcmanfm
 
 # dmenus
 alt + p
@@ -33,12 +31,6 @@ XF86MonBrightnessUp
     bright i
 XF86MonBrightnessDown
     bright d
-
-# redshift control
-# alt + equal
-#     sctc i
-# alt + minus
-#     sctc d
 
 # volume
 alt + apostrophe
