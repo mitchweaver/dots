@@ -43,7 +43,6 @@
 *config/gconf
 *config/libfm
 *config/enchant
-*vim-plug*
 *dconf*
 *autostart*
 *menus*
