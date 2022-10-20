@@ -22,13 +22,15 @@ let mapleader=" "
 " ╚═╝     ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝╚═╝  ╚═══╝╚══════╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-" NEOVIM ONLY
-" if has('nvim')
-" endif
-
 set nocompatible
 filetype off
 call plug#begin('~/.vim/vim-plug')
+
+" NEOVIM ONLY
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+        let g:deoplete#enable_at_startup = 1
+endif
 
 Plug 'tpope/vim-repeat'          " allows '.' to do more things
 Plug 'tpope/vim-speeddating'     " allows C-a to increment dates and times
@@ -116,9 +118,6 @@ Plug 'Yggdroot/indentLine' " show indentation lines
 let g:indentLine_enabled = 0
 nmap <leader>il :let g:indentLine_enabled = 1<CR>
 nmap <leader>li :let g:indentLine_enabled = 0<CR>
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup = 1
 
 Plug 'w0rp/ale'
 let g:ale_sign_column_always = 0
