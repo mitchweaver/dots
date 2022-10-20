@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 
 if [ ! -e ~/.vim/autoload/plug.vim ] ; then
     printf '\n%s\n\n' "Installing vim plug"
