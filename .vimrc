@@ -537,11 +537,11 @@ if has('nvim')
     augroup END
 
     command! -complete=dir -nargs=* Ranger :call <SID>Ranger(<f-args>)
+
+    let g:ranger_map_keys = 0
+    nnoremap <silent><leader>r :Ranger<CR>
 endif
 
-" ranger
-let g:ranger_map_keys = 0
-nnoremap <silent><leader>r :Ranger<CR>
 
 " ███████╗██████╗ ██╗     ██╗████████╗███████╗
 " ██╔════╝██╔══██╗██║     ██║╚══██╔══╝██╔════╝
