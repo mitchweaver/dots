@@ -56,11 +56,8 @@ for file in \
 
 done
 
-if [ ! -e ~/.vim/autoload/plug.vim ] ; then
-    printf '\n%s\n\n' "Installing vim plug"
-
-    curl -#fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if [ -d scripts ] ; then
+	sh ./scripts/install-vim-plug.sh
 fi
 
 echo "All done!"

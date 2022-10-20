@@ -25,14 +25,14 @@ gnome-keyring-daemon --start --components=secrets
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # DAEMONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-pgrep -f parcellite || parcellite >~/.cache/parcellite.log 2>&1 &
 pgrep -f nextcloud  || nextcloud >~/.cache/nextcloud.log 2>&1 &
-pgrep -f sxhkd      || sxhkd >~/.cache/sxhkd.log 2>&1 &
-pgrep -f redshift   || redshift -v >~/.cache/redshift.log 2>&1 &
 pgrep -f pipewire   || gentoo-pipewire-launcher &
-pgrep -f xbanish    || xbanish -t 10 &
-pgrep -f picom      || picom -b
 pgrep -f dunst      || dunst >~/.cache/dunst.log 2>&1 &
+pgrep -f sxhkd      || sxhkd >~/.cache/sxhkd.log 2>&1 &
+pgrep -f redshift   || firejail-redshift.sh -v >~/.cache/redshift.log 2>&1 &
+pgrep -f xbanish    || firejail xbanish -t 10 &
+pgrep -f picom      || firejail picom >~/.cache/picom.log &
+pgrep -f parcellite || firejail parcellite >~/.cache/parcellite.log 2>&1 &
 
 ####### -detectsleep \
 pgrep -f xautolock  || xautolock \
@@ -47,9 +47,9 @@ polybar mybar >~/.cache/polybar.log 2>&1 &
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # APPLICATIONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-mailspring >~/.cache/mailspring.log 2>&1 &
 firejail-discord.sh >~/.cache/discord.log 2>&1 &
+# firejail-spotify.sh >~/.cache/spotify.log 2>&1 &
+mailspring >~/.cache/mailspring.log 2>&1 &
 # joplin-desktop-bin >~/.cache/joplin.log 2>&1 &
-# spotify >~/.cache/spotify.log 2>&1 &
 
 exec i3 -d all >~/.cache/i3.log 2>&1

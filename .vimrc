@@ -21,185 +21,188 @@ let mapleader=" "
 " ██║     ███████╗╚██████╔╝╚██████╔╝██║██║ ╚████║███████║
 " ╚═╝     ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝╚═╝  ╚═══╝╚══════╝
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-if has('nvim')
-    set nocompatible
-    filetype off
-    call plug#begin('~/.vim/vim-plug')
 
-    Plug 'tpope/vim-repeat'          " allows '.' to do more things
-    Plug 'tpope/vim-speeddating'     " allows C-a to increment dates and times
-    Plug 'tpope/vim-eunuch'          " wrapper around common unix shell commands
-    Plug 'tpope/vim-sleuth'          " autodetect tab indentation
-    Plug 'tpope/vim-abolish'         " bracket {,} expansion in substitution
-    Plug 'tpope/vim-unimpaired'      " pairing of binds with '[' and ']'
-    Plug 'tpope/vim-surround'        " surround stuff with stuff
-        nmap ss ysiw
-        nmap sl yss
-        vmap s S
-    Plug 'tpope/vim-commentary'      " comment toggler
-        nmap <silent><leader>c :Commentary<CR>
-        autocmd BufNewFile,BufRead *.asm setlocal commentstring=;\ %s
-        autocmd BufNewFile,BufRead *.conf setlocal commentstring=#\ %s
-        autocmd BufNewFile,BufRead *rc setlocal commentstring=#\ %s
-        autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
+" NEOVIM ONLY
+" if has('nvim')
+" endif
 
-    Plug 'unblevable/quick-scope'    " make f F t T ; and , useable 
-        " trigger highlight only with 'f' and 'F'
-        let g:qs_highlight_on_keys = ['f', 'F']
-    Plug 'godlygeek/tabular'         " tab alignment
-    Plug 'sheerun/vim-polyglot'      " syntax highlighting
-    Plug 'ekalinin/Dockerfile.vim'   " syntax for dockerfiles
-    Plug 'svermeulen/vim-yoink'      " emacs killring for vim
-    Plug 'dstein64/vim-startuptime'  " useful for debugging slow plugins
-    Plug 'chrisbra/unicode.vim'      " easily search and copy unicode chars
-    Plug 'ryanoasis/vim-devicons'    " adds icons to plugins
-    Plug 'psliwka/vim-smoothie'      " smooth scrolling done right
-    Plug 'https://github.com/farmergreg/vim-lastplace' " remember last place in files
+set nocompatible
+filetype off
+call plug#begin('~/.vim/vim-plug')
 
-    Plug 'preservim/vim-wordy'       " make me write gooder
-        noremap <silent><F8> :<C-u>NextWordy<cr>
-        xnoremap <silent><F8> :<C-u>NextWordy<cr>
-        inoremap <silent><F8> <C-o>:NextWordy<cr>
-        if !&wildcharm | set wildcharm=<C-z> | endif
-        execute 'nnoremap <leader>w :Wordy<space>'.nr2char(&wildcharm)
+Plug 'tpope/vim-repeat'          " allows '.' to do more things
+Plug 'tpope/vim-speeddating'     " allows C-a to increment dates and times
+Plug 'tpope/vim-eunuch'          " wrapper around common unix shell commands
+Plug 'tpope/vim-sleuth'          " autodetect tab indentation
+Plug 'tpope/vim-abolish'         " bracket {,} expansion in substitution
+Plug 'tpope/vim-unimpaired'      " pairing of binds with '[' and ']'
+Plug 'tpope/vim-surround'        " surround stuff with stuff
+nmap ss ysiw
+nmap sl yss
+vmap s S
+Plug 'tpope/vim-commentary'      " comment toggler
+nmap <silent><leader>c :Commentary<CR>
+autocmd BufNewFile,BufRead *.asm setlocal commentstring=;\ %s
+autocmd BufNewFile,BufRead *.conf setlocal commentstring=#\ %s
+autocmd BufNewFile,BufRead *rc setlocal commentstring=#\ %s
+autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
-    Plug 'ap/vim-buftabline' " display buffers along top as tabs
-        " uncomment to hide tab if there is only one buffer
-        " let g:buftabline_show = 1
+Plug 'unblevable/quick-scope'    " make f F t T ; and , useable 
+" trigger highlight only with 'f' and 'F'
+let g:qs_highlight_on_keys = ['f', 'F']
+Plug 'godlygeek/tabular'         " tab alignment
+Plug 'sheerun/vim-polyglot'      " syntax highlighting
+Plug 'ekalinin/Dockerfile.vim'   " syntax for dockerfiles
+Plug 'svermeulen/vim-yoink'      " emacs killring for vim
+Plug 'dstein64/vim-startuptime'  " useful for debugging slow plugins
+Plug 'chrisbra/unicode.vim'      " easily search and copy unicode chars
+Plug 'ryanoasis/vim-devicons'    " adds icons to plugins
+Plug 'psliwka/vim-smoothie'      " smooth scrolling done right
+Plug 'https://github.com/farmergreg/vim-lastplace' " remember last place in files
 
-    Plug 'mg979/vim-visual-multi' " sublime-like multiple select
-        let g:VM_default_mappings = 0
-        let g:VM_mouse_mappings = 0
-        let g:VM_maps = {}
-        " let g:VM_maps["Undo"] = 'u'
-        " let g:VM_maps["Redo"] = '<C-r>'
-        " let g:VM_maps['Select All']  = '<M-n>'
-        " let g:VM_maps['Visual All']  = '<M-n>'
-        let g:VM_maps['Find Under']         = '<C-d>'
-        let g:VM_maps['Find Subword Under'] = '<C-d>'
-        let g:VM_maps['Skip Region'] = '<C-x>'
-        " let g:VM_maps["Select Cursor Down"] = '<M-C-Down>'
-        " let g:VM_maps["Select Cursor Up"]   = '<M-C-Up>'
+Plug 'preservim/vim-wordy'       " make me write gooder
+noremap <silent><F8> :<C-u>NextWordy<cr>
+xnoremap <silent><F8> :<C-u>NextWordy<cr>
+inoremap <silent><F8> <C-o>:NextWordy<cr>
+if !&wildcharm | set wildcharm=<C-z> | endif
+execute 'nnoremap <leader>w :Wordy<space>'.nr2char(&wildcharm)
 
-    Plug 'airblade/vim-gitgutter' " git diffing along the left side
-        let g:gitgutter_enabled = 0 " disable on startup, toggle with leader+g
-        let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
-        let g:gitgutter_realtime = 0 " only run gitgutter on save
-        let g:gitgutter_earer = 1
-        let g:gitgutter_max_signs = 1000
-        let g:gitgutter_diff_args = '-w'
-        let g:gitgutter_sign_added = '+'
-        let g:gitgutter_sign_modified = '~'
-        let g:gitgutter_sign_removed = '-'
-        let g:gitgutter_sign_removed_first_line = '^'
-        let g:gitgutter_sign_modified_removed = ':'
-        map <silent><leader>g :GitGutterToggle<CR>
-        " nmap ]h <Plug>GitGutterNextHunk
-        " nmap [h <Plug>GitGutterPrevHunk
-        " nmap <Leader>hs <Plug>GitGutterStageHunk
-        " nmap <Leader>hr <Plug>GitGutterUndoHunk
+Plug 'ap/vim-buftabline' " display buffers along top as tabs
+" uncomment to hide tab if there is only one buffer
+" let g:buftabline_show = 1
 
-    Plug 'honza/vim-snippets' " snippets repo
-    Plug 'SirVer/ultisnips' " snippet driver
-        let g:UltiSnipsExpandTrigger="<c-l>"
-        let g:UltiSnipsListSnippets = '<c-cr>'
-        let g:UltiSnipsEditSplit="vertical"
+Plug 'mg979/vim-visual-multi' " sublime-like multiple select
+let g:VM_default_mappings = 0
+let g:VM_mouse_mappings = 0
+let g:VM_maps = {}
+" let g:VM_maps["Undo"] = 'u'
+" let g:VM_maps["Redo"] = '<C-r>'
+" let g:VM_maps['Select All']  = '<M-n>'
+" let g:VM_maps['Visual All']  = '<M-n>'
+let g:VM_maps['Find Under']         = '<C-d>'
+let g:VM_maps['Find Subword Under'] = '<C-d>'
+let g:VM_maps['Skip Region'] = '<C-x>'
+" let g:VM_maps["Select Cursor Down"] = '<M-C-Down>'
+" let g:VM_maps["Select Cursor Up"]   = '<M-C-Up>'
 
-    Plug 'ervandew/supertab' " tab completion rather than <c-n>
-        let g:SuperTabDefaultCompletionType = "<c-n>"
+Plug 'airblade/vim-gitgutter' " git diffing along the left side
+let g:gitgutter_enabled = 0 " disable on startup, toggle with leader+g
+let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
+let g:gitgutter_realtime = 0 " only run gitgutter on save
+let g:gitgutter_earer = 1
+let g:gitgutter_max_signs = 1000
+let g:gitgutter_diff_args = '-w'
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '~'
+let g:gitgutter_sign_removed = '-'
+let g:gitgutter_sign_removed_first_line = '^'
+let g:gitgutter_sign_modified_removed = ':'
+map <silent><leader>g :GitGutterToggle<CR>
+" nmap ]h <Plug>GitGutterNextHunk
+" nmap [h <Plug>GitGutterPrevHunk
+" nmap <Leader>hs <Plug>GitGutterStageHunk
+" nmap <Leader>hr <Plug>GitGutterUndoHunk
 
-    Plug 'Yggdroot/indentLine' " show indentation lines
-        let g:indentLine_enabled = 0
-        nmap <leader>il :let g:indentLine_enabled = 1<CR>
-        nmap <leader>li :let g:indentLine_enabled = 0<CR>
+Plug 'honza/vim-snippets' " snippets repo
+Plug 'SirVer/ultisnips' " snippet driver
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsListSnippets = '<c-cr>'
+let g:UltiSnipsEditSplit="vertical"
 
-   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-       let g:deoplete#enable_at_startup = 1
+Plug 'ervandew/supertab' " tab completion rather than <c-n>
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
-    Plug 'w0rp/ale'
-        let g:ale_sign_column_always = 0
-        let g:ale_fix_on_save = 1
-        " uncomment to only have ale check on file saves
-        let g:ale_lint_on_text_changed = 'never'
-        let g:airline#extensions#ale#enabled = 1
-        let g:ale_linters = {'python': ['pylint']} " flake8
-        let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
+Plug 'Yggdroot/indentLine' " show indentation lines
+let g:indentLine_enabled = 0
+nmap <leader>il :let g:indentLine_enabled = 1<CR>
+nmap <leader>li :let g:indentLine_enabled = 0<CR>
 
-    Plug 'mhinz/vim-startify'
-        let g:startify_files_number = 10
-        " 0: recently-used files update on vim exit, 1: immediate
-        let g:startify_update_oldfiles = 1
-        let g:startify_change_to_dir = 1
-        " remove fortune and cowsay from startify... annoying...
-        let g:startify_custom_header = [
-            \ '                                 ',
-            \ '      ⢀⣀ ⣰⡀ ⢀⣀ ⡀⣀ ⣰⡀ ⣀⡀ ⢀⣀ ⢀⡀ ⢀⡀ ',
-            \ '      ⠭⠕ ⠘⠤ ⠣⠼ ⠏  ⠘⠤ ⡧⠜ ⠣⠼ ⣑⡺ ⠣⠭ ',
-            \ ]
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup = 1
 
-        let g:startify_lists = [
-            \ { 'type': 'dir',       'header': ['   Last Updated: '] },
-            \ { 'type': 'bookmarks', 'header': ['   Bookmarks:']      },
-            \ ]
+Plug 'w0rp/ale'
+let g:ale_sign_column_always = 0
+let g:ale_fix_on_save = 1
+" uncomment to only have ale check on file saves
+let g:ale_lint_on_text_changed = 'never'
+let g:airline#extensions#ale#enabled = 1
+let g:ale_linters = {'python': ['pylint']} " flake8
+let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 
-        let g:startify_bookmarks = [
-            \ {'v': '~/.vimrc'},
-            \ ]
+Plug 'mhinz/vim-startify'
+let g:startify_files_number = 10
+" 0: recently-used files update on vim exit, 1: immediate
+let g:startify_update_oldfiles = 1
+let g:startify_change_to_dir = 1
+" remove fortune and cowsay from startify... annoying...
+let g:startify_custom_header = [
+    \ '                                 ',
+    \ '      ⢀⣀ ⣰⡀ ⢀⣀ ⡀⣀ ⣰⡀ ⣀⡀ ⢀⣀ ⢀⡀ ⢀⡀ ',
+    \ '      ⠭⠕ ⠘⠤ ⠣⠼ ⠏  ⠘⠤ ⡧⠜ ⠣⠼ ⣑⡺ ⠣⠭ ',
+    \ ]
 
-        let g:startify_skiplist = [
-            \ 'COMMIT_EDITMSG',
-            \ escape(fnamemodify(resolve($VIMRUNTIME), ':p'), '\') .'doc',
-            \ 'bundle/.*/doc',
-            \ ]
+let g:startify_lists = [
+    \ { 'type': 'dir',       'header': ['   Last Updated: '] },
+    \ { 'type': 'bookmarks', 'header': ['   Bookmarks:']      },
+    \ ]
 
-    Plug 'preservim/nerdtree'
-        nnoremap <C-n> :NERDTreeToggle<CR>
-        nnoremap <leader>n :NERDTreeToggle<CR>
-        nnoremap <leader>f :NERDTreeFind<CR>
-        " Exit Vim if NERDTree is the only window left.
-        autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-            \ quit | endif
-        " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-        autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-            \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-        " Open the existing NERDTree on each new tab.
-        autocmd BufWinEnter * silent NERDTreeMirror
-        let g:NERDTreeDirArrowExpandable = '▸'
-        let g:NERDTreeDirArrowCollapsible = '▾'
+let g:startify_bookmarks = [
+    \ {'v': '~/.vimrc'},
+    \ ]
 
-    Plug 'gyim/vim-boxdraw' " the coolest plugin you never knew you needed
-        " NOTE: this is toggled by ']ov' if you tpope's vim-unimpaired
-        " set virtualedit+=all " allows you to select empty space in visual
+let g:startify_skiplist = [
+    \ 'COMMIT_EDITMSG',
+    \ escape(fnamemodify(resolve($VIMRUNTIME), ':p'), '\') .'doc',
+    \ 'bundle/.*/doc',
+    \ ]
 
-    Plug 'fladson/vim-kitty' " kitty.conf syntax
-    Plug 'gentoo/gentoo-syntax' " gentoo ebuild syntax
+Plug 'preservim/nerdtree'
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * silent NERDTreeMirror
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
-    Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
-    Plug 'sainnhe/everforest' " theme
-    Plug 'logico/typewriter-vim' " theme
-    Plug 'https://github.com/NLKNguyen/papercolor-theme' " theme
+Plug 'gyim/vim-boxdraw' " the coolest plugin you never knew you needed
+" NOTE: this is toggled by ']ov' if you tpope's vim-unimpaired
+" set virtualedit+=all " allows you to select empty space in visual
 
-    call plug#end()
-    filetype indent plugin on
+Plug 'fladson/vim-kitty' " kitty.conf syntax
+Plug 'gentoo/gentoo-syntax' " gentoo ebuild syntax
 
-    if exists(':PlugInstall')
-        map <silent><leader>pi :PlugInstall<CR>
-        map <silent><leader>pu :PlugUpdate<CR>
-        map <silent><leader>pc :PlugClean<CR>
+Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
+Plug 'sainnhe/everforest' " theme
+Plug 'logico/typewriter-vim' " theme
+Plug 'https://github.com/NLKNguyen/papercolor-theme' " theme
 
-        " NOTE: colorschemes must be set after loading plugins
-        " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
-        " colorscheme onehalfdark
-        " colorscheme typewriter
-        " colorscheme everforest
-        " colorscheme papercolor
-        set background=light
-        " set background=dark
-        " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+call plug#end()
+filetype indent plugin on
 
-        " make sign column same color as terminal background
-        hi signColumn ctermbg=NONE
-    endif
+if exists(':PlugInstall')
+    map <silent><leader>pi :PlugInstall<CR>
+    map <silent><leader>pu :PlugUpdate<CR>
+    map <silent><leader>pc :PlugClean<CR>
+
+    " NOTE: colorschemes must be set after loading plugins
+    " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+    " colorscheme onehalfdark
+    " colorscheme typewriter
+    " colorscheme everforest
+    " colorscheme papercolor
+    set background=light
+    " set background=dark
+    " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+
+    " make sign column same color as terminal background
+    hi signColumn ctermbg=NONE
 endif
 
 "  ██████╗ ███████╗███╗   ██╗███████╗██████╗  █████╗ ██╗
