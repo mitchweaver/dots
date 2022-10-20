@@ -111,18 +111,18 @@ alias sshcfg='v ~/.ssh/config'
 alias vimrc='v ~/.vimrc'
 
 mkgif() {
-    rm out.gif 2>/dev/null ||:
+    rm -- out.gif 2>/dev/null ||:
     convert -delay 100 -loop 0 ./*.jpg out.gif
 }
 
 # temp file for scratch pad
 pad() {
     mkdir -p /tmp/$$.tmpsh
-    trap 'rm -rf /tmp/$$.tmpsh' EXIT INT TERM HUP
+    trap 'rm -rf -- /tmp/$$.tmpsh' EXIT INT TERM HUP
     cd /tmp/$$.tmpsh &&
     ${EDITOR:-vi} $$.md &&
     cd - >/dev/null &&
-    /bin/rm -rf /tmp/$$.tmpsh 2>/dev/null ||:
+    /bin/rm -rf -- /tmp/$$.tmpsh 2>/dev/null ||:
 }
 
 alias img2pdf='img2pdf *jpg --output combined.pdf'
@@ -180,7 +180,7 @@ backup-firefox() {
     dir="firefox-backup-$(date +'%Y%m%d_%H%M%S')"
     mkdir -p "$dir"
     cp -r ~/.mozilla "$dir"/
-    tar -cvJpf "$dir".tar.xz "$dir" && rm -r "$dir"
+    tar -cvJpf "$dir".tar.xz "$dir" && rm -r -- "$dir"
 }
 
 alias htpo=htop
