@@ -27,7 +27,7 @@ pkg() {
             [ "$ans" == y ] && sudo emerge $_def_opts --depclean
             ;;
         -sync)
-            sudo EMERGE_DEFAULT_OPTS= emerge $_def_opts --sync "$@"
+            sudo emerge $_def_opts --sync --ask n "$@"
     esac
     unset _def_opts
 }

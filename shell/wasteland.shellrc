@@ -211,10 +211,37 @@ alias progress='progress -w -M'
 alias gputemp="nvidia-smi  -q | grep 'GPU Current Temp' | trim"
 
 pvmv() {
-    [ $# -eq 2 ] || return 1
-    : > "$2" || return 1
-    pv < "$1" > "$2" && rm -f -- "$1"
+    if [ $# -eq 2 ] ; then
+        case $2 in
+            */)
+                _file="$2/$1"
+                ;;
+            *)
+                _file="$2"
+        esac
+        : > "$_file" || return 1
+    else
+        return 1
+    fi
+    pv < "$1" > "$_file" && rm -f -- "$1"
+}
+pvcp() {
+    if [ $# -eq 2 ] ; then
+        case $2 in
+            */)
+                _file="$2/$1"
+                ;;
+            *)
+                _file="$2"
+        esac
+        : > "$_file" || return 1
+    else
+        return 1
+    fi
+    pv < "$1" > "$_file"
 }
 
 alias fjl='firejail --list'
 alias pbrestart='polybar-msg cmd restart'
+
+alias governor='cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor'
