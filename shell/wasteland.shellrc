@@ -210,36 +210,33 @@ cuesplit() {
 alias progress='progress -w -M'
 alias gputemp="nvidia-smi  -q | grep 'GPU Current Temp' | trim"
 
-pvmv() {
-    if [ $# -eq 2 ] ; then
-        case $2 in
-            */)
-                _file="$2/$1"
-                ;;
-            *)
-                _file="$2"
-        esac
-        : > "$_file" || return 1
-    else
-        return 1
-    fi
-    pv < "$1" > "$_file" && rm -f -- "$1"
-}
 pvcp() {
-    if [ $# -eq 2 ] ; then
+    if [ $# -ge 2 ] ; then
         case $2 in
+            --delete)
+                return 1
+                ;;
             */)
-                _file="$2/$1"
+                _file="${2%/}/${1##*/}"
                 ;;
             *)
-                _file="$2"
+                if [ -d "$2" ] ; then
+                    _file="${2%/}/${1##*/}"
+                else
+                    _file="$2"
+                fi
         esac
         : > "$_file" || return 1
     else
         return 1
     fi
-    pv < "$1" > "$_file"
+    if pv < "$1" > "$_file" ; then
+        if [ "$3" = "--delete" ] ; then
+            rm -f -- "$1"
+        fi
+    fi
 }
+pvmv() { pvcp "$1" "$2" --delete ; }
 
 alias fjl='firejail --list'
 alias pbrestart='polybar-msg cmd restart'
