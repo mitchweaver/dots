@@ -175,6 +175,11 @@ for_window [class="Pavucontrol"] resize shrink left 100, resize shrink right 100
 for_window [class="Arandr"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
+for_window [window_role="-up"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="gl"] floating enable
+for_window [class="pcmanfm"] floating enable
+for_window [class="Pcmanfm"] floating enable
 
 # for_window [instance="scratchpad"] move to scratchpad
 # bindsym $mod+Shift+t [instance="scratchpad"] scratchpad show
