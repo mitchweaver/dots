@@ -53,8 +53,6 @@ Plug 'unblevable/quick-scope'    " make f F t T ; and , useable
 " trigger highlight only with 'f' and 'F'
 let g:qs_highlight_on_keys = ['f', 'F']
 Plug 'godlygeek/tabular'         " tab alignment
-Plug 'sheerun/vim-polyglot'      " syntax highlighting
-Plug 'ekalinin/Dockerfile.vim'   " syntax for dockerfiles
 Plug 'svermeulen/vim-yoink'      " emacs killring for vim
 Plug 'dstein64/vim-startuptime'  " useful for debugging slow plugins
 Plug 'chrisbra/unicode.vim'      " easily search and copy unicode chars
@@ -176,6 +174,16 @@ Plug 'gyim/vim-boxdraw' " the coolest plugin you never knew you needed
 
 Plug 'fladson/vim-kitty' " kitty.conf syntax
 Plug 'gentoo/gentoo-syntax' " gentoo ebuild syntax
+Plug 'sheerun/vim-polyglot'      " syntax highlighting
+Plug 'ekalinin/Dockerfile.vim'   " syntax for dockerfiles
+
+Plug 'gabrielelana/vim-markdown' " syntax highlighting
+    let g:markdown_enable_conceal = 0
+    let g:markdown_enable_input_abbreviations = 0
+    let g:markdown_enable_spell_checking = 0
+    let g:markdown_enable_mappings = 0
+    let g:markdown_enable_folding = 0
+    let g:markdown_include_jekyll_support = 0
 
 Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
 Plug 'sainnhe/everforest' " theme
