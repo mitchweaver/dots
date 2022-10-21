@@ -172,11 +172,15 @@ Plug 'gyim/vim-boxdraw' " the coolest plugin you never knew you needed
 " NOTE: this is toggled by ']ov' if you tpope's vim-unimpaired
 " set virtualedit+=all " allows you to select empty space in visual
 
+" -------------------------------------------------------------
 Plug 'fladson/vim-kitty' " kitty.conf syntax
 Plug 'gentoo/gentoo-syntax' " gentoo ebuild syntax
-Plug 'sheerun/vim-polyglot'      " syntax highlighting
 Plug 'ekalinin/Dockerfile.vim'   " syntax for dockerfiles
 
+" I like vim-markdown better than polyglot's markdown
+Plug 'sheerun/vim-polyglot'      " syntax highlighting
+    let g:polyglot_disabled = ['markdown']
+    let g:polyglot_disabled = ['markdown.plugin']
 Plug 'gabrielelana/vim-markdown' " syntax highlighting
     let g:markdown_enable_conceal = 0
     let g:markdown_enable_input_abbreviations = 0
@@ -184,7 +188,7 @@ Plug 'gabrielelana/vim-markdown' " syntax highlighting
     let g:markdown_enable_mappings = 0
     let g:markdown_enable_folding = 0
     let g:markdown_include_jekyll_support = 0
-
+" -------------------------------------------------------------
 Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
 Plug 'sainnhe/everforest' " theme
 Plug 'logico/typewriter-vim' " theme
@@ -272,8 +276,9 @@ autocmd BufNewFile,BufRead *.hs      set syntax=haskell
 autocmd BufNewFile,BufRead *.py      set syntax=python
 autocmd BufNewFile,BufRead *.pl      set syntax=perl
 autocmd BufNewFile,BufRead *.txt     set syntax=off
-autocmd BufNewFile,BufRead *.md      set syntax=md
-autocmd BufNewFile,BufRead *.pad     set syntax=md
+autocmd BufNewFile,BufRead *.md      set syntax=markdown
+autocmd BufNewFile,BufRead *.pad     set syntax=markdown
+autocmd BufNewFile,BufRead *.note     set syntax=markdown
 autocmd BufNewFile,BufRead *.asm     setlocal ft=nasm
 
 autocmd BufNewFile,BufRead /tmp/mutt-* set tw=72
