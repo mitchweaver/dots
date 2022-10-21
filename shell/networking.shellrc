@@ -18,10 +18,6 @@ wtf() {
     w3m -dump https://wtfismyip.com/json | jq -r
 }
 
-ping() {
-    command ping "${1:-openbsd.org}"
-}
-
 # scan for open ports
 alias portscan='nmap -sT'
 

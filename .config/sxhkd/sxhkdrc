@@ -1,6 +1,6 @@
 # programs
 alt Return
-    kitty --single-instance
+    stwrapper
 alt + w
     brws
 alt + r

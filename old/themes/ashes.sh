@@ -5,7 +5,7 @@
 
 case ${1#--} in
     link|l)
-        ln -sf ~/src/dots/themes/"${0##*/}" ~/src/dots/themes/current
+        ln -sf ~/src/dots/old/themes/"${0##*/}" ~/.cache/themes/current
         ;;
 esac
 

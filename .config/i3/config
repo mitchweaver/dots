@@ -28,8 +28,8 @@ focus_follows_mouse no
 # Hide edge borders only if there is one window with no gaps
 hide_edge_borders smart_no_gaps
 
-gaps inner 16
-# gaps outer 10
+gaps inner 20
+gaps outer 20
 
 # setting these all to zero keeps gaps symmetrical
 # for a more "dwm" look

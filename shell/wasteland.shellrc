@@ -242,3 +242,12 @@ alias fjl='firejail --list'
 alias pbrestart='polybar-msg cmd restart'
 
 alias governor='cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor'
+
+joplin() {
+    if ping -c 1 -s 1 joplin-cli >/dev/null 2>&1 ; then
+        ssh joplin-cli
+    else
+        >&2 echo 'turn wireguard on dumbass'
+    fi
+}
+alias j=joplin
