@@ -19,8 +19,7 @@ alt + e
 
 # dmenus
 alt + p
-    dmenu_run -p 'Run:'
-    # menu run -p 'Run:'
+    menu --wide run -p 'Run:'
 alt + o
     dedit
 # alt + y

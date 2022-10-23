@@ -110,7 +110,12 @@ alias torget='torsocks -i wget'
 # -----------------------------------------------------------
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-#### LAPTOP WIREGUARD --- for when im out, back to my homelab
-alias vpnup='nmcli connection up laptop'
-alias vpndown='nmcli connection down laptop'
+wg-up() {
+    yesipv6
+    sudo wg-quick up wg0
+}
+wg-down() {
+    noipv6
+    sudo wg-quick down wg0
+}
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

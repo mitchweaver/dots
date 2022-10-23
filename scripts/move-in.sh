@@ -48,6 +48,7 @@ for file in \
 	.profile .pylintrc .vimrc \
 	.xmodmaprc .xinitrc .Xresources \
 	.config/redshift.conf \
+	.shellcheckrc \
 	.gtkrc-2.0 ; do
 
 	rm -fv "${HOME}/$file"

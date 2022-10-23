@@ -39,7 +39,7 @@ gaps bottom 0
 gaps right 0
 
 # enable outer gaps only when there is exactly one container
-# smart_gaps inverse_outer
+smart_gaps inverse_outer
 
 # hide gaps if only one window on wrorkspace
 smart_gaps on
@@ -116,7 +116,7 @@ workspace $ws1 gaps outer 10
 
 set $ws1 "1.  Firefox"
 set $ws2 "2.  Terminal"
-set $ws3 "3.  Terminal"
+set $ws3 "3.  Work"
 set $ws4 "4.  Terminal"
 set $ws5 "5. Misc"
 set $ws6 "6. Misc"

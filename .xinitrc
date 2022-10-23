@@ -6,6 +6,10 @@
 export DISPLAY="${DISPLAY:-:0}"
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+if command -v dimensions >/dev/null ; then
+    export DIMENSIONS="$(dimensions)"
+fi
+
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # XORG SETTINGS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -26,17 +30,20 @@ gnome-keyring-daemon --start --components=secrets
 # DAEMONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 pgrep -f nextcloud  || nextcloud >~/.cache/nextcloud.log 2>&1 &
-pgrep -f pipewire   || gentoo-pipewire-launcher &
 pgrep -f dunst      || dunst >~/.cache/dunst.log 2>&1 &
 pgrep -f sxhkd      || sxhkd >~/.cache/sxhkd.log 2>&1 &
 pgrep -f redshift   || firejail-redshift.sh -v >~/.cache/redshift.log 2>&1 &
 pgrep -f xbanish    || firejail xbanish -t 10 &
 pgrep -f picom      || firejail picom >~/.cache/picom.log &
 pgrep -f parcellite || firejail parcellite >~/.cache/parcellite.log 2>&1 &
+pgrep -f weatherd   || weatherd -d >/dev/null 2>&1 &
+
+#### why is this broken on i3 startup... have to manually do it
+# pgrep -f pipewire   || gentoo-pipewire-launcher &
 
 ####### -detectsleep \
 pgrep -f xautolock  || xautolock \
-    -locker 'i3lock-fancy-rapid 15 pixel' \
+    -locker 'i3lock-fancy-rapid 10 pixel' \
     -time 10 \
     -notify 15 \
     -notifier notify-send >~/.cache/xautolock.log 2>&1 &

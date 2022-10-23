@@ -169,10 +169,8 @@ autocmd BufWinEnter * silent NERDTreeMirror
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
-Plug 'gyim/vim-boxdraw' " the coolest plugin you never knew you needed
-" NOTE: this is toggled by ']ov' if you tpope's vim-unimpaired
-" set virtualedit+=all " allows you to select empty space in visual
-
+" -------------------------------------------------------------
+" SYNTAXES
 " -------------------------------------------------------------
 Plug 'fladson/vim-kitty' " kitty.conf syntax
 Plug 'gentoo/gentoo-syntax' " gentoo ebuild syntax
@@ -189,6 +187,8 @@ Plug 'gabrielelana/vim-markdown' " syntax highlighting
     let g:markdown_enable_mappings = 0
     let g:markdown_enable_folding = 0
     let g:markdown_include_jekyll_support = 0
+" -------------------------------------------------------------
+"  THEMES
 " -------------------------------------------------------------
 Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
 Plug 'sainnhe/everforest' " theme

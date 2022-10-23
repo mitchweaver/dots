@@ -251,3 +251,8 @@ joplin() {
     fi
 }
 alias j=joplin
+
+alias restart_sxhkd='pkill sxhkd ; cd ~ ; sxhkd >/dev/null 2>&1 &'
+
+alias fixaudio='pkill pipewire ; gentoo-pipewire-launcher &'
+
