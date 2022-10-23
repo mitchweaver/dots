@@ -1,6 +1,7 @@
 app-admin/sudo
 app-admin/sysklogd
 app-admin/sysstat
+app-antivirus/clamav
 app-arch/cabextract
 app-arch/p7zip
 app-arch/pigz
@@ -29,7 +30,6 @@ app-text/dos2unix
 app-text/mupdf
 app-text/zathura
 app-text/zathura-meta
-dev-lang/rust-bin
 dev-python/pillow
 dev-python/pip
 dev-python/pygments
@@ -50,10 +50,15 @@ media-fonts/nerd-fonts
 media-fonts/noto
 media-fonts/noto-cjk
 media-fonts/noto-emoji
+media-fonts/roboto
+media-fonts/spleen
+media-fonts/terminus-font
 media-gfx/gimp
 media-gfx/imagemagick
 media-gfx/jpegoptim
+media-gfx/ueberzug
 media-libs/alsa-ucm-conf
+media-libs/exiftool
 media-libs/fontconfig
 media-plugins/alsa-plugins
 media-plugins/gimp-lqr
@@ -78,6 +83,7 @@ net-fs/samba
 net-im/discord-bin
 net-misc/curl
 net-misc/dhcpcd
+net-misc/endlessh
 net-misc/nextcloud-client
 net-misc/openntpd
 net-misc/rdesktop
@@ -86,6 +92,7 @@ net-misc/youtube-dl
 net-print/cups
 net-print/cups-filters
 net-print/cups-pdf
+net-print/hplip
 net-vpn/openvpn
 net-vpn/wireguard-tools
 net-wireless/bluez
@@ -101,6 +108,7 @@ sys-apps/mlocate
 sys-apps/pciutils
 sys-apps/progress
 sys-apps/pv
+sys-apps/ripgrep
 sys-apps/usbutils
 sys-boot/grub
 sys-devel/autoconf
@@ -133,12 +141,12 @@ x11-apps/xmodmap
 x11-apps/xrandr
 x11-base/xorg-drivers
 x11-drivers/xf86-input-libinput
-x11-misc/dmenu
 x11-misc/dunst
 x11-misc/i3blocks
 x11-misc/i3lock-fancy-rapid
 x11-misc/i3status
 x11-misc/lightdm
+x11-misc/ly
 x11-misc/parcellite
 x11-misc/pcmanfm
 x11-misc/picom
@@ -152,7 +160,6 @@ x11-misc/xclip
 x11-misc/xdotool
 x11-misc/xsel
 x11-misc/xwallpaper
-x11-terms/kitty
 x11-terms/xterm
 x11-themes/paper-gtk-theme
 x11-themes/paper-icon-theme

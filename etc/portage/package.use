@@ -1,12 +1,37 @@
 # =/=/=/=/= my flags /=/=/=/=/=/=/=/=/=/=/=/=/=
+
+############### FIREFOX ######################
+# lto/pgo make compile slow as balls but for something as
+# bulky as a web browser you have open 99% the time its worth it
+www-client/firefox lto pgo hwaccel gmp-autoupdate geckodriver
+www-client/firefox-bin lto pgo hwaccel gmp-autoupdate geckodriver
+# needed for firefox
+media-libs/libvpx postproc
+###############################################
+
 sys-boot/grub:2 device-mapper
-www-client/firefox hwaccel gmp-autoupdate
-www-client/firefox-bin hwaccel gmp-autoupdate
+
 net-analyzer/wireshark wifi
 media-video/ffmpeg x264
 x11-misc/picom config-file opengl
 net-misc/nextcloud-client -dolphin -nautilus
 x11-misc/slop -opengl
+
+x11-misc/pywal python_targets_python3_9
+
+sys-libs/compiler-rt-sanitizers profile
+
+####################
+sys-apps/firejail contrib -apparmor
+app-antivirus/clamav rar
+
+media-video/mpv jpeg png rubberband libcaca zimg
+
+media-fonts/terminus-font center-tilder distint-l pcf-unicode
+
+# for hplip
+net-dns/avahi python
+
 # note: ads === active directory
 net-fs/cifs-utils -ads -acl -creds
 net-fs/samba -regedit -ads -acl -ceph -cluster -glusterfs -profiling-data -quota -spotlight
@@ -16,7 +41,6 @@ app-admin/sysstat lm-sensors
 dev-libs/glib -dbus
 
 x11-misc/polybar i3wm curl network ipc -mpd
-#########x11-misc/i3blocks contrib
 
 # png needed to render emoji fonts
 media-libs/freetype X png
@@ -99,6 +123,7 @@ media-libs/libsdl2 X opengl gles2
 x11-libs/pango X
 x11-apps/xinit -twm
 x11-base/xorg-drivers -wacom
+x11-base/xorg-server xvfb -xnest -xephyr
 # NOTE: if using wayland you can delete this:
 sys-auth/pambase elogind
 # ========= XORG CRAP ==============
@@ -115,8 +140,6 @@ x11-libs/gdk-pixbuf jpeg
 
 # only thing on system needing berkdb, required by python
 sys-libs/gdbm berkdb
-# needed for firefox
-media-libs/libvpx postproc
 # ========= MISC =============
 
 # ************************************************
