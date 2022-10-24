@@ -10,6 +10,7 @@ Xft.rgba: rgb
 Xcursor.theme: plan9
 Xcursor.size: 16
 
-*foreground: #ffffff
-*background: #000000
+/* spleen = default openbsd font */
 *font: spleen
+
+#include "/home/mitch/.cache/wal/colors.Xresources"

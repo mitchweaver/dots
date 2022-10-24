@@ -50,13 +50,6 @@ for_window [class="^.*"] border pixel 1
 # Font for window titles
 font pango:TerminessTTF Nerd Font Mono 12
 
-# bar {
-#         font pango:ShureTechMono Nerd Font Mono 12
-#         # font pango:TerminessTTF Nerd Font Mono 12
-#         status_command i3blocks
-#         position top
-# }
-
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # FOCUS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -115,11 +108,11 @@ workspace $ws1 gaps inner 10
 workspace $ws1 gaps outer 10
 
 set $ws1 "1.  Firefox"
-set $ws2 "2.  Terminal"
-set $ws3 "3.  Work"
-set $ws4 "4.  Terminal"
-set $ws5 "5. Misc"
-set $ws6 "6. Misc"
+set $ws2 "2.  Term"
+set $ws3 "3.  Term"
+set $ws4 "4.  Term"
+set $ws5 "5.  Term"
+set $ws6 "6.  Term"
 set $ws7 "7.  Spotify"
 set $ws8 "8.  Joplin"
 set $ws9 "9.  Email"

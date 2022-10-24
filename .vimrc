@@ -194,6 +194,7 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
 Plug 'sainnhe/everforest' " theme
 Plug 'logico/typewriter-vim' " theme
 Plug 'https://github.com/NLKNguyen/papercolor-theme' " theme
+Plug 'AlphaTechnolog/pywal.nvim', { 'as': 'pywal' }
 
 call plug#end()
 filetype indent plugin on
@@ -209,7 +210,8 @@ if exists(':PlugInstall')
     " colorscheme typewriter
     " colorscheme everforest
     " colorscheme papercolor
-    set background=light
+    colorscheme pywal
+    " set background=light
     " set background=dark
     " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 
@@ -232,7 +234,9 @@ set history=200
 set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
 set updatetime=500
-set clipboard=unnamedplus
+"
+" set clipboard=unnamedplus
+"
 set lazyredraw          " whether to redraw screen after macros
 set mat=2               " how fast to blink matched brackets
 set textwidth=0         " very annoying warning
@@ -269,6 +273,7 @@ autocmd BufNewFile,BufRead *.conf    set syntax=sh
 autocmd BufNewFile,BufRead *.cfg     set syntax=sh
 autocmd BufNewFile,BufRead *.rc      set syntax=sh
 autocmd BufNewFile,BufRead *.shellrc set syntax=sh
+autocmd BufNewFile,BufRead *.local   set syntax=sh
 autocmd BufNewFile,BufRead pkgfile   set syntax=sh
 
 autocmd BufNewFile,BufRead *.c       set syntax=c
