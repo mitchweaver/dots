@@ -14,10 +14,19 @@ pkg() {
         a)
             sudo emerge $_def_opts --noreplace "$@"
             ;;
+        # update all except for large stuff
         u)
+            [ "$1" ] || set -- '@world'
+            sudo emerge $_def_opts --update --newuse --deep --with-bdeps=y \
+                --exclude 'firefox ghc libreoffice nodejs python rust' \
+                "$@"
+            ;;
+        # really update everything
+        uu)
             [ "$1" ] || set -- '@world'
             sudo emerge $_def_opts --update --newuse --deep --with-bdeps=y "$@"
             ;;
+
         d)
             if [ "$1" ] ; then
                 sudo emerge $_def_opts --unmerge "$@"
