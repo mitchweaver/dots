@@ -119,40 +119,40 @@ nmap <leader>il :let g:indentLine_enabled = 1<CR>
 nmap <leader>li :let g:indentLine_enabled = 0<CR>
 
 Plug 'w0rp/ale'
-let g:ale_sign_column_always = 0
-let g:ale_fix_on_save = 1
-" uncomment to only have ale check on file saves
-let g:ale_lint_on_text_changed = 'never'
-let g:airline#extensions#ale#enabled = 1
-let g:ale_linters = {'python': ['pylint']} " flake8
-let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
+    let g:ale_sign_column_always = 0
+    let g:ale_fix_on_save = 1
+    " uncomment to only have ale check on file saves
+    let g:ale_lint_on_text_changed = 'never'
+    let g:airline#extensions#ale#enabled = 1
+    let g:ale_linters = {'python': ['pylint']} " flake8
+    let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 
 Plug 'mhinz/vim-startify'
-let g:startify_files_number = 10
-" 0: recently-used files update on vim exit, 1: immediate
-let g:startify_update_oldfiles = 1
-let g:startify_change_to_dir = 1
-" remove fortune and cowsay from startify... annoying...
-let g:startify_custom_header = [
-    \ '                                 ',
-    \ '      ⢀⣀ ⣰⡀ ⢀⣀ ⡀⣀ ⣰⡀ ⣀⡀ ⢀⣀ ⢀⡀ ⢀⡀ ',
-    \ '      ⠭⠕ ⠘⠤ ⠣⠼ ⠏  ⠘⠤ ⡧⠜ ⠣⠼ ⣑⡺ ⠣⠭ ',
-    \ ]
+    " bug: this needs to be set to '0' or else creates delay on startup
+    let g:startify_update_oldfiles = 0
+    let g:startify_files_number = 10
+    let g:startify_change_to_dir = 1
+    " remove fortune and cowsay from startify... annoying...
+    let g:startify_custom_header = [
+        \ '                                 ',
+        \ '      ⢀⣀ ⣰⡀ ⢀⣀ ⡀⣀ ⣰⡀ ⣀⡀ ⢀⣀ ⢀⡀ ⢀⡀ ',
+        \ '      ⠭⠕ ⠘⠤ ⠣⠼ ⠏  ⠘⠤ ⡧⠜ ⠣⠼ ⣑⡺ ⠣⠭ ',
+        \ ]
 
-let g:startify_lists = [
-    \ { 'type': 'dir',       'header': ['   Last Updated: '] },
-    \ { 'type': 'bookmarks', 'header': ['   Bookmarks:']      },
-    \ ]
+    let g:startify_lists = [
+        \ { 'type': 'dir',       'header': ['   Last Updated: '] },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks:']      },
+        \ ]
 
-let g:startify_bookmarks = [
-    \ {'v': '~/.vimrc'},
-    \ ]
+    let g:startify_bookmarks = [
+        \ {'v': '~/.vimrc'},
+        \ ]
 
-let g:startify_skiplist = [
-    \ 'COMMIT_EDITMSG',
-    \ escape(fnamemodify(resolve($VIMRUNTIME), ':p'), '\') .'doc',
-    \ 'bundle/.*/doc',
-    \ ]
+    let g:startify_skiplist = [
+        \ 'COMMIT_EDITMSG',
+        \ escape(fnamemodify(resolve($VIMRUNTIME), ':p'), '\') .'doc',
+        \ 'bundle/.*/doc',
+        \ ]
 
 Plug 'preservim/nerdtree'
 nnoremap <C-n> :NERDTreeToggle<CR>
