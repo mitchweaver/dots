@@ -31,7 +31,7 @@ gnome-keyring-daemon --start --components=secrets
 pgrep -f nextcloud  || nextcloud >~/.cache/nextcloud.log 2>&1 &
 pgrep -f dunst      || dunst >~/.cache/dunst.log 2>&1 &
 pgrep -f sxhkd      || sxhkd >~/.cache/sxhkd.log 2>&1 &
-pgrep -f xbanish    || firejail xbanish -t 10 &
+pgrep -f xbanish    || firejail xbanish -t 30 &
 pgrep -f picom      || firejail picom &
 pgrep -f redshift   || firejail-redshift.sh -v >~/.cache/redshift.log 2>&1 &
 pgrep -f parcellite || firejail parcellite >~/.cache/parcellite.log 2>&1 &

@@ -47,6 +47,7 @@ Plug 'tpope/vim-commentary'      " comment toggler
 nmap <silent><leader>c :Commentary<CR>
 autocmd BufNewFile,BufRead *.asm setlocal commentstring=;\ %s
 autocmd BufNewFile,BufRead *.conf setlocal commentstring=#\ %s
+autocmd BufNewFile,BufRead *.local setlocal commentstring=#\ %s
 autocmd BufNewFile,BufRead *rc setlocal commentstring=#\ %s
 autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 

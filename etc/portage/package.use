@@ -20,6 +20,8 @@ x11-misc/slop -opengl
 x11-misc/pywal python_targets_python3_9
 
 sys-libs/compiler-rt-sanitizers profile
+media-gfx/sxiv jpeg png gif webp
+media-libs/imblib2 jpeg png gif webp -bzip2
 
 ####################
 sys-apps/firejail contrib -apparmor
@@ -36,7 +38,7 @@ net-dns/avahi python
 net-fs/cifs-utils -ads -acl -creds
 net-fs/samba -regedit -ads -acl -ceph -cluster -glusterfs -profiling-data -quota -spotlight
 media-gfx/imagemagick X jpeg jpeg2k png tiff webp
-x11-misc/dmenu xinerama -savedconfig
+x11-misc/dmenu -savedconfig
 app-admin/sysstat lm-sensors
 dev-libs/glib -dbus
 
@@ -77,13 +79,17 @@ dev-cpp/cairo glib
 dev-libs/libical intropection glib
 # =========== audio =======================
 
+# note: nls needed on boost for libreoffice-bin
+#       can be removed if regular libreoffice
+dev-libs/boost nls -numpy
+
 # ---------- junk cleaning -------------------
 dev-lang/python -bluetooth
-dev-libs/boost -numpy
 dev-libs/liborcus -spreadsheet-model
 app-admin/sudo -offensive
-net-clean/cups -usb
+net-print/cups -usb
 sys-devel/clang -static-analyzer
+x11-terms/xterm -xinerama
 
 # not needed for single user system
 sys-auth/pambase -passwdqc

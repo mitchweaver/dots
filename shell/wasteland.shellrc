@@ -267,3 +267,4 @@ alias restart_sxhkd='pkill sxhkd ; cd ~ ; sxhkd >/dev/null 2>&1 &'
 alias pbrestart='polybar-msg cmd restart'
 alias fixaudio='pkill pipewire ; gentoo-pipewire-launcher & pbrestart'
 
+alias services='rc-update -v show | grep default'
