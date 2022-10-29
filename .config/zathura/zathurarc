@@ -1,5 +1,5 @@
 # vim:ft=config
-set sandbox strict
+############ set sandbox strict
 set adjust-open bestfit
 set render-loading false
 set scroll-page-aware true
