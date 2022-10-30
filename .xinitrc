@@ -40,6 +40,8 @@ pgrep -f weatherd   || weatherd -d >/dev/null 2>&1 &
 #### why is this broken on i3 startup... have to manually do it
 # pgrep -f pipewire   || gentoo-pipewire-launcher &
 
+pgrep -f xdimmer || xdimmer -p 20 -s 10 -b 1 -t 570 &
+
 pgrep -f xautolock  || xautolock \
     -locker 'i3lock-fancy-rapid 10 pixel' \
     -time 10 \
