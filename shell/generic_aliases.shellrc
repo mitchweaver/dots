@@ -10,12 +10,10 @@
 # REPLACEMENTS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 case $TERM in
-    *-256color|xterm-kitty)
+    *-256color|*-kitty)
         if command -v exa >/dev/null ; then
-            alias ls='exa -F --group-directories-first'
+            alias ls='exa -F --color=always --group-directories-first'
             alias tree='exa -F -T'
-        elif command -v colorls >/dev/null ; then
-            alias ls='colorls -G -F'
         else
             alias ls='ls -F'
         fi
@@ -28,7 +26,6 @@ esac
 if command -v rg >/dev/null 2>&1 ; then
     alias grep=rg
 fi
-
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 alias {l,sls,sl}=ls
@@ -58,10 +55,15 @@ alias gv='grep -v'
 alias df='df -h'
 alias su='sudo su -'
 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 alias h1='head -n 1'
 alias h5='head -n 5'
+alias h10='head -n 10'
 alias t1='tail -n 1'
 alias t5='tail -n 5'
+alias t10='tail -n 10'
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
 alias tf='tail -f'
 
 alias cmd=command
