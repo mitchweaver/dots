@@ -23,6 +23,8 @@ if [ -e ~/.bonsai/bin/oksh ] ; then
     export SHELL="${HOME}/.bonsai/bin/oksh"
 fi
 
+export NPROC="${NPROC:-$(nproc 2>/dev/null)}"
+export NPROC="${NPROC:-1}"
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 case $(uname) in

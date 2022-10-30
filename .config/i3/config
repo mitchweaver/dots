@@ -29,23 +29,23 @@ smart_borders no_gaps
 smart_borders yes
 
 # enable outer gaps only when one window
-smart_gaps inverse_outer
+# smart_gaps inverse_outer
 
-gaps inner 15
-gaps outer 5
+gaps inner 25
+gaps outer 25
 
 # setting these all to zero keeps gaps symmetrical
 # for a more "dwm" look
-# gaps top 0
-# gaps left 0
-# gaps bottom 0
-# gaps right 0
+gaps top 0
+gaps left 0
+gaps bottom 0
+gaps right 0
 
 # hide gaps if only one window on wrorkspace
 # smart_gaps on
 
 # remove window title bars
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 4
 
 # Font for window titles
 font pango:TerminessTTF Nerd Font Mono 12
@@ -108,11 +108,11 @@ workspace $ws1 gaps inner 10
 workspace $ws1 gaps outer 10
 
 set $ws1 "1.  Firefox"
-set $ws2 "2.  Term"
-set $ws3 "3.  Term"
-set $ws4 "4.  Term"
-set $ws5 "5.  Term"
-set $ws6 "6.  Term"
+set $ws2 "2.  Terminal"
+set $ws3 "3.  Terminal"
+set $ws4 "4.  Terminal"
+set $ws5 "5.  Terminal"
+set $ws6 "6.  Terminal"
 set $ws7 "7.  Spotify"
 set $ws8 "8.  Joplin"
 set $ws9 "9.  Email"
@@ -213,18 +213,20 @@ bindsym $mod+Control+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit
 # COLORS (pywal)
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # Set colors from Xresources
-# Change 'color7' and 'color2' to whatever colors you want i3 to use 
+# Change 'color7' and 'color2' to whatever colors you want i3 to use
 # from the generated scheme.
 # NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
 # it fails to get colors from Xresources.
-set_from_resource $fg i3wm.color7 #f0f0f0
-set_from_resource $bg i3wm.color2 #f0f0f0
+set_from_resource $fg foreground
+set_from_resource $bg background
+set_from_resource $foc_border   color4
+set_from_resource $unfoc_border color2
 
 # class                 border  backgr. text indicator child_border
-client.focused          $bg     $bg     $fg  $bg       $bg
-client.focused_inactive $bg     $bg     $fg  $bg       $bg
-client.unfocused        $bg     $bg     $fg  $bg       $bg
-client.urgent           $bg     $bg     $fg  $bg       $bg
-client.placeholder      $bg     $bg     $fg  $bg       $bg
+client.focused          $foc_border     $bg     $fg  $bg       $foc_border
+client.focused_inactive $bg             $bg     $fg  $bg       $bg
+client.unfocused        $unfoc_border   $bg     $fg  $bg       $unfoc_border
+client.urgent           $bg             $bg     $fg  $bg       $bg
+client.placeholder      $bg             $bg     $fg  $bg       $bg
 
 client.background       $bg

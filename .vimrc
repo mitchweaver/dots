@@ -246,7 +246,7 @@ set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
 set updatetime=500
 "
-" set clipboard=unnamedplus
+set clipboard=unnamedplus
 "
 set lazyredraw          " whether to redraw screen after macros
 set mat=2               " how fast to blink matched brackets

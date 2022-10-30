@@ -10,7 +10,8 @@ for int in $ints ; do
     fi
 done
 
-color_fmt=%{F#F0C674}
+color_fmt=
+# color_fmt=%{F#F0C674}
 clear_fmt=%{F-}
 
 if [ "$wg" ] ; then
