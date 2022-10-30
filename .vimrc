@@ -49,6 +49,9 @@ autocmd BufNewFile,BufRead *.asm setlocal commentstring=;\ %s
 autocmd BufNewFile,BufRead *.conf setlocal commentstring=#\ %s
 autocmd BufNewFile,BufRead *.local setlocal commentstring=#\ %s
 autocmd BufNewFile,BufRead *rc setlocal commentstring=#\ %s
+autocmd BufNewFile,BufRead *.cfg setlocal commentstring=#\ %s
+autocmd BufNewFile,BufRead *.config setlocal commentstring=#\ %s
+autocmd BufNewFile,BufRead *.profile setlocal commentstring=#\ %s
 autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
 
 Plug 'unblevable/quick-scope'    " make f F t T ; and , useable 
@@ -128,32 +131,32 @@ Plug 'w0rp/ale'
     let g:ale_linters = {'python': ['pylint']} " flake8
     let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 
-Plug 'mhinz/vim-startify'
-    " bug: this needs to be set to '0' or else creates delay on startup
-    let g:startify_update_oldfiles = 0
-    let g:startify_files_number = 10
-    let g:startify_change_to_dir = 1
-    " remove fortune and cowsay from startify... annoying...
-    let g:startify_custom_header = [
-        \ '                                 ',
-        \ '      ⢀⣀ ⣰⡀ ⢀⣀ ⡀⣀ ⣰⡀ ⣀⡀ ⢀⣀ ⢀⡀ ⢀⡀ ',
-        \ '      ⠭⠕ ⠘⠤ ⠣⠼ ⠏  ⠘⠤ ⡧⠜ ⠣⠼ ⣑⡺ ⠣⠭ ',
-        \ ]
+" Plug 'mhinz/vim-startify'
+"     " bug: this needs to be set to '0' or else creates delay on startup
+"     let g:startify_update_oldfiles = 0
+"     let g:startify_files_number = 10
+"     let g:startify_change_to_dir = 1
+"     " remove fortune and cowsay from startify... annoying...
+"     let g:startify_custom_header = [
+"         \ '                                 ',
+"         \ '      ⢀⣀ ⣰⡀ ⢀⣀ ⡀⣀ ⣰⡀ ⣀⡀ ⢀⣀ ⢀⡀ ⢀⡀ ',
+"         \ '      ⠭⠕ ⠘⠤ ⠣⠼ ⠏  ⠘⠤ ⡧⠜ ⠣⠼ ⣑⡺ ⠣⠭ ',
+"         \ ]
 
-    let g:startify_lists = [
-        \ { 'type': 'dir',       'header': ['   Last Updated: '] },
-        \ { 'type': 'bookmarks', 'header': ['   Bookmarks:']      },
-        \ ]
+"     let g:startify_lists = [
+"         \ { 'type': 'dir',       'header': ['   Last Updated: '] },
+"         \ { 'type': 'bookmarks', 'header': ['   Bookmarks:']      },
+"         \ ]
 
-    let g:startify_bookmarks = [
-        \ {'v': '~/.vimrc'},
-        \ ]
+"     let g:startify_bookmarks = [
+"         \ {'v': '~/.vimrc'},
+"         \ ]
 
-    let g:startify_skiplist = [
-        \ 'COMMIT_EDITMSG',
-        \ escape(fnamemodify(resolve($VIMRUNTIME), ':p'), '\') .'doc',
-        \ 'bundle/.*/doc',
-        \ ]
+"     let g:startify_skiplist = [
+"         \ 'COMMIT_EDITMSG',
+"         \ escape(fnamemodify(resolve($VIMRUNTIME), ':p'), '\') .'doc',
+"         \ 'bundle/.*/doc',
+"         \ ]
 
 Plug 'preservim/nerdtree'
 nnoremap <C-n> :NERDTreeToggle<CR>
@@ -195,6 +198,7 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
 Plug 'sainnhe/everforest' " theme
 Plug 'logico/typewriter-vim' " theme
 Plug 'https://github.com/NLKNguyen/papercolor-theme' " theme
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'AlphaTechnolog/pywal.nvim', { 'as': 'pywal' }
 
 call plug#end()
@@ -211,8 +215,9 @@ if exists(':PlugInstall')
     " colorscheme typewriter
     " colorscheme everforest
     " colorscheme papercolor
-    colorscheme pywal
-    " set background=light
+    " colorscheme catppuccin
+    " colorscheme pywal
+    set background=light
     " set background=dark
     " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 
@@ -229,7 +234,12 @@ endif
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 scriptencoding utf-8
 set encoding=utf-8
-set mouse=a             " a=all,'unset mouse'=disable
+
+"---- a = enabled
+"---- v = disabled
+" set mouse=a
+set mouse=v
+
 set signcolumn=auto     " yes=always, no=never, auto=ifchanges
 set history=200
 set backspace=indent,eol,start

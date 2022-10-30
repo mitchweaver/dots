@@ -17,3 +17,17 @@ private-opt discord
 
 # Redirect
 include discord-common.profile
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+include firefox-common.profile
+
+noblacklist /home/mitch/downloads
+whitelist /home/mitch/downloads
+
+noblacklist /home/mitch/tmp
+whitelist /home/mitch/tmp
+
+noblacklist /home/mitch/.cache/discord_cache
+whitelist /home/mitch/.cache/discord_cache
+

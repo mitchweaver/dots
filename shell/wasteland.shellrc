@@ -267,4 +267,16 @@ alias restart_sxhkd='pkill sxhkd ; cd ~ ; sxhkd >/dev/null 2>&1 &'
 alias pbrestart='polybar-msg cmd restart'
 alias fixaudio='pkill pipewire ; gentoo-pipewire-launcher & pbrestart'
 
-alias services='rc-update -v show | grep default'
+alias rcl='rc-update -v show | grep default'
+alias z=zathura
+
+alias stcfg='v ~/src/suckless/st/cfg/config.h'
+
+spt() {
+    if ! pgrep -f spotifyd >/dev/null ; then
+        printf '%s' "Unlock your pash: "
+        pash s spotifyd >/dev/null
+        spotifyd
+    fi
+    command spt
+}

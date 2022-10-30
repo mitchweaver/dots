@@ -10,10 +10,20 @@ PATH=${HOME}/.local/bin:$PATH
 LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH
 export PATH
 export LD_LIBRARY_PATH
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 export MANPATH="${HOME}/.local/share/man:$MANPATH"
 export FONTCONFIG_PATH="/etc/fonts:${HOME}/.fonts"
+
+if [ -d ~/.bonsai ] ; then
+    export MANPATH="${HOME}/.bonsai/share/man:$MANPATH"
+    export PATH="${HOME}/.bonsai/bin:$PATH"
+fi
+
+if [ -e ~/.bonsai/bin/oksh ] ; then
+    export SHELL="${HOME}/.bonsai/bin/oksh"
+fi
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 case $(uname) in
     OpenBSD|Darwin)
