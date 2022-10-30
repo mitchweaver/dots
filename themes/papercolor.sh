@@ -3,12 +3,6 @@
 # https://github.com/NLKNguyen/papercolor-theme
 #
 
-case ${1#--} in
-    link|l)
-        ln -sf ~/src/dots/themes/"${0##*/}" ~/src/dots/themes/current
-        ;;
-esac
-
 color0='#eeeeee'
 color1='#af0000'
 color2='#008700'
@@ -29,3 +23,6 @@ color15='#005f87'
 foreground='#444444'
 background='#eeeeee'
 cursor='#444444'
+
+mkdir -p ~/.cache/themes
+ln -svf ~/src/dots/themes/"${0##*/}" ~/.cache/themes/current

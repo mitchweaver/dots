@@ -1,11 +1,5 @@
 #!/bin/sh
 
-case ${1#--} in
-    link|l)
-        ln -sf ~/src/dots/themes/"${0##*/}" ~/src/dots/themes/current
-        ;;
-esac
-
 background='#282936'
 foreground='#e9e9f4'
 cursor='#e9e9f4'
@@ -26,3 +20,6 @@ color12='#62d6e8'
 color13='#b45bcf'
 color14='#a1efe4'
 color15='#f7f7fb'
+
+mkdir -p ~/.cache/themes
+ln -svf ~/src/dots/themes/"${0##*/}" ~/.cache/themes/current

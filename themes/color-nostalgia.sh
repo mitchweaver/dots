@@ -1,14 +1,10 @@
+#!/bin/sh
 #
 # color nostalgia
 #
 # a theme by http://github.com/mitchweaver
 #
-
-case ${1#--} in
-    link|l)
-        ln -sf ~/src/dots/themes/"${0##*/}" ~/src/dots/themes/current
-        ;;
-esac
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 color0='#d9d5ba'
 color1='#825b69'
@@ -30,3 +26,6 @@ color15='#494847'
 background='#d9d5ba'
 foreground='#444444'
 cursor='#444444'
+
+mkdir -p ~/.cache/themes
+ln -svf ~/src/dots/themes/"${0##*/}" ~/.cache/themes/current

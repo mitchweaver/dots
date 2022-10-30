@@ -1,12 +1,8 @@
+#!/bin/sh
 #
-# a little black on white makes a happy rob pike
+# "a little black on white makes a happy rob pike"
 #
-
-case ${1#--} in
-    link|l)
-        ln -sf ~/src/dots/themes/"${0##*/}" ~/src/dots/themes/current
-        ;;
-esac
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 color0='#ffffff'
 color1='#000000'
@@ -28,3 +24,6 @@ color15='#666666'
 background='#ffffff'
 foreground='#000000'
 cursor='#111111'
+
+mkdir -p ~/.cache/themes
+ln -svf ~/src/dots/themes/"${0##*/}" ~/.cache/themes/current

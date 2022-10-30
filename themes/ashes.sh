@@ -3,12 +3,6 @@
 # ashes
 #
 
-case ${1#--} in
-    link|l)
-        ln -sf ~/src/dots/old/themes/"${0##*/}" ~/.cache/themes/current
-        ;;
-esac
-
 color0='#1c2023'
 color1='#c7ae95'
 color2='#95c7ae'
@@ -29,3 +23,6 @@ color15='#f3f4f5'
 background='#1c2023'
 foreground='#c7ccd1'
 cursor='#c7ae95'
+
+mkdir -p ~/.cache/themes
+ln -svf ~/src/dots/themes/"${0##*/}" ~/.cache/themes/current
