@@ -308,10 +308,10 @@ let g:asmsyntax = 'nasm'
 map <silent><leader>sy :set syntax=sh<cr>
 filetype plugin on       " vim plugin syntax
 
-" ▜ ▗                  ▌           
+" ▜ ▗                  ▌
 " ▐ ▄ ▛▀▖▞▀▖ ▛▀▖▌ ▌▛▚▀▖▛▀▖▞▀▖▙▀▖▞▀▘
 " ▐ ▐ ▌ ▌▛▀  ▌ ▌▌ ▌▌▐ ▌▌ ▌▛▀ ▌  ▝▀▖
-"  ▘▀▘▘ ▘▝▀▘ ▘ ▘▝▀▘▘▝ ▘▀▀ ▝▀▘▘  ▀▀ 
+"  ▘▀▘▘ ▘▝▀▘ ▘ ▘▝▀▘▘▝ ▘▀▀ ▝▀▘▘  ▀▀
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 map <silent><leader>ln :set number!<cr>
 map <silent><leader>nl :set relativenumber!<cr>

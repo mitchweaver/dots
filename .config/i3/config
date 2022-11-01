@@ -23,10 +23,10 @@ focus_follows_mouse no
 # AESTHETICS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # hide borders when there are no gaps
-smart_borders no_gaps
+# smart_borders no_gaps
 
 # hide borders when only one window
-smart_borders yes
+# smart_borders yes
 
 # enable outer gaps only when one window
 # smart_gaps inverse_outer

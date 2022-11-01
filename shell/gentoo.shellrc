@@ -18,7 +18,7 @@ pkg() {
         u)
             [ "$1" ] || set -- '@world'
             sudo emerge $_def_opts --update --newuse --deep --with-bdeps=y \
-                --exclude 'firefox ghc libreoffice nodejs python rust' \
+                --exclude 'firefox ghc libreoffice nodejs python rust llvm' \
                 "$@"
             ;;
         # really update everything
