@@ -2,9 +2,14 @@
 
 My personal dotfiles. Buyer beware, its messy.
 
-![dot_files_hah_get_it](https://i.imgur.com/xENdAZB.png)
+![fch](https://i.imgur.com/aYKuoXH.jpeg)
 
 I bounce between Gentoo, Alpine, and OpenBSD.  
-Bewarned things get moved around arbitrarily...
+Be warned things get moved around arbitrarily...
 
-## See also my [~/bin](http://github.com/mitchweaver/bin)
+## See also
+
+* [~/bin](https://github.com/mitchweaver/bin)
+* [suckless modifications](https://github.com/mitchweaver/suckless)
+* [color theme](https://github.com/mitchweaver/color-nostalgia)
+
