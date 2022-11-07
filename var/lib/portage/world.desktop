@@ -1,3 +1,4 @@
+app-admin/entr
 app-admin/sudo
 app-admin/sysklogd
 app-admin/sysstat
@@ -12,7 +13,6 @@ app-cdr/cuetools
 app-containers/docker
 app-containers/docker-compose
 app-editors/neovim
-app-emulation/qemu-guest-agent
 app-eselect/eselect-python
 app-eselect/eselect-repository
 app-i18n/translate-shell
@@ -24,10 +24,13 @@ app-misc/ranger
 app-misc/task
 app-misc/toilet
 app-office/joplin-desktop-bin
+app-office/libreoffice-bin
 app-portage/cpuid2cpuflags
+app-portage/lto-rebuild
 app-shells/loksh
 app-text/dos2unix
 app-text/mupdf
+app-text/tree
 app-text/zathura
 app-text/zathura-meta
 dev-python/pillow
@@ -35,12 +38,14 @@ dev-python/pip
 dev-python/pygments
 dev-python/pylint
 dev-python/pynvim
+dev-python/requests
 dev-python/setuptools
 dev-util/ccache
 dev-util/cmake
 dev-util/ninja
 dev-util/shellcheck-bin
 dev-vcs/git
+games-util/steam-launcher
 lxde-base/lxappearance
 mail-client/mailspring
 media-fonts/font-util
@@ -56,6 +61,7 @@ media-fonts/terminus-font
 media-gfx/gimp
 media-gfx/imagemagick
 media-gfx/jpegoptim
+media-gfx/sxiv
 media-gfx/ueberzug
 media-libs/alsa-ucm-conf
 media-libs/exiftool
@@ -103,14 +109,19 @@ net-wireless/wpa_supplicant
 sys-apps/ethtool
 sys-apps/exa
 sys-apps/firejail
+sys-apps/ipmitool
 sys-apps/lm-sensors
 sys-apps/mlocate
 sys-apps/pciutils
 sys-apps/progress
 sys-apps/pv
 sys-apps/ripgrep
+sys-apps/smartmontools
 sys-apps/usbutils
+sys-block/parted
 sys-boot/grub
+sys-boot/woeusb-ng
+sys-config/ltoize
 sys-devel/autoconf
 sys-devel/automake
 sys-devel/binutils
@@ -119,8 +130,10 @@ sys-devel/gdb
 sys-devel/libtool
 sys-firmware/sof-firmware
 sys-fs/cryptsetup
+sys-fs/dosfstools
 sys-fs/fuse
 sys-fs/inotify-tools
+sys-fs/ntfs3g
 sys-kernel/genkernel
 sys-kernel/gentoo-sources
 sys-kernel/linux-firmware
@@ -146,7 +159,6 @@ x11-misc/i3blocks
 x11-misc/i3lock-fancy-rapid
 x11-misc/i3status
 x11-misc/lightdm
-x11-misc/ly
 x11-misc/parcellite
 x11-misc/pcmanfm
 x11-misc/picom
@@ -161,6 +173,7 @@ x11-misc/xdotool
 x11-misc/xsel
 x11-misc/xwallpaper
 x11-terms/xterm
+x11-themes/chameleon-xcursors
 x11-themes/paper-gtk-theme
 x11-themes/paper-icon-theme
 x11-themes/xcursor-themes
