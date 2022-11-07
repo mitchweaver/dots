@@ -1,0 +1,1 @@
+/var/db/repos/lto-overlay/sys-config/ltoize/files/bashrc.d/43-lto-no-common.sh

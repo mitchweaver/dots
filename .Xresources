@@ -13,5 +13,5 @@ Xcursor.size: 16
 /* spleen = default openbsd font */
 *font: Spleen
 
-/* #include "/home/mitch/.cache/wal/colors.Xresources" */
-#include "/home/mitch/src/dots/themes/color-nostalgia.Xresources"
+#include "/home/mitch/.cache/wal/colors.Xresources"
+/* #include "/home/mitch/src/dots/themes/color-nostalgia.Xresources" */

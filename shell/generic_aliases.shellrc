@@ -40,7 +40,7 @@ alias t=tree
 
 alias cp='cp -irv'
 alias mv='mv -iv'
-alias {mkdir,mkd,mkdr}='mkdir -p'
+alias {mkdir,mkd,mkdr,mkir}='mkdir -p'
 
 alias {x,xx,xxx,q,qq,qqq,lq,:q,:Q,:wq,:w,exi,ex}=exit
 alias {cll,clear,claer,clar,clea,clera}=clear
@@ -85,3 +85,5 @@ fi
 
 alias reboot='sudo reboot'
 alias poweroff='sudo poweroff'
+
+alias y=yes

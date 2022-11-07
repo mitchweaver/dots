@@ -31,10 +31,10 @@ gnome-keyring-daemon --start --components=secrets
 pgrep -f nextcloud  || nextcloud >~/.cache/nextcloud.log 2>&1 &
 pgrep -f dunst      || dunst >~/.cache/dunst.log 2>&1 &
 pgrep -f sxhkd      || sxhkd >~/.cache/sxhkd.log 2>&1 &
-pgrep -f xbanish    || firejail xbanish -t 30 &
-pgrep -f picom      || firejail picom &
-pgrep -f redshift   || firejail-redshift.sh -v >~/.cache/redshift.log 2>&1 &
-pgrep -f parcellite || firejail parcellite >~/.cache/parcellite.log 2>&1 &
+pgrep -f xbanish    || xbanish -t 30 &
+pgrep -f picom      || picom &
+pgrep -f redshift   || firejail-redshift.sh &
+pgrep -f parcellite || firejail parcellite &
 pgrep -f weatherd   || weatherd -d >/dev/null 2>&1 &
 
 #### why is this broken on i3 startup... have to manually do it
@@ -51,7 +51,7 @@ pgrep -f xautolock  || xautolock \
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # APPLICATIONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-firejail-discord.sh >~/.cache/discord.log 2>&1 &
+# firejail-discord.sh >~/.cache/discord.log 2>&1 &
 # firejail-spotify.sh >~/.cache/spotify.log 2>&1 &
 mailspring >~/.cache/mailspring.log 2>&1 &
 # joplin-desktop-bin >~/.cache/joplin.log 2>&1 &

@@ -18,13 +18,13 @@ pkg() {
         u)
             [ "$1" ] || set -- '@world'
             sudo emerge $_def_opts --update --newuse --deep --with-bdeps=y \
-                --exclude 'firefox ghc libreoffice nodejs python rust llvm' \
+                --exclude 'firefox ghc libreoffice nodejs go python rust llvm cpupower' \
                 "$@"
             ;;
         # really update everything
         uu)
             [ "$1" ] || set -- '@world'
-            sudo emerge $_def_opts --update --newuse --deep --with-bdeps=y "$@"
+            sudo emerge $_def_opts --update --newuse --deep --with-bdeps=y --exclude cpupower "$@"
             ;;
 
         d)

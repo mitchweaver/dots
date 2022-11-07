@@ -1,0 +1,46 @@
+COMMON_FLAGS_PERFORMANCE=""
+
+# Optimization level - Options: -O2, -O3, -Ofast
+#
+# Personally never had a problem with -O3 even with hardened or LTO
+#
+# note: -Ofast often creates larger code which ends up creating more
+#       cache misses which results in a overall slow down compared to -O3
+#       still researching this... With (much) larger cache sizes of newer
+#       CPUs this may be worth the trade off?
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -O3"
+
+# Use pipes instead of temp files, faster compile times
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -pipe"
+
+# take bodies of externally called functions into account to potentially hard code
+# variables if compiler is able to determine they won't change
+#
+# see: https://stackoverflow.com/questions/13066663/what-in-short-words-does-the-gcc-option-fipa-pta-do
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fipa-pta"
+
+# "Semantic interposition is implemented using a procedure linkage table (PLT).
+#  Any function that can be overridden with LD_PRELOAD is looked up in a table before it is called."
+#
+# see: https://developers.redhat.com/blog/2020/06/25/red-hat-enterprise-linux-8-2-brings-faster-python-3-8-run-speeds
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fno-semantic-interposition"
+
+# Optimize loops with graphite. Identity allows for cost/benefit analysis between it and Gimple.
+# see: https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fgraphite-identity -floop-nest-optimize"
+
+# assumes that floating-point operations cannot generate user-visible traps
+#
+# see: https://www.intel.com/content/www/us/en/docs/programmable/683242/current/fno-trapping-math.html
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fno-trapping-math"
+
+# Faster math by using fast square roots.
+# Maybe this is bad for scientific applications but haven't seen any bugs yet for desktop use.
+#
+# "compiler maps calls to sqrtf() directly to the fsqrts custom instruction"
+#
+# see: https://www.intel.com/content/www/us/en/docs/programmable/683242/current/fno-math-errno.html
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fno-math-errno"
+
+# Supposedly smaller binaries, no performance impact
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fasynchronous-unwind-tables"

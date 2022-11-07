@@ -213,11 +213,11 @@ if exists(':PlugInstall')
     " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
     " colorscheme onehalfdark
     " colorscheme typewriter
-    " colorscheme everforest
+    colorscheme everforest
     " colorscheme papercolor
     " colorscheme catppuccin
     " colorscheme pywal
-    set background=light
+    " set background=light
     " set background=dark
     " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 
@@ -434,7 +434,8 @@ nmap <leader>s :%s//g<Left><Left>
 noremap <leader>W !!sh<cr>
 
 " pipe line to fmt and replace current line
-noremap <F> !!fmt<cr>
+noremap <F>:.!fmt --width=80<cr>
+
 "
 " prepend '> ' to lines as if to block quote
 noremap Q :norm 0i> <esc>$

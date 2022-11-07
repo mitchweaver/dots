@@ -1,0 +1,7 @@
+# ******************************************************
+# DESKTOP ---- i9-13900k
+# ******************************************************
+MAKEOPTS="-j32 -l33"
+#CPU_USE_FLAGS="?"
+VIDEO_CARDS="nouveau"
+INPUT_DEVICES="libinput joystick"

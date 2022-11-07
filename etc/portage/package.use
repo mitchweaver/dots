@@ -7,7 +7,13 @@ www-client/firefox lto pgo hwaccel gmp-autoupdate geckodriver
 www-client/firefox-bin lto pgo hwaccel gmp-autoupdate geckodriver
 # needed for firefox
 media-libs/libvpx postproc
-sys-boot/grub:2 device-mapper
+
+# needed for lvm/dm-raid, needed for os-prober/windows
+sys-boot/grub:2 device-mapper grub_platforms_pc
+
+# woeusb-ng
+x11-libs/wxGTK gstreamer
+
 net-analyzer/wireshark wifi
 media-video/ffmpeg x264
 x11-misc/picom config-file opengl
@@ -21,8 +27,21 @@ sys-apps/firejail contrib -apparmor
 app-antivirus/clamav rar
 media-video/mpv jpeg png rubberband libcaca zimg
 media-fonts/terminus-font center-tilder distint-l pcf-unicode
-# for hplip
+sys-apps/smartmontools -daemon -update-drivedb -caps
+
+# ==== hplip ==========
 net-dns/avahi python
+dev-qt/qtmultimedia widgets
+# ==== hplip ==========
+
+# =========== LTO =======================
+sys-devel/gcc plugins graphite
+sys-devel/binutils plugins
+dev-libs/icu abi_x86_32
+dev-libs/libxml2 abi_x86_32
+sys-libs/gpm abi_x86_32
+# =========== LTO =======================
+
 # note: ads === active directory
 net-fs/cifs-utils -ads -acl -creds
 net-fs/samba -regedit -ads -acl -ceph -cluster -glusterfs -profiling-data -quota -spotlight
@@ -43,7 +62,7 @@ net-libs/webkit-gtk X
 gnome-base/gnome-keyring -ssh-agent
 app-crypt/gcr gtk -vala
 # pcmanfm
-x11-libs/libfm gtk -automount
+x11-libs/libfm gtk -udisks -automount
 # =/=/=/=/= my flags /=/=/=/=/=/=/=/=/=/=/=/=/=
 
 # =========== audio =======================
