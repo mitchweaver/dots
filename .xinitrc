@@ -12,11 +12,27 @@ fi
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # XORG SETTINGS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-xrdb load ~/.Xresources
 xmodmap ~/.xmodmaprc
 xset +fp ~/.fonts
 xset m 0 0
 xset b off
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# SET PROPER DPI
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+if [ "$DIMENSIONS" ] ; then
+    # shellcheck disable=2086
+    set -- $DIMENSIONS
+    case $1 in
+        1920)
+            sed -i 's/.*Xft.dpi:.*/Xft.dpi: 120/' ~/.Xresources
+            ;;
+        3840)
+            sed -i 's/.*Xft.dpi:.*/Xft.dpi: 196/' ~/.Xresources
+            ;;
+    esac
+fi
+xrdb load ~/.Xresources
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # ONE SHOT COMMANDS
