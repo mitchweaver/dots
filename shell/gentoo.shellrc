@@ -3,42 +3,40 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 pkg() {
-    _def_opts="--ask --ask-enter-invalid --verbose"
     [ "$1" ] || set -- h
     flag=${1#-}
     shift
     case $flag in
         s)
-            emerge $def_opts --search "$@"
+            emerge --search "$@"
             ;;
         a)
-            sudo emerge $_def_opts --noreplace "$@"
+            sudo emerge --noreplace "$@"
             ;;
         # update all except for large stuff
         u)
             [ "$1" ] || set -- '@world'
-            sudo emerge $_def_opts --update --newuse --deep --with-bdeps=y \
+            sudo emerge --update --newuse --deep --with-bdeps=y \
                 --exclude 'firefox ghc libreoffice nodejs go python rust llvm cpupower' \
                 "$@"
             ;;
         # really update everything
         uu)
             [ "$1" ] || set -- '@world'
-            sudo emerge $_def_opts --update --newuse --deep --with-bdeps=y --exclude cpupower "$@"
+            sudo emerge --update --newuse --deep --with-bdeps=y --exclude cpupower "$@"
             ;;
 
         d)
             if [ "$1" ] ; then
-                sudo emerge $_def_opts --unmerge "$@"
+                sudo emerge --unmerge "$@"
             fi
             printf '\n%s ' 'Would you also like to depclean? (y/n):'
             read -r ans
-            [ "$ans" == y ] && sudo emerge $_def_opts --depclean
+            [ "$ans" == y ] && sudo emerge --depclean
             ;;
         -sync)
-            sudo emerge $_def_opts --sync --ask n "$@"
+            sudo emerge --sync --ask n "$@"
     esac
-    unset _def_opts
 }
 
 alias lessworld='less /var/lib/portage/world'

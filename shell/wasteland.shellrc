@@ -264,10 +264,7 @@ alias j=joplin
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 alias restart_sxhkd='pkill sxhkd ; cd ~ ; sxhkd >/dev/null 2>&1 &'
-alias pbrestart='polybar-msg cmd restart'
-alias fixaudio='pkill pipewire ; gentoo-pipewire-launcher & pbrestart'
 
-alias rcl='rc-update -v show | grep default'
 alias z=zathura
 
 alias stcfg='v ~/src/suckless/st/cfg/config.h'
@@ -279,4 +276,23 @@ spt() {
         spotifyd
     fi
     command spt
+}
+
+# list openrc enabled services sorted by run level
+rcl() {
+    rc-update -v show | grep boot
+    rc-update -v show | grep default
+    rc-update -v show | grep nonetwork
+    rc-update -v show | grep shutdown
+    rc-update -v show | grep sysinit
+    rc-update -v show | grep user
+    rc-update -v show | grep afternet
+}
+
+alias pbrestart='polybar-msg cmd restart'
+alias fixaudio='pkill pipewire wireplumber ; gentoo-pipewire-launcher & pbrestart'
+startup() {
+    sudo rc-service netmount restart
+    fixaudio
+    pbrestart
 }

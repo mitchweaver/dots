@@ -87,3 +87,4 @@ alias reboot='sudo reboot'
 alias poweroff='sudo poweroff'
 
 alias y=yes
+alias watch='watch -t'

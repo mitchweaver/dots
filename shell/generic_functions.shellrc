@@ -38,8 +38,8 @@ silent() { eval "$* >/dev/null 2>&1" ; }
 # output if command was succesful
 iif() { "$@" >/dev/null && echo yes || echo no ; }
 
-# dump contents of a file in $PATH
 cw() { cat "$(which "${1:-?}")" ; }
+vw() { $EDITOR "$(which "${1:-?}")" ; }
 
 # sum numbers in a file, with the digits one per line
 sum() { [ -f "$1" ] && paste -sd+ <"$1" | bc ; }
