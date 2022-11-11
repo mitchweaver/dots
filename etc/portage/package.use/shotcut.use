@@ -1,0 +1,3 @@
+# ========= SHOTCUT =============
+media-libs/mlt xml sdl frei0r qt5 jack opengl ffmpeg
+media-libs/opencv contribdnn contrib

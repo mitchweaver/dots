@@ -1,0 +1,7 @@
+# gcc itself is failing with lto and pgo on
+# look into fixing this later...
+sys-devel/gcc plugins graphite -lto -pgo
+sys-devel/binutils plugins
+dev-libs/icu abi_x86_32
+dev-libs/libxml2 abi_x86_32
+sys-libs/gpm abi_x86_32

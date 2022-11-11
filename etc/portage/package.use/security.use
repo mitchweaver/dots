@@ -1,0 +1,8 @@
+app-admin/doas persist
+app-admin/sudo -offensive
+
+# allow scan rar files
+app-antivirus/clamav rar
+
+# not needed for single user system
+sys-auth/pambase -passwdqc

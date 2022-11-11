@@ -5,3 +5,4 @@ x11-themes/claws-mail-themes CC-BY-NC-SA-3.0 CC-BY-ND-3.0 all-rights-reserved
 x11-themes/paper-icon-theme CC-BY-SA-4.0
 x11-themes/paper-gtk-theme CC-BY-SA-4.0
 games-util/steam-launcher ValveSteamLicense
+games-server/steamcmd Steam
