@@ -31,8 +31,8 @@ smart_borders no_gaps
 # enable outer gaps only when one window
 smart_gaps inverse_outer
 
-gaps inner 20
-gaps outer 20
+gaps inner 22
+gaps outer 18
 
 # setting these all to zero keeps gaps symmetrical
 # for a more "dwm" look
@@ -42,10 +42,11 @@ gaps bottom 0
 gaps right 0
 
 # hide gaps if only one window on wrorkspace
-smart_gaps on
+smart_gaps off
 
 # remove window title bars
-for_window [class="^.*"] border pixel 4
+for_window [class="^.*"] border pixel 1
+# for_window [class="^.*"] border pixel 4
 
 # Font for window titles
 font pango:TerminessTTF Nerd Font Mono 12
@@ -112,8 +113,8 @@ set $ws2 "2.  Terminal"
 set $ws3 "3.  Terminal"
 set $ws4 "4.  Terminal"
 set $ws5 "5.  Terminal"
-set $ws6 "6.  Terminal"
-set $ws7 "7.  Spotify"
+set $ws6 "6.  Spotify"
+set $ws7 "7.  Steam"
 set $ws8 "8.  Joplin"
 set $ws9 "9.  Email"
 set $ws10 "10.  Discord"
@@ -184,10 +185,13 @@ for_window [class="Pcmanfm"] floating enable
 assign [class="firefox"] → $ws1
 assign [class="Firefox"] → $ws1
 assign [class="Navigator"] → $ws1
+assign [class="spotify"] → $ws6
+assign [class="Spotify"] → $ws6
+for_window [class="Spotify"] move --no-auto-back-and-forth container to workspace $ws6
+assign [class="Steam"] → $ws7
+assign [class="steam"] → $ws7
 assign [class="Joplin"] → $ws8
 assign [class="joplin"] → $ws8
-assign [class="spotify"] → $ws7
-assign [class="Spotify"] → $ws7
 assign [class="Mailspring"] → $ws9
 assign [class="Discord"] → $ws10
 assign [class="discord"] → $ws10
