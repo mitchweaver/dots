@@ -13,7 +13,6 @@ x11-misc/slop -opengl
 sys-libs/compiler-rt-sanitizers profile
 media-gfx/sxiv jpeg png gif webp
 media-libs/imblib2 jpeg png gif webp -bzip2
-sys-apps/firejail contrib -apparmor
 media-video/mpv jpeg png rubberband libcaca zimg
 sys-apps/smartmontools -daemon -update-drivedb -caps
 
@@ -32,8 +31,6 @@ x11-misc/lightdm non-root -introspection
 gnome-base/gnome-keyring -ssh-agent
 
 app-crypt/gcr gtk -vala
-# pcmanfm
-x11-libs/libfm gtk -udisks -automount
 
 dev-lang/python xml -bluetooth
 dev-libs/liborcus -spreadsheet-model
@@ -51,3 +48,6 @@ x11-libs/gdk-pixbuf jpeg
 # only thing on system needing berkdb, required by python
 sys-libs/gdbm berkdb
 # ========= MISC =============
+
+# for boxes
+dev-libs/libpcre2 pcre32

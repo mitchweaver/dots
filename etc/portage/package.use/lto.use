@@ -1,6 +1,8 @@
-# gcc itself is failing with lto and pgo on
-# look into fixing this later...
-sys-devel/gcc plugins graphite -lto -pgo
+# notice: need -lto -pgo on gcc for the initial build for GentooLTO
+#         once you have GentooLTO built and world successfully compiled,
+#         you can re-add lto/pgo to gcc.
+#         (ex: remove the -lto, -pgo from here)
+sys-devel/gcc plugins graphite
 sys-devel/binutils plugins
 dev-libs/icu abi_x86_32
 dev-libs/libxml2 abi_x86_32

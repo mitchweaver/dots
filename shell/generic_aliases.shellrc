@@ -73,8 +73,6 @@ alias {dc,ccd}=cd
 alias dt='dmesg | tail -n 20'
 alias dmg='dmesg | grep -i'
 
-alias pid2name='ps -p'
-
 if command -v trash >/dev/null ; then
     alias rm=trash
     alias rmdir=trash
@@ -86,5 +84,4 @@ fi
 alias reboot='sudo reboot'
 alias poweroff='sudo poweroff'
 
-alias y=yes
 alias watch='watch -t'

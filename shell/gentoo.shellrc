@@ -28,7 +28,7 @@ pkg() {
 
         d)
             if [ "$1" ] ; then
-                sudo emerge --unmerge "$@"
+                sudo emerge --rage-clean "$@"
             fi
             printf '\n%s ' 'Would you also like to depclean? (y/n):'
             read -r ans

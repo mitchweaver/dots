@@ -1,0 +1,8 @@
+# the libedit use flag is enabled globally in make.conf
+# here contains any programs that need "-readline" specifically
+#
+# do not put -readline globally as if there isn't libedit compatibility
+# then you'll lose line edit functionality all together
+dev-libs/libedit abi_x86_32
+dev-libs/libpcre -readline
+dev-libs/libpcre2 -readline

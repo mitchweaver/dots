@@ -179,6 +179,7 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 Plug 'fladson/vim-kitty' " kitty.conf syntax
 Plug 'gentoo/gentoo-syntax' " gentoo ebuild syntax
 Plug 'ekalinin/Dockerfile.vim'   " syntax for dockerfiles
+Plug 'https://github.com/mboughaba/i3config.vim' " i3wm syntax
 
 " I like vim-markdown better than polyglot's markdown
 Plug 'sheerun/vim-polyglot'      " syntax highlighting
@@ -302,6 +303,11 @@ autocmd BufNewFile,BufRead /tmp/mutt-* set tw=72
 augroup filetypedetect
   autocmd BufRead,BufNewFile *mutt-*   setfiletype mail
 augroup END
+
+aug i3config_ft_detection
+  au!
+  au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
+aug end
 
 let g:is_posix = 1
 let g:asmsyntax = 'nasm'

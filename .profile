@@ -7,6 +7,7 @@ PATH=/bin:/sbin:$PATH
 PATH=/usr/bin:/usr/sbin:$PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 PATH=${HOME}/.local/bin:$PATH
+PATH=$PATH:${HOME}/.local/go/bin
 LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH
 export PATH
 export LD_LIBRARY_PATH
@@ -19,9 +20,9 @@ if [ -d ~/.bonsai ] ; then
     export PATH="${HOME}/.bonsai/bin:$PATH"
 fi
 
-if [ -e ~/.bonsai/bin/oksh ] ; then
-    export SHELL="${HOME}/.bonsai/bin/oksh"
-fi
+# if [ -e ~/.bonsai/bin/oksh ] ; then
+#     export SHELL="${HOME}/.bonsai/bin/oksh"
+# fi
 
 export NPROC="${NPROC:-$(nproc 2>/dev/null)}"
 export NPROC="${NPROC:-1}"

@@ -25,7 +25,7 @@ alias gm="_g $XDG_MUSIC_DIR"
 alias gW="_g $XDG_PICTURES_DIR/wallpapers"
 
 alias gb="_g ${HOME}/src/bin"
-alias gsb="_g ${HOME}/src/bin"
+alias gsb="_g ${HOME}/src/bonsai"
 alias gs="_g ${HOME}/src"
 
 alias gt="_g ~/tmp"

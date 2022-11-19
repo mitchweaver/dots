@@ -58,3 +58,5 @@ COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -D_FORTIFY_SOURCE=2"
 # Enable bounds checking for strings as well as null pointer checks.
 # see: http://gcc.gnu.org/onlinedocs/libstdc++/manual/using_macros.html
 COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -D_GLIBCXX_ASSERTIONS"
+
+# vim:ft=config

@@ -98,15 +98,6 @@ jpg() {
 }
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# mupdf
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-pdf2txt() {
-    # this is kinda jank... WIP
-    mutool draw -F txt -i -- "$1" 2>/dev/null |
-        sed 's/[^[:print:]]//g' | tr -s '[:blank:]'
-}
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # translate-shell
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 trans() { command trans -no-auto -b "$*" 2>/dev/null ; }
@@ -290,7 +281,7 @@ rcl() {
 }
 
 alias pbrestart='polybar-msg cmd restart'
-alias fixaudio='pkill pipewire wireplumber ; gentoo-pipewire-launcher & pbrestart'
+alias fixaudio='pkill pipewire ; pkill wireplumber ; gentoo-pipewire-launcher & pbrestart'
 startup() {
     sudo rc-service netmount restart
     fixaudio

@@ -49,3 +49,5 @@ COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fno-math-errno"
 
 # Supposedly smaller binaries, no performance impact
 COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fasynchronous-unwind-tables"
+
+# vim:ft=config
