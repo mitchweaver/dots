@@ -49,7 +49,9 @@ COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -Wl,-z,relro,-z,now"
 #
 # see: http://bugzilla.mozilla.org/show_bug.cgi?id=333640
 # see: http://wiki.rosalab.ru/ru/index.php/Underlinking#Why_underlinking_is_bad
-COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -Wl,-z,defs"
+# NOTE: this seems to break a few python packages, looking into
+#       pycairo/numpy so far failing to link if this is enabled
+############################COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -Wl,-z,defs"
 
 # Enable buffer overflow checks.
 # see: http://access.redhat.com/blogs/766093/posts/1976213

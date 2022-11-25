@@ -1,2 +1,7 @@
 media-sound/spotify
 net-im/discord-bin
+
+# borked package for gwe
+dev-python/Rx
+
+x11-drivers/nvidia-drivers

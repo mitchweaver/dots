@@ -27,14 +27,17 @@ if [ "$DIMENSIONS" ] ; then
     case $1 in
         # laptop
         1920)
-            pgrep -f redshift   || firejail-redshift.sh &
-            pgrep -f xbanish    || xbanish -t 30 &
-            pgrep -f picom      || picom -b
-            sed -i 's/.*Xft.dpi:.*/Xft.dpi: 120/' ~/.Xresources
+            if [ "$(cat /etc/hostname)" != desktop ] ; then
+                pgrep -f redshift   || firejail-redshift.sh &
+                pgrep -f xbanish    || xbanish -t 30 &
+                pgrep -f picom      || picom -b
+                sed -i 's/.*Xft.dpi:.*/Xft.dpi: 120/' ~/.Xresources
+            fi
             ;;
         # desktop
         3840)
             sed -i 's/.*Xft.dpi:.*/Xft.dpi: 196/' ~/.Xresources
+            xrandr --output HDMI-0 --off --output DP-0 --primary --mode 3840x2160 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --mode 1920x1080 --pos 3840x112 --rotate normal --output DP-3 --off --output DP-4 --off --output DP-5 --off
             ;;
     esac
 fi
@@ -79,5 +82,5 @@ pgrep -f pipewire   || gentoo-pipewire-launcher &
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # polybar-msg cmd quit >~/.cache/polybar.log 2>&1
 # polybar mybar >>~/.cache/polybar.log 2>&1 &
-# exec i3 >~/.cache/i3.log 2>&1
+#exec i3 >~/.cache/i3.log 2>&1
 exec budgie-desktop

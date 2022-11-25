@@ -20,8 +20,10 @@ media-gfx/imagemagick jpeg jpeg2k png tiff webp
 x11-misc/dmenu -savedconfig
 app-admin/sysstat lm-sensors
 dev-libs/glib -dbus
+
 # for images in kitty
 dev-python/pillow jpeg jpeg2k tiff webp
+
 media-libs/tiff jpeg
 
 # drop priv
@@ -32,10 +34,16 @@ gnome-base/gnome-keyring -ssh-agent
 
 app-crypt/gcr gtk -vala
 
-dev-lang/python xml -bluetooth
+# note: python failing to compile with -hardened
+dev-lang/python tk xml -bluetooth -hardened
+
 dev-libs/liborcus -spreadsheet-model
 
 media-libs/libsdl2 opengl gles2
+
+# jellyfin-media-player
+dev-qt/qtwebengine jumbo-build
+dev-qt/qtwebchannel qml
 
 # ========= MISC =============
 app-text/xmlto text

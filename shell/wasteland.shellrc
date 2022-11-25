@@ -287,3 +287,5 @@ startup() {
     fixaudio
     pbrestart
 }
+
+alias v4l='sudo modprobe v4l2loopback'

@@ -34,11 +34,15 @@ x11-libs/libXrender abi_x86_32
 x11-libs/libpciaccess abi_x86_32
 x11-drivers/nvidia-drivers abi_x86_32
 
-# # ************************************************
-# # GreenWithEnvy (msiafterburner for linux)
-# # ************************************************
+# ************************************************
+# GreenWithEnvy (msiafterburner for linux)
+# NOTE: this needs 'tk' use flag on dev-lang/python
+# ************************************************
+dev-libs/libdbusmenu gtk3
 # sys-power/gwe python_single_target_python3_8
-# dev-libs/libdbusmenu gtk3
+# dev-python/Rx python_targets_python3_9
+
+#
 # # this below is super obnoxious...
 # dev-python/injector python_targets_python3_8
 # dev-python/matplotlib python_targets_python3_8
@@ -48,7 +52,6 @@ x11-drivers/nvidia-drivers abi_x86_32
 # dev-python/python python_targets_python3_8
 # dev-python/pyxdg python_targets_python3_8
 # dev-python/requests python_targets_python3_8
-# dev-python/Rx python_targets_python3_8
 # dev-python/setuptools python_targets_python3_8
 # dev-python/appdirs python_targets_python3_8
 # dev-python/jaraco python_targets_python3_8
