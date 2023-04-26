@@ -71,13 +71,13 @@ export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # hide GOPATH to ~/.local/go instead of ~/go
-export GOPATH=${HOME}/.local/go
+export GOPATH="${HOME}/.local/go"
 
 # try to catch either 11 or 8 openjdk version
 for i in 11 8 ; do
     if [ -d /usr/local/jdk-$i ] ; then
         export JAVA_HOME=/usr/local/jdk-$i
-        export PATH=$PATH:$JAVA_HOME/bin
+        export PATH="$PATH:$JAVA_HOME/bin"
         break
     fi
 done
@@ -120,8 +120,9 @@ if [ -d ~/.ssh ] ; then
 fi
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-rm -f ~/tmp
+/bin/rm -f ~/tmp ||: 2>/dev/null
 mkdir -p "/tmp/tmp-$USER"
 chmod -R 777 "/tmp/tmp-$USER"
 ln -s "/tmp/tmp-$USER" ~/tmp
-export PATH=$PATH:${HOME}/.local/bin
+export PATH="$PATH:${HOME}/.local/bin"
+
