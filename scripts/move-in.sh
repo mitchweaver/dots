@@ -15,10 +15,10 @@ NOTE:
 
 EOF
 
-echo -n 'Confirm? (YES/NO): '
+printf '%s' 'Confirm? (YES/NO): '
 
 read -r ans
-[ "$ans" == YES ] || die 'Exiting.'
+[ "$ans" = YES ] || die 'Exiting.'
 
 # --------------------------------------
 
@@ -37,11 +37,11 @@ for folder in \
 	.config/redshift \
 	.config/sway \
 	.config/sxhkd \
+	.config/waybar \
 	.config/gtk-3.0 ; do
 
 	rm -rfv "${HOME:?}/$folder"
 	ln -sv "$DOTS_DIR/$folder" "${HOME}/$folder"
-
 done
 
 for file in \
@@ -54,7 +54,6 @@ for file in \
 
 	rm -fv "${HOME}/$file"
 	ln -sv "$DOTS_DIR/$file" "${HOME}/$file"
-
 done
 
 if [ -d scripts ] ; then

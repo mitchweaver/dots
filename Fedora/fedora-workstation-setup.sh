@@ -305,12 +305,27 @@ fi
 #
 
 # wayland stuff
-######swaybg wofi waybar xorg-x11-server-Xwayland
+######swaybg wofi waybar xorg-x11-server-Xwayland grim slurp
 
 
 # themes
 dnf install -y \
 	paper-icon-theme \
+	papirus-icon-theme \
 	lxappearance \
 	arc-theme
+
+
+# budgie
+# dnf install -y \
+# 	budgie-control-center \
+# 	budgie-desktop-defaults \
+# 	budgie-desktop-view \
+# 	budgie-screensaver \
+# 	budgie-desktop
+
+# File manager stuff
+dnf install -y \
+	pcmanfm
+
 

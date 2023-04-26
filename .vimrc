@@ -217,7 +217,7 @@ if exists(':PlugInstall')
     " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
     " colorscheme onehalfdark
     " colorscheme typewriter
-    colorscheme everforest
+    " colorscheme everforest
     " colorscheme papercolor
     " colorscheme catppuccin
     " colorscheme pywal
