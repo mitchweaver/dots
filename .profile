@@ -124,3 +124,4 @@ rm -f ~/tmp
 mkdir -p "/tmp/tmp-$USER"
 chmod -R 777 "/tmp/tmp-$USER"
 ln -s "/tmp/tmp-$USER" ~/tmp
+export PATH=$PATH:${HOME}/.local/bin

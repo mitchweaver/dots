@@ -18,6 +18,10 @@ xset +fp ~/.fonts
 xset m 0 0
 xset b off
 
+##### TESTING ##############
+exit 0
+############################
+
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # SET PROPER DPI
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -83,4 +87,4 @@ pgrep -f pipewire   || gentoo-pipewire-launcher &
 # polybar-msg cmd quit >~/.cache/polybar.log 2>&1
 # polybar mybar >>~/.cache/polybar.log 2>&1 &
 #exec i3 >~/.cache/i3.log 2>&1
-exec budgie-desktop
+#exec budgie-desktop

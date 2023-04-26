@@ -53,8 +53,8 @@ dnf install -y dnf-plugins-core
 # ===================================================================
 # sway
 # ===================================================================
-dnf install -y \
-	wlroots sway sway-systemd
+#dnf install -y \
+#	wlroots sway sway-systemd
 	# swaybg swayidle swaylock
 	# grim grimshot slurp waybar wlsunset
 	# wofi
@@ -104,13 +104,16 @@ dnf install -y \
 	tor torsocks tigervnc dnsutils bluez bluez-libs bluez-tools \
 	openssl w3m socat dnstop
 
-# taskwarrior
-dnf install -y task taskopen tasksh vit
+##### taskwarrior
+######dnf install -y task taskopen tasksh vit
 
 # media
 dnf install -y \
 	gimp ImageMagick ffmpeg ffmpegthumbnailer youtube-dl \
-	jpegoptim gyazo audacity-freeworld
+	jpegoptim
+
+#### gyazo
+### audacity-freeworld
 
 # fonts
 dnf install -y \
@@ -159,9 +162,9 @@ dnf install -y pipewire-pulseaudio pulseaudio-utils pavucontrol
 # ===================================================================
 # user space
 # ===================================================================
+####	torbrowser-launcher \
 dnf install -y \
 	ranger \
-	torbrowser-launcher \
 	mpv \
 	shntool \
 	cuetools \
@@ -254,23 +257,23 @@ dnf install -y xhost xbanish xdotool xterm xbacklight xsetroot xinput arandr pic
 # ===================================================================
 # firefox
 # ===================================================================
-if ! command -v firefox-nightly >/dev/null 2>&1 ; then
-	sudo dnf remove -y firefox
-	sudo dnf copr enable proletarius101/firefox-nightly -y
-	sudo dnf update -y
-	sudo dnf install -y firefox-nightly
-	mkdir -p /usr/local/bin
-	ln -sf "$(which firefox-nightly)" /usr/local/bin/firefox
-fi
+#if ! command -v firefox-nightly >/dev/null 2>&1 ; then
+#	sudo dnf remove -y firefox
+#	sudo dnf copr enable proletarius101/firefox-nightly -y
+#	sudo dnf update -y
+#	sudo dnf install -y firefox-nightly
+#	mkdir -p /usr/local/bin
+#	ln -sf "$(which firefox-nightly)" /usr/local/bin/firefox
+#fi
 
 # ===================================================================
 # non-repo packages
 # ===================================================================
-if ! command -v gotop >/dev/null 2>&1 ; then
-	wget 'https://github.com/xxxserxxx/gotop/releases/download/v4.1.3/gotop_v4.1.3_linux_amd64.rpm' -O /tmp/gotop.rpm
-	rpm -i /tmp/gotop.rpm
-	rm -f /tmp/gotop.rpm
-fi
+#if ! command -v gotop >/dev/null 2>&1 ; then
+#	wget 'https://github.com/xxxserxxx/gotop/releases/download/v4.1.3/gotop_v4.1.3_linux_amd64.rpm' -O /tmp/gotop.rpm
+#	rpm -i /tmp/gotop.rpm
+#	rm -f /tmp/gotop.rpm
+#fi
 
 if ! command -v pfetch >/dev/null 2>&1 ; then
 	git clone https://github.com/dylanaraps/pfetch /tmp/pfetch

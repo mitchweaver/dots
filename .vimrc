@@ -123,13 +123,17 @@ nmap <leader>il :let g:indentLine_enabled = 1<CR>
 nmap <leader>li :let g:indentLine_enabled = 0<CR>
 
 Plug 'w0rp/ale'
-    let g:ale_sign_column_always = 0
+let g:ale_sign_column_always = 0
     let g:ale_fix_on_save = 1
     " uncomment to only have ale check on file saves
     let g:ale_lint_on_text_changed = 'never'
     let g:airline#extensions#ale#enabled = 1
     let g:ale_linters = {'python': ['pylint']} " flake8
     let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
+    " to only show hints on mouse hover
+    """""let g:ale_virtualtext_cursor = 'current'
+    " to never show hints
+    let g:ale_virtualtext_cursor = 'disabled'
 
 " Plug 'mhinz/vim-startify'
 "     " bug: this needs to be set to '0' or else creates delay on startup

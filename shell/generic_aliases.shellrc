@@ -44,7 +44,7 @@ alias {mkdir,mkd,mkdr,mkir}='mkdir -p'
 
 alias {x,xx,xxx,q,qq,qqq,lq,:q,:Q,:wq,:w,exi,ex}=exit
 alias {cll,clear,claer,clar,clea,clera}=clear
-alias {cls,csl,cl,lc}='clear ; ls'
+alias {cls,csl,cl,lc,clearls}='clear ; ls'
 alias {e,ech,eho}=echo
 alias {g,gi,gr,grp,gre,Grep,gerp,grpe}='grep -i'
 alias {pg,pgrpe}=pgrep
