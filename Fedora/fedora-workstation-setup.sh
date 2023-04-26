@@ -33,7 +33,7 @@ dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-
 dnf upgrade --refresh
 dnf groupupdate core
 dnf install -y rpmfusion-free-release-tainted
-dnf install -y dnf-plugins-core
+dnf install -y dnf-plugins-core distribution-gpg-keys
 
 # # ===================================================================
 # # gnome
@@ -83,10 +83,13 @@ dnf install -y pigz zip unzip unrar p7zip
 
 # system
 dnf install -y \
-	util-linux-user fail2ban htop detox \
+	util-linux-user htop detox \
 	inotify-tools lm_sensors hwinfo lshw \
-	clamav clamav-data clamav-update lsof \
-	timeshift
+	lsof
+
+# security
+dnf install -y \
+	firejail fail2ban clamav clamav-data clamav-update
 
 systemctl enable fail2ban
 systemctl start fail2ban
@@ -101,19 +104,13 @@ dnf install -y pv progress tree neofetch slop translate-shell exa \
 dnf install -y \
 	openssh-server openssh openvpn rdesktop rsync wget \
 	curl aria2 wireshark net-tools nmap netcat speedtest-cli \
-	tor torsocks tigervnc dnsutils bluez bluez-libs bluez-tools \
+	tigervnc dnsutils bluez bluez-libs bluez-tools \
 	openssl w3m socat dnstop
-
-##### taskwarrior
-######dnf install -y task taskopen tasksh vit
 
 # media
 dnf install -y \
 	gimp ImageMagick ffmpeg ffmpegthumbnailer youtube-dl \
 	jpegoptim
-
-#### gyazo
-### audacity-freeworld
 
 # fonts
 dnf install -y \
@@ -157,7 +154,7 @@ dnf install -y gstreamer1-plugin-openh264 mozilla-openh264
 dnf install -y cups cups-client cups-lpd cups-pdf
 
 # sound
-dnf install -y pipewire-pulseaudio pulseaudio-utils pavucontrol
+dnf install -y pipewire-pulseaudio pulseaudio-utils pavucontrol pipewire-devel
 
 # ===================================================================
 # user space
@@ -173,9 +170,27 @@ dnf install -y \
 	vorbis-tools \
 	libreoffice \
 	obs-studio \
+	v4l2loopback \
 	shotcut \
 	xournal \
-	discord
+	discord \
+	parcellite \
+	redshift \
+	nextcloud-client \
+	pcmanfm
+
+# ===================================================================
+# rice
+# ===================================================================
+dnf install -y \
+	dunst \
+	picom \
+	i3 \
+	polybar
+
+dnf copr enable linuxredneck/xwallpaper -y
+dnf update
+dnf install -y xwallpaper
 
 # evince \
 # evince-thumbnailer \
@@ -243,12 +258,14 @@ dnf install -y \
     gstreamer1-plugins-good-qt \
     qt5-qtbase-private-devel \
     glibc-devel \
-    libXcursor-devel
+    libXcursor-devel \
+    libbsd \
+    libbsd-devel
 
 # ===================================================================
 # xorg stuff (not applicable on wayland)
 # ===================================================================
-dnf install -y xhost xbanish xdotool xterm xbacklight xsetroot xinput arandr picom sxhkd xautolock
+dnf install -y xhost xbanish xdotool xterm xbacklight xsetroot xinput arandr sxhkd xautolock
 # xdimmer
 
 # ===================================================================
@@ -305,7 +322,7 @@ fi
 #
 
 # wayland stuff
-######swaybg wofi waybar xorg-x11-server-Xwayland grim slurp
+######swaybg wofi waybar xorg-x11-server-Xwayland grim slurp qt6-qtwayland
 
 
 # themes
@@ -324,8 +341,12 @@ dnf install -y \
 # 	budgie-screensaver \
 # 	budgie-desktop
 
-# File manager stuff
-dnf install -y \
-	pcmanfm
 
+dnf copr enable taw/joplin
+dnf update
+dnf install -y joplin
+
+wget https://github.com/xxxserxxx/gotop/releases/download/v4.2.0/gotop_v4.2.0_linux_amd64.rpm -O /tmp/gotop_v4.2.0_linux_amd64.rpm
+rpm -i /tmp/gotop_v4.2.0_linux_amd64.rpm
+rm /tmp/gotop_v4.2.0_linux_amd64.rpm
 
