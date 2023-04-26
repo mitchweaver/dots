@@ -1,0 +1,2 @@
+x11-libs/libfm    gtk -udisks -automount
+x11-libs/libfm-qt gtk -udisks -automount

@@ -1,0 +1,61 @@
+# needed for lvm/dm-raid, needed for os-prober/windows
+sys-boot/grub:2 device-mapper grub_platforms_pc
+
+# clang junk i dont use
+sys-devel/clang -extra -xml -static-analyzer
+
+# woeusb-ng
+x11-libs/wxGTK gstreamer
+
+net-analyzer/wireshark wifi
+net-misc/nextcloud-client -dolphin -nautilus
+x11-misc/slop -opengl
+sys-libs/compiler-rt-sanitizers profile
+media-gfx/sxiv jpeg png gif webp
+media-libs/imblib2 jpeg png gif webp -bzip2
+media-video/mpv jpeg png rubberband libcaca zimg
+sys-apps/smartmontools -daemon -update-drivedb -caps
+
+media-gfx/imagemagick jpeg jpeg2k png tiff webp
+x11-misc/dmenu -savedconfig
+app-admin/sysstat lm-sensors
+dev-libs/glib -dbus
+
+# for images in kitty
+dev-python/pillow jpeg jpeg2k tiff webp
+
+media-libs/tiff jpeg
+
+# drop priv
+x11-misc/lightdm non-root -introspection
+
+# mailspring
+gnome-base/gnome-keyring -ssh-agent
+
+app-crypt/gcr gtk -vala
+
+# note: python failing to compile with -hardened
+dev-lang/python tk xml -bluetooth -hardened
+
+dev-libs/liborcus -spreadsheet-model
+
+media-libs/libsdl2 opengl gles2
+
+# jellyfin-media-player
+dev-qt/qtwebengine jumbo-build
+dev-qt/qtwebchannel qml
+
+# ========= MISC =============
+app-text/xmlto text
+app-text/ghostscript-gpl cups
+app-text/poppler cairo
+media-libs/gegl cairo
+sys-libs/zlib minizip
+x11-libs/gdk-pixbuf jpeg
+
+# only thing on system needing berkdb, required by python
+sys-libs/gdbm berkdb
+# ========= MISC =============
+
+# for boxes
+dev-libs/libpcre2 pcre32

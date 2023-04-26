@@ -1,0 +1,124 @@
+# for games-util/mangohud
+media-libs/imgui vulkan
+
+# ************************************************
+# STEAM
+# ************************************************
+games-util/steam-client-meta trayicon -steamvr
+games-util/steam-launcher joystick
+app-arch/zstd abi_x86_32
+app-crypt/libmd abi_x86_32
+dev-libs/expat abi_x86_32
+dev-libs/libbsd abi_x86_32
+dev-libs/libffi abi_x86_32
+dev-libs/libpcre2 abi_x86_32
+media-libs/libglvnd abi_x86_32
+media-libs/mesa abi_x86_32
+virtual/opengl abi_x86_32
+sys-devel/llvm abi_x86_32
+sys-libs/libselinux abi_x86_32
+sys-libs/libsepol abi_x86_32
+sys-libs/ncurses abi_x86_32
+sys-libs/zlib abi_x86_32
+x11-libs/libX11 abi_x86_32
+x11-libs/libXau abi_x86_32
+x11-libs/libxcb abi_x86_32
+x11-libs/libXdmcp abi_x86_32
+x11-libs/libdrm abi_x86_32
+x11-libs/libxshmfence abi_x86_32
+x11-libs/libXext abi_x86_32
+x11-libs/libXxf86vm abi_x86_32
+x11-libs/libXfixes abi_x86_32
+x11-libs/libXrandr abi_x86_32
+x11-libs/libXrender abi_x86_32
+x11-libs/libpciaccess abi_x86_32
+x11-drivers/nvidia-drivers abi_x86_32
+
+# ************************************************
+# GreenWithEnvy (msiafterburner for linux)
+# NOTE: this needs 'tk' use flag on dev-lang/python
+# ************************************************
+dev-libs/libdbusmenu gtk3
+# sys-power/gwe python_single_target_python3_8
+# dev-python/Rx python_targets_python3_9
+
+#
+# # this below is super obnoxious...
+# dev-python/injector python_targets_python3_8
+# dev-python/matplotlib python_targets_python3_8
+# dev-python/peewee python_targets_python3_8
+# dev-python/py3nvml python_targets_python3_8
+# dev-python/pygobject python_targets_python3_8
+# dev-python/python python_targets_python3_8
+# dev-python/pyxdg python_targets_python3_8
+# dev-python/requests python_targets_python3_8
+# dev-python/setuptools python_targets_python3_8
+# dev-python/appdirs python_targets_python3_8
+# dev-python/jaraco python_targets_python3_8
+# dev-python/more python_targets_python3_8
+# dev-python/nspektr python_targets_python3_8
+# dev-python/ordered python_targets_python3_8
+# dev-python/packaging python_targets_python3_8
+# dev-python/tomli python_targets_python3_8
+# dev-python/importlib_metadata python_targets_python3_8
+# dev-python/certifi python_targets_python3_8
+# dev-python/setuptools_scm python_targets_python3_8
+# dev-python/wheel python_targets_python3_8
+# dev-python/gpep517 python_targets_python3_8
+# dev-python/installer python_targets_python3_8
+# dev-python/flit_core python_targets_python3_8
+# dev-python/typing python_targets_python3_8
+# dev-python/zipp python_targets_python3_8
+# dev-python/pyparsing python_targets_python3_8
+# dev-python/jaraco python_targets_python3_8
+# dev-python/jaraco python_targets_python3_8
+# dev-python/autocommand python_targets_python3_8
+# dev-python/inflect python_targets_python3_8
+# dev-python/pydantic python_targets_python3_8
+# dev-python/cython python_targets_python3_8
+# dev-python/charset_normalizer python_targets_python3_8
+# dev-python/idna python_targets_python3_8
+# dev-python/urllib3 python_targets_python3_8
+# dev-python/PySocks python_targets_python3_8
+# dev-python/six python_targets_python3_8
+# dev-python/pycairo python_targets_python3_8
+# dev-python/contourpy python_targets_python3_8
+# dev-python/cycler python_targets_python3_8
+# dev-python/fonttools python_targets_python3_8
+# dev-python/kiwisolver python_targets_python3_8
+# dev-python/numpy python_targets_python3_8
+# dev-python/pillow python_targets_python3_8
+# dev-python/python python_targets_python3_8
+# dev-python/pytz python_targets_python3_8
+# dev-python/cairocffi python_targets_python3_8
+# dev-python/PyQt5 python_targets_python3_8
+# dev-python/wxpython python_targets_python3_8
+# dev-python/setuptools_scm_git_archive python_targets_python3_8
+# dev-python/dbus python_targets_python3_8
+# dev-python/PyQt5 python_targets_python3_8
+# dev-python/PyQt python_targets_python3_8
+# dev-python/sip python_targets_python3_8
+# dev-python/ply python_targets_python3_8
+# dev-python/toml python_targets_python3_8
+# dev-python/cffi python_targets_python3_8
+# dev-python/xcffib python_targets_python3_8
+# dev-python/pycparser python_targets_python3_8
+# dev-python/olefile python_targets_python3_8
+# dev-python/cppy python_targets_python3_8
+# dev-python/fs python_targets_python3_8
+# dev-python/pybind11 python_targets_python3_8
+# dev-python/PyQt-builder python_targets_python3_8
+# dev-python/python-xlib python_targets_python3_8
+# dev-python/jaraco-text python_targets_python3_8
+# dev-python/more-itertools python_targets_python3_8
+# dev-python/ordered-set python_targets_python3_8
+# dev-python/typing-extensions python_targets_python3_8
+# dev-python/jaraco-context python_targets_python3_8
+# dev-python/jaraco-functools python_targets_python3_8
+# dev-python/python-dateutil python_targets_python3_8
+# dev-python/dbus-python python_targets_python3_8
+# dev-python/PyQt5-sip python_targets_python3_8
+
+# # note: these two are missed as a dep in the ebuild
+# dev-python/rx python_targets_python3_8
+# dev-python/importlib_resources python_targets_python3_8

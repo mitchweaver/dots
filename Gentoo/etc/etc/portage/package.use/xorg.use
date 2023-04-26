@@ -1,0 +1,8 @@
+x11-base/xorg-server xvfb -xnest -xephyr
+x11-base/xorg-drivers -wacom
+
+x11-apps/xinit -twm
+x11-terms/xterm -xinerama
+
+# NOTE: if using wayland you can delete this:
+sys-auth/pambase elogind

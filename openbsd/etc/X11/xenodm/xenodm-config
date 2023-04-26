@@ -1,0 +1,17 @@
+DisplayManager.authDir:         /etc/X11/xenodm
+DisplayManager.errorLogFile:    /var/log/xenodm.log
+DisplayManager.servers:         /etc/X11/xenodm/Xservers
+DisplayManager*resources:       /etc/X11/xenodm/Xresources
+
+DisplayManager*startup:         /etc/X11/xenodm/Xstartup
+DisplayManager*session:         /etc/X11/xenodm/Xsession
+DisplayManager*reset:           /etc/X11/xenodm/Xreset
+
+DisplayManager._0.setup:        /etc/X11/xenodm/Xsetup_0
+DisplayManager._0.startup:      /etc/X11/xenodm/GiveConsole
+DisplayManager._0.reset:        /etc/X11/xenodm/TakeConsole
+DisplayManager.*.authName:      MIT-MAGIC-COOKIE-1
+
+! -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+! DisplayManager._0.autoLogin: mitch
+! -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

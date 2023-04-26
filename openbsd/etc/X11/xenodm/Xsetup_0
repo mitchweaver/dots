@@ -1,0 +1,7 @@
+#!/bin/sh
+
+wall=/etc/X11/xenodm/openbsd_wall.jpg
+
+[ -f $wall ] &&
+[ -x /usr/local/bin/xwallpaper ] &&
+/usr/local/bin/xwallpaper --stretch $wall
