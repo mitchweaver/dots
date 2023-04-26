@@ -1,9 +1,0 @@
-#!/usr/bin/env xdg-open
-[Desktop Entry]
-Type=Application
-Name=Joplin
-Comment=Joplin for Desktop
-Icon=joplin-desktop-bin
-Exec=joplin-desktop-bin
-Terminal=false
-Categories=Office
