@@ -1,3 +1,0 @@
-# consider this if using an Intel processor
-# see: https://github.com/InBetweenNames/gentooLTO/issues/164
-CFLAGS="${CFLAGS} -falign-functions=32"
