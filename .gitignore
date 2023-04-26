@@ -101,3 +101,6 @@ themes/current
 *config/user-dirs.locale
 *config/syncd
 *config/syncthing
+
+.config/ranger/plugins/ranger_devicons
+
