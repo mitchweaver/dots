@@ -6,17 +6,20 @@
     "passthrough": false,
     "gtk-layer-shell": true,
     "height": 0,
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
     "modules-left": [
         "wlr/workspaces"
     ],
+
     "modules-center": ["hyprland/window"],
+
     "modules-right": [
-        // "custom/updates",
         "tray",
-        "custom/weather",
+        // "custom/weather",
         "pulseaudio",
         "clock"
     ],
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
     "hyprland/window": {
         "format": "{}"
     },
@@ -24,32 +27,37 @@
         "disable-scroll": true,
         "all-outputs": true,
         "on-click": "activate",
-        //"format": "{icon}",
-        "persistent_workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": [],
-            "6": [],
-            "7": [],
-            "8": [],
-            "9": [],
-            "10": []
-        }
-    },
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "urgent": "",
+            "active": "",
+            "default": ""
+        },
+        "sort-by-number": true
+   },
+        // "persistent_workspaces": {
+        //     "1": [],
+        //     "2": [],
+        //     "3": [],
+        //     "4": [],
+        //     "5": [],
+        // }
     // "custom/updates": {
     //     "exec": "(checkupdates ; yay -Qua) | wc -l",
     //     "interval": ,
     //     "format": " {}"
     // },
-   "custom/weather" : {
-        "tooltip" : true,
-        "format" : "{}",
-        "interval" : 30,
-        "exec" : "~/.config/waybar/scripts/waybar-wttr.py",
-        "return-type" : "json"
-    },
+   // "custom/weather": {
+   //      "tooltip" : true,
+   //      "format" : "{}",
+   //      "interval" : 30,
+   //      "exec" : "~/.config/waybar/scripts/waybar-wttr.py",
+   //      "return-type" : "json"
+   //  },
     "tray": {
         "icon-size": 14,
         "spacing": 10

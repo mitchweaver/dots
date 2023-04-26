@@ -1,6 +1,7 @@
 # programs
 alt Return
     stwrapper
+    # kitty
 alt + w
     brws
 alt + r
