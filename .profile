@@ -89,13 +89,13 @@ elif command -v vim >/dev/null 2>&1 ; then
 	export EDITOR=vim
 fi
 
-if command -v brws >/dev/null 2>&1 ; then
-    export BROWSER=brws
-elif command -v firefox >/dev/null 2>&1 ; then
-	export BROWSER=firefox
-elif command -v firefox-bin >/dev/null 2>&1 ; then
-	export BROWSER=firefox-bin
-fi
+export BROWSER=firefox
+
+# if command -v brws >/dev/null 2>&1 ; then
+#     export BROWSER=brws
+# elif command -v firefox >/dev/null 2>&1 ; then
+# 	export BROWSER=firefox
+# fi
 
 export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage

@@ -27,6 +27,7 @@ for folder in \
 	.firejail \
 	.config/i3 \
 	.config/polybar \
+	.config/hypr \
 	.config/kitty \
 	.config/mpv \
 	.config/nvim \

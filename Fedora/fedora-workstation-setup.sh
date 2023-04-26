@@ -174,17 +174,13 @@ dnf install -y \
 	libreoffice \
 	obs-studio \
 	shotcut \
-	zathura-pdf-mupdf \
 	xournal \
-	discord \
-	qbittorrent \
-	qbittorrent-nox \
-	gedit \
-	gedit-plugins \
-	evince \
-	evince-thumbnailer \
-	evince-previewer \
-	evince-nautilus
+	discord
+
+# evince \
+# evince-thumbnailer \
+# evince-previewer \
+# evince-nautilus
 
 dnf install -y lpf-spotify-client
 lpf update
@@ -246,7 +242,8 @@ dnf install -y \
     libcec-devel \
     gstreamer1-plugins-good-qt \
     qt5-qtbase-private-devel \
-    glibc-devel
+    glibc-devel \
+    libXcursor-devel
 
 # ===================================================================
 # xorg stuff (not applicable on wayland)
@@ -305,3 +302,15 @@ fi
 ######
 ####### in fact lets just not use display manager
 ######sudo systemctl disable gdm
+#
+
+# wayland stuff
+######swaybg wofi waybar xorg-x11-server-Xwayland
+
+
+# themes
+dnf install -y \
+	paper-icon-theme \
+	lxappearance \
+	arc-theme
+
