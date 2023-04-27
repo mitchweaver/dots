@@ -10,17 +10,25 @@ dnf autoremove
 dnf install -y rpm-build
 
 # ------------ firmware ---------------------
-#fwupdmgr get-devices
-#fwupdmgr refresh --force
-#fwupdmgr get-updates
-#fwupdmgr update
+printf '%s' "Upgrade firmware? (y/n):"
+read -r ans
+case $ans in
+	y)
+		fwupdmgr get-devices
+		fwupdmgr refresh --force
+		fwupdmgr get-updates
+		fwupdmgr update
+		;;
+	*)
+		>&2 echo "Skipping"
+esac
 # -------------------------------------------
 
 # make dnf not suck as much
 if ! grep fastestmirror=1 /etc/dnf/dnf.conf >/dev/null ; then
 cat >> /etc/dnf/dnf.conf <<EOF
 fastestmirror=1
-max_parallel_downloads=10
+max_parallel_downloads=15
 deltarpm=true
 EOF
 fi
@@ -35,20 +43,20 @@ dnf groupupdate core
 dnf install -y rpmfusion-free-release-tainted
 dnf install -y dnf-plugins-core distribution-gpg-keys
 
-# # ===================================================================
-# # gnome
-# # ===================================================================
-# dnf install -y \
-# 	gnome-tweaks gconf-editor gnome-extensions-app \
-# 	gnome-shell-extension-appindicator \
-# 	gnome-shell-extension-caffeine \
-# 	gnome-shell-extension-dash-to-dock \
-# 	gnome-shell-extension-user-theme \
-# 	gnome-shell-extension-no-overview \
-# 	gnome-shell-extension-frippery-move-clock \
-# 	gnome-shell-theme-flat-remix \
-# 	gnome-shell-extension-screenshot-window-sizer \
-# 	gnome-screenshot
+# ===================================================================
+# gnome
+# ===================================================================
+dnf install -y \
+	gnome-tweaks gconf-editor gnome-extensions-app \
+	gnome-shell-extension-appindicator \
+	gnome-shell-extension-caffeine \
+	gnome-shell-extension-dash-to-dock \
+	gnome-shell-extension-user-theme \
+	gnome-shell-extension-no-overview \
+	gnome-shell-extension-frippery-move-clock \
+	gnome-shell-theme-flat-remix \
+	gnome-shell-extension-screenshot-window-sizer \
+	gnome-screenshot
 
 # ===================================================================
 # sway
@@ -159,7 +167,6 @@ dnf install -y pipewire-pulseaudio pulseaudio-utils pavucontrol pipewire-devel
 # ===================================================================
 # user space
 # ===================================================================
-####	torbrowser-launcher \
 dnf install -y \
 	ranger \
 	mpv \
@@ -178,9 +185,12 @@ dnf install -y \
 	redshift \
 	nextcloud-client \
 	pcmanfm
+# evince \
+# evince-thumbnailer \
+# evince-previewer
 
 # ===================================================================
-# rice
+# i3 rice
 # ===================================================================
 dnf install -y \
 	dunst \
@@ -198,11 +208,6 @@ install -D -m 0755 i3lock-fancy-rapid /usr/local/bin/i3lock-fancy-rapid
 dnf copr enable linuxredneck/xwallpaper -y
 dnf update
 dnf install -y xwallpaper
-
-# evince \
-# evince-thumbnailer \
-# evince-previewer \
-# evince-nautilus
 
 dnf install -y lpf-spotify-client
 lpf update
@@ -290,16 +295,16 @@ dnf install -y xhost xbanish xdotool xterm xbacklight xsetroot xinput arandr sxh
 # ===================================================================
 # non-repo packages
 # ===================================================================
-#if ! command -v gotop >/dev/null 2>&1 ; then
-#	wget 'https://github.com/xxxserxxx/gotop/releases/download/v4.1.3/gotop_v4.1.3_linux_amd64.rpm' -O /tmp/gotop.rpm
-#	rpm -i /tmp/gotop.rpm
-#	rm -f /tmp/gotop.rpm
-#fi
-
 if ! command -v pfetch >/dev/null 2>&1 ; then
 	git clone https://github.com/dylanaraps/pfetch /tmp/pfetch
 	sudo install -D -m 0755 /tmp/pfetch/pfetch /usr/local/bin/pfetch
 	rm -rf /tmp/pfetch
+fi
+
+if ! command -v gotop >/dev/null 2>&1 ; then
+	wget https://github.com/xxxserxxx/gotop/releases/download/v4.2.0/gotop_v4.2.0_linux_amd64.rpm -O /tmp/gotop_v4.2.0_linux_amd64.rpm
+	rpm -i /tmp/gotop_v4.2.0_linux_amd64.rpm
+	rm /tmp/gotop_v4.2.0_linux_amd64.rpm
 fi
 
 # ===================================================================
@@ -310,27 +315,8 @@ fi
 #	ln -s /var/lib/snapd/snap /snap
 #fi
 
-# ===================================================================
-# if using xorg
-# ===================================================================
-####### use xinitrc because new linux is stupid
-######cat <<EOF | sudo tee /usr/share/xsessions/xinitrc.desktop
-######[Desktop Entry]
-######Encoding=UTF-8
-######Name=xinitrc
-######Comment=xinitrc
-######Exec=/home/mitch/.xinitrc
-######TryExec=/home/mitch/.xinitrc
-######Type=Application
-######EOF
-######
-####### in fact lets just not use display manager
-######sudo systemctl disable gdm
-#
-
 # wayland stuff
 ######swaybg wofi waybar xorg-x11-server-Xwayland grim slurp qt6-qtwayland
-
 
 # themes
 dnf install -y \
@@ -338,7 +324,6 @@ dnf install -y \
 	papirus-icon-theme \
 	lxappearance \
 	arc-theme
-
 
 # budgie
 # dnf install -y \
@@ -352,8 +337,4 @@ dnf install -y \
 dnf copr enable taw/joplin
 dnf update
 dnf install -y joplin
-
-wget https://github.com/xxxserxxx/gotop/releases/download/v4.2.0/gotop_v4.2.0_linux_amd64.rpm -O /tmp/gotop_v4.2.0_linux_amd64.rpm
-rpm -i /tmp/gotop_v4.2.0_linux_amd64.rpm
-rm /tmp/gotop_v4.2.0_linux_amd64.rpm
 
