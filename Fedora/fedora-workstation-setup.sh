@@ -186,7 +186,14 @@ dnf install -y \
 	dunst \
 	picom \
 	i3 \
+	i3lock \
 	polybar
+
+cd /tmp
+git clone https://github.com/yvbbrjdr/i3lock-fancy-rapid
+cd i3lock-fancy-rapid
+make
+install -D -m 0755 i3lock-fancy-rapid /usr/local/bin/i3lock-fancy-rapid
 
 dnf copr enable linuxredneck/xwallpaper -y
 dnf update
