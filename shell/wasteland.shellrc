@@ -183,6 +183,18 @@ backup-firefox() {
     tar -cvJpf "$dir".tar.xz "$dir" && rm -r -- "$dir"
 }
 
+backup-gnome () {
+    dir="gnome-backup-$(date +'%Y%m%d_%H%M%S')"
+    file="$dir/dconf-backup-$(date +'%Y%m%d_%H%M%S')".dconf
+    dconf dump / > "$file"
+    xz "$file"
+    mkdir -p "$dir"/dot_local
+    mkdir -p "$dir"/dot_local/share
+    cp -r ~/.local/gnome-shell "$dir"/dot_local/gnome-shell
+    cp -r ~/.local/share/gnome-shell "$dir"/dot_local/share/gnome-shell
+    pack "$dir"
+}
+
 alias htpo=htop
 
 cuesplit() {
