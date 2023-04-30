@@ -182,6 +182,7 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 " -------------------------------------------------------------
 Plug 'fladson/vim-kitty' " kitty.conf syntax
 Plug 'gentoo/gentoo-syntax' " gentoo ebuild syntax
+set rtp+=/usr/share/vim/vimfiles
 Plug 'ekalinin/Dockerfile.vim'   " syntax for dockerfiles
 
 " I like vim-markdown better than polyglot's markdown
