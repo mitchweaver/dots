@@ -4,10 +4,20 @@
 # initial setup
 # ===================================================================
 
+# make dnf not suck as much
+if ! grep fastestmirror=1 /etc/dnf/dnf.conf >/dev/null ; then
+cat >> /etc/dnf/dnf.conf <<EOF
+fastestmirror=1
+max_parallel_downloads=15
+deltarpm=true
+EOF
+fi
+
 dnf upgrade --refresh
 dnf check
 dnf autoremove
 dnf install -y rpm-build
+
 
 # ------------ firmware ---------------------
 printf '%s' "Upgrade firmware? (y/n):"
@@ -23,15 +33,6 @@ case $ans in
 		>&2 echo "Skipping"
 esac
 # -------------------------------------------
-
-# make dnf not suck as much
-if ! grep fastestmirror=1 /etc/dnf/dnf.conf >/dev/null ; then
-cat >> /etc/dnf/dnf.conf <<EOF
-fastestmirror=1
-max_parallel_downloads=15
-deltarpm=true
-EOF
-fi
 
 # ===================================================================
 # repos
@@ -51,12 +52,19 @@ dnf install -y \
 	gnome-shell-extension-appindicator \
 	gnome-shell-extension-caffeine \
 	gnome-shell-extension-dash-to-dock \
+	gnome-shell-extension-dash-to-panel \
 	gnome-shell-extension-user-theme \
 	gnome-shell-extension-no-overview \
 	gnome-shell-extension-frippery-move-clock \
 	gnome-shell-theme-flat-remix \
 	gnome-shell-extension-screenshot-window-sizer \
-	gnome-screenshot
+	gnome-screenshot \
+	gnome-shell-extension-blur-my-shell \
+	gnome-shell-extension-background-logo \
+	gnome-shell-extension-gamemode \
+	gnome-shell-extension-just-perfection \
+	gnome-shell-extension-openweather \
+	gnome-shell-extension-workspace-indicator
 
 # ===================================================================
 # sway
@@ -93,7 +101,7 @@ dnf install -y pigz zip unzip unrar p7zip
 dnf install -y \
 	util-linux-user htop detox \
 	inotify-tools lm_sensors hwinfo lshw \
-	lsof
+	lsof kitty kitty-bash-integration
 
 # security
 dnf install -y \
@@ -111,14 +119,14 @@ dnf install -y pv progress tree neofetch slop translate-shell exa \
 # networking
 dnf install -y \
 	openssh-server openssh openvpn rdesktop rsync wget \
-	curl aria2 wireshark net-tools nmap netcat speedtest-cli \
+	curl wireshark net-tools nmap netcat speedtest-cli \
 	tigervnc dnsutils bluez bluez-libs bluez-tools \
 	openssl w3m socat dnstop
 
 # media
 dnf install -y \
-	gimp ImageMagick ffmpeg ffmpegthumbnailer youtube-dl \
-	jpegoptim
+	ImageMagick ffmpeg ffmpegthumbnailer youtube-dl \
+	jpegoptim mpv
 
 # fonts
 dnf install -y \
@@ -160,6 +168,8 @@ dnf install -y gstreamer1-plugin-openh264 mozilla-openh264
 
 # printing
 dnf install -y cups cups-client cups-lpd cups-pdf
+systemctl enable cups
+systemctl start cups
 
 # sound
 dnf install -y pipewire-pulseaudio pulseaudio-utils pavucontrol pipewire-devel
@@ -180,11 +190,11 @@ dnf install -y \
 	v4l2loopback \
 	shotcut \
 	xournal \
-	discord \
-	parcellite \
 	redshift \
 	nextcloud-client \
-	pcmanfm
+	pcmanfm \
+        ranger
+
 # evince \
 # evince-thumbnailer \
 # evince-previewer
@@ -198,12 +208,6 @@ dnf install -y \
 	i3 \
 	i3lock \
 	polybar
-
-cd /tmp
-git clone https://github.com/yvbbrjdr/i3lock-fancy-rapid
-cd i3lock-fancy-rapid
-make
-install -D -m 0755 i3lock-fancy-rapid /usr/local/bin/i3lock-fancy-rapid
 
 dnf copr enable linuxredneck/xwallpaper -y
 dnf update
@@ -280,6 +284,12 @@ dnf install -y \
 dnf install -y xhost xbanish xdotool xterm xbacklight xsetroot xinput arandr sxhkd xautolock
 # xdimmer
 
+cd /tmp
+git clone https://github.com/yvbbrjdr/i3lock-fancy-rapid
+cd i3lock-fancy-rapid
+make
+install -D -m 0755 i3lock-fancy-rapid /usr/local/bin/i3lock-fancy-rapid
+
 # ===================================================================
 # firefox
 # ===================================================================
@@ -338,3 +348,24 @@ dnf copr enable taw/joplin
 dnf update
 dnf install -y joplin
 
+
+dnf install -y --allowerasing ffmpeg
+
+
+dnf install -y nextcloud-client kdiskmark
+
+# enable flathub
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# logitech mice
+dnf install -y \
+	libratbag-ratbagd
+
+
+# gimp stuff
+dnf install -y \
+	gimp gimp-lensfun gimp-lqr-plugin
+
+# wayland import alternative
+dnf install -y \
+	grim
