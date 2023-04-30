@@ -30,20 +30,18 @@ if [ -d "${SHELLRC_DIR}" ] ; then
     . "${SHELLRC_DIR}/history.shellrc"
     . "${SHELLRC_DIR}/movement.shellrc"
     . "${SHELLRC_DIR}/networking.shellrc"
+    . "${SHELLRC_DIR}/oops.shellrc"
     . "${SHELLRC_DIR}/options.shellrc"
     . "${SHELLRC_DIR}/prompt.shellrc"
     . "${SHELLRC_DIR}/templates.shellrc"
     . "${SHELLRC_DIR}/wasteland.shellrc"
-    if [ -f /etc/os-release ] ;then
-        read -r release < /etc/os-release
-        case $release in
-            *Gentoo*)
-                . "${SHELLRC_DIR}/gentoo.shellrc"
-                ;;
-            *Fedora*)
-                . "${SHELLRC_DIR}/redhat.shellrc"
-        esac
+
+    if command -v emerge >/dev/null ; then
+            . "${SHELLRC_DIR}/gentoo.shellrc"
+    elif command -v dnf >/dev/null ; then
+            . "${SHELLRC_DIR}/redhat.shellrc"
     fi
+
     unset release
     unset SHELLRC_DIR
 fi

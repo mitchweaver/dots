@@ -1,0 +1,4 @@
+# cisco/juniper/nokia brain makes me type these way too much
+# when I mean to pipe to grep
+alias i=grep
+alias match=grep
