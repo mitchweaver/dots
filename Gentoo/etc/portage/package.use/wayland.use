@@ -1,9 +1,10 @@
-# ========= WAYLAND =============
-###########sys-auth/seatd server
-###########gui-apps/foot -grapheme-clustering
-###########dev-libs/weston xwayland
-###########dev-qt/qtgui egl
-###########media-libs/mesa wayland
-###########gui-libs/wlroots x11-backend
-###########x11-libs/gtk+ wayland
-# ========= WAYLAND =============
+dev-libs/wayland abi_x86_32
+dev-libs/weston xwayland
+dev-qt/qtgui egl
+media-libs/mesa wayland
+x11-libs/gtk+ wayland
+sys-auth/seatd server
+gui-apps/foot -grapheme-clustering
+
+# tinywl needed for wayland-firefox
+gui-libs/wlroots x11-backend tinywl

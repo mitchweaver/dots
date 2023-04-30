@@ -16,7 +16,9 @@ media-libs/imblib2 jpeg png gif webp -bzip2
 media-video/mpv jpeg png rubberband libcaca zimg
 sys-apps/smartmontools -daemon -update-drivedb -caps
 
-media-gfx/imagemagick jpeg jpeg2k png tiff webp
+app-editors/neovim python
+
+media-gfx/imagemagick jpeg jpeg2k png tiff webp xml
 x11-misc/dmenu -savedconfig
 app-admin/sysstat lm-sensors
 dev-libs/glib -dbus
@@ -28,9 +30,6 @@ media-libs/tiff jpeg
 
 # drop priv
 x11-misc/lightdm non-root -introspection
-
-# mailspring
-gnome-base/gnome-keyring -ssh-agent
 
 app-crypt/gcr gtk -vala
 
@@ -52,6 +51,9 @@ app-text/poppler cairo
 media-libs/gegl cairo
 sys-libs/zlib minizip
 x11-libs/gdk-pixbuf jpeg
+net-libs/webkit-gtk -gamepad -jumbo-build
+
+dev-libs/libratbag elogind -systemd
 
 # only thing on system needing berkdb, required by python
 sys-libs/gdbm berkdb

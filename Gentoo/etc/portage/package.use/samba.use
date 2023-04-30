@@ -1,3 +1,3 @@
 # note: ads === active directory
 net-fs/cifs-utils -ads -acl -creds
-net-fs/samba -regedit -ads -acl -ceph -cluster -glusterfs -profiling-data -quota -spotlight
+net-fs/samba client -regedit -ads -acl -ceph -cluster -glusterfs -profiling-data -quota -spotlight

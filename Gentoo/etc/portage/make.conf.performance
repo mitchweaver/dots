@@ -30,10 +30,6 @@ COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fipa-pta"
 # see: https://developers.redhat.com/blog/2020/06/25/red-hat-enterprise-linux-8-2-brings-faster-python-3-8-run-speeds
 COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fno-semantic-interposition"
 
-# Optimize loops with graphite. Identity allows for cost/benefit analysis between it and Gimple.
-# see: https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
-COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fgraphite-identity -floop-nest-optimize"
-
 # assumes that floating-point operations cannot generate user-visible traps
 #
 # see: https://www.intel.com/content/www/us/en/docs/programmable/683242/current/fno-trapping-math.html
