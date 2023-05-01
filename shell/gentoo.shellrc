@@ -13,26 +13,25 @@ pkg() {
         a)
             sudo emerge --noreplace "$@"
             ;;
-        # update all except for large stuff
         u)
             [ "$1" ] || set -- '@world'
-            sudo emerge --update --newuse --deep --with-bdeps=y \
-                --exclude 'firefox ghc libreoffice nodejs go python rust llvm gcc glibc cpupower' \
-                "$@"
+            sudo emerge --update --newuse --deep --with-bdeps=y --verbose-conflicts "$@"
             ;;
-        # really update everything
         uu)
+            # if gets stuck, add backtracking
             [ "$1" ] || set -- '@world'
-            sudo emerge --update --newuse --deep --with-bdeps=y --exclude "cpupower" "$@"
+            sudo emerge --update --newuse --deep --with-bdeps=y --backtrack=30 --verbose-conflicts "$@"
             ;;
-
+        l)
+            cat /var/lib/portage/world
+            ;;
         d)
             if [ "$1" ] ; then
                 sudo emerge --rage-clean "$@"
             fi
-            printf '\n%s ' 'Would you also like to depclean? (y/n):'
-            read -r ans
-            [ "$ans" == y ] && sudo emerge --depclean
+            # printf '\n%s ' 'Would you also like to depclean? (y/n):'
+            # read -r ans
+            # [ "$ans" == y ] && sudo emerge --depclean
             ;;
         -sync)
             sudo emerge --sync --ask n "$@"
@@ -44,3 +43,11 @@ alias editworld='sudo ${EDITOR} /var/lib/portage/world'
 
 alias packages='${BROWSER} https://packages.gentoo.org'
 alias overlays='${BROWSER} https://gpo.zugaina.org/'
+
+fix-pipewire() {
+    pkill -f wireplumber
+    pkill -f pipewire
+    pkill -f pulseaudio
+    nohup gentoo-pipewire-launcher >/dev/null 2>&1 &
+}
+
