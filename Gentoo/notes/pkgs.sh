@@ -26,7 +26,8 @@ add \
     www-apps/hugo \
     x11-terms/kitty \
     x11-terms/kitty-shell-integration \
-    x11-terms/kitty-terminfo
+    x11-terms/kitty-terminfo \
+    dev-python/pillow
 
 # system utils
 add \
@@ -83,8 +84,10 @@ add \
     media-video/mpv \
     media-video/shotcut \
     media-video/ffmpegthumbnailer \
-    media-video/obs-studio \
-    net-misc/yt-dlp
+    net-misc/yt-dlp \
+    media-video/v4l2loopback \
+    media-plugins/gst-plugins-v4l2 \
+    media-video/obs-studio
 
 # AUDIO
 add \
@@ -202,6 +205,10 @@ add mailspring
 add \
     net-im/discord \
     media-sound/spotify
+
+# FLATPAK
+add \
+    sys-apps/flatpak
 
 # ===============================================================================
 # OLD WORLD
