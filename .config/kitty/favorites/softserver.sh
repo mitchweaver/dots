@@ -1,6 +1,6 @@
 #!/bin/sh
 
-NAME="Hybrid"
+NAME=SoftServer
 
 CONFIG_DIR=${HOME}/.config/kitty
 THEME_DIR=$CONFIG_DIR/themes

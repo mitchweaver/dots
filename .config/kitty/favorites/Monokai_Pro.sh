@@ -1,6 +1,6 @@
 #!/bin/sh
 
-NAME="Pnevma"
+NAME="Monokai_Pro"
 
 CONFIG_DIR=${HOME}/.config/kitty
 THEME_DIR=$CONFIG_DIR/themes
