@@ -19,4 +19,7 @@ useradd -m -G users,wheel,audio,video,lpadmin -s /bin/bash mitch
 passwd mitch
 echo "US/Central" > /etc/timezone
 emerge --config sys-libs/timezone-data
+eselect locale set en_US.utf
+locale-gen
+env-update
 ```
