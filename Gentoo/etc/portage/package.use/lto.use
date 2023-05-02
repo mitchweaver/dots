@@ -1,9 +1,17 @@
+# ============================================
 # notice: need -lto -pgo on gcc for the initial build for GentooLTO
 #         once you have GentooLTO built and world successfully compiled,
 #         you can re-add lto/pgo to gcc.
 #         (ex: remove the -lto, -pgo from here)
+# ============================================
 sys-devel/gcc plugins graphite
 sys-devel/binutils plugins
+
 dev-libs/icu abi_x86_32
 dev-libs/libxml2 abi_x86_32
 sys-libs/gpm abi_x86_32
+
+# ============================================
+# packages that break with lto/pgo/graphite
+# ============================================
+net-libs/webkit-gtk jumbo-build wayland -lto -pgo -graphite -X -gamepad -pdf -lcms -jpeg2k

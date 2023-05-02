@@ -1,16 +1,14 @@
-# ==================================
-# audio
-# ==================================
-
 # to get battery levels via bluetooth
 net-wireless/bluez experimental
 
 # to let pipewire work w/o pulseaudio
-media-video/pipewire bluetooth dbus pipewire-alsa sound-server -jack-sdk -jack-client
+media-video/pipewire bluetooth elogind dbus pipewire-alsa sound-server X wayland -jack-sdk -jack-client -pulseaudio
 
 # pulseaudio for APIs, but the server will be pipewire
 media-sound/pulseaudio glib -daemon
 media-libs/libpulse glib
+
+media-video/wireplumber elogind -pulseaudio
 
 # needed for pavucontrol
 x11-libs/cairo glib

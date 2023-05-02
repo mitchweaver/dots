@@ -1,0 +1,3 @@
+sys-kernel/gentoo-sources -build
+sys-kernel/zen-sources -build
+sys-kernel/pf-sources -build
