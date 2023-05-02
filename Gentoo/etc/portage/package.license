@@ -8,3 +8,4 @@ x11-themes/paper-gtk-theme CC-BY-SA-4.0
 games-util/steam-launcher ValveSteamLicense
 games-server/steamcmd Steam
 net-misc/teamviewer TeamViewer
+net-print/hplip-plugin hplip-plugin

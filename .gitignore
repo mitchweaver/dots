@@ -93,7 +93,6 @@
 *config/xfce4
 *Thunar*
 *geany*
-*cataclysm-dda/debug.log
 themes/current
 *config/pulse
 */pavucontrol.ini
@@ -102,4 +101,15 @@ themes/current
 *config/syncthing
 
 .config/ranger/plugins/ranger_devicons
+
+# default junk
+*/etc/portage/bashrc
+*/etc/portage/bashrc.d
+*/etc/portage/profile
+# dont hard copy these, use eselect-repository
+*/etc/portage/repos.conf
+# these are from GentooLTO, dont edit
+*/etc/portage/make.profile
+*/etc/portage/make.conf.lto
+*/etc/portage/make.conf.lto.defines
 

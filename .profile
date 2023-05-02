@@ -124,3 +124,5 @@ chmod -R 777 "/tmp/tmp-$USER"
 ln -s "/tmp/tmp-$USER" ~/tmp
 export PATH="$PATH:${HOME}/.local/bin"
 
+# for obs
+export QT_QPA_PLATFORM=wayland

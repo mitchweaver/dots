@@ -30,7 +30,6 @@ if [ -d "${SHELLRC_DIR}" ] ; then
     . "${SHELLRC_DIR}/history.shellrc"
     . "${SHELLRC_DIR}/movement.shellrc"
     . "${SHELLRC_DIR}/networking.shellrc"
-    . "${SHELLRC_DIR}/oops.shellrc"
     . "${SHELLRC_DIR}/options.shellrc"
     . "${SHELLRC_DIR}/prompt.shellrc"
     . "${SHELLRC_DIR}/templates.shellrc"

@@ -29,9 +29,9 @@ pkg() {
             if [ "$1" ] ; then
                 sudo emerge --rage-clean "$@"
             fi
-            # printf '\n%s ' 'Would you also like to depclean? (y/n):'
-            # read -r ans
-            # [ "$ans" == y ] && sudo emerge --depclean
+            printf '\n%s ' 'Would you also like to depclean? (y/n):'
+            read -r ans
+            [ "$ans" == y ] && sudo emerge --ask --depclean
             ;;
         -sync)
             sudo emerge --sync --ask n "$@"

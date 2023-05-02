@@ -240,6 +240,9 @@ endif
 scriptencoding utf-8
 set encoding=utf-8
 
+" fix graphical bugs in kitty
+let &t_ut=''
+
 "---- a = enabled
 "---- v = disabled
 " set mouse=a
