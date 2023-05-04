@@ -139,18 +139,12 @@ mkdir -p /mnt/gentoo/boot/efi
 mount /dev/nvme0n1p1 /mnt/gentoo/boot/efi
 ```
 
-> ### Set /boot to be bootable
-
-> ```
-> zpool set bootfs=bpool/gentoo/root
-> ```
-
 ## Create zswap
 
 see: https://openzfs.github.io/openzfs-docs/Project%20and%20Community/FAQ.html#using-a-zvol-for-a-swap-device-on-linux
 
 ```
-zfs create -V 32G -b $(getconf PAGESIZE) \
+zfs create -V 16G -b $(getconf PAGESIZE) \
     -o logbias=throughput -o sync=always \
     -o primarycache=metadata \
     -o com.sun:auto-snapshot=false rpool/swap
@@ -180,13 +174,13 @@ chroot /mnt/gentoo
 ## for sanity so nano doesn't drive me insane
 
 ```
-emerge busybox
-ln -s $(which busybox) /bin/vi
-# also make emerge faster
+emerge --sync
 cat >> /etc/portage/make.conf <<EOF
-MAKEOPTS=-j"$(nproc)"
+MAKEOPTS=-j$(nproc)
 FEATURES="fail-clean parallel-fetch parallel-install network-sandbox ipc-sandbox userpriv userfetch compress-build-logs compressdebug nodoc noinfo -news"
 EOF
+emerge busybox
+ln -s $(which busybox) /bin/vi
 ```
 
 ## keywords
@@ -216,14 +210,22 @@ sys-boot/grub libzfs
 EOF
 ```
 
-update world with new flags
-`emerge -uDNav @world`
-
 ## initial genkernel to build zfs modules
 
 ```
 echo 'ACCEPT_LICENSE="linux-fw-redistributable"' >> /etc/portage/make.conf
-emerge sys-kernel/genkernel sys-kernel/gentoo-sources linux-firmware
+emerge --noreplace --ask --verbose --newuse --update \
+  sys-kernel/genkernel \
+  sys-kernel/gentoo-sources \
+  linux-firmware
+
+# NOTE: as of 5/1/23,  the latest kernel openzfs supports is 6.2.14
+#       6.3.0+ not yet supported
+
+# NOTE THIS WILL FAIL BECAUSE NO KERNEL BUILT YET FOR ZFS!
+emerge --noreplace --ask --verbose --newuse --update \
+  sys-boot/grub
+
 cd /usr/src
 ln -s $PWD/whatever linux
 cd linux
@@ -243,7 +245,10 @@ genkernel \
 
 now that we have *some* kernel, we can build the zfs module
 ```
-emerge sys-boot/grub sys-fs/zfs sys-fs/zfs-kmod
+emerge --noreplace --ask --verbose --newuse --update \
+    sys-boot/grub \
+    sys-fs/zfs \
+    sys-fs/zfs-kmod
 ```
 
 and now we build our actual kernel, using that module

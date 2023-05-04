@@ -21,7 +21,6 @@ add \
     dev-util/shellcheck-bin \
     app-containers/docker \
     app-containers/docker-compose \
-    sys-devel/gdb \
     app-misc/jq \
     www-apps/hugo \
     x11-terms/kitty \
@@ -31,7 +30,7 @@ add \
 
 # system utils
 add \
-    htop  \
+    sys-process/htop  \
     app-misc/ranger \
     sys-apps/exa \
     app-text/tree \
@@ -43,7 +42,6 @@ add \
     sys-apps/mlocate \
     sys-apps/pciutils \
     sys-apps/usbutils \
-    sys-apps/ripgrep \
     sys-apps/smartmontools \
     app-admin/sysstat \
     app-misc/detox \
@@ -62,6 +60,7 @@ add \
     net-fs/samba \
     sys-fs/dosfstools \
     sys-fs/fuse \
+    sys-fs/fuse:0 \
     sys-fs/inotify-tools \
     sys-fs/ntfs3g
 
@@ -128,26 +127,26 @@ add \
 
 # NETWORKING
 add \
-    net-vpn/openvpn \
-    net-vpn/wireguard-tools \
     net-analyzer/netcat \
     net-analyzer/nmap \
+    net-analyzer/wireshark \
+    net-analyzer/speedtest-cli \
     net-dns/bind-tools \
     net-misc/curl \
     net-misc/dhcpcd \
     net-misc/rdesktop \
     net-misc/socat \
-    net-analyzer/wireshark \
-    sys-apps/ethtool \
+    net-vpn/openvpn \
+    net-vpn/wireguard-tools \
     net-wireless/bluez \
-    net-wireless/bluez-tools
+    net-wireless/bluez-tools \
+    sys-apps/ethtool
 
 # DRIVERS / FIRMWARE
 add \
     x11-base/xorg-drivers \
     x11-drivers/xf86-input-libinput \
-    sys-firmware/sof-firmware \
-    dev-libs/libratbag
+    sys-firmware/sof-firmware
 
 # MISC
 add \
@@ -174,9 +173,7 @@ add \
 # INTERNET / OFFICE
 add \
     net-misc/nextcloud-client \
-    app-office/libreoffice-bin \
-    www-client/firefox-bin \
-    www-client/chromium-bin
+    app-office/libreoffice-bin
 
 # THEMES
 add \
@@ -206,43 +203,22 @@ add \
     net-im/discord \
     media-sound/spotify
 
-# FLATPAK
-add \
-    sys-apps/flatpak
-
 # ===============================================================================
 # OLD WORLD
 # ===============================================================================
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# X11 Stuff
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# add \
-#     x11-apps/xhost \
-#     x11-apps/xinput \
-#     x11-apps/xmodmap \
-#     x11-apps/xrandr \
-#     x11-misc/redshift \
-#     x11-misc/sxhkd \
-#     x11-misc/xautolock \
-#     x11-misc/xbanish \
-#     x11-misc/xclip \
-#     x11-misc/xdotool \
-#     x11-misc/xsel \
-#     x11-misc/xwallpaper \
-#     x11-misc/slop
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # i3 Rice Stuff
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# x11-wm/i3-gaps
 # x11-misc/dunst
 # x11-misc/parcellite
 # x11-misc/pcmanfm
 # x11-misc/picom
-# x11-misc/polybar
+#
 # x11-misc/lightdm
+#
+# x11-misc/polybar
+# x11-wm/i3
 # x11-misc/i3lock-fancy-rapid
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 

@@ -16,10 +16,6 @@ tmpfs		/var/tmp/portage		tmpfs	size=12G,uid=portage,gid=portage,mode=775,nosuid,
 
 ```
 emerge eselect-repository dev-vcs/git
-eselect repository list | grep lto
-eselect repository list | grep mv
-eselect repository enable XXX
-eselect repository enable XXX
 emerge --sync lto-overlay
 emerge --sync mv
 emerge ltoize
@@ -28,7 +24,15 @@ mkdir -p /var/tmp/notmpfs
 CFLAGS="-O2 -march=native -pipe" USE="-lto -pgo graphite" emerge -av gcc
 # rebuild gcc, now with lto/pgo/graphite on itself
 emerge --newuse --with-bdeps y --update --verbose gcc
+
+eselect gcc list
+eseelect gcc set (whatever is new that got built)
+
 # ltoize the world
-emerge --newuse --deep --with-bdeps y --update --verbose @world
+emerge --deep --with-bdeps y --verbose --keep-going @world
+
+# update with any new flags after
+emerge --newuse --deep --with-bdeps y --update --verbose --keep-going @world
+mkdir -p /var/tmp/notmpfs
 ```
 

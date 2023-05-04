@@ -19,7 +19,14 @@ useradd -m -G users,wheel,audio,video,lpadmin -s /bin/bash mitch
 passwd mitch
 echo "US/Central" > /etc/timezone
 emerge --config sys-libs/timezone-data
-eselect locale set en_US.utf
+echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
+eselect locale set en_US.utf8
 locale-gen
 env-update
+
+emerge --rage-clean nano
+sed -i 's/nano/vi/g' /etc/profile
+emerge sudo
+EDITOR=vi visudo
 ```
+
