@@ -31,8 +31,8 @@ smart_borders no_gaps
 # enable outer gaps only when one window
 smart_gaps inverse_outer
 
-gaps inner 22
-gaps outer 18
+gaps inner 16
+gaps outer 14
 
 # setting these all to zero keeps gaps symmetrical
 # for a more "dwm" look
@@ -145,18 +145,18 @@ bindsym $mod+Shift+BackSpace move container to workspace number $ws10
 # RESIZING
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # mode "resize" {
-#         bindsym h resize shrink width 25 px or 25 ppt
-#         bindsym j resize grow height 25 px or 25 ppt
-#         bindsym k resize shrink height 25 px or 25 ppt
-#         bindsym l resize grow width 25 px or 25 ppt
-#         bindsym Left resize shrink width 25 px or 25 ppt
-#         bindsym Down resize grow height 25 px or 25 ppt
-#         bindsym Up resize shrink height 25 px or 25 ppt
-#         bindsym Right resize grow width 25 px or 25 ppt
+        # bindsym h resize shrink width 25 px or 25 ppt
+        # bindsym j resize grow height 25 px or 25 ppt
+        # bindsym k resize shrink height 25 px or 25 ppt
+        # bindsym l resize grow width 25 px or 25 ppt
+        # bindsym Left resize shrink width 25 px or 25 ppt
+        # bindsym Down resize grow height 25 px or 25 ppt
+        # bindsym Up resize shrink height 25 px or 25 ppt
+        # bindsym Right resize grow width 25 px or 25 ppt
 
-#         bindsym Return mode "default"
-#         bindsym Escape mode "default"
-#         bindsym $mod+r mode "default"
+        # bindsym Return mode "default"
+        # bindsym Escape mode "default"
+        # bindsym $mod+r mode "default"
 # }
 # bindsym $mod+r mode "resize"
 
@@ -202,16 +202,15 @@ assign [class="discord"] → $ws10
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # SYSTEM
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-set $i3t_alt_tab        ~/.config/i3/i3-alt-tab.py next current
-set $i3t_alt_shift_tab  ~/.config/i3/i3-alt-tab.py prev current
-bindsym Mod1+Tab        exec $i3t_alt_tab
-bindsym Mod1+Shift+Tab  exec $i3t_alt_shift_tab
+#set $i3t_alt_tab        ~/.config/i3/i3-alt-tab.py next current
+#set $i3t_alt_shift_tab  ~/.config/i3/i3-alt-tab.py prev current
+#bindsym Mod1+Tab        exec $i3t_alt_tab
+#bindsym Mod1+Shift+Tab  exec $i3t_alt_shift_tab
 
 # RELOAD
 bindsym $mod+Shift+r reload
 # EXIT
 bindsym $mod+Control+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # COLORS

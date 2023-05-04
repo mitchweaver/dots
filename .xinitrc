@@ -36,11 +36,21 @@ if [ "$DIMENSIONS" ] ; then
         # desktop
         3840)
             sed -i 's/.*Xft.dpi:.*/Xft.dpi: 196/' ~/.Xresources
-            #xrandr --output HDMI-0 --off --output DP-0 --primary --mode 3840x2160 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --mode 1920x1080 --pos 3840x112 --rotate normal --output DP-3 --off --output DP-4 --off --output DP-5 --off
             ;;
     esac
 fi
+
 xrdb load ~/.Xresources
+
+case $(hostname) in
+    *desktop*)
+# --output DP-2 --mode 1920x1080 --pos 1920x0 -r 144 --rotate normal \
+        xrandr \
+            --output DP-0 --primary --mode 1920x1080 -r 390 --pos 0x0 --rotate normal \
+            --output HDMI-0 --off \
+            --output DP-1 --off \
+            --output DP-3 --off --output DP-4 --off --output DP-5 --off
+esac
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # ONE SHOT COMMANDS
@@ -54,26 +64,28 @@ background &
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # DAEMONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-pgrep -f nextcloud  || nextcloud >~/.cache/nextcloud.log 2>&1 &
+# pgrep -f nextcloud  || nextcloud >~/.cache/nextcloud.log 2>&1 &
 pgrep -f dunst      || dunst >~/.cache/dunst.log 2>&1 &
 pgrep -f parcellite || parcellite &
 pgrep -f sxhkd      || sxhkd >~/.cache/sxhkd.log 2>&1 &
 
 pgrep -f xdimmer || xdimmer -p 20 -s 10 -b 1 -t 570 &
 
-pgrep -f xautolock  || xautolock \
-    -locker 'i3lock-fancy-rapid 10 pixel' \
-    -time ${LOCK_TIME:-10} \
-    -notify 15 \
-    -notifier notify-send >~/.cache/xautolock.log 2>&1 &
+pgrep -f wireplumber || nohup gentoo-pipewire-launcher > /dev/null 2>&1 &
+
+#pgrep -f xautolock  || xautolock \
+#    -locker 'i3lock-fancy-rapid 10 pixel' \
+#    -time ${LOCK_TIME:-10} \
+#    -notify 15 \
+#    -notifier notify-send >~/.cache/xautolock.log 2>&1 &
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # APPLICATIONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-discord >~/.cache/discord.log 2>&1 &
+# discord >~/.cache/discord.log 2>&1 &
 # spotify >~/.cache/spotify.log 2>&1 &
-mailspring >~/.cache/mailspring.log 2>&1 &
-joplin-desktop-bin >~/.cache/joplin.log 2>&1 &
+# mailspring >~/.cache/mailspring.log 2>&1 &
+# joplin-desktop-bin >~/.cache/joplin.log 2>&1 &
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # WINDOW MANAGER
@@ -82,4 +94,3 @@ polybar-msg cmd quit >~/.cache/polybar.log 2>&1
 polybar mybar >>~/.cache/polybar.log 2>&1 &
 pgrep -f picom || picom -b
 exec i3 >~/.cache/i3.log 2>&1
-# exec budgie-desktop

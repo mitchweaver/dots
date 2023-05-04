@@ -7,7 +7,7 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# REPLACEMENTS
+# COLOR
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 case $TERM in
     *-256color|*-kitty)
@@ -15,19 +15,27 @@ case $TERM in
             alias ls='exa -F --color=always --group-directories-first'
             alias tree='exa -F -T'
         else
-            alias ls='ls -F'
+            alias ls='ls --color=auto -F'
         fi
+
+        alias dir='dir --color=always'
+        alias vdir='vdir --color=always'
+        alias grep='grep --color=always'
+        alias fgrep='fgrep --color=always'
+        alias egrep='egrep --color=always'
         ;;
     *)
-        alias ls='ls -F'
+        alias ls='ls -F --color=never'
+        alias dir='dir --color=never'
+        alias vdir='vdir --color=never'
+        alias grep='grep --color=never'
+        alias fgrep='fgrep --color=never'
+        alias egrep='egrep --color=never'
         export NO_COLOR=true
 esac
 
-# if command -v rg >/dev/null 2>&1 ; then
-#     alias grep=rg
-# fi
 
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# =============================================================
 alias {l,sls,sl}=ls
 alias {ll,lll}='ls -l'
 alias la='ls -a'
@@ -35,8 +43,6 @@ alias {lla,lal}='ls -al'
 alias {l1,lv}='ls -1'
 alias lsf='ls "$PWD"/*'
 alias {lsg,lg}='ls | grep -i'
-
-alias t=tree
 
 alias cp='cp -irv'
 alias mv='mv -iv'

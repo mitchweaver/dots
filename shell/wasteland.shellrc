@@ -115,16 +115,6 @@ mkgif() {
     convert -delay 100 -loop 0 ./*.jpg out.gif
 }
 
-# temp file for scratch pad
-pad() {
-    mkdir -p /tmp/$$.tmpsh
-    trap 'rm -rf -- /tmp/$$.tmpsh' EXIT INT TERM HUP
-    cd /tmp/$$.tmpsh &&
-    ${EDITOR:-vi} $$.md &&
-    cd - >/dev/null &&
-    /bin/rm -rf -- /tmp/$$.tmpsh 2>/dev/null ||:
-}
-
 alias img2pdf='img2pdf *jpg --output combined.pdf'
 
 alias autoclick='while sleep 1 ; do xdotool click 1; done'
@@ -162,8 +152,6 @@ amdproporfree() {
             echo nonfree
     esac
 }
-
-alias wayland_or_x11='loginctl show-session "$XDG_SESSION_ID" -p Type'
 
 fixpulseaudio() {
     pkill -9 pulseaudio

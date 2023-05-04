@@ -39,7 +39,7 @@ Plug 'tpope/vim-sleuth'          " autodetect tab indentation
 Plug 'tpope/vim-abolish'         " bracket {,} expansion in substitution
 Plug 'tpope/vim-unimpaired'      " pairing of binds with '[' and ']'
 Plug 'tpope/vim-surround'        " surround stuff with stuff
-Plug 'tpope/vim-endwise'         " automatch endings of structures
+" Plug 'tpope/vim-endwise'         " automatch endings of structures
 nmap ss ysiw
 nmap sl yss
 vmap s S

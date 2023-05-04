@@ -31,7 +31,7 @@ pkg() {
             fi
             printf '\n%s ' 'Would you also like to depclean? (y/n):'
             read -r ans
-            [ "$ans" == y ] && sudo emerge --ask --depclean
+            [ "$ans" == y ] && sudo emerge --ask --with-bdeps y --depclean
             ;;
         -sync)
             sudo emerge --sync --ask n "$@"
