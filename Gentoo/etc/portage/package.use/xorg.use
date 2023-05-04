@@ -1,5 +1,16 @@
+media-libs/mesa X abi_x86_32 lm-sensors proprietary-codecs
+
 x11-base/xorg-server xvfb -xnest -xephyr
-x11-base/xorg-drivers -wacom
+
 x11-apps/xinit -twm
 x11-terms/xterm -xinerama
 sys-auth/pambase elogind
+
+x11-libs/cairo X
+x11-libs/gtk X
+x11-libs/gtk+ X
+dev-qt/qtgui X
+dev-cpp/cairomm X
+
+# ==========================================
+x11-misc/xwallpaper jpeg png
