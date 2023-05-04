@@ -1,1 +1,5 @@
 <dev-libs/openssl-3.0.8-r4
+>sys-kernel/gentoo-sources-6.2.11
+>sys-kernel/zen-sources-6.2.11
+>=dev-util/ccache-4.8
+
