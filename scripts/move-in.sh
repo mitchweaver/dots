@@ -37,8 +37,7 @@ for folder in \
 	.config/redshift \
 	.config/sway \
 	.config/sxhkd \
-	.config/waybar \
-	.config/gtk-3.0 ; do
+	.config/waybar ; do
 
 	rm -rfv "${HOME:?}/$folder"
 	ln -sv "$DOTS_DIR/$folder" "${HOME}/$folder"
@@ -49,8 +48,7 @@ for file in \
 	.profile .pylintrc .vimrc \
 	.xmodmaprc .xinitrc .Xresources \
 	.config/redshift.conf \
-	.shellcheckrc \
-	.gtkrc-2.0 ; do
+	.shellcheckrc ; do
 
 	rm -fv "${HOME}/$file"
 	ln -sv "$DOTS_DIR/$file" "${HOME}/$file"
