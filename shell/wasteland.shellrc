@@ -164,11 +164,11 @@ mousexy() {
     while sleep 0.5; do clear ;xinput --query-state 9 | grep -E 'valuator(\[0\]|\[1\])'; done
 }
 
-backup-firefox() {
-    dir="firefox-backup-$(date +'%Y%m%d_%H%M%S')"
+backup-librewolf() {
+    dir="librewolf-backup-$(date +'%Y%m%d_%H%M%S')"
     mkdir -p "$dir"
-    cp -r ~/.mozilla "$dir"/
-    tar -cvJpf "$dir".tar.xz "$dir" && rm -r -- "$dir"
+    cp -r ~/.librewolf "$dir"/
+    tar -cvJpf "$dir".tar.xz "$dir" && /bin/rm -r -- "$dir"
 }
 
 backup-gnome () {
@@ -242,20 +242,21 @@ alias fjl='firejail --list'
 
 alias governor='cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor'
 
-alias restart_sxhkd='pkill sxhkd ; cd ~ ; sxhkd >/dev/null 2>&1 &'
-
-alias z=zathura
+alias restart-sxhkd='pkill sxhkd ; cd ~ ; sxhkd >/dev/null 2>&1 &'
+alias restart-polybar='pkill polybar;nohup polybar >/dev/null 2>&1 &'
 
 alias stcfg='v ~/src/suckless/st/cfg/config.h'
 
-spt() {
-    if ! pgrep -f spotifyd >/dev/null ; then
-        printf '%s' "Unlock your pash: "
-        pash s spotifyd >/dev/null
-        spotifyd
-    fi
-    command spt
-}
+if command -v spotifyd >/dev/null ; then
+    spt() {
+        if ! pgrep -f spotifyd >/dev/null ; then
+            printf '%s' "Unlock your pash: "
+            pash s spotifyd >/dev/null
+            spotifyd
+        fi
+        command spt
+    }
+fi
 
 # list openrc enabled services sorted by run level
 rcl() {
@@ -277,3 +278,20 @@ startup() {
 }
 
 alias v4l='sudo modprobe v4l2loopback'
+
+airpods() {
+    if ! pgrep -x bluetoothd >/dev/null ; then
+        >&2 echo 'start bluetoothd stupid'
+        exit 1
+    fi
+
+    AP="5C:52:30:DA:62:E7"
+
+    bluetoothctl power on
+    bluetoothctl agent on
+    bluetoothctl default-agent
+    bluetoothctl --timeout 5 scan on
+    bluetoothctl pair "$AP"
+    bluetoothctl trust "$AP"
+    bluetoothctl connect "$AP"
+}
