@@ -14,9 +14,9 @@ _ps1_print_user() {
 _ps1_print_host() {
     if [ -f /etc/hostname ] ; then
         read -r _hostname < /etc/hostname
-        printf '%s' "\[\e[1;34m\]$_hostname"
+        printf '%s' "\[\e[1;34m\]${_hostname%%.*}"
     else
-        printf '%s' 'UNKNOWN'
+        printf '%s' "$(/bin/hostname -s)"
     fi
 }
 
