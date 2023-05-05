@@ -28,7 +28,7 @@ if [ "$DIMENSIONS" ] ; then
         # laptop
         1920)
             if [ "$(cat /etc/hostname)" != desktop ] ; then
-                # pgrep -f redshift   || redshift &
+                pgrep -f redshift   || redshift &
                 pgrep -f xbanish    || xbanish -t 30 &
                 sed -i 's/.*Xft.dpi:.*/Xft.dpi: 120/' ~/.Xresources
             fi
@@ -64,7 +64,7 @@ background &
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # DAEMONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# pgrep -f nextcloud  || nextcloud >~/.cache/nextcloud.log 2>&1 &
+pgrep -f nextcloud  || nextcloud >~/.cache/nextcloud.log 2>&1 &
 pgrep -f dunst      || dunst >~/.cache/dunst.log 2>&1 &
 pgrep -f parcellite || parcellite &
 pgrep -f sxhkd      || sxhkd >~/.cache/sxhkd.log 2>&1 &

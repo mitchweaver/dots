@@ -15,6 +15,9 @@ export LD_LIBRARY_PATH
 export MANPATH="${HOME}/.local/share/man:$MANPATH"
 export FONTCONFIG_PATH="/etc/fonts:${HOME}/.fonts"
 
+export NPM_CONFIG_PREFIX="${HOME}/.npm"
+export PROFILE="$PROFILE:$NPM_CONFIG_PREFIX/bin"
+
 if [ -d ~/.bonsai ] ; then
     export MANPATH="${HOME}/.bonsai/share/man:$MANPATH"
     export PATH="${HOME}/.bonsai/bin:$PATH"
@@ -83,17 +86,18 @@ for i in 11 8 ; do
 done
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-if command -v nvim >/dev/null 2>&1 ; then
-	export EDITOR=nvim
-elif command -v vim >/dev/null 2>&1 ; then
-	export EDITOR=vim
-fi
+for i in nvim vim vi nvi nano ; do
+    if command -v $i >/dev/null 2>&1 ; then
+        export EDITOR=nvim
+    fi
+done
 
-if command -v firefox >/dev/null ; then
-    export BROWSER=firefox
-elif command -v firefox-bin >/dev/null ; then
-    export BROWSER=firefox-bin
-fi
+for i in librewolf librewolf-bin firefox firefox-bin chromium chromium-bin ; do
+    if command -v $i >/dev/null ; then
+        export BROWSER=$i
+        break
+    fi
+done
 
 export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage

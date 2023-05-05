@@ -89,7 +89,19 @@ alias dmg='dmesg | grep -i'
 
 if command -v trash >/dev/null ; then
     alias rm=trash
-    alias rmdir=trash
+    rmdir() {
+        for dir ; do
+            if [ -d "$dir" ] ; then
+                if isempty "$dir" ; then
+                    trash -r "$dir"
+                else
+                    >&2 echo "Not empty"
+                fi
+            else
+                >&2 echo "Not a directory"
+            fi
+        done
+    }
 else
     alias rm='rm -v'
     alias rmdir='rm -v'

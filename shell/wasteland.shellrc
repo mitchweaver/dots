@@ -290,8 +290,8 @@ airpods() {
     bluetoothctl power on
     bluetoothctl agent on
     bluetoothctl default-agent
-    bluetoothctl --timeout 5 scan on
-    bluetoothctl pair "$AP"
-    bluetoothctl trust "$AP"
+#    bluetoothctl --timeout 5 scan on
+#    bluetoothctl pair "$AP"
+#    bluetoothctl trust "$AP"
     bluetoothctl connect "$AP"
 }

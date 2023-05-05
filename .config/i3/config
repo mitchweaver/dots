@@ -42,7 +42,7 @@ gaps bottom 0
 gaps right 0
 
 # hide gaps if only one window on wrorkspace
-smart_gaps off
+smart_gaps on
 
 # remove window title bars
 for_window [class="^.*"] border pixel 1
@@ -202,10 +202,10 @@ assign [class="discord"] → $ws10
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # SYSTEM
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-#set $i3t_alt_tab        ~/.config/i3/i3-alt-tab.py next current
-#set $i3t_alt_shift_tab  ~/.config/i3/i3-alt-tab.py prev current
-#bindsym Mod1+Tab        exec $i3t_alt_tab
-#bindsym Mod1+Shift+Tab  exec $i3t_alt_shift_tab
+set $i3t_alt_tab        ~/.config/i3/i3-alt-tab.py next current
+set $i3t_alt_shift_tab  ~/.config/i3/i3-alt-tab.py prev current
+bindsym Mod1+Tab        exec $i3t_alt_tab
+bindsym Mod1+Shift+Tab  exec $i3t_alt_shift_tab
 
 # RELOAD
 bindsym $mod+Shift+r reload

@@ -204,6 +204,11 @@ add \
     net-im/discord \
     media-sound/spotify
 
+# node
+eselect repository enable broverlay
+emerge --sync broverlay
+add nodejs-bin
+
 # ===============================================================================
 # OLD WORLD
 # ===============================================================================
