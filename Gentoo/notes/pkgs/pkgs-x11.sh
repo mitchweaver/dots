@@ -22,5 +22,13 @@ add \
     x11-misc/xwallpaper \
     x11-misc/slop \
     x11-misc/arandr \
-    x11-misc/xbanish
+    x11-misc/xbanish \
+    x11-misc/xwininfo
+
+add \
+    gui-libs/display-manager-init
+
+echo 'DISPLAYMANAGER="lightdm"' > /etc/conf.d/display-manager
+rc-update add elogind default
+rc-update add display-manager default
 # ==========================================================
