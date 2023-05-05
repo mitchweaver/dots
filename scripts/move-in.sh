@@ -37,7 +37,8 @@ for folder in \
 	.config/redshift \
 	.config/sway \
 	.config/sxhkd \
-	.config/waybar ; do
+	.config/waybar \
+	.config/joplin ; do
 
 	rm -rfv "${HOME:?}/$folder"
 	ln -sv "$DOTS_DIR/$folder" "${HOME}/$folder"

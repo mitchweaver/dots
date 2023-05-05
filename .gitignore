@@ -121,3 +121,10 @@ themes/current
 *config/gtk-4.0*
 *config/gtk-3.0*
 *config/gtk-2.0*
+
+*config/joplin*/settings.json
+*config/joplin*/database.sqlite
+*config/joplin*/tmp
+*config/joplin*/resources
+*config/joplin*/cache
+*config/joplin*/log.txt
