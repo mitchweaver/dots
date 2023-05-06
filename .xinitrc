@@ -6,9 +6,10 @@
 export DISPLAY="${DISPLAY:-:0}"
 export _JAVA_AWT_WM_NONREPARENTING=1
 export STEAM_RUNTIME=1
-if command -v dimensions >/dev/null ; then
-    export DIMENSIONS="$(dimensions)"
-fi
+export DIMENSIONS="$(dimensions 2>/dev/null)"
+export DIMENSIONS="${DIMENSIONS:-"1920 1080"}"
+export XINIT_LOGS="/tmp/${USER}-xinit-logs"
+mkdir -p "$XINIT_LOGS"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # XORG SETTINGS
@@ -28,8 +29,6 @@ if [ "$DIMENSIONS" ] ; then
         # laptop
         1920)
             if [ "$(cat /etc/hostname)" != desktop ] ; then
-                pgrep -f redshift   || redshift &
-                pgrep -f xbanish    || xbanish -t 30 &
                 sed -i 's/.*Xft.dpi:.*/Xft.dpi: 120/' ~/.Xresources
             fi
             ;;
@@ -56,41 +55,38 @@ esac
 # ONE SHOT COMMANDS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 background &
-{
-    dbus-update-activation-environment --all
-    gnome-keyring-daemon --start --components=secrets
-} &
+dbus-update-activation-environment --all &
+gnome-keyring-daemon --start --components=secrets &
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # DAEMONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-pgrep -f nextcloud  || nextcloud >~/.cache/nextcloud.log 2>&1 &
-pgrep -f dunst      || dunst >~/.cache/dunst.log 2>&1 &
-pgrep -f parcellite || parcellite &
-pgrep -f sxhkd      || sxhkd >~/.cache/sxhkd.log 2>&1 &
-
-pgrep -f xdimmer || xdimmer -p 20 -s 10 -b 1 -t 570 &
-
-pgrep -f wireplumber || nohup gentoo-pipewire-launcher > /dev/null 2>&1 &
-
-#pgrep -f xautolock  || xautolock \
-#    -locker 'i3lock-fancy-rapid 10 pixel' \
-#    -time ${LOCK_TIME:-10} \
-#    -notify 15 \
-#    -notifier notify-send >~/.cache/xautolock.log 2>&1 &
+pgrep -f parcellite  >/dev/null || parcellite &
+pgrep -f dunst       >/dev/null || dunst >"$XINIT_LOGS"/dunst.log 2>&1 &
+pgrep -f sxhkd       >/dev/null || sxhkd >"$XINIT_LOGS"/sxhkd.log 2>&1 &
+pgrep -f xdimmer     >/dev/null || xdimmer -p 20 -s 10 -b 1 -t 570 >"$XINIT_LOGS"/xdimmer.log 2>&1 &
+pgrep -f wireplumber >/dev/null || nohup gentoo-pipewire-launcher >"$XINIT_LOGS"/pipewire.log 2>&1 &
+pgrep -f nextcloud   >/dev/null || nextcloud >"$XINIT_LOGS"/nextcloud.log 2>&1 &
+pgrep -f xbanish     >/dev/null || xbanish -t 30 >"$XINIT_LOGS"/xbanish.log 2>&1 &
+pgrep -f picom       >/dev/null || picom --log-file "$XINIT_LOGS"/picom.log -b
+pgrep -f xautolock   >/dev/null || xautolock \
+    -locker 'i3lock-fancy-rapid 10 pixel' \
+    -time "${LOCK_TIME:-10}" \
+    -notify 15 \
+    -notifier notify-send >"$XINIT_LOGS"/xautolock.log 2>&1 &
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# APPLICATIONS
+# FIREJAILED APPLICATIONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# discord >~/.cache/discord.log 2>&1 &
-# spotify >~/.cache/spotify.log 2>&1 &
-# mailspring >~/.cache/mailspring.log 2>&1 &
-# joplin-desktop-bin >~/.cache/joplin.log 2>&1 &
+firejail-redshift      >"$XINIT_LOGS"/redshift.log   2>&1 &
+firejail-mailspring.sh >"$XINIT_LOGS"/mailspring.log 2>&1 &
+firejail-joplin.sh     >"$XINIT_LOGS"/joplin.log     2>&1 &
+firejail-discord.sh    >"$XINIT_LOGS"/discord.log    2>&1 &
+# firejail-spotify.sh  >"$XINIT_LOGS"/spotify.log    2>&1 &
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # WINDOW MANAGER
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-polybar-msg cmd quit >~/.cache/polybar.log 2>&1
-polybar mybar >>~/.cache/polybar.log 2>&1 &
-pgrep -f picom || picom -b
-exec i3 >~/.cache/i3.log 2>&1
+polybar-msg cmd quit >"$XINIT_LOGS"/polybar.log 2>&1
+polybar mybar >>"$XINIT_LOGS"/polybar.log 2>&1 &
+exec i3 >"$XINIT_LOGS"/i3.log 2>&1

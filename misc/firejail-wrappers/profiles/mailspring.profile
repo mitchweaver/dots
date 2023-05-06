@@ -38,7 +38,10 @@ protocol unix,inet,inet6,netlink
 seccomp !chroot
 shell none
 
+disable-mnt
+private-cache
 private-dev
+private-tmp
 
 private-etc os-release,fonts,localtime,selinux,
 private-etc alternatives,ca-certificates,crypto-policies,fonts,ld.so.cache,ld.so.conf,ld.so.conf.d,ld.so.preload,machine-id,nsswitch.conf,pki,resolv.conf,ssl

@@ -1,10 +1,7 @@
-# Firejail profile for redshift
-# Description: Adjusts the color temperature of your screen according to your surroundings
-# This file is overwritten after every install/update
+# vim:ft=config
+
 quiet
-# Persistent local customizations
 include redshift.local
-# Persistent global definitions
 include globals.local
 
 noblacklist ${HOME}/.config/redshift
