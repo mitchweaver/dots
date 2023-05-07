@@ -1,5 +1,18 @@
 # Gentoo on ZFS RAID with Full Disk Encryption
 
+
+
+## WARNING
+
+**Swap on ZFS is extremely unstable and NOT recommended.**  
+I ignored warnings originally but I've experienced deadlocks/freezes as
+  well. This happens more often on low spec machines.
+
+1. https://github.com/openzfs/zfs/issues/7734
+2. https://github.com/openzfs/zfs/issues/260#issuecomment-758782144
+
+Recommendation: Just make a ext4 partition to use as swap.
+
 ## Overview
 
 this guide is using 3 disks in this layout using two pools  
