@@ -7,10 +7,8 @@ elif command -v librewolf-bin >/dev/null ; then
     LIBREWOLF=librewolf-bin
 fi
 
-# --profile="${HOME}/.firejail/librewolf.profile"
-
 exec firejail \
-    --profile=/etc/firejail/librecad.profile \
+    --profile=/etc/firejail/librewolf.profile \
     /usr/bin/$LIBREWOLF \
     --disable-pinch \
     "$@"

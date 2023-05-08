@@ -16,27 +16,23 @@ export MANPATH="${HOME}/.local/share/man:$MANPATH"
 export FONTCONFIG_PATH="/etc/fonts:${HOME}/.fonts"
 
 export NPM_CONFIG_PREFIX="${HOME}/.npm"
-export PROFILE="$PROFILE:$NPM_CONFIG_PREFIX/bin"
+export PATH="$PATH:$NPM_CONFIG_PREFIX/bin"
 
 if [ -d ~/.bonsai ] ; then
     export MANPATH="${HOME}/.bonsai/share/man:$MANPATH"
     export PATH="${HOME}/.bonsai/bin:$PATH"
 fi
 
-# if [ -e ~/.bonsai/bin/oksh ] ; then
-#     export SHELL="${HOME}/.bonsai/bin/oksh"
-# fi
-
 export NPROC="${NPROC:-$(nproc 2>/dev/null)}"
 export NPROC="${NPROC:-1}"
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 case $(uname) in
-    OpenBSD|Darwin)
-        export CC="${CC:-clang}" cc="${cc:-clang}"
-        ;;
     Linux|FreeBSD)
         export CC="${CC:-gcc}" cc="${cc:-gcc}"
+        ;;
+    OpenBSD|Darwin)
+        export CC="${CC:-clang}" cc="${cc:-clang}"
 esac
 
 # using en_US.UTF-8 over C causes case-insensitive sorting
@@ -54,6 +50,8 @@ export XDG_CONFIG_HOME="${HOME}/.config" \
        XDG_DOWNLOAD_DIR="${HOME}/downloads" \
        XDG_DOCUMENTS_DIR="${HOME}/files" \
        XDG_PICTURES_DIR="${HOME}/images"
+
+export DOWNLOADS="${XDG_DOWNLOAD_DIR}"
 
 export XDG_DESKTOP_DIR="${HOME}/Desktop"
 export XDG_DATA_HOME="${HOME}/.local"
@@ -109,7 +107,7 @@ export LESSHISTFILE=/dev/null
 chmod 0755 ~
 if [ -d ~/.gnupg ] ; then
     chmod 0700 ~/.gnupg
-    chmod 0600 ~/.gnupg/*
+    chmod 0600 ~/.gnupg/* 2>/dev/null ||:
 fi
 if [ -d ~/.ssh ] ; then
     chmod 0700 ~/.ssh

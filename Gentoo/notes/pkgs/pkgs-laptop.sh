@@ -10,14 +10,24 @@ add() {
 add \
     net-wireless/iw \
     net-wireless/wireless-tools \
-    net-wireless/wpa_supplicant
+    net-wireless/wpa_supplicant \
+    sys-power/acpi \
+    sys-power/acpilight \
+    sys-apps/fwupd \
+    sys-apps/fwupd-efi
 
-# sys-power/acpi
-# sys-power/acpilight
-# sys-power/cpupower
-# sys-power/powertop
-# sys-power/tlp
-# sys-power/upower
-# app-laptop/tpacpi-bat
+# for newer thinkpads:
+# add app-laptop/tpacpi-bat
 
+# https://wiki.gentoo.org/wiki/Power_management/Guide#About_laptop-mode-tools
+#
+# note: remember copy tlp.conf from this repo
+add \
+    sys-power/thermald \
+    sys-power/tlp \
+    sys-power/powertop
 
+rc-update add thermald default
+rc-update add tlp default
+rc-service thermald start
+rc-service tlp start

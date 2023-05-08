@@ -1,0 +1,25 @@
+#!/bin/sh
+
+get_openvpn() {
+    for openvpn_path in /usr/bin /usr/sbin /usr/local/sbin /usr/local/bin ; do
+        if [ -x $openvpn_path/openvpn ] ; then
+            break
+        fi
+    done
+
+    COLUMNS=1000 \
+    ps -axxo command= | \
+    while read -r cmd ; do
+        case $cmd in
+            "$openvpn_path"/openvpn*)
+                loc=${cmd##*/openvpn/}
+                loc="${loc%.ovpn}"
+                if [ "$loc" ] ; then
+                    printf '%s %s' '' "$loc"
+                else
+                    printf '%s None' ""
+                fi
+                break
+        esac
+    done
+}

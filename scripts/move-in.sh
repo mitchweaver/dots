@@ -38,7 +38,8 @@ for folder in \
 	.config/sway \
 	.config/sxhkd \
 	.config/waybar \
-	.config/joplin ; do
+	.config/joplin \
+	.config/mmbar ; do
 
 	rm -rfv "${HOME:?}/$folder"
 	ln -sv "$DOTS_DIR/$folder" "${HOME}/$folder"

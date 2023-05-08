@@ -1,12 +1,12 @@
 # programs
 alt Return
-    kitty
-    # stwrapper
+    stwrapper
+#   kitty
 alt + w
     brws
 alt + r
-    kitty --single-instance ranger
-# stwrapper -e ranger
+    stwrapper -e ranger
+    # kitty --single-instance ranger
 
 super + l
     xautolock -locknow -locker 'i3lock-fancy-rapid 15 pixel'
@@ -44,13 +44,13 @@ XF86VolumeDown
     vol d
 
 # media / mpv
-# alt + slash
-#     mmt -t
-# alt + period
-#     mmt -n
-# alt + comma
-#     mmt -p
-# alt + bracketright
-#     mmt -f
-# alt + bracketleft
-#     mmt -b
+alt + slash
+    mmt -t
+alt + period
+    mmt -n
+alt + comma
+    mmt -p
+alt + bracketright
+    mmt -f
+alt + bracketleft
+    mmt -b

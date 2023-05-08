@@ -16,10 +16,10 @@ umask 022
 
 # -*-*- Options -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 SHELLRC_DIR=~/src/dots/shell
-# PS1_STYLE=pwd-no-prompt  # [user-pwd/user/pwd/user-host-pwd/pwd-no-prompt]
-PS1_STYLE=user-host-pwd  # [user-pwd/user/pwd/user-host-pwd/pwd-no-prompt]
-# PS1_STYLE=user-pwd       # [user-pwd/user/pwd/user-host-pwd/pwd-no-prompt]
-# PS1_STYLE=pwd            # [user-pwd/user/pwd/user-host-pwd/pwd-no-prompt]
+# PS1_STYLE=pwd-no-prompt  # [user-pwd/user/pwd/user-host-pwd]
+PS1_STYLE=user-host-pwd  # [user-pwd/user/pwd/user-host-pwd]
+# PS1_STYLE=user-pwd       # [user-pwd/user/pwd/user-host-pwd]
+# PS1_STYLE=pwd            # [user-pwd/user/pwd/user-host-pwd]
 PS1_GIT=true             # [true/false]
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 

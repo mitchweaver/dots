@@ -111,3 +111,6 @@ alias reboot='sudo reboot'
 alias poweroff='sudo poweroff'
 
 alias watch='watch -t'
+
+# align file in two columns, spaced out
+alias 2column='column -t -l 2 -o "     "'

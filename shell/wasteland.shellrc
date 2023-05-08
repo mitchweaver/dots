@@ -33,17 +33,6 @@ alias mpv="mpv $MPV_OPTS"
 alias hme='htop -u mitch'
 alias hroot='htop -u root'
 
-sxiv() {
-    # if arguments, view files
-    # if no arguments, start in thumbnail mode in folder
-    if [ "$1" ] ; then
-        command sxiv -a -b -N sxiv -p -q -r -s d "$@"
-    else
-        command sxiv -a -N sxiv -p -q -r -s d -t . # -b
-    fi 2>/dev/null
-}
-alias s=sxiv
-
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # wttr.in
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -243,9 +232,15 @@ alias fjl='firejail --list'
 alias governor='cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor'
 
 alias restart-sxhkd='pkill sxhkd ; cd ~ ; sxhkd >/dev/null 2>&1 &'
-alias restart-polybar='pkill polybar;nohup polybar >/dev/null 2>&1 &'
+
+restart-polybar() {
+    polybar-msg cmd quit >~/.cache/polybar.log 2>&1
+    pkill polybar
+    nohup polybar >/dev/null 2>&1 &
+}
 
 alias stcfg='v ~/src/suckless/st/cfg/config.h'
+alias dwmcfg='v ~/src/suckless/dwm/cfg/config.h'
 
 if command -v spotifyd >/dev/null ; then
     spt() {
@@ -281,8 +276,10 @@ alias v4l='sudo modprobe v4l2loopback'
 
 airpods() {
     if ! pgrep -x bluetoothd >/dev/null ; then
-        >&2 echo 'start bluetoothd stupid'
-        exit 1
+        echo "Start bluetooth:"
+        set -x
+        sudo rc-service bluetooth start
+        set +x
     fi
 
     AP="5C:52:30:DA:62:E7"
@@ -290,8 +287,22 @@ airpods() {
     bluetoothctl power on
     bluetoothctl agent on
     bluetoothctl default-agent
-#    bluetoothctl --timeout 5 scan on
-#    bluetoothctl pair "$AP"
-#    bluetoothctl trust "$AP"
+
+    bluetoothctl --timeout 5 scan on
+
+    bluetoothctl --timeout 5 pair "$AP"
+    bluetoothctl trust "$AP"
     bluetoothctl connect "$AP"
 }
+apcon() {
+    AP="5C:52:30:DA:62:E7"
+    bluetoothctl connect "$AP"
+}
+alias fixbluetooth='sudo rc-service bluetooth restart'
+
+# =========================================================
+note() {
+    ${EDITOR:-nvim} ~/nextcloud/notes/notes.md
+}
+alias n=note
+# =========================================================

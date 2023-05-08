@@ -72,11 +72,16 @@ add \
 
 # GFX
 add \
+    media-libs/x264 \
+    media-libs/x265 \
+    media-video/x264-encoder \
+    media-plugins/gst-plugins-x264 \
+    media-plugins/gst-plugins-x265 \
     media-gfx/gimp \
+    media-plugins/gimp-lqr \
     media-gfx/imagemagick \
     media-gfx/jpegoptim \
-    media-libs/exiftool \
-    media-plugins/gimp-lqr
+    media-libs/exiftool
 
 # VIDEO
 add \
@@ -126,7 +131,7 @@ add \
 
 # NETWORKING
 add \
-    net-analyzer/netcat \
+    net-analyzer/openbsd-netcat \
     net-analyzer/nmap \
     net-analyzer/wireshark \
     net-analyzer/speedtest-cli \
@@ -204,10 +209,13 @@ add \
     net-im/discord \
     media-sound/spotify
 
-# node
-eselect repository enable broverlay
-emerge --sync broverlay
-add nodejs-bin
+# nodejs-bin
+# eselect repository enable broverlay
+# emerge --sync broverlay
+# add nodejs-bin
+
+add \
+    anki-bin
 
 # ===============================================================================
 # OLD WORLD
