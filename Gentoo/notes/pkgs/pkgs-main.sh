@@ -77,6 +77,8 @@ add \
     media-video/x264-encoder \
     media-plugins/gst-plugins-x264 \
     media-plugins/gst-plugins-x265 \
+    media-plugins/gst-plugins-ugly \
+    media-plugins/gst-plugins-bad \
     media-gfx/gimp \
     media-plugins/gimp-lqr \
     media-gfx/imagemagick \
@@ -90,8 +92,8 @@ add \
     media-video/ffmpegthumbnailer \
     net-misc/yt-dlp \
     media-video/v4l2loopback \
-    media-plugins/gst-plugins-v4l2 \
     media-video/obs-studio
+##### media-plugins/gst-plugins-v4l2
 
 # AUDIO
 add \
@@ -120,7 +122,9 @@ add \
 # GENTOO-SPECIFIC
 add \
     app-eselect/eselect-python \
-    app-eselect/eselect-repository
+    app-eselect/eselect-repository \
+    app-portage/gentoolkit \
+    app-portage/portage-utils
 
 # PRINTING
 add \

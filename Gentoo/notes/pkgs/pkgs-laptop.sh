@@ -14,7 +14,8 @@ add \
     sys-power/acpi \
     sys-power/acpilight \
     sys-apps/fwupd \
-    sys-apps/fwupd-efi
+    sys-apps/fwupd-efi \
+    media-libs/libva-intel-media-driver
 
 # for newer thinkpads:
 # add app-laptop/tpacpi-bat
