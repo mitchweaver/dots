@@ -3,3 +3,5 @@ net-analyzer/wireshark wifi gui pcap tshark -sharkd -plugins -dftest -randpkt -r
 # note: ads === active directory
 net-fs/cifs-utils -ads -acl -creds
 net-fs/samba client -regedit -ads -acl -ceph -cluster -glusterfs -profiling-data -quota -spotlight
+
+net-dns/dnsmasq dnssec loop -auth-dns -conntrack -dhcp -dbus -dumpfile -inotify

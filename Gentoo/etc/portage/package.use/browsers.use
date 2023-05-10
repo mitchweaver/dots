@@ -1,4 +1,5 @@
 www-client/firefox lto pgo hwaccel gmp-autoupdate system-av1 system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-webp system-png -geckodriver
 www-client/firefox-bin lto pgo hwaccel gmp-autoupdate -geckodriver
 
-www-client/librewolf lto pgo hwaccel gmp-autoupdate system-av1 system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-webp system-png -geckodriver
+www-client/librewolf lto pgo hwaccel gmp-autoupdate system-av1 system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-webp system-png -geckodriver -eme-free
+www-client/librewolf-bin lto pgo hwaccel gmp-autoupdate system-av1 system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-webp system-png -geckodriver -eme-free

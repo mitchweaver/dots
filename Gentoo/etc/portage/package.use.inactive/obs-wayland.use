@@ -1,8 +1,0 @@
-media-video/obs-studio screencast nvenc pipewire v4l browser lua wayland X pulseaudio -vlc -websocket -speex
-media-video/ffmpeg x264 opus nvenc pipewire wayland X
-
-sys-apps/xdg-desktop-portal screencast pipewire wayland X
-sys-apps/xdg-desktop-portal-gnome screencast pipewire wayland X
-sys-apps/xdg-desktop-portal-gtk screencast pipewire wayland X
-sys-apps/xdg-desktop-portal-wlr screencast pipewire wayland X
-

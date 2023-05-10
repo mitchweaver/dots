@@ -37,7 +37,7 @@ dev-libs/liborcus -spreadsheet-model
 media-libs/libsdl2 opengl gles2
 
 # jellyfin-media-player
-dev-qt/qtwebengine jumbo-build
+dev-qt/qtwebengine jumbo-build -designer -widgets
 dev-qt/qtwebchannel qml
 
 # ========= MISC =============
@@ -56,3 +56,5 @@ sys-libs/gdbm berkdb
 
 # for lm-sensors in mesa
 sys-apps/lm-sensors abi_x86_32
+
+net-libs/nodejs npm -lto -pgo -snapshot

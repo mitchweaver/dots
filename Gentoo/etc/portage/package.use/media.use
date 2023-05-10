@@ -1,5 +1,4 @@
-media-video/mpv X jpeg png rubberband libcaca zimg
+media-video/mpv X jpeg png rubberband libcaca zimg -libcaca
 media-libs/imblib2 jpeg png gif webp -bzip2
 
 media-gfx/sxiv jpeg png gif webp
-

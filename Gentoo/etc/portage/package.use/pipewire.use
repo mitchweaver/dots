@@ -1,6 +1,9 @@
 # to get battery levels via bluetooth
 net-wireless/bluez experimental
 
+# pulls in pandoc/ghc/haskell stuff if man left in
+media-sound/bluez-alsa -man
+
 # to let pipewire work w/o pulseaudio
 media-video/pipewire X bluetooth elogind dbus pipewire-alsa sound-server -wayland -jack-sdk -jack-client -pulseaudio
 
