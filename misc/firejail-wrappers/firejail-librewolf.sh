@@ -9,6 +9,4 @@ fi
 
 exec firejail \
     --profile=/etc/firejail/librewolf.profile \
-    /usr/bin/$LIBREWOLF \
-    --disable-pinch \
-    "$@"
+    /usr/bin/$LIBREWOLF "$@"

@@ -46,7 +46,8 @@ add \
     app-admin/sysstat \
     app-misc/detox \
     app-misc/neofetch \
-    app-text/dos2unix
+    app-text/dos2unix \
+    app-admin/entr
 
 # SYSTEM DAEMONS
 add \
@@ -149,7 +150,9 @@ add \
     net-wireless/bluez \
     net-wireless/bluez-tools \
     net-wireless/bluez-alsa \
-    sys-apps/ethtool
+    sys-apps/ethtool \
+    net-dns/dnsmasq \
+    net-libs/ldns
 
 # DRIVERS / FIRMWARE
 add \

@@ -444,7 +444,6 @@ noremap <leader>W !!sh<cr>
 " pipe line to fmt and replace current line
 noremap <F>:.!fmt --width=80<cr>
 
-"
 " prepend '> ' to lines as if to block quote
 noremap Q :norm 0i> <esc>$
 

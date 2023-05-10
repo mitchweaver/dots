@@ -25,6 +25,9 @@ pkg() {
         l)
             cat /var/lib/portage/world
             ;;
+        deps)
+            equery depends "$@"
+            ;;
         d)
             if [ "$1" ] ; then
                 sudo emerge --rage-clean "$@"

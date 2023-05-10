@@ -1,12 +1,12 @@
 # programs
 alt Return
-    stwrapper
-#   kitty
+    kitty
+    # stwrapper
 alt + w
     brws
 alt + r
+    kitty --single-instance ranger
     stwrapper -e ranger
-    # kitty --single-instance ranger
 
 super + l
     xautolock -locknow -locker 'i3lock-fancy-rapid 15 pixel'

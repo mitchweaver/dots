@@ -49,6 +49,8 @@ xmodmap ~/.xmodmaprc
 xset +fp ~/.fonts
 xset m 0 0
 xset b off
+xset b 0 0 0
+dconf write /org/gnome/desktop/sound/event-sounds "false"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # ONE SHOT COMMANDS
@@ -77,8 +79,8 @@ pgrep -f xautolock   >/dev/null || xautolock \
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # APPLICATIONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# pgrep -f nextcloud   >/dev/null || nextcloud >"$XINIT_LOGS"/nextcloud.log 2>&1 &
-pgrpe -f redshift    >/dev/null || firejail-redshift >"$XINIT_LOGS"/redshift.log 2>&1 &
+pgrep -f nextcloud >/dev/null || firejail-nextcloud.sh >"$XINIT_LOGS"/nextcloud.log 2>&1 &
+pgrep -f redshift >/dev/null || firejail-redshift.sh >"$XINIT_LOGS"/redshift.log 2>&1 &
 # firejail-mailspring.sh >"$XINIT_LOGS"/mailspring.log 2>&1 &
 # firejail-joplin.sh     >"$XINIT_LOGS"/joplin.log     2>&1 &
 # firejail-discord.sh    >"$XINIT_LOGS"/discord.log    2>&1 &
@@ -94,5 +96,5 @@ pgrpe -f redshift    >/dev/null || firejail-redshift >"$XINIT_LOGS"/redshift.log
 pkill mmbar
 mmbar -d &
 while sleep 1 ; do
-    dwm && break || continue
+    dwm >"$XINIT_LOGS"/dwm.log 2>&1 && break || continue
 done

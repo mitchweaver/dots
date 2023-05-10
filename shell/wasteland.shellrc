@@ -10,8 +10,8 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # I hate these stupid dirs and every program that creates them.
-/bin/rmdir Desktop Downloads Pictures Public \
-        Templates Videos Music 2>/dev/null ||:
+nohup /bin/rmdir Desktop Downloads Pictures Public \
+        Templates Videos Music Nextcloud >/dev/null 2>&1 ||:
 
 # search for a font name
 fcg() { fc-list | grep -i "$*" ; }
@@ -80,7 +80,7 @@ removeaudio() {
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 jpg() {
     if [ -f "$1" ] ; then
-        jpegoptim -s "$1"
+        jpegoptim -p -s "$1"
     elif [ -d "${1:-.}" ] ; then
         find "${1:-.}" -type f -iname "*.jp*" -exec jpegoptim -s {} \;
     fi
@@ -231,7 +231,7 @@ alias fjl='firejail --list'
 
 alias governor='cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor'
 
-alias restart-sxhkd='pkill sxhkd ; cd ~ ; sxhkd >/dev/null 2>&1 &'
+alias restart-sxhkd='pkill sxhkd ; cd ~ ; nohup sxhkd >/dev/null 2>&1 &'
 
 restart-polybar() {
     polybar-msg cmd quit >~/.cache/polybar.log 2>&1
@@ -241,6 +241,7 @@ restart-polybar() {
 
 alias stcfg='v ~/src/suckless/st/cfg/config.h'
 alias dwmcfg='v ~/src/suckless/dwm/cfg/config.h'
+alias kittycfg='v ~/.config/kitty/kitty.conf'
 
 if command -v spotifyd >/dev/null ; then
     spt() {
@@ -265,7 +266,8 @@ rcl() {
 }
 
 alias pbrestart='polybar-msg cmd restart'
-alias fixaudio='pkill pipewire ; pkill wireplumber ; gentoo-pipewire-launcher & pbrestart'
+alias fixaudio='pkill pipewire ; pkill wireplumber ; nohup gentoo-pipewire-launcher >/dev/null 2>&1 &'
+
 startup() {
     sudo rc-service netmount restart
     fixaudio
@@ -275,6 +277,8 @@ startup() {
 alias v4l='sudo modprobe v4l2loopback'
 
 airpods() {
+    fix-pipewire
+    sleep 2
     if ! pgrep -x bluetoothd >/dev/null ; then
         echo "Start bluetooth:"
         set -x
