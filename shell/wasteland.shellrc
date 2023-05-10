@@ -305,8 +305,11 @@ apcon() {
 alias fixbluetooth='sudo rc-service bluetooth restart'
 
 # =========================================================
-note() {
+notes() {
     ${EDITOR:-nvim} ~/nextcloud/notes/notes.md
 }
-alias n=note
+alias {n,note}=notes
+words() {
+    ${EDITOR:-nvim} ~/nextcloud/notes/words.md
+}
 # =========================================================

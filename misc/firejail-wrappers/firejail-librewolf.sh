@@ -8,5 +8,5 @@ elif command -v librewolf-bin >/dev/null ; then
 fi
 
 exec firejail \
-    --profile=/etc/firejail/librewolf.profile \
+    --profile="${HOME}/.firejail/joplin.profile" \
     /usr/bin/$LIBREWOLF "$@"

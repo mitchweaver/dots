@@ -53,6 +53,7 @@ autocmd BufNewFile,BufRead *.cfg setlocal commentstring=#\ %s
 autocmd BufNewFile,BufRead *.config setlocal commentstring=#\ %s
 autocmd BufNewFile,BufRead *.profile setlocal commentstring=#\ %s
 autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
+autocmd BufNewFile,BufRead *.h setlocal commentstring=\/\/\ %s
 
 Plug 'unblevable/quick-scope'    " make f F t T ; and , useable 
 " trigger highlight only with 'f' and 'F'
