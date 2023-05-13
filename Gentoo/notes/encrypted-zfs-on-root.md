@@ -1,7 +1,5 @@
 # Gentoo on ZFS RAID with Full Disk Encryption
 
-
-
 ## WARNING
 
 **Swap on ZFS is extremely unstable and NOT recommended.**  
@@ -15,8 +13,8 @@ Recommendation: Just make a ext4 partition to use as swap.
 
 ## Overview
 
-this guide is using 3 disks in this layout using two pools  
-one boot pool, unencrypted  
+this guide is using 3 disks in this layout using two pools
+one boot pool, unencrypted
 one root data pool, encrypted
 
 ```

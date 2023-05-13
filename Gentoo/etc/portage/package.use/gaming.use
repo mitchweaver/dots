@@ -17,7 +17,6 @@ dev-libs/libffi abi_x86_32
 dev-libs/libpcre2 abi_x86_32
 media-libs/libglvnd abi_x86_32
 virtual/opengl abi_x86_32
-sys-devel/llvm abi_x86_32
 sys-libs/libselinux abi_x86_32
 sys-libs/libsepol abi_x86_32
 sys-libs/ncurses abi_x86_32

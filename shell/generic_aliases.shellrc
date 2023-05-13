@@ -18,6 +18,10 @@ case $TERM in
             alias ls='ls --color=auto -F'
         fi
 
+        if command -v bat >/dev/null ; then
+            alias cat='bat -p --pager=never --wrap=never --color=always'
+        fi
+
         alias dir='dir --color=always'
         alias vdir='vdir --color=always'
         alias grep='grep --color=always'
@@ -53,7 +57,8 @@ alias {cll,clear,claer,clar,clea,clera}=clear
 alias {cls,csl,cl,lc,clearls}='clear ; ls'
 alias {e,ech,eho}=echo
 alias {g,gi,gr,grp,gre,grep,Grep,gerp,grpe,match,include,i,inc}='grep -i'
-alias {pg,pgrpe}=pgrep
+alias {pg,pgrpe,pgre}=pgrep
+alias pk=pkill
 
 alias ga='grep -i -A 6'
 alias ga='grep -i -B 6'
@@ -114,3 +119,5 @@ alias watch='watch -t'
 
 # align file in two columns, spaced out
 alias 2column='column -t -l 2 -o "     "'
+
+hg() { grep "$*" "$HISTFILE" ; }

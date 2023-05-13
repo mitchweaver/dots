@@ -30,8 +30,12 @@ alias r=ranger
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 alias mpv="mpv $MPV_OPTS"
 
+alias {htop,htpo}='htop -d 10 -s PERCENT_CPU'
 alias hme='htop -u mitch'
 alias hroot='htop -u root'
+alias hf='htop -F'
+
+alias iotop='iotop -d 1 -o -P'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # wttr.in
@@ -40,7 +44,7 @@ weather() {
     if [ -f "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}" ] ; then
         read -r loc < "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}"
         if [ "$loc" ] ; then
-            curl -Ls https://wttr.in/"$loc"?u0TQ
+            curl -L https://wttr.in/"$loc"?u0TQ
         fi
     else
         >&2 echo 'Need to set "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}"'
@@ -171,8 +175,6 @@ backup-gnome () {
     cp -r ~/.local/share/gnome-shell "$dir"/dot_local/share/gnome-shell
     pack "$dir"
 }
-
-alias htpo=htop
 
 cuesplit() {
     case $1 in
@@ -313,3 +315,6 @@ words() {
     ${EDITOR:-nvim} ~/nextcloud/notes/words.md
 }
 # =========================================================
+
+days-since() { datediff "$1" today ; }
+

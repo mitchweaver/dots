@@ -18,7 +18,7 @@ games-util/xpadneo::steam-overlay
 gnome-extra/gnome-shell-extension-openweather::4nykey
 x11-themes/papirus-icon-theme::4nykey
 
-x11-themes/paper-icon-theme::tastytey
+x11-themes/paper-icon-theme::tastytea
 
 x11-themes/materia-theme::edgets
 ####mail-client/mailspring::edgets

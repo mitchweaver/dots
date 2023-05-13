@@ -22,11 +22,14 @@ emerge ltoize
 # now uncomment make.conf.lto and rebuild gcc to add lto/pgo/graphite support
 mkdir -p /var/tmp/notmpfs
 CFLAGS="-O2 -march=native -pipe" USE="-lto -pgo graphite" emerge -av gcc
-# rebuild gcc, now with lto/pgo/graphite on itself
-emerge --newuse --with-bdeps y --update --verbose gcc
 
 eselect gcc list
 eseelect gcc set (whatever is new that got built)
+
+emerge --depclean
+
+# rebuild gcc, now with lto/pgo/graphite on itself
+emerge --newuse --with-bdeps y --update --verbose gcc
 
 # ltoize the world
 emerge --deep --with-bdeps y --verbose --keep-going @world

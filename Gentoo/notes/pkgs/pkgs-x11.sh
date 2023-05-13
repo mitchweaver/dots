@@ -24,7 +24,7 @@ add \
     x11-misc/slop \
     x11-misc/arandr \
     x11-misc/xbanish \
-    x11-misc/xwininfo
+    x11-apps/xwininfo
 
 add \
     gui-libs/display-manager-init

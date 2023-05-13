@@ -1,6 +1,7 @@
 # clang junk i dont use
 # also note: -clang is in make.conf globally
-sys-devel/clang -extra -xml -static-analyzer
+sys-devel/clang -lto -pgo -extra -xml -static-analyzer
+sys-devel/llvm abi_x86_32 -lto -pgo
 
 # woeusb-ng
 x11-libs/wxGTK gstreamer
@@ -58,3 +59,6 @@ sys-libs/gdbm berkdb
 sys-apps/lm-sensors abi_x86_32
 
 net-libs/nodejs npm -lto -pgo -snapshot
+
+dev-lang/rust system-llvm -rust-analyzer -miri -clippy -rustfmt
+dev-lang/rust-bin system-llvm -rust-analyzer -miri -clippy -rustfmt

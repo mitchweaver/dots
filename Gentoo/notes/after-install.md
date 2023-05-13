@@ -16,7 +16,7 @@ rc-update add docker default
 rc-update add elogind default
 rc-update add display-manager default
 rc-update add dnsmasq default
-useradd -m -G users,wheel,audio,video,lpadmin -s /bin/bash mitch
+useradd -m -G users,wheel,audio,video,lpadmin,input -s /bin/bash mitch
 passwd mitch
 echo "US/Central" > /etc/timezone
 emerge --config sys-libs/timezone-data

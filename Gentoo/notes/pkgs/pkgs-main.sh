@@ -4,15 +4,6 @@ add() {
     emerge --verbose --noreplace "$@"
 }
 
-# initial install / GentooLTO setup
-add \
-    sys-apps/busybox \
-    dev-vcs/git \
-    eselect-repository \
-    app-admin/sudo \
-    sys-kernel/genkernel \
-    sys-kernel/linux-firmware
-
 # development
 add \
     app-editors/neovim \
@@ -26,13 +17,13 @@ add \
     x11-terms/kitty \
     x11-terms/kitty-shell-integration \
     x11-terms/kitty-terminfo \
-    dev-python/pillow
+    dev-python/pillow \
+    dev-lang/rust-bin
 
 # system utils
 add \
     sys-process/htop  \
     app-misc/ranger \
-    sys-apps/exa \
     app-text/tree \
     sys-apps/pv \
     sys-apps/progress \
@@ -47,7 +38,13 @@ add \
     app-misc/detox \
     app-misc/neofetch \
     app-text/dos2unix \
-    app-admin/entr
+    app-admin/entr \
+    sys-process/iotop-c
+
+# alternative system-utils
+add \
+    sys-apps/exa \
+    sys-apps/bat
 
 # SYSTEM DAEMONS
 add \
@@ -78,8 +75,8 @@ add \
     media-video/x264-encoder \
     media-plugins/gst-plugins-x264 \
     media-plugins/gst-plugins-x265 \
-    media-plugins/gst-plugins-ugly \
-    media-plugins/gst-plugins-bad \
+    media-libs/gst-plugins-ugly \
+    media-libs/gst-plugins-bad \
     media-gfx/gimp \
     media-plugins/gimp-lqr \
     media-gfx/imagemagick \
@@ -94,7 +91,6 @@ add \
     net-misc/yt-dlp \
     media-video/v4l2loopback \
     media-video/obs-studio
-##### media-plugins/gst-plugins-v4l2
 
 # AUDIO
 add \
@@ -149,10 +145,14 @@ add \
     net-vpn/wireguard-tools \
     net-wireless/bluez \
     net-wireless/bluez-tools \
-    net-wireless/bluez-alsa \
+    media-sound/bluez-alsa \
     sys-apps/ethtool \
     net-dns/dnsmasq \
     net-libs/ldns
+
+# misc
+add \
+    app-misc/dateutils
 
 # DRIVERS / FIRMWARE
 add \
@@ -166,48 +166,13 @@ add \
     app-i18n/translate-shell \
     app-text/pandoc-bin
 
-# FONTS
-add \
-    x11-apps/mkfontscale \
-    media-libs/fontconfig \
-    media-fonts/font-util \
-    media-fonts/fontawesome \
-    media-fonts/liberation-fonts \
-    media-fonts/noto \
-    media-fonts/noto-cjk \
-    media-fonts/noto-emoji \
-    media-fonts/roboto \
-    media-fonts/terminus-font
-
-# RICE
-add \
-    lxde-base/lxappearance
-
 # INTERNET / OFFICE
 add \
     net-misc/nextcloud-client \
     app-office/libreoffice-bin
 
-# THEMES
-add \
-    x11-themes/arc-theme
-
-eselect repository enable 4nykey
-emerge --sync 4nykey
-add x11-themes/papirus-icon-theme
-
-eselect repository enable tastytea
-emerge --sync tastytea
-add x11-themes/paper-icon-theme
-
-eselect repository enable edgets
-emerge --sync edgets
-add x11-themes/materia-theme
-
 # MAILSPRING
-eselect repository enable kzd
 eselect repository enable edgets
-emerge --sync kzd
 emerge --sync edgets
 add mailspring
 
@@ -221,8 +186,8 @@ add \
 # emerge --sync broverlay
 # add nodejs-bin
 
-add \
-    anki-bin
+# add \
+# anki-bin
 
 # ===============================================================================
 # OLD WORLD

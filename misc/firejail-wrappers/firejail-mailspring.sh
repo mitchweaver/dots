@@ -1,9 +1,13 @@
 #!/bin/sh
 
-mailspring=/usr/bin/mailspring
+if [ -e /usr/bin/mailspring ] ; then
+    mailspring=/usr/bin/mailspring
 
-if [ -L "$mailspring" ] ; then
-    mailspring=/usr/share/mailspring/mailspring
+    if [ -L "$mailspring" ] ; then
+        mailspring=/usr/share/mailspring/mailspring
+    fi
+else
+    mailspring=$(which mailspring)
 fi
 
 # --appimage \
