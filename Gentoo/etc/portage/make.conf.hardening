@@ -49,16 +49,20 @@ COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -Wl,-z,relro,-z,now"
 #
 # see: http://bugzilla.mozilla.org/show_bug.cgi?id=333640
 # see: http://wiki.rosalab.ru/ru/index.php/Underlinking#Why_underlinking_is_bad
+#
 # NOTE: this seems to break a few python packages, looking into
 #       pycairo/numpy so far failing to link if this is enabled
-############################COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -Wl,-z,defs"
+COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -Wl,-z,defs"
 
 # Enable buffer overflow checks.
 # see: http://access.redhat.com/blogs/766093/posts/1976213
+#
+# note: this causes a few packages to fail compile
+#       see env/no-fortify-source.conf
 COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -D_FORTIFY_SOURCE=2"
 
 # Enable bounds checking for strings as well as null pointer checks.
 # see: http://gcc.gnu.org/onlinedocs/libstdc++/manual/using_macros.html
-COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -D_GLIBCXX_ASSERTIONS"
+CXXFLAGS="$CXXFLAGS -D_GLIBCXX_ASSERTIONS"
 
 # vim:ft=config

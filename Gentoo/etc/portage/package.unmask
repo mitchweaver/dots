@@ -7,7 +7,12 @@ dev-python/Rx
 x11-drivers/nvidia-drivers
 
 # ================================================
+# GIT VERSION (-9999) UNMASKS
+# ================================================
+
+# ================================================
 # OVERLAY UNMASKS (see package.mask)
+# ================================================
 media-fonts/cozette::robertgzr
 media-fonts/spleen::src_prepare-overlay
 
@@ -21,13 +26,11 @@ x11-themes/papirus-icon-theme::4nykey
 x11-themes/paper-icon-theme::tastytea
 
 x11-themes/materia-theme::edgets
-####mail-client/mailspring::edgets
-
 net-libs/nodejs-bin::broverlay
 
-mail-client/mailspring-bin::guru
+mail-client/mailspring::edgets
+
 app-misc/anki-bin::guru
 x11-misc/i3lock-fancy-rapid::guru
 app-office/joplin-bin::guru
 x11-misc/xbanish::guru
-# ================================================

@@ -5,7 +5,7 @@ net-wireless/bluez experimental
 media-sound/bluez-alsa -man
 
 # to let pipewire work w/o pulseaudio
-media-video/pipewire X bluetooth elogind dbus pipewire-alsa sound-server -wayland -jack-sdk -jack-client -pulseaudio
+media-video/pipewire X bluetooth elogind dbus pipewire-alsa sound-server -jack-sdk -jack-client -pulseaudio
 
 # pulseaudio for APIs, but the server will be pipewire
 media-sound/pulseaudio glib -daemon

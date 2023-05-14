@@ -39,7 +39,8 @@ add \
     app-misc/neofetch \
     app-text/dos2unix \
     app-admin/entr \
-    sys-process/iotop-c
+    sys-process/iotop-c \
+    app-admin/doas
 
 # alternative system-utils
 add \
@@ -73,15 +74,15 @@ add \
     media-libs/x264 \
     media-libs/x265 \
     media-video/x264-encoder \
-    media-plugins/gst-plugins-x264 \
-    media-plugins/gst-plugins-x265 \
-    media-libs/gst-plugins-ugly \
-    media-libs/gst-plugins-bad \
     media-gfx/gimp \
     media-plugins/gimp-lqr \
     media-gfx/imagemagick \
     media-gfx/jpegoptim \
     media-libs/exiftool
+# media-plugins/gst-plugins-x264 \
+# media-plugins/gst-plugins-x265 \
+#    media-libs/gst-plugins-ugly \
+#    media-libs/gst-plugins-bad \
 
 # VIDEO
 add \
@@ -168,8 +169,8 @@ add \
 
 # INTERNET / OFFICE
 add \
-    net-misc/nextcloud-client \
-    app-office/libreoffice-bin
+    net-misc/nextcloud-client
+####    app-office/libreoffice-bin
 
 # MAILSPRING
 eselect repository enable edgets
@@ -180,6 +181,16 @@ add mailspring
 add \
     net-im/discord \
     media-sound/spotify
+
+# LIBS
+add \
+    dev-cpp/nlohmann_json
+
+LLVM / Clang / lld
+add \
+    sys-devel/clang \
+    sys-devel/llvm \
+    sys-devel/lld
 
 # nodejs-bin
 # eselect repository enable broverlay

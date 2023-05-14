@@ -70,8 +70,9 @@ pgrep -f xdimmer     >/dev/null || xdimmer -p 20 -s 10 -b 1 -t 570 >"$XINIT_LOGS
 pgrep -f wireplumber >/dev/null || nohup gentoo-pipewire-launcher >"$XINIT_LOGS"/pipewire.log 2>&1 &
 pgrep -f xbanish     >/dev/null || xbanish -t 30 >"$XINIT_LOGS"/xbanish.log 2>&1 &
 pgrep -f picom       >/dev/null || picom --log-file "$XINIT_LOGS"/picom.log -b
+
 pgrep -f xautolock   >/dev/null || xautolock \
-    -locker 'i3lock-fancy-rapid 10 pixel' \
+    -locker 'lockscreen' \
     -time "${LOCK_TIME:-10}" \
     -notify 15 \
     -notifier notify-send >"$XINIT_LOGS"/xautolock.log 2>&1 &
@@ -84,15 +85,10 @@ pgrep -f redshift >/dev/null || firejail-redshift.sh >"$XINIT_LOGS"/redshift.log
 # firejail-mailspring.sh >"$XINIT_LOGS"/mailspring.log 2>&1 &
 # firejail-joplin.sh     >"$XINIT_LOGS"/joplin.log     2>&1 &
 # firejail-discord.sh    >"$XINIT_LOGS"/discord.log    2>&1 &
-# firejail-spotify.sh  >"$XINIT_LOGS"/spotify.log    2>&1 &
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # WINDOW MANAGER
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# polybar-msg cmd quit >"$XINIT_LOGS"/polybar.log 2>&1
-# polybar mybar >>"$XINIT_LOGS"/polybar.log 2>&1 &
-# exec i3 >"$XINIT_LOGS"/i3.log 2>&1
-
 pkill mmbar
 mmbar -d &
 while sleep 1 ; do

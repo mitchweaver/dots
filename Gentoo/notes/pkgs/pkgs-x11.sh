@@ -24,7 +24,8 @@ add \
     x11-misc/slop \
     x11-misc/arandr \
     x11-misc/xbanish \
-    x11-apps/xwininfo
+    x11-apps/xwininfo \
+    x11-apps/mesa-progs
 
 add \
     gui-libs/display-manager-init

@@ -3,18 +3,6 @@
 set -o noclobber -o noglob -o nounset -o pipefail
 IFS=$'\n'
 
-## If the option `use_preview_script` is set to `true`,
-## then this script will be called and its output will be displayed in ranger.
-## ANSI color codes are supported.
-## STDIN is disabled, so interactive scripts won't work properly
-
-## This script is considered a configuration file and must be updated manually.
-## It will be left untouched if you upgrade ranger.
-
-## Because of some automated testing we do on the script #'s for comments need
-## to be doubled up. Code that is commented out, because it's an alternative for
-## example, gets only one #.
-
 ## Meanings of exit codes:
 ## code | meaning    | action of ranger
 ## -----+------------+-------------------------------------------
@@ -27,18 +15,21 @@ IFS=$'\n'
 ## 6    | image      | Display the image `$IMAGE_CACHE_PATH` points to as an image preview
 ## 7    | image      | Display the file directly as an image
 
-## Script arguments
+# Script arguments
 FILE_PATH="${1}"         # Full path of the highlighted file
 PV_WIDTH="${2}"          # Width of the preview pane (number of fitting characters)
-## shellcheck disable=SC2034 # PV_HEIGHT is provided for convenience and unused
+
+# shellcheck disable=SC2034 # PV_HEIGHT is provided for convenience and unused
+
 PV_HEIGHT="${3}"         # Height of the preview pane (number of fitting characters)
-IMAGE_CACHE_PATH="${4}"  # Full path that should be used to cache image preview
+
+# Full path that should be used to cache image preview
+IMAGE_CACHE_PATH="$4"
 PV_IMAGE_ENABLED="${5}"  # 'True' if image previews are enabled, 'False' otherwise.
 
 FILE_EXTENSION="${FILE_PATH##*.}"
 FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_EXTENSION}" | tr '[:upper:]' '[:lower:]')"
 
-## Settings
 HIGHLIGHT_SIZE_MAX=262143  # 256KiB
 HIGHLIGHT_TABWIDTH=${HIGHLIGHT_TABWIDTH:-8}
 HIGHLIGHT_STYLE=${HIGHLIGHT_STYLE:-pablo}
@@ -130,9 +121,9 @@ handle_image() {
             exit 7;;
 
         video/*)
-            # super slow?
-#            ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
-            exit 1;;
+            ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 -q 3 -c jpeg && exit 6
+            exit 1
+            ;;
 
         ## PDF
         # application/pdf)
@@ -155,25 +146,25 @@ handle_image() {
         #     exit 1;;
 
         # Font
-        application/font*|application/*opentype)
-            preview_png="/tmp/$(basename "${IMAGE_CACHE_PATH%.*}").png"
-            if fontimage -o "${preview_png}" \
-                         --pixelsize "120" \
-                         --fontname \
-                         --pixelsize "80" \
-                         --text "  ABCDEFGHIJKLMNOPQRSTUVWXYZ  " \
-                         --text "  abcdefghijklmnopqrstuvwxyz  " \
-                         --text "  0123456789.:,;(*!?') ff fl fi ffi ffl  " \
-                         --text "  The quick brown fox jumps over the lazy dog.  " \
-                         "${FILE_PATH}";
-            then
-                convert -- "${preview_png}" "${IMAGE_CACHE_PATH}" \
-                    && rm "${preview_png}" \
-                    && exit 6
-            else
-                exit 1
-            fi
-            ;;
+        # application/font*|application/*opentype)
+        #     preview_png="/tmp/$(basename "${IMAGE_CACHE_PATH%.*}").png"
+        #     if fontimage -o "${preview_png}" \
+        #                  --pixelsize "120" \
+        #                  --fontname \
+        #                  --pixelsize "80" \
+        #                  --text "  ABCDEFGHIJKLMNOPQRSTUVWXYZ  " \
+        #                  --text "  abcdefghijklmnopqrstuvwxyz  " \
+        #                  --text "  0123456789.:,;(*!?') ff fl fi ffi ffl  " \
+        #                  --text "  The quick brown fox jumps over the lazy dog.  " \
+        #                  "${FILE_PATH}";
+        #     then
+        #         convert -- "${preview_png}" "${IMAGE_CACHE_PATH}" \
+        #             && rm "${preview_png}" \
+        #             && exit 6
+        #     else
+        #         exit 1
+        #     fi
+            # ;;
 
         ## Preview archives using the first image inside.
         # (Very useful for comic book collections for example.)
@@ -191,14 +182,14 @@ handle_image() {
              { fn=$(bsdtar --list --file "${FILE_PATH}") && bsd=1 && tar=""; } || \
              { [ "$rar" ] && fn=$(unrar lb -p- -- "${FILE_PATH}"); } || \
              { [ "$zip" ] && fn=$(zipinfo -1 -- "${FILE_PATH}"); } || return
-        
+
              fn=$(echo "$fn" | python -c "import sys; import mimetypes as m; \
                      [ print(l, end='') for l in sys.stdin if \
                        (m.guess_type(l[:-1])[0] or '').startswith('image/') ]" |\
                  sort -V | head -n 1)
              [ "$fn" = "" ] && return
              [ "$bsd" ] && fn=$(printf '%b' "$fn")
-        
+
              [ "$tar" ] && tar --extract --to-stdout \
                  --file "${FILE_PATH}" -- "$fn" > "${IMAGE_CACHE_PATH}" && exit 6
              fe=$(echo -n "$fn" | sed 's/[][*?\]/\\\0/g')
@@ -214,39 +205,25 @@ handle_image() {
     esac
 }
 
-handle_mime() {
-    local mimetype="${1}"
-    case "${mimetype}" in
-        text/* | */xml | *script)
-            ## Syntax highlight
-            cat "$FILE_PATH" && exit 5
-            exit 2;;
-        ## Image
-        image/*)
-            ## Preview as text conversion
-            img2txt --gamma=0.6 --width="${PV_WIDTH}" -- "${FILE_PATH}" && exit 4
-            exiftool "${FILE_PATH}" && exit 5
-            exit 1;;
-        ## Video and audio
-##        video/* | audio/*)
- #           mediainfo "${FILE_PATH}" && exit 5
- #           exiftool "${FILE_PATH}" && exit 5
- #           exit 1;;
-    esac
-}
+# handle_mime() {
+#     local mimetype="${1}"
+#     case "${mimetype}" in
+#         text/* | */xml | *script)
+#             ## Syntax highlight
+#             cat "$FILE_PATH" && exit 5
+#             exit 2;;
+#     esac
+# }
 
 handle_fallback() {
     echo '----- File Type Classification -----' && file --dereference --brief -- "${FILE_PATH}" && exit 5
     exit 1
 }
 
-
 MIMETYPE="$( file --dereference --brief --mime-type -- "${FILE_PATH}" )"
 if [ "${PV_IMAGE_ENABLED}" = True ]; then
     handle_image "${MIMETYPE}"
 fi
 handle_extension
-handle_mime "${MIMETYPE}"
+# handle_mime "${MIMETYPE}"
 handle_fallback
-
-exit 1

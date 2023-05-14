@@ -1,0 +1,3 @@
+dev-libs/wayland abi_x86_32
+dev-qt/qtgui egl
+gui-libs/wlroots tinywl

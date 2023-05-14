@@ -19,14 +19,14 @@ case $TERM in
         fi
 
         if command -v bat >/dev/null ; then
-            alias cat='bat -p --pager=never --wrap=never --color=always'
+            alias cat='bat -p --pager=never --wrap=never --color=auto'
         fi
 
-        alias dir='dir --color=always'
-        alias vdir='vdir --color=always'
-        alias grep='grep --color=always'
-        alias fgrep='fgrep --color=always'
-        alias egrep='egrep --color=always'
+        alias dir='dir --color=auto'
+        alias vdir='vdir --color=auto'
+        alias grep='grep --color=auto'
+        alias fgrep='fgrep --color=auto'
+        alias egrep='egrep --color=auto'
         ;;
     *)
         alias ls='ls -F --color=never'
@@ -121,3 +121,7 @@ alias watch='watch -t'
 alias 2column='column -t -l 2 -o "     "'
 
 hg() { grep "$*" "$HISTFILE" ; }
+
+if command -v doas >/dev/null ; then
+    alias sudo=doas
+fi

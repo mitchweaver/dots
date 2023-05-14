@@ -324,7 +324,9 @@ filetype plugin on       " vim plugin syntax
 " -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 map <silent><leader>ln :set number!<cr>
 map <silent><leader>nl :set relativenumber!<cr>
-set number! " start with line numbering enabled
+
+
+"""""""""""""""""""""""""""""""""" set number! " start with line numbering enabled
 
 " set color column width to 72 chars
 " editor will start with it hidden, but allow it

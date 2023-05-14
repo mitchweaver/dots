@@ -38,3 +38,9 @@ add x11-themes/paper-icon-theme
 
 #x11-wm/i3
 #x11-misc/polybar
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# wayfire
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+gui-wm/wayfire
+gui-libs/wayfire-plugins-extra

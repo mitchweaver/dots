@@ -15,7 +15,8 @@ add \
     media-fonts/noto-cjk \
     media-fonts/noto-emoji \
     media-fonts/roboto \
-    media-fonts/terminus-font
+    media-fonts/terminus-font \
+    media-fonts/dejavu
 
 eselect repository enable src_prepare-overlay
 emerge --sync src_prepare-overlay
