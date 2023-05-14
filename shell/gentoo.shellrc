@@ -13,14 +13,22 @@ pkg() {
         a)
             sudo emerge --noreplace "$@"
             ;;
+        # update quick, without big stuff
         u)
             [ "$1" ] || set -- '@world'
-            sudo emerge --update --newuse --deep --with-bdeps=y --verbose-conflicts "$@"
+            sudo emerge --update --newuse --deep --with-bdeps=y --verbose-conflicts \
+            --exclude="gcc llvm clang rust librewolf libreoffice" \
+            "$@"
             ;;
+        # actually update everything
         uu)
-            # if gets stuck, add backtracking
             [ "$1" ] || set -- '@world'
-            sudo emerge --update --newuse --deep --with-bdeps=y --backtrack=30 --verbose-conflicts "$@"
+            sudo emerge --update --newuse --deep --with-bdeps=y --verbose-conflicts \
+            ;;
+        # if gets stuck, add backtracking
+        uuu)
+            [ "$1" ] || set -- '@world'
+            sudo emerge --update --newuse --deep --with-bdeps=y --backtrack=100 --verbose-conflicts "$@"
             ;;
         l)
             cat /var/lib/portage/world

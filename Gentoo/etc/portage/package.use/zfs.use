@@ -1,2 +1,0 @@
-sys-apps/util-linux static-libs
-sys-boot/grub libzfs device-mapper grub_platforms_pc -themes

@@ -4,7 +4,6 @@
 # ▀▀ ▝▀ ▝▀ ▘ ▘▝▀▘▘  
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-# if openbsd, we do not have docker, return
 command -v docker >/dev/null || return
 
 # have all below run as root with clean environment

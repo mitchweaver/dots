@@ -80,7 +80,8 @@ pgrep -f xautolock   >/dev/null || xautolock \
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # APPLICATIONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-pgrep -f nextcloud >/dev/null || firejail-nextcloud.sh >"$XINIT_LOGS"/nextcloud.log 2>&1 &
+# pgrep -f nextcloud >/dev/null || firejail-nextcloud.sh >"$XINIT_LOGS"/nextcloud.log 2>&1 &
+pgrep -f nextcloud >/dev/null || nextcloud >"$XINIT_LOGS"/nextcloud.log 2>&1 &
 pgrep -f redshift >/dev/null || firejail-redshift.sh >"$XINIT_LOGS"/redshift.log 2>&1 &
 # firejail-mailspring.sh >"$XINIT_LOGS"/mailspring.log 2>&1 &
 # firejail-joplin.sh     >"$XINIT_LOGS"/joplin.log     2>&1 &

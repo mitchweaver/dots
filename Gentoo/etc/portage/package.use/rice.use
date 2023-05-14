@@ -1,8 +1,0 @@
-x11-misc/polybar i3wm curl network ipc -mpd
-
-# config-file else only supports arguments
-x11-misc/picom config-file opengl
-
-# imblib = allow icons in menus
-x11-wm/openbox session imlib
-x11-misc/tint2 tint2conf battery

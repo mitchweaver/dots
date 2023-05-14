@@ -39,7 +39,8 @@ for folder in \
 	.config/sxhkd \
 	.config/waybar \
 	.config/joplin \
-	.config/mmbar ; do
+	.config/mmbar \
+	.config/zathura ; do
 
 	rm -rfv "${HOME:?}/$folder"
 	ln -sv "$DOTS_DIR/$folder" "${HOME}/$folder"

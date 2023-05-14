@@ -1,3 +1,0 @@
-media-video/obs-studio X screencast nvenc pipewire v4l browser pulseaudio -vlc -websocket -speex
-media-video/ffmpeg X x264 opus nvenc pipewire
-

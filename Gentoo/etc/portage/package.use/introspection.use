@@ -1,7 +1,0 @@
-app-accessibility/at-spi2-core     introspection
-dev-libs/atk                       introspection
-x11-libs/gtk+                      introspection
-x11-libs/gdk                       introspection
-x11-libs/pango                     introspection
-x11-libs/gdk-pixbuf                introspection jpeg
-media-libs/harfbuzz                introspection truetype

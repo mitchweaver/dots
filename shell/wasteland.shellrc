@@ -279,8 +279,6 @@ startup() {
 alias v4l='sudo modprobe v4l2loopback'
 
 airpods() {
-    fix-pipewire
-    sleep 2
     if ! pgrep -x bluetoothd >/dev/null ; then
         echo "Start bluetooth:"
         set -x
@@ -318,3 +316,5 @@ words() {
 
 days-since() { datediff "$1" today ; }
 
+
+alias fixdns="sudo rc-service dnsmasq restart"

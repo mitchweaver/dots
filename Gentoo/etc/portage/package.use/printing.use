@@ -1,5 +1,0 @@
-net-print/cups pdf dbus -usb
-net-dns/avahi python
-net-print/hplip pdf minimal
-net-print/hplip-plugin pdf -orblite
-dev-qt/qtmultimedia widgets
