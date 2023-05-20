@@ -10,8 +10,6 @@ exec dbus-update-activation-environment --all
 exec gnome-keyring-daemon --start --components=secrets
 exec mako
 
-output * bg /home/mitch/.local/wallpaper fill
-
 # =================================================
 # INPUT / OUTPUT
 # =================================================
@@ -51,14 +49,19 @@ set $term asahi-kitty
 # =================================================
 # GAPS / THEMES / RICE
 # =================================================
-gaps inner 10
-gaps outer 10
+gaps inner 15
+gaps outer 15
 smart_gaps inverse_outer
 hide_edge_borders --i3 both
 smart_borders on
 
 default_border pixel 2
 default_floating_border none
+
+include "$HOME/.cache/wal/colors-sway"
+
+output * bg /home/mitch/.local/wallpaper fill
+client.focused $color0 $background $foreground $color7 $background
 
 # note: this only applies to non-xwayland windows
 #       need to find way to set it in xwayland too so is consistent
@@ -258,9 +261,15 @@ bar {
     status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
 
     colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        statusline $color1
+        background $color0
+        separator #FFFFFF
+        # border / border / text
+        active_workspace $color5 $color5 $color8
+        inactive_workspace $color3 $color3 $color8
+        focused_workspace $color1 $color1 $color8
+        urgent_workspace #FF0000 #FF0000 #FFFFFF
+
     }
 }
 

@@ -40,24 +40,24 @@ OPENSCAD_COLORSCHEME=${RNGR_OPENSCAD_COLORSCHEME:-Tomorrow Night}
 
 handle_extension() {
     case "${FILE_EXTENSION_LOWER}" in
-        crypt)
-            # do nothing
+        # DO NOTHING
+        crypt|flac|mp3|opus|aac|iso|img|bk)
             exit 1
             ;;
-        ## Archive
-        a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|\
-        rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)
-            atool --list -- "${FILE_PATH}" && exit 5
-            bsdtar --list --file "${FILE_PATH}" && exit 5
-            exit 1;;
-        rar)
-            ## Avoid password prompt by providing empty password
-            unrar lt -p- -- "${FILE_PATH}" && exit 5
-            exit 1;;
-        7z)
-            ## Avoid password prompt by providing empty password
-            7z l -p -- "${FILE_PATH}" && exit 5
-            exit 1;;
+        # ## Archive
+        # a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|\
+        # rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)
+        #     atool --list -- "${FILE_PATH}" && exit 5
+        #     bsdtar --list --file "${FILE_PATH}" && exit 5
+        #     exit 1;;
+        # rar)
+        #     ## Avoid password prompt by providing empty password
+        #     unrar lt -p- -- "${FILE_PATH}" && exit 5
+        #     exit 1;;
+        # 7z)
+        #     ## Avoid password prompt by providing empty password
+        #     7z l -p -- "${FILE_PATH}" && exit 5
+        #     exit 1;;
 
         pdf)
             ## Preview as text conversion
@@ -205,25 +205,26 @@ handle_image() {
     esac
 }
 
-# handle_mime() {
-#     local mimetype="${1}"
-#     case "${mimetype}" in
-#         text/* | */xml | *script)
-#             ## Syntax highlight
-#             cat "$FILE_PATH" && exit 5
-#             exit 2;;
-#     esac
-# }
+handle_mime() {
+    local mimetype="${1}"
+    case "${mimetype}" in
+        text/* | */xml | *script)
+            ## Syntax highlight
+            cat "$FILE_PATH" && exit 5
+            exit 2;;
+    esac
+}
 
 handle_fallback() {
     echo '----- File Type Classification -----' && file --dereference --brief -- "${FILE_PATH}" && exit 5
     exit 1
 }
 
+handle_extension
+
 MIMETYPE="$( file --dereference --brief --mime-type -- "${FILE_PATH}" )"
 if [ "${PV_IMAGE_ENABLED}" = True ]; then
     handle_image "${MIMETYPE}"
 fi
-handle_extension
-# handle_mime "${MIMETYPE}"
+handle_mime "${MIMETYPE}"
 handle_fallback
