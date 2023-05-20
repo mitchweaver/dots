@@ -3,6 +3,36 @@
 # =================================================
 output * adaptive_sync off
 
+# =================================================
+# STARTUP APPS
+# =================================================
+exec dbus-update-activation-environment --all
+exec gnome-keyring-daemon --start --components=secrets
+exec mako
+
+output * bg /home/mitch/.local/wallpaper fill
+
+# =================================================
+# INPUT / OUTPUT
+# =================================================
+input type:keyboard {
+    xkb_layout "us"
+    # note: default=300/30
+    repeat_delay 230
+    repeat_rate 33
+}
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+}
+
+output * {
+    scale 2
+}
+
+# =================================================
+# VARS
+# =================================================
 # note: mod1 = alt, mod4 = super
 # NOTE NOTE: M1 Mac / Asahi for some reason these are switched
 #            in however sway reads them. Only happens with sway not sure why.
@@ -18,8 +48,21 @@ set $right l
 # set $term stwrapper
 set $term asahi-kitty
 
-# Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
-output * bg /home/mitch/.local/wallpaper fill
+# =================================================
+# GAPS / THEMES / RICE
+# =================================================
+gaps inner 10
+gaps outer 10
+smart_gaps inverse_outer
+hide_edge_borders --i3 both
+smart_borders on
+
+default_border pixel 2
+default_floating_border none
+
+# note: this only applies to non-xwayland windows
+#       need to find way to set it in xwayland too so is consistent
+####seat seat0 xcursor_theme Windows10Light 32
 
 # =================================================
 # Monitor Configuration
@@ -62,18 +105,15 @@ output * bg /home/mitch/.local/wallpaper fill
 # Key binds
 # =================================================
 bindsym $mod+Return exec $term
-bindsym $mod+w exec brws
+bindsym $mod+w exec MOZ_ENABLE_WAYLAND=1 librewolf
+bindsym $mod+e exec pcmanfm
+bindsym $mod+r exec asahi-kitty --single-instance ranger
 
-bindsym $mod+p exec menu run | xargs swaymsg exec --
-bindsym $mod+o exec dedit | xargs swaymsg exec --
+bindsym $mod+p exec menu run --wide run -p 'Run:' | xargs swaymsg exec --
+bindsym $mod+o exec dedit
 
 bindsym $mod+q kill
 
-# Drag floating windows by holding down $mod and left mouse button.
-# Resize them with right mouse button + $mod.
-# Despite the name, also works for non-floating windows.
-# Change normal to inverse to use left mouse button for resizing and right
-# mouse button for dragging.
 floating_modifier $mod normal
 
 # =================================================
@@ -119,6 +159,7 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
+bindsym $mod+Backspace workspace number 10
 # =================================================
 # Move to workspace
 # =================================================
@@ -132,32 +173,22 @@ bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+Shift+Backspace move container to workspace number 10
 
 # =================================================
 # Layouts
 # =================================================
-# You can "split" the current object of your focus with
-# $mod+b or $mod+v, for horizontal and vertical splits
-# respectively.
+bindsym $mod+t layout toggle split
+bindsym $mod+f floating toggle
+
 bindsym $mod+b splith
 bindsym $mod+v splitv
 
-# Switch the current container between different layout styles
-bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
-
-# Make the current focus fullscreen
+# bindsym $mod+s layout stacking
+# bindsym $mod+t layout tabbed
 ################### bindsym $mod+f fullscreen
-
-# Toggle the current focus between tiling and floating mode
-bindsym $mod+f floating toggle
-
-# Swap focus between the tiling area and the floating area
-bindsym $mod+space focus mode_toggle
-
-# Move focus to the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+space focus mode_toggle
+# bindsym $mod+a focus parent
 
 # =================================================
 # Scratchpad
@@ -170,29 +201,50 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # =================================================
+# WORKSPACE ASSIGNMENTS
+# =================================================
+assign [class="firefox"] -> 1
+assign [class="librewolf"] -> 1
+
+assign [class="discord"] -> 10
+assign [class="Discord"] -> 10
+assign [class="armcord"] -> 10
+assign [class="Armcord"] -> 10
+assign [class="ArmCord"] -> 10
+assign [class="mailspring"] -> 9
+assign [class="Mailspring"] -> 9
+assign [class="joplin"] -> 8
+assign [class="Joplin"] -> 8
+assign [class="spotify"] -> 7
+assign [class="Spotify"] -> 7
+assign [class="deezer"] -> 7
+assign [class="Deezer"] -> 7
+
+
+# =================================================
 # Resizing
 # =================================================
-mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+# mode "resize" {
+#     # left will shrink the containers width
+#     # right will grow the containers width
+#     # up will shrink the containers height
+#     # down will grow the containers height
+#     bindsym $left resize shrink width 10px
+#     bindsym $down resize grow height 10px
+#     bindsym $up resize shrink height 10px
+#     bindsym $right resize grow width 10px
 
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+#     # Ditto, with arrow keys
+#     bindsym Left resize shrink width 10px
+#     bindsym Down resize grow height 10px
+#     bindsym Up resize shrink height 10px
+#     bindsym Right resize grow width 10px
 
-    # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+r mode "resize"
+#     # Return to default mode
+#     bindsym Return mode "default"
+#     bindsym Escape mode "default"
+# }
+# bindsym $mod+r mode "resize"
 
 # =================================================
 # Bar
