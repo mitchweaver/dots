@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export MOZ_ENABLE_WAYLAND=1
+
+exec flatpak run io.gitlab.librewolf-community
