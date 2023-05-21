@@ -2,4 +2,14 @@
 
 export MOZ_ENABLE_WAYLAND=1
 
-exec flatpak run io.gitlab.librewolf-community
+flatpak override --user --filesystem="${HOME}/.librewolf" io.gitlab.librewolf-community
+
+# enable hardware acceleration in asahi
+# note: this is _very_ buggy and should be removed as soon as we can
+if uname -a | grep asahi >/dev/null ; then
+    export MESA_GL_VERSION_OVERRIDE=3.3
+    export MESA_GLSL_VERSION_OVERRIDE=330
+    export MESA_GLES_VERSION_OVERRIDE=3.1
+fi
+
+exec flatpak run io.gitlab.librewolf-community "$@"

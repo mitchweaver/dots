@@ -5,8 +5,12 @@ if [ -z "$DBUS_SESSION_BUS_ADDRESS" ] ; then
     export $(dbus-launch)
 fi
 
-exec flatpak run \
+exec dbus-launch \
+    flatpak run \
     --env=USE_WAYLAND=1 \
     xyz.armcord.ArmCord \
-    --enable-features=UseOzonePlatform \
-    --ozone-platform=wayland
+    "$@"
+
+    # --enable-features=UseOzonePlatform \
+    # --ozone-platform=wayland \
+
