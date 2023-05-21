@@ -8,7 +8,7 @@ output * adaptive_sync off
 # =================================================
 exec dbus-update-activation-environment --all
 exec gnome-keyring-daemon --start --components=secrets
-exec mako
+exec dbus-launch mako
 
 # =================================================
 # INPUT / OUTPUT
@@ -22,6 +22,10 @@ input type:keyboard {
 input type:touchpad {
     tap enabled
     natural_scroll enabled
+    accel_profile "flat"
+}
+input type:pointer {
+    accel_profile "flat"
 }
 
 output * {
@@ -49,23 +53,31 @@ set $term asahi-kitty
 # =================================================
 # GAPS / THEMES / RICE
 # =================================================
-gaps inner 15
-gaps outer 15
-smart_gaps inverse_outer
-hide_edge_borders --i3 both
-smart_borders on
-
+output * bg /home/mitch/.local/wallpaper fill
+gaps inner 14
+gaps outer 4
+smart_gaps on
+# smart_gaps inverse_outer
+hide_edge_borders smart
+smart_borders no_gaps
 default_border pixel 2
-default_floating_border none
 
 include "$HOME/.cache/wal/colors-sway"
-
-output * bg /home/mitch/.local/wallpaper fill
-client.focused $color0 $background $foreground $color7 $background
+#                                                        BORDER
+client.focused $color0 $background $foreground $color5   $color2
+client.unfocused $color0 $background $foreground $color5 $color1
 
 # note: this only applies to non-xwayland windows
 #       need to find way to set it in xwayland too so is consistent
 ####seat seat0 xcursor_theme Windows10Light 32
+
+# =================================================
+# SWAYFX SPECIFIC
+# =================================================
+# shadows enable
+# shadow_blur_radius 50
+# shadows_on_csd enable
+# corner_radius 10
 
 # =================================================
 # Monitor Configuration
@@ -89,22 +101,6 @@ client.focused $color0 $background $foreground $color7 $background
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 # =================================================
-# Input configuration
-# =================================================
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
-
-# =================================================
 # Key binds
 # =================================================
 bindsym $mod+Return exec $term
@@ -112,7 +108,7 @@ bindsym $mod+w exec MOZ_ENABLE_WAYLAND=1 librewolf
 bindsym $mod+e exec pcmanfm
 bindsym $mod+r exec asahi-kitty --single-instance ranger
 
-bindsym $mod+p exec menu run --wide run -p 'Run:' | xargs swaymsg exec --
+bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
 bindsym $mod+o exec dedit
 
 bindsym $mod+q kill
@@ -222,55 +218,5 @@ assign [class="spotify"] -> 7
 assign [class="Spotify"] -> 7
 assign [class="deezer"] -> 7
 assign [class="Deezer"] -> 7
-
-
-# =================================================
-# Resizing
-# =================================================
-# mode "resize" {
-#     # left will shrink the containers width
-#     # right will grow the containers width
-#     # up will shrink the containers height
-#     # down will grow the containers height
-#     bindsym $left resize shrink width 10px
-#     bindsym $down resize grow height 10px
-#     bindsym $up resize shrink height 10px
-#     bindsym $right resize grow width 10px
-
-#     # Ditto, with arrow keys
-#     bindsym Left resize shrink width 10px
-#     bindsym Down resize grow height 10px
-#     bindsym Up resize shrink height 10px
-#     bindsym Right resize grow width 10px
-
-#     # Return to default mode
-#     bindsym Return mode "default"
-#     bindsym Escape mode "default"
-# }
-# bindsym $mod+r mode "resize"
-
-# =================================================
-# Bar
-# Read `man 5 sway-bar` for more information about this section.
-# =================================================
-bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-
-    colors {
-        statusline $color1
-        background $color0
-        separator #FFFFFF
-        # border / border / text
-        active_workspace $color5 $color5 $color8
-        inactive_workspace $color3 $color3 $color8
-        focused_workspace $color1 $color1 $color8
-        urgent_workspace #FF0000 #FF0000 #FFFFFF
-
-    }
-}
 
 include @sysconfdir@/sway/config.d/*
