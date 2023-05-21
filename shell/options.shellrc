@@ -1,15 +1,17 @@
-# ▞▀▖▌     ▜▜  ▞▀▖   ▐  ▗          
+# ▞▀▖▌     ▜▜  ▞▀▖   ▐  ▗
 # ▚▄ ▛▀▖▞▀▖▐▐  ▌ ▌▛▀▖▜▀ ▄ ▞▀▖▛▀▖▞▀▘
 # ▖ ▌▌ ▌▛▀ ▐▐  ▌ ▌▙▄▘▐ ▖▐ ▌ ▌▌ ▌▝▀▖
-# ▝▀ ▘ ▘▝▀▘ ▘▘ ▝▀ ▌   ▀ ▀▘▝▀ ▘ ▘▀▀ 
+# ▝▀ ▘ ▘▝▀▘ ▘▘ ▝▀ ▌   ▀ ▀▘▝▀ ▘ ▘▀▀
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 case ${0##*/} in
-    *ksh) # ksh only
-        set -o csh-history # allow 'bang!' style commands
-        set -o trackall    # all commands become tracked aliases
-        set -o bgnice      # all background jobs run at lower priority
+    *ksh)
+        set -o vi-tabcomplete  # vim emulation mode
+        set -o csh-history     # allow '!bang' style commands
+        set -o pipefail        # exit codes are of right-most command in pipelines
+        set -o ignoreeof       # do not exit on EOF or ^D, require 'exit'
+        set -o trackall        # all commands become tracked aliases
+        set -o bgnice          # all background jobs run at lower priority
+        set -o braceexpand     # allow for 'echo {foo,bar}' bash-style expansions
 esac
 
-set -o vi         # vim emulation mode
-set -o ignoreeof  # do not exit on EOF or ^D, require 'exit'

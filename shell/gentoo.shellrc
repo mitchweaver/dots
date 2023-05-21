@@ -11,22 +11,17 @@ pkg() {
             ############################## emerge --search "$@"
             # wayyyyyyyyyyyyy faster search for packages
             # use this if you're tired of emerge taking 5 seconds
-            find /var/db/repos -mindepth 3 -maxdepth 3 -type d -iname "$*" | \
+            find /var/db/repos -mindepth 3 -maxdepth 3 -type d -iname "*$**" | \
                 sed -e 's/\/var\/db\/repos\///g' -e 's/\//: /' | \
                 sort
             ;;
         a)
-            sudo emerge -av --noreplace --update --verbose-conflicts "$@"
+            sudo emerge -nU "$@"
             ;;
         # actually update everything
         u)
             [ "$1" ] || set -- '@world'
-            sudo emerge -av --update --newuse --deep --with-bdeps=y --verbose-conflicts "$@"
-            ;;
-        # if gets stuck, add backtracking
-        uu)
-            [ "$1" ] || set -- '@world'
-            sudo emerge -av --update --newuse --deep --with-bdeps=y --backtrack=100 --verbose-conflicts "$@"
+            sudo emerge -UND --with-bdeps=y --backtrack=200 "$@"
             ;;
         l)
             cat /var/lib/portage/world
@@ -40,9 +35,9 @@ pkg() {
             fi
             printf '\n%s ' 'Would you also like to depclean? (y/n):'
             read -r ans
-            [ "$ans" == y ] && sudo emerge -av --with-bdeps y --depclean
+            [ "$ans" == y ] && sudo emerge --with-bdeps y --depclean
             ;;
-        -sync)
+        -sync|sync)
             sudo emerge --sync --ask n "$@"
     esac
 }
@@ -59,4 +54,3 @@ fix-pipewire() {
     pkill -f pulseaudio
     nohup gentoo-pipewire-launcher >/dev/null 2>&1 &
 }
-

@@ -37,6 +37,7 @@ alias gV='_g /var'
 
 alias gss='_g ${HOME}/src/suckless'
 alias gsd='_g ${HOME}/src/dots'
+alias gsg='_g ${HOME}/src/gentoo'
 
 alias gcf='_g ${XDG_CONFIG_HOME}'
 alias gch='_g ${XDG_CACHE_HOME}'

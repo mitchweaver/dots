@@ -40,7 +40,9 @@ for folder in \
 	.config/waybar \
 	.config/joplin \
 	.config/mmbar \
-	.config/zathura ; do
+	.config/zathura \
+	.config/foot \
+	.config/mako ; do
 
 	rm -rfv "${HOME:?}/$folder"
 	ln -sv "$DOTS_DIR/$folder" "${HOME}/$folder"
@@ -60,5 +62,7 @@ done
 if [ -d scripts ] ; then
 	sh ./scripts/install-vim-plug.sh
 fi
+
+ln -sf ~/.Xresources ~/.Xdefaults
 
 echo "All done!"

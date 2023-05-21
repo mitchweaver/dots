@@ -15,6 +15,10 @@ nohup /bin/rmdir Desktop Downloads Pictures Public \
 
 # search for a font name
 fcg() { fc-list | grep -i "$*" ; }
+alias fontfamilys="fc-list : family | sort | uniq"
+kittyfonts() { kitty +list-fonts --psnames | g "$*" ; }
+
+alias wasteland='v ~/src/dots/shell/wasteland.shellrc'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 ranger() {
@@ -110,20 +114,11 @@ mkgif() {
 
 alias img2pdf='img2pdf *jpg --output combined.pdf'
 
-alias autoclick='while sleep 1 ; do xdotool click 1; done'
-
-btcprice() {
-    p=$(curl -Ls https://api.binance.com/api/v1/ticker/24hr | \
-    jq -cr '.[] | select(.symbol == "'"BTCUSDT"'") | .lastPrice')
-    printf '$%s\n' "${p%%000000}"
-}
-
 alias detox='detox -v'
 
 docx2pdf() {
     libreoffice --convert-to pdf "$1" 2>/dev/null
 }
-
 
 ##### fix this later
 # pinebook pro brightness, max=4096
@@ -235,26 +230,24 @@ alias governor='cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor'
 
 alias restart-sxhkd='pkill sxhkd ; cd ~ ; nohup sxhkd >/dev/null 2>&1 &'
 
-restart-polybar() {
-    polybar-msg cmd quit >~/.cache/polybar.log 2>&1
-    pkill polybar
-    nohup polybar >/dev/null 2>&1 &
-}
-
+# ================== configs =============================
 alias stcfg='v ~/src/suckless/st/cfg/config.h'
 alias dwmcfg='v ~/src/suckless/dwm/cfg/config.h'
 alias kittycfg='v ~/.config/kitty/kitty.conf'
+alias swaycfg='v ~/.config/sway/config'
+alias hyprcfg='v ~/.config/hypr/hyprland.conf'
+# ========================================================
 
-if command -v spotifyd >/dev/null ; then
-    spt() {
-        if ! pgrep -f spotifyd >/dev/null ; then
-            printf '%s' "Unlock your pash: "
-            pash s spotifyd >/dev/null
-            spotifyd
-        fi
-        command spt
-    }
-fi
+# if command -v spotifyd >/dev/null ; then
+#     spt() {
+#         if ! pgrep -f spotifyd >/dev/null ; then
+#             printf '%s' "Unlock your pash: "
+#             pash s spotifyd >/dev/null
+#             spotifyd
+#         fi
+#         command spt
+#     }
+# fi
 
 # list openrc enabled services sorted by run level
 rcl() {
@@ -266,9 +259,6 @@ rcl() {
     rc-update -v show | grep user
     rc-update -v show | grep afternet
 }
-
-alias pbrestart='polybar-msg cmd restart'
-alias fixaudio='pkill pipewire ; pkill wireplumber ; nohup gentoo-pipewire-launcher >/dev/null 2>&1 &'
 
 startup() {
     sudo rc-service netmount restart
@@ -292,7 +282,7 @@ airpods() {
     bluetoothctl agent on
     bluetoothctl default-agent
 
-    bluetoothctl --timeout 5 scan on
+    bluetoothctl --timeout 10 scan on
 
     bluetoothctl --timeout 5 pair "$AP"
     bluetoothctl trust "$AP"
@@ -314,7 +304,19 @@ words() {
 }
 # =========================================================
 
-days-since() { datediff "$1" today ; }
-
-
 alias fixdns="sudo rc-service dnsmasq restart"
+
+alias steamapps='cd ~/.steam/steam/steamapps/common'
+
+export DZR_CBC=g4el58wc0zvf9na1
+
+fix-mount() {
+    for dir in array backup iso music photos torrents videos obs ; do
+        if [ -d /mnt/$dir ] ; then
+            sudo umount /mnt/$dir 2>/dev/null
+            sudo mount /mnt/$dir
+        fi
+    done
+}
+
+alias stop_typing_it_wrong_idiot="su -c faillock --user mitch --reset"

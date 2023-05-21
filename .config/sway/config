@@ -9,6 +9,7 @@ output * adaptive_sync off
 exec dbus-update-activation-environment --all
 exec gnome-keyring-daemon --start --components=secrets
 exec dbus-launch mako
+exec waybar
 
 # =================================================
 # INPUT / OUTPUT
@@ -18,6 +19,7 @@ input type:keyboard {
     # note: default=300/30
     repeat_delay 230
     repeat_rate 33
+    xkb_options "caps:escape"
 }
 input type:touchpad {
     tap enabled
@@ -57,10 +59,12 @@ output * bg /home/mitch/.local/wallpaper fill
 gaps inner 14
 gaps outer 4
 smart_gaps on
-# smart_gaps inverse_outer
+smart_gaps inverse_outer
 hide_edge_borders smart
-smart_borders no_gaps
-default_border pixel 2
+# smart_borders no_gaps
+
+# disable borders
+default_border pixel 0
 
 include "$HOME/.cache/wal/colors-sway"
 #                                                        BORDER
@@ -88,17 +92,10 @@ client.unfocused $color0 $background $foreground $color5 $color1
 # =================================================
 # Idle Configuration
 # =================================================
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -c 000000'
 
 # =================================================
 # Key binds
@@ -109,6 +106,8 @@ bindsym $mod+e exec pcmanfm
 bindsym $mod+r exec asahi-kitty --single-instance ranger
 
 bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
+####bindsym $mod+p exec wofi -f -I -m -b -i -G --show run | xargs swaymsg exec --
+
 bindsym $mod+o exec dedit
 
 bindsym $mod+q kill

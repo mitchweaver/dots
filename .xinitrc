@@ -63,26 +63,26 @@ bright s 80 &
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # DAEMONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-pgrep -f parcellite  >/dev/null || parcellite &
-pgrep -f dunst       >/dev/null || dunst >"$XINIT_LOGS"/dunst.log 2>&1 &
-pgrep -f sxhkd       >/dev/null || sxhkd >"$XINIT_LOGS"/sxhkd.log 2>&1 &
-pgrep -f xdimmer     >/dev/null || xdimmer -p 20 -s 10 -b 1 -t 570 >"$XINIT_LOGS"/xdimmer.log 2>&1 &
-pgrep -f wireplumber >/dev/null || nohup gentoo-pipewire-launcher >"$XINIT_LOGS"/pipewire.log 2>&1 &
-pgrep -f xbanish     >/dev/null || xbanish -t 30 >"$XINIT_LOGS"/xbanish.log 2>&1 &
-pgrep -f picom       >/dev/null || picom --log-file "$XINIT_LOGS"/picom.log -b
+# pgrep -f parcellite  >/dev/null || parcellite &
+# pgrep -f dunst       >/dev/null || dunst >"$XINIT_LOGS"/dunst.log 2>&1 &
+# pgrep -f sxhkd       >/dev/null || sxhkd >"$XINIT_LOGS"/sxhkd.log 2>&1 &
+# pgrep -f xdimmer     >/dev/null || xdimmer -p 20 -s 10 -b 1 -t 570 >"$XINIT_LOGS"/xdimmer.log 2>&1 &
+# pgrep -f wireplumber >/dev/null || nohup gentoo-pipewire-launcher >"$XINIT_LOGS"/pipewire.log 2>&1 &
+# pgrep -f xbanish     >/dev/null || xbanish -t 30 >"$XINIT_LOGS"/xbanish.log 2>&1 &
+# pgrep -f picom       >/dev/null || picom --log-file "$XINIT_LOGS"/picom.log -b
 
-pgrep -f xautolock   >/dev/null || xautolock \
-    -locker 'lockscreen' \
-    -time "${LOCK_TIME:-10}" \
-    -notify 15 \
-    -notifier notify-send >"$XINIT_LOGS"/xautolock.log 2>&1 &
+# pgrep -f xautolock   >/dev/null || xautolock \
+#     -locker 'lockscreen' \
+#     -time "${LOCK_TIME:-10}" \
+#     -notify 15 \
+#     -notifier notify-send >"$XINIT_LOGS"/xautolock.log 2>&1 &
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # APPLICATIONS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # pgrep -f nextcloud >/dev/null || firejail-nextcloud.sh >"$XINIT_LOGS"/nextcloud.log 2>&1 &
-pgrep -f nextcloud >/dev/null || nextcloud >"$XINIT_LOGS"/nextcloud.log 2>&1 &
-pgrep -f redshift >/dev/null || firejail-redshift.sh >"$XINIT_LOGS"/redshift.log 2>&1 &
+#pgrep -f nextcloud >/dev/null || nextcloud >"$XINIT_LOGS"/nextcloud.log 2>&1 &
+#pgrep -f redshift >/dev/null || firejail-redshift.sh >"$XINIT_LOGS"/redshift.log 2>&1 &
 # firejail-mailspring.sh >"$XINIT_LOGS"/mailspring.log 2>&1 &
 # firejail-joplin.sh     >"$XINIT_LOGS"/joplin.log     2>&1 &
 # firejail-discord.sh    >"$XINIT_LOGS"/discord.log    2>&1 &
@@ -90,8 +90,9 @@ pgrep -f redshift >/dev/null || firejail-redshift.sh >"$XINIT_LOGS"/redshift.log
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # WINDOW MANAGER
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-pkill mmbar
-mmbar -d &
-while sleep 1 ; do
-    dwm >"$XINIT_LOGS"/dwm.log 2>&1 && break || continue
-done
+# pkill mmbar
+# mmbar -d &
+exec dwm
+# while sleep 1 ; do
+#     dwm >"$XINIT_LOGS"/dwm.log 2>&1 && break || continue
+# done
