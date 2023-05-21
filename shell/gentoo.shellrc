@@ -8,27 +8,25 @@ pkg() {
     shift
     case $flag in
         s)
-            emerge --search "$@"
+            ############################## emerge --search "$@"
+            # wayyyyyyyyyyyyy faster search for packages
+            # use this if you're tired of emerge taking 5 seconds
+            find /var/db/repos -mindepth 3 -maxdepth 3 -type d -iname "$*" | \
+                sed -e 's/\/var\/db\/repos\///g' -e 's/\//: /' | \
+                sort
             ;;
         a)
-            sudo emerge --noreplace "$@"
-            ;;
-        # update quick, without big stuff
-        u)
-            [ "$1" ] || set -- '@world'
-            sudo emerge --update --newuse --deep --with-bdeps=y --verbose-conflicts \
-            --exclude="gcc llvm clang rust librewolf libreoffice" \
-            "$@"
+            sudo emerge -av --noreplace --update --verbose-conflicts "$@"
             ;;
         # actually update everything
-        uu)
+        u)
             [ "$1" ] || set -- '@world'
-            sudo emerge --update --newuse --deep --with-bdeps=y --verbose-conflicts \
+            sudo emerge -av --update --newuse --deep --with-bdeps=y --verbose-conflicts "$@"
             ;;
         # if gets stuck, add backtracking
-        uuu)
+        uu)
             [ "$1" ] || set -- '@world'
-            sudo emerge --update --newuse --deep --with-bdeps=y --backtrack=100 --verbose-conflicts "$@"
+            sudo emerge -av --update --newuse --deep --with-bdeps=y --backtrack=100 --verbose-conflicts "$@"
             ;;
         l)
             cat /var/lib/portage/world
@@ -38,11 +36,11 @@ pkg() {
             ;;
         d)
             if [ "$1" ] ; then
-                sudo emerge --rage-clean "$@"
+                sudo emerge --rage-clean "$@" || return
             fi
             printf '\n%s ' 'Would you also like to depclean? (y/n):'
             read -r ans
-            [ "$ans" == y ] && sudo emerge --ask --with-bdeps y --depclean
+            [ "$ans" == y ] && sudo emerge -av --with-bdeps y --depclean
             ;;
         -sync)
             sudo emerge --sync --ask n "$@"
@@ -50,7 +48,7 @@ pkg() {
 }
 
 alias lessworld='less /var/lib/portage/world'
-alias editworld='sudo ${EDITOR} /var/lib/portage/world'
+alias editworld='sudo ${EDITOR:-vi} /var/lib/portage/world'
 
 alias packages='${BROWSER} https://packages.gentoo.org'
 alias overlays='${BROWSER} https://gpo.zugaina.org/'
