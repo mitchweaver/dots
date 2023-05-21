@@ -185,6 +185,8 @@ Plug 'fladson/vim-kitty' " kitty.conf syntax
 Plug 'gentoo/gentoo-syntax' " gentoo ebuild syntax
 set rtp+=/usr/share/vim/vimfiles
 Plug 'ekalinin/Dockerfile.vim'   " syntax for dockerfiles
+Plug 'terminalnode/sway-vim-syntax'   " swaywm config syntax
+Plug 'waycrate/swhkd-vim' " swhkd / sxhkd syntax
 
 " I like vim-markdown better than polyglot's markdown
 Plug 'sheerun/vim-polyglot'      " syntax highlighting
@@ -204,7 +206,6 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
 Plug 'sainnhe/everforest' " theme
 Plug 'logico/typewriter-vim' " theme
 Plug 'https://github.com/NLKNguyen/papercolor-theme' " theme
-Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'AlphaTechnolog/pywal.nvim', { 'as': 'pywal' }
 
 call plug#end()
@@ -221,7 +222,6 @@ if exists(':PlugInstall')
     " colorscheme typewriter
     " colorscheme everforest
     " colorscheme papercolor
-    " colorscheme catppuccin
     " colorscheme pywal
     " set background=light
     " set background=dark
@@ -255,7 +255,10 @@ set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
 set updatetime=500
 "
+" =============== CLIPBOARD =================================
 set clipboard=unnamedplus
+nnoremap <silent><ctrl+v>
+" ===========================================================
 "
 set lazyredraw          " whether to redraw screen after macros
 set mat=2               " how fast to blink matched brackets
@@ -328,10 +331,10 @@ map <silent><leader>nl :set relativenumber!<cr>
 
 """""""""""""""""""""""""""""""""" set number! " start with line numbering enabled
 
-" set color column width to 72 chars
+" set color column width to 80 chars
 " editor will start with it hidden, but allow it
 " it to be toggleable with leader + 'll'
-let s:color_column_old = 72
+let s:color_column_old = 80
 function! s:ToggleColorColumn()
     if s:color_column_old == 0
         let s:color_column_old = &colorcolumn
@@ -371,11 +374,11 @@ set breakindent       " set indents when wrapped
 " hi ActiveWindow ctermbg=0 | hi InactiveWindow ctermbg=234
 " set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
 
-" textwidth
-augroup textwidth
-	autocmd!
-	autocmd FileType text,mail,markdown,gmi setlocal textwidth=72
-augroup END
+" " textwidth auto-wrapping
+" augroup textwidth
+" 	autocmd!
+" 	autocmd FileType text,mail,markdown,gmi setlocal textwidth=80
+" augroup END
 
 " " spellcheck
 " augroup spelling
@@ -465,9 +468,8 @@ set wildignore+=*.so,*.o,*.a
 noremap <silent><C-o> 10zl
 noremap <silent><C-i> 10zh
 
-" print a 60-char line separator, commented
-map <C-s> 30i-*<ESC>:Commentary<CR>
-" map <C-s> 30i-/<ESC>:Commentary<CR>
+" print a 72-char line separator, commented
+map <C-s> 72i=<ESC>:Commentary<CR>
 
 augroup resCur "reopen vim at previous cursor point
   autocmd!
