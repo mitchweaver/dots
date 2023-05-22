@@ -76,6 +76,6 @@ alias pip=pip3
 # web development
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # serve site on localhost
-alias hs='hugo server -D'
+alias hs='hugo server -D --noHTTPCache'
 # serve site on local LAN
-alias hslocal='hugo server -D --bind $(getlocalip) --baseURL http://$(getlocalip)'
+alias hslocal='hugo server -D --bind $(getlocalip) --baseURL http://$(getlocalip) --noHTTPCache'

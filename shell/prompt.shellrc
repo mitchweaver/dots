@@ -16,7 +16,7 @@ _ps1_print_host() {
         read -r _hostname < /etc/hostname
         printf '%s' "\[\e[1;34m\]${_hostname%%.*}"
     else
-        printf '%s' "$(/bin/hostname -s)"
+        printf '%s' "\[\e[1;34m\]$(/bin/hostname -s)"
     fi
 }
 
