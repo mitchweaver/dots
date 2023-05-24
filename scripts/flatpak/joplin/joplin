@@ -1,0 +1,16 @@
+#!/bin/sh
+
+if uname -a | grep asahi >/dev/null ; then
+    export MESA_GL_VERSION_OVERRIDE=3.3
+    export MESA_GLSL_VERSION_OVERRIDE=330
+    export MESA_GLES_VERSION_OVERRIDE=3.1
+fi
+
+exec dbus-launch \
+    flatpak run \
+    net.cozic.joplin_desktop \
+    "$@"
+
+    # --enable-features=UseOzonePlatform \
+    # --ozone-platform=wayland \
+
