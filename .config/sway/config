@@ -6,15 +6,17 @@ output * adaptive_sync off
 # =================================================
 # STARTUP APPS
 # =================================================
+exec background
 exec dbus-update-activation-environment --all
 exec dbus-launch gnome-keyring-daemon --start --components=secrets
 exec dbus-launch mako
 exec waybar
-exec gammastep -m wayland -l '36.06083743210746:-95.79738783706367'
+exec nextcloud
+exec gammastep -m randr -l '36.06083743210746:-95.79738783706367'
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
+         timeout 300 'lock' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c 000000'
+        before-sleep 'swaylock -f -c 000000'
 
 # =================================================
 # INPUT / OUTPUT
@@ -25,14 +27,19 @@ input type:keyboard {
     repeat_delay 230
     repeat_rate 33
     xkb_options "caps:escape"
+    # xkb_options "super_r:alt"
 }
+
 input type:touchpad {
     tap enabled
     natural_scroll enabled
     accel_profile "flat"
+    click_method clickfinger
 }
+
 input type:pointer {
     accel_profile "flat"
+    click_method clickfinger
 }
 
 output * {
@@ -60,7 +67,6 @@ set $term asahi-kitty
 # =================================================
 # GAPS / THEMES / RICE
 # =================================================
-output * bg /home/mitch/.local/wallpaper fill
 gaps inner 14
 gaps outer 4
 smart_gaps on
@@ -78,7 +84,7 @@ client.unfocused $color0 $background $foreground $color5 $color1
 
 # note: this only applies to non-xwayland windows
 #       need to find way to set it in xwayland too so is consistent
-####seat seat0 xcursor_theme Windows10Light 32
+# seat seat0 xcursor_theme Windows10Light 32
 
 # =================================================
 # SWAYFX SPECIFIC
@@ -193,22 +199,21 @@ bindsym $mod+minus scratchpad show
 # =================================================
 # WORKSPACE ASSIGNMENTS
 # =================================================
-assign [class="firefox"] -> 1
-assign [class="librewolf"] -> 1
-
-assign [class="discord"] -> 10
-assign [class="Discord"] -> 10
-assign [class="armcord"] -> 10
-assign [class="Armcord"] -> 10
-assign [class="ArmCord"] -> 10
-assign [class="mailspring"] -> 9
-assign [class="Mailspring"] -> 9
-assign [class="joplin"] -> 8
-assign [class="Joplin"] -> 8
-assign [class="spotify"] -> 7
-assign [class="Spotify"] -> 7
-assign [class="deezer"] -> 7
-assign [class="Deezer"] -> 7
+assign [class="firefox"] 1
+assign [class="librewolf"] 1
+assign [class="discord"] 10
+assign [class="Discord"] 10
+assign [class="armcord"] 10
+assign [class="Armcord"] 10
+assign [class="ArmCord"] 10
+assign [class="mailspring"] 9
+assign [class="Mailspring"] 9
+assign [class="joplin"] 8
+assign [class="Joplin"] 8
+assign [class="spotify"] 7
+assign [class="Spotify"] 7
+assign [class="deezer"] 7
+assign [class="Deezer"] 7
 
 # =================================================
 # Volume / Brightness

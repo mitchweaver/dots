@@ -79,3 +79,5 @@ alias pip=pip3
 alias hs='hugo server -D --noHTTPCache'
 # serve site on local LAN
 alias hslocal='hugo server -D --bind $(getlocalip) --baseURL http://$(getlocalip) --noHTTPCache'
+# create new hugo post and immediately edit it
+hn() { hugo new content/"$*" && sleep 1 && ${EDITOR} content/"$*" ; }

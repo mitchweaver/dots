@@ -1,11 +1,12 @@
 Xft.dpi: 196
+/* Xft.dpi: 196 */
 
 Xft.antialias: 1
 Xft.hinting: 1
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
-Xcursor.theme: plan9
+/* Xcursor.theme: plan9 */
 Xcursor.size: 16
 
 /* spleen = default openbsd font */

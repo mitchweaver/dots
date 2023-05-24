@@ -2,16 +2,15 @@
     "layer": "top",
     "position": "top",
     "height": 40,
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
-    "modules-right": ["tray", "cpu", "memory", "battery", "network", "custom/clock"],
-    // "pulseaudio",
+    "modules-left": ["sway/workspaces", "sway/window"],
+    "modules-right": ["tray", "network", "battery", "pulseaudio", "custom/clock"],
     "custom/clock": {
         "format": "  {}",
-        "exec": "date +'%a %d %I:%M %p'"
+        "exec": "while date +'%a %d %I:%M %p' ; do sleep 59 ; done"
     },
-    "sway/mode": {
-        "format": " {}"
-    },
+    //"sway/mode": {
+    //    "format": " {}"
+    //},
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
@@ -43,16 +42,16 @@
         "format": "{:%a %d %b - %H:%M}",
         "tooltip": false
     },
-    "cpu": {
-        "interval": 5,
-        "format": "︁ {}%",
-        "max-length": 10
-    },
-    "memory": {
-        "interval": 15,
-        "format": "<span font='TerminessTTF Nerd Font 9'>︁</span> {used:0.1f}G/{total:0.1f}G",
-        "tooltip": false
-    },
+//    "cpu": {
+//        "interval": 5,
+//        "format": "︁ {}%",
+//        "max-length": 10
+//    },
+//    "memory": {
+//        "interval": 15,
+//        "format": "<span font='TerminessTTF Nerd Font 9'>︁</span> {used:0.1f}G/{total:0.1f}G",
+//        "tooltip": false
+//    },
     "battery": {
         "format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}%{time}",
         "format-icons": ["", "", "", "", ""],

@@ -89,6 +89,7 @@ alias cmd=command
 alias w=which
 alias {dc,ccd}=cd
 
+alias demsg=dmesg
 alias {dt,d10}='dmesg | tail -n 20'
 alias dg='dmesg | grep -i'
 

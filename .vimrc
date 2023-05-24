@@ -65,6 +65,7 @@ Plug 'tpope/vim-commentary'      " comment toggler
     autocmd BufNewFile,BufRead *.profile setlocal commentstring=#\ %s
     autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
     autocmd BufNewFile,BufRead *.h setlocal commentstring=\/\/\ %s
+    " autocmd BufNewFile,BufRead *.md setlocal commentstring=\<\!--%s--\>
 
 Plug 'godlygeek/tabular'         " tab alignment
 Plug 'svermeulen/vim-yoink'      " emacs killring for vim
@@ -116,11 +117,11 @@ Plug 'airblade/vim-gitgutter' " git diffing along the left side
     let g:gitgutter_sign_removed = '-'
     let g:gitgutter_sign_removed_first_line = '^'
     let g:gitgutter_sign_modified_removed = ':'
-    nmap <silent><leader>gg :GitGutterToggle<CR>
-    nmap <Leader>gn <Plug>(GitGutterNextHunk)
-    nmap <Leader>gp <Plug>(GitGutterPrevHunk)
-    nmap <Leader>gs <Plug>(GitGutterStageHunk)
-    nmap <Leader>gu <Plug>(GitGutterUndoHunk)
+    nmap <silent><leader>g :GitGutterToggle<CR>
+    " nmap <Leader>gn <Plug>(GitGutterNextHunk)
+    " nmap <Leader>gp <Plug>(GitGutterPrevHunk)
+    " nmap <Leader>gs <Plug>(GitGutterStageHunk)
+    " nmap <Leader>gu <Plug>(GitGutterUndoHunk)
 
 Plug 'honza/vim-snippets' " snippets repo
 Plug 'SirVer/ultisnips' " snippet driver
@@ -156,6 +157,7 @@ Plug 'Yggdroot/indentLine' " show indentation lines
 " SYNTAXES
 " -------------------------------------------------------------
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'isobit/vim-caddyfile'
 
 Plug 'gentoo/gentoo-syntax' " gentoo ebuild syntax
     set rtp+=/usr/share/vim/vimfiles
@@ -284,10 +286,10 @@ autocmd BufNewFile,BufRead *.hs      set syntax=haskell
 autocmd BufNewFile,BufRead *.py      set syntax=python
 autocmd BufNewFile,BufRead *.pl      set syntax=perl
 autocmd BufNewFile,BufRead *.txt     set syntax=off
-autocmd BufNewFile,BufRead *.md      set syntax=markdown
 autocmd BufNewFile,BufRead *.pad     set syntax=markdown
 autocmd BufNewFile,BufRead *.note     set syntax=markdown
 autocmd BufNewFile,BufRead *.asm     setlocal ft=nasm
+autocmd BufNewFile,BufRead *.md      set syntax=markdown
 
 autocmd BufNewFile,BufRead /tmp/mutt-* set tw=72
 augroup filetypedetect
