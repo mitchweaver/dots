@@ -115,3 +115,49 @@ cat >"${1:-index.html}"<<"EOF"
 
 EOF
 }
+
+# -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+helloignore() {
+if [ ! -f .gitignore ] ; then
+cat >.gitignore <<"EOF"
+*.pem
+*.key
+*.keys
+*.secret
+*.secrets
+*.priv
+*.private
+*.crt
+*.pub
+
+*.bk
+*.bkup
+*.backup
+*.back
+
+*.tmp
+*.temp
+
+*.log
+*.logs
+
+*DS_Store*
+
+*~*
+*~
+*.core
+*__pycache__*
+*.out
+*.o
+*.rej
+*.orig
+\:w
+\:q
+\:wq
+
+cache
+_cache
+.cache
+EOF
+fi
+}

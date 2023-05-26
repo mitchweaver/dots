@@ -13,6 +13,7 @@ alias p8='ping 8.8.8.8'
 alias cv='curl -v'
 
 alias ssh='TERM=xterm-256color ssh'
+alias {vssh,vissh}='${EDITOR:-vi} ~/.ssh/config'
 
 wtf() {
     w3m -dump https://wtfismyip.com/json | jq -r

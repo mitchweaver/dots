@@ -76,8 +76,14 @@ alias pip=pip3
 # web development
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # serve site on localhost
-alias hs='hugo server -D --noHTTPCache'
+hs() {
+    rm -rf public resources 2>/dev/null
+    mkdir -p public resources
+    hugo server -D --quiet --noHTTPCache --disableFastRender
+}
+
 # serve site on local LAN
-alias hslocal='hugo server -D --bind $(getlocalip) --baseURL http://$(getlocalip) --noHTTPCache'
+######## alias hslocal='hugo server -D --bind $(getlocalip) --baseURL http://$(getlocalip) --noHTTPCache --disableFastRender'
+
 # create new hugo post and immediately edit it
 hn() { hugo new content/"$*" && sleep 1 && ${EDITOR} content/"$*" ; }

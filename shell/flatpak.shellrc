@@ -1,0 +1,9 @@
+#!/bin/sh
+
+flatpak-clean() {
+    flatpak uninstall --unused
+}
+
+flatpak-update() {
+    flatpak update
+}

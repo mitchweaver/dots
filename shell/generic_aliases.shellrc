@@ -46,7 +46,8 @@ alias la='ls -a'
 alias {lla,lal}='ls -al'
 alias {l1,lv}='ls -1'
 alias lsf='ls "$PWD"/*'
-alias {lsg,lg}='ls | grep -i'
+alias ls1='ls -1'
+alias {lsg,lg}='ls -1 | grep -i'
 
 alias cp='cp -irv'
 alias mv='mv -iv'
@@ -73,6 +74,9 @@ alias df='df -h'
 alias su='sudo su -'
 
 alias rl=readlink
+
+# show tree directories only 1-sublevel deep
+alias tree1='tree -L 2'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 alias h1='head -n 1'

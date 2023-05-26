@@ -40,6 +40,8 @@ alias gM='_g /mnt'
 alias gT="_g /tmp"
 alias gV='_g /var'
 
+alias gtr="mkdir -p ~/.local/share/Trash/files ; _g ~/.local/share/Trash/files"
+
 # ========================================================================
 alias gss='_g ${HOME}/src/suckless'
 alias gsd='_g ${HOME}/src/dots'

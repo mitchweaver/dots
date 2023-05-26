@@ -8,10 +8,9 @@ output * adaptive_sync off
 # =================================================
 exec background
 exec dbus-update-activation-environment --all
-exec dbus-launch gnome-keyring-daemon --start --components=secrets
+exec gnome-keyring-daemon --start --components=secrets
 exec dbus-launch mako
 exec waybar
-exec nextcloud
 exec gammastep -m randr -l '36.06083743210746:-95.79738783706367'
 exec swayidle -w \
          timeout 300 'lock' \
@@ -70,9 +69,12 @@ set $term asahi-kitty
 gaps inner 14
 gaps outer 4
 smart_gaps on
-smart_gaps inverse_outer
 hide_edge_borders smart
-# smart_borders no_gaps
+smart_borders no_gaps
+# smart_gaps inverse_outer
+
+bindsym $mod+g gaps inner current plus 2
+bindsym $mod+shift+g gaps inner current minus 2
 
 # disable borders
 default_border pixel 0
@@ -85,6 +87,7 @@ client.unfocused $color0 $background $foreground $color5 $color1
 # note: this only applies to non-xwayland windows
 #       need to find way to set it in xwayland too so is consistent
 # seat seat0 xcursor_theme Windows10Light 32
+# seat seat0 xcursor_theme default 48
 
 # =================================================
 # SWAYFX SPECIFIC
@@ -206,14 +209,29 @@ assign [class="Discord"] 10
 assign [class="armcord"] 10
 assign [class="Armcord"] 10
 assign [class="ArmCord"] 10
+assign [app_id="armcord"] 10
+assign [app_id="Armcord"] 10
+assign [app_id="ArmCord"] 10
 assign [class="mailspring"] 9
 assign [class="Mailspring"] 9
+assign [class="Geary"] 9
+assign [class="geary"] 9
+assign [app_id="Geary"] 9
+assign [app_id="geary"] 9
 assign [class="joplin"] 8
 assign [class="Joplin"] 8
 assign [class="spotify"] 7
 assign [class="Spotify"] 7
 assign [class="deezer"] 7
 assign [class="Deezer"] 7
+
+# =================================================
+# FORCE FLOATING
+# =================================================
+for_window [class="mpv"] floating enable
+for_window [class="mpvimg"] floating enable
+for_window [app_id="mpv"] floating enable
+for_window [app_id="mpvimg"] floating enable
 
 # =================================================
 # Volume / Brightness

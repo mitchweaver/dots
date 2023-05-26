@@ -36,6 +36,7 @@ if [ -d "${SHELLRC_DIR}" ] ; then
     . "${SHELLRC_DIR}/prompt.shellrc"
     . "${SHELLRC_DIR}/templates.shellrc"
     . "${SHELLRC_DIR}/wasteland.shellrc"
+    . "${SHELLRC_DIR}/flatpak.shellrc"
 
     if command -v emerge >/dev/null ; then
             . "${SHELLRC_DIR}/gentoo.shellrc"
