@@ -10,6 +10,9 @@
 
 exec dbus-launch \
     flatpak run \
-    md.obsidian.Obsidian \
-    --enable-features=UseOzonePlatform \
+    com.valvesoftware.Steam \
     "$@"
+
+# --enable-features=UseOzonePlatform \
+# --ozone-platform=wayland \
+

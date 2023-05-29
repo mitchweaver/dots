@@ -9,8 +9,6 @@ fi
 exec dbus-launch \
     flatpak run \
     net.cozic.joplin_desktop \
+    --enable-features=UseOzonePlatform \
     "$@"
-
-    # --enable-features=UseOzonePlatform \
-    # --ozone-platform=wayland \
 
