@@ -269,6 +269,8 @@ startup() {
 alias v4l='sudo modprobe v4l2loopback'
 
 airpods() {
+    fix-pipewire
+
     if ! pgrep -x bluetoothd >/dev/null ; then
         echo "Start bluetooth:"
         set -x
@@ -320,3 +322,5 @@ fix-mount() {
 }
 
 alias stop_typing_it_wrong_idiot="su -c faillock --user mitch --reset"
+
+alias cdsteam='cd ~/.var/app/com.valvesoftware.Steam/data/Steam/steamapps/common'

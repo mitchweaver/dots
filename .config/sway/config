@@ -8,14 +8,13 @@ output * adaptive_sync off
 # =================================================
 exec background
 exec dbus-update-activation-environment --all
-exec gnome-keyring-daemon --start --components=secrets
 exec dbus-launch mako
 exec waybar
 exec gammastep -m randr -l '36.06083743210746:-95.79738783706367'
 exec swayidle -w \
-         timeout 300 'lock' \
-         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-        before-sleep 'swaylock -f -c 000000'
+         timeout 500 'lock' \
+         timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -c 000000'
 
 # =================================================
 # INPUT / OUTPUT
@@ -41,9 +40,9 @@ input type:pointer {
     click_method clickfinger
 }
 
-output * {
-    scale 2
-}
+# output * {
+#     scale 2
+# }
 
 # =================================================
 # VARS
@@ -51,8 +50,8 @@ output * {
 # note: mod1 = alt, mod4 = super
 # NOTE NOTE: M1 Mac / Asahi for some reason these are switched
 #            in however sway reads them. Only happens with sway not sure why.
-###set $mod Mod1
-set $mod Mod4
+set $mod Mod1
+###set $mod Mod4
 
 set $left h
 set $down j
@@ -100,8 +99,13 @@ client.unfocused $color0 $background $foreground $color5 $color1
 # =================================================
 # Monitor Configuration
 # =================================================
-# Example: output HDMI-A-1 resolution 1920x1080 position 1920,0
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+# swaymsg -t get_outputs
+#
+#
+#
+# THESE DONT WORK BECAUSE FUCK YOU NVIDIA
+##########output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@359Hz position 0,0
+##########output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@390.297Hz position 0,0
 
 # =================================================
 # Key binds
