@@ -220,6 +220,10 @@ handle_fallback() {
     exit 1
 }
 
+# do nothing if > 50mb
+size="$(du -k "${FILE_PATH}" | sed 's/\t.*//g')"
+[ "$size" -le 20480 ] || exit 1
+
 handle_extension
 
 MIMETYPE="$( file --dereference --brief --mime-type -- "${FILE_PATH}" )"
