@@ -323,4 +323,11 @@ fix-mount() {
 
 alias stop_typing_it_wrong_idiot="su -c faillock --user mitch --reset"
 
-alias cdsteam='cd ~/.var/app/com.valvesoftware.Steam/data/Steam/steamapps/common'
+cdsteam() {
+    if flatpak list | grep -i steam >/dev/null ; then
+        cd ~/.var/app/com.valvesoftware.Steam/data/Steam/steamapps/common
+    else
+        cd ~/.local/Steam/steamapps/common
+    fi
+}
+

@@ -94,7 +94,7 @@ alias w=which
 alias {dc,ccd}=cd
 
 alias demsg=dmesg
-alias {dt,d10}='dmesg | tail -n 20'
+alias dt='dmesg | tail -n 30'
 alias dg='dmesg | grep -i'
 
 if command -v trash >/dev/null ; then

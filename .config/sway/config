@@ -50,8 +50,8 @@ input type:pointer {
 # note: mod1 = alt, mod4 = super
 # NOTE NOTE: M1 Mac / Asahi for some reason these are switched
 #            in however sway reads them. Only happens with sway not sure why.
-set $mod Mod1
-###set $mod Mod4
+####set $mod Mod1
+set $mod Mod4
 
 set $left h
 set $down j
