@@ -237,8 +237,9 @@ set whichwrap+=<,>,h,l
 set updatetime=500
 "
 " =============== CLIPBOARD =================================
-set clipboard=unnamedplus
-nnoremap <silent><ctrl+v>
+"""""""""""""""""""""""""""""""""""""" FIX THIS LATER
+""""""""""""set clipboard=unnamedplus
+"""""""""""nnoremap <silent><ctrl+v>
 " ===========================================================
 "
 set lazyredraw          " whether to redraw screen after macros

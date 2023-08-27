@@ -59,8 +59,8 @@ set $up k
 set $right l
 
 # Your preferred terminal emulator
-# set $term stwrapper
-set $term asahi-kitty
+set $term stwrapper
+# set $term asahi-kitty
 
 # =================================================
 # GAPS / THEMES / RICE

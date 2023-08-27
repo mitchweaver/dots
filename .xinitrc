@@ -55,10 +55,10 @@ dconf write /org/gnome/desktop/sound/event-sounds "false"
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # ONE SHOT COMMANDS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-background &
-dbus-update-activation-environment --all &
-gnome-keyring-daemon --start --components=secrets &
-bright s 80 &
+# background &
+# dbus-update-activation-environment --all &
+# gnome-keyring-daemon --start --components=secrets &
+# bright s 80 &
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # DAEMONS
@@ -92,7 +92,11 @@ bright s 80 &
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # pkill mmbar
 # mmbar -d &
-exec dwm
+# exec dwm
 # while sleep 1 ; do
 #     dwm >"$XINIT_LOGS"/dwm.log 2>&1 && break || continue
 # done
+
+export "$(dbus-launch)"
+dbus-run-session startplasma-x11
+# startplasma-x11

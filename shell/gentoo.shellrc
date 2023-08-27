@@ -21,7 +21,7 @@ pkg() {
         # actually update everything
         u)
             [ "$1" ] || set -- '@world'
-            sudo emerge -UND --with-bdeps=y --backtrack=200 "$@"
+            sudo emerge -UND --with-bdeps=y --backtrack=30 "$@"
             ;;
         l)
             cat /var/lib/portage/world
