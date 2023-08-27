@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=LibreWolf
+Exec=/opt/librewolf/bin/LibreWolf.aarch64.AppImage
+Icon=Librewolf
+Type=Application
