@@ -23,10 +23,10 @@ PS1_STYLE=user-host-pwd  # [user-pwd/user/pwd/user-host-pwd]
 PS1_GIT=true             # [true/false]
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-if [ "$PWD" != "$HOME" ] ; then
-    cd ~
-    clear
-fi
+# if [ "$PWD" != "$HOME" ] ; then
+#     cd ~
+#     clear
+# fi
 
 if [ -d "${SHELLRC_DIR}" ] ; then
     . "${SHELLRC_DIR}/builtins.shellrc"

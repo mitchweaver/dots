@@ -11,14 +11,14 @@ pkg() {
                 'pkg: [-a add] [-u update] [-d delete] [-s search] [-i info] [-f file] [-l list]'
             ;;
         a)
-            sudo dnf install -y "$@"
+            sudo dnf install "$@"
             ;;
         u)
             sudo dnf upgrade --refresh
-            sudo dnf update -y "$@"
+            sudo dnf update "$@"
             ;;
         d)
-            sudo dnf remove -y "$@"
+            sudo dnf remove "$@"
             ;;
         s)
             dnf search "$@"

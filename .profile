@@ -7,7 +7,10 @@ PATH=/bin:/sbin:$PATH
 PATH=/usr/bin:/usr/sbin:$PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 PATH=${HOME}/.local/bin:$PATH
+
 PATH=$PATH:${HOME}/.local/go/bin
+PATH=$PATH:/home/mitch/.cargo/bin
+
 LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH
 export PATH
 export LD_LIBRARY_PATH
