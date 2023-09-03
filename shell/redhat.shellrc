@@ -24,7 +24,8 @@ pkg() {
             dnf search "$@"
             ;;
         i)
-            dnf info "$@"
+            # dnf info "$@"
+            dnf repoquery --userinstalled
             ;;
         f)
             dnf provides "$@"

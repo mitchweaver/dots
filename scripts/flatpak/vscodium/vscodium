@@ -8,7 +8,7 @@
 
 exec dbus-launch \
     flatpak run \
-    run com.vscodium.codium \
+    com.vscodium.codium \
     --enable-features=UseOzonePlatform \
     "$@"
 

@@ -331,3 +331,5 @@ cdsteam() {
     fi
 }
 
+
+alias flup='flatpak update'

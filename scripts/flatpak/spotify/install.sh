@@ -1,3 +1,3 @@
 #!/bin/sh
 
-flatpak install com.spotify.Client
+flatpak install flathub com.spotify.Client

@@ -186,10 +186,13 @@ Plug 'cespare/vim-toml'
 "  THEMES
 " -------------------------------------------------------------
 Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
-Plug 'sainnhe/everforest' " theme
 Plug 'logico/typewriter-vim' " theme
 Plug 'https://github.com/NLKNguyen/papercolor-theme' " theme
 Plug 'AlphaTechnolog/pywal.nvim', { 'as': 'pywal' }
+Plug 'kvrohit/mellow.nvim' " theme
+Plug 'sainnhe/everforest' " theme
+    " Available values: 'hard', 'medium'(default), 'soft'
+    let g:everforest_background = 'soft'
 
 call plug#end()
 filetype indent plugin on
@@ -205,11 +208,21 @@ endif
 " ========================================================================
 " colorscheme onehalfdark
 " colorscheme typewriter
-" colorscheme everforest
+colorscheme everforest
 " colorscheme papercolor
 " colorscheme pywal
+" colorscheme mellow
 " set background=light
-" set background=dark
+set background=dark
+
+if has('termguicolors')
+    set termguicolors
+endif
+
+" force usage of terminal scheme background instead
+" of editor scheme -- this allows to respect of terminal transparency
+hi Normal guibg=none
+
 " ========================================================================
 
 "  ██████╗ ███████╗███╗   ██╗███████╗██████╗  █████╗ ██╗
@@ -223,7 +236,7 @@ scriptencoding utf-8
 set encoding=utf-8
 
 " fix graphical bugs in kitty
-let &t_ut=''
+"let &t_ut=''
 
 "---- a = enabled
 "---- v = disabled

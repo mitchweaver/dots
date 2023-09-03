@@ -202,20 +202,20 @@ dnf install -y \
 # ===================================================================
 # i3 rice
 # ===================================================================
-dnf install -y \
-	dunst \
-	picom \
-	i3 \
-	i3lock \
-	polybar
+# dnf install -y \
+# 	dunst \
+# 	picom \
+# 	i3 \
+# 	i3lock \
+# 	polybar
 
-dnf copr enable linuxredneck/xwallpaper -y
-dnf update
-dnf install -y xwallpaper
+# dnf copr enable linuxredneck/xwallpaper -y
+# dnf update
+# dnf install -y xwallpaper
 
-dnf install -y lpf-spotify-client
-lpf update
-rpm -i /root/rpmbuild/RPMS/x86_64/spotify-client*.rpm
+# dnf install -y lpf-spotify-client
+# lpf update
+# rpm -i /root/rpmbuild/RPMS/x86_64/spotify-client*.rpm
 
 # ===================================================================
 # devices
@@ -284,11 +284,11 @@ dnf install -y \
 dnf install -y xhost xbanish xdotool xterm xbacklight xsetroot xinput arandr sxhkd xautolock
 # xdimmer
 
-cd /tmp
-git clone https://github.com/yvbbrjdr/i3lock-fancy-rapid
-cd i3lock-fancy-rapid
-make
-install -D -m 0755 i3lock-fancy-rapid /usr/local/bin/i3lock-fancy-rapid
+# cd /tmp
+# git clone https://github.com/yvbbrjdr/i3lock-fancy-rapid
+# cd i3lock-fancy-rapid
+# make
+# install -D -m 0755 i3lock-fancy-rapid /usr/local/bin/i3lock-fancy-rapid
 
 # ===================================================================
 # firefox
@@ -344,15 +344,17 @@ dnf install -y \
 # 	budgie-desktop
 
 
-dnf copr enable taw/joplin
-dnf update
-dnf install -y joplin
+# dnf copr enable taw/joplin
+# dnf update
+# dnf install -y joplin
 
 
 dnf install -y --allowerasing ffmpeg
 
 
-dnf install -y nextcloud-client kdiskmark
+dnf install -y nextcloud-client
+
+# kdiskmark
 
 # enable flathub
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
