@@ -6,9 +6,10 @@
 #     export MESA_GLES_VERSION_OVERRIDE=3.1
 # fi
 
+# --enable-features=UseOzonePlatform \
+
 exec dbus-launch \
     flatpak run \
     com.vscodium.codium \
-    --enable-features=UseOzonePlatform \
     "$@"
 

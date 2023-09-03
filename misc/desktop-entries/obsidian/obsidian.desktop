@@ -1,5 +1,5 @@
 [Desktop Entry]
 Name=Obsidian
-Exec=/opt/obsidian/bin/obsidian
+Exec=obsidian
 Icon=obsidian
 Type=Application

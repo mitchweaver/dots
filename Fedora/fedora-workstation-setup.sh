@@ -166,6 +166,13 @@ dnf group upgrade --with-optional Multimedia
 dnf config-manager --set-enabled fedora-cisco-openh264
 dnf install -y gstreamer1-plugin-openh264 mozilla-openh264
 
+sudo dnf swap ffmpeg-free ffmpeg --allowerasing -y
+sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
+sudo dnf groupupdate sound-and-video -y
+
+# for platform specific see:
+# https://rpmfusion.org/Howto/Multimedia
+
 # printing
 dnf install -y cups cups-client cups-lpd cups-pdf
 systemctl enable cups
@@ -349,9 +356,6 @@ dnf install -y \
 # dnf install -y joplin
 
 
-dnf install -y --allowerasing ffmpeg
-
-
 dnf install -y nextcloud-client
 
 # kdiskmark
@@ -371,3 +375,19 @@ dnf install -y \
 # wayland import alternative
 dnf install -y \
 	grim
+
+# vscodium
+sudo tee -a /etc/yum.repos.d/vscodium.repo << 'EOF'
+[gitlab.com_paulcarroty_vscodium_repo]
+name=gitlab.com_paulcarroty_vscodium_repo
+baseurl=https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+metadata_expire=1h
+EOF
+
+dnf upgrade --refresh
+dnf install -y codium
+
