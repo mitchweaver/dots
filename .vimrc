@@ -123,11 +123,11 @@ Plug 'airblade/vim-gitgutter' " git diffing along the left side
     " nmap <Leader>gs <Plug>(GitGutterStageHunk)
     " nmap <Leader>gu <Plug>(GitGutterUndoHunk)
 
-Plug 'honza/vim-snippets' " snippets repo
-Plug 'SirVer/ultisnips' " snippet driver
-    let g:UltiSnipsExpandTrigger="<c-l>"
-    let g:UltiSnipsListSnippets = '<c-cr>'
-    let g:UltiSnipsEditSplit="vertical"
+" Plug 'honza/vim-snippets' " snippets repo
+" Plug 'SirVer/ultisnips' " snippet driver
+"     let g:UltiSnipsExpandTrigger="<c-l>"
+"     let g:UltiSnipsListSnippets = '<c-cr>'
+"     let g:UltiSnipsEditSplit="vertical"
 
 Plug 'ervandew/supertab' " tab completion rather than <c-n>
     let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -251,7 +251,8 @@ set updatetime=500
 "
 " =============== CLIPBOARD =================================
 """""""""""""""""""""""""""""""""""""" FIX THIS LATER
-""""""""""""set clipboard=unnamedplus
+" set clipboard=unnamedplus
+set clipboard=unnamed
 """""""""""nnoremap <silent><ctrl+v>
 " ===========================================================
 "

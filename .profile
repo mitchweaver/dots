@@ -11,7 +11,12 @@ PATH=${HOME}/.local/bin:$PATH
 PATH=$PATH:${HOME}/.local/go/bin
 PATH=$PATH:/home/mitch/.cargo/bin
 
+if [ -d /opt/homebrew/bin ] ; then
+    PATH="/opt/homebrew/bin:$PATH"
+fi
+
 LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH
+
 export PATH
 export LD_LIBRARY_PATH
 
@@ -49,10 +54,16 @@ export LC_CTYPE="$LC_ALL" \
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 export XDG_OPEN=opn PLUMBER=opn
 
+# export XDG_CONFIG_HOME="${HOME}/.config" \
+#        XDG_DOWNLOAD_DIR="${HOME}/downloads" \
+#        XDG_DOCUMENTS_DIR="${HOME}/files" \
+#        XDG_PICTURES_DIR="${HOME}/images"
+
 export XDG_CONFIG_HOME="${HOME}/.config" \
-       XDG_DOWNLOAD_DIR="${HOME}/downloads" \
-       XDG_DOCUMENTS_DIR="${HOME}/files" \
-       XDG_PICTURES_DIR="${HOME}/images"
+       XDG_DOWNLOAD_DIR="${HOME}/Downloads" \
+       XDG_DOCUMENTS_DIR="${HOME}/Documents" \
+       XDG_PICTURES_DIR="${HOME}/Pictures"
+
 
 export DOWNLOADS="${XDG_DOWNLOAD_DIR}"
 
@@ -123,7 +134,9 @@ if [ -d ~/.ssh ] ; then
 fi
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-/bin/rm -f ~/tmp ||: 2>/dev/null
-mkdir -p "/tmp/tmp-$USER"
-chmod -R 777 "/tmp/tmp-$USER"
-ln -s "/tmp/tmp-$USER" ~/tmp
+if [ ! -L ~/tmp ] ; then
+    /bin/rm -f ~/tmp ||: 2>/dev/null
+    mkdir -p "/tmp/tmp-$USER"
+    chmod -R 777 "/tmp/tmp-$USER"
+    ln -s "/tmp/tmp-$USER" ~/tmp
+fi

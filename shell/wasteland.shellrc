@@ -25,7 +25,7 @@ ranger() {
     if [ "$RANGER_LEVEL" ]; then
         exit
     else
-        /usr/bin/ranger "$@"
+        $(which ranger) "$@"
         clear
     fi
 }

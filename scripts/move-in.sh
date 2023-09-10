@@ -25,24 +25,14 @@ read -r ans
 
 for folder in \
 	.firejail \
-	.config/i3 \
-	.config/polybar \
-	.config/hypr \
 	.config/kitty \
 	.config/mpv \
 	.config/nvim \
-	.config/parcellite \
 	.config/picom \
 	.config/ranger \
 	.config/redshift \
 	.config/sway \
-	.config/sxhkd \
-	.config/waybar \
-	.config/joplin \
-	.config/mmbar \
-	.config/zathura \
-	.config/foot \
-	.config/mako ; do
+	.config/sxhkd ; do
 
 	rm -rfv "${HOME:?}/$folder"
 	ln -sv "$DOTS_DIR/$folder" "${HOME}/$folder"
@@ -63,6 +53,6 @@ if [ -d scripts ] ; then
 	sh ./scripts/install-vim-plug.sh
 fi
 
-ln -sf ~/.Xresources ~/.Xdefaults
+pip3 install --user --upgrade pynvim
 
 echo "All done!"
