@@ -4,7 +4,7 @@ My personal dotfiles. Buyer beware, its messy.
 
 ![fch](res/new_fetch.png)
 
-I bounce between Gentoo, Alpine, and OpenBSD.  
+I bounce between Fedora, Gentoo, and MacOS.  
 
 ## See also
 
