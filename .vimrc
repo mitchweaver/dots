@@ -190,9 +190,11 @@ Plug 'logico/typewriter-vim' " theme
 Plug 'https://github.com/NLKNguyen/papercolor-theme' " theme
 Plug 'AlphaTechnolog/pywal.nvim', { 'as': 'pywal' }
 Plug 'kvrohit/mellow.nvim' " theme
+
 Plug 'sainnhe/everforest' " theme
     " Available values: 'hard', 'medium'(default), 'soft'
     let g:everforest_background = 'soft'
+    " let g:everforest_background = 'medium'
 
 call plug#end()
 filetype indent plugin on
@@ -207,21 +209,42 @@ endif
 " THEME LOADING (must be after end of plug)
 " ========================================================================
 " colorscheme onehalfdark
-" colorscheme typewriter
-colorscheme everforest
+" colorscheme everforest
 " colorscheme papercolor
-" colorscheme pywal
+colorscheme typewriter
 " colorscheme mellow
 " set background=light
-set background=dark
+" set background=dark
 
-if has('termguicolors')
-    set termguicolors
-endif
+" if has('termguicolors')
+"     set termguicolors
+" endif
 
 " force usage of terminal scheme background instead
 " of editor scheme -- this allows to respect of terminal transparency
 hi Normal guibg=none
+
+
+" ========================================================================
+" NEOVIDE / GUI SPECIFIC
+" ========================================================================
+" set guifont=Source\ Code\ Pro:h14
+set linespace=0
+
+" g:neovide_transparency should be 0 if you want to unify
+" transparency of content and title bar
+let g:neovide_transparency = 0.0
+let g:transparency = 0.9
+let g:neovide_background_color = '#0f1117'.printf('%x', float2nr(255 * g:transparency))
+let g:neovide_floating_blur_amount_x = 2.0
+let g:neovide_floating_blur_amount_y = 2.0
+let g:neovide_scroll_animation_length = 0.3
+let g:neovide_refresh_rate = 117
+let g:neovide_remember_window_size = v:true
+" STUPID ANIMATION
+let g:neovide_cursor_animation_length = 0.0
+let g:neovide_cursor_trail_size = 0.0
+let g:neovide_cursor_antialiasing = v:true
 
 " ========================================================================
 
@@ -236,12 +259,12 @@ scriptencoding utf-8
 set encoding=utf-8
 
 " fix graphical bugs in kitty
-"let &t_ut=''
+let &t_ut=''
 
 "---- a = enabled
 "---- v = disabled
-" set mouse=a
-set mouse=v
+set mouse=a
+" set mouse=v
 
 set signcolumn=auto     " yes=always, no=never, auto=ifchanges
 set history=200
