@@ -8,8 +8,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export STEAM_RUNTIME=1
 export DIMENSIONS="$(dimensions 2>/dev/null)"
 export DIMENSIONS="${DIMENSIONS:-"1920 1080"}"
-export XINIT_LOGS="/tmp/${USER}-xinit-logs"
-mkdir -p "$XINIT_LOGS"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # SET PROPER DPI
@@ -44,13 +42,13 @@ mkdir -p "$XINIT_LOGS"
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # XORG SETTINGS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-xrdb load ~/.Xresources
-xmodmap ~/.xmodmaprc
-xset +fp ~/.fonts
+# xrdb load ~/.Xresources
+# xmodmap ~/.xmodmaprc
+# xset +fp ~/.fonts
 xset m 0 0
 xset b off
 xset b 0 0 0
-dconf write /org/gnome/desktop/sound/event-sounds "false"
+# dconf write /org/gnome/desktop/sound/event-sounds "false"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # ONE SHOT COMMANDS
@@ -97,6 +95,6 @@ dconf write /org/gnome/desktop/sound/event-sounds "false"
 #     dwm >"$XINIT_LOGS"/dwm.log 2>&1 && break || continue
 # done
 
-export "$(dbus-launch)"
-dbus-run-session startplasma-x11
+# export "$(dbus-launch)"
+# dbus-run-session startplasma-x11
 # startplasma-x11

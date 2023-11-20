@@ -7,3 +7,5 @@ flatpak-clean() {
 flatpak-update() {
     flatpak update
 }
+
+alias flup='flatpak update'

@@ -55,11 +55,11 @@ esac
 
 # using en_US.UTF-8 over C causes case-insensitive sorting
 # up to you whether the benefits outweigh the negatives
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="$LC_ALL" \
-       LANG="$LC_ALL" \
-       LANGUAGE="$LC_ALL" \
-       LOCALE="$LC_ALL"
+####export LC_ALL="en_US.UTF-8"
+# export LC_CTYPE="$LC_ALL" \
+#        LANG="$LC_ALL" \
+#        LANGUAGE="$LC_ALL" \
+#        LOCALE="$LC_ALL"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 export XDG_OPEN=opn PLUMBER=opn
@@ -144,14 +144,16 @@ if [ -d ~/.ssh ] ; then
     fi
 fi
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-if [ ! -d "/tmp/tmp-$USER" ] ; then
-    mkdir -p "/tmp/tmp-$USER"
-    chmod -R 777 "/tmp/tmp-$USER"
-    chown -R "$USER" "/tmp/tmp-$USER"
-fi
-if [ ! -L ~/tmp ] ; then
-    ln -sf "/tmp/tmp-$USER" ~/tmp
-fi
+# if [ ! -d "/tmp/tmp-$USER" ] ; then
+#     mkdir -p "/tmp/tmp-$USER"
+#     chmod -R 777 "/tmp/tmp-$USER"
+#     chown -R "$USER" "/tmp/tmp-$USER"
+# fi
+# if [ ! -L ~/tmp ] ; then
+#     ln -sf "/tmp/tmp-$USER" ~/tmp
+# fi
+#
+mkdir -p ~/tmp
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # MacOS Specific
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
