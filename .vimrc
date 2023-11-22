@@ -263,8 +263,8 @@ let &t_ut=''
 
 "---- a = enabled
 "---- v = disabled
-set mouse=a
-" set mouse=v
+" set mouse=a
+set mouse=v
 
 set signcolumn=auto     " yes=always, no=never, auto=ifchanges
 set history=200
@@ -658,3 +658,15 @@ if has('nvim')
         autocmd BufEnter term://* startinsert
     augroup end
 endif
+
+" set yank to windows clipboard, stolen from:
+" https://old.reddit.com/r/vim/comments/162uzms/how_to_copy_from_vim_to_other_programwsl2_ubuntu/jy028tl
+"
+" this is easiest solution, no confusing plugins or different keybinds needed, just works
+if system('uname -r') =~ "Microsoft"
+  augroup Yank
+    autocmd!
+    autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
+  augroup END
+endif
+
