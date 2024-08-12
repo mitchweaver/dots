@@ -1,0 +1,7 @@
+profile {
+    output 'Acer Technologies XV252Q F 11481FF254200' {
+        mode 1920x1080@390.297Hz
+        position 0,0
+        adaptive_sync off
+    }
+}

@@ -68,16 +68,10 @@ esac
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 export XDG_OPEN=opn PLUMBER=opn
 
-# export XDG_CONFIG_HOME="${HOME}/.config" \
-#        XDG_DOWNLOAD_DIR="${HOME}/downloads" \
-#        XDG_DOCUMENTS_DIR="${HOME}/files" \
-#        XDG_PICTURES_DIR="${HOME}/images"
-
 export XDG_CONFIG_HOME="${HOME}/.config" \
-       XDG_DOWNLOAD_DIR="${HOME}/Downloads" \
-       XDG_DOCUMENTS_DIR="${HOME}/Documents" \
-       XDG_PICTURES_DIR="${HOME}/Pictures"
-
+       XDG_DOWNLOAD_DIR="${HOME}/downloads" \
+       XDG_DOCUMENTS_DIR="${HOME}/files" \
+       XDG_PICTURES_DIR="${HOME}/images"
 
 export DOWNLOADS="${XDG_DOWNLOAD_DIR}"
 
@@ -170,12 +164,15 @@ mkdir -p ~/tmp
 
 : > ~/.hushlogin
 
-<<<<<<< HEAD
 if [ ! -L ~/tmp ] ; then
     /bin/rm -f ~/tmp ||: 2>/dev/null
     mkdir -p "/tmp/tmp-$USER"
     chmod -R 777 "/tmp/tmp-$USER"
     ln -s "/tmp/tmp-$USER" ~/tmp
 fi
-=======
->>>>>>> ec663536d7065660792ab5da277084b135379f8d
+
+# wayland buffoonery
+export GTK_THEME=Arc-Dark
+# allow screen tearing kde
+export KWIN_DRM_NO_AMS=1
+

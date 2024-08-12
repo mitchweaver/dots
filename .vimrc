@@ -208,7 +208,7 @@ endif
 " ========================================================================
 " THEME LOADING (must be after end of plug)
 " ========================================================================
-colorscheme onehalfdark
+" colorscheme onehalfdark
 " colorscheme everforest
 " colorscheme papercolor
 " colorscheme typewriter

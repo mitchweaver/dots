@@ -73,6 +73,9 @@ rja() { rtrans ja "$*" ; }
 
 alias sshcfg='v ~/.ssh/config'
 alias vimrc='v ~/.vimrc'
+alias swaycfg='v ~/.config/sway/config'
+alias kittycfg='v ~/.config/kitty/kitty.conf'
+alias waybarcfg='v ~/.config/waybar/config'
 
 mkgif() {
     rm -- out.gif 2>/dev/null ||:
@@ -140,3 +143,8 @@ alias stop_typing_it_wrong_idiot="su -c faillock --user mitch --reset"
 if command -v apt > /dev/null ; then
     alias  update='sudo apt update; sudo apt upgrade -y ; sudo apt dist-upgrade -y ; sudo apt clean'
 fi
+
+
+# segfaults on wayland/sway idk why but works with this
+alias lxappearance='GDK_BACKEND=x11 lxappearance'
+

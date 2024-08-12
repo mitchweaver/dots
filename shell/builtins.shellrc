@@ -4,6 +4,12 @@
 # ▀▀ ▝▀▘▀▘▘▀ ▀▘▘ ▘ ▝▀  ▘ ▝▀▘▘  ▘  ▀▘▝▀▘▝▀▘▀▀ 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
+# override builtin fg, nobody uses this anyway
+# use my fg 'find grep' script instead from environment
+fg(){
+    env fg "$@"
+}
+
 # fuzzy finding cd
 cd() { 
     case $1 in
@@ -52,3 +58,4 @@ cd() {
             esac
     esac
 }
+

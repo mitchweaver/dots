@@ -1,32 +1,34 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 40,
-    "modules-left": ["sway/workspaces", "sway/window"],
-    "modules-right": ["tray", "network", "battery", "pulseaudio", "custom/clock"],
+    "height": 31,
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
+    "modules-right": ["tray", "idle_inhibitor", "memory", "cpu", "temperature", "battery", "pulseaudio", "custom/clock"],
+    // dont show network if on desktop
+    // modules-right": ["tray", "network", "battery", "pulseaudio", "custom/clock"],
     "custom/clock": {
         "format": "  {}",
         "exec": "while date +'%a %d %I:%M %p' ; do sleep 59 ; done"
     },
-    //"sway/mode": {
-    //    "format": " {}"
-    //},
+    "sway/mode": {
+        "format": " {}"
+    },
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "disable-markup": false,
         "format": "{icon}",
         "format-icons": {
-            "1": "<span font='Terminess Nerd Font 14'>1</span>",
-            "2": "<span font='Terminess Nerd Font 14'>2</span>",
-            "3": "<span font='Terminess Nerd Font 14'>3</span>",
-            "4": "<span font='Terminess Nerd Font 14'>4</span>",
-            "5": "<span font='Terminess Nerd Font 14'>5</span>",
-            "6": "<span font='Terminess Nerd Font 14'>6</span>",
-            "7": "<span font='Terminess Nerd Font 14'>7</span>",
-            "8": "<span font='Terminess Nerd Font 14'>8</span>",
-            "9": "<span font='Terminess Nerd Font 14'>9</span>",
-            "10": "<span font='Terminess Nerd Font 14'>10</span>"
+            "1":  "󰈹",
+            "2":  "2",
+            "3":  "3",
+            "4":  "4",
+            "5":  "5",
+            "6":  "6",
+            "7":  "7",
+            "8":  "8",
+            "9":  "󰇮",
+            "10": ""
         }
     },
     "tray": {
@@ -42,16 +44,16 @@
         "format": "{:%a %d %b - %H:%M}",
         "tooltip": false
     },
-//    "cpu": {
-//        "interval": 5,
-//        "format": "︁ {}%",
-//        "max-length": 10
-//    },
-//    "memory": {
-//        "interval": 15,
-//        "format": "<span font='Terminess Nerd Font 9'>︁</span> {used:0.1f}G/{total:0.1f}G",
-//        "tooltip": false
-//    },
+    "cpu": {
+        "interval": 5,
+        "format": "︁   {usage}%",
+        "max-length": 10
+    },
+    "memory": {
+        "interval": 15,
+        "format": "<span font='Terminess Nerd Font 9'>︁</span> {percentage}%",
+        "tooltip": false
+    },
     "battery": {
         "format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}%{time}",
         "format-icons": ["", "", "", "", ""],
@@ -87,26 +89,25 @@
         "on-click": "pavucontrol",
         "tooltip": false
     },
-    //"backlight": {
-//        "format": "{icon} {percent}%",
-//        "format-alt": "{icon}",
-//        "format-alt-click": "click-left",
-//        "format-icons": ["", ""],
-//        "on-scroll-up": "light -A 1",
-//        "on-scroll-down": "light -U 1"
-//    },
-//    "temperature": {
-//        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-//        "critical-threshold": 75,
-//        "interval": 5,
-//        "format": "{icon} {temperatureC}°",
-//        "tooltip": false,
-//        "format-icons": [
-//            "", // Icon: temperature-empty
-//            "", // Icon: temperature-quarter
-//            "", // Icon: temperature-half
-//            "", // Icon: temperature-three-quarters
-//            ""  // Icon: temperature-full
-//        ]
+    "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        "critical-threshold": 75,
+        "interval": 5,
+        "format": "{icon} {temperatureC}°",
+        "tooltip": false,
+        "format-icons": [
+            "", // Icon: temperature-empty
+            "", // Icon: temperature-quarter
+            "", // Icon: temperature-half
+            "", // Icon: temperature-three-quarters
+            ""  // Icon: temperature-full
+        ]
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": "󰾪"
+        }
     }
 }

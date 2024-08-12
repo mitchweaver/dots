@@ -1,18 +1,18 @@
 # =================================================
-# DISABLE VSYNC
-# =================================================
-output * adaptive_sync off
-
-# =================================================
 # STARTUP APPS
 # =================================================
+exec waybar
 exec background
+exec pkill -f pipewire
 exec gentoo-pipewire-launcher
 exec dbus-update-activation-environment --all
 exec dbus-launch mako
 exec nextcloud --background
-exec waybar
-###############exec gammastep -m randr -l '36.06083743210746:-95.79738783706367'
+exec mailspring --password-store="gnome-libsecret"
+exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
+exec STEAM_FORCE_DESKTOPUI_SCALING=1.0 steam
+############### exec gammastep -m randr -l '36.06083743210746:-95.79738783706367'
+
 exec swayidle -w \
          timeout 500 'lock' \
          timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
@@ -92,13 +92,15 @@ seat seat0 xcursor_theme Windows10Light 32
 shadows enable
 shadow_blur_radius 50
 shadows_on_csd enable
-corner_radius 10
+# corner_radius 10
 
 # =================================================
 # Monitor Configuration
 # =================================================
 # swaymsg -t get_outputs
-output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@390.297Hz position 0,0
+output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@390.297Hz position 0,0 adaptive_sync off
+# not merged yet:
+##########################allow_tearing yes
 
 # =================================================
 # Key binds
@@ -110,13 +112,18 @@ bindsym $mod+r exec kitty --single-instance ranger
 bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
 ####bindsym $mod+p exec wofi -f -I -m -b -i -G --show run | xargs swaymsg exec --
 bindsym $mod+o exec dedit
+
 bindsym $mod+q kill
+# toggle between alt / super to kill so i dont accidentally kill when gaming
+# bindsym Mod4+q kill
+
+# bindsym $mod+q [class="steam_app_813780"] || kill
 
 # =================================================
 # Exiting / Reloading
 # =================================================
 bindsym $mod+Shift+c reload
-bindsym $mod+Control+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Control+Shift+q exec swaynag -t warning -m 'Exit sway? ' -B 'Yes, exit sway' 'swaymsg exit'
 
 # =================================================
 # Window Focus
@@ -203,20 +210,16 @@ assign [class="firefox"] 1
 assign [class="librewolf"] 1
 assign [class="discord"] 10
 assign [class="Discord"] 10
-assign [class="armcord"] 10
-assign [class="Armcord"] 10
-assign [class="ArmCord"] 10
-assign [app_id="armcord"] 10
-assign [app_id="Armcord"] 10
-assign [app_id="ArmCord"] 10
+assign [class="Friends - Discord"] 10
 assign [class="mailspring"] 9
 assign [class="Mailspring"] 9
 assign [class="Geary"] 9
 assign [class="geary"] 9
 assign [app_id="Geary"] 9
 assign [app_id="geary"] 9
-assign [class="joplin"] 8
-assign [class="Joplin"] 8
+assign [class="chromium"] 8
+assign [class="Chromium"] 8
+assign [class="chromium-bin"] 8
 assign [class="spotify"] 7
 assign [class="Spotify"] 7
 assign [class="deezer"] 7
@@ -233,9 +236,12 @@ for_window [app_id="mpvimg"] floating enable
 # =================================================
 # Volume / Brightness
 # =================================================
-######## bindsym XF86MonBrightnessUp exec asahi-brightnessctl -i
-######## bindsym XF86MonBrightnessDown exec asahi-brightnessctl -d
+############bindsym XF86MonBrightnessUp exec asahi-brightnessctl -i
+#####################bindsym XF86MonBrightnessDown exec asahi-brightnessctl -d
 bindsym XF86AudioRaiseVolume exec vol -i
 bindsym XF86AudioLowerVolume exec vol -d
+bindsym mod1+semicolon exec vol -d
+bindsym mod1+apostrophe exec vol -i
+
 
 include @sysconfdir@/sway/config.d/*
