@@ -24,13 +24,15 @@ pkg() {
             dnf search "$@"
             ;;
         i)
-            # dnf info "$@"
-            dnf repoquery --userinstalled
+            dnf info "$@"
             ;;
         f)
             dnf provides "$@"
             ;;
         l)
-            dnf list "$@"
+            dnf list installed
+            ;;
+        lu)
+            dnf repoquery --userinstalled
     esac
 }

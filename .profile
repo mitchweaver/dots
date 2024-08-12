@@ -28,6 +28,10 @@ fi
 
 export NPROC="${NPROC:-$(nproc 2>/dev/null)}"
 export NPROC="${NPROC:-1}"
+
+# if using wayland
+export MOZ_ENABLE_WAYLAND=1
+
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 case $(uname) in
@@ -120,10 +124,12 @@ if [ -d ~/.ssh ] ; then
     if [ -f ~/.ssh/authorized_keys ] ; then
         chmod 0600 ~/.ssh/authorized_keys
     fi
-fi
+fi 2>/dev/null
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-/bin/rm -f ~/tmp ||: 2>/dev/null
-mkdir -p "/tmp/tmp-$USER"
-chmod -R 777 "/tmp/tmp-$USER"
-ln -s "/tmp/tmp-$USER" ~/tmp
+if [ ! -L ~/tmp ] ; then
+    /bin/rm -f ~/tmp ||: 2>/dev/null
+    mkdir -p "/tmp/tmp-$USER"
+    chmod -R 777 "/tmp/tmp-$USER"
+    ln -s "/tmp/tmp-$USER" ~/tmp
+fi

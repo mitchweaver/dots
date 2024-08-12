@@ -251,7 +251,8 @@ set updatetime=500
 "
 " =============== CLIPBOARD =================================
 """""""""""""""""""""""""""""""""""""" FIX THIS LATER
-""""""""""""set clipboard=unnamedplus
+" set clipboard=unnamedplus
+set clipboard=unnamed
 """""""""""nnoremap <silent><ctrl+v>
 " ===========================================================
 "

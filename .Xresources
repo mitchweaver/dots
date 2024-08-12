@@ -1,16 +1,15 @@
-Xft.dpi: 196
 /* Xft.dpi: 196 */
 
-Xft.antialias: 1
-Xft.hinting: 1
-Xft.hintstyle: hintfull
-Xft.lcdfilter: lcddefault
-Xft.rgba: rgb
-/* Xcursor.theme: plan9 */
-Xcursor.size: 16
+/* Xft.antialias: 1 */
+/* Xft.hinting: 1 */
+/* Xft.hintstyle: hintfull */
+/* Xft.lcdfilter: lcddefault */
+/* Xft.rgba: rgb */
+/* /1* Xcursor.theme: plan9 *1/ */
+/* Xcursor.size: 16 */
 
-/* spleen = default openbsd font */
-*font: Spleen
+/* /1* spleen = default openbsd font *1/ */
+/* *font: Spleen */
 
-#include "/home/mitch/.cache/wal/colors.Xresources"
-/* #include "/home/mitch/src/dots/themes/color-nostalgia.Xresources" */
+/* #include "/home/mitch/.cache/wal/colors.Xresources" */
+/* /1* #include "/home/mitch/src/dots/themes/color-nostalgia.Xresources" *1/ */

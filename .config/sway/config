@@ -7,10 +7,12 @@ output * adaptive_sync off
 # STARTUP APPS
 # =================================================
 exec background
+exec gentoo-pipewire-launcher
 exec dbus-update-activation-environment --all
 exec dbus-launch mako
+exec nextcloud --background
 exec waybar
-exec gammastep -m randr -l '36.06083743210746:-95.79738783706367'
+###############exec gammastep -m randr -l '36.06083743210746:-95.79738783706367'
 exec swayidle -w \
          timeout 500 'lock' \
          timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
@@ -40,18 +42,14 @@ input type:pointer {
     click_method clickfinger
 }
 
-# output * {
-#     scale 2
-# }
-
 # =================================================
 # VARS
 # =================================================
 # note: mod1 = alt, mod4 = super
 # NOTE NOTE: M1 Mac / Asahi for some reason these are switched
 #            in however sway reads them. Only happens with sway not sure why.
-####set $mod Mod1
-set $mod Mod4
+set $mod Mod1
+############## set $mod Mod4
 
 set $left h
 set $down j
@@ -59,8 +57,8 @@ set $up k
 set $right l
 
 # Your preferred terminal emulator
-set $term stwrapper
-# set $term asahi-kitty
+# set $term stwrapper
+set $term kitty
 
 # =================================================
 # GAPS / THEMES / RICE
@@ -85,35 +83,30 @@ client.unfocused $color0 $background $foreground $color5 $color1
 
 # note: this only applies to non-xwayland windows
 #       need to find way to set it in xwayland too so is consistent
-# seat seat0 xcursor_theme Windows10Light 32
+seat seat0 xcursor_theme Windows10Light 32
 # seat seat0 xcursor_theme default 48
 
 # =================================================
 # SWAYFX SPECIFIC
 # =================================================
-# shadows enable
-# shadow_blur_radius 50
-# shadows_on_csd enable
-# corner_radius 10
+shadows enable
+shadow_blur_radius 50
+shadows_on_csd enable
+corner_radius 10
 
 # =================================================
 # Monitor Configuration
 # =================================================
 # swaymsg -t get_outputs
-#
-#
-#
-# THESE DONT WORK BECAUSE FUCK YOU NVIDIA
-##########output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@359Hz position 0,0
-##########output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@390.297Hz position 0,0
+output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@390.297Hz position 0,0
 
 # =================================================
 # Key binds
 # =================================================
 bindsym $mod+Return exec $term
-bindsym $mod+w exec MOZ_ENABLE_WAYLAND=1 librewolf
+bindsym $mod+w exec MOZ_ENABLE_WAYLAND=1 firefox
 bindsym $mod+e exec pcmanfm
-bindsym $mod+r exec asahi-kitty --single-instance ranger
+bindsym $mod+r exec kitty --single-instance ranger
 bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
 ####bindsym $mod+p exec wofi -f -I -m -b -i -G --show run | xargs swaymsg exec --
 bindsym $mod+o exec dedit
@@ -240,8 +233,8 @@ for_window [app_id="mpvimg"] floating enable
 # =================================================
 # Volume / Brightness
 # =================================================
-bindsym XF86MonBrightnessUp exec asahi-brightnessctl -i
-bindsym XF86MonBrightnessDown exec asahi-brightnessctl -d
+######## bindsym XF86MonBrightnessUp exec asahi-brightnessctl -i
+######## bindsym XF86MonBrightnessDown exec asahi-brightnessctl -d
 bindsym XF86AudioRaiseVolume exec vol -i
 bindsym XF86AudioLowerVolume exec vol -d
 
