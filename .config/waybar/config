@@ -2,13 +2,17 @@
     "layer": "top",
     "position": "top",
     "height": 31,
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window", "wlr/taskbar"],
     "modules-right": ["tray", "idle_inhibitor", "memory", "cpu", "temperature", "battery", "pulseaudio", "custom/clock"],
     // dont show network if on desktop
     // modules-right": ["tray", "network", "battery", "pulseaudio", "custom/clock"],
     "custom/clock": {
         "format": "  {}",
         "exec": "while date +'%a %d %I:%M %p' ; do sleep 59 ; done"
+    },
+    "wlr/taskbar": {
+        "format": "{app_id}",
+        "on-click": "minimize-raise",
     },
     "sway/mode": {
         "format": " {}"
