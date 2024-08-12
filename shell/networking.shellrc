@@ -9,6 +9,8 @@ alias rsync='rsync -avhu --progress --delete --partial --links'
 # alias fatsync='rsync -rvhu --progress --delete --partial' # for fat32
 alias scp='scp -rp'
 
+alias pign=ping
+
 alias p8='ping 8.8.8.8'
 alias cv='curl -v'
 

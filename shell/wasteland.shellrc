@@ -13,11 +13,6 @@
 nohup /bin/rmdir Desktop Downloads Pictures Public \
         Templates Videos Music Nextcloud >/dev/null 2>&1 ||:
 
-# search for a font name
-fcg() { fc-list | grep -i "$*" ; }
-alias fontfamilys="fc-list : family | sort | uniq"
-kittyfonts() { kitty +list-fonts --psnames | g "$*" ; }
-
 alias wasteland='v ~/src/dots/shell/wasteland.shellrc'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -25,7 +20,7 @@ ranger() {
     if [ "$RANGER_LEVEL" ]; then
         exit
     else
-        /usr/bin/ranger "$@"
+        $(which ranger) "$@"
         clear
     fi
 }
@@ -38,33 +33,7 @@ alias {htop,htpo}='htop -d 10 -s PERCENT_CPU'
 alias hme='htop -u mitch'
 alias hroot='htop -u root'
 alias hf='htop -F'
-
 alias iotop='iotop -d 1 -o -P'
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# wttr.in
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-weather() {
-    if [ -f "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}" ] ; then
-        read -r loc < "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}"
-        if [ "$loc" ] ; then
-            curl -L https://wttr.in/"$loc"?u0TQ
-        fi
-    else
-        >&2 echo 'Need to set "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}"'
-    fi
-}
-
-forecast() {
-    if [ -f "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}" ] ; then
-        read -r loc < "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}"
-        if [ "$loc" ] ; then
-            curl -Ls https://wttr.in/"$loc"?u | tail -n 33 | head -n 31
-        fi
-    else
-        >&2 echo 'Need to set "${WEATHERD_OUTPUT_FILE:-${XDG_CONFIG_HOME:-${HOME}/.config}/weatherd/location}"'
-    fi
-}
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # youtube-dl / ffmpeg
@@ -102,8 +71,6 @@ rtrans() { c=$1 ; shift ; command trans -from en -to $c "$*" 2>/dev/null ; }
 rde() { rtrans de "$*" ; }
 rja() { rtrans ja "$*" ; }
 
-alias ytm='yt -m'
-
 alias sshcfg='v ~/.ssh/config'
 alias vimrc='v ~/.vimrc'
 
@@ -115,61 +82,6 @@ mkgif() {
 alias img2pdf='img2pdf *jpg --output combined.pdf'
 
 alias detox='detox -v'
-
-docx2pdf() {
-    libreoffice --convert-to pdf "$1" 2>/dev/null
-}
-
-##### fix this later
-# pinebook pro brightness, max=4096
-alias lowbr='echo 1150 | sudo tee /sys/class/backlight/*/brightness'
-alias medbr='echo 2100 | sudo tee /sys/class/backlight/*/brightness'
-alias highbr='echo 3600 | sudo tee /sys/class/backlight/*/brightness'
-
-
-alias subsgu='subs -g ; subs -u'
-
-alias mouse='ratbagctl cheering-viscacha dpi set 400 ; xset m 0 0'
-
-amdproporfree() {
-    case $(glxinfo | grep "OpenGL vendor string" | cut -f2 -d":" | xargs) in
-        AMD)
-            echo free
-            ;;
-        Advanced*)
-            echo nonfree
-    esac
-}
-
-fixpulseaudio() {
-    pkill -9 pulseaudio
-    systemctl enable --user pulseaudio
-    systemctl start --user pulseaudio || \
-    systemctl restart --user pulseaudio
-}
-
-mousexy() { 
-    while sleep 0.5; do clear ;xinput --query-state 9 | grep -E 'valuator(\[0\]|\[1\])'; done
-}
-
-backup-librewolf() {
-    dir="librewolf-backup-$(date +'%Y%m%d_%H%M%S')"
-    mkdir -p "$dir"
-    cp -r ~/.librewolf "$dir"/
-    tar -I lz4 -cvpf "$dir".tar.lz4 "$dir" && /bin/rm -r -- "$dir"
-}
-
-# backup-gnome () {
-#     dir="gnome-backup-$(date +'%Y%m%d_%H%M%S')"
-#     file="$dir/dconf-backup-$(date +'%Y%m%d_%H%M%S')".dconf
-#     dconf dump / > "$file"
-#     xz "$file"
-#     mkdir -p "$dir"/dot_local
-#     mkdir -p "$dir"/dot_local/share
-#     cp -r ~/.local/gnome-shell "$dir"/dot_local/gnome-shell
-#     cp -r ~/.local/share/gnome-shell "$dir"/dot_local/share/gnome-shell
-#     pack "$dir"
-# }
 
 cuesplit() {
     case $1 in
@@ -194,7 +106,6 @@ cuesplit() {
 }
 
 alias progress='progress -w -M'
-alias gputemp="nvidia-smi  -q | grep 'GPU Current Temp' | trim"
 
 pvcp() {
     if [ $# -ge 2 ] ; then
@@ -224,112 +135,8 @@ pvcp() {
 }
 pvmv() { pvcp "$1" "$2" --delete ; }
 
-alias fjl='firejail --list'
-
-alias governor='cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor'
-
-alias restart-sxhkd='pkill sxhkd ; cd ~ ; nohup sxhkd >/dev/null 2>&1 &'
-
-# ================== configs =============================
-alias stcfg='v ~/src/suckless/st/cfg/config.h'
-alias dwmcfg='v ~/src/suckless/dwm/cfg/config.h'
-alias kittycfg='v ~/.config/kitty/kitty.conf'
-alias swaycfg='v ~/.config/sway/config'
-alias hyprcfg='v ~/.config/hypr/hyprland.conf'
-# ========================================================
-
-# if command -v spotifyd >/dev/null ; then
-#     spt() {
-#         if ! pgrep -f spotifyd >/dev/null ; then
-#             printf '%s' "Unlock your pash: "
-#             pash s spotifyd >/dev/null
-#             spotifyd
-#         fi
-#         command spt
-#     }
-# fi
-
-# list openrc enabled services sorted by run level
-rcl() {
-    rc-update -v show | grep boot
-    rc-update -v show | grep default
-    rc-update -v show | grep nonetwork
-    rc-update -v show | grep shutdown
-    rc-update -v show | grep sysinit
-    rc-update -v show | grep user
-    rc-update -v show | grep afternet
-}
-
-startup() {
-    sudo rc-service netmount restart
-    fixaudio
-    pbrestart
-}
-
-alias v4l='sudo modprobe v4l2loopback'
-
-airpods() {
-    fix-pipewire
-
-    if ! pgrep -x bluetoothd >/dev/null ; then
-        echo "Start bluetooth:"
-        set -x
-        sudo rc-service bluetooth start
-        set +x
-    fi
-
-    AP="5C:52:30:DA:62:E7"
-
-    bluetoothctl power on
-    bluetoothctl agent on
-    bluetoothctl default-agent
-
-    bluetoothctl --timeout 10 scan on
-
-    bluetoothctl --timeout 5 pair "$AP"
-    bluetoothctl trust "$AP"
-    bluetoothctl connect "$AP"
-}
-apcon() {
-    AP="5C:52:30:DA:62:E7"
-    bluetoothctl connect "$AP"
-}
-alias fixbluetooth='sudo rc-service bluetooth restart'
-
-# =========================================================
-notes() {
-    ${EDITOR:-nvim} ~/nextcloud/notes/notes.md
-}
-alias {n,note}=notes
-words() {
-    ${EDITOR:-nvim} ~/nextcloud/notes/words.md
-}
-# =========================================================
-
-alias fixdns="sudo rc-service dnsmasq restart"
-
-alias steamapps='cd ~/.steam/steam/steamapps/common'
-
-export DZR_CBC=g4el58wc0zvf9na1
-
-fix-mount() {
-    for dir in array backup iso music photos torrents videos obs ; do
-        if [ -d /mnt/$dir ] ; then
-            sudo umount /mnt/$dir 2>/dev/null
-            sudo mount /mnt/$dir
-        fi
-    done
-}
-
 alias stop_typing_it_wrong_idiot="su -c faillock --user mitch --reset"
 
-cdsteam() {
-    if flatpak list | grep -i steam >/dev/null ; then
-        cd ~/.var/app/com.valvesoftware.Steam/data/Steam/steamapps/common
-    else
-        cd ~/.local/Steam/steamapps/common
-    fi
-}
-
-
-alias flup='flatpak update'
+if command -v apt > /dev/null ; then
+    alias  update='sudo apt update; sudo apt upgrade -y ; sudo apt dist-upgrade -y ; sudo apt clean'
+fi

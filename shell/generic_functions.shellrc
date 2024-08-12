@@ -72,30 +72,6 @@ mkmv() {
     esac
 }
 
-# grep for terms within tree of files
-# (I don't use the "fg"/"bg" commands)
-fg() {
-    usage() {
-        >&2 echo 'Usage: fg [dir] [search terms]'
-        return 1
-    }
-    case $# in
-        0) usage ;;
-        1) set -- . "$1"
-    esac
-    case $1 in
-        -h)
-            usage
-            ;;
-        *)
-            find "$1" -type f 2>/dev/null | \
-            while read -r f ; do
-                grep -i -- "$2" "$f" >/dev/null &&
-                printf '%s\n' "$f"
-            done
-    esac
-}
-
 # foo/bar.mp4 ---> foo/foo.mp4
 rename_as_parent_dir() {
     file=${1##*/}
@@ -103,12 +79,12 @@ rename_as_parent_dir() {
     mv -f "$1" "$dir/$dir"
 }
 
-randint() {
-    LC_ALL=C \
-    tr -dc -- 0-9 < /dev/urandom | \
-    dd ibs=1 obs=1 count=1 2>/dev/null
-    echo
-}
+#randint() {
+#    LC_ALL=C \
+#    tr -dc -- 0-9 < /dev/urandom | \
+#    dd ibs=1 obs=1 count=1 2>/dev/null
+#    echo
+#}
 
 # appends text onto a filename
 append() {
@@ -132,3 +108,4 @@ load() {
         printf '%s %s %s\n' "$1" "$2" "$3"
     fi
 }
+

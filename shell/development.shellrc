@@ -53,15 +53,21 @@ v() {
               *) return
         esac
     fi
-    case ${EDITOR:-vi} in
-        # terminal editor
-        vi|vim|nvim)
-            $EDITOR -n -- "$@" &&
-            clear
-            ;;
-        *)
-            # graphical editor
-            ($EDITOR "$@" >/dev/null 2>&1 &)
+    case $(uname) in
+        Darwin)
+            ${EDITOR:-nvim} "$@"
+        ;;
+        Linux)
+            case ${EDITOR:-vi} in
+                # terminal editor
+                vi|vim|nvim)
+                    $EDITOR -n -- "$@" &&
+                    clear
+                    ;;
+                *)
+                    # graphical editor
+                    ($EDITOR "$@" >/dev/null 2>&1 &)
+            esac
     esac
 }
 

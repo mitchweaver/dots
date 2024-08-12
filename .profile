@@ -11,7 +11,22 @@ PATH=${HOME}/.local/bin:$PATH
 PATH=$PATH:${HOME}/.local/go/bin
 PATH=$PATH:/home/mitch/.cargo/bin
 
+# GNU utils
+if [ -d /opt/homebrew/bin ] ; then
+    PATH="/opt/homebrew/bin:$PATH"
+
+    PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+    PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
+    ##### PATH="/opt/homebrew/opt/binutils/bin:$PATH"
+
+    PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+    PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
+    PATH="/opt/homebrew/opt/gnu-indent/libexec/gnubin:$PATH"
+    PATH="/opt/homebrew/opt/gpatch/bin:$PATH"
+fi
+
 LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH
+
 export PATH
 export LD_LIBRARY_PATH
 
@@ -44,19 +59,25 @@ esac
 
 # using en_US.UTF-8 over C causes case-insensitive sorting
 # up to you whether the benefits outweigh the negatives
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="$LC_ALL" \
-       LANG="$LC_ALL" \
-       LANGUAGE="$LC_ALL" \
-       LOCALE="$LC_ALL"
+####export LC_ALL="en_US.UTF-8"
+# export LC_CTYPE="$LC_ALL" \
+#        LANG="$LC_ALL" \
+#        LANGUAGE="$LC_ALL" \
+#        LOCALE="$LC_ALL"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 export XDG_OPEN=opn PLUMBER=opn
 
+# export XDG_CONFIG_HOME="${HOME}/.config" \
+#        XDG_DOWNLOAD_DIR="${HOME}/downloads" \
+#        XDG_DOCUMENTS_DIR="${HOME}/files" \
+#        XDG_PICTURES_DIR="${HOME}/images"
+
 export XDG_CONFIG_HOME="${HOME}/.config" \
-       XDG_DOWNLOAD_DIR="${HOME}/downloads" \
-       XDG_DOCUMENTS_DIR="${HOME}/files" \
-       XDG_PICTURES_DIR="${HOME}/images"
+       XDG_DOWNLOAD_DIR="${HOME}/Downloads" \
+       XDG_DOCUMENTS_DIR="${HOME}/Documents" \
+       XDG_PICTURES_DIR="${HOME}/Pictures"
+
 
 export DOWNLOADS="${XDG_DOWNLOAD_DIR}"
 
@@ -91,9 +112,10 @@ for i in 11 8 ; do
 done
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-for i in nvim vim vi nvi nano ; do
+for i in neovide nvim vim vi nvi nano ; do
     if command -v $i >/dev/null 2>&1 ; then
-        export EDITOR=nvim
+        export EDITOR=$i
+        break
     fi
 done
 
@@ -126,10 +148,34 @@ if [ -d ~/.ssh ] ; then
     fi
 fi 2>/dev/null
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# if [ ! -d "/tmp/tmp-$USER" ] ; then
+#     mkdir -p "/tmp/tmp-$USER"
+#     chmod -R 777 "/tmp/tmp-$USER"
+#     chown -R "$USER" "/tmp/tmp-$USER"
+# fi
+# if [ ! -L ~/tmp ] ; then
+#     ln -sf "/tmp/tmp-$USER" ~/tmp
+# fi
+#
+mkdir -p ~/tmp
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# MacOS Specific
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# case $(uname) in
+#     Darwin)
+#         # allow time machine to backup to samba/nfs
+#         defaults write com.apple.systempreferences TMShowUnsupportedNetworkVolumes 1
+# esac
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
+: > ~/.hushlogin
+
+<<<<<<< HEAD
 if [ ! -L ~/tmp ] ; then
     /bin/rm -f ~/tmp ||: 2>/dev/null
     mkdir -p "/tmp/tmp-$USER"
     chmod -R 777 "/tmp/tmp-$USER"
     ln -s "/tmp/tmp-$USER" ~/tmp
 fi
+=======
+>>>>>>> ec663536d7065660792ab5da277084b135379f8d

@@ -4,14 +4,22 @@
 # ▀▀ ▝▀ ▝▀ ▘ ▘▝▀▘▘  
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
+case $(uname) in
+    Darwin)
+        if command -v colima >/dev/null ; then
+            alias docker-compose="/opt/homebrew/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose"
+            alias docker-buildx="/opt/homebrew/opt/docker-buildx/bin/docker-buildx ~/.docker/cli-plugins/docker-buildx"
+            export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
+        else
+            return
+        fi
+        ;;
+    Linux)
+        alias docker='sudo env -i docker'
+        alias docker-compose='sudo env -i docker-compose'
+esac
+
 command -v docker >/dev/null || return
-
-# have all below run as root with clean environment
-alias docker='sudo env -i docker'
-alias docker-compose='sudo env -i docker-compose'
-
-# basic
-alias compose=docker-compose
 
 # list images/containers
 alias {dli,dlsi}='docker images'
