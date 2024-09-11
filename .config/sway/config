@@ -7,14 +7,14 @@ exec pkill -f pipewire
 exec gentoo-pipewire-launcher
 exec dbus-update-activation-environment --all
 exec dbus-launch mako
-exec nextcloud --background
-exec mailspring --password-store="gnome-libsecret"
-exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
-exec STEAM_FORCE_DESKTOPUI_SCALING=1.0 steam
+# exec nextcloud --background
+# exec mailspring --password-store="gnome-libsecret"
+# exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
+# exec STEAM_FORCE_DESKTOPUI_SCALING=1.0 steam
 ############### exec gammastep -m randr -l '36.06083743210746:-95.79738783706367'
 
 exec swayidle -w \
-         timeout 500 'lock' \
+         timeout 600 'lock' \
          timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 
@@ -63,18 +63,18 @@ set $term kitty
 # =================================================
 # GAPS / THEMES / RICE
 # =================================================
-gaps inner 14
-gaps outer 4
-smart_gaps on
-hide_edge_borders smart
-smart_borders no_gaps
+#gaps inner 12
+#gaps outer 7
+#smart_gaps off
+#hide_edge_borders smart
+#smart_borders no_gaps
 # smart_gaps inverse_outer
 
 bindsym $mod+g gaps inner current plus 2
 bindsym $mod+shift+g gaps inner current minus 2
 
 # disable borders
-default_border pixel 0
+default_border pixel 3
 
 include "$HOME/.cache/wal/colors-sway"
 #                                                        BORDER
@@ -89,18 +89,23 @@ seat seat0 xcursor_theme Windows10Light 32
 # =================================================
 # SWAYFX SPECIFIC
 # =================================================
-shadows enable
-shadow_blur_radius 50
-shadows_on_csd enable
+# shadows enable
+# shadow_blur_radius 50
+# shadows_on_csd enable
+###  shadow_offset <x offset> <y offset>
+# blur disable
+# blur_xray disable
 # corner_radius 10
+# layer_effects 'waybar' 'blur enable; shadows enable;'
 
 # =================================================
 # Monitor Configuration
 # =================================================
 # swaymsg -t get_outputs
+#
+# output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@60.000Hz position 0,0 adaptive_sync off
 output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@390.297Hz position 0,0 adaptive_sync off
-# not merged yet:
-##########################allow_tearing yes
+#allow_tearing yes
 
 # =================================================
 # Key binds
@@ -113,9 +118,9 @@ bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
 ####bindsym $mod+p exec wofi -f -I -m -b -i -G --show run | xargs swaymsg exec --
 bindsym $mod+o exec dedit
 
-bindsym $mod+q kill
 # toggle between alt / super to kill so i dont accidentally kill when gaming
-# bindsym Mod4+q kill
+# bindsym $mod+q kill
+bindsym Mod4+q kill
 
 # bindsym $mod+q [class="steam_app_813780"] || kill
 
@@ -211,6 +216,9 @@ assign [class="librewolf"] 1
 assign [class="discord"] 10
 assign [class="Discord"] 10
 assign [class="Friends - Discord"] 10
+assign [app_id="discord"] 10
+assign [app_id="Discord"] 10
+assign [app_id="Friends - Discord"] 10
 assign [class="mailspring"] 9
 assign [class="Mailspring"] 9
 assign [class="Geary"] 9
@@ -225,6 +233,13 @@ assign [class="Spotify"] 7
 assign [class="deezer"] 7
 assign [class="Deezer"] 7
 
+assign [class="Steam"] 4
+assign [app_id="Steam"] 4
+assign [class="steam"] 4
+assign [app_id="steam"] 4
+assign [class="steamwebhelper"] 4
+assign [app_id="steamwebhelper"] 4
+
 # =================================================
 # FORCE FLOATING
 # =================================================
@@ -236,12 +251,12 @@ for_window [app_id="mpvimg"] floating enable
 # =================================================
 # Volume / Brightness
 # =================================================
-############bindsym XF86MonBrightnessUp exec asahi-brightnessctl -i
-#####################bindsym XF86MonBrightnessDown exec asahi-brightnessctl -d
+# bindsym XF86MonBrightnessUp exec vol -i
+# bindsym XF86MonBrightnessDown vol -d
 bindsym XF86AudioRaiseVolume exec vol -i
 bindsym XF86AudioLowerVolume exec vol -d
 bindsym mod1+semicolon exec vol -d
 bindsym mod1+apostrophe exec vol -i
 
-
 include @sysconfdir@/sway/config.d/*
+

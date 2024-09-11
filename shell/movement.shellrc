@@ -26,11 +26,12 @@ _g() {
 alias gf="_g $XDG_DOCUMENTS_DIR"
 alias gi="_g $XDG_PICTURES_DIR"
 alias gm="_g $XDG_MUSIC_DIR"
+alias gn='_g ~/nextcloud'
+alias gg='_g ~/games'
 
 alias gW="_g $XDG_PICTURES_DIR/wallpapers"
 
-alias gb="_g ${HOME}/src/bin"
-alias gsb="_g ${HOME}/src/bonsai"
+alias {gb,gsb}="_g ${HOME}/src/bin"
 alias gs="_g ${HOME}/src"
 
 alias gt="_g ~/tmp"
@@ -57,6 +58,8 @@ Yvi(){ cp "$@" $XDG_VIDEOS_DIR ; }
 Ys() { cp "$@" ${HOME}/src ; }
 Yt() { cp "$@" ~/tmp ; }
 YT() { cp "$@" /tmp  ; }
+Yn() { cp "$@" ~/nextcloud ; }
+Yg() { cp "$@" ~/games ; }
 
 mf() { mv "$@" $XDG_DOCUMENTS_DIR ; }
 mi() { mv "$@" $XDG_PICTURES_DIR ; }
@@ -66,7 +69,14 @@ mW() { mv "$@" $XDG_PICTURES_DIR/wallpapers ; }
 ms() { mv "$@" ${HOME}/src ; }
 mt() { mv "$@" ~/tmp ; }
 mT() { mv "$@" /tmp  ; }
+mn() { mv "$@" ~/nextcloud ; }
+mg() { mv "$@" ~/games ; }
 
 alias gd='_g ${XDG_DOWNLOAD_DIR}'
-Yd() { cp "$@" ${XDG_DOWNLOAD_DIR} ; }
-md() { mv "$@" ${XDG_DOWNLOAD_DIR} ; }
+Yd() { cp "$@" "${XDG_DOWNLOAD_DIR}" ; }
+md() { mv "$@" "${XDG_DOWNLOAD_DIR}" ; }
+
+alias gD='_g ${XDG_DESKTOP_DIR}'
+YD() { cp "$@" "${XDG_DESKTOP_DIR}" ; }
+mD() { mv "$@" "${XDG_DESKTOP_DIR}" ; }
+

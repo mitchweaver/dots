@@ -129,3 +129,6 @@ alias resolved-statistics="systemd-resolve --statistics"
 alias resolved-write="pkill -USR1 systemd-resolve"
 alias resolved-flush="resolvectl flush-caches"
 
+
+alias nsl=nslookup
+

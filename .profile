@@ -44,9 +44,6 @@ fi
 export NPROC="${NPROC:-$(nproc 2>/dev/null)}"
 export NPROC="${NPROC:-1}"
 
-# if using wayland
-export MOZ_ENABLE_WAYLAND=1
-
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 case $(uname) in
@@ -75,7 +72,7 @@ export XDG_CONFIG_HOME="${HOME}/.config" \
 
 export DOWNLOADS="${XDG_DOWNLOAD_DIR}"
 
-export XDG_DESKTOP_DIR="${HOME}/Desktop"
+export XDG_DESKTOP_DIR="${HOME}/desktop"
 export XDG_DATA_HOME="${HOME}/.local"
 export XDG_CACHE_HOME="${HOME}/.cache"
 
@@ -164,15 +161,12 @@ mkdir -p ~/tmp
 
 : > ~/.hushlogin
 
-if [ ! -L ~/tmp ] ; then
-    /bin/rm -f ~/tmp ||: 2>/dev/null
-    mkdir -p "/tmp/tmp-$USER"
-    chmod -R 777 "/tmp/tmp-$USER"
-    ln -s "/tmp/tmp-$USER" ~/tmp
-fi
+mkdir -p ~/tmp
 
-# wayland buffoonery
+# -------------- wayland buffoonery below -------------------
+export MOZ_ENABLE_WAYLAND=1
 export GTK_THEME=Arc-Dark
 # allow screen tearing kde
-export KWIN_DRM_NO_AMS=1
+##############################export KWIN_DRM_NO_AMS=1
+##############################export XDG_SESSION_TYPE=wayland
 

@@ -213,7 +213,7 @@ endif
 " colorscheme papercolor
 " colorscheme typewriter
 " colorscheme mellow
-" set background=light
+set background=light
 " set background=dark
 
 " if has('termguicolors')
@@ -223,7 +223,6 @@ endif
 " force usage of terminal scheme background instead
 " of editor scheme -- this allows to respect of terminal transparency
 hi Normal guibg=none
-
 
 " ========================================================================
 " NEOVIDE / GUI SPECIFIC

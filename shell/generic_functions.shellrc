@@ -109,3 +109,12 @@ load() {
     fi
 }
 
+# stop typing cc idiot
+cc() {
+    if ls | grep '\.c' >/dev/null ; then
+        command cc "$@"
+    else
+        clear
+    fi
+}
+

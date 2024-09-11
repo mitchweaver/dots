@@ -8,12 +8,12 @@ pkg() {
     shift
     case $flag in
         s)
-            ############################## emerge --search "$@"
-            # wayyyyyyyyyyyyy faster search for packages
-            # use this if you're tired of emerge taking 5 seconds
-            find /var/db/repos -mindepth 3 -maxdepth 3 -type d -iname "*$**" | \
-                sed -e 's/\/var\/db\/repos\///g' -e 's/\//: /' | \
-                sort
+            emerge --search "$@"
+            # # wayyyyyyyyyyyyy faster search for packages
+            # # use this if you're tired of emerge taking 5 seconds
+            # find /var/db/repos -mindepth 3 -maxdepth 3 -type d -iname "*$**" | \
+            #     sed -e 's/\/var\/db\/repos\///g' -e 's/\//: /' | \
+            #     sort
             ;;
         a)
             sudo emerge -nU "$@"
@@ -21,7 +21,12 @@ pkg() {
         # actually update everything
         u)
             [ "$1" ] || set -- '@world'
-            sudo emerge -UND --with-bdeps=y --backtrack=30 "$@"
+            sudo emerge --update --newuse --deep --with-bdeps=y "$@"
+            ;;
+        su)
+            [ "$1" ] || set -- '@world'
+            pkg sync
+            sudo emerge --update --newuse --deep --with-bdeps=y "$@"
             ;;
         l)
             cat /var/lib/portage/world
@@ -38,12 +43,12 @@ pkg() {
             [ "$ans" == y ] && sudo emerge --with-bdeps y --depclean
             ;;
         -sync|sync)
-            sudo emerge --sync --ask n "$@"
+            sudo emerge --sync --ask n --jobs=8 "$@"
     esac
 }
 
 alias lessworld='less /var/lib/portage/world'
-alias editworld='sudo ${EDITOR:-vi} /var/lib/portage/world'
+alias {viworld,editworld}='sudo ${EDITOR:-vi} /var/lib/portage/world'
 
 alias packages='${BROWSER} https://packages.gentoo.org'
 alias overlays='${BROWSER} https://gpo.zugaina.org/'
@@ -54,3 +59,4 @@ fix-pipewire() {
     pkill -f pulseaudio
     nohup gentoo-pipewire-launcher >/dev/null 2>&1 &
 }
+

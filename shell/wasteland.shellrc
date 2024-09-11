@@ -10,7 +10,7 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # I hate these stupid dirs and every program that creates them.
-nohup /bin/rmdir Desktop Downloads Pictures Public \
+nohup /bin/rmdir Desktop Downloads Documents Pictures Public \
         Templates Videos Music Nextcloud >/dev/null 2>&1 ||:
 
 alias wasteland='v ~/src/dots/shell/wasteland.shellrc'
@@ -147,4 +147,28 @@ fi
 
 # segfaults on wayland/sway idk why but works with this
 alias lxappearance='GDK_BACKEND=x11 lxappearance'
+
+# because i cant remember this command
+alias swaytree='swaymsg -t get_tree'
+
+
+alias rdpi='razer-cli --dpi'
+alias rbat='razer-cli --battery print | grep charge | trim'
+
+###### aoe2 ###########################
+alias aoe2mods='cd "$HOME/.local/Steam/steamapps/compatdata/813780/pfx/drive_c/users/steamuser/Games/Age of Empires 2 DE/76561198090295145"'
+alias aoe2steam='cd "$HOME/.local/Steam/steamapps/common/AoE2DE"'
+#######################################
+
+empty_obs() {
+    if ! isempty /mnt/500GBx2/obs_output ; then
+        printf 'Empty OBS folder? (y/n): '
+        read -r ans
+        case $ans in
+            y)
+                command rm /mnt/500GBx2/obs_output/*mkv
+                echo Emptied.
+        esac
+    fi
+}
 

@@ -46,20 +46,27 @@ alias la='ls -a'
 alias {lla,lal}='ls -al'
 alias {l1,lv}='ls -1'
 alias lsf='ls "$PWD"/*'
-alias ls1='ls -1'
+alias {ls1,lst}='ls -1'
 alias {lsg,lg}='ls -1 | grep -i'
 
 alias cp='cp -irv'
 alias mv='mv -iv'
 alias {mkdir,mkd,mkdr,mkir}='mkdir -p'
 
+alias pk=pkill
+
 alias {x,xx,xxx,q,qq,qqq,lq,:q,:Q,:wq,:w,exi,ex}=exit
 alias {cll,clear,claer,clar,clea,clera,ear,lear,ler}=clear
 alias {cls,csl,cl,lc,clearls}='clear ; ls'
+
 alias {e,ech,eho}=echo
-alias {g,gi,gr,grp,gre,grep,Grep,gerp,grpe,match,include,i,inc}='grep -i'
+alias {g,gi,gr,grp,gre,grep,Grep,gerp,grpe,grap,greap}='grep -i'
 alias {pg,pgrpe,pgre}=pgrep
-alias pk=pkill
+
+alias {match,include,i,inc}=grep
+alias {ex,exc,except}='grep -v'
+
+alias {w,whihc,whic}=which
 
 alias ga='grep -i -A 6'
 alias ga='grep -i -B 6'
