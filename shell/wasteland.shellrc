@@ -155,20 +155,3 @@ alias swaytree='swaymsg -t get_tree'
 alias rdpi='razer-cli --dpi'
 alias rbat='razer-cli --battery print | grep charge | trim'
 
-###### aoe2 ###########################
-alias aoe2mods='cd "$HOME/.local/Steam/steamapps/compatdata/813780/pfx/drive_c/users/steamuser/Games/Age of Empires 2 DE/76561198090295145"'
-alias aoe2steam='cd "$HOME/.local/Steam/steamapps/common/AoE2DE"'
-#######################################
-
-empty_obs() {
-    if ! isempty /mnt/500GBx2/obs_output ; then
-        printf 'Empty OBS folder? (y/n): '
-        read -r ans
-        case $ans in
-            y)
-                command rm /mnt/500GBx2/obs_output/*mkv
-                echo Emptied.
-        esac
-    fi
-}
-
