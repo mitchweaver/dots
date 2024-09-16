@@ -213,7 +213,7 @@ endif
 " colorscheme papercolor
 " colorscheme typewriter
 " colorscheme mellow
-set background=light
+" set background=light
 " set background=dark
 
 " if has('termguicolors')

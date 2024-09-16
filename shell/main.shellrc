@@ -61,6 +61,7 @@ if [ -d "${SHELLRC_DIR}" ] ; then
     . "${SHELLRC_DIR}/templates.shellrc"
     . "${SHELLRC_DIR}/wasteland.shellrc"
     . "${SHELLRC_DIR}/flatpak.shellrc"
+    . "${SHELLRC_DIR}/aoe2.shellrc"
 
     unset release
     unset SHELLRC_DIR
