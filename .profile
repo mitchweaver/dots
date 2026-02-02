@@ -11,20 +11,6 @@ PATH=${HOME}/.local/bin:$PATH
 PATH=$PATH:${HOME}/.local/go/bin
 PATH=$PATH:/home/mitch/.cargo/bin
 
-# GNU utils
-if [ -d /opt/homebrew/bin ] ; then
-    PATH="/opt/homebrew/bin:$PATH"
-
-    PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-    PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
-    ##### PATH="/opt/homebrew/opt/binutils/bin:$PATH"
-
-    PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
-    PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
-    PATH="/opt/homebrew/opt/gnu-indent/libexec/gnubin:$PATH"
-    PATH="/opt/homebrew/opt/gpatch/bin:$PATH"
-fi
-
 LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH
 
 export PATH
@@ -93,17 +79,17 @@ export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s'
 # hide GOPATH to ~/.local/go instead of ~/go
 export GOPATH="${HOME}/.local/go"
 
-# try to catch either 11 or 8 openjdk version
-for i in 11 8 ; do
-    if [ -d /usr/local/jdk-$i ] ; then
-        export JAVA_HOME=/usr/local/jdk-$i
-        export PATH="$PATH:$JAVA_HOME/bin"
-        break
-    fi
-done
+# # try to catch either 11 or 8 openjdk version
+# for i in 11 8 ; do
+#     if [ -d /usr/local/jdk-$i ] ; then
+#         export JAVA_HOME=/usr/local/jdk-$i
+#         export PATH="$PATH:$JAVA_HOME/bin"
+#         break
+#     fi
+# done
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-for i in neovide nvim vim vi nvi nano ; do
+for i in nvim vim vi nvi nano ; do
     if command -v $i >/dev/null 2>&1 ; then
         export EDITOR=$i
         break
@@ -123,12 +109,11 @@ export LESS='-QRsim +Gg'
 export LESSHISTFILE=/dev/null
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# Permissions
-chmod 0755 ~
-if [ -d ~/.gnupg ] ; then
-    chmod 0700 ~/.gnupg
-    chmod 0600 ~/.gnupg/* 2>/dev/null ||:
-fi
+# if [ -d ~/.gnupg ] ; then
+#     chmod 0755 ~
+#     chmod 0700 ~/.gnupg
+#     chmod 0600 ~/.gnupg/* 2>/dev/null ||:
+# fi
 if [ -d ~/.ssh ] ; then
     chmod 0700 ~/.ssh
     chmod 0600 ~/.ssh/id_rsa
@@ -166,7 +151,4 @@ mkdir -p ~/tmp
 # -------------- wayland buffoonery below -------------------
 export MOZ_ENABLE_WAYLAND=1
 export GTK_THEME=Arc-Dark
-# allow screen tearing kde
-##############################export KWIN_DRM_NO_AMS=1
-##############################export XDG_SESSION_TYPE=wayland
 

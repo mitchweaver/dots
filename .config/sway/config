@@ -3,15 +3,16 @@
 # =================================================
 exec waybar
 exec background
-exec pkill -f pipewire
-exec gentoo-pipewire-launcher
 exec dbus-update-activation-environment --all
 exec dbus-launch mako
-# exec nextcloud --background
-# exec mailspring --password-store="gnome-libsecret"
+exec nextcloud --background
+exec mailspring --password-store="gnome-libsecret"
+exec gentoo-pipewire-launcher restart
+exec bright -s 80
+
 # exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 # exec STEAM_FORCE_DESKTOPUI_SCALING=1.0 steam
-############### exec gammastep -m randr -l '36.06083743210746:-95.79738783706367'
+# exec gammastep -m randr -l '36.06083743210746:-95.79738783706367'
 
 exec swayidle -w \
          timeout 600 'lock' \
@@ -63,18 +64,18 @@ set $term kitty
 # =================================================
 # GAPS / THEMES / RICE
 # =================================================
-#gaps inner 12
-#gaps outer 7
-#smart_gaps off
-#hide_edge_borders smart
-#smart_borders no_gaps
-# smart_gaps inverse_outer
+gaps inner 12
+gaps outer 7
+## smart_gaps off
+## hide_edge_borders smart
+# smart_borders no_gaps
+smart_gaps inverse_outer
 
-bindsym $mod+g gaps inner current plus 2
-bindsym $mod+shift+g gaps inner current minus 2
+bindsym $mod+g gaps inner current plus 4
+bindsym $mod+shift+g gaps inner current minus 4
 
-# disable borders
-default_border pixel 3
+# disable borders = pixel 0
+default_border pixel 0
 
 include "$HOME/.cache/wal/colors-sway"
 #                                                        BORDER
@@ -84,17 +85,17 @@ client.unfocused $color0 $background $foreground $color5 $color1
 # note: this only applies to non-xwayland windows
 #       need to find way to set it in xwayland too so is consistent
 seat seat0 xcursor_theme Windows10Light 32
-# seat seat0 xcursor_theme default 48
+# seat seat0 xcursor_theme default 32
 
 # =================================================
 # SWAYFX SPECIFIC
 # =================================================
-# shadows enable
-# shadow_blur_radius 50
-# shadows_on_csd enable
+shadows enable
+shadow_blur_radius 30
+shadows_on_csd enable
 ###  shadow_offset <x offset> <y offset>
-# blur disable
-# blur_xray disable
+blur disable
+blur_xray disable
 # corner_radius 10
 # layer_effects 'waybar' 'blur enable; shadows enable;'
 
@@ -102,16 +103,18 @@ seat seat0 xcursor_theme Windows10Light 32
 # Monitor Configuration
 # =================================================
 # swaymsg -t get_outputs
-#
-# output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@60.000Hz position 0,0 adaptive_sync off
+
+# 390hz 1080p acer
 output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@390.297Hz position 0,0 adaptive_sync off
-#allow_tearing yes
+
+# thinkpad x1c7
+output 'AU Optronics 0x573D Unknown' resolution 1920x1080@60.033Hz position 0,0 scale 1 adaptive_sync off allow_tearing yes
 
 # =================================================
 # Key binds
 # =================================================
 bindsym $mod+Return exec $term
-bindsym $mod+w exec MOZ_ENABLE_WAYLAND=1 firefox
+bindsym $mod+w exec MOZ_ENABLE_WAYLAND=1 firefox-bin
 bindsym $mod+e exec pcmanfm
 bindsym $mod+r exec kitty --single-instance ranger
 bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
@@ -119,8 +122,8 @@ bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
 bindsym $mod+o exec dedit
 
 # toggle between alt / super to kill so i dont accidentally kill when gaming
-# bindsym $mod+q kill
-bindsym Mod4+q kill
+bindsym $mod+q kill
+# bindsym Mod4+q kill
 
 # bindsym $mod+q [class="steam_app_813780"] || kill
 
@@ -193,7 +196,7 @@ bindsym $mod+f floating toggle
 floating_modifier $mod normal
 
 # bindsym $mod+s layout stacking
-# bindsym $mod+t layout tabbed
+# bindsym $mod+a layout tabbed
 ################### bindsym $mod+f fullscreen
 # bindsym $mod+space focus mode_toggle
 # bindsym $mod+a focus parent
@@ -202,11 +205,11 @@ floating_modifier $mod normal
 # Scratchpad
 # =================================================
 # Move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
+# bindsym $mod+Shift+minus move scratchpad
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
+# bindsym $mod+minus scratchpad show
 
 # =================================================
 # WORKSPACE ASSIGNMENTS
@@ -251,8 +254,8 @@ for_window [app_id="mpvimg"] floating enable
 # =================================================
 # Volume / Brightness
 # =================================================
-# bindsym XF86MonBrightnessUp exec vol -i
-# bindsym XF86MonBrightnessDown vol -d
+bindsym XF86MonBrightnessUp exec bright -i
+bindsym XF86MonBrightnessDown exec bright -d
 bindsym XF86AudioRaiseVolume exec vol -i
 bindsym XF86AudioLowerVolume exec vol -d
 bindsym mod1+semicolon exec vol -d

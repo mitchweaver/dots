@@ -162,7 +162,6 @@ Plug 'isobit/vim-caddyfile'
 Plug 'gentoo/gentoo-syntax' " gentoo ebuild syntax
     set rtp+=/usr/share/vim/vimfiles
 
-Plug 'terminalnode/sway-vim-syntax'
 Plug 'waycrate/swhkd-vim'
 Plug 'fladson/vim-kitty'
 

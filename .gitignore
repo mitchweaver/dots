@@ -128,3 +128,4 @@ themes/current
 *config/joplin*/resources
 *config/joplin*/cache
 *config/joplin*/log.txt
+*config/joplin

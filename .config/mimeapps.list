@@ -10,6 +10,7 @@ application/xhtml_xml=firefox.desktop
 image/webp=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 x-scheme-handler/ftp=firefox.desktop
+x-scheme-handler/discord-409416265891971072=discord-409416265891971072.desktop
 
 [Added Associations]
 text/html=firefox.desktop;

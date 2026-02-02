@@ -13,5 +13,11 @@ case ${0##*/} in
         set -o trackall        # all commands become tracked aliases
         set -o bgnice          # all background jobs run at lower priority
         set -o braceexpand     # allow for 'echo {foo,bar}' bash-style expansions
+        ;;
+    *bash)
+        set -o vi
+        set -o pipefail
+        set -o ignoreeof
+        set -o braceexpand
 esac
 
