@@ -57,7 +57,7 @@ v() {
         Darwin)
             ${EDITOR:-nvim} "$@"
         ;;
-        Linux)
+        Linux|FreeBSD|OpenBSD)
             case ${EDITOR:-vi} in
                 # terminal editor
                 vi|vim|nvim)
