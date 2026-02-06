@@ -1,0 +1,13 @@
+# Device                Mountpoint      FStype	   Options   Dump Pass
+/dev/gpt/efiboot0       /boot/efi       msdosfs	   rw	     2    2
+/dev/nda0p3             none            swap       sw	     0    0
+
+# network shares
+truenas.local.wvr.sh:/mnt/pool/array          /mnt/array      nfs  rw 0 0
+truenas.local.wvr.sh:/mnt/pool/backup         /mnt/backup     nfs  rw 0 0
+truenas.local.wvr.sh:/mnt/pool/clips          /mnt/clips      nfs  rw 0 0
+truenas.local.wvr.sh:/mnt/pool/music          /mnt/music      nfs  rw 0 0
+truenas.local.wvr.sh:/mnt/pool/iso            /mnt/iso        nfs  rw 0 0
+truenas.local.wvr.sh:/mnt/pool/torrents       /mnt/torrents   nfs  rw 0 0
+truenas.local.wvr.sh:/mnt/pool/videos         /mnt/videos     nfs  rw 0 0
+

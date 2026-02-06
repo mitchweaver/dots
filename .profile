@@ -32,13 +32,21 @@ export NPROC="${NPROC:-1}"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-case $(uname) in
-    Linux|FreeBSD)
-        export CC="${CC:-gcc}" cc="${cc:-gcc}"
-        ;;
-    OpenBSD|Darwin)
-        export CC="${CC:-clang}" cc="${cc:-clang}"
-esac
+if [ -e /etc/os-release ] ; then
+    read -r line < /etc/os-release
+    case ${line#NAME=} in
+        Linux|FreeBSD)
+            export CC="${CC:-gcc}" cc="${cc:-gcc}"
+            ;;
+        OpenBSD)
+            export CC="${CC:-clang}" cc="${cc:-clang}"
+            ;;
+        Darwin|MacOS)
+            export CC="${CC:-clang}" cc="${cc:-clang}"
+            # allow time machine to backup to samba/nfs
+            defaults write com.apple.systempreferences TMShowUnsupportedNetworkVolumes 1
+    esac
+fi
 
 # using en_US.UTF-8 over C causes case-insensitive sorting
 # up to you whether the benefits outweigh the negatives
@@ -78,15 +86,6 @@ export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s'
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # hide GOPATH to ~/.local/go instead of ~/go
 export GOPATH="${HOME}/.local/go"
-
-# # try to catch either 11 or 8 openjdk version
-# for i in 11 8 ; do
-#     if [ -d /usr/local/jdk-$i ] ; then
-#         export JAVA_HOME=/usr/local/jdk-$i
-#         export PATH="$PATH:$JAVA_HOME/bin"
-#         break
-#     fi
-# done
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 for i in nvim vim vi nvi nano ; do
@@ -134,14 +133,6 @@ fi 2>/dev/null
 # fi
 #
 mkdir -p ~/tmp
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# MacOS Specific
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# case $(uname) in
-#     Darwin)
-#         # allow time machine to backup to samba/nfs
-#         defaults write com.apple.systempreferences TMShowUnsupportedNetworkVolumes 1
-# esac
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 : > ~/.hushlogin
