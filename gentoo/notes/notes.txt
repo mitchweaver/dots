@@ -1,0 +1,4 @@
+#1. install on ZFS from zfs guild
+#2. copy all files into /etc/portage
+#3. install mold linker (will need to remove mold from LDFLAGS temporarily)
+#4. do "after install" guide

@@ -1,0 +1,14 @@
+# ******************************************************
+# 2021 Macbook Pro M1 Pro (10-core / 16gb)
+# ******************************************************
+MAKEOPTS="-j11 -l12"
+CPU_USE_FLAGS="edsp neon thumb vfp vfpv3 vfpv4 vfp-d32 aes sha1 sha2 crc32 v4 v5 v6 v7 v8 thumb2"
+VIDEO_CARDS="asahi"
+INPUT_DEVICES="asahi"
+
+GRUB_PLATFORMS="efi-64"
+CHOST="aarch64-gentoo-linux-musl"
+
+ACCEPT_KEYWORDS="~arm64 arm64 ~arm arm"
+
+# vim:ft=config

@@ -1,0 +1,13 @@
+# Check that target addresses are valid before changing flow control.
+# Helps protect against ROP attacks.
+#
+# * branch: only branching
+# * return: only returns
+# * full: both
+#
+# see: http://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html
+#
+# NOTE: not available for arm64!
+COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -fcf-protection=full"
+
+# vim:ft=config

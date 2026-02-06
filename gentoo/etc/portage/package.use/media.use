@@ -1,0 +1,19 @@
+media-video/mpv X jpeg png rubberband libcaca zimg -libcaca
+media-video/ffmpegthumbnailer png jpeg jpg gtk
+
+# note: browser plugin bugged on musl as of 05/23
+media-video/obs-studio X screencast nvenc pipewire v4l pulseaudio browser -websocket -speex
+media-video/ffmpeg X x264 pipewire
+
+# add 5.4 flag and remove global 5.1 flag
+# required either 5.3 or 5.4
+media-video/wireplumber lua_single_target_lua5-4 -lua_single_target_lua5-1
+
+media-libs/opus custom-modes
+
+# ========= SHOTCUT =============
+media-libs/mlt xml sdl frei0r opengl ffmpeg jack
+media-libs/opencv contribdnn contrib features2d
+media-sound/jack2 -tools
+media-sound/jack-example-tools -readline
+

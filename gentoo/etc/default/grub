@@ -1,0 +1,16 @@
+GRUB_DISTRIBUTOR="Gentoo"
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=3
+GRUB_TERMINAL=console
+GRUB_DISABLE_LINUX_PARTUUID=false
+GRUB_DISABLE_RECOVERY=true
+GRUB_DISABLE_SUBMENU=y
+
+#GRUB_BACKGROUND="/boot/grub/mybackground.png"
+
+# ======================= KERNEL ARGS ====================================
+GRUB_CMDLINE_LINUX="dozfs root=ZFS=rpool/gentoo/root net.ifnames=0 nowatchdog zswap.enabled=1 zswap.compressor=lz4"
+####init=/usr/lib/systemd/systemd
+####mitigations=off
+##########nvidia-drm.modeset=1
+# ======================= KERNEL ARGS ====================================

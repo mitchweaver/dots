@@ -1,0 +1,6 @@
+# note: fortran needed for scipy
+sys-devel/gcc plugins graphite fortran default-stack-clash-protection default-znow ssp
+
+# FIY: gold is required by some packages on arm64
+#      can be disabled on amd64
+sys-devel/binutils plugins -gold

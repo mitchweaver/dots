@@ -1,0 +1,3 @@
+dev-lang/rust rust-src rustfmt rust-analyzer system-llvm -miri -clippy
+dev-lang/rust-bin rust-src rustfmt rust-analyzer system-llvm -miri -clippy
+virtual/rust rust-src rustfmt

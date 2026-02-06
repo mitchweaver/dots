@@ -1,0 +1,49 @@
+COMMON_FLAGS_PERFORMANCE=""
+
+# Optimization level - Options: -O2, -O3, -Ofast
+#
+# Personally never had a problem with -O3 even with hardened or LTO
+#
+# note: -Ofast often creates larger code which ends up creating more
+#       cache misses which results in a overall slow down compared to -O3
+#       (this is also why you won't find any loop unrolling in this file)
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -O3"
+
+# Use pipes instead of temp files, faster compile times
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -pipe"
+
+# Omit the frame pointer, allows for an extra register to be used for processing.
+#
+# "When the frame pointer is eliminated, register fp is available as a temporary register."
+# see: https://www.intel.com/content/www/us/en/docs/programmable/683836/current/frame-pointer-elimination.html
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fomit-frame-pointer"
+
+# take bodies of externally called functions into account to potentially hard code
+# variables if compiler is able to determine they won't change
+#
+# see: https://stackoverflow.com/questions/13066663/what-in-short-words-does-the-gcc-option-fipa-pta-do
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fipa-pta"
+
+# "Semantic interposition is implemented using a procedure linkage table (PLT).
+#  Any function that can be overridden with LD_PRELOAD is looked up in a table before it is called."
+#
+# see: https://developers.redhat.com/blog/2020/06/25/red-hat-enterprise-linux-8-2-brings-faster-python-3-8-run-speeds
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fno-semantic-interposition"
+
+# assumes that floating-point operations cannot generate user-visible traps
+#
+# see: https://www.intel.com/content/www/us/en/docs/programmable/683242/current/fno-trapping-math.html
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fno-trapping-math"
+
+# Faster math by using fast square roots.
+# Maybe this is bad for scientific applications but haven't seen any bugs yet for desktop use.
+#
+# "compiler maps calls to sqrtf() directly to the fsqrts custom instruction"
+#
+# see: https://www.intel.com/content/www/us/en/docs/programmable/683242/current/fno-math-errno.html
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fno-math-errno"
+
+# Supposedly smaller binaries, no performance impact
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -fasynchronous-unwind-tables"
+
+# vim:ft=config

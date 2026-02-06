@@ -1,0 +1,2 @@
+app-admin/sysklogd logrotate
+sys-auth/pambase elogind

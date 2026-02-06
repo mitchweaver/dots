@@ -1,0 +1,54 @@
+# ========== Proprietary =========================
+net-im/discord-bin
+x11-drivers/nvidia-drivers
+
+# ========= Bin Packages =========================
+######### www-client/librewolf-bin::librewolf
+www-client/firefox-bin::gentoo
+
+# ================================================
+# OVERLAY UNMASKS (see package.mask)
+# ================================================
+dev-python/pywal::mitchw
+#############x11-themes/*
+app-portage/portage-bashrc-mv::mv
+mail-client/mailspring::edgets
+gui-wm/swayfx::guru
+gui-libs/scenefx::guru
+media-fonts/nerdfonts::guru
+app-misc/pfetch::guru
+
+####### FRESH START 2026 #################
+# recommenting all below
+#########################################
+
+# app-shells/runtitle::mv
+
+# games-util/steam-launcher::steam-overlay
+# games-server/steamcmd::steam-overlay
+# games-util/xpadneo::steam-overlay
+# gnome-extra/gnome-shell-extension-openweather::4nykey
+# x11-themes/papirus-icon-theme::4nykey
+# net-libs/nodejs-bin::broverlay
+# app-misc/anki-bin::guru
+# x11-misc/i3lock-fancy-rapid::guru
+# app-office/joplin-bin::guru
+# sys-process/gotop::guru
+# dev-python/markdownify::guru
+# mail-client/geary::guru
+# x11-misc/ksnip::guru
+# gui-apps/labwc-tweaks::wayland-desktop
+# gui-wm/labwc::wayland-desktop
+# www-client/ungoogled-chromium-bin::pf4public
+# sys-apps/coolercontrol::parona-overlay
+# sys-apps/coolercontrold::parona-overlay
+
+# ===========================================================
+# FONTS
+# ===========================================================
+media-fonts/robotomono-nerdfont::guru
+media-fonts/gohufont::guru
+media-fonts/iosevka-nerdfont::guru
+media-fonts/spleen::src_prepare-overlay
+
+# vim:ft=config

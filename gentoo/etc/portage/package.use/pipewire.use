@@ -1,0 +1,22 @@
+# to get battery levels via bluetooth
+net-wireless/bluez experimental
+
+# pulls in pandoc/ghc/haskell stuff if man left in
+media-sound/bluez-alsa -man
+
+# to let pipewire work w/o pulseaudio
+#
+# NOTE: need "extra" and "gstreamer" if using on Asahi Linux (M1 Macs)
+# see: https://github.com/AsahiLinux/docs/wiki/Installing-Gentoo-with-LiveCD
+media-video/pipewire acl X bluetooth elogind dbus pipewire-alsa sound-server extra gstreamer flatpak -jack-sdk -jack-client -pulseaudio
+
+# pulseaudio for APIs, but the server will be pipewire
+media-sound/pulseaudio glib -daemon
+media-libs/libpulse glib
+
+media-video/wireplumber elogind -pulseaudio
+
+# needed for pavucontrol
+x11-libs/cairo glib
+dev-cpp/cairo glib
+dev-libs/libical intropection glib

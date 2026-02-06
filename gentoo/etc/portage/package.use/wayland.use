@@ -1,0 +1,15 @@
+# ========= WAYLAND LIBS ==============
+x11-base/xwayland libei
+
+gui-apps/swaybg gdk-pixbuf
+
+# needs policykit for seatd
+sys-auth/elogind policykit
+sys-auth/seatd server elogind
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# SWAY
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+gui-wm/sway tray swaybar swaynag -grimshot -wallpapers
+gui-wm/swayfx tray swaybar swaynag -grimshot -wallpapers
+gui-libs/wlroots tinywl x11 x11-backend

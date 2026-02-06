@@ -1,0 +1,10 @@
+net-im/discord-bin all-rights-reserved
+net-im/discord all-rights-reserved
+media-fonts/nerd-fonts Vic-Fieger-License
+x11-themes/paper-icon-theme CC-BY-SA-4.0
+x11-themes/paper-gtk-theme CC-BY-SA-4.0
+games-util/steam-launcher ValveSteamLicense
+games-server/steamcmd Steam
+net-print/hplip-plugin hplip-plugin
+
+# vim:ft=config

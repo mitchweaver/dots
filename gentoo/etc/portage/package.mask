@@ -1,0 +1,79 @@
+# =========================================================
+# KERNEL / ZFS
+# =========================================================
+# as of Jan 2026, latest allowed is 6.17.13 and 2.3.5
+# check latest at: https://github.com/openzfs/zfs/releases
+>sys-fs/zfs-2.3.5
+>sys-fs/zfs-kmod-2.3.5
+>sys-kernel/gentoo-sources-6.17.13
+
+# =========================================================
+# TOOLCHAIN
+# =========================================================
+# latest stable Feb 2026
+>sys-devel/gcc-15.2.1_p20251122
+
+# =========================================================
+# LIBS
+# =========================================================
+# latest stable
+# unstable are failing compile with my flags as of Feb 2026
+>sys-libs/glibc-2.41-r6
+
+# =========================================================
+# MUSL LIBC WORKAROUNDS
+# =========================================================
+######force usage of older elogind that is patched from the musl overlay
+######sys-auth/elogind::gentoo
+######dev-util/bindgen-0.56.0
+
+# =========================================================
+# DEBLOAT
+# =========================================================
+# use pandoc-bin else pulls in ghc and a bunch of haskell crap
+app-text/pandoc
+
+# =========================================================
+# BUGS
+# =========================================================
+########## broken complaining about symbol stripping
+# ---- may not be broken anymore, testing ----
+##########>app-misc/dateutils-0.4.9
+
+# ============ OVERLAY MASKS ==============================
+# Note: for reason why I do this,
+#
+# When you add an overlay, that gets added to emerge's search
+# for new packages -- globally. That means if a "new" version
+# of a package gets added to an overlay, it will prefer that
+# over gentoo's default. This could be a security concern
+# for example someone could push malware to their overlay
+# with a version of "gzip-v5000" and it would get grabbed
+# by portage as being an "update"
+#
+# Better solution is have a default blacklist all and only
+# whitelist specific packages you want to install from the
+# overlay. This in MY OPINION should be the DEFAULT...
+
+*/*::mv
+*/*::4nykey
+*/*::tastytea
+*/*::edgets
+*/*::kzd
+*/*::broverlay
+*/*::guru
+*/*::robertgzr
+*/*::steam-overlay
+*/*::src_prepare-overlay
+*/*::fyn_overlay
+*/*::wayland-desktop
+*/*::pf4public
+*/*::parona-overlay
+# ==========================================================
+
+########### BROKEN PACKAGES ##################
+# may not be broken anymore -- testing
+###########=media-sound/bluez-alsa-4.3.1
+########### BROKEN PACKAGES ##################
+
+# vim:ft=config

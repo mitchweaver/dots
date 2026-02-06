@@ -1,0 +1,4 @@
+
+x11-base/xorg-server xvfb -xnest -xephyr
+x11-apps/xinit -twm
+
