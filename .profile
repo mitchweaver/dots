@@ -108,11 +108,11 @@ export LESS='-QRsim +Gg'
 export LESSHISTFILE=/dev/null
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# if [ -d ~/.gnupg ] ; then
-#     chmod 0755 ~
-#     chmod 0700 ~/.gnupg
-#     chmod 0600 ~/.gnupg/* 2>/dev/null ||:
-# fi
+if [ -d ~/.gnupg ] ; then
+    chmod 0755 ~
+    chmod 0700 ~/.gnupg
+    chmod 0600 ~/.gnupg/* 2>/dev/null ||:
+fi
 if [ -d ~/.ssh ] ; then
     chmod 0700 ~/.ssh
     chmod 0600 ~/.ssh/id_rsa
@@ -121,7 +121,10 @@ if [ -d ~/.ssh ] ; then
     if [ -f ~/.ssh/authorized_keys ] ; then
         chmod 0600 ~/.ssh/authorized_keys
     fi
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_rsa
 fi 2>/dev/null
+
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # if [ ! -d "/tmp/tmp-$USER" ] ; then
 #     mkdir -p "/tmp/tmp-$USER"

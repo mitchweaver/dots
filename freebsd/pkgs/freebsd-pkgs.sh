@@ -4,6 +4,11 @@ add() {
     pkg install "$@"
 }
 
+# freebsd specific
+add \
+    ports-mgmt/portsnap \
+    games/linux-steam-utils
+
 # system utils
 add \
     sysutils/smartmontools \
@@ -111,7 +116,6 @@ add \
     multimedia/ffmpeg \
     multimedia/ffmpegthumbnailer \
     www/yt-dlp \
-    multimedia/obs-studio \
     multimedia/shotcut
 
 # video codecs
@@ -131,10 +135,18 @@ add \
     audio/alsa-utils \
     audio/alsa-plugins \
     audio/gstreamer1-plugins-alsa \
-    audio/pavucontrol \
     audio/shntool \
     audio/vorbis-tools \
-    audio/wavpack
+    audio/wavpack \
+    audio/mixertui
+
+# pulseaudio
+# as much as I hate this software AFAIK its the only option
+# for recording multiple streams with obs-studio on freebsd
+add \
+    audio/pulseaudio \
+    audio/pavucontrol \
+    multimedia/obs-studio
 
 # office
 add \

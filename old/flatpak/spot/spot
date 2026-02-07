@@ -1,6 +1,0 @@
-#!/bin/sh
-
-exec dbus-launch \
-    flatpak run \
-    dev.alextren.Spot \
-    "$@"

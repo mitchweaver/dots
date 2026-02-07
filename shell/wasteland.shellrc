@@ -27,8 +27,6 @@ ranger() {
 unalias r 2>/dev/null
 alias r=ranger
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-alias mpv="mpv $MPV_OPTS"
-
 alias {htop,htpo}='htop -d 10 -s PERCENT_CPU'
 alias hme='htop -u mitch'
 alias hroot='htop -u root'

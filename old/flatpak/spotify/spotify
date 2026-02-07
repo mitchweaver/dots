@@ -1,8 +1,0 @@
-#!/bin/sh
-
-exec dbus-launch \
-    flatpak run \
-    com.spotify.Client \
-    --enable-features=UseOzonePlatform \
-    "$@"
-

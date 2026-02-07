@@ -16,16 +16,6 @@ alias mka='make clean ; make ; make install'
 # activate my PS1 git branch detection after branch switching
 gud() { command gud "$@" ; cd . ; }
 
-# quick recompile
-rcp() {
-    case $1 in
-        st|dwm|dmenu|surf|tabbed|sent|slock)
-            cd ~/src/suckless &&
-            sh ./build.sh "$@" &&
-            cd - >/dev/null
-    esac
-}
-
 scfg() {
     ${PLUMBER:-${EDITOR:-vi}} ~/src/suckless/$1/cfg/config.h
 }
@@ -71,25 +61,3 @@ v() {
     esac
 }
 
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# python
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-alias py2=python2
-alias {py3,py,python}=python3
-alias pip=pip3
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# web development
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# serve site on localhost
-hs() {
-    rm -rf public resources 2>/dev/null
-    mkdir -p public resources
-    hugo server -D --quiet --noHTTPCache --disableFastRender
-}
-
-# serve site on local LAN
-######## alias hslocal='hugo server -D --bind $(getlocalip) --baseURL http://$(getlocalip) --noHTTPCache --disableFastRender'
-
-# create new hugo post and immediately edit it
-hn() { hugo new content/"$*" && sleep 1 && ${EDITOR} content/"$*" ; }

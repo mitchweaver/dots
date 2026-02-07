@@ -46,9 +46,10 @@ _ps1_print_git() {
     if [ -d .git ] ; then
         set -- "$(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)"
         if [ "$1" ] ; then
-            printf '(%s)' " $1"
+            printf '(%s)' "🐙 $1"
+            ##### 
         else
-            printf '(%s)' " no branch"
+            printf '(%s)' "🐙 no branch"
         fi
     fi
 }

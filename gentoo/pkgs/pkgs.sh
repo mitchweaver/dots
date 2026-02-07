@@ -121,7 +121,7 @@ add \
     app-containers/docker \
     app-containers/docker-compose \
     app-misc/jq \
-    dev-python/pylint 
+    dev-python/pylint
 
 # security
 add \
@@ -134,7 +134,7 @@ add \
     gui-apps/grim \
     gui-apps/slurp \
     x11-misc/gammastep \
-    sys-power/acpilight 
+    sys-power/acpilight
 
 # GFX
 add \

@@ -7,16 +7,20 @@ pkg() {
     flag=${1#-}
     shift
     case $flag in
-        s|-s|search)
+        s|search)
             command pkg search --search name --full "$@" | grep Origin | sed -E 's/.*: //g'
             ;;
-        a|-a)
+        a|add|install)
             doas command pkg install "$@"
             ;;
-        d|-d)
+        d|delete)
             doas command pkg delete "$@"
             ;;
-        l|-l)
+        u|update)
+            doas command pkg update
+            doas command pkg upgrade "$@"
+            ;;
+        l|list)
             command pkg list "$@"
             ;;
         *)

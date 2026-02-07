@@ -1,7 +1,0 @@
-#!/bin/sh
-
-exec dbus-launch \
-    flatpak run \
-    md.obsidian.Obsidian \
-    --env=OBSIDIAN_USE_WAYLAND=1 \
-    "$@"
