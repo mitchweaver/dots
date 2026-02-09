@@ -6,15 +6,18 @@ exec dbus-update-activation-environment --all
 exec dbus-launch mako
 exec bright -s 80
 exec waybar
-exec nextcloud --background
+
+# freebsd
+exec /usr/local/bin/pulseaudio --start --log-target=syslog
+# gentoo
+######### exec gentoo-pipewire-launcher restart
+
+###########exec nextcloud --background
 
 # exec mailspring --password-store="gnome-libsecret"
 # exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 # exec STEAM_FORCE_DESKTOPUI_SCALING=1.0 steam
 # exec gammastep -m randr -l '36.06083743210746:-95.79738783706367'
-
-exec /usr/local/bin/pulseaudio --start --log-target=syslog
-# exec gentoo-pipewire-launcher restart
 
 exec swayidle -w \
          timeout 600 'lock' \
@@ -49,47 +52,43 @@ input type:pointer {
 # VARS
 # =================================================
 # note: mod1 = alt, mod4 = super
-# NOTE NOTE: M1 Mac / Asahi for some reason these are switched
-#            in however sway reads them. Only happens with sway not sure why.
 set $mod Mod1
-############## set $mod Mod4
 
 set $left h
 set $down j
 set $up k
 set $right l
 
-# Your preferred terminal emulator
-# set $term stwrapper
 set $term kitty
 
 # =================================================
 # GAPS / THEMES / RICE
 # =================================================
-gaps inner 0
-gaps outer 0
-# gaps inner 12
-# gaps outer 7
-## smart_gaps off
+# gaps inner 0
+# gaps outer 0
+gaps inner 17
+gaps outer 11
 ## hide_edge_borders smart
 # smart_borders no_gaps
+
+smart_gaps on
 # smart_gaps inverse_outer
 
 bindsym $mod+g gaps inner current plus 4
 bindsym $mod+shift+g gaps inner current minus 4
 
 # disable borders = pixel 0
-default_border pixel 2
+default_border pixel 0
 
 include "$HOME/.cache/wal/colors-sway"
 #                                                        BORDER
 client.focused $color0 $background $foreground $color5   $color2
 client.unfocused $color0 $background $foreground $color5 $color1
 
-# note: this only applies to non-xwayland windows
-#       need to find way to set it in xwayland too so is consistent
-seat seat0 xcursor_theme Windows10Light 32
-# seat seat0 xcursor_theme default 32
+# FreeBSD package:
+# x11-themes/cursor-neutral-white-theme
+# basically a windows white cursor clone
+seat seat0 xcursor_theme Neutral++_White 32
 
 # =================================================
 # SWAYFX SPECIFIC
@@ -108,11 +107,22 @@ blur_xray disable
 # =================================================
 # swaymsg -t get_outputs
 
+# vars
+set $laptop eDP-1
+set $mon1 DP-1
+
 # 390hz 1080p acer
-output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@390.297Hz position 0,0 adaptive_sync off
+output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@390.297Hz position 0,0 adaptive_sync off allow_tearing yes
 
 # thinkpad x1c7
 output 'AU Optronics 0x573D Unknown' resolution 1920x1080@60.033Hz position 0,0 scale 1 adaptive_sync off allow_tearing yes
+
+# hdmi out #1
+output $mon1 resolution 1920x1080@120.000Hz position 1920,0 scale 1 adaptive_sync off allow_tearing yes
+
+# fix for freebsd lid close
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
 
 # =================================================
 # Key binds
@@ -152,14 +162,18 @@ bindsym $mod+Right focus right
 # =================================================
 # Window Moving
 # =================================================
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym Control+Shift+$left move left
+bindsym Control+Shift+$down move down
+bindsym Control+Shift+$up move up
+bindsym Control+Shift+$right move right
+
+# =================================================
+# Window Resizing
+# =================================================
+bindsym $mod+Shift+$left resize grow width 8
+bindsym $mod+Shift+$right resize shrink width 8
+bindsym $mod+Shift+$down resize grow height 8
+bindsym $mod+Shift+$up resize shrink height 8
 
 # =================================================
 # Switch to workspace
@@ -235,10 +249,6 @@ assign [app_id="geary"] 9
 assign [class="chromium"] 8
 assign [class="Chromium"] 8
 assign [class="chromium-bin"] 8
-assign [class="spotify"] 7
-assign [class="Spotify"] 7
-assign [class="deezer"] 7
-assign [class="Deezer"] 7
 
 assign [class="Steam"] 4
 assign [app_id="Steam"] 4
@@ -264,6 +274,4 @@ bindsym XF86AudioRaiseVolume exec vol -i
 bindsym XF86AudioLowerVolume exec vol -d
 bindsym mod1+semicolon exec vol -d
 bindsym mod1+apostrophe exec vol -i
-
-include @sysconfdir@/sway/config.d/*
 
