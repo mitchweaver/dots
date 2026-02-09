@@ -13,6 +13,7 @@ add \
 add \
     sysutils/smartmontools \
     sysutils/htop \
+    sysutils/gotop \
     sysutils/sensors \
     sysutils/pciutils \
     sysutils/usbutils
@@ -31,7 +32,8 @@ add \
 
 # filesystem
 add \
-    filesystems/linux-c7-dosfstools
+    filesystems/linux-c7-dosfstools \
+    filesystems/zfs-stats
 
 # networking
 add \
@@ -56,6 +58,7 @@ add \
 
 # misc development libs
 add \
+    lang/rust \
     java/openjdk25 \
     devel/libnotify \
     devel/nlohmann-json \
@@ -66,7 +69,8 @@ add \
 add \
     math/py-numpy \
     science/py-scipy \
-    editors/py-pynvim
+    editors/py-pynvim \
+    devel/py-typing-extensions
 
 # firmware
 add \
@@ -82,7 +86,6 @@ add \
     textproc/translate-shell \
     sysutils/tree \
     sysutils/pv \
-    sysutils/progress \
     sysutils/eza \
     textproc/bat
 
@@ -199,6 +202,13 @@ add \
     sysutils/neofetch \
     sysutils/pfetch \
     graphics/pywal
+
+# theming
+add \
+    x11-themes/lxappearance \
+    x11-themes/gtk-arc-themes \
+    x11-themes/flatery-icon-themes \
+    x11-themes/cursor-neutral-white-theme
 
 # ============================
 # PORTS

@@ -7,21 +7,42 @@ pkg() {
     flag=${1#-}
     shift
     case $flag in
-        s|search)
+        s)
+            command pkg search "$@"
+            ;;
+        ss)
             command pkg search --search name --full "$@" | grep Origin | sed -E 's/.*: //g'
             ;;
         a|add|install)
             doas command pkg install "$@"
             ;;
         d|delete)
-            doas command pkg delete "$@"
+            if [ "$1" ] ; then
+                doas command pkg delete "$@"
+            fi
+            doas command pkg autoremove
             ;;
         u|update)
             doas command pkg update
             doas command pkg upgrade "$@"
             ;;
+        i|info)
+            command pkg info "$@"
+            ;;
         l|list)
             command pkg list "$@"
+            ;;
+        stats)
+            command pkg stats "$@"
+            ;;
+        audit)
+            command pkg audit -F
+            ;;
+        portsearch|ps)
+            ls /usr/ports/* | grep -- "$*"
+            ;;
+        portsnap)
+            doas portsnap auto
             ;;
         *)
             command pkg "$@"

@@ -11,9 +11,9 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 case $TERM in
     *-256color|*-kitty)
-        if command -v exa >/dev/null ; then
-            alias ls='exa -F --color=always --group-directories-first'
-            alias tree='exa -F -T'
+        if command -v eza >/dev/null ; then
+            alias ls='eza -F --color=always --group-directories-first'
+            alias tree='eza -F -T'
         else
             alias ls='ls --color=auto -F'
         fi
@@ -37,7 +37,6 @@ case $TERM in
         alias egrep='egrep --color=never'
         export NO_COLOR=true
 esac
-
 
 # =============================================================
 alias {l,sls,sl}=ls
@@ -117,3 +116,4 @@ hg() { grep "$*" "$HISTFILE" ; }
 if command -v doas >/dev/null ; then
     alias sudo=doas
 fi
+

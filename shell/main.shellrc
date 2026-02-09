@@ -23,13 +23,6 @@ PS1_STYLE=user-host-pwd  # [user-pwd/user/pwd/user-host-pwd]
 PS1_GIT=true             # [true/false]
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-# reset to home if somehow invoked interactively
-# somewhere else unless we were summoned by ranger
-if [ "$PWD" != "$HOME" ] && [ -z "$RANGER_LEVEL" ] ; then
-    cd ~
-    clear
-fi
-
 if [ -d "${SHELLRC_DIR}" ] ; then
     if [ -e /etc/os-release ] ; then
         read -r line < /etc/os-release

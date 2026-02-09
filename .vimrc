@@ -13,6 +13,7 @@ let &packpath = &runtimepath
 " unbind space for everything but leader
 nnoremap <silent><SPACE> <nop>
 let mapleader=" "
+""""""let g:python3_host_prog = '/usr/local/bin/python3.11'
 
 " ██████╗ ██╗     ██╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗
 " ██╔══██╗██║     ██║   ██║██╔════╝ ██║████╗  ██║██╔════╝
@@ -212,7 +213,7 @@ endif
 " colorscheme papercolor
 " colorscheme typewriter
 " colorscheme mellow
-" set background=light
+set background=light
 " set background=dark
 
 " if has('termguicolors')

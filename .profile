@@ -50,11 +50,11 @@ fi
 
 # using en_US.UTF-8 over C causes case-insensitive sorting
 # up to you whether the benefits outweigh the negatives
-####export LC_ALL="en_US.UTF-8"
-# export LC_CTYPE="$LC_ALL" \
-#        LANG="$LC_ALL" \
-#        LANGUAGE="$LC_ALL" \
-#        LOCALE="$LC_ALL"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="$LC_ALL" \
+       LANG="$LC_ALL" \
+       LANGUAGE="$LC_ALL" \
+       LOCALE="$LC_ALL"
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 export XDG_OPEN=opn PLUMBER=opn
@@ -121,7 +121,7 @@ if [ -d ~/.ssh ] ; then
     if [ -f ~/.ssh/authorized_keys ] ; then
         chmod 0600 ~/.ssh/authorized_keys
     fi
-    eval "$(ssh-agent -s)"
+    eval "$(ssh-agent -s)" >/dev/null
     ssh-add ~/.ssh/id_rsa
 fi 2>/dev/null
 

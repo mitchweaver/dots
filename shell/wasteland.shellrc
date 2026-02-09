@@ -153,3 +153,5 @@ alias sway='exec dbus-run-session $(which sway)'
 alias rdpi='razer-cli --dpi'
 alias rbat='razer-cli --battery print | grep charge | trim'
 
+alias fixpulse='/usr/local/bin/pulseaudio --start --log-target=syslog'
+
