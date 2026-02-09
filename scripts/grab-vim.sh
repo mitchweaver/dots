@@ -1,20 +1,29 @@
-#!/bin/sh -x
+#!/bin/sh
 
-if [ ! -e ~/.vim/autoload/plug.vim ] ; then
-    printf '\n%s\n\n' "Installing vim plug"
-
-    curl -#fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if [ "${PWD##*/}" != scripts ] ; then
+    >&2 "please run me from inside the scripts dir"
+    exit 1
 fi
 
+# copy nvim config
 if [ ! -e ~/.config/nvim ] ; then
     mkdir -p ~/.config
     cp -r ../.config/nvim ~/.config/
 fi
 
-if [ ! -f ~/.vimrc ] ; then
-    cp -v ../.vimrc ~/.vimrc
-    if [ -f ~/.bashrc ] ; then
-        echo 'alias v=vim' >> ~/.bashrc
-    fi
+# install plug
+if [ ! -e ~/.vim/autoload/plug.vim ] ; then
+    printf '\n%s\n\n' "Installing vim plug"
+
+    mkdir -p ~/.vim/autoload
+    curl -#fLo ~/.vim/autoload/plug.vim \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
+
+# copy vimrc
+if [ ! -e ~/.vimrc ] ; then
+    cp -v ../.vimrc ~/.vimrc
+    echo 'alias v=vim' >> ~/.bashrc
+    echo 'alias v=vim' >> ~/.shrc
+fi
+
