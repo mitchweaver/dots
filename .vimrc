@@ -216,34 +216,9 @@ endif
 set background=light
 " set background=dark
 
-" if has('termguicolors')
-"     set termguicolors
-" endif
-
 " force usage of terminal scheme background instead
 " of editor scheme -- this allows to respect of terminal transparency
 hi Normal guibg=none
-
-" ========================================================================
-" NEOVIDE / GUI SPECIFIC
-" ========================================================================
-" set guifont=Source\ Code\ Pro:h14
-set linespace=0
-
-" g:neovide_transparency should be 0 if you want to unify
-" transparency of content and title bar
-let g:neovide_transparency = 0.0
-let g:transparency = 0.9
-let g:neovide_background_color = '#0f1117'.printf('%x', float2nr(255 * g:transparency))
-let g:neovide_floating_blur_amount_x = 2.0
-let g:neovide_floating_blur_amount_y = 2.0
-let g:neovide_scroll_animation_length = 0.3
-let g:neovide_refresh_rate = 117
-let g:neovide_remember_window_size = v:true
-" STUPID ANIMATION
-let g:neovide_cursor_animation_length = 0.0
-let g:neovide_cursor_trail_size = 0.0
-let g:neovide_cursor_antialiasing = v:true
 
 " ========================================================================
 

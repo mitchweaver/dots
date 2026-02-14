@@ -1,9 +1,3 @@
-# ▌ ▌▗    ▐           
-# ▙▄▌▄ ▞▀▘▜▀ ▞▀▖▙▀▖▌ ▌
-# ▌ ▌▐ ▝▀▖▐ ▖▌ ▌▌  ▚▄▌
-# ▘ ▘▀▘▀▀  ▀ ▝▀ ▘  ▗▄▘
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
 export HISTCONTROL=ignoredups:ignorespace
 export HISTSIZE=500
 
@@ -24,3 +18,4 @@ hg() {
         grep -i "$*" "$HISTFILE" | grep -v '^hg' | head -n 20
     fi
 }
+

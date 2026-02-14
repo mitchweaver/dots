@@ -5,3 +5,4 @@ alias bs='brew search'
 alias flushdns='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
 alias unquarantine='xattr -d com.apple.quarantine'
+

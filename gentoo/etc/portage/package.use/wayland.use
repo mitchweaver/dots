@@ -13,3 +13,4 @@ sys-auth/seatd server elogind
 gui-wm/sway tray swaybar swaynag -grimshot -wallpapers
 gui-wm/swayfx tray swaybar swaynag -grimshot -wallpapers
 gui-libs/wlroots tinywl x11 x11-backend
+gui-apps/waybar experimental logind tray wifi evdev network pipewire pulseaudio -mpd -mpris

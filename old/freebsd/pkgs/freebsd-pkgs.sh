@@ -35,6 +35,15 @@ add \
     filesystems/linux-c7-dosfstools \
     filesystems/zfs-stats
 
+# misc development libs
+add \
+    lang/rust \
+    java/openjdk25 \
+    devel/libnotify \
+    devel/nlohmann-json \
+    www/tidy-html5 \
+    www/tidy
+
 # networking
 add \
     ftp/wget \
@@ -46,7 +55,8 @@ add \
     net/socat \
     net/rdesktop \
     security/openvpn \
-    net/wireguard-tools
+    net/wireguard-tools \
+    net/speedtest
 
 # scripting utilities
 add \
@@ -54,16 +64,8 @@ add \
     sysutils/detox \
     converters/dos2unix \
     sysutils/inotify-tools \
-    sysutils/dateutils
-
-# misc development libs
-add \
-    lang/rust \
-    java/openjdk25 \
-    devel/libnotify \
-    devel/nlohmann-json \
-    www/tidy-html5 \
-    www/tidy
+    sysutils/dateutils \
+    graphics/libqrencode
 
 # python libraries
 add \
@@ -87,13 +89,15 @@ add \
     sysutils/tree \
     sysutils/pv \
     sysutils/eza \
-    textproc/bat
+    textproc/bat \
+    www/w3m-img
 
 # development
 add \
     devel/hs-ShellCheck \
     textproc/jq \
-    devel/pylint
+    devel/pylint \
+    www/gohugo
 
 # misc x11 stuff
 add \
@@ -200,8 +204,8 @@ add \
 add \
     x11-fm/pcmanfm \
     sysutils/neofetch \
-    sysutils/pfetch \
-    graphics/pywal
+    graphics/pywal \
+    graphics/mupdf
 
 # theming
 add \

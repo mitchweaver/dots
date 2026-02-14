@@ -1,9 +1,3 @@
-# ▙ ▌   ▐            ▌  ▗       
-# ▌▌▌▞▀▖▜▀ ▌  ▌▞▀▖▙▀▖▌▗▘▄ ▛▀▖▞▀▌
-# ▌▝▌▛▀ ▐ ▖▐▐▐ ▌ ▌▌  ▛▚ ▐ ▌ ▌▚▄▌
-# ▘ ▘▝▀▘ ▀  ▘▘ ▝▀ ▘  ▘ ▘▀▘▘ ▘▗▄▘
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
 alias rsync='rsync -avhu --progress --delete --partial --links'
 
 # alias fatsync='rsync -rvhu --progress --delete --partial' # for fat32

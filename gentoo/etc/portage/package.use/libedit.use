@@ -3,7 +3,7 @@
 #
 # do not put -readline globally as if there isn't libedit compatibility
 # then you'll lose line edit functionality all together
-dev-libs/libedit abi_x86_32
+###########dev-libs/libedit abi_x86_32
 dev-libs/libpcre -readline
 dev-libs/libpcre2 -readline
 net-firewall/nftables -readline

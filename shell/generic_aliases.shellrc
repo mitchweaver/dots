@@ -1,9 +1,4 @@
-# ▞▀▖            ▗     ▞▀▖▜ ▗             
-# ▌▄▖▞▀▖▛▀▖▞▀▖▙▀▖▄ ▞▀▖ ▙▄▌▐ ▄ ▝▀▖▞▀▘▞▀▖▞▀▘
-# ▌ ▌▛▀ ▌ ▌▛▀ ▌  ▐ ▌ ▖ ▌ ▌▐ ▐ ▞▀▌▝▀▖▛▀ ▝▀▖
-# ▝▀ ▝▀▘▘ ▘▝▀▘▘  ▀▘▝▀  ▘ ▘ ▘▀▘▝▀▘▀▀ ▝▀▘▀▀ 
-#
-# Aliases that work on any machine with a unix userland.
+# aliases that work on any machine with a unix userland
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -113,7 +108,7 @@ alias 2column='column -t -l 2 -o "     "'
 
 hg() { grep "$*" "$HISTFILE" ; }
 
-if command -v doas >/dev/null ; then
-    alias sudo=doas
+if [ -x /usr/bin/doas ] ; then
+    alias sudo=/usr/bin/doas
 fi
 

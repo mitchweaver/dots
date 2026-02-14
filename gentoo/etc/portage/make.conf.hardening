@@ -28,8 +28,8 @@ COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -fstack-clash-protection"
 # * full: both
 #
 # see: http://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html
-# NOTE: ONLY FOR AMD64 --- IS NOT AVAILABLE FOR ARM64
-########################COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -fcf-protection=full"
+# WARNING: ONLY FOR AMD64 --- IS NOT AVAILABLE FOR ARM64
+COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -fcf-protection=full"
 
 # Full Read-Only Relocation
 #
@@ -56,14 +56,13 @@ CXXFLAGS="$CXXFLAGS -D_GLIBCXX_ASSERTIONS"
 # see: http://wiki.rosalab.ru/ru/index.php/Underlinking#Why_underlinking_is_bad
 # see: http://bugzilla.mozilla.org/show_bug.cgi?id=333640
 #
-#
-# NOTE: aug 2024, mega breakage currently, looking into it
-#####COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -Wl,-z,defs"
+###############COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -Wl,-z,defs"
 
 # treat any undefined symbols in shared libraries linked in as errors
 # WARNING: more exprimental than -z,defs will cause more breakage
 #
 # see: https://wiki.gentoo.org/wiki/Project:Quality_Assurance/-Wl,-z,defs_and_-Wl,--no-allow-shlib-undefined
-####################COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -Wl,--no-allow-shlib-undefined"
+############################ COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -Wl,--no-allow-shlib-undefined"
 
 # vim:ft=config
+

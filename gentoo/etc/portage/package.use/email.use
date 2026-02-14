@@ -1,5 +1,0 @@
-# geary
-mail-client/geary -ytnef
-app-text/enchant hunspell
-dev-libs/folks -bluetooth -utils
-

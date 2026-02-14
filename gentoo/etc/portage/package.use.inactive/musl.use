@@ -1,6 +1,7 @@
-#######sys-libs/libxcrypt headers-only system
-######sys-libs/musl -crypt
-#####sys-libs/musl crypt
+# ================================================================================
+# Only keep this out of inactive if using musl
+# ================================================================================
+sys-libs/libxcrypt headers-only system
+sys-libs/musl -crypt
+sys-libs/musl crypt
 
-#################### see mitchweaver's overlay
-###################dev-libs/gjs musl

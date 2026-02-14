@@ -154,4 +154,7 @@ alias rdpi='razer-cli --dpi'
 alias rbat='razer-cli --battery print | grep charge | trim'
 
 alias fixpulse='/usr/local/bin/pulseaudio --start --log-target=syslog'
+alias nf=neofetch
+
+alias sway='exec ~/bin/misc/launch_sway.sh'
 

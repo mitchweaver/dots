@@ -1,0 +1,6 @@
+# these are flags that are only available on amd64 cpus (some specifically only newer)
+#
+#
+# see: https://wiki.gentoo.org/wiki/GCC_optimization#-msse.2C_-msse2.2C_-msse3.2C_-mmmx.2C_-m3dnow
+COMMON_FLAGS_PERFORMANCE="$COMMON_FLAGS_PERFORMANCE -msse -msse2 -msse3 -mmmx -m3dnow"
+

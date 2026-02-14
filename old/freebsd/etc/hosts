@@ -1,0 +1,4 @@
+::1 localhost localhost.local.wvr.sh
+127.0.0.1 localhost localhost.local.wvr.sh
+127.0.0.1 thonkpad thonkpad.local.wvr.sh
+

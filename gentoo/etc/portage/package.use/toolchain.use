@@ -4,3 +4,12 @@ sys-devel/gcc plugins graphite fortran default-stack-clash-protection default-zn
 # FIY: gold is required by some packages on arm64
 #      can be disabled on amd64
 sys-devel/binutils plugins -gold
+
+# ==============================================
+# hash-sysv-compat: Easy Anti Cheat support
+# stack-realign: fixes common game bugs
+#
+# https://wiki.gentoo.org/wiki/Steam#Easy_Anti_Cheat_Support
+# https://wiki.gentoo.org/wiki/Steam#Troubleshooting_2
+sys-libs/glibc hash-sysv-compat stack-realign
+

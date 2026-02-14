@@ -16,17 +16,17 @@ pkg() {
             #     sort
             ;;
         a)
-            sudo emerge -nU "$@"
+            doas emerge -nU "$@"
             ;;
         # actually update everything
         u)
             [ "$1" ] || set -- '@world'
-            sudo emerge --update --newuse --deep --with-bdeps=y "$@"
+            doas emerge --update --newuse --deep --with-bdeps=y "$@"
             ;;
         su)
             [ "$1" ] || set -- '@world'
             pkg sync
-            sudo emerge --update --newuse --deep --with-bdeps=y "$@"
+            doas emerge --update --newuse --deep --with-bdeps=y "$@"
             ;;
         l)
             cat /var/lib/portage/world
@@ -36,19 +36,19 @@ pkg() {
             ;;
         d)
             if [ "$1" ] ; then
-                sudo emerge --rage-clean "$@" || return
+                doas emerge --rage-clean "$@" || return
             fi
             printf '\n%s ' 'Would you also like to depclean? (y/n):'
             read -r ans
-            [ "$ans" == y ] && sudo emerge --with-bdeps y --depclean
+            [ "$ans" == y ] && doas emerge --with-bdeps y --depclean
             ;;
         -sync|sync)
-            sudo emerge --sync --ask n --jobs=8 "$@"
+            doas emerge --sync --ask n --jobs=8 "$@"
     esac
 }
 
 alias lessworld='less /var/lib/portage/world'
-alias {viworld,editworld}='sudo ${EDITOR:-vi} /var/lib/portage/world'
+alias {viworld,editworld}='doas ${EDITOR:-vi} /var/lib/portage/world'
 
 alias packages='${BROWSER} https://packages.gentoo.org'
 alias overlays='${BROWSER} https://gpo.zugaina.org/'

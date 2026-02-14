@@ -7,14 +7,13 @@ exec dbus-launch mako
 exec bright -s 80
 exec waybar
 
-# freebsd
-exec /usr/local/bin/pulseaudio --start --log-target=syslog
-# gentoo
-######### exec gentoo-pipewire-launcher restart
+####exec /usr/local/bin/pulseaudio --start --log-target=syslog
+exec gentoo-pipewire-launcher restart
 
-###########exec nextcloud --background
+exec nextcloud --background
+exec joplin-desktop
+exec mailspring --password-store="gnome-libsecret"
 
-# exec mailspring --password-store="gnome-libsecret"
 # exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 # exec STEAM_FORCE_DESKTOPUI_SCALING=1.0 steam
 # exec gammastep -m randr -l '36.06083743210746:-95.79738783706367'
@@ -85,10 +84,7 @@ include "$HOME/.cache/wal/colors-sway"
 client.focused $color0 $background $foreground $color5   $color2
 client.unfocused $color0 $background $foreground $color5 $color1
 
-# FreeBSD package:
-# x11-themes/cursor-neutral-white-theme
-# basically a windows white cursor clone
-seat seat0 xcursor_theme Neutral++_White 32
+seat seat0 xcursor_theme DMZ-White 24
 
 # =================================================
 # SWAYFX SPECIFIC
@@ -103,26 +99,24 @@ blur_xray disable
 # layer_effects 'waybar' 'blur enable; shadows enable;'
 
 # =================================================
-# Monitor Configuration
+# Monitor Configuration --- swaymsg -t get_outputs
 # =================================================
-# swaymsg -t get_outputs
-
-# vars
-set $laptop eDP-1
-set $mon1 DP-1
-
+# main monitor === left
 # 390hz 1080p acer
 output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@390.297Hz position 0,0 adaptive_sync off allow_tearing yes
 
-# thinkpad x1c7
-output 'AU Optronics 0x573D Unknown' resolution 1920x1080@60.033Hz position 0,0 scale 1 adaptive_sync off allow_tearing yes
+# main monitor === left
+# 600hz zowie
+output 'BNQ XL2586X+ EB4CR00840SL0' resolution 1920x1080@599.944Hz position 0,0 adaptive_sync off allow_tearing yes
 
-# hdmi out #1
-output $mon1 resolution 1920x1080@120.000Hz position 1920,0 scale 1 adaptive_sync off allow_tearing yes
+# "to the right" of main monitor
+# 165hz old acer
+output 'Acer Technologies VG240Y S 0x027157B7' resolution 1920x1080@165.003Hz position 1920,0 adaptive_sync off allow_tearing yes
 
-# fix for freebsd lid close
-bindswitch --reload --locked lid:on output $laptop disable
-bindswitch --reload --locked lid:off output $laptop enable
+# laptop
+output eDP-1 resolution 1920x1080@60.033Hz position 0,0 scale 1 adaptive_sync off allow_tearing yes
+bindswitch --reload --locked lid:on output eDP-1 disable
+bindswitch --reload --locked lid:off output eDP-1 enable
 
 # =================================================
 # Key binds

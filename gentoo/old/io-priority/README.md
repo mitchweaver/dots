@@ -10,4 +10,5 @@ PORTAGE_IONICE_COMMAND="/usr/local/bin/io-priority \${PID}"
 
 ## note
 
-I don't think this is worth using if you have fast (nvme) storage
+this isn't worth using if you have fast (nvme) storage
+

@@ -1,9 +1,4 @@
-# ▞▀▖            ▗     ▛▀▘        ▐  ▗          
-# ▌▄▖▞▀▖▛▀▖▞▀▖▙▀▖▄ ▞▀▖ ▙▄▌ ▌▛▀▖▞▀▖▜▀ ▄ ▞▀▖▛▀▖▞▀▘
-# ▌ ▌▛▀ ▌ ▌▛▀ ▌  ▐ ▌ ▖ ▌ ▌ ▌▌ ▌▌ ▖▐ ▖▐ ▌ ▌▌ ▌▝▀▖
-# ▝▀ ▝▀▘▘ ▘▝▀▘▘  ▀▘▝▀  ▘ ▝▀▘▘ ▘▝▀  ▀ ▀▘▝▀ ▘ ▘▀▀ 
-#
-# Functions that work on any machine with a unix userland.
+# functions that work on any machine with a unix userland
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # dynamic "c" utility

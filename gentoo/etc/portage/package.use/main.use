@@ -8,7 +8,7 @@ sys-apps/smartmontools -daemon -update-drivedb -caps
 # =====================================================================================
 # nextcloud
 # =====================================================================================
-net-misc/nextcloud-client dolphin -nautilus
+net-misc/nextcloud-client -dolphin -nautilus
 dev-libs/qtkeychain qt5
 
 app-editors/neovim python -nvimpager
@@ -58,4 +58,5 @@ media-libs/harfbuzz truetype
 media-libs/tiff jpeg
 x11-libs/gdk-pixbuf jpeg
 
-x11-libs/libfm gtk
+x11-libs/libfm gtk -automount
+

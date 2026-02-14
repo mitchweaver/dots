@@ -1,3 +1,7 @@
+# install troubleshooting
+
+## cant see nvme
+
 lspci -i | grep -i vmd
 
 if you see this you need VMD built in NOT as module

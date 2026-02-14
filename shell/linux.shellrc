@@ -1,5 +1,5 @@
 # ===============================================================
-# Aliases that only make sense when using Linux as a desktop
+# aliases that only make sense when using Linux as a desktop
 # ===============================================================
 
 # list openrc enabled services sorted by run level
@@ -71,7 +71,4 @@ docx2pdf() {
 fcg() { fc-list | grep -i "$*" ; }
 alias fontfamilys="fc-list : family | sort | uniq"
 kittyfonts() { kitty +list-fonts --psnames | g "$*" ; }
-
-
-
 

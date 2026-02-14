@@ -5,6 +5,9 @@
 #  █▀█     ▀▀▀▄  █   █   █     █
 #  █  ▀▄  ▀▄▄▄▀  █   █   █     ▀█▄▄▀
 #
+#
+#  welcome to my shell configuration
+#
 #  http://github.com/mitchweaver/dots
 #
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
@@ -25,22 +28,22 @@ PS1_GIT=true             # [true/false]
 
 if [ -d "${SHELLRC_DIR}" ] ; then
     if [ -e /etc/os-release ] ; then
-        read -r line < /etc/os-release
-        case ${line#NAME=} in
-            *FreeBSD*)
-                . "${SHELLRC_DIR}/freebsd.shellrc"
-            ;;
-            *OpenBSD*)
-                . "${SHELLRC_DIR}/openbsd.shellrc"
-            ;;
-            *Linux*|*Microsoft*)
-                . "${SHELLRC_DIR}/linux.shellrc"
-                if command -v emerge >/dev/null ; then
-                    . "${SHELLRC_DIR}/gentoo.shellrc"
-                elif command -v dnf >/dev/null ; then
-                    . "${SHELLRC_DIR}/redhat.shellrc"
-                fi
-        esac
+        if command -v emerge >/dev/null ; then
+            . "${SHELLRC_DIR}/gentoo.shellrc"
+            . "${SHELLRC_DIR}/linux.shellrc"
+        elif command -v dnf >/dev/null ; then
+            . "${SHELLRC_DIR}/redhat.shellrc"
+            . "${SHELLRC_DIR}/linux.shellrc"
+        else
+            read -r line < /etc/os-release
+            case ${line#NAME=} in
+                *FreeBSD*)
+                    . "${SHELLRC_DIR}/freebsd.shellrc"
+                ;;
+                *OpenBSD*)
+                    . "${SHELLRC_DIR}/openbsd.shellrc"
+            esac
+        fi
     elif command -v brew >/dev/null ; then
             . "${SHELLRC_DIR}/macos.shellrc"
     fi

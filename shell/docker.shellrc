@@ -1,9 +1,3 @@
-# ▛▀▖      ▌        
-# ▌ ▌▞▀▖▞▀▖▌▗▘▞▀▖▙▀▖
-# ▌ ▌▌ ▌▌ ▖▛▚ ▛▀ ▌  
-# ▀▀ ▝▀ ▝▀ ▘ ▘▝▀▘▘  
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
 case $(uname) in
     Darwin)
         if command -v colima >/dev/null ; then
@@ -71,3 +65,4 @@ DOCKER_NUKE() {
         docker_remove_networks
     }
 }
+

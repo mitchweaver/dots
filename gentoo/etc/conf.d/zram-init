@@ -1,0 +1,25 @@
+load_on_start=yes
+unload_on_stop=yes
+num_devices=2
+
+# =================================================================
+
+type1="/tmp"
+flag1="ext4"
+opts1="noatime"
+mode1=777
+size1="1024"
+labl1="zram-tmp"
+
+type2=/var/tmp/portage
+flag2=ext4
+opts2="noatime"
+size2=4096
+algo2=zstd
+owgr2="portage:portage"
+mode2=775
+labl2=zram-var-tmp-portage
+back2=/dev/mapper/zram-nvme0n1p4
+icmp2=y
+idle2=600
+

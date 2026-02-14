@@ -17,3 +17,4 @@ for file in bashrc make.conf.lto make.conf.lto.defines ; do
 done
 
 [ -L "portage/make.profile" ] && unlink "portage/make.profile"
+

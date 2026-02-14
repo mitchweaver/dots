@@ -243,9 +243,6 @@ emerge --noreplace --ask --verbose --newuse --update \
   sys-kernel/gentoo-sources \
   linux-firmware
 
-# NOTE: as of 5/1/23,  the latest kernel openzfs supports is 6.2.14
-#       6.3.0+ not yet supported
-
 # NOTE THIS WILL FAIL BECAUSE NO KERNEL BUILT YET FOR ZFS!
 # just emerge it all down until grub which will fail, get the deps
 emerge --noreplace --ask --verbose --newuse --update \
@@ -254,7 +251,14 @@ emerge --noreplace --ask --verbose --newuse --update \
 cd /usr/src
 ln -s $PWD/whatever linux
 cd linux
-# (copy your kernel config now if you have one)
+
+# copy your kernel config now if you have one
+# run this, and let it start building but cancel it
+# we want to get the new defaults from the new config
+# as genkernel doesn't have this option. it only runs straight "oldconfig"
+# we want to make sure we run with the `olddefconfig` first
+make olddefconfig
+
 # Notice we only make the kernel here and are not requesting --zfs yet
 genkernel \
   --no-clean --no-mrproper --oldconfig \
@@ -265,6 +269,7 @@ genkernel \
   --no-mdadm \
   --no-lvm \
   --no-mountboot \
+  --utils-cflags="-w" \
   kernel
 ```
 
@@ -287,6 +292,7 @@ genkernel \
   --no-lvm \
   --zfs \
   --no-mountboot \
+  --utils-cflags="-w" \
   all
 ```
 

@@ -1,11 +1,12 @@
 # =========================================================
 # KERNEL / ZFS
 # =========================================================
-# as of Jan 2026, latest allowed is 6.17.13 and 2.3.5
+# as of March 2026, latest allowed is 6.18.9 and 2.4.0
 # check latest at: https://github.com/openzfs/zfs/releases
->sys-fs/zfs-2.3.5
->sys-fs/zfs-kmod-2.3.5
->sys-kernel/gentoo-sources-6.17.13
+>sys-fs/zfs-2.4.0
+>sys-fs/zfs-kmod-2.4.0
+>sys-kernel/zen-sources-6.18.9
+>sys-kernel/gentoo-sources-6.18.9
 
 # =========================================================
 # TOOLCHAIN
@@ -16,16 +17,6 @@
 # =========================================================
 # LIBS
 # =========================================================
-# latest stable
-# unstable are failing compile with my flags as of Feb 2026
->sys-libs/glibc-2.41-r6
-
-# =========================================================
-# MUSL LIBC WORKAROUNDS
-# =========================================================
-######force usage of older elogind that is patched from the musl overlay
-######sys-auth/elogind::gentoo
-######dev-util/bindgen-0.56.0
 
 # =========================================================
 # DEBLOAT
@@ -36,9 +27,6 @@ app-text/pandoc
 # =========================================================
 # BUGS
 # =========================================================
-########## broken complaining about symbol stripping
-# ---- may not be broken anymore, testing ----
-##########>app-misc/dateutils-0.4.9
 
 # ============ OVERLAY MASKS ==============================
 # Note: for reason why I do this,
@@ -77,3 +65,4 @@ app-text/pandoc
 ########### BROKEN PACKAGES ##################
 
 # vim:ft=config
+

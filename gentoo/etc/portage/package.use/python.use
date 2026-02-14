@@ -1,9 +1,7 @@
-######### 3.13+ currently bugged building with libedit Aug 2024
-#######>=dev-lang/python-3.13 readline -libedit
-
 dev-python/numpy lapack
 
 dev-python/PyQt5                       python_targets_python3_11 svg gui widgets network webchannel printsupport
+
 dev-python/decorator                   python_targets_python3_11
 dev-python/protobuf                    python_targets_python3_11
 dev-python/distro                      python_targets_python3_11
@@ -94,3 +92,4 @@ dev-python/psutil                      python_targets_python3_11
 
 # non-system
 dev-python/pywal                       python_targets_python3_11
+

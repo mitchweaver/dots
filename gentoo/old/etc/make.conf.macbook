@@ -1,5 +1,8 @@
 # ******************************************************
 # 2021 Macbook Pro M1 Pro (10-core / 16gb)
+#
+# edit: I no longer use one of these but leaving here
+#       for notes for anyone else
 # ******************************************************
 MAKEOPTS="-j11 -l12"
 CPU_USE_FLAGS="edsp neon thumb vfp vfpv3 vfpv4 vfp-d32 aes sha1 sha2 crc32 v4 v5 v6 v7 v8 thumb2"
