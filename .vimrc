@@ -1,13 +1,9 @@
 " http://github.com/mitchweaver/dots
 " -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 
-" ██╗███╗   ██╗██╗████████╗
-" ██║████╗  ██║██║╚══██╔══╝
-" ██║██╔██╗ ██║██║   ██║
-" ██║██║╚██╗██║██║   ██║
-" ██║██║ ╚████║██║   ██║
-" ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" ========================================================================
+" init
+" ========================================================================
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 " unbind space for everything but leader
@@ -15,14 +11,9 @@ nnoremap <silent><SPACE> <nop>
 let mapleader=" "
 """"""let g:python3_host_prog = '/usr/local/bin/python3.11'
 
-" ██████╗ ██╗     ██╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗
-" ██╔══██╗██║     ██║   ██║██╔════╝ ██║████╗  ██║██╔════╝
-" ██████╔╝██║     ██║   ██║██║  ███╗██║██╔██╗ ██║███████╗
-" ██╔═══╝ ██║     ██║   ██║██║   ██║██║██║╚██╗██║╚════██║
-" ██║     ███████╗╚██████╔╝╚██████╔╝██║██║ ╚████║███████║
-" ╚═╝     ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝╚═╝  ╚═══╝╚══════╝
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
+" ========================================================================
+" plugins
+" ========================================================================
 set nocompatible
 filetype off
 call plug#begin('~/.vim/vim-plug')
@@ -154,9 +145,9 @@ Plug 'Yggdroot/indentLine' " show indentation lines
 "     let g:NERDTreeDirArrowExpandable = '▸'
 "     let g:NERDTreeDirArrowCollapsible = '▾'
 
-" -------------------------------------------------------------
-" SYNTAXES
-" -------------------------------------------------------------
+" ========================================================================
+" syntaxes
+" ========================================================================
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'isobit/vim-caddyfile'
 
@@ -182,9 +173,9 @@ Plug 'gabrielelana/vim-markdown'
 
 Plug 'cespare/vim-toml'
 
-" -------------------------------------------------------------
-"  THEMES
-" -------------------------------------------------------------
+" ========================================================================
+" themes
+" ========================================================================
 Plug 'sonph/onehalf', {'rtp': 'vim/'} " theme
 Plug 'logico/typewriter-vim' " theme
 Plug 'https://github.com/NLKNguyen/papercolor-theme' " theme
@@ -221,16 +212,13 @@ set background=light
 hi Normal guibg=none
 
 " ========================================================================
-
-"  ██████╗ ███████╗███╗   ██╗███████╗██████╗  █████╗ ██╗
-" ██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔══██╗██╔══██╗██║
-" ██║  ███╗█████╗  ██╔██╗ ██║█████╗  ██████╔╝███████║██║
-" ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ██╔══██╗██╔══██║██║
-" ╚██████╔╝███████╗██║ ╚████║███████╗██║  ██║██║  ██║███████╗
-"  ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" general
+" ========================================================================
 scriptencoding utf-8
 set encoding=utf-8
+
+set clipboard=unnamedplus
+" set clipboard=unnamed
 
 " fix graphical bugs in kitty
 let &t_ut=''
@@ -245,14 +233,7 @@ set history=200
 set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
 set updatetime=500
-"
-" =============== CLIPBOARD =================================
-"""""""""""""""""""""""""""""""""""""" FIX THIS LATER
-" set clipboard=unnamedplus
-set clipboard=unnamed
-"""""""""""nnoremap <silent><ctrl+v>
-" ===========================================================
-"
+
 set lazyredraw          " whether to redraw screen after macros
 set mat=2               " how fast to blink matched brackets
 set textwidth=0         " very annoying warning
@@ -267,7 +248,6 @@ set nostartofline       " gg/G do not always go to line start
 set modeline            " enable per-file custom syntax
 set shortmess+=I        " disable startup message
 " set noshowmode        " don't show 'insert' or etc on bottom left
-" set cursorline " highlight current line of cursor
 
 " remove need to hold shift for commands
 noremap ; :
@@ -277,13 +257,9 @@ noremap :W! :w!
 noremap :Q :q
 noremap :Q! :q!
 
-" ███████╗██╗   ██╗███╗   ██╗████████╗ █████╗ ██╗  ██╗
-" ██╔════╝╚██╗ ██╔╝████╗  ██║╚══██╔══╝██╔══██╗╚██╗██╔╝
-" ███████╗ ╚████╔╝ ██╔██╗ ██║   ██║   ███████║ ╚███╔╝ 
-" ╚════██║  ╚██╔╝  ██║╚██╗██║   ██║   ██╔══██║ ██╔██╗ 
-" ███████║   ██║   ██║ ╚████║   ██║   ██║  ██║██╔╝ ██╗
-" ╚══════╝   ╚═╝   ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" ========================================================================
+" syntax autoload
+" ========================================================================
 autocmd BufNewFile,BufRead *.config  set syntax=sh
 autocmd BufNewFile,BufRead *.conf    set syntax=sh
 autocmd BufNewFile,BufRead *.cfg     set syntax=sh
@@ -313,16 +289,17 @@ let g:asmsyntax = 'nasm'
 map <silent><leader>sy :set syntax=sh<cr>
 filetype plugin on       " vim plugin syntax
 
-" ▜ ▗                  ▌
-" ▐ ▄ ▛▀▖▞▀▖ ▛▀▖▌ ▌▛▚▀▖▛▀▖▞▀▖▙▀▖▞▀▘
-" ▐ ▐ ▌ ▌▛▀  ▌ ▌▌ ▌▌▐ ▌▌ ▌▛▀ ▌  ▝▀▖
-"  ▘▀▘▘ ▘▝▀▘ ▘ ▘▝▀▘▘▝ ▘▀▀ ▝▀▘▘  ▀▀
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" ========================================================================
+" UI
+" ========================================================================
+set cursorline " highlight current line of cursor
+
+" toggle numberline
 map <silent><leader>ln :set number!<cr>
-map <silent><leader>nl :set relativenumber!<cr>
+""""""""""""""""""""'map <silent><leader>nl :set relativenumber!<cr>
 
-
-"""""""""""""""""""""""""""""""""" set number! " start with line numbering enabled
+" uncomment to start with number line enabled
+""""""""""""""set number!
 
 " set color column width to 80 chars
 " editor will start with it hidden, but allow it
@@ -337,6 +314,8 @@ function! s:ToggleColorColumn()
         let s:color_column_old = 0
     endif
 endfunction
+
+" keybind to show the 80char column indicator
 nnoremap <silent><leader>ll :call <SID>ToggleColorColumn()<cr>
 
 set showmatch           " show matching parens
@@ -347,13 +326,9 @@ set formatoptions+=o    " continue comments new lines
 set synmaxcol=512
 set nowrap
 
-" ███████╗████████╗██╗   ██╗██╗     ███████╗
-" ██╔════╝╚══██╔══╝╚██╗ ██╔╝██║     ██╔════╝
-" ███████╗   ██║    ╚████╔╝ ██║     █████╗  
-" ╚════██║   ██║     ╚██╔╝  ██║     ██╔══╝  
-" ███████║   ██║      ██║   ███████╗███████╗
-" ╚══════╝   ╚═╝      ╚═╝   ╚══════╝╚══════╝
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" ========================================================================
+" style
+" ========================================================================
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -379,27 +354,19 @@ set breakindent       " set indents when wrapped
 " 	autocmd FileType text,mail,markdown,gmi setlocal spell
 " augroup END
 
-" ███╗   ██╗ ██████╗ ███╗   ██╗███████╗███████╗███╗   ██╗███████╗███████╗
-" ████╗  ██║██╔═══██╗████╗  ██║██╔════╝██╔════╝████╗  ██║██╔════╝██╔════╝
-" ██╔██╗ ██║██║   ██║██╔██╗ ██║███████╗█████╗  ██╔██╗ ██║███████╗█████╗  
-" ██║╚██╗██║██║   ██║██║╚██╗██║╚════██║██╔══╝  ██║╚██╗██║╚════██║██╔══╝  
-" ██║ ╚████║╚██████╔╝██║ ╚████║███████║███████╗██║ ╚████║███████║███████╗
-" ╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚══════╝╚═╝  ╚═══╝╚══════╝╚══════╝
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" ========================================================================
+" crap that should be disabled by default
+" ========================================================================
 set vb                   " disable audible bell
 set novisualbell         " kill the visual bell too
 set noerrorbells         " did I mention I hate bells?
-set nobackup             " we have vcs, we don't need backups.
-set nowritebackup        " we have vcs, we don't need backups.
+set nobackup             " we have vcs, we don't need backups
+set nowritebackup        " we have vcs, we don't need backups
 set noswapfile           " annoying
 
-" ██████╗ ██╗   ██╗███████╗███████╗███████╗██████╗ ███████╗
-" ██╔══██╗██║   ██║██╔════╝██╔════╝██╔════╝██╔══██╗██╔════╝
-" ██████╔╝██║   ██║█████╗  █████╗  █████╗  ██████╔╝███████╗
-" ██╔══██╗██║   ██║██╔══╝  ██╔══╝  ██╔══╝  ██╔══██╗╚════██║
-" ██████╔╝╚██████╔╝██║     ██║     ███████╗██║  ██║███████║
-" ╚═════╝  ╚═════╝ ╚═╝     ╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" ========================================================================
+" buffers/tabs
+" ========================================================================
 set hidden        " allow buffers with unsaved changes
 set autoread      " reload files if changed on disk
 
@@ -416,6 +383,9 @@ vnoremap > >gv
 
 map Q @q
 
+" ========================================================================
+" search
+" ========================================================================
 set ignorecase " case insensitive search
 set smartcase " if there are uppercase letters, become case-sensitive.
 set incsearch " live incremental searching
@@ -425,32 +395,27 @@ set gdefault " use the `g` flag by default.
 set wrapscan " searching wraps lines
 set magic " 'magic' patterns - (extended regex)
 nnoremap <silent><leader><leader> :let @/ = ""<CR>:noh<CR>
-
-" Search and Replace
+" Search and Replace (keybind: space + s)
 nmap <leader>s :%s//g<Left><Left>
 
-" ██╗  ██╗ █████╗  ██████╗██╗  ██╗███████╗
-" ██║  ██║██╔══██╗██╔════╝██║ ██╔╝██╔════╝
-" ███████║███████║██║     █████╔╝ ███████╗
-" ██╔══██║██╔══██║██║     ██╔═██╗ ╚════██║
-" ██║  ██║██║  ██║╚██████╗██║  ██╗███████║
-" ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" ========================================================================
+" hacks
+" ========================================================================
 " execute line as shell command and replace it with output
 " notice: capital Wk
-noremap <leader>W !!sh<cr>
+""""""""""""""""""""""""""""""""""""'noremap <leader>W !!sh<cr>
 
-" pipe line to fmt and replace current line
+" wrap line to 80char by piping to /usr/bin/fmt
 noremap <F>:.!fmt --width=80<cr>
 
-" prepend '> ' to lines as if to block quote
-noremap Q :norm 0i> <esc>$
+" prepend '> ' to lines as if to block quote (useful for mails with mutt)
+""""""""""""""""""""""""""" noremap Q :norm 0i> <esc>$
 
 """"" noremap <leader>T !!toilet -f smblock<cr>
 " noremap <leader>T !!toiletmenu -f<cr>
 
 " view open file in rendered markdown
-nmap <leader>md :!a=$(rgen) ; ghmd2html "%:p" >/tmp/$a.html && $BROWSER /tmp/$a.html<CR>
+"""""""""""""""""""""" nmap <leader>md :!a=$(rgen) ; ghmd2html "%:p" >/tmp/$a.html && $BROWSER /tmp/$a.html<CR>
 
 set wildignore+=*.opus,*.flac,*.mp3,*.ogg,*.mp4,*.webm
 set wildignore+=*.jpg,*.png,*.gif,*.jpeg,*.pdf
@@ -469,12 +434,9 @@ augroup resCur "reopen vim at previous cursor point
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup END
 
-" ██╗███╗   ██╗██╗   ██╗██╗███████╗██╗██████╗ ██╗     ███████╗███████╗
-" ██║████╗  ██║██║   ██║██║██╔════╝██║██╔══██╗██║     ██╔════╝██╔════╝
-" ██║██╔██╗ ██║██║   ██║██║███████╗██║██████╔╝██║     █████╗  ███████╗
-" ██║██║╚██╗██║╚██╗ ██╔╝██║╚════██║██║██╔══██╗██║     ██╔══╝  ╚════██║
-" ██║██║ ╚████║ ╚████╔╝ ██║███████║██║██████╔╝███████╗███████╗███████║
-" ╚═╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚══════╝╚═╝╚═════╝ ╚══════╝╚══════╝╚══════╝
+" ========================================================================
+" invisibles
+" ========================================================================
 set list
 set listchars=
 set listchars+=tab:·\ 
@@ -483,13 +445,9 @@ set listchars+=extends:»
 set listchars+=precedes:«
 set listchars+=nbsp:░
 
-" ██╗   ██╗ ██████╗ ██╗███╗   ██╗██╗  ██╗
-" ╚██╗ ██╔╝██╔═══██╗██║████╗  ██║██║ ██╔╝
-"  ╚████╔╝ ██║   ██║██║██╔██╗ ██║█████╔╝ 
-"   ╚██╔╝  ██║   ██║██║██║╚██╗██║██╔═██╗ 
-"    ██║   ╚██████╔╝██║██║ ╚████║██║  ██╗
-"    ╚═╝    ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" ========================================================================
+" yoink
+" ========================================================================
 nmap <c-[> <plug>(YoinkPostPasteSwapBack)
 nmap <c-]> <plug>(YoinkPostPasteSwapForward)
 
@@ -500,13 +458,9 @@ nmap P <plug>(YoinkPaste_P)
 nmap gp <plug>(YoinkPaste_gp)
 nmap gP <plug>(YoinkPaste_gP)
 
-" ██████╗  █████╗ ███╗   ██╗ ██████╗ ███████╗██████╗ 
-" ██╔══██╗██╔══██╗████╗  ██║██╔════╝ ██╔════╝██╔══██╗
-" ██████╔╝███████║██╔██╗ ██║██║  ███╗█████╗  ██████╔╝
-" ██╔══██╗██╔══██║██║╚██╗██║██║   ██║██╔══╝  ██╔══██╗
-" ██║  ██║██║  ██║██║ ╚████║╚██████╔╝███████╗██║  ██║
-" ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+" ========================================================================
+" ranger integration
+" ========================================================================
 if has('nvim')
     function! s:Ranger(...)
         let path = a:0 ? a:1 : getcwd()
@@ -578,15 +532,9 @@ if has('nvim')
     nnoremap <silent><leader>r :Ranger<CR>
 endif
 
-
-" ███████╗██████╗ ██╗     ██╗████████╗███████╗
-" ██╔════╝██╔══██╗██║     ██║╚══██╔══╝██╔════╝
-" ███████╗██████╔╝██║     ██║   ██║   ███████╗
-" ╚════██║██╔═══╝ ██║     ██║   ██║   ╚════██║
-" ███████║██║     ███████╗██║   ██║   ███████║
-" ╚══════╝╚═╝     ╚══════╝╚═╝   ╚═╝   ╚══════╝
-" -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
+" ========================================================================
+" splits
+" ========================================================================
 func! WinMove(key)
     let t:curwin = winnr()
     exec "wincmd ".a:key
