@@ -36,10 +36,13 @@ alias iotop='iotop -d 1 -o -P'
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # youtube-dl / ffmpeg
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+# find res of a video file
 alias res='ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0'
+
 alias youtube-dl='yt-dlp'
 ytdl() {
-    youtube-dl --no-playlist "$@"
+    youtube-dl --no-playlist -c -R 50 --geo-bypass --prefer-ffmpeg -o '%(title)s.%(ext)s' "$@"
 }
 
 # removes audio from a video clip
@@ -158,3 +161,5 @@ alias nf=neofetch
 
 alias sway='exec ~/bin/misc/launch_sway.sh'
 
+
+alias zramctl='zramctl --output-all'

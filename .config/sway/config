@@ -13,9 +13,9 @@ exec gentoo-pipewire-launcher restart
 exec nextcloud --background
 exec joplin-desktop
 exec mailspring --password-store="gnome-libsecret"
+#############exec launch_steam.sh silent
 
 # exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
-# exec STEAM_FORCE_DESKTOPUI_SCALING=1.0 steam
 # exec gammastep -m randr -l '36.06083743210746:-95.79738783706367'
 
 exec swayidle -w \

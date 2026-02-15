@@ -1,2 +1,2 @@
 CHECKVT=7
-DISPLAYMANAGER="lightdm"
+DISPLAYMANAGER="/usr/bin/true"

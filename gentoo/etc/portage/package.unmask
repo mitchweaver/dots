@@ -17,31 +17,25 @@ gui-wm/swayfx::guru
 gui-libs/scenefx::guru
 media-fonts/nerdfonts::guru
 app-misc/pfetch::guru
+games-util/steam-launcher::steam-overlay
 
 ####### FRESH START 2026 #################
 # recommenting all below
 #########################################
 
 # app-shells/runtitle::mv
-
-# games-util/steam-launcher::steam-overlay
 # games-server/steamcmd::steam-overlay
 # games-util/xpadneo::steam-overlay
 # gnome-extra/gnome-shell-extension-openweather::4nykey
 # x11-themes/papirus-icon-theme::4nykey
 # net-libs/nodejs-bin::broverlay
 # app-misc/anki-bin::guru
-# x11-misc/i3lock-fancy-rapid::guru
-# app-office/joplin-bin::guru
 # sys-process/gotop::guru
 # dev-python/markdownify::guru
-# mail-client/geary::guru
 # x11-misc/ksnip::guru
 # gui-apps/labwc-tweaks::wayland-desktop
 # gui-wm/labwc::wayland-desktop
 # www-client/ungoogled-chromium-bin::pf4public
-# sys-apps/coolercontrol::parona-overlay
-# sys-apps/coolercontrold::parona-overlay
 
 # ===========================================================
 # FONTS

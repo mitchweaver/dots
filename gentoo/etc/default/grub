@@ -10,6 +10,6 @@ GRUB_DISABLE_SUBMENU=y
 GRUB_BACKGROUND="/boot/grub/mybackground.png"
 
 # ======================= KERNEL ARGS ====================================
-GRUB_CMDLINE_LINUX="dozfs root=ZFS=rpool/gentoo/root net.ifnames=0 nowatchdog zswap.enabled=1 zswap.compressor=lz4"
+GRUB_CMDLINE_LINUX="dozfs root=ZFS=rpool/gentoo/root net.ifnames=0 nowatchdog zswap.enabled=1 zswap.compressor=lz4 split_lock_detect=off"
 ##########nvidia-drm.modeset=1
 # ======================= KERNEL ARGS ====================================

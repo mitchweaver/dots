@@ -12,9 +12,9 @@ rc-update add ntpd default
 rc-update add fail2ban default
 rc-update add cupsd default
 rc-update add bluetooth default
-rc-update add elogind default
 rc-update add dnsmasq default
 rc-update add resolvconf default
+rc-update add elogind boot
 
 ############rc-update add docker default
 #############rc-update add display-manager default
@@ -35,6 +35,8 @@ locale-gen
 env-update
 
 EDITOR=vi visudo
+
+hostname XXXXXXX
 ```
 
 

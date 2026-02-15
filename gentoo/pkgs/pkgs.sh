@@ -42,7 +42,8 @@ add \
     sys-apps/usbutils \
     sys-apps/smartmontools \
     app-admin/sysstat \
-    sys-devel/bc
+    sys-devel/bc \
+    sys-power/upower
 
 # ARCHIVE
 add \
@@ -51,7 +52,8 @@ add \
     app-arch/unzip \
     app-arch/zip \
     app-arch/lz4 \
-    app-arch/xz-utils
+    app-arch/xz-utils \
+    dev-libs/lzo
 
 # FILESYSTEM
 add \
@@ -118,7 +120,8 @@ add \
     sys-apps/progress \
     sys-apps/eza \
     sys-apps/bat \
-    www-client/w3m
+    www-client/w3m \
+    sys-fs/ncdu
 
 # misc legacy x11 stuff
 add \
@@ -265,10 +268,11 @@ add \
      x11-themes/arc-icon-theme \
      x11-themes/vanilla-dmz-xcursors
 
-# lightdm
-add \
-     gui-libs/display-manager-init \
-     x11-misc/lightdm
+################ # display manager
+################ add \
+################      gui-libs/display-manager-init \
+################      dev-libs/weston \
+################      x11-misc/sddm
 
 # # my ebuilds
 # add \

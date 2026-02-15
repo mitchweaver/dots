@@ -81,11 +81,12 @@ mkdir -p "$XDG_CACHE_HOME/null"
 
 export ENV="${HOME}/src/dots/shell/main.shellrc"
 export MENU_PROG=menu
-export YTDL_OPTS='-c -R 50 --geo-bypass --prefer-ffmpeg -o %(title)s.%(ext)s'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # hide GOPATH to ~/.local/go instead of ~/go
 export GOPATH="${HOME}/.local/go"
+
+touch ~/.hushlogin
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 for i in nvim vim vi nvi nano ; do
@@ -125,22 +126,15 @@ if [ -d ~/.ssh ] ; then
     ssh-add ~/.ssh/id_rsa
 fi 2>/dev/null
 
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# if [ ! -d "/tmp/tmp-$USER" ] ; then
-#     mkdir -p "/tmp/tmp-$USER"
-#     chmod -R 777 "/tmp/tmp-$USER"
-#     chown -R "$USER" "/tmp/tmp-$USER"
-# fi
-# if [ ! -L ~/tmp ] ; then
-#     ln -sf "/tmp/tmp-$USER" ~/tmp
-# fi
-#
-mkdir -p ~/tmp
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-: > ~/.hushlogin
-
-mkdir -p ~/tmp
+# ===================================================
+# create tmp dir
+# ===================================================
+if [ ! -e "/tmp/$USER-tmp" ] ; then
+    mkdir -p "/tmp/$USER-tmp"
+fi
+if [ ! -e ~/tmp ] ; then
+    ln -sf "/tmp/$USER-tmp" ~/tmp
+fi
 
 # -------------- wayland buffoonery below -------------------
 export MOZ_ENABLE_WAYLAND=1
