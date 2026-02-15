@@ -4,24 +4,32 @@
 exec background
 exec dbus-update-activation-environment --all
 exec dbus-launch mako
-exec bright -s 80
 exec waybar
+exec bright -s 80
+# exec gammastep -P -m randr -l '36.06083743210746:-95.79738783706367'
 
-####exec /usr/local/bin/pulseaudio --start --log-target=syslog
 exec gentoo-pipewire-launcher restart
-
-exec nextcloud --background
-exec joplin-desktop
-exec mailspring --password-store="gnome-libsecret"
-#############exec launch_steam.sh silent
-
-# exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
-# exec gammastep -m randr -l '36.06083743210746:-95.79738783706367'
+####exec /usr/local/bin/pulseaudio --start --log-target=syslog
 
 exec swayidle -w \
          timeout 600 'lock' \
          timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
+
+# exec nextcloud --background
+# exec joplin-desktop
+# exec mailspring --password-store="gnome-libsecret"
+#############exec launch_steam.sh silent
+#############exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
+
+# =================================================
+# misc
+# =================================================
+popup_during_fullscreen smart
+mouse_warping none
+titlebar_border_thickness 0
+titlebar_separator disable
+xwayland enable
 
 # =================================================
 # INPUT / OUTPUT
@@ -101,39 +109,91 @@ blur_xray disable
 # =================================================
 # Monitor Configuration --- swaymsg -t get_outputs
 # =================================================
-# main monitor === left
-# 390hz 1080p acer
-output 'Acer Technologies XV252Q F 11481FF254200' resolution 1920x1080@390.297Hz position 0,0 adaptive_sync off allow_tearing yes
+set $LEFT_MON 'Acer Technologies XV252Q F 11481FF254200'
+set $RIGHT_MON 'Acer Technologies VG240Y S 0x027157B7'
+set $LAPTOP 'eDP-1'
 
 # main monitor === left
-# 600hz zowie
-output 'BNQ XL2586X+ EB4CR00840SL0' resolution 1920x1080@599.944Hz position 0,0 adaptive_sync off allow_tearing yes
+# 390hz 1080p acer
+output $LEFT_MON resolution 1920x1080@390.297Hz position 0,0 adaptive_sync off allow_tearing yes
 
 # "to the right" of main monitor
 # 165hz old acer
-output 'Acer Technologies VG240Y S 0x027157B7' resolution 1920x1080@165.003Hz position 1920,0 adaptive_sync off allow_tearing yes
+output $RIGHT_MON resolution 1920x1080@165.003Hz position 1920,0 adaptive_sync off allow_tearing yes
 
 # laptop
-output eDP-1 resolution 1920x1080@60.033Hz position 0,0 scale 1 adaptive_sync off allow_tearing yes
-bindswitch --reload --locked lid:on output eDP-1 disable
-bindswitch --reload --locked lid:off output eDP-1 enable
+output $LAPTOP resolution 1920x1080@60.033Hz position 0,0 scale 1 adaptive_sync off allow_tearing yes
+bindswitch --reload --locked lid:on output $LAPTOP disable
+bindswitch --reload --locked lid:off output $LAPTOP enable
 
-# =================================================
+# ========================================================================
+# workspace configuration
+#
+# 10 workspaces per monitor, similar to dwm or
+# really any sane WM would handle it
+#
+# the default i3/sway behavior of mixing workspaces
+# between monitors is baffling to me
+# ========================================================================
+set $ws1a "1-a"
+set $ws2a "2-a"
+set $ws3a "3-a"
+set $ws4a "4-a"
+set $ws5a "5-a"
+set $ws6a "6-a"
+set $ws7a "7-a"
+set $ws8a "8-a"
+set $ws9a "9-a"
+
+set $ws1b "1-b"
+set $ws2b "2-b"
+set $ws3b "3-b"
+set $ws4b "4-b"
+set $ws5b "5-b"
+set $ws6b "6-b"
+set $ws7b "7-b"
+set $ws8b "8-b"
+set $ws9b "9-b"
+
+workspace $ws1a output $LEFT_MON
+workspace $ws2a output $LEFT_MON
+workspace $ws3a output $LEFT_MON
+workspace $ws4a output $LEFT_MON
+workspace $ws5a output $LEFT_MON
+workspace $ws6a output $LEFT_MON
+workspace $ws7a output $LEFT_MON
+workspace $ws8a output $LEFT_MON
+workspace $ws9a output $LEFT_MON
+
+workspace $ws1b output $RIGHT_MON
+workspace $ws2b output $RIGHT_MON
+workspace $ws3b output $RIGHT_MON
+workspace $ws4b output $RIGHT_MON
+workspace $ws5b output $RIGHT_MON
+workspace $ws6b output $RIGHT_MON
+workspace $ws7b output $RIGHT_MON
+workspace $ws8b output $RIGHT_MON
+workspace $ws9b output $RIGHT_MON
+
+workspace_auto_back_and_forth no
+
+# ========================================================================
 # Key binds
-# =================================================
+# ========================================================================
 bindsym $mod+Return exec $term
 bindsym $mod+w exec MOZ_ENABLE_WAYLAND=1 firefox
 bindsym $mod+e exec pcmanfm
 bindsym $mod+r exec kitty --single-instance ranger
 bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
-####bindsym $mod+p exec wofi -f -I -m -b -i -G --show run | xargs swaymsg exec --
 bindsym $mod+o exec dedit
+####bindsym $mod+p exec wofi -f -I -m -b -i -G --show run | xargs swaymsg exec --
 
 # toggle between alt / super to kill so i dont accidentally kill when gaming
 bindsym $mod+q kill
 # bindsym Mod4+q kill
 
-# bindsym $mod+q [class="steam_app_813780"] || kill
+# "kill window unless XXX"
+#########bindsym $mod+q [class="steam_app_813780"] || kill
 
 # =================================================
 # Exiting / Reloading
@@ -172,31 +232,42 @@ bindsym $mod+Shift+$up resize shrink height 8
 # =================================================
 # Switch to workspace
 # =================================================
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
-bindsym $mod+Backspace workspace number 10
+# first we switch to the 2nd monitor, then the 1st
+# this way the 1st monitor behaves completely as normal
+#
+# the only difference is when you're on monitor #2 you
+# have to click or move mouse to regain focus to stay on #2
+#
+# this is actually fine for me as 2nd monitor is usually
+# always email/chat/documentation etc so i dont mind
+#
+#
+# if anyone has a better solution to this jank garbage
+# please let me know
+bindsym $mod+1 workspace $ws1b; workspace $ws1a
+bindsym $mod+2 workspace $ws2b; workspace $ws2a
+bindsym $mod+3 workspace $ws3b; workspace $ws3a
+bindsym $mod+4 workspace $ws4b; workspace $ws4a
+bindsym $mod+5 workspace $ws5b; workspace $ws5a
+bindsym $mod+6 workspace $ws6b; workspace $ws6a
+bindsym $mod+7 workspace $ws7b; workspace $ws7a
+bindsym $mod+8 workspace $ws8b; workspace $ws8a
+bindsym $mod+9 workspace $ws9b; workspace $ws9a
+bindsym $mod+Backspace workspace $ws9b; workspace $ws9a
+
 # =================================================
 # Move to workspace
 # =================================================
-bindsym $mod+Shift+1 move container to workspace number 1
-bindsym $mod+Shift+2 move container to workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
-bindsym $mod+Shift+Backspace move container to workspace number 10
+bindsym $mod+Shift+1 move container to workspace number $ws1a
+bindsym $mod+Shift+2 move container to workspace number $ws2a
+bindsym $mod+Shift+3 move container to workspace number $ws3a
+bindsym $mod+Shift+4 move container to workspace number $ws4a
+bindsym $mod+Shift+5 move container to workspace number $ws5a
+bindsym $mod+Shift+6 move container to workspace number $ws6a
+bindsym $mod+Shift+7 move container to workspace number $ws7a
+bindsym $mod+Shift+8 move container to workspace number $ws8a
+bindsym $mod+Shift+9 move container to workspace number $ws9a
+bindsym $mod+Shift+Backspace move container to workspace number $ws9a
 
 # =================================================
 # Layouts
@@ -226,30 +297,29 @@ floating_modifier $mod normal
 # =================================================
 # WORKSPACE ASSIGNMENTS
 # =================================================
-assign [class="firefox"] 1
-assign [class="librewolf"] 1
-assign [class="discord"] 10
-assign [class="Discord"] 10
-assign [class="Friends - Discord"] 10
-assign [app_id="discord"] 10
-assign [app_id="Discord"] 10
-assign [app_id="Friends - Discord"] 10
-assign [class="mailspring"] 9
-assign [class="Mailspring"] 9
-assign [class="Geary"] 9
-assign [class="geary"] 9
-assign [app_id="Geary"] 9
-assign [app_id="geary"] 9
-assign [class="chromium"] 8
-assign [class="Chromium"] 8
-assign [class="chromium-bin"] 8
+assign [class="firefox"] $ws1a
+assign [class="librewolf"] $ws1a
 
-assign [class="Steam"] 4
-assign [app_id="Steam"] 4
-assign [class="steam"] 4
-assign [app_id="steam"] 4
-assign [class="steamwebhelper"] 4
-assign [app_id="steamwebhelper"] 4
+assign [class="discord"] $ws9b
+assign [class="Discord"] $ws9b
+assign [class="Friends - Discord"] $ws9b
+assign [app_id="discord"] $ws9b
+assign [app_id="Discord"] $ws9b
+assign [app_id="Friends - Discord"] $ws9b
+
+assign [class="mailspring"] $ws8a
+assign [class="Mailspring"] $ws8a
+
+assign [class="joplin"] $ws9a
+assign [class="Joplin"] $ws9a
+assign [class="joplin-desktop"] $ws9a
+
+# assign [class="Steam"] 4
+# assign [app_id="Steam"] 4
+# assign [class="steam"] 4
+# assign [app_id="steam"] 4
+# assign [class="steamwebhelper"] 4
+# assign [app_id="steamwebhelper"] 4
 
 # =================================================
 # FORCE FLOATING

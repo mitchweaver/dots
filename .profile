@@ -122,7 +122,9 @@ if [ -d ~/.ssh ] ; then
     if [ -f ~/.ssh/authorized_keys ] ; then
         chmod 0600 ~/.ssh/authorized_keys
     fi
-    eval "$(ssh-agent -s)" >/dev/null
+    if ! pgrep -u "$USER" -x ssh-agent >/dev/null ; then
+        eval "$(ssh-agent -s)" >/dev/null
+    fi
     ssh-add ~/.ssh/id_rsa
 fi 2>/dev/null
 
