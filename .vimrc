@@ -36,7 +36,6 @@ if has('nvim')
 endif
 
 Plug 'tpope/vim-repeat'          " allows '.' to do more things
-Plug 'tpope/vim-speeddating'     " allows C-a to increment dates and times
 Plug 'tpope/vim-eunuch'          " wrapper around common unix shell commands
 Plug 'tpope/vim-sleuth'          " autodetect tab indentation
 Plug 'tpope/vim-abolish'         " bracket {,} expansion in substitution
@@ -65,7 +64,8 @@ Plug 'dstein64/vim-startuptime'  " useful for debugging slow plugins
 Plug 'chrisbra/unicode.vim'      " easily search and copy unicode chars
 Plug 'ryanoasis/vim-devicons'    " adds icons to plugins
 Plug 'psliwka/vim-smoothie'      " smooth scrolling done right
-Plug 'https://github.com/farmergreg/vim-lastplace' " remember last place in files
+Plug 'farmergreg/vim-lastplace'  " remember last place in files
+Plug 'folke/todo-comments.nvim'  " highlight useful things
 
 Plug 'unblevable/quick-scope'    " make f F t T ; and , useable 
     " trigger highlight only with 'f' and 'F'
@@ -129,21 +129,10 @@ Plug 'Yggdroot/indentLine' " show indentation lines
     nmap <leader>il :let g:indentLine_enabled = 1<CR>
     nmap <leader>li :let g:indentLine_enabled = 0<CR>
 
-" Note: I like using ranger script at the bottom more than nerd tree
-" Plug 'preservim/nerdtree'
-"     nnoremap <C-n> :NERDTreeToggle<CR>
-"     nnoremap <leader>n :NERDTreeToggle<CR>
-"     nnoremap <leader>f :NERDTreeFind<CR>
-"     " Exit Vim if NERDTree is the only window left.
-"     autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-"         \ quit | endif
-"     " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-"     autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-"         \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-"     " Open the existing NERDTree on each new tab.
-"     autocmd BufWinEnter * silent NERDTreeMirror
-"     let g:NERDTreeDirArrowExpandable = '▸'
-"     let g:NERDTreeDirArrowCollapsible = '▾'
+Plug 'monaqa/dial.nvim' " C-A/C-X improved
+    nnoremap  <C-a> <Plug>(dial-increment)
+    nnoremap  <C-x> <Plug>(dial-decrement)
+
 
 " ========================================================================
 " syntaxes
@@ -225,7 +214,6 @@ let &t_ut=''
 
 "---- a = enabled
 "---- v = disabled
-" set mouse=a
 set mouse=v
 
 set signcolumn=auto     " yes=always, no=never, auto=ifchanges
@@ -247,7 +235,7 @@ set cmdheight=1         " cmd output only take up 1 line
 set nostartofline       " gg/G do not always go to line start
 set modeline            " enable per-file custom syntax
 set shortmess+=I        " disable startup message
-" set noshowmode        " don't show 'insert' or etc on bottom left
+set noshowmode          " don't show 'insert' or etc on bottom left
 
 " remove need to hold shift for commands
 noremap ; :
@@ -292,7 +280,7 @@ filetype plugin on       " vim plugin syntax
 " ========================================================================
 " UI
 " ========================================================================
-set cursorline " highlight current line of cursor
+""""""""""""""" set cursorline " highlight current line of cursor
 
 " toggle numberline
 map <silent><leader>ln :set number!<cr>
@@ -459,6 +447,69 @@ nmap gp <plug>(YoinkPaste_gp)
 nmap gP <plug>(YoinkPaste_gP)
 
 " ========================================================================
+" splits
+" ========================================================================
+func! WinMove(key)
+    let t:curwin = winnr()
+    exec "wincmd ".a:key
+    if (t:curwin == winnr())
+        if (match(a:key,'[jk]'))
+            wincmd v
+        else
+            wincmd s
+        endif
+        exec "wincmd ".a:key
+    endif
+endfu
+
+nnoremap <silent><C-h> :call WinMove('h')<CR>
+nnoremap <silent><C-j> :call WinMove('j')<CR>
+nnoremap <silent><C-k> :call WinMove('k')<CR>
+nnoremap <silent><C-l> :call WinMove('l')<CR>
+set fillchars+=vert:│
+
+" open new split panes to right and bottom
+" feels more natural than vim’s default
+set splitbelow
+set splitright
+
+" resize split vertically
+nnoremap <silent><C--> :resize -5<CR>
+nnoremap <silent><C-=> :resize +5<CR>
+
+" resize split horizontally
+nnoremap <silent><C-[> :vertical resize +5<CR>
+nnoremap <silent><C-]> :vertical resize -5<CR>
+
+" allow leaving terminal mode to move between splits (LIFESAVER!)
+tnoremap <silent><C-\> <C-\><C-n>
+
+" start insert automatically when entering terminal
+" (so you don't have to press 'i'), only works with neovim
+if has('nvim')
+    augroup nvim_terminal | au!
+        " entering terminal buffer for the first time
+        autocmd TermEnter term://* startinsert
+        " switching to terminal window/buffer
+        autocmd BufEnter term://* startinsert
+    augroup end
+endif
+
+" ========================================================================
+" WSL
+" ========================================================================
+" set yank to windows clipboard, stolen from:
+" https://old.reddit.com/r/vim/comments/162uzms/how_to_copy_from_vim_to_other_programwsl2_ubuntu/jy028tl
+"
+" this is easiest solution, no confusing plugins or different keybinds needed, just works
+if system('uname -r') =~ "Microsoft"
+  augroup Yank
+    autocmd!
+    autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
+  augroup END
+endif
+
+" ========================================================================
 " ranger integration
 " ========================================================================
 if has('nvim')
@@ -530,65 +581,5 @@ if has('nvim')
 
     let g:ranger_map_keys = 0
     nnoremap <silent><leader>r :Ranger<CR>
-endif
-
-" ========================================================================
-" splits
-" ========================================================================
-func! WinMove(key)
-    let t:curwin = winnr()
-    exec "wincmd ".a:key
-    if (t:curwin == winnr())
-        if (match(a:key,'[jk]'))
-            wincmd v
-        else
-            wincmd s
-        endif
-        exec "wincmd ".a:key
-    endif
-endfu
-
-nnoremap <silent><C-h> :call WinMove('h')<CR>
-nnoremap <silent><C-j> :call WinMove('j')<CR>
-nnoremap <silent><C-k> :call WinMove('k')<CR>
-nnoremap <silent><C-l> :call WinMove('l')<CR>
-set fillchars+=vert:│
-
-" open new split panes to right and bottom
-" feels more natural than vim’s default
-set splitbelow
-set splitright
-
-" resize split vertically
-nnoremap <silent><C--> :resize -5<CR>
-nnoremap <silent><C-=> :resize +5<CR>
-
-" resize split horizontally
-nnoremap <silent><C-[> :vertical resize +5<CR>
-nnoremap <silent><C-]> :vertical resize -5<CR>
-
-" allow leaving terminal mode to move between splits (LIFESAVER!)
-tnoremap <silent><C-\> <C-\><C-n>
-
-" start insert automatically when entering terminal
-" (so you don't have to press 'i'), only works with neovim
-if has('nvim')
-    augroup nvim_terminal | au!
-        " entering terminal buffer for the first time
-        autocmd TermEnter term://* startinsert
-        " switching to terminal window/buffer
-        autocmd BufEnter term://* startinsert
-    augroup end
-endif
-
-" set yank to windows clipboard, stolen from:
-" https://old.reddit.com/r/vim/comments/162uzms/how_to_copy_from_vim_to_other_programwsl2_ubuntu/jy028tl
-"
-" this is easiest solution, no confusing plugins or different keybinds needed, just works
-if system('uname -r') =~ "Microsoft"
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
-  augroup END
 endif
 

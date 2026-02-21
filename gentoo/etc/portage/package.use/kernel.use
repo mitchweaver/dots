@@ -1,10 +1,15 @@
+# dont automatically build after downloading sources
 sys-kernel/gentoo-sources -build
 sys-kernel/zen-sources -build
 sys-kernel/pf-sources -build
-sys-apps/kmod zstd
+
+# dont use dracut
+sys-kernel/installkernel -dracut
 
 # NOTE: kernel fails build w/o this
 #       prob way to disable not sure
 sys-libs/libxcrypt abi_x86_32
 virtual/libcrypt   abi_x86_32
+
+sys-apps/kmod zstd
 

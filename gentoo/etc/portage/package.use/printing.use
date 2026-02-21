@@ -1,9 +1,6 @@
 net-print/cups dbus -usb
+net-print/cups-filters foomatic
 net-dns/avahi python
 net-print/hplip minimal
 net-print/hplip-plugin -orblite
-dev-qt/qtmultimedia widgets
 
-# ----------------------------------
-net-print/cups-filters foomatic
-# ----------------------------------

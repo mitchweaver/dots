@@ -1,16 +1,33 @@
-# ========= WAYLAND LIBS ==============
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# WAYLAND LIBS
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# no builtin if using openrc with elogind
+sys-auth/seatd -builtin server
+sys-auth/elogind policykit
 x11-base/xwayland libei
 
-gui-apps/swaybg gdk-pixbuf
-
-# needs policykit for seatd
-sys-auth/elogind policykit
-sys-auth/seatd server elogind
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# LEGACY X11 LIBS
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+x11-base/xorg-server xvfb -xnest -xephyr
+x11-apps/xinit -twm
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # SWAY
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-gui-wm/sway tray swaybar swaynag -grimshot -wallpapers
-gui-wm/swayfx tray swaybar swaynag -grimshot -wallpapers
 gui-libs/wlroots tinywl x11 x11-backend
-gui-apps/waybar experimental logind tray wifi evdev network pipewire pulseaudio -mpd -mpris
+gui-wm/swayfx tray logind swaybar swaynag -grimshot -wallpapers
+gui-apps/swaybg gdk-pixbuf
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# LABWC
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+gui-wm/labwc icons svg
+gui-apps/waybar tray logind experimental wifi evdev network pipewire pulseaudio -mpd -mpris
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# SDDM
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# need kiosk flag if using sddm with weston
+dev-libs/weston kiosk
+

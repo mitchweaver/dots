@@ -1,7 +1,12 @@
-dev-python/numpy lapack
+dev-lang/python xml -tk -bluetooth
 
+# only thing on system needing berkdb, required by python
+sys-libs/gdbm berkdb
+
+dev-python/numpy lapack
 dev-python/PyQt5                       python_targets_python3_11 svg gui widgets network webchannel printsupport
 
+# ========================================================================
 dev-python/decorator                   python_targets_python3_11
 dev-python/protobuf                    python_targets_python3_11
 dev-python/distro                      python_targets_python3_11
@@ -89,6 +94,7 @@ dev-python/mypy                        python_targets_python3_11
 dev-python/librt                       python_targets_python3_11
 dev-python/mypy-extensions             python_targets_python3_11
 dev-python/psutil                      python_targets_python3_11
+# ========================================================================
 
 # non-system
 dev-python/pywal                       python_targets_python3_11

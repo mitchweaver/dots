@@ -8,19 +8,21 @@
 rc-update add sshd default
 rc-update add sysklogd default
 rc-update add cronie default
-rc-update add ntpd default
 rc-update add fail2ban default
 rc-update add cupsd default
 rc-update add bluetooth default
 rc-update add dnsmasq default
 rc-update add resolvconf default
-rc-update add elogind boot
+rc-update add seatd default
+rc-update add ntpd default
+rc-update add chronyd default
 
 ############rc-update add docker default
 #############rc-update add display-manager default
+#################rc-update add elogind boot
 
 # remember to also edit /etc/passwd for uid/gid for NFS exports to match
-useradd -m -G users,wheel,audio,video,lpadmin,input -s /bin/bash mitch
+useradd -m -G users,wheel,audio,video,lpadmin,input,seat -s /bin/bash mitch
 passwd mitch
 
 echo "US/Central" > /etc/timezone

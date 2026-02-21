@@ -1,2 +1,12 @@
 app-admin/sysklogd logrotate
-sys-auth/pambase elogind
+# sys-auth/pambase elogind
+
+# symlink /bin/sh to /usr/bin/dash (fastest shell)
+app-alternatives/sh dash
+
+app-admin/sudo -offensive
+app-admin/doas persist
+
+dev-lang/perl minimal
+sys-libs/zlib minizip
+

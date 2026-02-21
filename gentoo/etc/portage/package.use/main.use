@@ -1,62 +1,39 @@
-sys-devel/clang -extra -xml -static-analyzer
-
-dev-lang/perl minimal
-
-sys-libs/compiler-rt-sanitizers profile
+# ========================================================================
+# misc apps
+# ========================================================================
+app-editors/neovim python -nvimpager
+app-admin/sysstat lm-sensors
 sys-apps/smartmontools -daemon -update-drivedb -caps
 
-# =====================================================================================
-# nextcloud
-# =====================================================================================
-net-misc/nextcloud-client -dolphin -nautilus
-dev-libs/qtkeychain qt5
-
-app-editors/neovim python -nvimpager
-
-x11-terms/kitty X
-
-media-gfx/imagemagick jpeg jpeg2k png tiff webp xml
-x11-misc/dmenu -savedconfig
-app-admin/sysstat lm-sensors
-
-dev-libs/glib dbus
-
-# for images in kitty
-dev-python/pillow jpeg jpeg2k tiff webp
-
-# drop priv
-x11-misc/lightdm non-root
-
-app-crypt/gcr gtk -vala
-
-# note: python failing to compile with -hardened
-dev-lang/python xml -tk -bluetooth -hardened
-
-dev-libs/liborcus -spreadsheet-model
-
-media-libs/libsdl2 opengl gles2
-
-# jellyfin-media-player
-dev-qt/qtwebengine jumbo-build -designer -widgets
-dev-qt/qtbase xml libproxy
-
+# ========================================================================
+# misc libs
+# ========================================================================
+app-crypt/gcr gtk
 app-misc/jq oniguruma
 app-text/xmlto text
 app-text/poppler cairo
-sys-libs/zlib minizip
+app-text/ebook-tools -lit2epub
+dev-libs/liborcus -spreadsheet-model
+dev-libs/folks -bluetooth -utils
+dev-libs/glib dbus
+net-libs/nodejs npm -snapshot
+x11-libs/libfm gtk -automount
 
+# ========================================================================
+# browsers
+# ========================================================================
+www-client/firefox     gmp-autoupdate
+www-client/firefox-bin gmp-autoupdate
+www-client/librewolf     gmp-autoupdate -eme-free
+www-client/librewolf-bin gmp-autoupdate -eme-free
+
+# ========================================================================
 # needed for discord
+# ========================================================================
 dev-libs/libdbusmenu gtk3
 
-# only thing on system needing berkdb, required by python
-sys-libs/gdbm berkdb
-
-net-libs/nodejs npm -snapshot
-
-media-libs/gegl cairo
-media-libs/harfbuzz truetype
-media-libs/tiff jpeg
-x11-libs/gdk-pixbuf jpeg
-
-x11-libs/libfm gtk -automount
+# ========================================================================
+# complete junk
+# ========================================================================
+app-accessibility/espeak-ng -async -klatt -l10n_ru -l10n_zh -mbrola -sound
 

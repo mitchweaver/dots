@@ -4,20 +4,24 @@ add() {
     emerge -av --noreplace --update --verbose-conflicts "$@" || return 1
 }
 
-# ======= overlays ========================
+# ========================================================================
+# overlays
+# ========================================================================
 eselect repository enable guru
 emerge --sync guru
 
 eselect repository enable edgets
 emerge --sync edgets
-# =========================================
 
+# ========================================================================
 # most important must be installed first
+# ========================================================================
 add \
     sys-devel/mold
 
-
+# ========================================================================
 # GENTOO-SPECIFIC
+# ========================================================================
 add \
     app-eselect/eselect-python \
     app-eselect/eselect-repository \
@@ -25,16 +29,21 @@ add \
     app-portage/portage-utils \
     sys-block/zram-init
 
+# ========================================================================
 # SYSTEM DAEMONS
+# ========================================================================
 add \
     app-admin/sysklogd \
     sys-process/cronie \
-    net-misc/openntpd
+    net-misc/chrony
 
-# system utils
+# ========================================================================
+# SYSTEM UTILS
+# ========================================================================
 add \
     app-admin/doas \
     app-admin/sudo \
+    app-shells/dash \
     sys-process/htop  \
     sys-process/lsof \
     sys-apps/lm-sensors \
@@ -45,7 +54,9 @@ add \
     sys-devel/bc \
     sys-power/upower
 
+# ========================================================================
 # ARCHIVE
+# ========================================================================
 add \
     app-arch/p7zip \
     app-arch/unrar \
@@ -55,20 +66,20 @@ add \
     app-arch/xz-utils \
     dev-libs/lzo
 
+# ========================================================================
 # FILESYSTEM
+# ========================================================================
 add \
     sys-fs/dosfstools \
     sys-fs/ntfs3g \
     net-fs/nfs-utils \
-    net-fs/libnfs
+    net-fs/libnfs \
+    net-fs/cifs-utils \
+    net-fs/samba
 
-# ========================================
-# if using samba instead of nfs
-######################net-fs/cifs-utils \
-######################net-fs/samba \
-# ========================================
-
+# ========================================================================
 # MISC SYSTEM LIBS
+# ========================================================================
 add \
     x11-libs/libnotify \
     app-crypt/libsecret \
@@ -76,7 +87,9 @@ add \
     dev-python/scipy \
     dev-cpp/nlohmann_json
 
+# ========================================================================
 # NETWORKING
+# ========================================================================
 add \
     net-analyzer/openbsd-netcat \
     net-analyzer/nmap \
@@ -94,7 +107,9 @@ add \
     sys-apps/ethtool \
     net-libs/ldns
 
-# scripting utilities
+# ========================================================================
+# SCRIPTING UTILS
+# ========================================================================
 add \
     app-admin/entr \
     app-misc/detox \
@@ -103,13 +118,17 @@ add \
     app-misc/dateutils \
     media-gfx/qrencode
 
-############## wireless (if laptop)
-# add \
-#     net-wireless/iw \
-#     net-wireless/wireless-tools \
-#     net-wireless/wpa_supplicant
+# ========================================================================
+# WIRELESS (laptop)
+# ========================================================================
+add \
+    net-wireless/iw \
+    net-wireless/wireless-tools \
+    net-wireless/wpa_supplicant
 
-# terminal userland
+# ========================================================================
+# TERMINAL USERLAND
+# ========================================================================
 add \
     x11-terms/kitty \
     app-editors/neovim \
@@ -121,33 +140,38 @@ add \
     sys-apps/eza \
     sys-apps/bat \
     www-client/w3m \
-    sys-fs/ncdu
+    sys-fs/ncdu \
+    dev-python/pynvim
 
-# misc legacy x11 stuff
+# ========================================================================
+# LEGACY X11
+# ========================================================================
 add \
     x11-apps/xrdb \
     x11-apps/xrandr
 
-# terminal userland needed libraries
-add \
-    dev-python/pynvim
-
-# development
+# ========================================================================
+# DEVELOPMENT
+# ========================================================================
 add \
     dev-util/shellcheck-bin \
     app-containers/docker \
     app-containers/docker-compose \
     app-misc/jq \
     dev-python/pylint \
-    www-apps/hugo
+    www-apps/hugo \
+    dev-java/openjdk-jre-bin
 
-# security
+# ========================================================================
+# SECURITY
+# ========================================================================
 add \
-    net-analyzer/fail2ban
+    net-analyzer/fail2ban \
+    sys-apps/flatpak
 
-###################    sys-apps/flatpak
-
-# wayland  utils
+# ========================================================================
+# WAYLAND UTILS
+# ========================================================================
 add \
     gui-libs/egl-wayland \
     gui-apps/grim \
@@ -155,14 +179,18 @@ add \
     x11-misc/gammastep \
     sys-power/acpilight
 
+# ========================================================================
 # GFX
+# ========================================================================
 add \
     media-gfx/gimp \
     media-gfx/imagemagick \
     media-gfx/jpegoptim \
     media-libs/exiftool
 
+# ========================================================================
 # VIDEO
+# ========================================================================
 add \
     media-video/mpv \
     media-video/ffmpeg \
@@ -171,7 +199,9 @@ add \
     media-video/obs-studio \
     media-video/shotcut
 
-# video libraries
+# ========================================================================
+# VIDEO LIBRARIES
+# ========================================================================
 add \
     media-video/x264-encoder \
     media-libs/x264 \
@@ -184,7 +214,9 @@ add \
     media-plugins/gst-plugins-v4l2 \
     media-video/v4l2loopback
 
+# ========================================================================
 # AUDIO
+# ========================================================================
 add \
     app-cdr/cuetools \
     media-sound/alsa-utils \
@@ -198,27 +230,29 @@ add \
     media-video/v4l2loopback \
     sys-auth/rtkit
 
-# large binaries
-add \
-    dev-java/openjdk-jre-bin \
-    app-office/libreoffice-bin
-
-# office
+# ========================================================================
+# OFFICE
+# ========================================================================
 add \
     www-client/firefox \
+    app-office/libreoffice \
     net-misc/nextcloud-client \
     mail-client/mailspring \
     app-text/htmltidy \
     app-office/joplin-desktop
 
+# ========================================================================
 # PRINTING
+# ========================================================================
 add \
     net-print/cups \
     net-print/cups-filters \
     net-print/cups-pdf \
     net-print/hplip
 
+# ========================================================================
 # FONTS
+# ========================================================================
 add \
     app-misc/figlet \
     x11-apps/mkfontscale \
@@ -238,41 +272,31 @@ add \
     media-fonts/unifont \
     media-fonts/spleen
 
-# SWAY
+# ========================================================================
+# MISC USERLAND
+# ========================================================================
 add \
-    gui-wm/swayfx \
-    gui-apps/swaybg \
-    gui-apps/swayidle \
-    gui-apps/swaylock \
-    gui-libs/xdg-desktop-portal-wlr \
-    gui-apps/wl-clipboard \
-    gui-apps/waybar \
-    gui-apps/mako
-
-# misc userland
-add \
-    x11-misc/pcmanfm \
     app-misc/neofetch \
     app-text/mupdf
 
-# firmware
+# ========================================================================
+# FIRMWARE
+# ========================================================================
 add \
     sys-kernel/linux-firmware \
     sys-firmware/alsa-firmware \
     sys-firmware/sof-firmware
 
-# themes
+##########    dev-libs/libratbag
+
+# ========================================================================
+# THEMES
+# ========================================================================
 add \
      lxde-base/lxappearance \
      x11-themes/arc-theme \
      x11-themes/arc-icon-theme \
      x11-themes/vanilla-dmz-xcursors
-
-################ # display manager
-################ add \
-################      gui-libs/display-manager-init \
-################      dev-libs/weston \
-################      x11-misc/sddm
 
 # # my ebuilds
 # add \
@@ -285,3 +309,4 @@ add \
 #     app-text/zathura \
 #     app-text/zathura-meta
 
+    # x11-misc/pcmanfm \

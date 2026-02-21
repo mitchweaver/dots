@@ -1,2 +1,0 @@
-# need kiosk flag if using sddm with weston
-dev-libs/weston kiosk

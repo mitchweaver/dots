@@ -1,8 +1,7 @@
 # instrospection / vala gnome garbage you unfortunately have to have
-
 dev-libs/glib introspection
-media-libs/babl introspection lcms
-media-libs/gegl introspection lcms
+media-libs/babl introspection
+media-libs/gegl introspection
 media-libs/gexiv2 introspection
 x11-libs/gdk-pixbuf introspection
 x11-libs/gtk+ introspection

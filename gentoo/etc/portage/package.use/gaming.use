@@ -156,6 +156,7 @@ sys-apps/lm-sensors               abi_x86_32
 media-libs/libdisplay-info        abi_x86_32
 media-sound/apulse                abi_x86_32
 dev-util/glslang                  abi_x86_32
+dev-libs/json-c                   abi_x86_32
 
 # ==============================================================
 # not sure if still needed

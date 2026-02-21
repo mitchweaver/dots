@@ -1,2 +1,0 @@
-# set clock on startup
-NTPD_OPTS="-s"

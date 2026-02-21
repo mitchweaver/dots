@@ -4,7 +4,7 @@
 
 **Swap on ZFS is extremely unstable and NOT recommended.**  
 I ignored warnings originally but I've experienced deadlocks/freezes as
-  well. This happens more often on low spec machines.
+well. This happens more often on low spec machines.
 
 1. https://github.com/openzfs/zfs/issues/7734
 2. https://github.com/openzfs/zfs/issues/260#issuecomment-758782144
@@ -59,7 +59,9 @@ n
 t
 19 (swap)
 ```
+
 then
+
 ```
 mkswap /dev/nvme0n1p3
 ```
@@ -129,6 +131,7 @@ zpool create -f \
 ```
 
 turn on autotrim on root pool
+
 ```
 zpool set autotrim=on rpool
 zpool set autotrim=on bpool
@@ -210,6 +213,7 @@ emerge --rage-clean nano
 ## keywords
 
 zfs packages will complain about not having "~amd64" in keywords
+
 ```
 echo 'ACCEPT_KEYWORDS="~amd64"' >> /etc/portage/make.conf
 ```

@@ -1,0 +1,14 @@
+[auth]
+username = 'admin'
+password = 'admin'
+plaintext = true
+
+[server]
+host = 'https://gonic.local.wvr.sh'
+scrobble = false
+
+[client]
+random-songs = 50
+
+[ui]
+spinner = '▁▂▃▄▅▆▇█▇▆▅▄▃▂▁'

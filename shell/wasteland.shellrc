@@ -163,3 +163,7 @@ alias sway='exec ~/bin/misc/launch_sway.sh'
 
 
 alias zramctl='zramctl --output-all'
+
+alias ostui='ostui --config ~/.config/ostui --no-mpris --no-playlists'
+
+

@@ -8,13 +8,13 @@ media-sound/bluez-alsa -man
 #
 # NOTE: need "extra" and "gstreamer" if using on Asahi Linux (M1 Macs)
 # see: https://github.com/AsahiLinux/docs/wiki/Installing-Gentoo-with-LiveCD
-media-video/pipewire acl X bluetooth elogind dbus pipewire-alsa sound-server extra gstreamer flatpak -jack-sdk -jack-client -pulseaudio
+media-video/pipewire acl X bluetooth dbus pipewire-alsa sound-server extra gstreamer flatpak -jack-sdk -jack-client -pulseaudio
 
 # pulseaudio for APIs, but the server will be pipewire
 media-sound/pulseaudio glib -daemon
 media-libs/libpulse glib
 
-media-video/wireplumber elogind -pulseaudio
+media-video/wireplumber -pulseaudio
 
 # needed for pavucontrol
 x11-libs/cairo glib

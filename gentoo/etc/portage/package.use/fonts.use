@@ -1,10 +1,17 @@
+# ========================================================================
+# LIBRARIES
+# ========================================================================
+media-libs/freetype harfbuzz
+media-libs/harfbuzz truetype
 # not sure why neovim is complaining about cjk for this package
 dev-libs/libutf8proc -cjk
 
+# ========================================================================
+# FONTS
+# ========================================================================
 media-fonts/terminus-font center-tilde distinct-l pcf-unicode otf quote
+media-fonts/roboto -binary
 
 # annoyingly no way to wrap lines in this file...
 media-fonts/nerd-fonts dejavusansmono hack ibmplexmono terminus robotomono sharetechmono sourcecodepro profont cascadiacode go-mono gohu -anonymouspro -arimo -aurulentsansmono -bigblueterminal -bitstreamverasansmono -codenewroman -cousine -daddytimemono -droidsansmono -fantasquesansmono -firacode -firamono -hasklig -heavydata -hermit -ia-writer -inconsolata -inconsolatago -inconsolatalgc -jetbrainsmono -lekton -liberationmono -lilex -meslo -monofur -monoid -mononoki -mplus -noto -opendyslexic -overpass -proggyclean -spacemono -symbols -symbolsmono -tinos -ubuntu -ubuntumono -victormono -agave -iosevka 
 media-fonts/nerdfonts dejavusansmono hack ibmplexmono terminus robotomono sharetechmono sourcecodepro profont cascadiacode go-mono gohu -anonymouspro -arimo -aurulentsansmono -bigblueterminal -bitstreamverasansmono -codenewroman -cousine -daddytimemono -droidsansmono -fantasquesansmono -firacode -firamono -hasklig -heavydata -hermit -ia-writer -inconsolata -inconsolatago -inconsolatalgc -jetbrainsmono -lekton -liberationmono -lilex -meslo -monofur -monoid -mononoki -mplus -noto -opendyslexic -overpass -proggyclean -spacemono -symbols -symbolsmono -tinos -ubuntu -ubuntumono -victormono -agave -iosevka 
-
-media-fonts/roboto -binary

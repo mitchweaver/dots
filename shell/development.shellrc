@@ -7,6 +7,8 @@ alias mkt='make test'
 alias mkki='make ; make install'
 alias mka='make clean ; make ; make install'
 
+alias py=python3
+
 # activate my PS1 git branch detection after branch switching
 gud() { command gud "$@" ; cd . ; }
 

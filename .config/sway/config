@@ -18,7 +18,7 @@ exec swayidle -w \
 
 # exec nextcloud --background
 # exec joplin-desktop
-# exec mailspring --password-store="gnome-libsecret"
+exec mailspring --password-store="gnome-libsecret"
 #############exec launch_steam.sh silent
 #############exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
