@@ -11,6 +11,8 @@ exec bright -s 80
 exec gentoo-pipewire-launcher restart
 ####exec /usr/local/bin/pulseaudio --start --log-target=syslog
 
+exec kitty
+
 exec swayidle -w \
          timeout 600 'lock' \
          timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
@@ -18,7 +20,7 @@ exec swayidle -w \
 
 # exec nextcloud --background
 # exec joplin-desktop
-exec mailspring --password-store="gnome-libsecret"
+# exec mailspring --password-store="gnome-libsecret"
 #############exec launch_steam.sh silent
 #############exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
@@ -30,6 +32,7 @@ mouse_warping none
 titlebar_border_thickness 0
 titlebar_separator disable
 xwayland enable
+focus_follows_mouse no
 
 # =================================================
 # INPUT / OUTPUT
@@ -60,6 +63,7 @@ input type:pointer {
 # =================================================
 # note: mod1 = alt, mod4 = super
 set $mod Mod1
+set $super Mod4
 
 set $left h
 set $down j
@@ -75,14 +79,14 @@ set $term kitty
 # gaps outer 0
 gaps inner 17
 gaps outer 11
-## hide_edge_borders smart
-# smart_borders no_gaps
+# hide_edge_borders smart
+smart_borders no_gaps
 
 smart_gaps on
 # smart_gaps inverse_outer
 
-bindsym $mod+g gaps inner current plus 4
-bindsym $mod+shift+g gaps inner current minus 4
+#bindsym $mod+g gaps inner current plus 4
+#bindsym $mod+shift+g gaps inner current minus 4
 
 # disable borders = pixel 0
 default_border pixel 0
@@ -92,7 +96,7 @@ include "$HOME/.cache/wal/colors-sway"
 client.focused $color0 $background $foreground $color5   $color2
 client.unfocused $color0 $background $foreground $color5 $color1
 
-seat seat0 xcursor_theme DMZ-White 24
+#seat seat0 xcursor_theme DMZ-White 24
 
 # =================================================
 # SWAYFX SPECIFIC
@@ -100,10 +104,10 @@ seat seat0 xcursor_theme DMZ-White 24
 shadows enable
 shadow_blur_radius 30
 shadows_on_csd enable
-###  shadow_offset <x offset> <y offset>
+##  shadow_offset <x offset> <y offset>
 blur disable
 blur_xray disable
-# corner_radius 10
+############ corner_radius 10
 # layer_effects 'waybar' 'blur enable; shadows enable;'
 
 # =================================================
@@ -128,54 +132,11 @@ bindswitch --reload --locked lid:off output $LAPTOP enable
 
 # ========================================================================
 # workspace configuration
-#
-# 10 workspaces per monitor, similar to dwm or
-# really any sane WM would handle it
-#
-# the default i3/sway behavior of mixing workspaces
-# between monitors is baffling to me
 # ========================================================================
-set $ws1a "1-a"
-set $ws2a "2-a"
-set $ws3a "3-a"
-set $ws4a "4-a"
-set $ws5a "5-a"
-set $ws6a "6-a"
-set $ws7a "7-a"
-set $ws8a "8-a"
-set $ws9a "9-a"
-
-set $ws1b "1-b"
-set $ws2b "2-b"
-set $ws3b "3-b"
-set $ws4b "4-b"
-set $ws5b "5-b"
-set $ws6b "6-b"
-set $ws7b "7-b"
-set $ws8b "8-b"
-set $ws9b "9-b"
-
-workspace $ws1a output $LEFT_MON
-workspace $ws2a output $LEFT_MON
-workspace $ws3a output $LEFT_MON
-workspace $ws4a output $LEFT_MON
-workspace $ws5a output $LEFT_MON
-workspace $ws6a output $LEFT_MON
-workspace $ws7a output $LEFT_MON
-workspace $ws8a output $LEFT_MON
-workspace $ws9a output $LEFT_MON
-
-workspace $ws1b output $RIGHT_MON
-workspace $ws2b output $RIGHT_MON
-workspace $ws3b output $RIGHT_MON
-workspace $ws4b output $RIGHT_MON
-workspace $ws5b output $RIGHT_MON
-workspace $ws6b output $RIGHT_MON
-workspace $ws7b output $RIGHT_MON
-workspace $ws8b output $RIGHT_MON
-workspace $ws9b output $RIGHT_MON
-
 workspace_auto_back_and_forth no
+
+## https://gitlab.com/hyask/swaysome
+## cargo install swaysome
 
 # ========================================================================
 # Key binds
@@ -190,10 +151,10 @@ bindsym $mod+o exec dedit
 
 # toggle between alt / super to kill so i dont accidentally kill when gaming
 bindsym $mod+q kill
-# bindsym Mod4+q kill
+##########bindsym $super+q kill
 
 # "kill window unless XXX"
-#########bindsym $mod+q [class="steam_app_813780"] || kill
+##########bindsym $mod+q [class="steam_app_813780"] || kill
 
 # =================================================
 # Exiting / Reloading
@@ -230,46 +191,6 @@ bindsym $mod+Shift+$down resize grow height 8
 bindsym $mod+Shift+$up resize shrink height 8
 
 # =================================================
-# Switch to workspace
-# =================================================
-# first we switch to the 2nd monitor, then the 1st
-# this way the 1st monitor behaves completely as normal
-#
-# the only difference is when you're on monitor #2 you
-# have to click or move mouse to regain focus to stay on #2
-#
-# this is actually fine for me as 2nd monitor is usually
-# always email/chat/documentation etc so i dont mind
-#
-#
-# if anyone has a better solution to this jank garbage
-# please let me know
-bindsym $mod+1 workspace $ws1b; workspace $ws1a
-bindsym $mod+2 workspace $ws2b; workspace $ws2a
-bindsym $mod+3 workspace $ws3b; workspace $ws3a
-bindsym $mod+4 workspace $ws4b; workspace $ws4a
-bindsym $mod+5 workspace $ws5b; workspace $ws5a
-bindsym $mod+6 workspace $ws6b; workspace $ws6a
-bindsym $mod+7 workspace $ws7b; workspace $ws7a
-bindsym $mod+8 workspace $ws8b; workspace $ws8a
-bindsym $mod+9 workspace $ws9b; workspace $ws9a
-bindsym $mod+Backspace workspace $ws9b; workspace $ws9a
-
-# =================================================
-# Move to workspace
-# =================================================
-bindsym $mod+Shift+1 move container to workspace number $ws1a
-bindsym $mod+Shift+2 move container to workspace number $ws2a
-bindsym $mod+Shift+3 move container to workspace number $ws3a
-bindsym $mod+Shift+4 move container to workspace number $ws4a
-bindsym $mod+Shift+5 move container to workspace number $ws5a
-bindsym $mod+Shift+6 move container to workspace number $ws6a
-bindsym $mod+Shift+7 move container to workspace number $ws7a
-bindsym $mod+Shift+8 move container to workspace number $ws8a
-bindsym $mod+Shift+9 move container to workspace number $ws9a
-bindsym $mod+Shift+Backspace move container to workspace number $ws9a
-
-# =================================================
 # Layouts
 # =================================================
 bindsym $mod+t layout toggle split
@@ -278,21 +199,20 @@ bindsym $mod+v splitv
 bindsym $mod+f floating toggle
 floating_modifier $mod normal
 
-# bindsym $mod+s layout stacking
-# bindsym $mod+a layout tabbed
-################### bindsym $mod+f fullscreen
-# bindsym $mod+space focus mode_toggle
-# bindsym $mod+a focus parent
+########## bindsym $mod+s layout stacking
+########## bindsym $mod+a layout tabbed
+########## bindsym $mod+f fullscreen
+########## bindsym $mod+space focus mode_toggle
+########## bindsym $mod+a focus parent
 
-# =================================================
-# Scratchpad
-# =================================================
-# Move the currently focused window to the scratchpad
-# bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-# bindsym $mod+minus scratchpad show
+############# =================================================
+############# Scratchpad
+############# =================================================
+############# Move the currently focused window to the scratchpad
+############# bindsym $mod+Shift+minus move scratchpad
+############# Show the next scratchpad window or hide the focused scratchpad window.
+############# If there are multiple scratchpad windows, this command cycles through them.
+############# bindsym $mod+minus scratchpad show
 
 # =================================================
 # WORKSPACE ASSIGNMENTS
@@ -314,12 +234,12 @@ assign [class="joplin"] $ws9a
 assign [class="Joplin"] $ws9a
 assign [class="joplin-desktop"] $ws9a
 
-# assign [class="Steam"] 4
-# assign [app_id="Steam"] 4
-# assign [class="steam"] 4
-# assign [app_id="steam"] 4
-# assign [class="steamwebhelper"] 4
-# assign [app_id="steamwebhelper"] 4
+assign [class="Steam"] 4
+assign [app_id="Steam"] 4
+assign [class="steam"] 4
+assign [app_id="steam"] 4
+assign [class="steamwebhelper"] 4
+assign [app_id="steamwebhelper"] 4
 
 # =================================================
 # FORCE FLOATING
@@ -338,4 +258,9 @@ bindsym XF86AudioRaiseVolume exec vol -i
 bindsym XF86AudioLowerVolume exec vol -d
 bindsym mod1+semicolon exec vol -d
 bindsym mod1+apostrophe exec vol -i
+
+# ========================================================================
+# includes
+# ========================================================================#
+include ~/.config/sway/config.d/*.conf
 
