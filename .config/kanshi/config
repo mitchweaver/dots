@@ -4,4 +4,9 @@ profile {
         position 0,0
         adaptive_sync off
     }
+    output 'Acer Technologies VG240Y S 0x027157B7' {
+        mode 1920x1080@165.003Hz
+        position 1920,0
+        adaptive_sync off
+    }
 }

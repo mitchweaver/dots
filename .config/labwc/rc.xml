@@ -1,24 +1,29 @@
 <?xml version="1.0"?>
 <labwc_config>
+<!-- ======================================================================== -->
   <core>
     <decoration>server</decoration>
-    <gap>0</gap>
+    <gap>20</gap>
     <adaptiveSync>no</adaptiveSync>
     <allowTearing>yes</allowTearing>
+    <autoEnableOutputs>yes</autoEnableOutputs>
     <reuseOutputMode>no</reuseOutputMode>
     <xwaylandPersistence>no</xwaylandPersistence>
+    <primarySelection>yes</primarySelection>
   </core>
+<!-- ======================================================================== -->
   <placement>
     <!-- <policy>center</policy> -->
-    <policy>cascade</policy>
+    <policy>automatic</policy>
     <cascadeOffset x="40" y="30"/>
   </placement>
+<!-- ======================================================================== -->
   <!-- <font><theme> can be defined without an attribute to set all places -->
   <theme>
     <name>Adwaita</name>
     <cornerRadius>8</cornerRadius>
     <keepBorder>yes</keepBorder>
-    <dropShadows>no</dropShadows>
+    <dropShadows>yes</dropShadows>
     <font place="ActiveWindow">
       <name>sans</name>
       <size>10</size>
@@ -43,7 +48,10 @@
       <slant>normal</slant>
       <weight>normal</weight>
     </font>
+    <icon>Flatery</icon>
+    <dropShadowsOnTiled>no</dropShadowsOnTiled>
   </theme>
+<!-- ======================================================================== -->
   <!-- 'identifier' = app_id for Wayland, WM_CLASS for XWayland . -->
   <windowSwitcher show="yes" preview="yes" outlines="yes" allWorkspaces="no">
     <fields>
@@ -53,6 +61,7 @@
       <field content="title" width="50%"/>
     </fields>
   </windowSwitcher>
+<!-- ======================================================================== -->
   <!--
     When using all workspaces option of window switcher, there are extra fields
     that can be used, workspace (variable length), state (single space),
@@ -84,20 +93,24 @@
       </fields>
     </windowSwitcher>
   -->
+<!-- ======================================================================== -->
   <resistance>
     <screenEdgeStrength>15</screenEdgeStrength>
     <windowEdgeStrength>15</windowEdgeStrength>
     <unSnapThreshold>15</unSnapThreshold>
   </resistance>
+<!-- ======================================================================== -->
   <resize>
     <popupShow>Never</popupShow>
     <drawContents>yes</drawContents>
   </resize>
+<!-- ======================================================================== -->
   <focus>
     <followMouse>no</followMouse>
     <followMouseRequiresMovement>yes</followMouseRequiresMovement>
     <raiseOnFocus>no</raiseOnFocus>
   </focus>
+<!-- ======================================================================== -->
   <snapping>
     <range>1</range>
     <overlay enabled="yes">
@@ -106,9 +119,25 @@
     <topMaximize>yes</topMaximize>
     <notifyClient>always</notifyClient>
   </snapping>
-
-  <desktops number="10" popupTime="0" prefix="ws"/>
-
+<!-- ======================================================================== -->
+      <desktops>
+      <initial>1</initial>
+      <popupTime>0</popupTime>
+      <number>10</number>
+      <names>
+        <name>1</name>
+        <name>2</name>
+        <name>3</name>
+        <name>4</name>
+        <name>5</name>
+        <name>6</name>
+        <name>7</name>
+        <name>8</name>
+        <name>9</name>
+        <name>0</name>
+      </names>
+    </desktops>
+<!-- ======================================================================== -->
   <!-- W - window/super/logo
       A - alt
       C - ctrl
@@ -116,39 +145,32 @@
   <keyboard>
     <numlock>on</numlock>
     <layoutScope>global</layoutScope>
-    <repeatRate>25</repeatRate>
-    <repeatDelay>600</repeatDelay>
+    <repeatRate>35</repeatRate>
+    <repeatDelay>370</repeatDelay>
     <keybind key="A-Tab">
       <action name="NextWindow"/>
     </keybind>
     <keybind key="A-Return">
       <action name="Execute" command="kitty"/>
     </keybind>
-
     <keybind key="A-p">
-      <action name="Execute" command="menu --wide run -p 'Run:'" />
+      <action name="Execute" command="menu --wide run -p 'Run:'"/>
     </keybind>
-
     <keybind key="A-w">
-      <action name="Execute" command="MOZ_ENABLE_WAYLAND=1 firefox" />
+      <action name="Execute" command="MOZ_ENABLE_WAYLAND=1 firefox"/>
     </keybind>
-
-
     <keybind key="A-e">
-      <action name="Execute" command="pcmanfm" />
+      <action name="Execute" command="pcmanfm"/>
     </keybind>
-
     <keybind key="A-o">
-      <action name="Execute" command="dedit" />
+      <action name="Execute" command="dedit"/>
     </keybind>
-
     <keybind key="A-q">
       <action name="Close"/>
     </keybind>
     <keybind key="W-a">
       <action name="ToggleMaximize"/>
     </keybind>
-
     <keybind key="A-Left">
       <action name="MoveToEdge" direction="left"/>
     </keybind>
@@ -191,8 +213,6 @@
     <keybind key="XF86_MonBrightnessDown">
       <action name="Execute" command="brightnessctl set 10%-"/>
     </keybind>
-
-
 <!-- ================= DESKTOPS =============================== -->
     <keybind key="A-1">
       <action name="GoToDesktop" to="1"/>
@@ -262,9 +282,8 @@
       <action name="SendToDesktop" to="10"/>
     </keybind>
 <!-- ================= DESKTOPS =============================== -->
-
-
   </keyboard>
+<!-- ======================================================================== -->
   <!--
     Multiple <mousebind> can exist within one <context>
     Multiple <actions> can exist within one <mousebind>
@@ -277,19 +296,38 @@
     example.
   -->
   <mouse>
-    <default />
+    <default/>
     <doubleClickTime>500</doubleClickTime>
     <scrollFactor>1.0</scrollFactor>
-  </mouse>
 
+      <!-- resize windows with alt+mouse -->
+      <context name="Frame">
+        <mousebind button="A-Left" action="Press">
+          <action name="Focus" />
+          <action name="Raise" />
+        </mousebind>
+        <mousebind button="A-Left" action="Drag">
+          <action name="Move" />
+        </mousebind>
+        <mousebind button="A-Right" action="Press">
+          <action name="Focus" />
+          <action name="Raise" />
+        </mousebind>
+        <mousebind button="A-Right" action="Drag">
+          <action name="Resize" />
+        </mousebind>
+      </context>
+
+  </mouse>
+<!-- ======================================================================== -->
   <touch deviceName="" mapToOutput=""/>
   <libinput>
     <device category="non-touch">
       <accelProfile>flat</accelProfile>
       <naturalScroll/>
+      <threeFingerDrag>yes</threeFingerDrag>
     </device>
   </libinput>
-
 <!-- ==================== WINDOW RULES ======================================= -->
   <!--
     # Window Rules
@@ -334,10 +372,10 @@
     </windowRules>
   -->
 <!-- ==================== WINDOW RULES ======================================= -->
-
   <menu>
     <ignoreButtonReleasePeriod>250</ignoreButtonReleasePeriod>
   </menu>
+<!-- ======================================================================== -->
   <magnifier>
     <width>400</width>
     <height>400</height>
@@ -345,4 +383,6 @@
     <increment>0.2</increment>
     <useFilter>true</useFilter>
   </magnifier>
+<!-- ======================================================================== -->
 </labwc_config>
+

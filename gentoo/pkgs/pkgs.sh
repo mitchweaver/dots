@@ -176,7 +176,6 @@ add \
     gui-libs/egl-wayland \
     gui-apps/grim \
     gui-apps/slurp \
-    x11-misc/gammastep \
     sys-power/acpilight
 
 # ========================================================================
@@ -298,7 +297,9 @@ add \
      x11-themes/arc-icon-theme \
      x11-themes/vanilla-dmz-xcursors
 
-# # my ebuilds
+# gui-apps/kanshi
+
+# my ebuilds
 # add \
 #     app-shells/oksh
 
@@ -310,3 +311,5 @@ add \
 #     app-text/zathura-meta
 
     # x11-misc/pcmanfm \
+    #
+    # x11-misc/gammastep \

@@ -77,6 +77,7 @@ alias vimrc='v ~/.vimrc'
 alias swaycfg='v ~/.config/sway/config'
 alias kittycfg='v ~/.config/kitty/kitty.conf'
 alias waybarcfg='v ~/.config/waybar/config'
+alias labwccfg='v ~/.config/labwc/rc.xml'
 
 mkgif() {
     rm -- out.gif 2>/dev/null ||:
