@@ -1,4 +1,4 @@
-net-print/cups dbus -usb
+net-print/cups abi_x86_32 dbus -usb
 net-print/cups-filters foomatic
 net-dns/avahi python
 net-print/hplip minimal

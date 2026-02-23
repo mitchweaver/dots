@@ -38,6 +38,9 @@ v() {
             *y*) ;;
               *) return
         esac
+    # if not provided a file to open, open scratchpad
+    elif [ -z "$1" ] ; then
+        set ~/files/scratchpad.md
     fi
     case $(uname) in
         Darwin)

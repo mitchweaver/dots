@@ -3,14 +3,13 @@ net-im/discord-bin
 x11-drivers/nvidia-drivers
 
 # ========= Bin Packages =========================
-######### www-client/librewolf-bin::librewolf
-www-client/firefox-bin::gentoo
+www-client/librewolf-bin::librewolf
+www-client/librewolf::librewolf
 
 # ================================================
 # OVERLAY UNMASKS (see package.mask)
 # ================================================
 dev-python/pywal::mitchw
-#############x11-themes/*
 app-portage/portage-bashrc-mv::mv
 mail-client/mailspring::edgets
 gui-wm/swayfx::guru
@@ -26,16 +25,12 @@ games-util/steam-launcher::steam-overlay
 # app-shells/runtitle::mv
 # games-server/steamcmd::steam-overlay
 # games-util/xpadneo::steam-overlay
-# gnome-extra/gnome-shell-extension-openweather::4nykey
 # x11-themes/papirus-icon-theme::4nykey
 # net-libs/nodejs-bin::broverlay
 # app-misc/anki-bin::guru
 # sys-process/gotop::guru
 # dev-python/markdownify::guru
 # x11-misc/ksnip::guru
-# gui-apps/labwc-tweaks::wayland-desktop
-# gui-wm/labwc::wayland-desktop
-# www-client/ungoogled-chromium-bin::pf4public
 
 # ===========================================================
 # FONTS
@@ -45,4 +40,3 @@ media-fonts/gohufont::guru
 media-fonts/iosevka-nerdfont::guru
 media-fonts/spleen::src_prepare-overlay
 
-# vim:ft=config

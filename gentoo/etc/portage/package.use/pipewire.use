@@ -1,9 +1,3 @@
-# to get battery levels via bluetooth
-net-wireless/bluez experimental
-
-# pulls in pandoc/ghc/haskell stuff if man left in
-media-sound/bluez-alsa -man
-
 # to let pipewire work w/o pulseaudio
 #
 # NOTE: need "extra" and "gstreamer" if using on Asahi Linux (M1 Macs)

@@ -13,6 +13,10 @@ rcl() {
     rc-update -v show | grep afternet
 }
 
+rcr() { doas rc-service "$1" restart ; }
+rcu() { doas rc-update add "$1" default ; }
+rcd() { doas rc-update delete "$1" default ; }
+
 alias v4l='sudo modprobe v4l2loopback'
 
 airpods() {

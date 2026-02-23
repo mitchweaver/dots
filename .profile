@@ -141,4 +141,5 @@ fi
 # -------------- wayland buffoonery below -------------------
 export MOZ_ENABLE_WAYLAND=1
 export GTK_THEME=Arc-Dark
+export _JAVA_AWT_WM_NONREPARENTING=1
 

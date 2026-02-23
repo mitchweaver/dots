@@ -26,8 +26,7 @@ add \
     app-eselect/eselect-python \
     app-eselect/eselect-repository \
     app-portage/gentoolkit \
-    app-portage/portage-utils \
-    sys-block/zram-init
+    app-portage/portage-utils
 
 # ========================================================================
 # SYSTEM DAEMONS
@@ -52,7 +51,8 @@ add \
     sys-apps/smartmontools \
     app-admin/sysstat \
     sys-devel/bc \
-    sys-power/upower
+    sys-power/upower \
+    sys-block/zram-init
 
 # ========================================================================
 # ARCHIVE
@@ -72,10 +72,11 @@ add \
 add \
     sys-fs/dosfstools \
     sys-fs/ntfs3g \
-    net-fs/nfs-utils \
-    net-fs/libnfs \
     net-fs/cifs-utils \
     net-fs/samba
+
+## net-fs/nfs-utils
+## net-fs/libnfs
 
 # ========================================================================
 # MISC SYSTEM LIBS
@@ -119,14 +120,6 @@ add \
     media-gfx/qrencode
 
 # ========================================================================
-# WIRELESS (laptop)
-# ========================================================================
-add \
-    net-wireless/iw \
-    net-wireless/wireless-tools \
-    net-wireless/wpa_supplicant
-
-# ========================================================================
 # TERMINAL USERLAND
 # ========================================================================
 add \
@@ -155,8 +148,6 @@ add \
 # ========================================================================
 add \
     dev-util/shellcheck-bin \
-    app-containers/docker \
-    app-containers/docker-compose \
     app-misc/jq \
     dev-python/pylint \
     www-apps/hugo \
@@ -175,8 +166,7 @@ add \
 add \
     gui-libs/egl-wayland \
     gui-apps/grim \
-    gui-apps/slurp \
-    sys-power/acpilight
+    gui-apps/slurp
 
 # ========================================================================
 # GFX
@@ -230,17 +220,6 @@ add \
     sys-auth/rtkit
 
 # ========================================================================
-# OFFICE
-# ========================================================================
-add \
-    www-client/firefox \
-    app-office/libreoffice \
-    net-misc/nextcloud-client \
-    mail-client/mailspring \
-    app-text/htmltidy \
-    app-office/joplin-desktop
-
-# ========================================================================
 # PRINTING
 # ========================================================================
 add \
@@ -286,8 +265,6 @@ add \
     sys-firmware/alsa-firmware \
     sys-firmware/sof-firmware
 
-##########    dev-libs/libratbag
-
 # ========================================================================
 # THEMES
 # ========================================================================
@@ -297,8 +274,25 @@ add \
      x11-themes/arc-icon-theme \
      x11-themes/vanilla-dmz-xcursors
 
-# gui-apps/kanshi
+# ========================================================================
+# BIG APPLICATIONS
+# ========================================================================
+add \
+    app-office/libreoffice \
+    net-misc/nextcloud-client \
+    mail-client/mailspring \
+    app-text/htmltidy \
+    app-office/joplin-desktop \
+    app-admin/bitwarden-desktop-bin
 
+########    www-client/firefox \
+########    www-client/librewolf
+
+## net-im/signal-desktop-bin
+
+# ========================================================================
+# RANDOM STUFF BELOW
+# ========================================================================
 # my ebuilds
 # add \
 #     app-shells/oksh
@@ -307,9 +301,9 @@ add \
 ###################add \
 ###################    net-im/discord
 
-#     app-text/zathura \
-#     app-text/zathura-meta
+# app-text/zathura \
+# app-text/zathura-meta
+# x11-misc/pcmanfm \
+# app-containers/docker \
+# app-containers/docker-compose \
 
-    # x11-misc/pcmanfm \
-    #
-    # x11-misc/gammastep \

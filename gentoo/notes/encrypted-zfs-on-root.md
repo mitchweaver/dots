@@ -253,10 +253,6 @@ cd linux
 emerge --noreplace --ask --verbose --newuse --update \
   sys-boot/grub
 
-cd /usr/src
-ln -s $PWD/whatever linux
-cd linux
-
 # copy your kernel config now if you have one
 # run this, and let it start building but cancel it
 # we want to get the new defaults from the new config

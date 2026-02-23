@@ -1,0 +1,9 @@
+# experimental: get battery levels via bluetooth
+#
+# -cups: dont need bluetooth printers, use wifi
+# -mesh: dont enable mesh support (who uses this seriously?)
+net-wireless/bluez experimental -cups -mesh
+
+# pulls in pandoc/ghc/haskell stuff if man left in
+media-sound/bluez-alsa -man
+

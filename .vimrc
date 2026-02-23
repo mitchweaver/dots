@@ -97,7 +97,6 @@ Plug 'mg979/vim-visual-multi' " sublime-like multiple select
     " let g:VM_maps["Select Cursor Up"]   = '<M-C-Up>'
 
 Plug 'airblade/vim-gitgutter' " git diffing along the left side
-    hi signColumn ctermbg=NONE " make sign column same color as terminal background
     let g:gitgutter_enabled = 0 " disable on startup, toggle with leader+g
     let g:gitgutter_map_keys = 0 " disable all gitgutter keybinds
     let g:gitgutter_realtime = 0 " only run gitgutter on save
@@ -132,7 +131,6 @@ Plug 'Yggdroot/indentLine' " show indentation lines
 Plug 'monaqa/dial.nvim' " C-A/C-X improved
     nnoremap  <C-a> <Plug>(dial-increment)
     nnoremap  <C-x> <Plug>(dial-decrement)
-
 
 " ========================================================================
 " syntaxes
@@ -193,12 +191,16 @@ endif
 " colorscheme papercolor
 " colorscheme typewriter
 " colorscheme mellow
+
 set background=light
 " set background=dark
 
 " force usage of terminal scheme background instead
 " of editor scheme -- this allows to respect of terminal transparency
 hi Normal guibg=none
+
+" make sign column same color as terminal background
+hi signColumn ctermbg=NONE
 
 " ========================================================================
 " general

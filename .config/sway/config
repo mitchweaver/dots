@@ -11,16 +11,15 @@ exec bright -s 80
 exec gentoo-pipewire-launcher restart
 ####exec /usr/local/bin/pulseaudio --start --log-target=syslog
 
-exec kitty
-
 exec swayidle -w \
          timeout 600 'lock' \
          timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 
-# exec nextcloud --background
-# exec joplin-desktop
-# exec mailspring --password-store="gnome-libsecret"
+exec nextcloud --background
+exec joplin-desktop
+exec mailspring --password-store="gnome-libsecret"
+exec bitwarden-desktop-bin
 #############exec launch_steam.sh silent
 #############exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
@@ -85,8 +84,8 @@ smart_borders no_gaps
 smart_gaps on
 # smart_gaps inverse_outer
 
-#bindsym $mod+g gaps inner current plus 4
-#bindsym $mod+shift+g gaps inner current minus 4
+bindsym $mod+g gaps inner current plus 4
+bindsym $mod+shift+g gaps inner current minus 4
 
 # disable borders = pixel 0
 default_border pixel 0
@@ -102,13 +101,19 @@ client.unfocused $color0 $background $foreground $color5 $color1
 # SWAYFX SPECIFIC
 # =================================================
 shadows enable
-shadow_blur_radius 30
+shadow_blur_radius 24
 shadows_on_csd enable
+
 ##  shadow_offset <x offset> <y offset>
 blur disable
 blur_xray disable
-############ corner_radius 10
-# layer_effects 'waybar' 'blur enable; shadows enable;'
+
+# to show shadow on waybar
+# (only makes sense if always using gaps and no smartgaps)
+########## layer_effects 'waybar' 'blur enable; shadows enable;'
+
+# for rounded edges
+########## corner_radius 10
 
 # =================================================
 # Monitor Configuration --- swaymsg -t get_outputs
@@ -142,7 +147,7 @@ workspace_auto_back_and_forth no
 # Key binds
 # ========================================================================
 bindsym $mod+Return exec $term
-bindsym $mod+w exec MOZ_ENABLE_WAYLAND=1 firefox
+bindsym $mod+w exec librewolf
 bindsym $mod+e exec pcmanfm
 bindsym $mod+r exec kitty --single-instance ranger
 bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
@@ -152,6 +157,9 @@ bindsym $mod+o exec dedit
 # toggle between alt / super to kill so i dont accidentally kill when gaming
 bindsym $mod+q kill
 ##########bindsym $super+q kill
+
+bindsym $mod+shift+s exec scrap
+bindsym $super+shift+s exec scrap
 
 # "kill window unless XXX"
 ##########bindsym $mod+q [class="steam_app_813780"] || kill
@@ -217,22 +225,22 @@ floating_modifier $mod normal
 # =================================================
 # WORKSPACE ASSIGNMENTS
 # =================================================
-assign [class="firefox"] $ws1a
-assign [class="librewolf"] $ws1a
+assign [class="firefox"] 1
+assign [class="librewolf"] 1
 
-assign [class="discord"] $ws9b
-assign [class="Discord"] $ws9b
-assign [class="Friends - Discord"] $ws9b
-assign [app_id="discord"] $ws9b
-assign [app_id="Discord"] $ws9b
-assign [app_id="Friends - Discord"] $ws9b
+assign [class="discord"] 9
+assign [class="Discord"] 9
+assign [class="Friends - Discord"] 9
+assign [app_id="discord"] 9
+assign [app_id="Discord"] 9
+assign [app_id="Friends - Discord"] 9
 
-assign [class="mailspring"] $ws8a
-assign [class="Mailspring"] $ws8a
+assign [class="mailspring"] 8
+assign [class="Mailspring"] 8
 
-assign [class="joplin"] $ws9a
-assign [class="Joplin"] $ws9a
-assign [class="joplin-desktop"] $ws9a
+assign [class="joplin"] 9
+assign [class="Joplin"] 9
+assign [class="joplin-desktop"] 9
 
 assign [class="Steam"] 4
 assign [app_id="Steam"] 4
