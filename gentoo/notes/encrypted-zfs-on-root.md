@@ -2,15 +2,6 @@
 
 ## WARNING
 
-**Swap on ZFS is extremely unstable and NOT recommended.**  
-I ignored warnings originally but I've experienced deadlocks/freezes as
-well. This happens more often on low spec machines.
-
-1. https://github.com/openzfs/zfs/issues/7734
-2. https://github.com/openzfs/zfs/issues/260#issuecomment-758782144
-
-Recommendation: Just make a ext4 partition to use as swap.
-
 ## Overview
 
 this guide is using 3 disks in this layout using two pools
@@ -49,7 +40,7 @@ enter
 +1024M
 ```
 
-Step 2.5: If not using ZFS swap
+Step 2.5: Swap
 
 Create swap partition
 
@@ -91,7 +82,6 @@ zpool create -f -d \
     -o feature@hole_birth=enabled \
     -o feature@large_blocks=enabled \
     -o feature@lz4_compress=enabled \
-    -o feature@spacemap_histogram=enabled \
     -o ashift=12 \
     -o autotrim=on \
     -O acltype=posixacl \
@@ -165,21 +155,6 @@ mkdir -p /mnt/gentoo/boot/efi
 mount /dev/nvme0n1p1 /mnt/gentoo/boot/efi
 ```
 
-## Create zswap (if using ZFS swap)
-
-Please note this is unstable and NOT recommended.
-
-see: https://openzfs.github.io/openzfs-docs/Project%20and%20Community/FAQ.html#using-a-zvol-for-a-swap-device-on-linux
-
-```
-zfs create -V 16G -b $(getconf PAGESIZE) \
-    -o logbias=throughput -o sync=always \
-    -o primarycache=metadata \
-    -o com.sun:auto-snapshot=false rpool/swap
-
-mkswap /dev/zvol/rpool/swap
-```
-
 ## Checks
 
 ```
@@ -199,15 +174,36 @@ cp /etc/resolv.conf /mnt/gentoo/etc/
 chroot /mnt/gentoo
 ```
 
-## for sanity so nano doesn't drive me insane
+## directory and portage config setup
+
+Note, this section is mainly for myself and my configs
+if you're following from elsewhere, skip over to the next section
 
 ```
-emerge --sync
+# for zram tmp later
+mkdir -p /var/tmp/notmpfs
+chown -R portage $_
+chmod 755 $_
 
-emerge busybox
-ln -s $(which busybox) /bin/vi
-sed -i 's/nano/vi/g' /etc/profile
-emerge --rage-clean nano
+# will remove this from fstab for zram-init later but for now
+# add this to /etc/fstab
+#### tmpfs /var/tmp/portage tmpfs rw,nosuid,nodev,size=2G,mode=1777 0 0
+
+# then
+mount /var/tmp/portage
+
+# now copy over your /etc/portage files
+# * important remove use mold from LDFLAGS as we dont have it installed yet
+# * comment/uncomment anything as needed for this machine
+
+# update world
+source ~/dots/shell/gentoo.shellrc
+pkg sync
+pkg a mold
+# now edit LDFLAGS in /etc/make.conf for mold
+
+# update world
+pkg u
 ```
 
 ## keywords
@@ -246,6 +242,11 @@ emerge --noreplace --ask --verbose --newuse --update \
   sys-kernel/genkernel \
   sys-kernel/gentoo-sources \
   linux-firmware
+
+# make symlink
+cd /usr/src/linux
+ln -s $PWD/whatever-linux linux
+cd linux
 
 # NOTE THIS WILL FAIL BECAUSE NO KERNEL BUILT YET FOR ZFS!
 # just emerge it all down until grub which will fail, get the deps
