@@ -47,7 +47,7 @@ app-text/pandoc
 # Better solution is have a default blacklist all and only
 # whitelist specific packages you want to install from the
 # overlay. This in MY OPINION should be the DEFAULT...
-
+*/*::mitchw
 */*::mv
 */*::4nykey
 */*::tastytea
@@ -62,12 +62,6 @@ app-text/pandoc
 */*::wayland-desktop
 */*::pf4public
 */*::parona-overlay
+*/*::librewolf
 # ==========================================================
-
-########### BROKEN PACKAGES ##################
-# may not be broken anymore -- testing
-###########=media-sound/bluez-alsa-4.3.1
-########### BROKEN PACKAGES ##################
-
-# vim:ft=config
 

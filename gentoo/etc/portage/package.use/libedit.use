@@ -7,6 +7,5 @@ dev-libs/libpcre -readline
 dev-libs/libpcre2 -readline
 net-firewall/nftables -readline
 
-# needed for steam possibly others
 dev-libs/libedit abi_x86_32
-
+sys-libs/ncurses abi_x86_32

@@ -1,15 +1,16 @@
 # ========== Proprietary =========================
-net-im/discord-bin
-x11-drivers/nvidia-drivers
+######### net-im/discord-bin
+######### x11-drivers/nvidia-drivers
 
-# ========= Bin Packages =========================
-www-client/librewolf-bin::librewolf
-www-client/librewolf::librewolf
+# ================================================
+# MINE
+# ================================================
+app-shell/oksh::mitchw
+dev-python/pywal::mitchw
 
 # ================================================
 # OVERLAY UNMASKS (see package.mask)
 # ================================================
-dev-python/pywal::mitchw
 app-portage/portage-bashrc-mv::mv
 mail-client/mailspring::edgets
 gui-wm/swayfx::guru
@@ -17,26 +18,25 @@ gui-libs/scenefx::guru
 media-fonts/nerdfonts::guru
 app-misc/pfetch::guru
 games-util/steam-launcher::steam-overlay
+www-client/librewolf::librewolf
+www-client/librewolf-bin::librewolf
+www-client/ungoogled-chromium::pf4public
+www-client/ungoogled-chromium-bin::pf4public
 
 ####### FRESH START 2026 #################
 # recommenting all below
 #########################################
-
-# app-shells/runtitle::mv
-# games-server/steamcmd::steam-overlay
-# games-util/xpadneo::steam-overlay
-# x11-themes/papirus-icon-theme::4nykey
-# net-libs/nodejs-bin::broverlay
 # app-misc/anki-bin::guru
-# sys-process/gotop::guru
-# dev-python/markdownify::guru
-# x11-misc/ksnip::guru
+
+# ===========================================================
+# THEMES
+# ===========================================================
 
 # ===========================================================
 # FONTS
 # ===========================================================
-media-fonts/robotomono-nerdfont::guru
-media-fonts/gohufont::guru
-media-fonts/iosevka-nerdfont::guru
+######### media-fonts/robotomono-nerdfont::guru
+######### media-fonts/gohufont::guru
+######### media-fonts/iosevka-nerdfont::guru
 media-fonts/spleen::src_prepare-overlay
 

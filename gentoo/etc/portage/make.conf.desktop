@@ -14,5 +14,3 @@ ACCEPT_KEYWORDS="~amd64"
 GRUB_PLATFORMS="efi-64"
 
 INPUT_DEVICES="libinput joystick"
-
-# vim:ft=config

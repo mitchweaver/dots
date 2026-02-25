@@ -16,10 +16,10 @@ exec swayidle -w \
          timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 
-exec nextcloud --background
-exec joplin-desktop
-exec mailspring --password-store="gnome-libsecret"
-exec bitwarden-desktop-bin
+# exec nextcloud --background
+# exec joplin-desktop
+# exec mailspring --password-store="gnome-libsecret"
+# exec bitwarden-desktop-bin
 #############exec launch_steam.sh silent
 #############exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
@@ -118,17 +118,21 @@ blur_xray disable
 # =================================================
 # Monitor Configuration --- swaymsg -t get_outputs
 # =================================================
-set $LEFT_MON 'Acer Technologies XV252Q F 11481FF254200'
+# 4k 160hz 27" lg
+set $LEFT_MON 'LG Electronics 27GN950 101NTQDE1076'
+
+# 1080p 165hz 24" acer
 set $RIGHT_MON 'Acer Technologies VG240Y S 0x027157B7'
+
+# thinkpad
 set $LAPTOP 'eDP-1'
 
-# main monitor === left
-# 390hz 1080p acer
-output $LEFT_MON resolution 1920x1080@390.297Hz position 0,0 adaptive_sync off allow_tearing yes
+##########set 390hz_acer 'Acer Technologies XV252Q F 11481FF254200'
+##########output $LEFT_MON resolution 1920x1080@390.297Hz position 0,0 adaptive_sync off allow_tearing yes
 
-# "to the right" of main monitor
-# 165hz old acer
-output $RIGHT_MON resolution 1920x1080@165.003Hz position 1920,0 adaptive_sync off allow_tearing yes
+# thinkpad x1 carbon 7th gen can only output 4k @ 30 hz :(((( need buy new laptop
+output $LEFT_MON  resolution 3840x2160@30.000Hz  position 0,0    scale 2 adaptive_sync off allow_tearing yes
+output $RIGHT_MON resolution 1920x1080@165.003Hz position 3840,0 scale 1 adaptive_sync off allow_tearing yes
 
 # laptop
 output $LAPTOP resolution 1920x1080@60.033Hz position 0,0 scale 1 adaptive_sync off allow_tearing yes
@@ -256,6 +260,8 @@ for_window [class="mpv"] floating enable
 for_window [class="mpvimg"] floating enable
 for_window [app_id="mpv"] floating enable
 for_window [app_id="mpvimg"] floating enable
+# for_window [app_id="mailspring"] floating enable
+# for_window [app_id="Mailspring"] floating enable
 
 # =================================================
 # Volume / Brightness

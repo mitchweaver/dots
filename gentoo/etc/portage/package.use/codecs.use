@@ -1,7 +1,8 @@
 # ========================================================================
 # VIDEO
 # ========================================================================
-media-libs/gegl cairo
+media-libs/gegl lcms cairo
+media-libs/babl lcms
 media-video/x264-encoder ffmpeg
 
 # ========================================================================
@@ -18,3 +19,6 @@ media-libs/tiff jpeg
 media-libs/libpng apng
 x11-libs/gdk-pixbuf jpeg
 
+# these create circular dependency if used together
+media-libs/tiff -webp
+media-libs/libwebp -tiff

@@ -7,11 +7,19 @@ add() {
 # ========================================================================
 # overlays
 # ========================================================================
+add eselect-repository
+
 eselect repository enable guru
 emerge --sync guru
 
 eselect repository enable edgets
 emerge --sync edgets
+
+eselect repository enable pf4public
+emerge --sync pf4public
+
+eselect repository enable librewolf
+emerge --sync librewolf
 
 # ========================================================================
 # most important must be installed first
@@ -42,7 +50,6 @@ add \
 add \
     app-admin/doas \
     app-admin/sudo \
-    app-shells/dash \
     sys-process/htop  \
     sys-process/lsof \
     sys-apps/lm-sensors \
@@ -53,6 +60,18 @@ add \
     sys-devel/bc \
     sys-power/upower \
     sys-block/zram-init
+
+# ========================================================================
+# APP-ALTERNATIVES
+# ========================================================================
+add \
+    app-alternatives/gzip \
+    app-alternatives/ninja \
+    app-alternatives/sh \
+    app-alternatives/bzip2 \
+    app-alternatives/cpio \
+    app-alternatives/tar \
+    app-alternatives/lzip
 
 # ========================================================================
 # ARCHIVE
@@ -92,6 +111,7 @@ add \
 # NETWORKING
 # ========================================================================
 add \
+    net-dns/openresolv \
     net-analyzer/openbsd-netcat \
     net-analyzer/nmap \
     net-analyzer/speedtest-cli \
@@ -151,6 +171,7 @@ add \
     app-misc/jq \
     dev-python/pylint \
     www-apps/hugo \
+    net-libs/nodejs \
     dev-java/openjdk-jre-bin
 
 # ========================================================================
@@ -236,19 +257,20 @@ add \
     x11-apps/mkfontscale \
     media-libs/fontconfig \
     media-fonts/font-util \
-    media-fonts/fontawesome \
-    media-fonts/liberation-fonts \
-    media-fonts/noto \
-    media-fonts/noto-cjk \
-    media-fonts/noto-emoji \
-    media-fonts/roboto \
-    media-fonts/terminus-font \
-    media-fonts/dejavu \
-    media-fonts/hack \
-    media-fonts/ibm-plex \
     media-fonts/nerdfonts \
-    media-fonts/unifont \
     media-fonts/spleen
+
+#   media-fonts/fontawesome \
+#   media-fonts/liberation-fonts \
+#   media-fonts/noto \
+#   media-fonts/noto-cjk \
+#   media-fonts/noto-emoji \
+#   media-fonts/roboto \
+#   media-fonts/terminus-font \
+#   media-fonts/dejavu \
+#   media-fonts/hack \
+#   media-fonts/ibm-plex \
+#   media-fonts/unifont \
 
 # ========================================================================
 # MISC USERLAND
@@ -272,6 +294,7 @@ add \
      lxde-base/lxappearance \
      x11-themes/arc-theme \
      x11-themes/arc-icon-theme \
+     x11-themes/papirus-icon-theme \
      x11-themes/vanilla-dmz-xcursors
 
 # ========================================================================

@@ -5,21 +5,40 @@
 ## setup environment
 
 ```
-rc-update add sshd default
-rc-update add sysklogd default
+# default gentoo services
 rc-update add cronie default
-rc-update add fail2ban default
-rc-update add cupsd default
-rc-update add bluetooth default
-rc-update add dnsmasq default
-rc-update add resolvconf default
-rc-update add seatd default
-rc-update add ntpd default
-rc-update add chronyd default
+rc-update add dhcpcd default
+rc-update add sshd default
 
-############rc-update add docker default
-#############rc-update add display-manager default
-#################rc-update add elogind boot
+# stuff need to install
+rc-update add sysklogd default
+rc-update add chronyd default
+rc-update add fail2ban default
+rc-update add dnsmasq default
+rc-update add zram-init default
+
+rc-update add seatd default
+rc-update add bluetooth default
+rc-update add cupsd default
+```
+
+## setup /etc/rc.local
+```
+mkdir tmp
+cd tmp
+git clone https://github.com/mitchweaver/rclocal
+cd rclocal
+make install
+cd ../..
+rm -rf tmp
+```
+
+## other services may or may not need
+> ========================================================================
+rc-update add tlp default
+rc-update add docker default
+###### rc-update add display-manager default
+> ========================================================================
 
 # remember to also edit /etc/passwd for uid/gid for NFS exports to match
 useradd -m -G users,wheel,audio,video,lpadmin,input,seat -s /bin/bash mitch
@@ -45,3 +64,4 @@ hostname XXXXXXX
 ```
 mkdir -p /etc/modprobe.d ; rmmod pcspkr ; echo "blacklist pcspkr" >>/etc/modprobe.d/blacklist.conf
 ```
+

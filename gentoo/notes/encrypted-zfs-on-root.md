@@ -227,7 +227,7 @@ rpool/gentoo/var             /var            zfs             rw,xattr,posixacl 0
 
 ## flags
 
-```
+`zfs list -t all``
 cat > /etc/portage/package.use/zfs.use <<EOF
 sys-apps/util-linux static-libs
 sys-boot/grub libzfs
@@ -247,7 +247,7 @@ emerge --noreplace --ask --verbose --newuse --update \
 cd /usr/src/linux
 ln -s $PWD/whatever-linux linux
 cd linux
-
+zfs list -t all
 # NOTE THIS WILL FAIL BECAUSE NO KERNEL BUILT YET FOR ZFS!
 # just emerge it all down until grub which will fail, get the deps
 emerge --noreplace --ask --verbose --newuse --update \
@@ -332,16 +332,19 @@ rc-update add zfs-zed default
 
 ## set final mountpoints
 
-```
-# this may or may not be needed
-zfs set mountpoint=/ rpool/gentoo/root
-```
-
 # Finishing up
 
 ## set root password
 
 dont forget this :p
+
+## this may or may not be needed
+
+```
+zfs set mountpoint=/ rpool/gentoo/root
+```
+
+----------
 
 ### helpers ignore below
 
@@ -369,3 +372,4 @@ mount -t proc proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys
 mount --rbind /dev /mnt/gentoo/dev
 ```
+

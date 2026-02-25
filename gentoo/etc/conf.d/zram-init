@@ -8,12 +8,9 @@ type0="/var/tmp/portage"
 flag0=ext4
 opts0="noatime"
 size0=4096
-algo0=zstd
 owgr0="portage:portage"
 mode0=775
-labl0="zram-var-tmp-portage"
-back0="/dev/mapper/zram-nvme0n1p4"
-icmp0=y
+labl0="tmp-portage"
 idle0=600
 
 type1="/tmp"
@@ -22,7 +19,6 @@ opts1="noatime"
 mode1=777
 size1="2048"
 labl1="zram-tmp"
-algo1=zstd
 
 type2="/var/log/portage"
 flag2="ext4"
@@ -31,5 +27,4 @@ mode2=644
 owgr2="portage:portage"
 size2="16"
 labl2="portage-log"
-algo2=zstd
 

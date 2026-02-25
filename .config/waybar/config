@@ -98,7 +98,7 @@
         "format": "{icon}",
         "format-alt": "<span font='Terminess Nerd Font 10'>︁</span> ︁{ipaddr}/{cidr} {icon}",
         "format-alt-click": "click-left",
-        "format-wifi": "<span font='Terminess Nerd Font 10'></span> {essid} ({signalStrength}%)",
+        "format-wifi": "<span font='Terminess Nerd Font 10'> </span> {essid} ({signalStrength}%)",
         "format-ethernet": "<span font='Terminess Nerd Font 10'>󰈀 </span> {ifname}",
         "format-disconnected": "  Disconnected",
         "tooltip": false

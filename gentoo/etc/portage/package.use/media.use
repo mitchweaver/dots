@@ -1,4 +1,4 @@
-media-video/mpv rubberband zimg
+media-video/mpv rubberband zimg lua libmpv
 media-video/obs-studio screencast pulseaudio browser
 
 media-video/ffmpegthumbnailer gtk
@@ -15,7 +15,7 @@ media-libs/opus custom-modes
 dev-qt/qtbase xml libproxy widgets -cups
 dev-qt/qtdeclarative widgets
 dev-qt/qtwebengine -designer
-media-libs/mlt xml sdl frei0r opengl ffmpeg
+media-libs/mlt xml sdl frei0r opengl ffmpeg jack
 media-libs/opencv contribdnn contrib features2d
 media-sound/jack2 -tools
 media-sound/jack-example-tools -readline

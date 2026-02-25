@@ -86,8 +86,6 @@ export MENU_PROG=menu
 # hide GOPATH to ~/.local/go instead of ~/go
 export GOPATH="${HOME}/.local/go"
 
-touch ~/.hushlogin
-
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 for i in nvim vim vi nvi nano ; do
     if command -v $i >/dev/null 2>&1 ; then
