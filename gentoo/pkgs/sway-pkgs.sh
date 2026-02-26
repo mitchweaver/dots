@@ -12,6 +12,7 @@ add \
     gui-apps/swaylock \
     gui-libs/xdg-desktop-portal-wlr \
     gui-apps/wl-clipboard \
+    app-misc/cliphist \
     gui-apps/waybar \
     x11-misc/dunst
 

@@ -6,8 +6,9 @@ exec dbus-update-activation-environment --all
 exec dbus-launch dunst
 exec waybar
 exec bright -s 80
-exec gammastep -P -t 6300:4800 -l '36.2:-96.0'
+exec gammastep -P -t 6100:4600 -l '36.2:-96.0'
 exec gentoo-pipewire-launcher restart
+exec wl-paste --watch cliphist store
 
 exec swayidle -w \
          timeout 900 'lock' \
@@ -156,6 +157,9 @@ bindsym $mod+q kill
 
 bindsym $mod+shift+s exec scrap
 bindsym $super+shift+s exec scrap
+
+bindsym $mod+c   exec cliphist list | menu | cliphist decode | wl-copy
+bindsym $super+v exec cliphist list | menu | cliphist decode | wl-copy
 
 # "kill window unless XXX"
 ##########bindsym $mod+q [class="steam_app_813780"] || kill

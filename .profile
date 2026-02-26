@@ -112,12 +112,12 @@ else
     mv ~/.cache ~/.cache.bk
 fi
 
-mkdir -p "/tmp/$USER-tmp/cache"
 mkdir -p "/tmp/$USER-tmp/tmp"
-mkdir -p "/tmp/$USER-tmp/junk"
+mkdir -p "/tmp/$USER-tmp/.cache"
+mkdir -p "/tmp/$USER-tmp/.junk"
 
 ln -sf "/tmp/$USER-tmp/tmp" ~/tmp
-ln -sf "/tmp/$USER-tmp/cache" ~/.cache
+ln -sf "/tmp/$USER-tmp/.cache" ~/.cache
 
 # ===================================================
 # other symlinks for junk I don't want on disk
@@ -126,14 +126,14 @@ rm -r ~/.w3m 2>/dev/null ||:
 rm -f ~/.python_history
 rm -f ~/.wget-hsts
 
-mkdir -p ~/junk/w3m
-ln -sf ~/tmp/junk/w3m ~/.w3m
+mkdir -p ~/tmp/.junk/w3m
+ln -sf ~/tmp/.junk/w3m ~/.w3m
 
-touch ~/tmp/junk/python_history
-ln -sf ~/tmp/junk/python_history ~/.python_history
+touch ~/tmp/.junk/python_history
+ln -sf ~/tmp/.junk/python_history ~/.python_history
 
-touch ~/tmp/junk/wget-hsts
-ln -sf ~/tmp/junk/wget-hsts ~/.wget-hsts
+touch ~/tmp/.junk/wget-hsts
+ln -sf ~/tmp/.junk/wget-hsts ~/.wget-hsts
 
 # ========================================================================
 # FIX PERMISSIONS

@@ -269,7 +269,8 @@ add \
     media-fonts/noto \
     media-fonts/noto-cjk \
     media-fonts/noto-emoji \
-    media-fonts/liberation-fonts
+    media-fonts/liberation-fonts \
+    media-fonts/unifont
 
 #   media-fonts/fontawesome \
 #   media-fonts/roboto \
@@ -277,7 +278,6 @@ add \
 #   media-fonts/dejavu \
 #   media-fonts/hack \
 #   media-fonts/ibm-plex \
-#   media-fonts/unifont \
 
 # ========================================================================
 # MISC USERLAND

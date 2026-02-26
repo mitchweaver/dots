@@ -51,12 +51,14 @@ window#waybar.hidden {
 }
 
 #memory,
+#cpu,
 #custom-power,
 #battery,
 #backlight,
 #pulseaudio,
 #network,
 #clock,
+#idle_inhibitor,
 #tray {
   border-radius: 4px;
   margin: 6px 3px;
@@ -69,17 +71,14 @@ window#waybar.hidden {
   margin-right: 6px;
 }
 
-#custom-logo {
-  padding-right: 7px;
-  padding-left: 7px;
-  margin-left: 5px;
-  font-size: 15px;
-  border-radius: 8px 0px 0px 8px;
-  color: #1793d1;
+#memory {
+  font-size: 16px;
+  background-color: #fab387;
 }
 
-#memory {
-  background-color: #fab387;
+#cpu {
+  font-size: 16px;
+  background-color: #F7D4B3;
 }
 
 #battery {
@@ -103,6 +102,7 @@ window#waybar.hidden {
 }
 
 #pulseaudio {
+  font-size: 16px;
   background-color: #f9e2af;
 }
 
@@ -113,6 +113,11 @@ window#waybar.hidden {
 
 #clock {
   background-color: #cba6f7;
+}
+
+#idle_inhibitor {
+  font-size: 20px;
+  background-color: #F6F8FA;
 }
 
 #custom-power {

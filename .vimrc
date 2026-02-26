@@ -141,7 +141,6 @@ Plug 'isobit/vim-caddyfile'
 Plug 'gentoo/gentoo-syntax' " gentoo ebuild syntax
     set rtp+=/usr/share/vim/vimfiles
 
-Plug 'waycrate/swhkd-vim'
 Plug 'fladson/vim-kitty'
 
 " I don't care for polyglot's markdown/toml syntaxes
