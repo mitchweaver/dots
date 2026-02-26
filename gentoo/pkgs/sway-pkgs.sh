@@ -13,5 +13,5 @@ add \
     gui-libs/xdg-desktop-portal-wlr \
     gui-apps/wl-clipboard \
     gui-apps/waybar \
-    gui-apps/mako
+    x11-misc/dunst
 

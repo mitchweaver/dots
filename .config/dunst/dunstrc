@@ -1,7 +1,7 @@
 [global]
   corner_radius = 4
   follow = mouse
-  font = "Shure Tech Mono Nerd Font Complete Mono 12"
+  font = "ShureTechMono Nerd Font Mono 18"
   format = "<b>%s</b>\n<span font='12'>%b</span>"
   frame_color = "#cccccc"
   frame_width = 2
@@ -41,3 +41,4 @@
   foreground = "#e8e8e8"
   icon = /usr/share/icons/Paper/48x48/status/stock_dialog-warning.png
   timeout = 0
+

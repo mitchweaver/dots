@@ -20,6 +20,7 @@ rc-update add zram-init default
 rc-update add seatd default
 rc-update add bluetooth default
 rc-update add cupsd default
+rc-update add freshclam default
 ```
 
 ## setup /etc/rc.local

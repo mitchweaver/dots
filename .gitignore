@@ -99,6 +99,7 @@ themes/current
 *config/user-dirs.locale
 *config/syncd
 *config/syncthing
+*ibrewolf*
 
 .config/ranger/plugins/ranger_devicons
 
@@ -117,3 +118,6 @@ themes/current
 *config/joplin*/cache
 *config/joplin*/log.txt
 *config/joplin
+
+*itwarden*
+

@@ -53,7 +53,7 @@ export XDG_CACHE_HOME="${HOME}/.cache"
 
 # i dont use these but some programs complain
 # if they can't write to them
-export XDG_NULL_DIR="/tmp/.xdg-$USER-void"
+export XDG_NULL_DIR="/tmp/$USER-tmp/.xdg-$USER-void"
 mkdir -p "$XDG_NULL_DIR"
 export XDG_PUBLICSHARE_DIR="$XDG_NULL_DIR" \
        XDG_TEMPLATES_DIR="$XDG_NULL_DIR" \

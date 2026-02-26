@@ -3,13 +3,11 @@
 # =================================================
 exec background
 exec dbus-update-activation-environment --all
-exec dbus-launch mako
+exec dbus-launch dunst
 exec waybar
 exec bright -s 80
-# exec gammastep -P -m randr -l '36.06083743210746:-95.79738783706367'
-
+exec gammastep -P -t 6300:4800 -l '36.2:-96.0'
 exec gentoo-pipewire-launcher restart
-####exec /usr/local/bin/pulseaudio --start --log-target=syslog
 
 exec swayidle -w \
          timeout 900 'lock' \
@@ -19,7 +17,8 @@ exec swayidle -w \
 exec joplin-desktop
 exec bitwarden-desktop-bin
 exec mailspring --password-store="gnome-libsecret"
-# exec nextcloud --background
+exec nextcloud --background
+
 #############exec launch_steam.sh silent
 #############exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 

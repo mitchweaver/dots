@@ -18,6 +18,9 @@ emerge --sync edgets
 eselect repository enable pf4public
 emerge --sync pf4public
 
+eselect repository enable tastytea
+emerge --sync tastytea
+
 eselect repository enable librewolf
 emerge --sync librewolf
 
@@ -59,7 +62,8 @@ add \
     app-admin/sysstat \
     sys-devel/bc \
     sys-power/upower \
-    sys-block/zram-init
+    sys-block/zram-init \
+    dev-vcs/git
 
 # ========================================================================
 # APP-ALTERNATIVES
@@ -153,7 +157,9 @@ add \
     sys-apps/eza \
     sys-apps/bat \
     www-client/w3m \
-    dev-python/pynvim
+    dev-python/pynvim \
+    sys-fs/ncdu \
+    net-misc/yt-dlp
 
 # ========================================================================
 # LEGACY X11
@@ -179,7 +185,8 @@ add \
 # ========================================================================
 add \
     net-analyzer/fail2ban \
-    sys-apps/flatpak
+    sys-apps/flatpak \
+    app-antivirus/clamav
 
 # ========================================================================
 # WAYLAND UTILS
@@ -295,6 +302,7 @@ add \
      x11-themes/arc-theme \
      x11-themes/arc-icon-theme \
      x11-themes/papirus-icon-theme \
+     x11-themes/paper-icon-theme \
      x11-themes/vanilla-dmz-xcursors
 
 # ========================================================================
