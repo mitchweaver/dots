@@ -153,7 +153,6 @@ add \
     sys-apps/eza \
     sys-apps/bat \
     www-client/w3m \
-    sys-fs/ncdu \
     dev-python/pynvim
 
 # ========================================================================
@@ -161,7 +160,8 @@ add \
 # ========================================================================
 add \
     x11-apps/xrdb \
-    x11-apps/xrandr
+    x11-apps/xrandr \
+    x11-apps/xev
 
 # ========================================================================
 # DEVELOPMENT
@@ -258,13 +258,13 @@ add \
     media-libs/fontconfig \
     media-fonts/font-util \
     media-fonts/nerdfonts \
-    media-fonts/spleen
+    media-fonts/spleen \
+    media-fonts/noto \
+    media-fonts/noto-cjk \
+    media-fonts/noto-emoji \
+    media-fonts/liberation-fonts
 
 #   media-fonts/fontawesome \
-#   media-fonts/liberation-fonts \
-#   media-fonts/noto \
-#   media-fonts/noto-cjk \
-#   media-fonts/noto-emoji \
 #   media-fonts/roboto \
 #   media-fonts/terminus-font \
 #   media-fonts/dejavu \

@@ -1,64 +1,45 @@
 #!/bin/sh
 
-umask 022
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-PATH=/bin:/sbin:$PATH
-PATH=/usr/bin:/usr/sbin:$PATH
-PATH=/usr/local/bin:/usr/local/sbin:$PATH
-PATH=${HOME}/.local/bin:$PATH
-
-PATH=$PATH:${HOME}/.local/go/bin
-PATH=$PATH:/home/mitch/.cargo/bin
-
-LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH
-
-export PATH
-export LD_LIBRARY_PATH
-
+# ========================================================================
+# PATHS
+# ========================================================================
+export PATH="$HOME/.local/bin:$PATH:$HOME/.local/go/bin:$HOME/.cargo/bin:$HOME/.npm/bin"
 export MANPATH="${HOME}/.local/share/man:$MANPATH"
-export FONTCONFIG_PATH="/etc/fonts:${HOME}/.fonts"
 
 export NPM_CONFIG_PREFIX="${HOME}/.npm"
-export PATH="$PATH:$NPM_CONFIG_PREFIX/bin"
 
 if [ -d ~/.bonsai ] ; then
     export MANPATH="${HOME}/.bonsai/share/man:$MANPATH"
     export PATH="${HOME}/.bonsai/bin:$PATH"
 fi
 
-export NPROC="${NPROC:-$(nproc 2>/dev/null)}"
-export NPROC="${NPROC:-1}"
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-if [ -e /etc/os-release ] ; then
-    read -r line < /etc/os-release
-    case ${line#NAME=} in
-        Linux|FreeBSD)
-            export CC="${CC:-gcc}" cc="${cc:-gcc}"
-            ;;
-        OpenBSD)
-            export CC="${CC:-clang}" cc="${cc:-clang}"
-            ;;
-        Darwin|MacOS)
-            export CC="${CC:-clang}" cc="${cc:-clang}"
-            # allow time machine to backup to samba/nfs
-            defaults write com.apple.systempreferences TMShowUnsupportedNetworkVolumes 1
-    esac
+if command -v nproc >/dev/null ; then
+    export NPROC="$(nproc)"
 fi
 
-# using en_US.UTF-8 over C causes case-insensitive sorting
-# up to you whether the benefits outweigh the negatives
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="$LC_ALL" \
-       LANG="$LC_ALL" \
-       LANGUAGE="$LC_ALL" \
-       LOCALE="$LC_ALL"
+# for ksh
+export ENV="${HOME}/src/dots/shell/main.shellrc"
 
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-export XDG_OPEN=opn PLUMBER=opn
+# ========================================================================
+# OS specific settings
+# ========================================================================
+case $(uname) in
+    Linux|FreeBSD)
+        export CC="${CC:-gcc}" cc="${cc:-gcc}"
+        umask 022
+        ;;
+    OpenBSD)
+        export CC="${CC:-clang}" cc="${cc:-clang}"
+        ;;
+    Darwin|MacOS)
+        export CC="${CC:-clang}" cc="${cc:-clang}"
+        # allow time machine to backup to samba/nfs
+        defaults write com.apple.systempreferences TMShowUnsupportedNetworkVolumes 1
+esac
 
+# ========================================================================
+# DIRECTORIES
+# ========================================================================
 export XDG_CONFIG_HOME="${HOME}/.config" \
        XDG_DOWNLOAD_DIR="${HOME}/downloads" \
        XDG_DOCUMENTS_DIR="${HOME}/files" \
@@ -72,21 +53,19 @@ export XDG_CACHE_HOME="${HOME}/.cache"
 
 # i dont use these but some programs complain
 # if they can't write to them
-export XDG_PUBLICSHARE_DIR="$XDG_CACHE_HOME/null" \
-       XDG_TEMPLATES_DIR="$XDG_CACHE_HOME/null" \
-       XDG_VIDEOS_DIR="$XDG_CACHE_HOME/null" \
-       XDG_MUSIC_DIR="$XDG_CACHE_HOME/null"
-mkdir -p "$XDG_CACHE_HOME/null"
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+export XDG_NULL_DIR="/tmp/.xdg-$USER-void"
+mkdir -p "$XDG_NULL_DIR"
+export XDG_PUBLICSHARE_DIR="$XDG_NULL_DIR" \
+       XDG_TEMPLATES_DIR="$XDG_NULL_DIR" \
+       XDG_VIDEOS_DIR="$XDG_NULL_DIR" \
+       XDG_MUSIC_DIR="$XDG_NULL_DIR"
 
-export ENV="${HOME}/src/dots/shell/main.shellrc"
-export MENU_PROG=menu
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # hide GOPATH to ~/.local/go instead of ~/go
 export GOPATH="${HOME}/.local/go"
 
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# ========================================================================
+# MISC SETTINGS
+# ========================================================================
 for i in nvim vim vi nvi nano ; do
     if command -v $i >/dev/null 2>&1 ; then
         export EDITOR=$i
@@ -101,12 +80,26 @@ for i in librewolf librewolf-bin firefox firefox-bin chromium chromium-bin ; do
     fi
 done
 
+export MENU_PROG=menu
+export XDG_OPEN=opn PLUMBER=opn
+
 export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
 export LESS='-QRsim +Gg'
 export LESSHISTFILE=/dev/null
 
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# using en_US.UTF-8 over C causes case-insensitive sorting
+# up to you whether the benefits outweigh the negatives
+export LC_ALL="C"
+####################export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="$LC_ALL" \
+       LANG="$LC_ALL" \
+       LANGUAGE="$LC_ALL" \
+       LOCALE="$LC_ALL"
+
+# ========================================================================
+# FIX PERMISSIONS
+# ========================================================================
 if [ -d ~/.gnupg ] ; then
     chmod 0755 ~
     chmod 0700 ~/.gnupg
@@ -136,7 +129,9 @@ if [ ! -e ~/tmp ] ; then
     ln -sf "/tmp/$USER-tmp" ~/tmp
 fi
 
-# -------------- wayland buffoonery below -------------------
+# ========================================================================
+# wayland crap
+# ========================================================================
 export MOZ_ENABLE_WAYLAND=1
 export GTK_THEME=Arc-Dark
 export _JAVA_AWT_WM_NONREPARENTING=1

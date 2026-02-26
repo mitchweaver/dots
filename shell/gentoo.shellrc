@@ -43,7 +43,8 @@ pkg() {
             [ "$ans" == y ] && doas emerge --with-bdeps y --depclean
             ;;
         -sync|sync)
-            doas emerge --sync --ask n --jobs=8 "$@"
+            doas emerge --sync --ask n --jobs=$(ls /var/db/repos | wc -l) "$@"
+            ### doas emerge --regen
     esac
 }
 

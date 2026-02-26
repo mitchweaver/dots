@@ -12,14 +12,14 @@ exec gentoo-pipewire-launcher restart
 ####exec /usr/local/bin/pulseaudio --start --log-target=syslog
 
 exec swayidle -w \
-         timeout 600 'lock' \
-         timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         timeout 900 'lock' \
+         timeout 1200 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 
 exec joplin-desktop
 exec bitwarden-desktop-bin
+exec mailspring --password-store="gnome-libsecret"
 # exec nextcloud --background
-# exec mailspring --password-store="gnome-libsecret"
 #############exec launch_steam.sh silent
 #############exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
@@ -272,6 +272,13 @@ bindsym XF86AudioRaiseVolume exec vol -i
 bindsym XF86AudioLowerVolume exec vol -d
 bindsym mod1+semicolon exec vol -d
 bindsym mod1+apostrophe exec vol -i
+
+# mpv controls with mmt
+bindsym mod1+slash exec mmt -t
+bindsym mod1+bracketright exec mmt -f
+bindsym mod1+bracketleft exec mmt -b
+bindsym mod1+period exec mmt -n
+bindsym mod1+comma exec mmt -p
 
 # ========================================================================
 # includes

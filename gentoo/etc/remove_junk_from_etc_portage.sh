@@ -8,7 +8,7 @@
 
 [ -d portage ] || exit 1
 
-for folder in bashrc.d package.cflags profile repos.conf savedconfig ; do
+for folder in bashrc.d package.cflags repos.conf savedconfig ; do
     [ -e "portage/$folder" ] && rm -rv "portage/$folder"
 done
 

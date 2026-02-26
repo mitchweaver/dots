@@ -13,18 +13,20 @@
 *.pem*
 *.key*
 *.crt*
+*._cfg000*
 
 # default junk
 etc/portage/bashrc
 etc/portage/bashrc.d
-etc/portage/profile
+etc/portage/make.profile
+
 # dont hard copy these, use eselect-repository
 etc/portage/repos.conf
+etc/portage/repos
+
 # these are from GentooLTO, dont edit
-etc/portage/make.profile
 etc/portage/make.conf.lto
 etc/portage/make.conf.lto.defines
 etc/portage/package.cflags
 etc/portage/savedconfig
-etc/portage/repos
-*._cfg000*
+

@@ -1,0 +1,8 @@
+# allow LLVM-22
+#
+# im not sure why this is masked by developers
+# its not an issue to have multiple LLVMs slotted on a machine
+# that is the point of slots in the first place...
+#
+-llvm_slot_22
+

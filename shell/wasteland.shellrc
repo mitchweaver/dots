@@ -167,4 +167,8 @@ alias zramctl='zramctl --output-all'
 
 alias ostui='ostui --config ~/.config/ostui --no-mpris --no-playlists'
 
+# ========================================================================
+# MPV aliases
+# ========================================================================
+alias mpvm='mpv --no-video'
 
