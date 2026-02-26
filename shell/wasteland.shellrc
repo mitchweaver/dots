@@ -57,11 +57,17 @@ removeaudio() {
 # imagemagick
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 jpg() {
-    if [ -f "$1" ] ; then
-        jpegoptim -p -s "$1"
-    elif [ -d "${1:-.}" ] ; then
-        find "${1:-.}" -type f -iname "*.jp*" -exec jpegoptim -s {} \;
-    fi
+    printf 'This will recursively jpegoptim in current directory: %s\n' "$PWD"
+    printf 'Confirm? (y/n):'
+    read -r ans
+    case $ans in
+        *y*)
+            if [ -f "$1" ] ; then
+                jpegoptim -p -s "$1"
+            elif [ -d "${1:-.}" ] ; then
+                find "${1:-.}" -type f -iname "*.jp*" -exec jpegoptim -s {} \;
+            fi
+    esac
 }
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -171,4 +177,9 @@ alias ostui='ostui --config ~/.config/ostui --no-mpris --no-playlists'
 # MPV aliases
 # ========================================================================
 alias mpvm='mpv --no-video'
+
+# ========================================================================
+# ambient noise
+# ========================================================================
+alias rain='sh ~/src/shit/shitty-bin/rain.sh'
 

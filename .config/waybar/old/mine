@@ -1,0 +1,143 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+// ==========================================================================
+    "modules-left": ["sway/workspaces", "sway/window"],
+    // AVAILABLE: "wlr/taskbar"
+// ==========================================================================
+    "modules-right": ["tray", "idle_inhibitor", "cpu", "network", "battery", "pulseaudio", "custom/clock"],
+    // AVAILABLE: "memory", "cpu", "temperature"
+    // modules-right": ["tray", "network", "battery", "pulseaudio", "custom/clock"],
+// ==========================================================================
+    "custom/clock": {
+        "format": "<span font='Terminess Nerd Font 12'>  {}  </span>",
+        "exec": "while date +'%a %d %I:%M %p' ; do sleep 59 ; done"
+    },
+// ==========================================================================
+    "wlr/taskbar": {
+        "format": "<span font='Terminess Nerd Font 16'>{app_id}</span>",
+        "on-click": "minimize-raise",
+    },
+// ==========================================================================
+    "sway/mode": {
+        "format": " {}"
+    },
+// ==========================================================================
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "disable-markup": false,
+        "format": "<span font='Terminess Nerd Font 16'> {icon} </span>",
+        "format-icons": {
+            "11":  "1",
+            "12":  "2",
+            "13":  "3",
+            "14":  "4",
+            "15":  "5",
+            "16":  "6",
+            "17":  "7",
+            "18":  "8",
+            "19":  "9",
+            "21":  "1",
+            "22":  "2",
+            "23":  "3",
+            "24":  "4",
+            "25":  "5",
+            "26":  "6",
+            "27":  "7",
+            "28":  "8",
+            "29":  "9",
+            // "󰇮" "" "󰈹"
+        }
+    },
+// ==========================================================================
+    "tray": {
+        "icon-size": 22,
+        "spacing": 8
+    },
+// ==========================================================================
+    "sway/window": {
+        "max-length": 60,
+        "tooltip": false
+        // "format": "( {} )"
+    },
+// ==========================================================================
+    "clock": {
+        "format": "{:%a %d %b - %H:%M}",
+        "tooltip": false
+    },
+// ==========================================================================
+    "cpu": {
+        "interval": 5,
+        "format": "︁   {usage}%",
+        "max-length": 10
+    },
+// ==========================================================================
+    "memory": {
+        "interval": 15,
+        "format": "<span font='Terminess Nerd Font 9'>︁</span> {percentage}%",
+        "tooltip": false
+    },
+// ==========================================================================
+    "battery": {
+        "format": "<span font='Terminess Nerd Font 12'>{icon}  {capacity}%{time}</span>",
+        "format-icons": ["", "", "", "", ""],
+        "format-time": "<span font='Terminess Nerd Font 12'> ({H}h{M}m)</span>",
+        "format-charging": "<span font='Terminess Nerd Font 12'>  {icon}  {capacity}%</span>",
+        "format-full": "<span font='Terminess Nerd Font 12'>  {icon}  Charged</span>",
+        "interval": 15,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "tooltip": false
+    },
+// ==========================================================================
+    "network": {
+        "format": "{icon}",
+        "format-alt": "<span font='Terminess Nerd Font 10'>︁</span> ︁{ipaddr}/{cidr} {icon}",
+        "format-alt-click": "click-left",
+        "format-wifi": "<span font='Terminess Nerd Font 10'> </span> {essid} ({signalStrength}%)",
+        "format-ethernet": "<span font='Terminess Nerd Font 10'>󰈀 </span> {ifname}",
+        "format-disconnected": "  Disconnected",
+        "tooltip": false
+    },
+// ==========================================================================
+    "pulseaudio": {
+        "format": "<span font='Terminess Nerd Font 12'>{icon:2} </span>{volume}%",
+        "format-alt": "<span font='Terminess Nerd Font 12'>{icon:2} </span>{volume}%",
+        "format-alt-click": "click-right",
+        "format-muted": "<span font='Terminess Nerd Font 12'></span>",
+        "format-icons": {
+            "phone": [" ", " ", " ", " "],
+            "default": ["", "", "", ""]
+        },
+        "scroll-step": 2,
+        "on-click": "pavucontrol",
+        "tooltip": false
+    },
+// ==========================================================================
+    "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        "critical-threshold": 75,
+        "interval": 5,
+        "format": "{icon} {temperatureC}°",
+        "tooltip": false,
+        "format-icons": [
+            "", // Icon: temperature-empty
+            "", // Icon: temperature-quarter
+            "", // Icon: temperature-half
+            "", // Icon: temperature-three-quarters
+            ""  // Icon: temperature-full
+        ]
+    },
+// ==========================================================================
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": "󰾪"
+        }
+    }
+}

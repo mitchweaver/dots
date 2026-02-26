@@ -89,6 +89,7 @@ export LESS='-QRsim +Gg'
 export LESSHISTFILE=/dev/null
 
 # using en_US.UTF-8 over C causes case-insensitive sorting
+# "C" is supposed to be fastest text parsing
 # up to you whether the benefits outweigh the negatives
 export LC_ALL="C"
 ####################export LC_ALL="en_US.UTF-8"
@@ -97,14 +98,53 @@ export LC_CTYPE="$LC_ALL" \
        LANGUAGE="$LC_ALL" \
        LOCALE="$LC_ALL"
 
+# ===================================================
+# create tmp dir and cache
+# ===================================================
+if [ -L ~/tmp ] ; then
+    unlink ~/tmp 2>/dev/null ||:
+else
+    mv ~/tmp ~/tmp.bk
+fi
+if [ -L ~/.cache ] ; then
+    unlink ~/.cache 2>/dev/null ||:
+else
+    mv ~/.cache ~/.cache.bk
+fi
+
+mkdir -p "/tmp/$USER-tmp/cache"
+mkdir -p "/tmp/$USER-tmp/tmp"
+mkdir -p "/tmp/$USER-tmp/junk"
+
+ln -sf "/tmp/$USER-tmp/tmp" ~/tmp
+ln -sf "/tmp/$USER-tmp/cache" ~/.cache
+
+# ===================================================
+# other symlinks for junk I don't want on disk
+# ===================================================
+rm -r ~/.w3m 2>/dev/null ||:
+rm -f ~/.python_history
+rm -f ~/.wget-hsts
+
+mkdir -p ~/junk/w3m
+ln -sf ~/tmp/junk/w3m ~/.w3m
+
+touch ~/tmp/junk/python_history
+ln -sf ~/tmp/junk/python_history ~/.python_history
+
+touch ~/tmp/junk/wget-hsts
+ln -sf ~/tmp/junk/wget-hsts ~/.wget-hsts
+
 # ========================================================================
 # FIX PERMISSIONS
 # ========================================================================
+chmod -R 700 "/tmp/$USER-tmp"
+
 if [ -d ~/.gnupg ] ; then
-    chmod 0755 ~
     chmod 0700 ~/.gnupg
     chmod 0600 ~/.gnupg/* 2>/dev/null ||:
 fi
+
 if [ -d ~/.ssh ] ; then
     chmod 0700 ~/.ssh
     chmod 0600 ~/.ssh/id_rsa
@@ -113,21 +153,12 @@ if [ -d ~/.ssh ] ; then
     if [ -f ~/.ssh/authorized_keys ] ; then
         chmod 0600 ~/.ssh/authorized_keys
     fi
+    # start ssh-agent
     if ! pgrep -u "$USER" -x ssh-agent >/dev/null ; then
         eval "$(ssh-agent -s)" >/dev/null
     fi
     ssh-add ~/.ssh/id_rsa
 fi 2>/dev/null
-
-# ===================================================
-# create tmp dir
-# ===================================================
-if [ ! -e "/tmp/$USER-tmp" ] ; then
-    mkdir -p "/tmp/$USER-tmp"
-fi
-if [ ! -e ~/tmp ] ; then
-    ln -sf "/tmp/$USER-tmp" ~/tmp
-fi
 
 # ========================================================================
 # wayland crap

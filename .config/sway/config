@@ -24,7 +24,7 @@ exec mailspring --password-store="gnome-libsecret"
 #############exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
 # =================================================
-# misc
+# MISC
 # =================================================
 popup_during_fullscreen smart
 mouse_warping none
@@ -72,12 +72,12 @@ set $right l
 set $term kitty
 
 # =================================================
-# GAPS / THEMES / RICE
+# GAPS / BORDERS
 # =================================================
 # gaps inner 0
 # gaps outer 0
-gaps inner 17
-gaps outer 11
+gaps inner 18
+gaps outer 13
 # hide_edge_borders smart
 smart_borders no_gaps
 
@@ -89,13 +89,6 @@ bindsym $mod+shift+g gaps inner current minus 4
 
 # disable borders = pixel 0
 default_border pixel 0
-
-include "$HOME/.cache/wal/colors-sway"
-#                                                        BORDER
-client.focused $color0 $background $foreground $color5   $color2
-client.unfocused $color0 $background $foreground $color5 $color1
-
-#seat seat0 xcursor_theme DMZ-White 24
 
 # =================================================
 # SWAYFX SPECIFIC
@@ -280,8 +273,14 @@ bindsym mod1+bracketleft exec mmt -b
 bindsym mod1+period exec mmt -n
 bindsym mod1+comma exec mmt -p
 
-# ========================================================================
-# includes
-# ========================================================================#
+# =================================================
+# INCLUDE
+# =================================================
 include ~/.config/sway/config.d/*.conf
+
+# see theme include in conf.d
+client.focused $color0 $background $foreground $color5   $color2
+client.unfocused $color0 $background $foreground $color5 $color1
+
+#seat seat0 xcursor_theme DMZ-White 24
 

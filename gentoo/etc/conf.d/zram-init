@@ -17,7 +17,7 @@ type1="/tmp"
 flag1="ext4"
 opts1="noatime"
 mode1=777
-size1="2048"
+size1="4096"
 labl1="zram-tmp"
 
 type2="/var/log/portage"
@@ -25,6 +25,6 @@ flag2="ext4"
 opts2="noatime"
 mode2=644
 owgr2="portage:portage"
-size2="16"
+size2="64"
 labl2="portage-log"
 

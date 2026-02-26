@@ -1,35 +1,38 @@
+// mostly stolen from: https://github.com/sameemul-haque/dotfiles
 {
     "layer": "top",
     "position": "top",
+    "spacing": 0,
     "height": 34,
-// ==========================================================================
-    "modules-left": ["sway/workspaces", "sway/window"],
-    // AVAILABLE: "wlr/taskbar"
-// ==========================================================================
-    "modules-right": ["tray", "idle_inhibitor", "cpu", "network", "battery", "pulseaudio", "custom/clock"],
-    // AVAILABLE: "memory", "cpu", "temperature"
-    // modules-right": ["tray", "network", "battery", "pulseaudio", "custom/clock"],
-// ==========================================================================
-    "custom/clock": {
-        "format": "<span font='Terminess Nerd Font 12'>  {}  </span>",
-        "exec": "while date +'%a %d %I:%M %p' ; do sleep 59 ; done"
-    },
-// ==========================================================================
+    "modules-left": [
+        "sway/workspaces"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "tray",
+        "memory",
+        "network",
+        "pulseaudio",
+        "battery",
+        "custom/power",
+        "clock"
+    ],
     "wlr/taskbar": {
-        "format": "<span font='Terminess Nerd Font 16'>{app_id}</span>",
-        "on-click": "minimize-raise",
+        "format": "{icon}",
+        "on-click": "activate",
+        "on-click-right": "fullscreen",
+        "icon-theme": "Flatery-Blue",
+        "icon-size": 25,
+        "tooltip-format": "{title}"
     },
-// ==========================================================================
-    "sway/mode": {
-        "format": " {}"
-    },
-// ==========================================================================
     "sway/workspaces": {
+        // "on-click": "activate",
+        "format": "{icon}",
         "disable-scroll": true,
         "all-outputs": false,
         "disable-markup": false,
-        "format": "<span font='Terminess Nerd Font 16'> {icon} </span>",
         "format-icons": {
+            // "default": "",
             "11":  "1",
             "12":  "2",
             "13":  "3",
@@ -48,96 +51,108 @@
             "27":  "7",
             "28":  "8",
             "29":  "9",
-            // "󰇮" "" "󰈹"
-        }
+            // "active": "󱓻",
+            // "urgent": "󱓻"
+        },
+       // "persistent-workspaces": {
+       //     "11": [],
+       //     "12": [],
+       //     "13": [],
+       //     "14": [],
+       //     "15": [],
+       //     "16": [],
+       //     "17": [],
+       //     "18": [],
+       //     "19": []
+       // }
     },
-// ==========================================================================
-    "tray": {
-        "icon-size": 22,
-        "spacing": 8
-    },
-// ==========================================================================
-    "sway/window": {
-        "max-length": 60,
-        "tooltip": false
-        // "format": "( {} )"
-    },
-// ==========================================================================
-    "clock": {
-        "format": "{:%a %d %b - %H:%M}",
-        "tooltip": false
-    },
-// ==========================================================================
-    "cpu": {
+    "memory": {
         "interval": 5,
-        "format": "︁   {usage}%",
+        "format": "󰍛 {}%",
         "max-length": 10
     },
-// ==========================================================================
-    "memory": {
-        "interval": 15,
-        "format": "<span font='Terminess Nerd Font 9'>︁</span> {percentage}%",
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "tooltip-format": "{calendar}",
+        "format-alt": " {:%a, %d %b %Y}",
+        "format": " {:%I:%M %p}"
+    },
+    "network": {
+        "format-wifi" : "{icon} {essid}",
+        "format-icons": ["󰤯","󰤟","","",""],
+        "format-ethernet": "󰀂",
+        "format-disconnected" : "󰖪",
+	"tooltip-format-wifi": "{icon}  {essid}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+        "tooltip-format-ethernet": "󰀂  {ifname}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+	"tooltip-format-disconnected": "Disconnected",
+	"interval": 5,
+	"nospacing": 1,
+        "format-alt": "IP: ︁{ipaddr}/{cidr} {icon}",
+        "format-alt-click": "click-left",
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "󰂰",
+        "nospacing": 1,
+        // "tooltip-format": "Volume : {volume}%",
+        "format-muted": "󰝟",
+        "format-icons": {
+            "headphone": "",
+            "default": ["󰖀","󰕾",""]
+        },
+        "on-click": "pavucontrol",
+        "scroll-step": 2,
         "tooltip": false
     },
-// ==========================================================================
+//    "custom/logo": {
+ //       "format": "  ",
+  //      "tooltip": false,
+   //     "on-click": "~/.config/rofi/launchers/misc/launcher.sh &"
+    //},
     "battery": {
-        "format": "<span font='Terminess Nerd Font 12'>{icon}  {capacity}%{time}</span>",
-        "format-icons": ["", "", "", "", ""],
-        "format-time": "<span font='Terminess Nerd Font 12'> ({H}h{M}m)</span>",
-        "format-charging": "<span font='Terminess Nerd Font 12'>  {icon}  {capacity}%</span>",
-        "format-full": "<span font='Terminess Nerd Font 12'>  {icon}  Charged</span>",
-        "interval": 15,
+        "format": "{capacity}% {icon}",
+        "format-icons": {
+            "charging": [
+                "󰢜",
+                "󰂆",
+                "󰂇",
+                "󰂈",
+                "󰢝",
+                "󰂉",
+                "󰢞",
+                "󰂊",
+                "󰂋",
+                "󰂅"
+            ],
+            "default": [
+                "󰁺",
+                "󰁻",
+                "󰁼",
+                "󰁽",
+                "󰁾",
+                "󰁿",
+                "󰂀",
+                "󰂁",
+                "󰂂",
+                "󰁹"
+            ]
+        },
+        "format-full": "Charged ",
+        "interval": 5,
         "states": {
-            "warning": 25,
+            "warning": 20,
             "critical": 10
         },
         "tooltip": false
     },
-// ==========================================================================
-    "network": {
-        "format": "{icon}",
-        "format-alt": "<span font='Terminess Nerd Font 10'>︁</span> ︁{ipaddr}/{cidr} {icon}",
-        "format-alt-click": "click-left",
-        "format-wifi": "<span font='Terminess Nerd Font 10'> </span> {essid} ({signalStrength}%)",
-        "format-ethernet": "<span font='Terminess Nerd Font 10'>󰈀 </span> {ifname}",
-        "format-disconnected": "  Disconnected",
-        "tooltip": false
-    },
-// ==========================================================================
-    "pulseaudio": {
-        "format": "<span font='Terminess Nerd Font 12'>{icon:2} </span>{volume}%",
-        "format-alt": "<span font='Terminess Nerd Font 12'>{icon:2} </span>{volume}%",
-        "format-alt-click": "click-right",
-        "format-muted": "<span font='Terminess Nerd Font 12'></span>",
-        "format-icons": {
-            "phone": [" ", " ", " ", " "],
-            "default": ["", "", "", ""]
-        },
-        "scroll-step": 2,
-        "on-click": "pavucontrol",
-        "tooltip": false
-    },
-// ==========================================================================
-    "temperature": {
-        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
-        "critical-threshold": 75,
-        "interval": 5,
-        "format": "{icon} {temperatureC}°",
-        "tooltip": false,
-        "format-icons": [
-            "", // Icon: temperature-empty
-            "", // Icon: temperature-quarter
-            "", // Icon: temperature-half
-            "", // Icon: temperature-three-quarters
-            ""  // Icon: temperature-full
-        ]
-    },
-// ==========================================================================
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": "󰾪"
-        }
-    }
+//    "custom/power": {
+ //       "format": "󰤆",
+  //      "tooltip": false,
+// "on-click": "~/.config/rofi/powermenu/type-2/powermenu.sh &"
+   // }
 }
+
+// vi: ft=jsonc
+
