@@ -3,6 +3,14 @@ sys-kernel/gentoo-sources -build
 sys-kernel/zen-sources -build
 sys-kernel/pf-sources -build
 
+# WARNING: need CONFIG_FW_LOADER_COMPRESS_ZSTD enabled for zstd
+#          this is not enabled by default on gentoo's kernel!
+#
+# deduplicate replaces shared files within the firmware dir with symlinks
+# "should" be safe
+sys-kernel/linux-firmware compress-xz deduplicate
+########### compress-zstd
+
 # dont use dracut
 sys-kernel/installkernel -dracut
 

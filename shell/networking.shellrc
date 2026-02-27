@@ -95,17 +95,6 @@ getlocalip() {
 
 alias sendmail='msmtp -a wvr --'
 
-# ----------------------- tor -------------------------------
-alias {torsocks,ts}='torsocks -i'
-alias torshell='torsocks -i --shell'
-alias torcheck="\
-    torsocks -i \
-    curl -sL https://check.torproject.org | \
-    grep -E '(Congratulations|Sorry)' | \
-    head -n 1"
-alias torget='torsocks -i wget'
-# -----------------------------------------------------------
-
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 wg-up() {
     yesipv6
@@ -126,4 +115,26 @@ alias resolved-flush="resolvectl flush-caches"
 alias nsl=nslookup
 
 alias dnsmasq-restart='doas rc-service dnsmasq restart'
+
+dl() {
+    if [ "$2" ] ; then
+        wget -nv -c --no-cookies --no-hsts "$1" -O "$2"
+    elif [ "$1" ] ; then
+        wget -nv -c --no-cookies --no-hsts "$1"
+    fi
+}
+
+# ========================================================================
+# TOR
+# ========================================================================
+alias torsocks='torsocks -i'
+alias torshell='torsocks -i --shell'
+alias torcheck="\
+    torsocks -i \
+    curl -sL https://check.torproject.org | \
+    grep -E '(Congratulations|Sorry)' | \
+    head -n 1"
+alias torget='torsocks -i wget'
+# ========================================================================
+
 

@@ -13,24 +13,26 @@ dev-python/pywal::mitchw
 # ================================================
 app-portage/portage-bashrc-mv::mv
 mail-client/mailspring::edgets
+games-util/steam-launcher::steam-overlay
+
 gui-wm/swayfx::guru
 gui-libs/scenefx::guru
 media-fonts/nerdfonts::guru
 app-misc/pfetch::guru
-games-util/steam-launcher::steam-overlay
+app-misc/cliphist::guru
+net-vpn/mullvadvpn-app::guru
+media-sound/supersonic::guru
+www-client/torbrowser-launcher::guru
+
 www-client/librewolf::librewolf
 www-client/librewolf-bin::librewolf
 www-client/ungoogled-chromium::pf4public
 www-client/ungoogled-chromium-bin::pf4public
 
-####### FRESH START 2026 #################
-# recommenting all below
-#########################################
-# app-misc/anki-bin::guru
-
 # ===========================================================
 # THEMES
 # ===========================================================
+x11-themes/paper-icon-theme::tastytea
 
 # ===========================================================
 # FONTS

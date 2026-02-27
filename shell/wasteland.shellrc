@@ -183,3 +183,8 @@ alias mpvm='mpv --no-video'
 # ========================================================================
 alias rain='sh ~/src/shit/shitty-bin/rain.sh'
 
+# this is so annoying
+readlink() { command readlink "${1%/}" ; }
+
+alias tlp-profile='doas tlp-stat | grep "Power profile" | sed "s/.*= //"'
+

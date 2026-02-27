@@ -125,7 +125,6 @@ add \
     net-misc/dhcpcd \
     net-misc/socat \
     net-misc/rdesktop \
-    net-vpn/wireguard-tools \
     net-wireless/bluez \
     net-wireless/bluez-tools \
     media-sound/bluez-alsa \
@@ -184,9 +183,16 @@ add \
 # SECURITY
 # ========================================================================
 add \
+    net-firewall/nftables \
     net-analyzer/fail2ban \
+    app-antivirus/clamav \
     sys-apps/flatpak \
-    app-antivirus/clamav
+    net-vpn/wireguard-tools \
+    net-vpn/mullvadvpn-app
+
+# net-vpn/tor
+# net-proxy/torsocks
+# www-client/torbrowser-launcher
 
 # ========================================================================
 # WAYLAND UTILS
@@ -284,7 +290,9 @@ add \
 # ========================================================================
 add \
     app-misc/neofetch \
-    app-text/mupdf
+    app-text/mupdf \
+    app-text/zathura \
+    app-text/zathura-meta
 
 # ========================================================================
 # FIRMWARE
@@ -309,31 +317,30 @@ add \
 # BIG APPLICATIONS
 # ========================================================================
 add \
+    www-client/librewolf \
     app-office/libreoffice \
     net-misc/nextcloud-client \
     mail-client/mailspring \
     app-text/htmltidy \
     app-office/joplin-desktop \
-    app-admin/bitwarden-desktop-bin
-
-########    www-client/firefox \
-########    www-client/librewolf
+    app-admin/bitwarden-desktop-bin \
+    media-sound/supersonic
 
 ## net-im/signal-desktop-bin
 
 # ========================================================================
+# MY EBUILDS
+# ========================================================================
+add \
+    app-shells/oksh
+
+# ========================================================================
 # RANDOM STUFF BELOW
 # ========================================================================
-# my ebuilds
-# add \
-#     app-shells/oksh
-
 #################### proprietary
 ###################add \
 ###################    net-im/discord
 
-# app-text/zathura \
-# app-text/zathura-meta
 # x11-misc/pcmanfm \
 # app-containers/docker \
 # app-containers/docker-compose \

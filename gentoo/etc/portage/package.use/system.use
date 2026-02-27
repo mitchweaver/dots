@@ -11,3 +11,5 @@ sys-libs/zlib minizip
 # this just pulls in network-manager crap that I don't use
 sys-power/tlp -rdw
 
+app-antivirus/clamav rar -clamonacc -milter
+

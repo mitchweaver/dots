@@ -3,13 +3,12 @@
     "layer": "top",
     "position": "top",
     "spacing": 0,
-    "height": 28,
+    "height": 40,
     "modules-left": [
         "sway/workspaces"
     ],
-    "modules-center": [
-        "sway/window"
-    ],
+    "modules-center": [""],
+    // "sway/window"
     "modules-right": [
         "tray",
         "idle_inhibitor",
@@ -18,7 +17,6 @@
         "network",
         "pulseaudio",
         "battery",
-        "custom/power",
         "clock"
     ],
     "wlr/taskbar": {
@@ -107,17 +105,19 @@
         "format-icons": ["󰤯","󰤟","","",""],
         "format-ethernet": "󰀂",
         "format-disconnected" : "󰖪",
-	"tooltip-format-wifi": "{icon}  {essid}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-        "tooltip-format-ethernet": "󰀂  {ifname}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-	"tooltip-format-disconnected": "Disconnected",
 	"interval": 5,
 	"nospacing": 1,
-        "format-alt": "IP: ︁{ipaddr}/{cidr} {icon}",
         "format-alt-click": "click-left",
+        "format-alt": "{icon} {essid} ⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}",
+	"tooltip-format-wifi": "IP: ︁{ipaddr}/{cidr} {icon}",
+        // "format-alt": "IP: ︁{ipaddr}/{cidr} {icon}",
+	// "tooltip-format-wifi": "{icon}  {essid}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+        // "tooltip-format-ethernet": "󰀂  {ifname}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+	// "tooltip-format-disconnected": "Disconnected",
     },
     "pulseaudio": {
         "format": "{icon} {volume}%",
-        "format-bluetooth": "󰂰",
+        "format-bluetooth": "󰂰 {volume}%",
         "nospacing": 1,
         // "tooltip-format": "Volume : {volume}%",
         "format-muted": "󰝟",
@@ -182,9 +182,10 @@
     },
     "sway/window": {
         "all-outputs" : false,
-        "format": "{title}",
+        // "format": "{title}",
+        "format": "{app_id}",
         "tooltip": false,
-        "max-length": 80,
+        "max-length": 20,
     },
 //    "custom/power": {
  //       "format": "󰤆",

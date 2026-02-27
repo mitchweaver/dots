@@ -1,7 +1,7 @@
 # =================================================
 # STARTUP APPS
 # =================================================
-exec background
+exec background -s
 exec dbus-update-activation-environment --all
 exec dbus-launch dunst
 exec waybar
@@ -9,6 +9,8 @@ exec bright -s 80
 exec gammastep -P -t 6100:4600 -l '36.2:-96.0'
 exec gentoo-pipewire-launcher restart
 exec wl-paste --watch cliphist store
+
+# exec mullvad-vpn
 
 exec swayidle -w \
          timeout 900 'lock' \
@@ -87,8 +89,9 @@ smart_gaps on
 bindsym $mod+g gaps inner current plus 4
 bindsym $mod+shift+g gaps inner current minus 4
 
-# disable borders = pixel 0
+######## disable borders = pixel 0
 default_border pixel 0
+# default_border pixel 4
 
 # =================================================
 # SWAYFX SPECIFIC
@@ -209,18 +212,6 @@ floating_modifier $mod normal
 
 ########## bindsym $mod+s layout stacking
 ########## bindsym $mod+a layout tabbed
-########## bindsym $mod+f fullscreen
-########## bindsym $mod+space focus mode_toggle
-########## bindsym $mod+a focus parent
-
-############# =================================================
-############# Scratchpad
-############# =================================================
-############# Move the currently focused window to the scratchpad
-############# bindsym $mod+Shift+minus move scratchpad
-############# Show the next scratchpad window or hide the focused scratchpad window.
-############# If there are multiple scratchpad windows, this command cycles through them.
-############# bindsym $mod+minus scratchpad show
 
 # =================================================
 # WORKSPACE ASSIGNMENTS

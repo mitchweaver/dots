@@ -6,6 +6,9 @@ sys-libs/gdbm berkdb
 dev-python/numpy lapack
 dev-python/PyQt5                       python_targets_python3_11 svg gui widgets network webchannel printsupport
 
+# pyside gui/widgets needed for torbrowser 
+dev-python/pyside gui widgets -bluetooth -printsupport -svg -sql
+
 # ========================================================================
 dev-python/decorator                   python_targets_python3_11
 dev-python/protobuf                    python_targets_python3_11
@@ -97,5 +100,6 @@ dev-python/psutil                      python_targets_python3_11
 # ========================================================================
 
 # non-system
+dev-python/backports-zstd              python_targets_python3_11
 dev-python/pywal                       python_targets_python3_11
 

@@ -18,6 +18,7 @@ x11-apps/xinit -twm
 gui-libs/wlroots tinywl x11 x11-backend
 gui-wm/swayfx tray logind swaybar swaynag -grimshot -wallpapers
 gui-apps/swaybg gdk-pixbuf
+x11-misc/dunst -xdg -dunstify
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # LABWC

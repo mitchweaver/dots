@@ -2,4 +2,6 @@
 # needed because gentoo pkgs lags behind zfs versions
 sys-fs/zfs::gentoo **
 sys-fs/zfs-kmod::gentoo **
+
+x11-themes/paper-icon-theme::tastytea **
 # --------------------------------------------------

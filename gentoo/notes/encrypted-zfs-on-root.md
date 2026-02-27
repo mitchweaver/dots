@@ -160,6 +160,13 @@ zfs list -t all
 #####zpool get bootfs rpool
 ```
 
+## upgrade pool
+
+```
+zpool upgrade rpool
+zpool upgrade bpool
+```
+
 ## stage3 and chroot
 
 ```

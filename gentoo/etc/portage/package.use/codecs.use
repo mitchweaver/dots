@@ -15,7 +15,7 @@ media-libs/libsdl2 opengl gles2
 # IMAGE
 # ========================================================================
 media-gfx/imagemagick xml
-media-libs/tiff jpeg
+media-libs/tiff jpeg -zstd -lzma
 media-libs/libpng apng
 x11-libs/gdk-pixbuf jpeg
 

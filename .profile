@@ -91,33 +91,27 @@ export LESSHISTFILE=/dev/null
 # using en_US.UTF-8 over C causes case-insensitive sorting
 # "C" is supposed to be fastest text parsing
 # up to you whether the benefits outweigh the negatives
-export LC_ALL="C"
-####################export LC_ALL="en_US.UTF-8"
+#
+# NOTE: using "C" can cause bugs in terminal programs
+#       that expect certain font features to work
+########## export LC_ALL="C"
+export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="$LC_ALL" \
        LANG="$LC_ALL" \
        LANGUAGE="$LC_ALL" \
        LOCALE="$LC_ALL"
 
 # ===================================================
-# create tmp dir and cache
+# create tmp dir
 # ===================================================
 if [ -L ~/tmp ] ; then
     unlink ~/tmp 2>/dev/null ||:
 else
     mv ~/tmp ~/tmp.bk
 fi
-if [ -L ~/.cache ] ; then
-    unlink ~/.cache 2>/dev/null ||:
-else
-    mv ~/.cache ~/.cache.bk
-fi
 
 mkdir -p "/tmp/$USER-tmp/tmp"
-mkdir -p "/tmp/$USER-tmp/.cache"
-mkdir -p "/tmp/$USER-tmp/.junk"
-
 ln -sf "/tmp/$USER-tmp/tmp" ~/tmp
-ln -sf "/tmp/$USER-tmp/.cache" ~/.cache
 
 # ===================================================
 # other symlinks for junk I don't want on disk
