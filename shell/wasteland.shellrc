@@ -63,7 +63,7 @@ jpg() {
     case $ans in
         *y*)
             if [ -f "$1" ] ; then
-                jpegoptim -p -s "$1"
+                jpegoptim -p "$1"
             elif [ -d "${1:-.}" ] ; then
                 find "${1:-.}" -type f -iname "*.jp*" -exec jpegoptim -s {} \;
             fi

@@ -4,12 +4,12 @@ GRUB_TIMEOUT=2
 GRUB_TERMINAL=console
 GRUB_DISABLE_LINUX_PARTUUID=false
 GRUB_DISABLE_RECOVERY=true
-GRUB_DISABLE_SUBMENU=y
-
-# make sure you copy this image
-GRUB_BACKGROUND="/boot/grub/mybackground.png"
+GRUB_DISABLE_OS_PROBER=true
+GRUB_THEME=/boot/grub/themes/gentoo_glass/theme.txt
 
 # ======================= KERNEL ARGS ====================================
 GRUB_CMDLINE_LINUX="dozfs root=ZFS=rpool/gentoo/root net.ifnames=0 nowatchdog zswap.enabled=1 zswap.compressor=lz4 split_lock_detect=off"
-##########nvidia-drm.modeset=1
+#
+### nvidia-drm.modeset=1
+#
 # ======================= KERNEL ARGS ====================================

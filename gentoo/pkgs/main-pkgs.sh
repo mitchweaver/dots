@@ -129,7 +129,8 @@ add \
     net-wireless/bluez-tools \
     media-sound/bluez-alsa \
     sys-apps/ethtool \
-    net-libs/ldns
+    net-libs/ldns \
+    net-analyzer/wireshark
 
 # ========================================================================
 # SCRIPTING UTILS
@@ -341,7 +342,6 @@ add \
 ###################add \
 ###################    net-im/discord
 
-# x11-misc/pcmanfm \
 # app-containers/docker \
 # app-containers/docker-compose \
 

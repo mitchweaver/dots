@@ -14,5 +14,8 @@ add \
     gui-apps/wl-clipboard \
     app-misc/cliphist \
     gui-apps/waybar \
-    x11-misc/dunst
+    x11-misc/dunst \
+    xfce-base/thunar \
+    xfce-extra/thunar-media-tags-plugin \
+    xfce-extra/thunar-archive-plugin
 

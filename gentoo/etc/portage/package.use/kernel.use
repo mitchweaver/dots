@@ -3,21 +3,33 @@ sys-kernel/gentoo-sources -build
 sys-kernel/zen-sources -build
 sys-kernel/pf-sources -build
 
+# dont use dracut
+sys-kernel/installkernel -dracut
+# ====================================================
+
+# be careful with module-compress if using zfs FDE
+sys-fs/zfs -modules-compress
+sys-boot/grub libzfs mount themes
+
+sys-apps/util-linux static-libs
+sys-apps/kmod zstd
+
 # WARNING: need CONFIG_FW_LOADER_COMPRESS_ZSTD enabled for zstd
 #          this is not enabled by default on gentoo's kernel!
 #
 # deduplicate replaces shared files within the firmware dir with symlinks
 # "should" be safe
-sys-kernel/linux-firmware compress-xz deduplicate
+sys-kernel/linux-firmware deduplicate compress-xz
 ########### compress-zstd
 
-# dont use dracut
-sys-kernel/installkernel -dracut
+# this is bugged, fails saying can't compress despite it being
+# enabled in kernel
+#
+# * die "USE=modules-compress enabled but no MODULE_COMPRESS* configured";
+media-video/v4l2loopback -modules-compress
 
 # NOTE: kernel fails build w/o this
 #       prob way to disable not sure
 sys-libs/libxcrypt abi_x86_32
 virtual/libcrypt   abi_x86_32
-
-sys-apps/kmod zstd
 

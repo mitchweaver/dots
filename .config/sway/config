@@ -4,13 +4,13 @@
 exec background -s
 exec dbus-update-activation-environment --all
 exec dbus-launch dunst
+exec dbus-launch thunar --daemon
+exec wl-paste --watch cliphist store
+exec gammastep -P -t 6000:4500 -l '36.2:-96.0'
+exec gentoo-pipewire-launcher restart
+
 exec waybar
 exec bright -s 80
-exec gammastep -P -t 6100:4600 -l '36.2:-96.0'
-exec gentoo-pipewire-launcher restart
-exec wl-paste --watch cliphist store
-
-# exec mullvad-vpn
 
 exec swayidle -w \
          timeout 900 'lock' \
@@ -22,6 +22,7 @@ exec bitwarden-desktop-bin
 exec mailspring --password-store="gnome-libsecret"
 exec nextcloud --background
 
+# exec mullvad-vpn
 #############exec launch_steam.sh silent
 #############exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
@@ -148,7 +149,7 @@ workspace_auto_back_and_forth no
 # ========================================================================
 bindsym $mod+Return exec $term
 bindsym $mod+w exec librewolf
-bindsym $mod+e exec pcmanfm
+bindsym $mod+e exec thunar
 bindsym $mod+r exec kitty --single-instance ranger
 bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
 bindsym $mod+o exec dedit

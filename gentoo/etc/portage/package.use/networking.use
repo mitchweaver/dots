@@ -1,4 +1,4 @@
-net-analyzer/wireshark wifi gui pcap tshark -sharkd -plugins -dftest -randpkt -randpktdump -text2pcap
+net-analyzer/wireshark wifi gui pcap -opus -editcap -reordercap -mergecap -udpdump -tshark -sharkd -plugins -dftest -randpkt -randpktdump -text2pcap
 
 # ==========================================================
 # note: ads === active directory

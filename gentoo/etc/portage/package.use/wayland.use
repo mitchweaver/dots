@@ -21,6 +21,12 @@ gui-apps/swaybg gdk-pixbuf
 x11-misc/dunst -xdg -dunstify
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# WAYLAND GUI APPS
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# disable plugin as it pulls in xfce bar dependencies
+xfce-base/thunar -trash-panel-plugin
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # LABWC
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 gui-wm/labwc icons svg
