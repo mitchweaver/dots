@@ -158,6 +158,8 @@ fi 2>/dev/null
 # wayland crap
 # ========================================================================
 export MOZ_ENABLE_WAYLAND=1
+export MOZ_USE_XINPUT2=1
 export GTK_THEME=Arc-Dark
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+export PATH=$PATH:${HOME}/.local/bin

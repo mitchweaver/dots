@@ -194,8 +194,7 @@ endif
 set background=light
 " set background=dark
 
-" force usage of terminal scheme background instead
-" of editor scheme -- this allows to respect of terminal transparency
+" force usage of terminal colorscheme background instead of vim's scheme
 hi Normal guibg=none
 
 " make sign column same color as terminal background

@@ -6,7 +6,7 @@ exec dbus-update-activation-environment --all
 exec dbus-launch dunst
 exec dbus-launch thunar --daemon
 exec wl-paste --watch cliphist store
-exec gammastep -P -t 6000:4500 -l '36.2:-96.0'
+exec gammastep -P -t 6100:4600 -l '36.2:-96.0'
 exec gentoo-pipewire-launcher restart
 
 exec waybar
@@ -17,12 +17,14 @@ exec swayidle -w \
          timeout 1200 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 
-exec joplin-desktop
-exec bitwarden-desktop-bin
-exec mailspring --password-store="gnome-libsecret"
-exec nextcloud --background
+# exec joplin-desktop
+# exec bitwarden-desktop-bin
+# exec mailspring --password-store="gnome-libsecret"
+# exec nextcloud --background
 
-# exec mullvad-vpn
+# exec supersonic -start-minimized
+############# exec mullvad-vpn
+
 #############exec launch_steam.sh silent
 #############exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
@@ -43,7 +45,7 @@ input type:keyboard {
     xkb_layout "us"
     # note: default=300/30
     repeat_delay 230
-    repeat_rate 33
+    repeat_rate 27
     xkb_options "caps:escape"
     # xkb_options "super_r:alt"
 }
@@ -77,6 +79,7 @@ set $term kitty
 # =================================================
 # GAPS / BORDERS
 # =================================================
+default_border pixel 0
 # gaps inner 0
 # gaps outer 0
 gaps inner 18
@@ -90,20 +93,19 @@ smart_gaps on
 bindsym $mod+g gaps inner current plus 4
 bindsym $mod+shift+g gaps inner current minus 4
 
-######## disable borders = pixel 0
-default_border pixel 0
-# default_border pixel 4
-
 # =================================================
 # SWAYFX SPECIFIC
 # =================================================
-shadows enable
-shadow_blur_radius 24
-shadows_on_csd enable
+# shadows enable
+# shadows_on_csd enable
 
-##  shadow_offset <x offset> <y offset>
-blur disable
-blur_xray disable
+# --- drop shadows
+# shadow_blur_radius 4
+# shadow_offset 16 16
+
+# --- "normal" shadows
+# shadow_blur_radius 18
+# shadow_offset 0 1
 
 # to show shadow on waybar
 # (only makes sense if always using gaps and no smartgaps)
@@ -227,9 +229,6 @@ assign [app_id="discord"] 9
 assign [app_id="Discord"] 9
 assign [app_id="Friends - Discord"] 9
 
-assign [class="mailspring"] 8
-assign [class="Mailspring"] 8
-
 assign [class="joplin"] 9
 assign [class="Joplin"] 9
 assign [class="joplin-desktop"] 9
@@ -243,13 +242,31 @@ assign [app_id="steamwebhelper"] 4
 
 # =================================================
 # FORCE FLOATING
+# swaymsg -t get_tree  | grep app_id | grep -v sandbox
 # =================================================
+for_window [window_role = "pop-up"] floating enable
+for_window [window_role = "bubble"] floating enable
+for_window [window_role = "dialog"] floating enable
+for_window [window_type = "dialog"] floating enable
+for_window [window_role = "task_dialog"] floating enable
+for_window [window_type = "menu"] floating enable
+for_window [app_id = "floating"] floating enable
+for_window [app_id = "floating_update"] floating enable, resize set width 1000px height 600px
+for_window [title = "About Mozilla Firefox"] floating enable
+for_window [window_role = "About"] floating enable
+for_window [app_id="firefox" title="Library"] floating enable, border pixel 1, sticky enable
+for_window [title = "Firefox - Sharing Indicator"] kill
+for_window [title = "Firefox — Sharing Indicator"] kill
+for_window [class="^(steam$)" title="^(?!Steam$)"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="mpvimg"] floating enable
 for_window [app_id="mpv"] floating enable
 for_window [app_id="mpvimg"] floating enable
-# for_window [app_id="mailspring"] floating enable
-# for_window [app_id="Mailspring"] floating enable
+for_window [app_id="com.nextcloud.desktopclient.nextcloud"] floating enable
+for_window [app_id="bitwarden"] floating enable
+for_window [app_id="Bitwarden"] floating enable
+for_window [app_id="mailspring"] floating enable
+for_window [app_id="Mailspring"] floating enable
 
 # =================================================
 # Volume / Brightness

@@ -25,6 +25,7 @@ x11-misc/dunst -xdg -dunstify
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # disable plugin as it pulls in xfce bar dependencies
 xfce-base/thunar -trash-panel-plugin
+xfce-base/tumbler ffmpeg epub pdf odf jpeg
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # LABWC

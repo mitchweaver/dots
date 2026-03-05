@@ -12,8 +12,8 @@
     "modules-right": [
         "tray",
         "idle_inhibitor",
-        "cpu",
-        "memory",
+        // "cpu",
+        // "memory",
         "network",
         "pulseaudio",
         "battery",
@@ -97,8 +97,12 @@
     },
     "clock": {
         "tooltip-format": "{calendar}",
-        "format-alt": " {:%a, %d %b %Y}",
-        "format": " {:%I:%M %p}"
+        // "format-alt": "{calendar}",
+        "format-alt": "{:%a %d %b %I:%M %p}",
+        "format": "{:%a %d %b %I:%M %p}",
+        // "format-alt": " {:%a, %d %b %Y}",
+        // "format": "{:%a %I:%M %p}"
+        // 󰥔 
     },
     "network": {
         "format-wifi" : "{icon} {essid}",
@@ -162,7 +166,7 @@
                 "󰁹"
             ]
         },
-        "format-full": "Charged ",
+        "format-full": "100% 󰁹",
         "interval": 5,
         "states": {
             "warning": 20,
@@ -176,7 +180,7 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
+            "activated": "",
             "deactivated": "󰾪"
         }
     },

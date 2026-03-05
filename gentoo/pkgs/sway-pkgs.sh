@@ -17,5 +17,6 @@ add \
     x11-misc/dunst \
     xfce-base/thunar \
     xfce-extra/thunar-media-tags-plugin \
-    xfce-extra/thunar-archive-plugin
+    xfce-extra/thunar-archive-plugin \
+    xfce-base/tumbler
 

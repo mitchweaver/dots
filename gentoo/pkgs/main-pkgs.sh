@@ -94,6 +94,7 @@ add \
 # ========================================================================
 add \
     sys-fs/dosfstools \
+    sys-fs/exfat-utils \
     sys-fs/ntfs3g \
     net-fs/cifs-utils \
     net-fs/samba
@@ -159,7 +160,9 @@ add \
     www-client/w3m \
     dev-python/pynvim \
     sys-fs/ncdu \
-    net-misc/yt-dlp
+    net-misc/yt-dlp \
+    app-text/dictd \
+    app-dicts/dictd-gcide
 
 # ========================================================================
 # LEGACY X11
@@ -235,8 +238,8 @@ add \
     media-libs/gst-plugins-good \
     media-libs/gst-plugins-bad \
     media-libs/gst-plugins-ugly \
-    media-plugins/gst-plugins-v4l2 \
-    media-video/v4l2loopback
+    media-plugins/gst-plugins-v4l2
+    # media-video/v4l2loopback
 
 # ========================================================================
 # AUDIO
@@ -252,7 +255,8 @@ add \
     media-sound/wavpack \
     media-plugins/gst-plugins-v4l2 \
     media-video/v4l2loopback \
-    sys-auth/rtkit
+    sys-auth/rtkit \
+    media-sound/tenacity
 
 # ========================================================================
 # PRINTING

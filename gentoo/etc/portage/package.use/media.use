@@ -1,4 +1,6 @@
-media-video/mpv rubberband zimg lua libmpv
+# need lua support for youtube-dl
+media-video/mpv rubberband zimg libmpv lua
+
 media-video/obs-studio screencast pulseaudio browser
 
 media-video/ffmpegthumbnailer gtk
@@ -19,4 +21,9 @@ media-libs/mlt xml sdl frei0r opengl ffmpeg jack
 media-libs/opencv contribdnn contrib features2d
 media-sound/jack2 -tools
 media-sound/jack-example-tools -readline
+
+# ========================================================================
+# tenacity (aka audacity fork)
+# ========================================================================
+media-sound/tenacity ffmpeg matroska -midi
 

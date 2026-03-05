@@ -24,6 +24,6 @@ sys-devel/clang -extra -static-analyzer
 # ========================================================================
 dev-lang/rust rust-src rustfmt rust-analyzer system-llvm -miri -clippy
 dev-lang/rust-bin rust-src rustfmt rust-analyzer system-llvm -miri -clippy
-sys-libs/compiler-rt-sanitizers profile
+llvm-runtimes/compiler-rt-sanitizers profile
 virtual/rust rust-src rustfmt
 

@@ -128,19 +128,27 @@ zpool set autotrim=on bpool
 ## Create ZFS Datasets
 
 ```
+# create root pool encrypted
 zfs create -o mountpoint=none -o canmount=off -o encryption=on -o keyformat=passphrase -o keylocation=prompt rpool/gentoo
 zfs create -o canmount=noauto -o mountpoint=legacy rpool/gentoo/root
-mount -t zfs  rpool/gentoo/root /mnt/gentoo
+
+# create /home and /var
 zfs create -o mountpoint=legacy rpool/gentoo/home
-mkdir /mnt/gentoo/home
-mount -t zfs rpool/gentoo/home /mnt/gentoo/home
 zfs create -o mountpoint=legacy  rpool/gentoo/var
+
+# create boot pool
 zfs create -o mountpoint=none bpool/gentoo
 zfs create -o mountpoint=legacy bpool/gentoo/root
-mkdir /mnt/gentoo/boot
+
+# mount root
+mkdir /mnt/gentoo
+mount -t zfs rpool/gentoo/root /mnt/gentoo
+
+# mount root folders
+mkdir -p /mnt/gentoo/home /mnt/gentoo/boot /mnt/gentoo/var
+mount -t zfs rpool/gentoo/home /mnt/gentoo/home
+mount -t zfs rpool/gentoo/var  /mnt/gentoo/var
 mount -t zfs bpool/gentoo/root /mnt/gentoo/boot
-mkdir -p /mnt/gentoo/var
-mount -t zfs rpool/gentoo/var /mnt/gentoo/var
 ```
 
 ## Next format and mount the ESP partition
@@ -171,11 +179,15 @@ zpool upgrade bpool
 
 ```
 cd /mnt/gentoo
+
+# download hardened amd64 openrc
+wget https://distfiles.gentoo.org/releases/amd64/autobuilds/XXXXXXXXXXXX/stage3-amd64-hardened-openrc-XXXXXXXXXXXX.tar.xz
+
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 mount -t proc proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys
 mount --rbind /dev /mnt/gentoo/dev
-cp /etc/resolv.conf /mnt/gentoo/etc/
+cp -f /etc/resolv.conf /mnt/gentoo/etc/
 chroot /mnt/gentoo
 ```
 
@@ -192,9 +204,11 @@ chmod 755 $_
 
 # will remove this from fstab for zram-init later but for now
 # add this to /etc/fstab
-#### tmpfs /var/tmp/portage tmpfs rw,nosuid,nodev,size=2G,mode=1777 0 0
-
+#
+# tmpfs /var/tmp/portage tmpfs rw,nosuid,nodev,size=2G,mode=1777 0 0
+#
 # then
+mkdir -p /var/tmp/portage
 mount /var/tmp/portage
 
 # now copy over your /etc/portage files
@@ -232,7 +246,7 @@ rpool/gentoo/var             /var            zfs             rw,xattr,posixacl 0
 
 ## flags
 
-`zfs list -t all``
+```
 cat > /etc/portage/package.use/zfs.use <<EOF
 sys-apps/util-linux static-libs
 sys-boot/grub libzfs
@@ -269,6 +283,7 @@ make olddefconfig
 genkernel \
   --no-clean --no-mrproper --oldconfig \
   --menuconfig --makeopts=-j$(nproc) \
+  --microcode-initramfs \
   --no-hyperv \
   --no-virtio \
   --no-btrfs \
@@ -291,6 +306,7 @@ and now we build our actual kernel, using that module
 genkernel \
   --no-clean --no-mrproper --oldconfig \
   --makeopts=-j$(nproc) \
+  --microcode-initramfs \
   --no-hyperv \
   --no-virtio \
   --no-btrfs \
@@ -301,6 +317,8 @@ genkernel \
   --utils-cflags="-w" \
   all
 ```
+
+NOTE: depending on kernel may need `--no-compress-initramfs`
 
 # Grub
 
@@ -339,7 +357,10 @@ rc-update add zfs-zed default
 
 # Finishing up
 
-## set root password
+```
+# set root password
+passwd
+```
 
 dont forget this :p
 

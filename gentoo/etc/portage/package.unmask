@@ -23,6 +23,8 @@ app-misc/cliphist::guru
 net-vpn/mullvadvpn-app::guru
 media-sound/supersonic::guru
 www-client/torbrowser-launcher::guru
+app-dicts/dictd-gcide::guru
+media-sound/tenacity::guru
 
 www-client/librewolf::librewolf
 www-client/librewolf-bin::librewolf

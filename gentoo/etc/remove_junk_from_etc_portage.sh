@@ -12,7 +12,7 @@ for folder in bashrc.d package.cflags repos.conf savedconfig ; do
     [ -e "portage/$folder" ] && rm -rv "portage/$folder"
 done
 
-for file in bashrc make.conf.lto make.conf.lto.defines ; do
+for file in bashrc ; do
     [ -e "portage/$file" ] && rm -v "portage/$file"
 done
 

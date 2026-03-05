@@ -16,6 +16,7 @@ rc-update add chronyd default
 rc-update add fail2ban default
 rc-update add dnsmasq default
 rc-update add zram-init default
+rc-update add dictd default
 
 rc-update add seatd default
 rc-update add bluetooth default
@@ -60,7 +61,6 @@ EDITOR=vi visudo
 
 hostname XXXXXXX
 ```
-
 
 ```
 mkdir -p /etc/modprobe.d ; rmmod pcspkr ; echo "blacklist pcspkr" >>/etc/modprobe.d/blacklist.conf

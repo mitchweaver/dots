@@ -10,6 +10,9 @@ GRUB_THEME=/boot/grub/themes/gentoo_glass/theme.txt
 # ======================= KERNEL ARGS ====================================
 GRUB_CMDLINE_LINUX="dozfs root=ZFS=rpool/gentoo/root net.ifnames=0 nowatchdog zswap.enabled=1 zswap.compressor=lz4 split_lock_detect=off"
 #
-### nvidia-drm.modeset=1
+### FOR NVIDIA: nvidia-drm.modeset=1
+#
+### FOR SURFACE LAPTOP 6: acpi_osi=\"Windows 2022\" pci=hpiosize=0
+# https://github.com/linux-surface/linux-surface/wiki/Surface-Laptop-6
 #
 # ======================= KERNEL ARGS ====================================

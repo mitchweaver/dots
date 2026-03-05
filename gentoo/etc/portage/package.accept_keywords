@@ -8,8 +8,31 @@ sys-fs/zfs-kmod::gentoo **
 # ====================================================
 # FORCE STABLE
 # ====================================================
+# keep stable toolchain
+# testing is way more headache than its worth
+# sys-devel/gcc -~amd64 -~arm64
+# sys-libs/glibc -~amd64 -~arm64
+# sys-devel/binutils -~amd64 -~arm64
+# llvm-core/llvm -~amd64 -~arm64
+# llvm-core/llvmgold -~amd64 -~arm64
+# llvm-core/llvm-common -~amd64 -~arm64
+# llvm-core/clang -~amd64 -~arm64
+# llvm-runtimes/compiler-rt -~amd64 -~arm64
+# llvm-runtimes/compiler-rt-sanitizers -~amd64 -~arm64
+
+# force stable language versions
+# dev-lang/go -~amd64 -~arm64
+# dev-lang/python -~amd64 -~arm64
+# dev-lang/rust -~amd64 -~arm64
+# dev-lang/rust-bin -~amd64 -~arm64
+# dev-lang/zig -~amd64 -~arm64
+# dev-lang/zig-bin -~amd64 -~arm64
+
 # buggy unstable drivers
-sys-kernel/linux-firmware -~amd64
+sys-kernel/linux-firmware -~amd64 -~arm64
+
+# 0.26.3 causing neovim to fail compile (feb 2026)
+######## dev-libs/tree-sitter -~amd64 -~arm64
 
 # ====================================================
 # MISC GIT
