@@ -31,6 +31,11 @@ if [ -d "${SHELLRC_DIR}" ] ; then
         . "${SHELLRC_DIR}/gentoo.shellrc"
     fi
 
+    if command -v apk >/dev/null ; then
+        . "${SHELLRC_DIR}/alpine.shellrc"
+    fi
+
+
     . "${SHELLRC_DIR}/linux.shellrc"
     . "${SHELLRC_DIR}/builtins.shellrc"
     . "${SHELLRC_DIR}/development.shellrc"

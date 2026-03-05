@@ -1,0 +1,26 @@
+alias dmesg='doas /bin/dmesg'
+
+pkg() {
+    [ "$1" ] || set -- h
+    flag=${1#-}
+    shift
+    case $flag in
+        s)
+            apk search "$@"
+            ;;
+        a)
+            doas apk update
+            doas apk add "$@"
+            ;;
+        u)
+            doas apk update
+            doas apk upgrade "$@"
+            ;;
+        d)
+            doas apk del "$@"
+            ;;
+        i)
+            apk info "$@"
+            ;;
+    esac
+}

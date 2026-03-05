@@ -6,12 +6,26 @@ exec dbus-update-activation-environment --all
 exec dbus-launch dunst
 exec dbus-launch thunar --daemon
 exec wl-paste --watch cliphist store
-exec gammastep -P -t 6100:4600 -l '36.2:-96.0'
-exec gentoo-pipewire-launcher restart
+
+# currently broken:
+######## exec bright -s 80
+######## exec gammastep -P -t 6100:4600 -l '36.2:-96.0'
+
+# ========================================================================
+# alpine
+# exec rc-service -U pipewire start
+# exec rc-service -U pipewire-pulse start
+# exec rc-service -U wireplumber start
+
+exec pipewire
+exec pipewire-pulse
+exec wireplumber
+
+# gentoo
+####### exec gentoo-pipewire-launcher restart
+# ========================================================================
 
 exec waybar
-exec bright -s 80
-
 exec swayidle -w \
          timeout 900 'lock' \
          timeout 1200 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
@@ -34,7 +48,7 @@ exec swayidle -w \
 popup_during_fullscreen smart
 mouse_warping none
 titlebar_border_thickness 0
-titlebar_separator disable
+#############titlebar_separator disable
 xwayland enable
 focus_follows_mouse no
 
@@ -83,7 +97,7 @@ default_border pixel 0
 # gaps inner 0
 # gaps outer 0
 gaps inner 18
-gaps outer 13
+gaps outer 8
 # hide_edge_borders smart
 smart_borders no_gaps
 
@@ -125,6 +139,8 @@ set $RIGHT_MON 'Acer Technologies VG240Y S 0x027157B7'
 
 # thinkpad
 set $LAPTOP 'eDP-1'
+# surface
+set $SURFACE 'Sharp Corporation LQ135P1JX51 0x390D25A0'
 
 ##########set 390hz_acer 'Acer Technologies XV252Q F 11481FF254200'
 ##########output $LEFT_MON resolution 1920x1080@390.297Hz position 0,0 adaptive_sync off allow_tearing yes
@@ -132,6 +148,11 @@ set $LAPTOP 'eDP-1'
 # thinkpad x1 carbon 7th gen can only output 4k @ 30 hz :(((( need buy new laptop
 output $LEFT_MON  resolution 3840x2160@30.000Hz  position 0,0    scale 2 adaptive_sync off allow_tearing yes
 output $RIGHT_MON resolution 1920x1080@165.003Hz position 3840,0 scale 1 adaptive_sync off allow_tearing yes
+
+# surface
+output $SURFACE resolution 2256x1504@59.999Hz position 0,0 scale 1.5 adaptive_sync off allow_tearing yes
+# bindswitch --reload --locked lid:on output $SURFACE disable
+# bindswitch --reload --locked lid:off output $SURFACE enable
 
 # laptop
 output $LAPTOP resolution 1920x1080@60.033Hz position 0,0 scale 1 adaptive_sync off allow_tearing yes
