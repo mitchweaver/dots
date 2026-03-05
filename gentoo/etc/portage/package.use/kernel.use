@@ -33,3 +33,4 @@ media-video/v4l2loopback -modules-compress
 sys-libs/libxcrypt abi_x86_32
 virtual/libcrypt   abi_x86_32
 
+sys-firmware/intel-microcode hostonly
