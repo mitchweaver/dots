@@ -7,7 +7,9 @@
     "modules-left": [
         "sway/workspaces"
     ],
-    "modules-center": [""],
+    "modules-center": [
+        ""
+    ],
     // "sway/window"
     "modules-right": [
         "tray",
@@ -186,10 +188,10 @@
     },
     "sway/window": {
         "all-outputs" : false,
-        // "format": "{title}",
-        "format": "{app_id}",
+        "format": "{title}",
+        // "format": "{app_id}",
         "tooltip": false,
-        "max-length": 20,
+        "max-length": 40,
     },
 //    "custom/power": {
  //       "format": "󰤆",

@@ -1,0 +1,4 @@
+# joplin
+https://flathub.org/en/apps/net.cozic.joplin_desktop
+
+

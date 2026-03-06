@@ -7,11 +7,7 @@ add() {
 
 # MISSING:
 # dictd dictd-gcide mullvad-app tenacity
-# signal mailspring/html-tidy joplin bitwarden supersonic
-#
-# might still need: gnome-keyring
-#
-# look into: font-misc-misc
+# signal supersonic
 
 # ========================================================================
 # APK SETUP
@@ -174,7 +170,7 @@ apk add nwg-look lxappearance \
 # BIG APPLICATIONS
 # ========================================================================
 apk add librewolf libreoffice wireshark nextcloud-client \
-    gimp obs-studio shotcut
+    gimp obs-studio shotcut flatpak
 
 # ========================================================================
 # SWAY

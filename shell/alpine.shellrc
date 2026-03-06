@@ -5,21 +5,21 @@ pkg() {
     flag=${1#-}
     shift
     case $flag in
-        s)
+        s|search)
             apk search "$@"
             ;;
-        a)
+        a|add)
             doas apk update
             doas apk add "$@"
             ;;
-        u)
+        u|upgrade)
             doas apk update
             doas apk upgrade "$@"
             ;;
-        d)
+        d|del)
             doas apk del "$@"
             ;;
-        i)
+        i|info)
             apk info "$@"
             ;;
     esac

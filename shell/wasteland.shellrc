@@ -153,21 +153,14 @@ if command -v apt > /dev/null ; then
 fi
 
 
-# segfaults on wayland/sway idk why but works with this
+# segfaults on wayland idk why but works with this
 alias lxappearance='GDK_BACKEND=x11 lxappearance'
-
-# because i cant remember this command
-alias swaytree='swaymsg -t get_tree'
-alias sway='exec dbus-run-session $(which sway)'
 
 alias rdpi='razer-cli --dpi'
 alias rbat='razer-cli --battery print | grep charge | trim'
 
 alias fixpulse='/usr/local/bin/pulseaudio --start --log-target=syslog'
 alias nf=neofetch
-
-alias sway='exec ~/bin/misc/launch_sway.sh'
-
 
 alias {zramctl,zram}='zramctl --output-all'
 
@@ -202,5 +195,12 @@ usd() {
         doas umount /mnt/sdcard
     fi
 }
+
 # ========================================================================
+# SWAY
+# ========================================================================
+# because i cant remember these
+alias swayout='swaymsg -t get_outputs'
+alias swaytree='swaymsg -t get_tree'
+alias sway='exec ~/bin/misc/launch_sway.sh'
 

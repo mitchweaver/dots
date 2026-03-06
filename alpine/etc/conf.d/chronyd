@@ -1,0 +1,6 @@
+# /etc/conf.d/chronyd
+
+CFGFILE="/etc/chrony/chrony.conf"
+FAST_STARTUP=yes
+ARGS=""
+
