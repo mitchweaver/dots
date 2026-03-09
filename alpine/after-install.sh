@@ -12,11 +12,12 @@ rc-update add fail2ban default
 rc-update add cupsd default
 rc-update add dbus default
 rc-update add dhcpcd default
+rc-update add blueooth default
+rc-update add tlp default
 
 # zfs
 rc-update add zfs-share default
 rc-update add zfs-zed default
-
 
 # ===================================
 # sway

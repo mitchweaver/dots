@@ -7,9 +7,20 @@
 }
 
 window#waybar {
-  background-color: #181825;
+  /* purple-black */
+  /* background-color: #181825; */
+
+  /* gray */
+  /* background-color: #2B2A33; */
+
+  /* dark gray */
+  background-color: #1C1B22;
+
   transition-property: background-color;
   transition-duration: 0.5s;
+
+  /* top text centered color */
+  color: #ffffff;
 }
 
 window#waybar.hidden {
@@ -50,6 +61,7 @@ window#waybar.hidden {
   background-color: #f38ba8;
 }
 
+#custom-wireguard,
 #memory,
 #cpu,
 #custom-power,
@@ -59,6 +71,7 @@ window#waybar.hidden {
 #network,
 #clock,
 #idle_inhibitor,
+#temperature,
 #tray {
   border-radius: 4px;
   margin: 6px 3px;
@@ -71,13 +84,22 @@ window#waybar.hidden {
   margin-right: 6px;
 }
 
-#memory {
-  font-size: 16px;
+#custom-wireguard {
   background-color: #fab387;
 }
 
+#memory {
+/*  font-size: 16px; */
+  background-color: #fab387;
+}
+
+#temperature {
+/*  font-size: 16px; */
+  background-color: #F6F8FA;
+}
+
 #cpu {
-  font-size: 16px;
+/*  font-size: 16px; */
   background-color: #F7D4B3;
 }
 
@@ -102,7 +124,7 @@ window#waybar.hidden {
 }
 
 #pulseaudio {
-  font-size: 16px;
+/*  font-size: 16px; */
   background-color: #f9e2af;
 }
 
@@ -116,7 +138,7 @@ window#waybar.hidden {
 }
 
 #idle_inhibitor {
-  font-size: 20px;
+/*  font-size: 16px; */
   background-color: #F6F8FA;
 }
 

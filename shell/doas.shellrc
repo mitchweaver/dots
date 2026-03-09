@@ -1,0 +1,8 @@
+# see /etc/doas.conf
+#
+# these commands are permitted for wheel to use without pass
+
+alias dmesg='doas /usr/bin/dmesg'
+alias reboot='doas /usr/bin/reboot'
+alias poweroff='doas /usr/bin/poweroff'
+

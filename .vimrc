@@ -57,6 +57,7 @@ Plug 'tpope/vim-commentary'      " comment toggler
     autocmd BufNewFile,BufRead pkgfile setlocal commentstring=#\ %s
     autocmd BufNewFile,BufRead *.h setlocal commentstring=\/\/\ %s
     " autocmd BufNewFile,BufRead *.md setlocal commentstring=\<\!--%s--\>
+    " autocmd BufNewFile,BufRead *.css setlocal commentstring=\/\* %s \*\/
 
 Plug 'godlygeek/tabular'         " tab alignment
 Plug 'svermeulen/vim-yoink'      " emacs killring for vim

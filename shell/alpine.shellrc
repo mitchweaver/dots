@@ -22,5 +22,8 @@ pkg() {
         i|info)
             apk info "$@"
             ;;
+        l|list)
+            cat /etc/apk/world
+            ;;
     esac
 }

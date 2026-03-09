@@ -3,24 +3,29 @@
     "layer": "top",
     "position": "top",
     "spacing": 0,
-    "height": 40,
+    "height": 30,
+
     "modules-left": [
         "sway/workspaces"
     ],
-    "modules-center": [
-        ""
-    ],
-    // "sway/window"
+
+    // "modules-center": [
+    //     "sway/window"
+    // ],
+
     "modules-right": [
         "tray",
         "idle_inhibitor",
+        // "temperature",
         // "cpu",
         // "memory",
+        "custom/wireguard",
         "network",
         "pulseaudio",
         "battery",
         "clock"
     ],
+
     "wlr/taskbar": {
         "format": "{icon}",
         "on-click": "activate",
@@ -29,6 +34,7 @@
         "icon-size": 25,
         "tooltip-format": "{title}"
     },
+
     "sway/workspaces": {
         // "on-click": "activate",
         "format": "{icon}",
@@ -72,16 +78,15 @@
     },
     "memory": {
         "interval": 5,
-        "format": " {}%",
-        "max-length": 10
+        // "format": " {percentage}%",
+        // "format": " {used}G/{total}G",
+        "format": " {used}G",
     },
     "cpu": {
-        "interval": 10,
+        "interval": 5,
         "format": "󰇄 {usage}%",
-        "max-length": 10
     },
     "temperature": {
-        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
         "critical-threshold": 75,
         "interval": 5,
         "format": "{icon} {temperatureC}°",
@@ -111,10 +116,10 @@
         "format-icons": ["󰤯","󰤟","","",""],
         "format-ethernet": "󰀂",
         "format-disconnected" : "󰖪",
-	"interval": 5,
+	"interval": 3,
 	"nospacing": 1,
         "format-alt-click": "click-left",
-        "format-alt": "{icon} {essid} ⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}",
+        "format-alt": "{icon} {essid} ({signalStrength}%) ⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}",
 	"tooltip-format-wifi": "IP: ︁{ipaddr}/{cidr} {icon}",
         // "format-alt": "IP: ︁{ipaddr}/{cidr} {icon}",
 	// "tooltip-format-wifi": "{icon}  {essid}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
@@ -142,6 +147,8 @@
     //},
     "battery": {
         "format": "{capacity}% {icon}",
+        "tooltip": true,
+        "tooltip-format": "{timeTo}",
         "format-icons": {
             "charging": [
                 "󰢜",
@@ -174,7 +181,6 @@
             "warning": 20,
             "critical": 10
         },
-        "tooltip": false
     },
     // "custom/mpv-mmt": {
     //     "format": "exec "
@@ -191,8 +197,18 @@
         "format": "{title}",
         // "format": "{app_id}",
         "tooltip": false,
-        "max-length": 40,
+        "max-length": 32,
     },
+
+    "custom/wireguard": {
+        "interval": 5,
+        "exec": "~/.config/waybar/vpn-status.sh",
+        "format": "{text}",
+        "return-type": "text",
+        "tooltip": true,
+        "tooltip-format": "{text}"
+    },
+
 //    "custom/power": {
  //       "format": "󰤆",
   //      "tooltip": false,

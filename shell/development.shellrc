@@ -48,3 +48,9 @@ v() {
     ${EDITOR:-vi} -n -- "$@"
 }
 
+alias md2html='pandoc -f markdown'
+md2ff() {
+    pandoc -f markdown "$1" > /tmp/out.html &&
+    $BROWSER /tmp/out.html
+}
+

@@ -1,70 +1,36 @@
 alias rsync='rsync -avhu --progress --delete --partial --links'
+alias fatsync='rsync -rvhu --progress --delete --partial' # for fat32
 
-# alias fatsync='rsync -rvhu --progress --delete --partial' # for fat32
 alias scp='scp -rp'
 
 alias pign=ping
+alias nsl=nslookup
 
 alias p8='ping 8.8.8.8'
-alias cv='curl -v'
+alias p1='ping 1.1.1.1'
 
 alias ssh='TERM=xterm-256color ssh'
+
 alias {vssh,vissh}='${EDITOR:-vi} ~/.ssh/config'
+
+# scan for open ports
+alias portscan='nmap -sT'
+
+flushdns() {
+    if command -v resolvectl > /dev/null ; then
+        resolvectl flush-caches
+    elif command -v rc-service >/dev/null && command -v dnsmasq >/dev/null ; then
+        doas rc-service dnsmasq restart
+    fi
+}
 
 wtf() {
     w3m -dump https://wtfismyip.com/json | jq -r
 }
 
-# scan for open ports
-alias portscan='nmap -sT'
-
-noipv6() {
-    # disable ipv6
-    case $(uname) in
-        OpenBSD)
-            doas rcctl -f stop slaacd
-            doas rcctl -f disable slaacd
-            ;;
-        Linux)
-            sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
-            sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
-            sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=1
-    esac
-}
-
-yesipv6() {
-    # disable ipv6
-    case $(uname) in
-        OpenBSD)
-            doas rcctl -f start slaacd
-            doas rcctl -f enable slaacd
-            ;;
-        Linux)
-            sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0
-            sudo sysctl -w net.ipv6.conf.default.disable_ipv6=0
-            sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=0
-    esac
-}
-
-alias resolv='cat /etc/resolv.conf'
-
 # grab urls of any running processes
 # see: http://github.com/mitchweaver/bin for urls script
 psurls() { ps -auxww | urls ; }
-
-
-getint() {
-    case $(uname) in
-        OpenBSD)
-            # get correct interface
-            for i in urtwn0 iwm0 iwn0 iwx0 em0 ; do
-                if ifconfig | grep $i >/dev/null ; then
-                    echo $i
-                    break
-                fi
-            done
-    esac
-}
 
 isconnected() {
     if ifconfig $int | grep 'no network' >/dev/null ; then
@@ -72,49 +38,11 @@ isconnected() {
     fi
 }
 
-getlocalip() {
-    case $(uname) in
-        OpenBSD)
-            int=$(getint)
-            if isconnected $int ; then
-                ifconfig $int | \
-                while read -r line ; do
-                    case $line in
-                        *inet*)
-                            line=${line#*inet }
-                            line=${line% netmask*}
-                            echo $line
-                            break
-                    esac
-                done
-            else
-                return 1
-            fi
-    esac
-}
-
-alias sendmail='msmtp -a wvr --'
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-wg-up() {
-    yesipv6
-    sudo wg-quick up wg0
-}
-wg-down() {
-    noipv6
-    sudo wg-quick down wg0
-}
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
 # systemd-resolved
 alias resolved-status="systemd-resolve --status"
 alias resolved-statistics="systemd-resolve --statistics"
 alias resolved-write="pkill -USR1 systemd-resolve"
 alias resolved-flush="resolvectl flush-caches"
-
-alias nsl=nslookup
-
-alias dnsmasq-restart='doas rc-service dnsmasq restart'
 
 dl() {
     if [ "$2" ] ; then
@@ -129,12 +57,12 @@ dl() {
 # ========================================================================
 alias torsocks='torsocks -i'
 alias torshell='torsocks -i --shell'
-alias torcheck="\
-    torsocks -i \
-    curl -sL https://check.torproject.org | \
-    grep -E '(Congratulations|Sorry)' | \
-    head -n 1"
+alias torcheck='curl -x socks5h://localhost:9050 -s https://check.torproject.org | lynx -dump -stdin'
 alias torget='torsocks -i wget'
-# ========================================================================
 
+# ========================================================================
+# wireguard
+# ========================================================================
+alias wg-up='wg-quick up /etc/wireguard/wvr.sh.conf'
+alias wg-down='wg-quick down /etc/wireguard/wvr.sh.conf'
 

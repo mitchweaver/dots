@@ -47,8 +47,8 @@ apk add zram-init
 # ========================================================================
 # SYSTEM UTILS
 # ========================================================================
-apk add doas sudo htop lsof lm-sensors pciutils usbutils \
-    smartmontools sysstat bc upower git
+apk add doas sudo bc htop lsof lm-sensors pciutils usbutils \
+    smartmontools sysstat upower git
 
 # ========================================================================
 # ARCHIVE
@@ -69,20 +69,21 @@ apk add libnotify libsecret py3-numpy py3-scipy nlohmann-json
 # NETWORKING
 # ========================================================================
 apk add rsync openresolv netcat-openbsd nmap bind-tools \
-    dnsmasq curl dhcpcd socat rdesktop bluez bluez-tools \
-    bluez-alsa ethtool ldns wireless-tools iw \
-    speedtest-cli
+    dnsmasq curl dhcpcd socat rdesktop ldns wireless-tools iw \
+    ethtool speedtest-cli \
+    bluez bluez-tools bluez-alsa pipewire-spa-bluez blueman \
+    tor torsocks
 
 # ========================================================================
 # SCRIPTING UTILS
 # ========================================================================
-apk add entr detox dos2unix inotify-tools dateutils libqrencode
+apk add entr detox dos2unix inotify-tools dateutils libqrencode w3m lynx
 
 # ========================================================================
 # TERMINAL USERLAND
 # ========================================================================
 apk add oksh kitty kitty-kitten neovim ranger translate-shell tree pv \
-    progress eza bat w3m py3-pynvim ncdu
+    progress eza bat py3-pynvim ncdu
 
 # ========================================================================
 # LEGACY X11
@@ -94,13 +95,14 @@ apk add x11-apps/xrandr x11-apps/xev
 # ========================================================================
 # DEVELOPMENT
 # ========================================================================
-apk add gcc patch musl-dev meson ninja shellcheck jq \
+apk add build-base gcc patch musl-dev meson ninja shellcheck jq \
     nodejs openjdk25-jre py3-pylint py3-setuptools hugo sassc cargo go
 
 # ========================================================================
 # DEV LIBS
 # ========================================================================
-apk add libx11-dev libxinerama-dev libxft-dev eudev-dev
+apk add linux-headers ncurses-dev libx11-dev libxinerama-dev libxft-dev \
+    eudev-dev elfutils-dev openssl-dev
 
 # ========================================================================
 # SECURITY

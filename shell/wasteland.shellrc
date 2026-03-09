@@ -203,4 +203,14 @@ usd() {
 alias swayout='swaymsg -t get_outputs'
 alias swaytree='swaymsg -t get_tree'
 alias sway='exec ~/bin/misc/launch_sway.sh'
+alias waybar-restart='pkill -xf /usr/bin/waybar ; /usr/bin/waybar >~/.cache/waybar.log 2>&1 &'
+alias gammastep-restart='pkill gammastep ; ~/.config/sway/gammastep.sh &'
+
+# ========================================================================
+# surface
+# ========================================================================
+alias surface-high='doas surface profile set balanced-performance'
+alias surface-med='doas surface profile set balanced'
+alias surface-low='doas surface profile set low-power'
+alias surface-get='surface status'
 

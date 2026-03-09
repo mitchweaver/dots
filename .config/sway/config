@@ -8,35 +8,29 @@ exec dbus-launch thunar --daemon
 exec wl-paste --watch cliphist store
 
 exec bright -s 50
-exec gammastep -P -t 6300:4800 -l '36.2:-96.0'
+exec sh ~/.config/sway/gammastep.sh
+exec pipewire-start-or-restart.sh
 
-# ========================================================================
-# alpine
-exec pipewire
-exec pipewire-pulse
-exec wireplumber
-
-# gentoo
-####### exec gentoo-pipewire-launcher restart
-# ========================================================================
-
-exec waybar
+exec /usr/bin/waybar >~/.cache/waybar.log 2>&1
 exec swayidle -w \
          timeout 900 'lock' \
-         timeout 1200 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         timeout 1200 'swaymsg "output * power off"' \
+         resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -e -f -c 000000'
 
+exec blueman-applet
 exec nextcloud --background
 
-exec bitwarden_flatpak.sh
-exec joplin_flatpak.sh
-exec mailspring-flatpak.sh
+exec joplin-desktop
+exec bitwarden
+exec mailspring --password-store="gnome-libsecret"
 
-# exec supersonic -start-minimized
-############# exec mullvad-vpn
+exec nm-applet
 
-#############exec launch_steam.sh silent
-#############exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
+###exec supersonic_flatpak.sh
+###exec mullvad-vpn
+###exec launch_steam.sh silent
+###exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
 # =================================================
 # MISC
@@ -55,16 +49,23 @@ input type:keyboard {
     xkb_layout "us"
     # note: default=300/30
     repeat_delay 230
-    repeat_rate 27
+    repeat_rate 20
     xkb_options "caps:escape"
     # xkb_options "super_r:alt"
 }
 
 input type:touchpad {
-    tap enabled
     natural_scroll enabled
     accel_profile "flat"
+
+    tap enabled
+    tap_button_map lrm
+
+    # disable while typing
+    dwt enabled
+
     click_method clickfinger
+    # click_method button_areas
 }
 
 input type:pointer {
@@ -84,7 +85,7 @@ set $down j
 set $up k
 set $right l
 
-set $term kitty --single-instance
+set $term kitty
 
 # =================================================
 # GAPS / BORDERS
@@ -114,8 +115,8 @@ bindsym $mod+shift+g gaps inner current minus 4
 # shadow_offset 16 16
 
 # --- "normal" shadows
-# shadow_blur_radius 18
-# shadow_offset 0 1
+shadow_blur_radius 11
+shadow_offset 0 1
 
 # to show shadow on waybar
 # (only makes sense if always using gaps and no smartgaps)
@@ -160,7 +161,7 @@ workspace_auto_back_and_forth no
 bindsym $mod+Return exec $term
 bindsym $mod+w exec librewolf
 bindsym $mod+e exec thunar
-bindsym $mod+r exec kitty --single-instance ranger
+bindsym $mod+r exec kitty ranger
 bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
 bindsym $mod+o exec dedit
 ####bindsym $mod+p exec wofi -f -I -m -b -i -G --show run | xargs swaymsg exec --
@@ -276,6 +277,9 @@ for_window [app_id="Bitwarden"] floating enable
 for_window [app_id="mailspring"] floating enable
 for_window [app_id="Mailspring"] floating enable
 
+# gnome keyring prompt
+for_window [app_id="gcr-prompter"] floating enable
+
 # =================================================
 # Volume / Brightness
 # =================================================
@@ -302,5 +306,5 @@ include ~/.config/sway/config.d/*.conf
 client.focused $color0 $background $foreground $color5   $color2
 client.unfocused $color0 $background $foreground $color5 $color1
 
-#seat seat0 xcursor_theme DMZ-White 24
+seat seat0 xcursor_theme Paper 24
 
