@@ -4,36 +4,19 @@ add() {
     emerge -av --noreplace --update --verbose-conflicts "$@" || return 1
 }
 
-eselect repository enable linux-surface
-emerge --sync linux-surface
-
-# ========================================================================
-# SURFACE
-# ========================================================================
 add \
-    sys-kernel/surface-sources \
-    app-misc/surface-control \
-    dev-libs/libwacom-surface \
-    sys-firmware/iptsd
+net-wireless/iw \
+net-wireless/wireless-tools \
+net-wireless/wpa_supplicant \
+sys-power/acpilight \
+x11-misc/gammastep \
+sys-power/tlp
 
-# ========================================================================
-# WIRELESS
-# ========================================================================
-add \
-    net-wireless/iw \
-    net-wireless/wireless-tools \
-    net-wireless/wpa_supplicant
+# if nouveau:
+# sys-firmware/nvidia-firmware
+# x11-drivers/xf86-video-nouveau
 
-# ========================================================================
-# SCREEN
-# ========================================================================
-add \
-    sys-power/acpilight \
-    x11-misc/gammastep
-
-# ========================================================================
-# POWER --- NOTE: surface is super buggy, not worth
-# ========================================================================
-# add \
-#     sys-power/tlp
+# if nvidia:
+# x11-drivers/nvidia-drivers
+# sys-firmware/nvidia-firmware
 

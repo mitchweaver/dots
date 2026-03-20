@@ -4,6 +4,13 @@
 app-editors/neovim python -nvimpager
 app-admin/sysstat lm-sensors
 sys-apps/smartmontools -daemon -update-drivedb -caps
+dev-vcs/git -perl
+app-text/pandoc-cli -lua -server
+
+# ========================================================================
+# docker
+# ========================================================================
+app-containers/docker-credential-helpers keyring -pass
 
 # ========================================================================
 # misc libs
@@ -36,4 +43,10 @@ dev-libs/libdbusmenu gtk3
 # complete junk
 # ========================================================================
 app-accessibility/espeak-ng -async -klatt -l10n_ru -l10n_zh -mbrola -sound
+
+# ========================================================================
+# haskell
+# ========================================================================
+dev-haskell/vector-algorithms -bench -boundschecks
+dev-haskell/vector -boundschecks
 

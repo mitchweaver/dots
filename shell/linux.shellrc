@@ -86,7 +86,7 @@ kgrep() {
       gzip -d < /proc/config.gz | grep -i "$1"
 }
 
-alias temp='sensors | grep -E "^Core " | sed -E "s/\(high.*//"'
+alias temp='sensors 2>/dev/null | grep -E "^Core " 2>/dev/null | sed -E "s/\(high.*//"'
 
 
 alias fdisk='doas fdisk'

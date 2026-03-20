@@ -49,8 +49,10 @@ v() {
 }
 
 alias md2html='pandoc -f markdown'
-md2ff() {
-    pandoc -f markdown "$1" > /tmp/out.html &&
-    $BROWSER /tmp/out.html
+mdff() {
+    if [ -f "$1" ] ; then
+        pandoc -f markdown "$1" > /tmp/out.html &&
+        ${BROWSER:-firefox} /tmp/out.html
+    fi
 }
 

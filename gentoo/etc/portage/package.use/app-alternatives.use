@@ -1,8 +1,13 @@
 app-alternatives/gzip pigz -reference
 app-alternatives/bzip2 pbzip2 -reference
-app-alternatives/ninja samurai -reference
 app-alternatives/sh dash -reference
 app-alternatives/lzip plzip -reference
-app-alternatives/cpio libarchive -gnu -reference
-app-alternatives/tar libarchive -gnu -reference
+
+# libarchive cpio/tar causes genkernel to fail initramfs
+app-alternatives/tar gnu -libarchive
+app-alternatives/cpio gnu -libarchive
+
+# note: samurai doesn't support fortran so some packages will fail
+###########app-alternatives/ninja reference -samurai
+app-alternatives/ninja -reference samurai
 

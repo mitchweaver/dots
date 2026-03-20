@@ -9,3 +9,7 @@ x11-libs/pango introspection
 media-libs/harfbuzz introspection
 app-accessibility/at-spi2-core introspection
 
+# for blueman:
+x11-libs/libnotify introspection
+
+

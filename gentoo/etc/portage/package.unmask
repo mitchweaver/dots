@@ -25,11 +25,21 @@ media-sound/supersonic::guru
 www-client/torbrowser-launcher::guru
 app-dicts/dictd-gcide::guru
 media-sound/tenacity::guru
+sci-ml/ollama::guru
+acct-user/ollama::guru
+acct-group/ollama::guru
+app-misc/nwg-look::guru
+x11-apps/xcur2png::guru
 
 www-client/librewolf::librewolf
 www-client/librewolf-bin::librewolf
 www-client/ungoogled-chromium::pf4public
 www-client/ungoogled-chromium-bin::pf4public
+
+sys-kernel/surface-sources::linux-surface
+dev-libs/libwacom-surface::linux-surface
+app-misc/surface-control::linux-surface
+sys-firmware/iptsd::linux-surface
 
 # ===========================================================
 # THEMES

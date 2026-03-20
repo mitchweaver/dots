@@ -6,7 +6,7 @@ add() {
 
 # SWAY
 add \
-    gui-wm/swayfx \
+    gui-wm/sway \
     gui-apps/swaybg \
     gui-apps/swayidle \
     gui-apps/swaylock \

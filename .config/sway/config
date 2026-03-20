@@ -20,17 +20,15 @@ exec swayidle -w \
 
 exec blueman-applet
 exec nextcloud --background
-
 exec joplin-desktop
-exec bitwarden
+exec bitwarden-desktop-bin
 exec mailspring --password-store="gnome-libsecret"
+exec mullvad-vpn
 
-exec nm-applet
+# exec supersonic
 
-###exec supersonic_flatpak.sh
-###exec mullvad-vpn
-###exec launch_steam.sh silent
-###exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
+### exec sh ~/bin/misc/steam.sh silent
+### exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
 # =================================================
 # MISC
@@ -115,8 +113,8 @@ bindsym $mod+shift+g gaps inner current minus 4
 # shadow_offset 16 16
 
 # --- "normal" shadows
-shadow_blur_radius 11
-shadow_offset 0 1
+# shadow_blur_radius 11
+# shadow_offset 0 1
 
 # to show shadow on waybar
 # (only makes sense if always using gaps and no smartgaps)
@@ -136,16 +134,12 @@ set $LEFT_MON 'LG Electronics 27GN950 101NTQDE1076'
 
 # thinkpad
 set $LAPTOP 'eDP-1'
-# surface
-set $SURFACE 'Sharp Corporation LQ135P1JX51 0x390D25A0'
 
 output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 2 adaptive_sync off allow_tearing yes
 # output $RIGHT_MON resolution 1920x1080@165.003Hz position 3840,0 scale 1 adaptive_sync off allow_tearing yes
 
-# surface
-output $SURFACE resolution 2256x1504@59.999Hz position 0,0 scale 1.5 adaptive_sync off allow_tearing yes
-bindswitch --reload --locked lid:on output $SURFACE disable
-bindswitch --reload --locked lid:off output $SURFACE enable
+bindswitch --reload --locked lid:on  output $LAPTOP disable
+bindswitch --reload --locked lid:off output $LAPTOP enable
 
 # ========================================================================
 # workspace configuration
@@ -242,12 +236,12 @@ assign [class="joplin"] 9
 assign [class="Joplin"] 9
 assign [class="joplin-desktop"] 9
 
-assign [class="Steam"] 4
-assign [app_id="Steam"] 4
-assign [class="steam"] 4
-assign [app_id="steam"] 4
-assign [class="steamwebhelper"] 4
-assign [app_id="steamwebhelper"] 4
+# assign [class="Steam"] 4
+# assign [app_id="Steam"] 4
+# assign [class="steam"] 4
+# assign [app_id="steam"] 4
+# assign [class="steamwebhelper"] 4
+# assign [app_id="steamwebhelper"] 4
 
 # =================================================
 # FORCE FLOATING
@@ -276,6 +270,12 @@ for_window [app_id="bitwarden"] floating enable
 for_window [app_id="Bitwarden"] floating enable
 for_window [app_id="mailspring"] floating enable
 for_window [app_id="Mailspring"] floating enable
+
+# thunar copying
+for_window [app_id="thunar"] floating enable
+for_window [app_id="Thunar"] floating enable
+# for_window [name="File Operation Progress"] floating enable
+
 
 # gnome keyring prompt
 for_window [app_id="gcr-prompter"] floating enable
@@ -306,5 +306,5 @@ include ~/.config/sway/config.d/*.conf
 client.focused $color0 $background $foreground $color5   $color2
 client.unfocused $color0 $background $foreground $color5 $color1
 
-seat seat0 xcursor_theme Paper 24
+######## seat seat0 xcursor_theme Paper 24
 

@@ -20,6 +20,12 @@ dnf config-manager addrepo --from-repofile=https://repository.mullvad.net/rpm/st
 dnf install mullvad-vpn
 
 # ========================================================================
+# misc
+# ========================================================================
+# eza # no longer maintained
+# cargo install eza
+
+# ========================================================================
 # DEV LIBS
 # ========================================================================
 apk add libX11-devel ncurses-devel libXinerama-devel libXft-devel \

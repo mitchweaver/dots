@@ -7,345 +7,212 @@ add() {
 # ========================================================================
 # overlays
 # ========================================================================
-add eselect-repository
+if ! grep eselect-repository /var/lib/portage/world >/dev/null ; then
+	add eselect-repository
+fi
 
-eselect repository enable guru
-emerge --sync guru
-
-eselect repository enable edgets
-emerge --sync edgets
-
-eselect repository enable pf4public
-emerge --sync pf4public
-
-eselect repository enable tastytea
-emerge --sync tastytea
-
-eselect repository enable librewolf
-emerge --sync librewolf
+for repo in guru edgets pf4public tastytea librewolf ; do
+	if ! grep $repo /etc/portage/repos.conf/eselect-repo.conf >/dev/null ; then
+		eselect-repository enable $repo
+		emerge --sync $repo
+	fi
+done
 
 # ========================================================================
-# most important must be installed first
+# must be installed first
 # ========================================================================
+if ! command -v mold >/dev/null ; then
+	add sys-devel/mold
+fi
+
 add \
-    sys-devel/mold
+	app-admin/bitwarden-desktop-bin \
+	app-admin/doas \
+	app-admin/entr \
+	app-admin/sudo \
+	app-admin/sysklogd \
+	app-admin/sysstat \
+	app-alternatives/bzip2 \
+	app-alternatives/cpio \
+	app-alternatives/gzip \
+	app-alternatives/lzip \
+	app-alternatives/ninja \
+	app-alternatives/sh \
+	app-alternatives/tar \
+	app-antivirus/clamav \
+	app-arch/lz4 \
+	app-arch/p7zip \
+	app-arch/unrar \
+	app-arch/unzip \
+	app-arch/xz-utils \
+	app-arch/zip \
+	app-cdr/cuetools \
+	app-containers/docker \
+	app-containers/docker-compose \
+	app-crypt/libsecret \
+	app-dicts/dictd-gcide \
+	app-editors/neovim \
+	app-editors/nano \
+	app-eselect/eselect-python \
+	app-eselect/eselect-repository \
+	app-i18n/translate-shell \
+	app-misc/nwg-look \
+	app-misc/dateutils \
+	app-misc/detox \
+	app-misc/figlet \
+	app-misc/jq \
+	app-misc/neofetch \
+	app-misc/ranger \
+	app-office/joplin-desktop \
+	app-office/libreoffice \
+	app-portage/gentoolkit \
+	app-portage/portage-utils \
+	app-shells/oksh \
+	app-text/dictd \
+	app-text/dos2unix \
+	app-text/htmltidy \
+	app-text/mupdf \
+	app-text/tree \
+	app-text/zathura \
+	app-text/zathura-meta \
+	app-text/pandoc-cli \
+	dev-cpp/nlohmann_json \
+	dev-lang/rust \
+	dev-lang/go \
+	dev-libs/lzo \
+	dev-python/numpy \
+	dev-python/pylint \
+	dev-python/pynvim \
+	dev-python/scipy \
+	dev-util/shellcheck \
+	dev-vcs/git \
+	gui-apps/grim \
+	gui-apps/slurp \
+	gui-libs/egl-wayland \
+	lxde-base/lxappearance \
+	mail-client/mailspring \
+	media-fonts/font-util \
+	media-fonts/liberation-fonts \
+	media-fonts/nerdfonts \
+	media-fonts/noto \
+	media-fonts/noto-cjk \
+	media-fonts/noto-emoji \
+	media-fonts/spleen \
+	media-fonts/unifont \
+	media-gfx/gimp \
+	media-gfx/imagemagick \
+	media-gfx/jpegoptim \
+	media-gfx/qrencode \
+	media-libs/alsa-ucm-conf \
+	media-libs/exiftool \
+	media-libs/fontconfig \
+	media-libs/gst-plugins-bad \
+	media-libs/gst-plugins-good \
+	media-libs/gst-plugins-ugly \
+	media-libs/x264 \
+	media-libs/x265 \
+	media-plugins/gst-plugins-meta \
+	media-plugins/gimp-lqr \
+	media-plugins/alsa-plugins \
+	media-plugins/gst-plugins-v4l2 \
+	media-plugins/gst-plugins-x264 \
+	media-plugins/gst-plugins-x265 \
+	media-plugins/gst-plugins-vpx \
+	media-plugins/gst-plugins-opus \
+	media-plugins/gst-plugins-mpg123 \
+	media-plugins/gst-plugins-flac \
+	media-sound/alsa-utils \
+	media-sound/bluez-alsa \
+	media-sound/pavucontrol \
+	media-sound/shntool \
+	media-sound/supersonic \
+	media-sound/tenacity \
+	media-sound/vorbis-tools \
+	media-sound/wavpack \
+	media-video/ffmpeg \
+	media-video/ffmpegthumbnailer \
+	media-video/mpv \
+	media-video/obs-studio \
+	media-video/shotcut \
+	media-video/v4l2loopback \
+	media-video/x264-encoder \
+	net-analyzer/fail2ban \
+	net-analyzer/nmap \
+	net-analyzer/openbsd-netcat \
+	net-analyzer/speedtest-cli \
+	net-analyzer/wireshark \
+	net-dns/bind-tools \
+	net-dns/dnsmasq \
+	net-dns/openresolv \
+	net-firewall/nftables \
+	net-fs/cifs-utils \
+	net-fs/libnfs \
+	net-fs/nfs-utils \
+	net-fs/samba \
+	net-libs/ldns \
+	net-libs/nodejs \
+	net-misc/chrony \
+	net-misc/curl \
+	net-misc/dhcpcd \
+	net-misc/nextcloud-client \
+	net-misc/rdesktop \
+	net-misc/socat \
+	net-misc/yt-dlp \
+	net-misc/yt-dlp \
+	net-print/cups \
+	net-print/cups-filters \
+	net-print/cups-pdf \
+	net-print/hplip \
+	net-proxy/torsocks \
+	net-vpn/mullvadvpn-app \
+	net-vpn/tor \
+	net-vpn/wireguard-tools \
+	net-wireless/bluez \
+	net-wireless/bluez-tools \
+	sys-apps/bat \
+	sys-apps/ethtool \
+	sys-apps/eza \
+	sys-apps/flatpak \
+	sys-apps/lm-sensors \
+	sys-apps/pciutils \
+	sys-apps/progress \
+	sys-apps/pv \
+	sys-apps/smartmontools \
+	sys-apps/usbutils \
+	sys-auth/rtkit \
+	sys-block/zram-init \
+	sys-devel/bc \
+	sys-devel/dwz \
+	sys-firmware/alsa-firmware \
+	sys-firmware/sof-firmware \
+	sys-fs/dosfstools \
+	sys-fs/exfat-utils \
+	sys-fs/inotify-tools \
+	sys-fs/ncdu \
+	sys-fs/ntfs3g \
+	sys-kernel/linux-firmware \
+	sys-power/upower \
+	sys-process/cronie \
+	sys-process/htop  \
+	sys-process/lsof \
+	sci-ml/ollama \
+	www-apps/hugo \
+	www-client/librewolf \
+	www-client/torbrowser-launcher \
+	www-client/w3m \
+	x11-apps/mkfontscale \
+	x11-apps/xev \
+	x11-apps/xrandr \
+	x11-apps/xrdb \
+	x11-libs/libnotify \
+	x11-terms/kitty \
+	x11-themes/arc-icon-theme \
+	x11-themes/arc-theme \
+	x11-themes/paper-icon-theme \
+	x11-themes/papirus-icon-theme \
+	x11-themes/vanilla-dmz-xcursors
 
-# ========================================================================
-# GENTOO-SPECIFIC
-# ========================================================================
-add \
-    app-eselect/eselect-python \
-    app-eselect/eselect-repository \
-    app-portage/gentoolkit \
-    app-portage/portage-utils
 
-# ========================================================================
-# SYSTEM DAEMONS
-# ========================================================================
-add \
-    app-admin/sysklogd \
-    sys-process/cronie \
-    net-misc/chrony
-
-# ========================================================================
-# SYSTEM UTILS
-# ========================================================================
-add \
-    app-admin/doas \
-    app-admin/sudo \
-    sys-process/htop  \
-    sys-process/lsof \
-    sys-apps/lm-sensors \
-    sys-apps/pciutils \
-    sys-apps/usbutils \
-    sys-apps/smartmontools \
-    app-admin/sysstat \
-    sys-devel/bc \
-    sys-power/upower \
-    sys-block/zram-init \
-    dev-vcs/git
-
-# ========================================================================
-# APP-ALTERNATIVES
-# ========================================================================
-add \
-    app-alternatives/gzip \
-    app-alternatives/ninja \
-    app-alternatives/sh \
-    app-alternatives/bzip2 \
-    app-alternatives/cpio \
-    app-alternatives/tar \
-    app-alternatives/lzip
-
-# ========================================================================
-# ARCHIVE
-# ========================================================================
-add \
-    app-arch/p7zip \
-    app-arch/unrar \
-    app-arch/unzip \
-    app-arch/zip \
-    app-arch/lz4 \
-    app-arch/xz-utils \
-    dev-libs/lzo
-
-# ========================================================================
-# FILESYSTEM
-# ========================================================================
-add \
-    sys-fs/dosfstools \
-    sys-fs/exfat-utils \
-    sys-fs/ntfs3g \
-    net-fs/cifs-utils \
-    net-fs/samba
-
-## net-fs/nfs-utils
-## net-fs/libnfs
-
-# ========================================================================
-# MISC SYSTEM LIBS
-# ========================================================================
-add \
-    x11-libs/libnotify \
-    app-crypt/libsecret \
-    dev-python/numpy \
-    dev-python/scipy \
-    dev-cpp/nlohmann_json
-
-# ========================================================================
-# NETWORKING
-# ========================================================================
-add \
-    net-dns/openresolv \
-    net-analyzer/openbsd-netcat \
-    net-analyzer/nmap \
-    net-analyzer/speedtest-cli \
-    net-dns/bind-tools \
-    net-dns/dnsmasq \
-    net-misc/curl \
-    net-misc/dhcpcd \
-    net-misc/socat \
-    net-misc/rdesktop \
-    net-wireless/bluez \
-    net-wireless/bluez-tools \
-    media-sound/bluez-alsa \
-    sys-apps/ethtool \
-    net-libs/ldns \
-    net-analyzer/wireshark
-
-# ========================================================================
-# SCRIPTING UTILS
-# ========================================================================
-add \
-    app-admin/entr \
-    app-misc/detox \
-    app-text/dos2unix \
-    sys-fs/inotify-tools \
-    app-misc/dateutils \
-    media-gfx/qrencode
-
-# ========================================================================
-# TERMINAL USERLAND
-# ========================================================================
-add \
-    x11-terms/kitty \
-    app-editors/neovim \
-    app-misc/ranger \
-    app-i18n/translate-shell \
-    app-text/tree \
-    sys-apps/pv \
-    sys-apps/progress \
-    sys-apps/eza \
-    sys-apps/bat \
-    www-client/w3m \
-    dev-python/pynvim \
-    sys-fs/ncdu \
-    net-misc/yt-dlp \
-    app-text/dictd \
-    app-dicts/dictd-gcide
-
-# ========================================================================
-# LEGACY X11
-# ========================================================================
-add \
-    x11-apps/xrdb \
-    x11-apps/xrandr \
-    x11-apps/xev
-
-# ========================================================================
-# DEVELOPMENT
-# ========================================================================
-add \
-    dev-util/shellcheck-bin \
-    app-misc/jq \
-    dev-python/pylint \
-    www-apps/hugo \
-    net-libs/nodejs \
-    dev-java/openjdk-jre-bin
-
-# ========================================================================
-# SECURITY
-# ========================================================================
-add \
-    net-firewall/nftables \
-    net-analyzer/fail2ban \
-    app-antivirus/clamav \
-    sys-apps/flatpak \
-    net-vpn/wireguard-tools \
-    net-vpn/mullvadvpn-app
-
-# net-vpn/tor
-# net-proxy/torsocks
-# www-client/torbrowser-launcher
-
-# ========================================================================
-# WAYLAND UTILS
-# ========================================================================
-add \
-    gui-libs/egl-wayland \
-    gui-apps/grim \
-    gui-apps/slurp
-
-# ========================================================================
-# GFX
-# ========================================================================
-add \
-    media-gfx/gimp \
-    media-gfx/imagemagick \
-    media-gfx/jpegoptim \
-    media-libs/exiftool
-
-# ========================================================================
-# VIDEO
-# ========================================================================
-add \
-    media-video/mpv \
-    media-video/ffmpeg \
-    media-video/ffmpegthumbnailer \
-    net-misc/yt-dlp \
-    media-video/obs-studio \
-    media-video/shotcut
-
-# ========================================================================
-# VIDEO LIBRARIES
-# ========================================================================
-add \
-    media-video/x264-encoder \
-    media-libs/x264 \
-    media-libs/x265 \
-    media-plugins/gst-plugins-x264 \
-    media-plugins/gst-plugins-x265 \
-    media-libs/gst-plugins-good \
-    media-libs/gst-plugins-bad \
-    media-libs/gst-plugins-ugly \
-    media-plugins/gst-plugins-v4l2
-    # media-video/v4l2loopback
-
-# ========================================================================
-# AUDIO
-# ========================================================================
-add \
-    app-cdr/cuetools \
-    media-sound/alsa-utils \
-    media-libs/alsa-ucm-conf \
-    media-plugins/alsa-plugins \
-    media-sound/pavucontrol \
-    media-sound/shntool \
-    media-sound/vorbis-tools \
-    media-sound/wavpack \
-    media-plugins/gst-plugins-v4l2 \
-    media-video/v4l2loopback \
-    sys-auth/rtkit \
-    media-sound/tenacity
-
-# ========================================================================
-# PRINTING
-# ========================================================================
-add \
-    net-print/cups \
-    net-print/cups-filters \
-    net-print/cups-pdf \
-    net-print/hplip
-
-# ========================================================================
-# FONTS
-# ========================================================================
-add \
-    app-misc/figlet \
-    x11-apps/mkfontscale \
-    media-libs/fontconfig \
-    media-fonts/font-util \
-    media-fonts/nerdfonts \
-    media-fonts/spleen \
-    media-fonts/noto \
-    media-fonts/noto-cjk \
-    media-fonts/noto-emoji \
-    media-fonts/liberation-fonts \
-    media-fonts/unifont
-
-#   media-fonts/fontawesome \
-#   media-fonts/roboto \
-#   media-fonts/terminus-font \
-#   media-fonts/dejavu \
-#   media-fonts/hack \
-#   media-fonts/ibm-plex \
-
-# ========================================================================
-# MISC USERLAND
-# ========================================================================
-add \
-    app-misc/neofetch \
-    app-text/mupdf \
-    app-text/zathura \
-    app-text/zathura-meta
-
-# ========================================================================
-# FIRMWARE
-# ========================================================================
-add \
-    sys-kernel/linux-firmware \
-    sys-firmware/alsa-firmware \
-    sys-firmware/sof-firmware
-
-# ========================================================================
-# THEMES
-# ========================================================================
-add \
-     lxde-base/lxappearance \
-     x11-themes/arc-theme \
-     x11-themes/arc-icon-theme \
-     x11-themes/papirus-icon-theme \
-     x11-themes/paper-icon-theme \
-     x11-themes/vanilla-dmz-xcursors
-
-# ========================================================================
-# BIG APPLICATIONS
-# ========================================================================
-add \
-    www-client/librewolf \
-    app-office/libreoffice \
-    net-misc/nextcloud-client \
-    mail-client/mailspring \
-    app-text/htmltidy \
-    app-office/joplin-desktop \
-    app-admin/bitwarden-desktop-bin \
-    media-sound/supersonic
-
-## net-im/signal-desktop-bin
-
-# ========================================================================
-# MY EBUILDS
-# ========================================================================
-add \
-    app-shells/oksh
-
-# ========================================================================
-# RANDOM STUFF BELOW
-# ========================================================================
-#################### proprietary
-###################add \
-###################    net-im/discord
-
-# app-containers/docker \
-# app-containers/docker-compose \
+#### dev-java/openjdk-jre-bin
+#### net-im/signal-desktop-bin
 

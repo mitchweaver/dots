@@ -2,9 +2,10 @@
 sys-kernel/gentoo-sources -build
 sys-kernel/zen-sources -build
 sys-kernel/pf-sources -build
+sys-kernel/gentoo-kernel-build -build
 
 # dont use dracut
-sys-kernel/installkernel -dracut
+sys-kernel/installkernel dracut
 # ====================================================
 
 # be careful with module-compress if using zfs FDE
@@ -19,8 +20,7 @@ sys-apps/kmod zstd
 #
 # deduplicate replaces shared files within the firmware dir with symlinks
 # "should" be safe
-sys-kernel/linux-firmware deduplicate compress-xz
-########### compress-zstd
+sys-kernel/linux-firmware deduplicate -compress-xz -compress-zstd
 
 # this is bugged, fails saying can't compress despite it being
 # enabled in kernel
@@ -33,4 +33,7 @@ media-video/v4l2loopback -modules-compress
 sys-libs/libxcrypt abi_x86_32
 virtual/libcrypt   abi_x86_32
 
-sys-firmware/intel-microcode hostonly
+# hostonly installs only the currently running microcode
+# this can be """more minimal""" but the severe downside
+# of being unable to move the drive to a different machine
+sys-firmware/intel-microcode -hostonly -dist-kernel

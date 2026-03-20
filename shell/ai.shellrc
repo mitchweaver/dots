@@ -11,7 +11,7 @@ alias oqwen4='ollama run qwen3:4b'
 # ========================================================================
 
 oservice-start() {
-if [ ! -f /etc/systemd/system/ollama-server.service ] ; then
+if [ -d /etc/systemd ] && [ ! -f /etc/systemd/system/ollama-server.service ] ; then
 cat >/tmp/ollama-server.service <<"EOF"
 [Unit]
 Description=Ollama Chat Service

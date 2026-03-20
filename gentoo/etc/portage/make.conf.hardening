@@ -12,8 +12,11 @@ COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -Wl,-z,noexecstack"
 # * protector-strong: add to all functions with arrays larger than 4 bytes
 # * protector-all: add to ALL functions, regardless of arrays
 #
-# note: 'all' is generally considered a waste.
+# note: 'all' is generally considered a waste and gentoo hardened's wiki page
+#       warns against it due to mass breakage
+#
 # see: http://wiki.osdev.org/Stack_Smashing_Protector
+#      https://wiki.gentoo.org/wiki/Hardened/FAQ#Can_I_add_-fstack-protector-all_or_-fstack-protector_in_the_make.conf_CFLAGS.3F
 COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -fstack-protector-strong"
 
 # Prevent stack clash attacks.
@@ -63,6 +66,10 @@ CXXFLAGS="$CXXFLAGS -D_GLIBCXX_ASSERTIONS"
 #
 # see: https://wiki.gentoo.org/wiki/Project:Quality_Assurance/-Wl,-z,defs_and_-Wl,--no-allow-shlib-undefined
 ############################ COMMON_FLAGS_HARDENING="$COMMON_FLAGS_HARDENING -Wl,--no-allow-shlib-undefined"
+
+# ================================================================
+# to look into:
+# https://packages.gentoo.org/useflags/vtv
 
 # vim:ft=config
 

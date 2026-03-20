@@ -1,12 +1,18 @@
 # =========================================================
 # KERNEL / ZFS
 # =========================================================
-# as of March 2026, latest allowed is 6.18.9 and 2.4.0
+# as of March 2026, latest allowed is 6.19.6 and 2.4.1
 # check latest at: https://github.com/openzfs/zfs/releases
->sys-fs/zfs-2.4.0
->sys-fs/zfs-kmod-2.4.0
->sys-kernel/zen-sources-6.18.9
->sys-kernel/gentoo-sources-6.18.9
+>sys-fs/zfs-2.4.1
+>sys-fs/zfs-kmod-2.4.1
+>sys-kernel/zen-sources-6.19.6
+>sys-kernel/gentoo-sources-6.19.6
+
+# latest config from official surface-linux
+# https://github.com/linux-surface/linux-surface/tree/master/configs
+# https://github.com/jasisonee/linux-surface-overlay/tree/master/sys-kernel/surface-sources
+# see also: package.unmask
+######sys-kernel/surface-sources
 
 # =========================================================
 # TOOLCHAIN
@@ -61,5 +67,6 @@ app-text/pandoc
 */*::pf4public
 */*::parona-overlay
 */*::librewolf
+*/*::linux-surface
 # ==========================================================
 
