@@ -4,6 +4,7 @@
 # -mesh: dont enable mesh support (who uses this seriously?)
 net-wireless/bluez experimental -cups -mesh
 
-# pulls in pandoc/ghc/haskell stuff if man left in
-media-sound/bluez-alsa -man
+# note: pulls in pandoc/ghc/haskell stuff if man left in
+#       if you already have installed safe to leave 'man' use flag on
+media-sound/bluez-alsa man
 

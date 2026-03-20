@@ -11,9 +11,9 @@ sys-fs/zfs-kmod::gentoo **
 # keep stable toolchain
 # testing is way more headache than its worth
 sys-devel/gcc -~amd64 -~arm64
-sys-libs/glibc -~amd64 -~arm64
 sys-devel/binutils -~amd64 -~arm64
 sys-devel/mold -~amd64 -~arm64
+sys-libs/glibc -~amd64 -~arm64
 llvm-core/llvm -~amd64 -~arm64
 llvm-core/llvmgold -~amd64 -~arm64
 llvm-core/llvm-common -~amd64 -~arm64
@@ -35,11 +35,9 @@ dev-lang/rust-bin -~amd64 -~arm64
 # buggy unstable drivers
 sys-kernel/linux-firmware -~amd64 -~arm64
 
-# 0.26.3 causing neovim to fail compile (feb 2026)
-######## dev-libs/tree-sitter -~amd64 -~arm64
-
 # ====================================================
 # MISC GIT
 # ====================================================
 app-misc/ranger::gentoo **
 x11-themes/paper-icon-theme::tastytea **
+

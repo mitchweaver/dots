@@ -1,12 +1,12 @@
 # =========================================================
 # KERNEL / ZFS
 # =========================================================
-# as of March 2026, latest allowed is 6.19.6 and 2.4.1
+# as of March 2026, latest allowed is 6.19.8 and 2.4.1
 # check latest at: https://github.com/openzfs/zfs/releases
 >sys-fs/zfs-2.4.1
 >sys-fs/zfs-kmod-2.4.1
->sys-kernel/zen-sources-6.19.6
->sys-kernel/gentoo-sources-6.19.6
+>sys-kernel/zen-sources-6.19.8
+>sys-kernel/gentoo-sources-6.19.8
 
 # latest config from official surface-linux
 # https://github.com/linux-surface/linux-surface/tree/master/configs

@@ -1,0 +1,5 @@
+dev-haskell/vector-algorithms -bench -boundschecks
+dev-haskell/vector -boundschecks
+dev-haskell/aeson-pretty -executable
+dev-haskell/tasty -clock
+

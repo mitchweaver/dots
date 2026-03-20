@@ -44,9 +44,3 @@ dev-libs/libdbusmenu gtk3
 # ========================================================================
 app-accessibility/espeak-ng -async -klatt -l10n_ru -l10n_zh -mbrola -sound
 
-# ========================================================================
-# haskell
-# ========================================================================
-dev-haskell/vector-algorithms -bench -boundschecks
-dev-haskell/vector -boundschecks
-
