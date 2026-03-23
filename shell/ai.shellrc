@@ -5,34 +5,8 @@ alias ohist='if [ -f ~/.ollama/history ] ; then rm -v ~/.ollama/history ; fi'
 # https://ollama.com/library/qwen3
 
 # 1.7b is surprisingly really good
-alias oqwen='ollama run qwen3:1.7b'
+############alias oqwen='ollama run qwen3:1.7b'
 # 4b stresses laptop bit too much
-alias oqwen4='ollama run qwen3:4b'
+########## alias oqwen='ollama run qwen3:4b'
 # ========================================================================
-
-oservice-start() {
-if [ -d /etc/systemd ] && [ ! -f /etc/systemd/system/ollama-server.service ] ; then
-cat >/tmp/ollama-server.service <<"EOF"
-[Unit]
-Description=Ollama Chat Service
-After=network.target
-
-[Service]
-User=mitch
-ExecStart=/usr/bin/ollama serve
-Restart=never
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-doas mv -f /tmp/ollama-server.service /etc/systemd/system/
-fi
-
-    doas systemctl start ollama-server
-}
-
-oservice-stop() {
-    doas systemctl stop ollama-server
-}
 

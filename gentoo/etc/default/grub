@@ -1,18 +1,17 @@
 GRUB_DISTRIBUTOR="Gentoo"
 GRUB_DEFAULT=0
 GRUB_TIMEOUT=2
-GRUB_TERMINAL=console
 GRUB_DISABLE_LINUX_PARTUUID=false
-GRUB_DISABLE_RECOVERY=true
-GRUB_DISABLE_OS_PROBER=true
+GRUB_DISABLE_RECOVERY=false
+GRUB_DISABLE_OS_PROBER=false
 GRUB_THEME=/boot/grub/themes/gentoo_glass/theme.txt
 
+#########GRUB_GFXPAYLOAD_LINUX="keep"
+
 # ======================= KERNEL ARGS ====================================
-GRUB_CMDLINE_LINUX="dozfs root=ZFS=rpool/gentoo/root net.ifnames=0 nowatchdog zswap.enabled=1 zswap.compressor=lz4 split_lock_detect=off"
-#
-### FOR NVIDIA: nvidia-drm.modeset=1
-#
-### FOR SURFACE LAPTOP 6: acpi_osi=\"Windows 2022\" pci=hpiosize=0
-# https://github.com/linux-surface/linux-surface/wiki/Surface-Laptop-6
-#
+GRUB_CMDLINE_LINUX="dozfs root=ZFS=rpool/gentoo/root net.ifnames=0 nowatchdog zswap.enabled=1 zswap.compressor=lz4 split_lock_detect=off modprobe.blacklist=nouveau nvidia-drm.modeset=1"
 # ======================= KERNEL ARGS ====================================
+
+
+#  for nvidia drivers:
+####### modprobe.blacklist=nouveau nvidia-drm.modeset=1

@@ -7,13 +7,13 @@ add() {
 # ========================================================================
 # overlays
 # ========================================================================
-if ! grep eselect-repository /var/lib/portage/world >/dev/null ; then
-	add eselect-repository
-fi
+# if ! grep eselect-repository /var/lib/portage/world >/dev/null ; then
+# 	add eselect-repository
+# fi
 
 for repo in guru edgets pf4public tastytea librewolf ; do
 	if ! grep $repo /etc/portage/repos.conf/eselect-repo.conf >/dev/null ; then
-		eselect-repository enable $repo
+		eselect repository enable $repo
 		emerge --sync $repo
 	fi
 done
@@ -52,7 +52,6 @@ add \
 	app-crypt/libsecret \
 	app-dicts/dictd-gcide \
 	app-editors/neovim \
-	app-editors/nano \
 	app-eselect/eselect-python \
 	app-eselect/eselect-repository \
 	app-i18n/translate-shell \
@@ -88,6 +87,7 @@ add \
 	dev-vcs/git \
 	gui-apps/grim \
 	gui-apps/slurp \
+	gui-apps/swappy \
 	gui-libs/egl-wayland \
 	lxde-base/lxappearance \
 	mail-client/mailspring \
@@ -99,6 +99,7 @@ add \
 	media-fonts/noto-emoji \
 	media-fonts/spleen \
 	media-fonts/unifont \
+	media-fonts/fontawesome \
 	media-gfx/gimp \
 	media-gfx/imagemagick \
 	media-gfx/jpegoptim \
@@ -195,7 +196,6 @@ add \
 	sys-process/cronie \
 	sys-process/htop  \
 	sys-process/lsof \
-	sci-ml/ollama \
 	www-apps/hugo \
 	www-client/librewolf \
 	www-client/torbrowser-launcher \
@@ -215,4 +215,7 @@ add \
 
 #### dev-java/openjdk-jre-bin
 #### net-im/signal-desktop-bin
+
+# broken?
+#####sci-ml/ollama
 

@@ -163,3 +163,8 @@ export GTK_THEME=Arc-Dark
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 export PATH=$PATH:${HOME}/.local/bin
+
+mkdir -p ~/tmp/.cliphist
+chmod -R 0700 ~/tmp/.cliphist
+ln -sf ~/tmp/.cliphist ~/.cache/cliphist
+

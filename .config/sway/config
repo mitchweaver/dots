@@ -25,10 +25,11 @@ exec bitwarden-desktop-bin
 exec mailspring --password-store="gnome-libsecret"
 exec mullvad-vpn
 
+##### exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
+
 # exec supersonic
 
 ### exec sh ~/bin/misc/steam.sh silent
-### exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
 # =================================================
 # MISC
@@ -132,12 +133,12 @@ set $LEFT_MON 'LG Electronics 27GN950 101NTQDE1076'
 # 1080p 165hz 24" acer
 # set $RIGHT_MON 'Acer Technologies VG240Y S 0x027157B7'
 
-# thinkpad
-set $LAPTOP 'eDP-1'
-
+# output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 1 adaptive_sync off allow_tearing yes
 output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 2 adaptive_sync off allow_tearing yes
+
 # output $RIGHT_MON resolution 1920x1080@165.003Hz position 3840,0 scale 1 adaptive_sync off allow_tearing yes
 
+set $LAPTOP 'LG Display 0x06B3 Unknown'
 bindswitch --reload --locked lid:on  output $LAPTOP disable
 bindswitch --reload --locked lid:off output $LAPTOP enable
 
@@ -164,11 +165,13 @@ bindsym $mod+o exec dedit
 bindsym $mod+q kill
 ##########bindsym $super+q kill
 
-bindsym $mod+shift+s exec scrap
-bindsym $super+shift+s exec scrap
+bindsym $mod+shift+s exec scrap -a
+bindsym $super+shift+s exec scrap -a
 
 bindsym $mod+c   exec cliphist list | menu | cliphist decode | wl-copy
 bindsym $super+v exec cliphist list | menu | cliphist decode | wl-copy
+
+bindsym $super+l exec lock
 
 # "kill window unless XXX"
 ##########bindsym $mod+q [class="steam_app_813780"] || kill
@@ -270,6 +273,8 @@ for_window [app_id="bitwarden"] floating enable
 for_window [app_id="Bitwarden"] floating enable
 for_window [app_id="mailspring"] floating enable
 for_window [app_id="Mailspring"] floating enable
+
+for_window [app_id="swayimg"] floating enable
 
 # thunar copying
 for_window [app_id="thunar"] floating enable

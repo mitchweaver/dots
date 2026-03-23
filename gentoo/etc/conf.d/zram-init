@@ -7,7 +7,7 @@ num_devices=3
 type0="/var/tmp"
 flag0=ext4
 opts0="noatime"
-size0=4096
+size0=16500
 mode0=755
 idle0=600
 
@@ -15,7 +15,7 @@ type1="/tmp"
 flag1="ext4"
 opts1="noatime"
 mode1=777
-size1="4096"
+size1="8192"
 labl1="zram-tmp"
 
 type2="/var/log/portage"

@@ -19,7 +19,7 @@
         // "temperature",
         // "cpu",
         // "memory",
-        "custom/wireguard",
+        // "custom/wireguard",
         "network",
         "pulseaudio",
         "battery",

@@ -1,4 +1,11 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# WAYLAND GUI APPS
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# disable plugin as it pulls in xfce bar dependencies
+xfce-base/thunar -trash-panel-plugin
+xfce-base/tumbler ffmpeg epub pdf odf jpeg
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # WAYLAND LIBS
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # no builtin if using openrc with elogind
@@ -20,13 +27,7 @@ gui-wm/swayfx tray logind swaybar swaynag -grimshot -wallpapers
 gui-wm/sway tray logind swaybar swaynag -grimshot -wallpapers
 gui-apps/swaybg gdk-pixbuf
 x11-misc/dunst -xdg -dunstify
-
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# WAYLAND GUI APPS
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# disable plugin as it pulls in xfce bar dependencies
-xfce-base/thunar -trash-panel-plugin
-xfce-base/tumbler ffmpeg epub pdf odf jpeg
+media-gfx/swayimg raw jpegxl drm exif sixel
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # LABWC

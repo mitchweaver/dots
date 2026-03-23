@@ -30,6 +30,7 @@ acct-user/ollama::guru
 acct-group/ollama::guru
 app-misc/nwg-look::guru
 x11-apps/xcur2png::guru
+media-gfx/swayimg::guru
 
 www-client/librewolf::librewolf
 www-client/librewolf-bin::librewolf

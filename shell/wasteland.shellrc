@@ -70,6 +70,20 @@ jpg() {
     fi
 }
 
+jpg-strip() {
+    if [ -f "$1" ] ; then
+        jpegoptim -s -p -t -w $(($(nproc) / 2)) "$1"
+    elif [ -d "${1:-.}" ] ; then
+        printf 'This will recursively jpegoptim in current directory: %s\n' "$PWD"
+        printf 'Confirm? (y/n):'
+        read -r ans
+        case $ans in
+            *y*)
+                find "${1:-.}" -type f -iname "*.jp*" -exec jpegoptim -s -p -t -w $(($(nproc) / 2)) {} \;
+        esac
+    fi
+}
+
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 # translate-shell
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

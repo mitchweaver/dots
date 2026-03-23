@@ -1,5 +1,7 @@
 net-analyzer/wireshark wifi gui pcap -opus -editcap -reordercap -mergecap -udpdump -tshark -sharkd -plugins -dftest -randpkt -randpktdump -text2pcap
 
+net-wireless/wpa_supplicant gui
+
 # ==========================================================
 # note: ads === active directory
 net-fs/cifs-utils -ads -acl -creds
