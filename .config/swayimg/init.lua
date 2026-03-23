@@ -1,0 +1,1 @@
+swayimg.text.hide()
