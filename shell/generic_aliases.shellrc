@@ -74,6 +74,9 @@ alias gv='grep -v'
 alias df='df -h'
 alias su='sudo su -'
 
+alias {bc,calc}='bc -q -s'
+alias cal6='cal -n 6'
+
 alias rl=readlink
 
 # show tree directories only 1-sublevel deep
@@ -109,5 +112,4 @@ if [ -x /usr/bin/doas ] ; then
     alias sudo=/usr/bin/doas
 fi
 
-alias {bc,calc}='bc -q -s'
 

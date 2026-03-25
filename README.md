@@ -2,9 +2,15 @@
 
 My personal dotfiles. Buyer beware, its messy.
 
-![fch](res/new_fetch.png)
+![fch](res/current_desktop.png)
 
-I bounce between Gentoo, Alpine, FreeBSD, and OpenBSD
+I've been using *nix for about 15 years  
+bouncing between Gentoo, Alpine, and OpenBSD.
+
+## Laptop
+
+current main machine is a Thinkpad X1 Carbon 7th Gen  
+looking to replace soon
 
 ## See also
 

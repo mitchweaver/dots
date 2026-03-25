@@ -23,13 +23,12 @@ exec nextcloud --background
 exec joplin-desktop
 exec bitwarden-desktop-bin
 exec mailspring --password-store="gnome-libsecret"
-exec mullvad-vpn
 
-##### exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
+#### exec mullvad-vpn
 
 # exec supersonic
 
-### exec sh ~/bin/misc/steam.sh silent
+##### exec sh ~/bin/misc/steam.sh silent
 
 # =================================================
 # MISC
@@ -130,15 +129,25 @@ bindsym $mod+shift+g gaps inner current minus 4
 # 4k 160hz 27" lg
 set $LEFT_MON 'LG Electronics 27GN950 101NTQDE1076'
 
+# 1080p 390hz 24" acer
+set $LEFTMON 'Acer Technologies XV252Q F 11481FF254200'
+
 # 1080p 165hz 24" acer
 # set $RIGHT_MON 'Acer Technologies VG240Y S 0x027157B7'
 
 # output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 1 adaptive_sync off allow_tearing yes
-output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 2 adaptive_sync off allow_tearing yes
+# output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 2 adaptive_sync off allow_tearing yes
+
+output $LEFT_MON resolution 1920x1080@239.964Hz position 0,0   scale 1 adaptive_sync on allow_tearing no
 
 # output $RIGHT_MON resolution 1920x1080@165.003Hz position 3840,0 scale 1 adaptive_sync off allow_tearing yes
 
-set $LAPTOP 'LG Display 0x06B3 Unknown'
+# xps
+####### set $LAPTOP 'LG Display 0x06B3 Unknown'
+
+# thinkpad x1cg7
+set $LAPTOP 'AU Optronics 0x573D Unknown'
+
 bindswitch --reload --locked lid:on  output $LAPTOP disable
 bindswitch --reload --locked lid:off output $LAPTOP enable
 

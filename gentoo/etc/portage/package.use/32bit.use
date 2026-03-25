@@ -1,0 +1,8 @@
+dev-libs/libbsd            abi_x86_32
+app-crypt/libmd            abi_x86_32
+
+# needed for samba:
+dev-libs/leancrypto abi_x86_32
+net-libs/ngtcp2 gnutls abi_x86_32
+
+

@@ -16,5 +16,5 @@ for file in bashrc ; do
     [ -e "portage/$file" ] && rm -v "portage/$file"
 done
 
-[ -L "portage/make.profile" ] && unlink "portage/make.profile"
+################ [ -L "portage/make.profile" ] && unlink "portage/make.profile"
 

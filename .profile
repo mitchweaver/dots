@@ -8,17 +8,14 @@ export MANPATH="${HOME}/.local/share/man:$MANPATH"
 
 export NPM_CONFIG_PREFIX="${HOME}/.npm"
 
-if [ -d ~/.bonsai ] ; then
-    export MANPATH="${HOME}/.bonsai/share/man:$MANPATH"
-    export PATH="${HOME}/.bonsai/bin:$PATH"
-fi
-
 if command -v nproc >/dev/null ; then
     export NPROC="$(nproc)"
 fi
 
 # for ksh
-export ENV="${HOME}/src/dots/shell/main.shellrc"
+if [ -f ~/src/dots/shell/main.shellrc ] ; then
+    export ENV="${HOME}/src/dots/shell/main.shellrc"
+fi
 
 # ========================================================================
 # OS specific settings
@@ -129,6 +126,16 @@ ln -sf ~/tmp/.junk/python_history ~/.python_history
 touch ~/tmp/.junk/wget-hsts
 ln -sf ~/tmp/.junk/wget-hsts ~/.wget-hsts
 
+
+for browser_dir in librewolf mozilla chromium torbrowser ; do
+    if [ -d ~/.cache/$browser_dir ] ; then
+        rm -r ~/.cache/$browser_dir
+    fi
+    mkdir -p ~/tmp/.junk/${browser_dir}-cache
+    ln -sf ~/tmp/.junk/${browser_dir}-cache ~/.cache/$browser_dir
+done
+unset browser_dir
+
 # ========================================================================
 # FIX PERMISSIONS
 # ========================================================================
@@ -164,7 +171,10 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 export PATH=$PATH:${HOME}/.local/bin
 
-mkdir -p ~/tmp/.cliphist
-chmod -R 0700 ~/tmp/.cliphist
-ln -sf ~/tmp/.cliphist ~/.cache/cliphist
+if command -v cliphist >/dev/null ; then
+    mkdir -p ~/tmp/.cliphist
+    chmod -R 0700 ~/tmp/.cliphist
+    ln -sf ~/tmp/.cliphist ~/.cache/cliphist
+fi
+
 

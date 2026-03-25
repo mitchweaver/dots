@@ -91,6 +91,7 @@ trans() { command trans -no-auto -b "$*" 2>/dev/null ; }
 rtrans() { c=$1 ; shift ; command trans -from en -to $c "$*" 2>/dev/null ; }
 rde() { rtrans de "$*" ; }
 rja() { rtrans ja "$*" ; }
+rru() { rtrans ru "$*" ; }
 
 alias sshcfg='v ~/.ssh/config'
 alias vimrc='v ~/.vimrc'
@@ -98,11 +99,6 @@ alias swaycfg='v ~/.config/sway/config'
 alias kittycfg='v ~/.config/kitty/kitty.conf'
 alias waybarcfg='v ~/.config/waybar/config'
 alias labwccfg='v ~/.config/labwc/rc.xml'
-
-# mkgif() {
-#     rm -- out.gif 2>/dev/null ||:
-#     convert -delay 100 -loop 0 ./*.jpg out.gif
-# }
 
 alias img2pdf='img2pdf *jpg --output combined.pdf'
 
@@ -198,33 +194,23 @@ alias tlp-profile='doas tlp-stat | grep "Power profile" | sed "s/.*= //"'
 # ========================================================================
 # SD CARDS
 # ========================================================================
-SDCARD='/dev/disk/by-id/usb-USB_Mass_Storage_Device_817020190813-0:0-part1'
-msd() {
-    if [ -e "$SDCARD" ] ; then
-        doas mount -o rw,users,umask=000 "$SDCARD" /mnt/sdcard
-    fi
-}
-usd() {
-    if [ -e "$SDCARD" ] ; then
-        doas umount /mnt/sdcard
-    fi
-}
+# SDCARD='/dev/disk/by-id/usb-USB_Mass_Storage_Device_817020190813-0:0-part1'
+# msd() {
+#     if [ -e "$SDCARD" ] ; then
+#         doas mount -o rw,users,umask=000 "$SDCARD" /mnt/sdcard
+#     fi
+# }
+# usd() {
+#     if [ -e "$SDCARD" ] ; then
+#         doas umount /mnt/sdcard
+#     fi
+# }
 
 # ========================================================================
 # SWAY
 # ========================================================================
 # because i cant remember these
-alias swayout='swaymsg -t get_outputs'
-alias swaytree='swaymsg -t get_tree'
+alias sway-outputs='swaymsg -t get_outputs'
+alias sway-tree='swaymsg -t get_tree'
 alias sway='exec ~/bin/misc/launch_sway.sh'
-alias waybar-restart='pkill -xf /usr/bin/waybar ; /usr/bin/waybar >~/.cache/waybar.log 2>&1 &'
-alias gammastep-restart='pkill gammastep ; ~/.config/sway/gammastep.sh &'
-
-# ========================================================================
-# surface
-# ========================================================================
-alias surface-high='doas surface profile set balanced-performance'
-alias surface-med='doas surface profile set balanced'
-alias surface-low='doas surface profile set low-power'
-alias surface-get='surface status'
 

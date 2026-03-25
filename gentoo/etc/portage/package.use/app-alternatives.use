@@ -8,6 +8,7 @@ app-alternatives/tar gnu -libarchive
 app-alternatives/cpio gnu -libarchive
 
 # note: samurai doesn't support fortran so some packages will fail
-###########app-alternatives/ninja reference -samurai
 app-alternatives/ninja -reference samurai
+#########app-alternatives/ninja reference -samurai
+
 
