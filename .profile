@@ -70,7 +70,7 @@ for i in nvim vim vi nvi nano ; do
     fi
 done
 
-for i in librewolf librewolf-bin firefox firefox-bin chromium chromium-bin ; do
+for i in brws librewolf librewolf-bin firefox firefox-bin chromium chromium-bin ; do
     if command -v $i >/dev/null ; then
         export BROWSER=$i
         break
@@ -126,20 +126,15 @@ ln -sf ~/tmp/.junk/python_history ~/.python_history
 touch ~/tmp/.junk/wget-hsts
 ln -sf ~/tmp/.junk/wget-hsts ~/.wget-hsts
 
-
-for browser_dir in librewolf mozilla chromium torbrowser ; do
-    if [ -d ~/.cache/$browser_dir ] ; then
-        rm -r ~/.cache/$browser_dir
-    fi
-    mkdir -p ~/tmp/.junk/${browser_dir}-cache
-    ln -sf ~/tmp/.junk/${browser_dir}-cache ~/.cache/$browser_dir
-done
-unset browser_dir
+rm -f ~/.bash_history ~/.ksh_history
+ln -sf ~/tmp/.junk/bash_history ~/.bash_history
+ln -sf ~/tmp/.junk/ksh_history ~/.ksh_history
 
 # ========================================================================
 # FIX PERMISSIONS
 # ========================================================================
-chmod -R 700 "/tmp/$USER-tmp"
+chmod -R 0700 "/tmp/$USER-tmp"
+chmod -R 0700 ~/tmp
 
 if [ -d ~/.gnupg ] ; then
     chmod 0700 ~/.gnupg

@@ -23,12 +23,13 @@ exec nextcloud --background
 exec joplin-desktop
 exec bitwarden-desktop-bin
 exec mailspring --password-store="gnome-libsecret"
+exec mullvad-vpn
 
-#### exec mullvad-vpn
+######## exec sh ~/bin/misc/steam.sh silent
+
+######### exec /usr/bin/discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
 # exec supersonic
-
-##### exec sh ~/bin/misc/steam.sh silent
 
 # =================================================
 # MISC
@@ -130,21 +131,19 @@ bindsym $mod+shift+g gaps inner current minus 4
 set $LEFT_MON 'LG Electronics 27GN950 101NTQDE1076'
 
 # 1080p 390hz 24" acer
-set $LEFTMON 'Acer Technologies XV252Q F 11481FF254200'
+# set $LEFT_MON 'Acer Technologies XV252Q F 11481FF254200'
 
 # 1080p 165hz 24" acer
 # set $RIGHT_MON 'Acer Technologies VG240Y S 0x027157B7'
 
 # output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 1 adaptive_sync off allow_tearing yes
-# output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 2 adaptive_sync off allow_tearing yes
+output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 2 adaptive_sync off allow_tearing yes
 
-output $LEFT_MON resolution 1920x1080@239.964Hz position 0,0   scale 1 adaptive_sync on allow_tearing no
-
+# output $LEFT_MON resolution 1920x1080@390.297Hz position 0,0   scale 1 adaptive_sync off allow_tearing yes
 # output $RIGHT_MON resolution 1920x1080@165.003Hz position 3840,0 scale 1 adaptive_sync off allow_tearing yes
 
 # xps
 ####### set $LAPTOP 'LG Display 0x06B3 Unknown'
-
 # thinkpad x1cg7
 set $LAPTOP 'AU Optronics 0x573D Unknown'
 
@@ -163,7 +162,7 @@ workspace_auto_back_and_forth no
 # Key binds
 # ========================================================================
 bindsym $mod+Return exec $term
-bindsym $mod+w exec librewolf
+bindsym $mod+w exec brws
 bindsym $mod+e exec thunar
 bindsym $mod+r exec kitty ranger
 bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
@@ -237,12 +236,12 @@ floating_modifier $mod normal
 assign [class="firefox"] 1
 assign [class="librewolf"] 1
 
-assign [class="discord"] 9
-assign [class="Discord"] 9
-assign [class="Friends - Discord"] 9
-assign [app_id="discord"] 9
-assign [app_id="Discord"] 9
-assign [app_id="Friends - Discord"] 9
+# assign [class="discord"] 9
+# assign [class="Discord"] 9
+# assign [class="Friends - Discord"] 9
+# assign [app_id="discord"] 9
+# assign [app_id="Discord"] 9
+# assign [app_id="Friends - Discord"] 9
 
 assign [class="joplin"] 9
 assign [class="Joplin"] 9

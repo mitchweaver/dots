@@ -13,7 +13,10 @@ rcl() {
     rc-update -v show | grep afternet
 }
 
-rcr() { doas rc-service "$1" restart ; }
+rcr()     { doas rc-service "$1" restart ; }
+rcstop()  { doas rc-service "$1" stop    ; }
+rcstart() { doas rc-service "$1" start   ; }
+
 rcu() { doas rc-update add "$1" default ; }
 rcd() { doas rc-update delete "$1" default ; }
 

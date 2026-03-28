@@ -1,5 +1,4 @@
 export HISTCONTROL=ignoredups:ignorespace
-export HISTSIZE=500
 
 case ${HISTORY_STYLE:-default} in
     per-shell)
@@ -9,7 +8,7 @@ case ${HISTORY_STYLE:-default} in
         trap '/bin/rm -f -- "$HISTFILE" 2>/dev/null' EXIT TERM KILL QUIT
         ;;
     default)
-        export HISTFILE="${XDG_CACHE_HOME:-${HOME}/.cache}/history"
+        ;;
 esac
 
 # hist-grep: search shell history

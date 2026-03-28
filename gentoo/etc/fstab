@@ -1,0 +1,15 @@
+bpool/gentoo/root            /boot           zfs rw,relatime,xattr,posixacl    0 0
+/dev/nvme0n1p1               /boot/efi       vfat            noauto            1 2
+rpool/gentoo/root            /               zfs             rw,xattr,posixacl 0 0
+rpool/gentoo/home            /home           zfs             rw,xattr,posixacl 0 0
+rpool/gentoo/var             /var            zfs             rw,xattr,posixacl 0 0
+/dev/nvme0n1p3               none            swap            defaults          0 0
+
+//truenas.local.wvr.sh/array        /mnt/array       cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+//truenas.local.wvr.sh/backup       /mnt/backup      cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+//truenas.local.wvr.sh/clips        /mnt/clips       cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+//truenas.local.wvr.sh/images       /mnt/images      cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+//truenas.local.wvr.sh/music        /mnt/music       cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+//truenas.local.wvr.sh/iso          /mnt/iso         cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+//truenas.local.wvr.sh/torrents     /mnt/torrents    cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+//truenas.local.wvr.sh/videos       /mnt/videos      cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0

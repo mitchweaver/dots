@@ -29,10 +29,11 @@ x11-libs/libfm gtk -automount
 # ========================================================================
 # browsers
 # ========================================================================
-www-client/firefox     gmp-autoupdate
-www-client/firefox-bin gmp-autoupdate
-www-client/librewolf     gmp-autoupdate -eme-free
-www-client/librewolf-bin gmp-autoupdate -eme-free
+www-client/firefox          gmp-autoupdate wasm-sandbox system-av1 system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-pipewire system-png system-webp
+www-client/librewolf        gmp-autoupdate wasm-sandbox -eme-free system-av1 system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-pipewire system-png system-webp
+
+www-client/firefox-bin      gmp-autoupdate
+www-client/librewolf-bin    gmp-autoupdate -eme-free
 
 # ========================================================================
 # needed for discord

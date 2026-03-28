@@ -19,4 +19,5 @@ sys-power/tlp
 # if nvidia:
 # x11-drivers/nvidia-drivers
 # sys-firmware/nvidia-firmware
+# media-libs/nvidia-vaapi-driver
 

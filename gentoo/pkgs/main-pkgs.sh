@@ -12,10 +12,10 @@ add() {
 # fi
 
 for repo in guru edgets pf4public tastytea librewolf ; do
-    if ! grep $repo /etc/portage/repos.conf/eselect-repo.conf >/dev/null ; then
-	eselect repository enable $repo
-	emerge --sync $repo
-    fi
+    # if ! grep $repo /etc/portage/repos.conf/eselect-repo.conf >/dev/null ; then
+    eselect repository enable $repo
+    emerge --sync $repo
+    # fi
 done
 
 # ========================================================================

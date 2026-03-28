@@ -24,6 +24,10 @@ PS1_STYLE=user-host-pwd  # [user-pwd/user/pwd/user-host-pwd]
 # PS1_STYLE=user-pwd       # [user-pwd/user/pwd/user-host-pwd]
 # PS1_STYLE=pwd            # [user-pwd/user/pwd/user-host-pwd]
 PS1_GIT=true             # [true/false]
+
+HISTORY_STYLE=default      # [default/per-shell]
+export HISTSIZE=300
+export HISTFILE="${HOME}/.ksh_history"
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 if [ -d "${SHELLRC_DIR}" ] ; then
