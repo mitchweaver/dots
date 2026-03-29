@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# set wallpaper for xenodm
+# this is called by /etc/X11/xenodm/xenodm-config
+# ==============================================
+
+wall=/etc/X11/xenodm/openbsd_wall.jpg
+
+[ -f $wall ] &&
+[ -x /usr/local/bin/xwallpaper ] &&
+/usr/local/bin/xwallpaper --stretch $wall
+

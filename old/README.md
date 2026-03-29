@@ -1,4 +1,3 @@
 # old
 
-Files for Fedora/Gentoo/Alpine whatever else I've used for a while but
-don't currently
+Files for FreeBSD/Gentoo/Alpine/Fedora whatever else I've used for a while but don't currently

@@ -1,0 +1,6 @@
+apmd_flags=-A
+resolvd_flags=NO
+slaacd_flags=NO
+smtpd_flags=NO
+unbound_flags=
+xenodm_flags=

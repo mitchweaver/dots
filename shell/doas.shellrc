@@ -2,7 +2,14 @@
 #
 # these commands are permitted for wheel to use without pass
 
-alias dmesg='doas /usr/bin/dmesg'
-alias reboot='doas /usr/bin/reboot'
-alias poweroff='doas /usr/bin/poweroff'
-
+# OpenBSD
+if command -v pkg_add >/dev/null ; then
+    alias dmesg='doas /sbin/dmesg'
+    alias reboot='doas /sbin/reboot'
+    alias poweroff='doas /sbin/halt -p'
+# Linux / FreeBSD
+elif [ -d /proc ] ; then
+    alias dmesg='doas /usr/bin/dmesg'
+    alias reboot='doas /usr/bin/reboot'
+    alias poweroff='doas /usr/bin/poweroff'
+fi

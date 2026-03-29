@@ -1,0 +1,9 @@
+# create a LAGG failover preferring ethernet over wifi
+# eth  = iwm0
+# wlan = em0
+# ========================================================================
+up
+trunkproto failover trunkport em0
+trunkport iwm0
+-inet6
+dhcp

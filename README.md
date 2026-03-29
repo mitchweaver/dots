@@ -2,7 +2,7 @@
 
 My personal dotfiles. Buyer beware, its messy.
 
-![fch](res/current_desktop.png)
+![fch](res/gentoo_desktop.png)
 
 I've been using *nix for about 15 years  
 bouncing between Gentoo, Alpine, and OpenBSD.

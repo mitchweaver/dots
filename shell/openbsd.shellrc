@@ -1,0 +1,85 @@
+# openbsd-specific aliases
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+# stop .core file generation on crashes
+ulimit -c 0
+
+# settings $TERM here bugfixes crap with doas
+alias {doas,dosa,daos,sudo}='TERM=vt100 doas'
+
+alias sg='sysctl | grep -i'
+
+alias disks='sysctl -n hw.disknames'
+alias disklabel='doas disklabel'
+
+alias pfdump='doas tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout
+alias pfdrop='doas tcpdump -nettti pflog0 action drop'   # follow dropped
+alias netstart='doas sh /etc/netstart'
+
+alias reboot='doas reboot'
+alias poweroff='doas halt -p'
+
+alias diskstat='systat iostat'
+alias shred='rm -P'
+
+pkg() {
+    [ "$1" ] || set -- h
+    flag=${1#-}
+    shift
+    case $flag in
+        h)
+            >&2 printf '%s\n' \
+                'pkg: [-a add] [-u update] [-d delete] [-s search] [-i info] [-f file] [-l list]'
+            ;;
+        a)
+            doas pkg_add -D snap "$@"
+            ;;
+        u)
+            doas pkg_add -D snap -Uu "$@"
+            ;;
+        d)
+            doas pkg_delete "$@"
+            doas pkg_delete -a
+            ;;
+        s)
+            pkg_info -D snap -Q "$@"
+            ;;
+        i)
+            pkg_info -D snap "$@"
+            ;;
+        f)
+            pkg_info -D snap -E "$@"
+            ;;
+        l)
+            pkg_info "$@"
+    esac
+}
+
+alias portcheck=/usr/ports/infrastructure/bin/portcheck
+alias porttemplate='cp /usr/ports/infrastructure/templates/Makefile.template Makefile'
+alias cdwrksrc='cd $(make show=WRKSRC)'
+
+pledgesnippet() {
+cat <<"EOF"
+if (pledge("stdio rpath", NULL) == -1)
+{
+    fprintf (stderr, "%s: pledge\n", "PROGRAM_NAME");
+    exit ( 1 );
+}
+EOF
+}
+
+alias puffy="printf '%s\n' '🐡' | tee | xsel -ib"
+
+ports() {
+    case ${1#-} in
+        h)
+            >&2 printf '%s\n' \
+                'ports: [-s search]'
+            ;;
+        s)
+            make -f /usr/ports/Makefile search name="$2" | \
+            grep 'Port:'
+    esac
+}
+

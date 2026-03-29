@@ -1,0 +1,4 @@
+
+unzip
+waybar
+
