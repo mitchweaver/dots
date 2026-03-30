@@ -1,0 +1,37 @@
+# borderwidth 0
+
+# ========================================================================
+# program hotkeys
+# ========================================================================
+# key guide: 4=super / S=shift / M=alt / C=ctrl
+bind-key M-Return      "kitty"
+bind-key M-e           "thunar"
+bind-key M-w           "firefox"
+bind-key M-r           "kitty --app-id ranger --name ranger --title ranger ranger"
+bind-key M-o           "dedit"
+# bind-key MS-s           "scrap -a"
+# bind-key 4S-s           "scrap -a"
+#######bind-key M-p           menu --wide run -p 'Run:'
+
+# ========================================================================
+# window hotkeys
+# ========================================================================
+bind-key M-q       window-close
+bind-key M-f       window-maximize
+bind-key M-Tab     window-cycle
+bind-key CMS-q     quit
+
+# menu
+command firefox     "firefox"
+command thunar      "thunar"
+command htop        "kitty htop"
+command nvim        "kitty nvim ~/files/scratchpad.md"
+command term        "kitty"
+
+########command pavucontrol "pavucontrol"
+
+# tag rules
+autogroup    1    "Firefox-esr"
+autogroup    1    "Firefox"
+
+

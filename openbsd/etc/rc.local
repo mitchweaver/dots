@@ -1,2 +1,7 @@
+#!/bin/sh
+
+# stop .core file generation on crashes
+ulimit -c 0
+
 # enable tap to click on laptop touchpads
 wsconsctl mouse.tp.tapping=1

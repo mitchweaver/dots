@@ -98,7 +98,7 @@ alias vimrc='v ~/.vimrc'
 alias swaycfg='v ~/.config/sway/config'
 alias kittycfg='v ~/.config/kitty/kitty.conf'
 alias waybarcfg='v ~/.config/waybar/config'
-alias labwccfg='v ~/.config/labwc/rc.xml'
+alias i3cfg='v ~/.config/i3/config'
 
 alias img2pdf='img2pdf *jpg --output combined.pdf'
 

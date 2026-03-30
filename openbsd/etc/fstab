@@ -1,0 +1,28 @@
+#
+# replace XXXXXXXXXXX with drive seed
+#
+XXXXXXXXXXXXXXXXXXXXX.b     none swap sw
+XXXXXXXXXXXXXXXXXXXXX.a     / ffs rw 1 1
+XXXXXXXXXXXXXXXXXXXXX.l     /home              ffs rw,nodev,nosuid,softdep,noatime 1 2
+XXXXXXXXXXXXXXXXXXXXX.f     /usr               ffs rw,nodev,softdep,noatime 1 2
+XXXXXXXXXXXXXXXXXXXXX.g     /usr/X11R6         ffs rw,nodev,softdep,noatime 1 2
+XXXXXXXXXXXXXXXXXXXXX.h     /usr/local         ffs rw,wxallowed,nodev,softdep,noatime 1 2
+XXXXXXXXXXXXXXXXXXXXX.k     /usr/obj           ffs rw,nodev,nosuid,softdep,noatime 1 2
+XXXXXXXXXXXXXXXXXXXXX.j     /usr/src           ffs rw,nodev,nosuid,softdep,noatime 1 2
+XXXXXXXXXXXXXXXXXXXXX.e     /var               ffs rw,nodev,nosuid,softdep,noatime 1 2
+
+########## NOT USING THIS AUTOMATICALLY CREATED PARTITION
+######### 9d69b9a7d8be064a.d /tmp               ffs rw,nodev,nosuid,softdep,noatime 1 2
+
+# use mfs (tmpfs) instead
+swap               /tmp               mfs rw,nodev,nosuid,-s=2048m 0 0
+
+//truenas.local.wvr.sh/array        /mnt/array       cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+//truenas.local.wvr.sh/backup       /mnt/backup      cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+//truenas.local.wvr.sh/clips        /mnt/clips       cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+//truenas.local.wvr.sh/images       /mnt/images      cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+//truenas.local.wvr.sh/music        /mnt/music       cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+//truenas.local.wvr.sh/iso          /mnt/iso         cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+//truenas.local.wvr.sh/torrents     /mnt/torrents    cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+//truenas.local.wvr.sh/videos       /mnt/videos      cifs       rw,_netdev,vers=3.0,noauto,credentials=/root/sambacreds.txt,iocharset=utf8,uid=6969,nofail 0 0
+

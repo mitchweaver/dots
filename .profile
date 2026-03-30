@@ -3,17 +3,14 @@
 # ========================================================================
 # PATHS
 # ========================================================================
-export PATH="$PATH:/usr/X11R6/bin:/usr/local/sbin:$HOME/.local/go/bin:$HOME/.cargo/bin:$HOME/.npm/bin"
+export PATH="$HOME/.local/bin:$PATH:/usr/X11R6/bin:/usr/local/sbin:$HOME/.local/go/bin:$HOME/.cargo/bin:$HOME/.npm/bin"
 export MANPATH="${HOME}/.local/share/man:$MANPATH"
-export PATH=$PATH:${HOME}/.local/bin
 
-# hide npm patch to ~/.local/npm instead of ~/.npm
-export NPM_CONFIG_PREFIX="${HOME}/.local/npm"
-# hide GOPATH to ~/.local/go instead of ~/go
-export GOPATH="${HOME}/.local/go"
+export NPM_CONFIG_PREFIX="${HOME}/.npm"
 
-mkdir -p "$NPM_CONFIG_PREFIX"
-mkdir -p "$GOPATH"
+if command -v nproc >/dev/null ; then
+    export NPROC="$(nproc)"
+fi
 
 # for ksh
 if [ -f ~/src/dots/shell/main.shellrc ] ; then
@@ -37,16 +34,6 @@ case $(uname) in
         defaults write com.apple.systempreferences TMShowUnsupportedNetworkVolumes 1
 esac
 
-case $(uname) in
-    OpenBSD)
-        export NPROC="$(sysctl -n hw.ncpuonline)"
-        ;;
-    *)
-        if command -v nproc >/dev/null ; then
-            export NPROC="$(nproc)"
-        fi
-esac
-
 # ========================================================================
 # DIRECTORIES
 # ========================================================================
@@ -54,6 +41,8 @@ export XDG_CONFIG_HOME="${HOME}/.config" \
        XDG_DOWNLOAD_DIR="${HOME}/downloads" \
        XDG_DOCUMENTS_DIR="${HOME}/files" \
        XDG_PICTURES_DIR="${HOME}/images"
+
+export DOWNLOADS="${XDG_DOWNLOAD_DIR}"
 
 export XDG_DESKTOP_DIR="${HOME}/desktop"
 export XDG_DATA_HOME="${HOME}/.local"
@@ -67,6 +56,9 @@ export XDG_PUBLICSHARE_DIR="$XDG_NULL_DIR" \
        XDG_TEMPLATES_DIR="$XDG_NULL_DIR" \
        XDG_VIDEOS_DIR="$XDG_NULL_DIR" \
        XDG_MUSIC_DIR="$XDG_NULL_DIR"
+
+# hide GOPATH to ~/.local/go instead of ~/go
+export GOPATH="${HOME}/.local/go"
 
 # ========================================================================
 # MISC SETTINGS
@@ -93,6 +85,13 @@ export PAGER=less MANPAGER=less
 export LESS='-QRsim +Gg'
 export LESSHISTFILE=/dev/null
 
+# using en_US.UTF-8 over C causes case-insensitive sorting
+# "C" is supposed to be fastest text parsing
+# up to you whether the benefits outweigh the negatives
+#
+# NOTE: using "C" can cause bugs in terminal programs
+#       that expect certain font features to work
+########## export LC_ALL="C"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="$LC_ALL" \
        LANG="$LC_ALL" \
@@ -102,37 +101,40 @@ export LC_CTYPE="$LC_ALL" \
 # ===================================================
 # create tmp dir
 # ===================================================
-if [ -d ~/tmp ] ; then
+if [ -L ~/tmp ] ; then
+    unlink ~/tmp 2>/dev/null ||:
+else
     mv ~/tmp ~/tmp.bk
 fi
 
 mkdir -p "/tmp/$USER-tmp/tmp"
 ln -sf "/tmp/$USER-tmp/tmp" ~/tmp
-chmod -R 0700 "/tmp/$USER-tmp"
 
 # ===================================================
 # other symlinks for junk I don't want on disk
 # ===================================================
-# rm -r ~/.w3m 2>/dev/null ||:
-# rm -f ~/.python_history
-# rm -f ~/.wget-hsts
+rm -r ~/.w3m 2>/dev/null ||:
+rm -f ~/.python_history
+rm -f ~/.wget-hsts
 
-# mkdir -p ~/tmp/.junk/w3m
-# ln -sf ~/tmp/.junk/w3m ~/.w3m
+mkdir -p ~/tmp/.junk/w3m
+ln -sf ~/tmp/.junk/w3m ~/.w3m
 
-# touch ~/tmp/.junk/python_history
-# ln -sf ~/tmp/.junk/python_history ~/.python_history
+touch ~/tmp/.junk/python_history
+ln -sf ~/tmp/.junk/python_history ~/.python_history
 
-# touch ~/tmp/.junk/wget-hsts
-# ln -sf ~/tmp/.junk/wget-hsts ~/.wget-hsts
+touch ~/tmp/.junk/wget-hsts
+ln -sf ~/tmp/.junk/wget-hsts ~/.wget-hsts
 
-# rm -f ~/.bash_history ~/.ksh_history
-# ln -sf ~/tmp/.junk/bash_history ~/.bash_history
-# ln -sf ~/tmp/.junk/ksh_history ~/.ksh_history
+rm -f ~/.bash_history ~/.ksh_history
+ln -sf ~/tmp/.junk/bash_history ~/.bash_history
+ln -sf ~/tmp/.junk/ksh_history ~/.ksh_history
 
 # ========================================================================
 # FIX PERMISSIONS
 # ========================================================================
+chmod -R 0700 "/tmp/$USER-tmp"
+
 if [ -d ~/.gnupg ] ; then
     chmod 0700 ~/.gnupg
     chmod 0600 ~/.gnupg/* 2>/dev/null ||:
@@ -153,13 +155,20 @@ if [ -d ~/.ssh ] ; then
     ssh-add ~/.ssh/id_rsa
 fi 2>/dev/null
 
-################export MOZ_ENABLE_WAYLAND=1
-################export MOZ_USE_XINPUT2=1
-################export GTK_THEME=Arc-Dark
+# ========================================================================
+# wayland crap
+# ========================================================================
+export MOZ_ENABLE_WAYLAND=1
+export MOZ_USE_XINPUT2=1
+export GTK_THEME=Arc-Dark
+export _JAVA_AWT_WM_NONREPARENTING=1
 
-# if command -v cliphist >/dev/null ; then
-#     mkdir -p ~/tmp/.cliphist
-#     chmod -R 0700 ~/tmp/.cliphist
-#     ln -sf ~/tmp/.cliphist ~/.cache/cliphist
-# fi
+export PATH=$PATH:${HOME}/.local/bin
+
+if command -v cliphist >/dev/null ; then
+    mkdir -p ~/tmp/.cliphist
+    chmod -R 0700 ~/tmp/.cliphist
+    ln -sf ~/tmp/.cliphist ~/.cache/cliphist
+fi
+
 
