@@ -3,8 +3,6 @@
 # translate-shell
 # swappy
 #
-# ? pavucontrol
-#
 # cifs utils/samba?
 #
 # libnfs?
@@ -22,7 +20,7 @@ add() {
 
 # office
 add \
-    firefox tor-browser libreoffice mupdf zathura zathura-pdf-mupdf nextcloud
+    firefox tor-browser libreoffice mupdf zathura zathura-pdf-mupdf nextcloudclient
 
 # sys tools
 add \
@@ -44,7 +42,8 @@ add \
 
 # scripting tools
 add \
-    jq entr dateutils detox figlet dos2unix pandoc libqrencode inotify-tools
+    jq entr dateutils detox gawk dos2unix pandoc libqrencode inotify-tools \
+    figlet 
 
 # networking
 add \
@@ -72,7 +71,7 @@ add \
 add \
     xdotool xwallpaper xbanish xdimmer \
     dunst picom sct slop \
-    lxappearance
+    lxappearance pavucontrol
 
 #  pcmanfm-qt
 ############ thunar thunar-media-tags tumbler

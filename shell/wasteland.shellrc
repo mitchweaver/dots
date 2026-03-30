@@ -95,9 +95,7 @@ rru() { rtrans ru "$*" ; }
 
 alias sshcfg='v ~/.ssh/config'
 alias vimrc='v ~/.vimrc'
-alias swaycfg='v ~/.config/sway/config'
 alias kittycfg='v ~/.config/kitty/kitty.conf'
-alias waybarcfg='v ~/.config/waybar/config'
 alias i3cfg='v ~/.config/i3/config'
 
 alias img2pdf='img2pdf *jpg --output combined.pdf'
@@ -163,13 +161,9 @@ if command -v apt > /dev/null ; then
 fi
 
 
-# segfaults on wayland idk why but works with this
 alias lxappearance='GDK_BACKEND=x11 lxappearance'
 
-alias rdpi='razer-cli --dpi'
-alias rbat='razer-cli --battery print | grep charge | trim'
-
-alias fixpulse='/usr/local/bin/pulseaudio --start --log-target=syslog'
+######## alias fixpulse='/usr/local/bin/pulseaudio --start --log-target=syslog'
 alias nf=neofetch
 
 alias {zramctl,zram}='zramctl --output-all'
@@ -189,28 +183,13 @@ alias rain='sh ~/src/shit/shitty-bin/rain.sh'
 # this is so annoying
 readlink() { command readlink "${1%/}" ; }
 
-alias tlp-profile='doas tlp-stat | grep "Power profile" | sed "s/.*= //"'
-
-# ========================================================================
-# SD CARDS
-# ========================================================================
-# SDCARD='/dev/disk/by-id/usb-USB_Mass_Storage_Device_817020190813-0:0-part1'
-# msd() {
-#     if [ -e "$SDCARD" ] ; then
-#         doas mount -o rw,users,umask=000 "$SDCARD" /mnt/sdcard
-#     fi
-# }
-# usd() {
-#     if [ -e "$SDCARD" ] ; then
-#         doas umount /mnt/sdcard
-#     fi
-# }
-
 # ========================================================================
 # SWAY
 # ========================================================================
 # because i cant remember these
-alias sway-outputs='swaymsg -t get_outputs'
-alias sway-tree='swaymsg -t get_tree'
-alias sway='exec ~/bin/misc/launch_sway.sh'
+# alias sway-outputs='swaymsg -t get_outputs'
+# alias sway-tree='swaymsg -t get_tree'
+# alias sway='exec ~/bin/misc/launch_sway.sh'
+# alias swaycfg='v ~/.config/sway/config'
+# alias waybarcfg='v ~/.config/waybar/config'
 

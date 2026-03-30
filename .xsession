@@ -51,6 +51,7 @@ esac
 xrdb load ~/.Xresources
 xmodmap ~/.xmodmaprc
 xset +fp ~/.fonts
+xset +fp ~/nextcloud/opt/fonts
 xset m 0 0
 xset b off
 

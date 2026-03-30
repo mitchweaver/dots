@@ -101,14 +101,12 @@ export LC_CTYPE="$LC_ALL" \
 # ===================================================
 # create tmp dir
 # ===================================================
-if [ -L ~/tmp ] ; then
-    unlink ~/tmp 2>/dev/null ||:
-else
+if [ ! -L ~/tmp ] ; then
     mv ~/tmp ~/tmp.bk
+    ln -sf "/tmp/$USER-tmp/tmp" ~/tmp
 fi
 
 mkdir -p "/tmp/$USER-tmp/tmp"
-ln -sf "/tmp/$USER-tmp/tmp" ~/tmp
 
 # ===================================================
 # other symlinks for junk I don't want on disk
