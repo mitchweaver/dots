@@ -75,11 +75,11 @@ daemon_launch() {
     fi
 }
 
-daemon_launch dbust-launch dunst
+daemon_launch dbus-launch dunst
 daemon_launch xbanish -s
 daemon_launch xdimmer -p 20 -s 10 -b 1 -t 570
+daemon_launch picom -b
 
-##### daemon_launch picom -b
 ##### daemon_launch sctd
 
 ######### daemon_launch xautolock -locker slock -time 30 -notify 15 -notifier notify-send

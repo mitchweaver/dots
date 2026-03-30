@@ -22,6 +22,12 @@ alias poweroff='doas halt -p'
 alias diskstat='systat iostat'
 alias shred='rm -P'
 
+alias audiorecord='doas sysctl kern.audio.record=1'
+alias videorecord='doas sysctl kern.video.record=1'
+alias noaudiorecord='doas sysctl kern.audio.record=0'
+alias novideorecord='doas sysctl kern.video.record=0'
+
+
 pkg() {
     [ "$1" ] || set -- h
     flag=${1#-}
