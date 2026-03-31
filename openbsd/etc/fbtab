@@ -1,0 +1,10 @@
+# $ /etc/fbtab
+#
+# force enumeration of all wskbd0-9 and wsmouse0-9
+#
+# this currently needed for sway/wayland as of 03.2026
+#
+# bugfix found from this thread:
+# https://old.reddit.com/r/openbsd/comments/1hp0pcd/wayland_works_as_root_but_no_keyboard_response_as
+#
+/dev/ttyC0	0600	/dev/console:/dev/wskbd:/dev/wskbd0:/dev/wskbd1:/dev/wskbd2:/dev/wskbd3:/dev/wskbd3:/dev/wskbd4:/dev/wskbd5:/dev/wskbd6:/dev/wskbd7:/dev/wskbd8:/dev/wskbd9:/dev/wsmouse:/dev/wsmouse0:/dev/wsmouse1:/dev/wsmouse2:/dev/wsmouse3:/dev/wsmouse4:/dev/wsmouse5:/dev/wsmouse6:/dev/wsmouse7:/dev/wsmouse8:/dev/wsmouse9:/dev/ttyCcfg:/dev/ttyC4:/dev/dri/card0:/dev/dri/renderD128

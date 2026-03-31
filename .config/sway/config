@@ -3,16 +3,16 @@
 # =================================================
 exec background -s
 exec dbus-update-activation-environment --all
+
 exec dbus-launch dunst
 exec dbus-launch thunar --daemon
 exec wl-paste --watch cliphist store
 
 exec bright -s 50
+exec vol -u
+
 exec sh ~/.config/sway/gammastep.sh
-
 exec xbanish -s
-
-################# exec pipewire-start-or-restart.sh
 
 exec waybar >~/.cache/waybar.log 2>&1
 
@@ -22,18 +22,22 @@ exec swayidle -w \
          resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -e -f -c 000000'
 
-# exec blueman-applet
 # exec nextcloud --background
-# exec joplin-desktop
-# exec bitwarden-desktop-bin
-# exec mailspring --password-store="gnome-libsecret"
-# exec mullvad-vpn
 
-######## exec sh ~/bin/misc/steam.sh silent
+# ========================================================================
+# Linux Only
+####### exec pipewire-start-or-restart.sh
+####### exec mullvad-vpn
+####### exec mailspring --password-store="gnome-libsecret"
+####### exec bitwarden-desktop-bin
+####### exec joplin-desktop
+####### exec blueman-applet
 
+# ========================================================================
+# proprietary crap for gaming pc
+# ========================================================================
+######### exec sh ~/bin/misc/steam.sh silent
 ######### exec /usr/bin/discord --enable-features=UseOzonePlatform --ozone-platform=wayland
-
-# exec supersonic
 
 # =================================================
 # MISC

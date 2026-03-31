@@ -57,7 +57,9 @@ alias {cls,csl,cl,lc,clearls}='clear ; ls'
 
 alias {e,ech,eho}=echo
 alias {g,gi,gr,grp,gre,grep,Grep,gerp,grpe,grap,greap}='grep -i'
-alias {pg,pgrpe,pgre}=pgrep
+
+alias {pgrpe,pgre}=pgrep
+alias {pg,pgl}='pgrep -fl'
 
 alias {match,include,i,inc}=grep
 alias {ex,exc,except}='grep -v'

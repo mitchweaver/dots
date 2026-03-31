@@ -7,10 +7,6 @@
 #
 # libnfs?
 #
-# redshift?
-#
-# wl-clipboard cliphist waybar
-#
 # gnome-keyring?
 # ========================================================================
 
@@ -102,7 +98,8 @@ add \
 # ========================================================================
 # Note: wayland is very WIP/buggy on OpenBSD
 add \
-    wayland-protocols wlr-randr glfw grim slurp \
+    wayland-protocols wlr-randr wl-clipboard \
+    glfw grim slurp \
     sway swaybg swayidle swaylock
 # ========================================================================
 
