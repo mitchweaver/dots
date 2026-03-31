@@ -17,12 +17,12 @@
         "tray",
         "idle_inhibitor",
         // "temperature",
-        // "cpu",
-        // "memory",
+        "cpu",
+        "memory",
         // "custom/wireguard",
-        "network",
-        "pulseaudio",
-        "battery",
+        // "network",
+        // "pulseaudio",
+        // "battery",
         "clock"
     ],
 
@@ -103,9 +103,12 @@
         "spacing": 10
     },
     "clock": {
-        "tooltip-format": "{calendar}",
+        // openbsd
+        "tooltip": false,
+        // linux
+        // "tooltip-format": "{calendar}",
         // "format-alt": "{calendar}",
-        "format-alt": "{:%a %d %b %I:%M %p}",
+        // "format-alt": "{:%a %d %b %I:%M %p}",
         "format": "{:%a %d %b %I:%M %p}",
         // "format-alt": " {:%a, %d %b %Y}",
         // "format": "{:%a %I:%M %p}"
@@ -126,6 +129,15 @@
         // "tooltip-format-ethernet": "󰀂  {ifname}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
 	// "tooltip-format-disconnected": "Disconnected",
     },
+
+
+
+
+
+
+// ========================================================================
+// ####### LINUX+FreeBSD PIPEWIRE / PULSEAUDIO #####################
+// ####### DOES NOT WORK ON OPENBSD            #####################
     "pulseaudio": {
         "format": "{icon} {volume}%",
         "format-bluetooth": "󰂰 {volume}%",
@@ -140,6 +152,8 @@
         "scroll-step": 2,
         "tooltip": false
     },
+// ========================================================================
+
 //    "custom/logo": {
  //       "format": "  ",
   //      "tooltip": false,

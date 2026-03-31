@@ -14,7 +14,7 @@ exec vol -u
 exec sh ~/.config/sway/gammastep.sh
 exec xbanish -s
 
-exec waybar >~/.cache/waybar.log 2>&1
+exec dbus-launch waybar >~/.cache/waybar.log 2>&1
 
 exec swayidle -w \
          timeout 900 'lock' \
@@ -54,10 +54,16 @@ focus_follows_mouse no
 # =================================================
 input type:keyboard {
     xkb_layout "us"
-    # note: default=300/30
-    repeat_delay 230
-    repeat_rate 20
     xkb_options "caps:escape"
+
+    # ========================================================================
+    # bugging out on openbsd:
+    #
+    # note: default=300/30
+    # repeat_delay 230
+    # repeat_rate 20
+    # ======================================================================== 
+
     # xkb_options "super_r:alt"
 }
 
@@ -154,6 +160,8 @@ bindsym $mod+shift+g gaps inner current minus 4
 ####### set $LAPTOP 'LG Display 0x06B3 Unknown'
 # thinkpad x1cg7
 set $LAPTOP 'AU Optronics 0x573D Unknown'
+
+output $LAPTOP resolution 1920x1080@60.033Hz scale 1 adaptive_sync off allow_tearing yes
 
 bindswitch --reload --locked lid:on  output $LAPTOP disable
 bindswitch --reload --locked lid:off output $LAPTOP enable

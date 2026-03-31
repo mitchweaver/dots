@@ -1,0 +1,13 @@
+return
+############
+========================================================================
+
+#### pkg_add go
+
+git clone https://github.com/nwg-piotr/nwg-look
+
+cd nwg-look
+
+make build
+doas make install
+

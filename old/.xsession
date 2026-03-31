@@ -97,9 +97,3 @@ dbus-update-activation-environment --all
 ######exec dbus-launch --exit-with-session --sh-syntax cwm
 # exec dbus-launch --exit-with-session --sh-syntax i3 >~/.cache/i3-log.log 2>&1
 
-# export XDG_SESSION_TYPE=wayland
-# export XDG_SESSION_DESKTOP=sway
-# export XDG_CURRENT_DESKTOP=sway
-# export WLR_DRM_NO_ATOMIC=1
-# mkdir -p ~/.cache
-

@@ -30,6 +30,10 @@ add \
 add \
     neovim py3-neovim git got hugo pylint3 shellcheck
 
+# languages
+##### add \
+########## go rust zig
+
 # libraries
 add \
     libsecret nlohmann-json py3-numpy py3-scipy libldns libnotify \
@@ -84,7 +88,7 @@ add \
     ninja meson metaauto autoconf automake libtool intltool cmake gmake gpatch \
 
 # less common but still common:
-#     rust dwz jsoncpp catch2 scdoc help2man python-tkinter spdlog gettext-tools vala libdbusmenu
+#     dwz jsoncpp catch2 scdoc help2man python-tkinter spdlog gettext-tools vala libdbusmenu
 
 # wireshark
 # ldns-utils
