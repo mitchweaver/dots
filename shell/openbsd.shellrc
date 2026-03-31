@@ -81,15 +81,16 @@ EOF
 
 alias puffy="printf '%s\n' '🐡' | tee | xsel -ib"
 
-ports() {
+portsearch() {
     case ${1#-} in
         h)
-            >&2 printf '%s\n' \
-                'ports: [-s search]'
+            >&2 printf '%s\n' 'portsearch [-s]'
             ;;
-        s)
-            make -f /usr/ports/Makefile search name="$2" | \
-            grep 'Port:'
+        *)
+            if [ "$1" ] ; then
+                make -f /usr/ports/Makefile search name="$1" | \
+                grep 'Port:'
+            fi
     esac
 }
 

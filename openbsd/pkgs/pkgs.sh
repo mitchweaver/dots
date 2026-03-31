@@ -43,7 +43,7 @@ add \
 # scripting tools
 add \
     jq entr dateutils detox gawk dos2unix pandoc libqrencode inotify-tools \
-    figlet 
+    figlet fmt
 
 # networking
 add \
@@ -67,16 +67,9 @@ add \
 add \
     cuetools shntool vorbis-tools wavpack
 
-# X11
+# thunar
 add \
-    xdotool xwallpaper xbanish xdimmer \
-    dunst picom sct slop \
-    lxappearance pavucontrol
-
-#  pcmanfm-qt
-############ thunar thunar-media-tags tumbler
-
-# maybe replace with redshift: sct
+    thunar thunar-media-tags tumbler
 
 # fonts
 add \
@@ -91,24 +84,27 @@ add \
     cups cups-libs hplip
 
 # common package/port building deps
-# add \
-#     ninja meson metaauto autoconf automake cmake gmake gpatch \
-#     rust dwz jsoncpp catch2 scdoc help2man python-tkinter
+add \
+    ninja meson metaauto autoconf automake libtool intltool cmake gmake gpatch \
+
+# less common but still common:
+#     rust dwz jsoncpp catch2 scdoc help2man python-tkinter spdlog gettext-tools vala libdbusmenu
 
 # wireshark
 # ldns-utils
 
-# ========================================================================
-# wayland is very WIP/buggy on OpenBSD not recommended
-#
-#
-############### wayland
-############### add \
-###############     wayland-protocols wlr-randr glfw \
-###############     grim slurp
-##################    sway swaybg swayidle swaylock
-# ========================================================================
+# X11+Wayland
+add \
+    xdotool xbanish dunst lxappearance pavucontrol
 
+###### X11 ONLY ------- sct xdimmer xwallpaper picom slop 
+
+# ========================================================================
+# Note: wayland is very WIP/buggy on OpenBSD
+add \
+    wayland-protocols wlr-randr glfw grim slurp \
+    sway swaybg swayidle swaylock
+# ========================================================================
 
 ######## dictd-server dict-client
 

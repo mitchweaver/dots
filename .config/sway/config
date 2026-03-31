@@ -9,9 +9,13 @@ exec wl-paste --watch cliphist store
 
 exec bright -s 50
 exec sh ~/.config/sway/gammastep.sh
-exec pipewire-start-or-restart.sh
 
-exec /usr/bin/waybar >~/.cache/waybar.log 2>&1
+exec xbanish -s
+
+################# exec pipewire-start-or-restart.sh
+
+exec waybar >~/.cache/waybar.log 2>&1
+
 exec swayidle -w \
          timeout 900 'lock' \
          timeout 1200 'swaymsg "output * power off"' \
@@ -64,7 +68,7 @@ input type:touchpad {
     dwt enabled
 
     click_method clickfinger
-    # click_method button_areas
+    click_method button_areas
 }
 
 input type:pointer {
@@ -128,7 +132,7 @@ bindsym $mod+shift+g gaps inner current minus 4
 # Monitor Configuration --- swaymsg -t get_outputs
 # =================================================
 # 4k 160hz 27" lg
-set $LEFT_MON 'LG Electronics 27GN950 101NTQDE1076'
+# set $LEFT_MON 'LG Electronics 27GN950 101NTQDE1076'
 
 # 1080p 390hz 24" acer
 # set $LEFT_MON 'Acer Technologies XV252Q F 11481FF254200'
@@ -137,7 +141,7 @@ set $LEFT_MON 'LG Electronics 27GN950 101NTQDE1076'
 # set $RIGHT_MON 'Acer Technologies VG240Y S 0x027157B7'
 
 # output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 1 adaptive_sync off allow_tearing yes
-output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 2 adaptive_sync off allow_tearing yes
+# output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 2 adaptive_sync off allow_tearing yes
 
 # output $LEFT_MON resolution 1920x1080@390.297Hz position 0,0   scale 1 adaptive_sync off allow_tearing yes
 # output $RIGHT_MON resolution 1920x1080@165.003Hz position 3840,0 scale 1 adaptive_sync off allow_tearing yes
@@ -155,14 +159,11 @@ bindswitch --reload --locked lid:off output $LAPTOP enable
 # ========================================================================
 workspace_auto_back_and_forth no
 
-## https://gitlab.com/hyask/swaysome
-## cargo install swaysome
-
 # ========================================================================
 # Key binds
 # ========================================================================
 bindsym $mod+Return exec $term
-bindsym $mod+w exec firefox-bin
+bindsym $mod+w exec firefox
 bindsym $mod+e exec thunar
 bindsym $mod+r exec kitty ranger
 bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
@@ -313,11 +314,61 @@ bindsym mod1+comma exec mmt -p
 # =================================================
 # INCLUDE
 # =================================================
-include ~/.config/sway/config.d/*.conf
+# include ~/.config/sway/config.d/color-nostalgia-sway.conf
 
 # see theme include in conf.d
-client.focused $color0 $background $foreground $color5   $color2
-client.unfocused $color0 $background $foreground $color5 $color1
+# client.focused $color0 $background $foreground $color5   $color2
+# client.unfocused $color0 $background $foreground $color5 $color1
 
 ######## seat seat0 xcursor_theme Paper 24
+
+# ========================================================================
+# SWAYSOME BELOW
+#
+# https://gitlab.com/hyask/swaysome
+#
+# $ cargo install swaysome
+# ========================================================================
+# Use (un)bindcode or (un)bindsym, depending on what you used in your main sway config file.
+# The `--no-warn` setting is only added to shortcuts that exist in the default config. You may want to add or remove
+# that flag on some bindings depending on your config.
+
+# Change focus between workspaces
+bindsym --no-warn $mod+1 exec "swaysome focus 1"
+bindsym --no-warn $mod+2 exec "swaysome focus 2"
+bindsym --no-warn $mod+3 exec "swaysome focus 3"
+bindsym --no-warn $mod+4 exec "swaysome focus 4"
+bindsym --no-warn $mod+5 exec "swaysome focus 5"
+bindsym --no-warn $mod+6 exec "swaysome focus 6"
+bindsym --no-warn $mod+7 exec "swaysome focus 7"
+bindsym --no-warn $mod+8 exec "swaysome focus 8"
+bindsym --no-warn $mod+9 exec "swaysome focus 9"
+bindsym --no-warn $mod+Backspace exec "swaysome focus 9"
+############bindsym --no-warn $mod+0 exec "swaysome focus 0"
+
+# Move containers between workspaces
+bindsym --no-warn $mod+Shift+1 exec "swaysome move 1"
+bindsym --no-warn $mod+Shift+2 exec "swaysome move 2"
+bindsym --no-warn $mod+Shift+3 exec "swaysome move 3"
+bindsym --no-warn $mod+Shift+4 exec "swaysome move 4"
+bindsym --no-warn $mod+Shift+5 exec "swaysome move 5"
+bindsym --no-warn $mod+Shift+6 exec "swaysome move 6"
+bindsym --no-warn $mod+Shift+7 exec "swaysome move 7"
+bindsym --no-warn $mod+Shift+8 exec "swaysome move 8"
+bindsym --no-warn $mod+Shift+9 exec "swaysome move 9"
+bindsym --no-warn $mod+Shift+Backspace exec "swaysome move 9"
+###########3# bindsym --no-warn $mod+Shift+0 exec "swaysome move 0"
+
+# # Move focused container to next output
+# bindsym $mod+o exec "swaysome next-output"
+# # Move focused container to previous output
+# bindsym $mod+Shift+o exec "swaysome prev-output"
+
+# # Move focused workspace group to next output
+# bindsym $mod+Alt+o exec "swaysome workspace-group-next-output"
+# # Move focused workspace group to previous output
+# bindsym $mod+Alt+Shift+o exec "swaysome workspace-group-prev-output"
+
+# Init workspaces for every screen
+exec "swaysome init 1"
 

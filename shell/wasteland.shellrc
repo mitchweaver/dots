@@ -187,9 +187,9 @@ readlink() { command readlink "${1%/}" ; }
 # SWAY
 # ========================================================================
 # because i cant remember these
-# alias sway-outputs='swaymsg -t get_outputs'
-# alias sway-tree='swaymsg -t get_tree'
-# alias sway='exec ~/bin/misc/launch_sway.sh'
-# alias swaycfg='v ~/.config/sway/config'
-# alias waybarcfg='v ~/.config/waybar/config'
+alias sway-outputs='swaymsg -t get_outputs'
+alias sway-tree='swaymsg -t get_tree'
+alias sway='exec ~/bin/misc/launch_sway.sh'
+alias swaycfg='v ~/.config/sway/config'
+alias waybarcfg='v ~/.config/waybar/config'
 

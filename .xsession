@@ -13,12 +13,12 @@ fi
 # VARIABLES
 # ========================================================================
 
-export DISPLAY=${DISPLAY:-:0}
+# export DISPLAY=${DISPLAY:-:0}
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-if command -v dimensions >/dev/null ; then
-    export DIMENSIONS="$(dimensions)"
-fi
+# if command -v dimensions >/dev/null ; then
+#     export DIMENSIONS="$(dimensions)"
+# fi
 
 export XDG_SESSION_TYPE=i3
 export XDG_RUNTIME_DIR="/tmp/run/user/$(id -u)"
@@ -67,19 +67,19 @@ dbus-update-activation-environment --all
 # ========================================================================
 # daemons
 # ========================================================================
-daemon_launch() {
-    cmd=$1
-    shift
-    if command -v $cmd >/dev/null && ! pgrep -f $cmd >/dev/null ; then
-        printf 'Starting: %s\n' $cmd
-        $cmd "$@" &
-    fi
-}
+# daemon_launch() {
+#     cmd=$1
+#     shift
+#     if command -v $cmd >/dev/null && ! pgrep -f $cmd >/dev/null ; then
+#         printf 'Starting: %s\n' $cmd
+#         $cmd "$@" &
+#     fi
+# }
 
-daemon_launch dbus-launch dunst
-daemon_launch xbanish -s
-daemon_launch xdimmer -p 20 -s 10 -b 1 -t 570
-daemon_launch picom -b
+# daemon_launch dbus-launch dunst
+# daemon_launch xbanish -s
+# daemon_launch xdimmer -p 20 -s 10 -b 1 -t 570
+# daemon_launch picom -b
 
 ##### daemon_launch sctd
 
@@ -88,12 +88,18 @@ daemon_launch picom -b
 # daemon_launch sxhkd
 # daemon_launch mmbar -d
 
-unset -f daemon_launch
+# unset -f daemon_launch
 
 # ========================================================================
 # start
 # ========================================================================
 
 ######exec dbus-launch --exit-with-session --sh-syntax cwm
-exec dbus-launch --exit-with-session --sh-syntax i3 >~/.cache/i3-log.log 2>&1
+# exec dbus-launch --exit-with-session --sh-syntax i3 >~/.cache/i3-log.log 2>&1
+
+# export XDG_SESSION_TYPE=wayland
+# export XDG_SESSION_DESKTOP=sway
+# export XDG_CURRENT_DESKTOP=sway
+# export WLR_DRM_NO_ATOMIC=1
+# mkdir -p ~/.cache
 

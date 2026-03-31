@@ -10,27 +10,29 @@ case $TERM in
             alias ls='eza -F --color=always --group-directories-first'
             alias tree='eza -F -T'
         else
-            alias ls='ls --color=auto -F'
+            if ! command -v pkg_add >/dev/null ; then
+                alias ls='ls --color=auto -F'
+            else
+                alias ls='ls -F'
+            fi
         fi
 
         if command -v bat >/dev/null ; then
             alias cat='bat -p --pager=never --wrap=never --color=auto'
         fi
 
-        alias dir='dir --color=auto'
-        alias vdir='vdir --color=auto'
-        alias grep='grep --color=auto'
-        alias fgrep='fgrep --color=auto'
-        alias egrep='egrep --color=auto'
+        # dont try to add color on openbsd
+        if ! command -v pkg_add >/dev/null ; then
+            alias dir='dir --color=never'
+            alias vdir='vdir --color=never'
+            alias grep='grep --color=auto'
+            alias fgrep='fgrep --color=auto'
+            alias egrep='egrep --color=auto'
+        fi
         ;;
     *)
-        alias ls='ls -F --color=never'
-        alias dir='dir --color=never'
-        alias vdir='vdir --color=never'
-        alias grep='grep --color=never'
-        alias fgrep='fgrep --color=never'
-        alias egrep='egrep --color=never'
         export NO_COLOR=true
+        alias ls='ls -F'
 esac
 
 # =============================================================

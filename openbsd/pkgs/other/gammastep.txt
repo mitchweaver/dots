@@ -1,0 +1,18 @@
+# dont accidentally run
+return
+# ========================================================================
+
+git clone https://gitlab.com/chinstrap/gammastep
+
+### pkg_add libtool automake autoconf
+
+# verified working versions (03.2026):
+export AUTOCONF_VERSION=2.72
+export AUTOMAKE_VERSION=1.18
+
+./bootstrap
+./configure --prefix="${HOME}/.local"
+
+gmake
+gmake install
+
