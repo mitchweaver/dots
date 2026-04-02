@@ -77,7 +77,7 @@ add \
 
 # themes
 add \
-    arc-icon-theme arc-theme-solid paper-gtk-theme paper-icon-theme papirus-icon-theme
+    arc-theme-solid papirus-icon-theme
 
 # printing
 add \

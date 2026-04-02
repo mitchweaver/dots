@@ -8,7 +8,7 @@ fi
 # copy nvim config
 if [ ! -e ~/.config/nvim ] ; then
     mkdir -p ~/.config
-    cp -r ../.config/nvim ~/.config/
+    cp -r ../../.config/nvim ~/.config/
 fi
 
 # install plug
@@ -22,7 +22,7 @@ fi
 
 # copy vimrc
 if [ ! -e ~/.vimrc ] ; then
-    cp -v ../.vimrc ~/.vimrc
+    cp -v ../../.vimrc ~/.vimrc
     echo 'alias v=vim' >> ~/.bashrc
     echo 'alias v=vim' >> ~/.shrc
 fi

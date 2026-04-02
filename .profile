@@ -38,7 +38,7 @@ esac
 # DIRECTORIES
 # ========================================================================
 export XDG_CONFIG_HOME="${HOME}/.config" \
-       XDG_DOWNLOAD_DIR="${HOME}/downloads" \
+       XDG_DOWNLOAD_DIR="${HOME}/Downloads" \
        XDG_DOCUMENTS_DIR="${HOME}/files" \
        XDG_PICTURES_DIR="${HOME}/images"
 

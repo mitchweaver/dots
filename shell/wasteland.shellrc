@@ -10,7 +10,7 @@
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # I hate these stupid dirs and every program that creates them.
-nohup /bin/rmdir Desktop Downloads Documents Pictures Public \
+nohup /bin/rmdir Desktop Documents Pictures Public \
         Templates Videos Music Nextcloud >/dev/null 2>&1 ||:
 
 alias wasteland='v ~/src/dots/shell/wasteland.shellrc'

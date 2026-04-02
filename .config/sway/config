@@ -10,6 +10,7 @@ exec wl-paste --watch cliphist store
 
 exec bright -s 50
 exec vol -u
+exec vol -s 50
 
 exec sh ~/.config/sway/gammastep.sh
 exec xbanish -s
