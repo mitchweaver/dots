@@ -1,12 +1,16 @@
 #!/bin/sh
 
+if [ ! -e ~/.hushlogin ] ; then
+    touch ~/.hushlogin
+fi
+
 # ========================================================================
 # PATHS
 # ========================================================================
-export PATH="$HOME/.local/bin:$PATH:/usr/X11R6/bin:/usr/local/sbin:$HOME/.local/go/bin:$HOME/.cargo/bin:$HOME/.npm/bin"
+export PATH="$HOME/.local/bin:$PATH:/usr/local/bin:/usr/X11R6/bin:/usr/local/sbin:$HOME/.local/go/bin:$HOME/.cargo/bin:$HOME/.npm/bin"
 export MANPATH="${HOME}/.local/share/man:$MANPATH"
 
-export NPM_CONFIG_PREFIX="${HOME}/.npm"
+######## export NPM_CONFIG_PREFIX="${HOME}/.npm"
 
 if command -v nproc >/dev/null ; then
     export NPROC="$(nproc)"
@@ -29,34 +33,33 @@ case $(uname) in
         export CC="${CC:-clang}" cc="${cc:-clang}"
         ;;
     Darwin|MacOS)
+        export BASH_SILENCE_DEPRECATION_WARNING=1
         export CC="${CC:-clang}" cc="${cc:-clang}"
-        # allow time machine to backup to samba/nfs
-        defaults write com.apple.systempreferences TMShowUnsupportedNetworkVolumes 1
 esac
 
 # ========================================================================
 # DIRECTORIES
 # ========================================================================
-export XDG_CONFIG_HOME="${HOME}/.config" \
-       XDG_DOWNLOAD_DIR="${HOME}/Downloads" \
-       XDG_DOCUMENTS_DIR="${HOME}/files" \
-       XDG_PICTURES_DIR="${HOME}/images"
-
-export DOWNLOADS="${XDG_DOWNLOAD_DIR}"
-
-export XDG_DESKTOP_DIR="${HOME}/desktop"
-export XDG_DATA_HOME="${HOME}/.local"
-export XDG_CACHE_HOME="${HOME}/.cache"
+# export XDG_CONFIG_HOME="${HOME}/.config" \
+#        XDG_DOWNLOAD_DIR="${HOME}/Downloads" \
+#        XDG_DOCUMENTS_DIR="${HOME}/files" \
+#        XDG_PICTURES_DIR="${HOME}/images"
+#
+# export DOWNLOADS="${XDG_DOWNLOAD_DIR}"
+#
+# export XDG_DESKTOP_DIR="${HOME}/desktop"
+# export XDG_DATA_HOME="${HOME}/.local"
+# export XDG_CACHE_HOME="${HOME}/.cache"
 
 # i dont use these but some programs complain
 # if they can't write to them
-export XDG_NULL_DIR="/tmp/$USER-tmp/.xdg-$USER-void"
-mkdir -p "$XDG_NULL_DIR"
-export XDG_PUBLICSHARE_DIR="$XDG_NULL_DIR" \
-       XDG_TEMPLATES_DIR="$XDG_NULL_DIR" \
-       XDG_VIDEOS_DIR="$XDG_NULL_DIR" \
-       XDG_MUSIC_DIR="$XDG_NULL_DIR"
-
+# export XDG_NULL_DIR="/tmp/$USER-tmp/.xdg-$USER-void"
+# mkdir -p "$XDG_NULL_DIR"
+# export XDG_PUBLICSHARE_DIR="$XDG_NULL_DIR" \
+#        XDG_TEMPLATES_DIR="$XDG_NULL_DIR" \
+#        XDG_VIDEOS_DIR="$XDG_NULL_DIR" \
+#        XDG_MUSIC_DIR="$XDG_NULL_DIR"
+#
 # hide GOPATH to ~/.local/go instead of ~/go
 export GOPATH="${HOME}/.local/go"
 
@@ -77,8 +80,8 @@ for i in librewolf librewolf-bin firefox firefox-bin chromium chromium-bin ; do
     fi
 done
 
-export MENU_PROG=menu
-export XDG_OPEN=opn PLUMBER=opn
+#####export MENU_PROG=menu
+####export XDG_OPEN=opn PLUMBER=opn
 
 export PAGER=less MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
@@ -92,46 +95,47 @@ export LESSHISTFILE=/dev/null
 # NOTE: using "C" can cause bugs in terminal programs
 #       that expect certain font features to work
 ########## export LC_ALL="C"
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="$LC_ALL" \
-       LANG="$LC_ALL" \
-       LANGUAGE="$LC_ALL" \
-       LOCALE="$LC_ALL"
+# export LC_ALL="en_US.UTF-8"
+# export LC_CTYPE="$LC_ALL" \
+#        LANG="$LC_ALL" \
+#        LANGUAGE="$LC_ALL" \
+#        LOCALE="$LC_ALL"
 
 # ===================================================
 # create tmp dir
 # ===================================================
-if [ ! -L ~/tmp ] ; then
-    mv ~/tmp ~/tmp.bk
-    ln -sf "/tmp/$USER-tmp/tmp" ~/tmp
-fi
-
-mkdir -p "/tmp/$USER-tmp/tmp"
-
-# ===================================================
-# other symlinks for junk I don't want on disk
-# ===================================================
-rm -r ~/.w3m 2>/dev/null ||:
-rm -f ~/.python_history
-rm -f ~/.wget-hsts
-
-mkdir -p ~/tmp/.junk/w3m
-ln -sf ~/tmp/.junk/w3m ~/.w3m
-
-touch ~/tmp/.junk/python_history
-ln -sf ~/tmp/.junk/python_history ~/.python_history
-
-touch ~/tmp/.junk/wget-hsts
-ln -sf ~/tmp/.junk/wget-hsts ~/.wget-hsts
-
-rm -f ~/.bash_history ~/.ksh_history
-ln -sf ~/tmp/.junk/bash_history ~/.bash_history
-ln -sf ~/tmp/.junk/ksh_history ~/.ksh_history
+# if [ ! -f /etc/wsl.conf ] ; then
+#     if [ ! -L ~/tmp ] ; then
+#         mv ~/tmp ~/tmp.bk
+#         ln -sf "/tmp/$USER-tmp/tmp" ~/tmp
+#     fi
+#
+#     mkdir -p "/tmp/$USER-tmp/tmp"
+#
+#     rm -r ~/.w3m 2>/dev/null ||:
+#     rm -f ~/.python_history
+#     rm -f ~/.wget-hsts
+#
+#     mkdir -p ~/tmp/.junk/w3m
+#     ln -sf ~/tmp/.junk/w3m ~/.w3m
+#
+#     touch ~/tmp/.junk/python_history
+#     ln -sf ~/tmp/.junk/python_history ~/.python_history
+#
+#     touch ~/tmp/.junk/wget-hsts
+#     ln -sf ~/tmp/.junk/wget-hsts ~/.wget-hsts
+#
+#     rm -f ~/.bash_history ~/.ksh_history
+#     ln -sf ~/tmp/.junk/bash_history ~/.bash_history
+#     ln -sf ~/tmp/.junk/ksh_history ~/.ksh_history
+# else
+#     mkdir -p ~/tmp
+# fi
 
 # ========================================================================
 # FIX PERMISSIONS
 # ========================================================================
-chmod -R 0700 "/tmp/$USER-tmp"
+# chmod -R 0700 ~/tmp
 
 if [ -d ~/.gnupg ] ; then
     chmod 0700 ~/.gnupg
@@ -156,17 +160,24 @@ fi 2>/dev/null
 # ========================================================================
 # wayland crap
 # ========================================================================
-export MOZ_ENABLE_WAYLAND=1
-export MOZ_USE_XINPUT2=1
-export GTK_THEME=Arc-Dark
-export _JAVA_AWT_WM_NONREPARENTING=1
+# export MOZ_ENABLE_WAYLAND=1
+# export MOZ_USE_XINPUT2=1
+# export GTK_THEME=Arc-Dark
+# export _JAVA_AWT_WM_NONREPARENTING=1
+#
+# export PATH=$PATH:${HOME}/.local/bin
 
-export PATH=$PATH:${HOME}/.local/bin
+# if command -v cliphist >/dev/null ; then
+#     mkdir -p ~/tmp/.cliphist
+#     chmod -R 0700 ~/tmp/.cliphist
+#     ln -sf ~/tmp/.cliphist ~/.cache/cliphist
+# fi
 
-if command -v cliphist >/dev/null ; then
-    mkdir -p ~/tmp/.cliphist
-    chmod -R 0700 ~/tmp/.cliphist
-    ln -sf ~/tmp/.cliphist ~/.cache/cliphist
+# macos fix ; fix later
+if command -v brew >/dev/null ; then
+    case $SHELL in
+        *bash*)
+            . ~/.bashrc
+    esac
 fi
-
 

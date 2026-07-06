@@ -193,3 +193,5 @@ alias sway='exec ~/bin/misc/launch_sway.sh'
 alias swaycfg='v ~/.config/sway/config'
 alias waybarcfg='v ~/.config/waybar/config'
 
+alias ytdl-mp3='youtube-dl -x --audio-format mp3'
+

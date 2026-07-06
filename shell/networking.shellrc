@@ -16,13 +16,13 @@ alias {vssh,vissh}='${EDITOR:-vi} ~/.ssh/config'
 # scan for open ports
 alias portscan='nmap -sT'
 
-flushdns() {
-    if command -v resolvectl > /dev/null ; then
-        resolvectl flush-caches
-    elif command -v rc-service >/dev/null && command -v dnsmasq >/dev/null ; then
-        doas rc-service dnsmasq restart
-    fi
-}
+# flushdns() {
+#     if command -v resolvectl > /dev/null ; then
+#         resolvectl flush-caches
+#     elif command -v rc-service >/dev/null && command -v dnsmasq >/dev/null ; then
+#         doas rc-service dnsmasq restart
+#     fi
+# }
 
 wtf() {
     w3m -dump https://wtfismyip.com/json | jq -r

@@ -9,7 +9,27 @@ let &packpath = &runtimepath
 " unbind space for everything but leader
 nnoremap <silent><SPACE> <nop>
 let mapleader=" "
-""""""let g:python3_host_prog = '/usr/local/bin/python3.11'
+
+if has('mac')
+    let g:python3_host_prog = expand('~/.local/pipx/venvs/pynvim/bin/python3')
+elseif has('win32')
+    let g:python3_host_prog = 'C:\Python314\python.exe'
+elseif has('unix')
+    let g:python3_host_prog = '/usr/bin/python3'
+endif
+
+if exists('g:neovide')
+    set guifont=BlexMono\ Nerd\ Font\ Mono
+
+    set guifont=Consolas
+    let g:neovide_position_animation_length = 0
+    let g:neovide_cursor_animation_length = 0.00
+    let g:neovide_cursor_trail_size = 0
+    let g:neovide_cursor_animate_in_insert_mode = 0
+    let g:neovide_cursor_animate_command_line = 0
+    let g:neovide_scroll_animation_far_lines = 0
+    let g:neovide_scroll_animation_length = 0.00
+endif
 
 " ========================================================================
 " plugins
@@ -186,20 +206,23 @@ endif
 " ========================================================================
 " THEME LOADING (must be after end of plug)
 " ========================================================================
-" colorscheme onehalfdark
-" colorscheme everforest
-" colorscheme papercolor
-" colorscheme typewriter
-" colorscheme mellow
 
-set background=light
-" set background=dark
+" set background=light
+set background=dark
 
-" force usage of terminal colorscheme background instead of vim's scheme
-hi Normal guibg=none
-
-" make sign column same color as terminal background
-hi signColumn ctermbg=NONE
+" Load colorscheme on windows but just use terminal colors if on linux
+if has('win32')
+    " colorscheme papercolor
+    colorscheme onehalfdark
+    " colorscheme typewriter
+    " colorscheme mellow
+    " colorscheme everforest
+else
+    " force usage of terminal colorscheme background instead of vim's scheme
+    hi Normal guibg=none
+    " make sign column same color as terminal background
+    hi signColumn ctermbg=NONE
+endif
 
 " ========================================================================
 " general
@@ -222,6 +245,8 @@ set history=200
 set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
 set updatetime=500
+
+set belloff=all
 
 set lazyredraw          " whether to redraw screen after macros
 set mat=2               " how fast to blink matched brackets
@@ -503,11 +528,11 @@ endif
 " https://old.reddit.com/r/vim/comments/162uzms/how_to_copy_from_vim_to_other_programwsl2_ubuntu/jy028tl
 "
 " this is easiest solution, no confusing plugins or different keybinds needed, just works
-if system('uname -r') =~ "Microsoft"
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
-  augroup END
+if has('win32')
+    augroup Yank
+        autocmd!
+        autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
+    augroup END
 endif
 
 " ========================================================================

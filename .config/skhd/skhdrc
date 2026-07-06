@@ -1,0 +1,3 @@
+cmd - return : open /Applications/kitty.app
+ctrl - space : open -a "Mission Control"
+
