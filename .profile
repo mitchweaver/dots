@@ -17,9 +17,9 @@ if command -v nproc >/dev/null ; then
 fi
 
 # for ksh
-if [ -f ~/src/dots/shell/main.shellrc ] ; then
-    export ENV="${HOME}/src/dots/shell/main.shellrc"
-fi
+# if [ -f ~/src/dots/shell/main.shellrc ] ; then
+#     export ENV="${HOME}/src/dots/shell/main.shellrc"
+# fi
 
 # ========================================================================
 # OS specific settings
@@ -27,7 +27,9 @@ fi
 case $(uname) in
     Linux|FreeBSD)
         export CC="${CC:-gcc}" cc="${cc:-gcc}"
-        umask 022
+
+        # cause all newly created files to be unreadable by other users
+        umask 0077
         ;;
     OpenBSD)
         export CC="${CC:-clang}" cc="${cc:-clang}"
@@ -66,19 +68,22 @@ export GOPATH="${HOME}/.local/go"
 # ========================================================================
 # MISC SETTINGS
 # ========================================================================
-for i in nvim vim vi nvi nano ; do
-    if command -v $i >/dev/null 2>&1 ; then
-        export EDITOR=$i
-        break
-    fi
-done
+# for i in nvim vim vi nvi nano ; do
+#     if command -v $i >/dev/null 2>&1 ; then
+#         export EDITOR=$i
+#         break
+#     fi
+# done
+#
+export EDITOR=nvim
+export BROWSER=firefox
 
-for i in librewolf librewolf-bin firefox firefox-bin chromium chromium-bin ; do
-    if command -v $i >/dev/null ; then
-        export BROWSER=$i
-        break
-    fi
-done
+# for i in librewolf librewolf-bin firefox firefox-bin chromium chromium-bin ; do
+#     if command -v $i >/dev/null ; then
+#         export BROWSER=$i
+#         break
+#     fi
+# done
 
 #####export MENU_PROG=menu
 ####export XDG_OPEN=opn PLUMBER=opn
@@ -175,9 +180,13 @@ fi 2>/dev/null
 
 # macos fix ; fix later
 if command -v brew >/dev/null ; then
-    case $SHELL in
+    case $0 in
         *bash*)
-            . ~/.bashrc
+            source ~/.bashrc
     esac
 fi
+
+# basic check if we've been run or not
+# see kshrc
+export DOT_PROFILE_IMPORTED=1
 

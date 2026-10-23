@@ -2,6 +2,16 @@ alias {..,cd..}='cd ..'
 alias ...='.. ; ..'
 alias ....='.. ; ...'
 
+# ========================================================================
+# fix for macos right now, figure out how to assign these later
+# mac not reading ~/.profile
+: "${XDG_DOWNLOAD_DIR:="${HOME}/Downloads"}"
+: "${XDG_DESKTOP_DIR:="${HOME}/Desktop"}"
+: "${XDG_DOCUMENTS_DIR:="${HOME}/files"}"
+: "${XDG_PICTURES_DIR:="${HOME}/images"}"
+# ========================================================================
+
+
 # directory marking
 # usage: 'm1' = mark 1
 #        'g1' = return to m1

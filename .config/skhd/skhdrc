@@ -1,3 +1,4 @@
-cmd - return : open /Applications/kitty.app
+# command + enter = open terminal
+#############cmd - return : open /Applications/kitty.app --single-instance -d 
 ctrl - space : open -a "Mission Control"
 

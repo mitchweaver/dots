@@ -42,7 +42,7 @@ v() {
         esac
     # if not provided a file to open, open scratchpad
     elif [ -z "$1" ] ; then
-        set ~/files/scratchpad.md
+        set ~/nextcloud/files/scratchpad.md
     fi
 
     ${EDITOR:-vi} -n -- "$@"

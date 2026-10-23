@@ -27,6 +27,9 @@ alias videorecord='doas sysctl kern.video.record=1'
 alias noaudiorecord='doas sysctl kern.audio.record=0'
 alias novideorecord='doas sysctl kern.video.record=0'
 
+alias dmesg='doas /sbin/dmesg'
+alias reboot='doas /sbin/reboot'
+alias poweroff='doas /sbin/halt -p'
 
 pkg() {
     [ "$1" ] || set -- h

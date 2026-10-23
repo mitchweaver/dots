@@ -1,0 +1,4 @@
+# get driver ver for getting correct flatpak runtime
+alias nvidia-driver-version='nvidia-smi --query-gpu=driver_version --format=csv,noheader'
+alias flatpak-check-nvidia='flatpak list --runtime | grep -i nvidia'
+alias flatpak-gl-drivers='flatpak --gl-drivers'

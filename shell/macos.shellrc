@@ -1,3 +1,5 @@
+alias brew=/opt/homebrew/bin/brew
+
 alias bu='brew update ; brew upgrade'
 alias bi='brew install'
 alias bs='brew search'
@@ -5,4 +7,18 @@ alias bs='brew search'
 alias flushdns='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
 alias unquarantine='xattr -d com.apple.quarantine'
+
+export HOMEBREW_NO_ANALYTICS=1
+
+# ========================================================================
+# defaults
+# ========================================================================
+# disable crash reporter
+defaults write com.apple.CrashReporter DialogType none
+
+# always show file types in finder
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# do not save documents in icloud by default
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 

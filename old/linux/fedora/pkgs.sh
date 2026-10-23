@@ -31,7 +31,6 @@ dnf install mullvad-vpn
 apk add libX11-devel ncurses-devel libXinerama-devel libXft-devel \
     elfutils-devel openssl-devel
 
-
 NetworkManager-tui
 
 # for images in kitty

@@ -112,8 +112,8 @@ alias 2column='column -t -l 2 -o "     "'
 
 hg() { grep "$*" "$HISTFILE" ; }
 
-if [ -x /usr/bin/doas ] ; then
-    alias sudo=/usr/bin/doas
-fi
+# if [ -x /usr/bin/doas ] ; then
+#     alias sudo=/usr/bin/doas
+# fi
 
 

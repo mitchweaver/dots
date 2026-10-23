@@ -11,7 +11,10 @@ nnoremap <silent><SPACE> <nop>
 let mapleader=" "
 
 if has('mac')
-    let g:python3_host_prog = expand('~/.local/pipx/venvs/pynvim/bin/python3')
+    " if intel:
+    """"" let g:python3_host_prog = expand('~/.local/pipx/venvs/pynvim/bin/python3')
+    " apple silicon
+    let g:python3_host_prog = '/usr/bin/python3'
 elseif has('win32')
     let g:python3_host_prog = 'C:\Python314\python.exe'
 elseif has('unix')
@@ -19,9 +22,9 @@ elseif has('unix')
 endif
 
 if exists('g:neovide')
-    set guifont=BlexMono\ Nerd\ Font\ Mono
+    " set guifont=BlexMono\ Nerd\ Font\ Mono
+    " set guifont=Consolas
 
-    set guifont=Consolas
     let g:neovide_position_animation_length = 0
     let g:neovide_cursor_animation_length = 0.00
     let g:neovide_cursor_trail_size = 0

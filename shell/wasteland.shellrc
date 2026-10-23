@@ -195,3 +195,6 @@ alias waybarcfg='v ~/.config/waybar/config'
 
 alias ytdl-mp3='youtube-dl -x --audio-format mp3'
 
+kittyfonts() { kitty +list-fonts --psnames | g "$*" ; }
+
+

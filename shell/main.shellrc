@@ -12,10 +12,15 @@
 #
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
+if [ "$DOT_PROFILE_IMPORTED" != 1 ] ; then
+    . ~/.profile
+fi
+
 # stop .core file generation
 ulimit -c 0
 
-umask 022
+# cause all newly created files to be unreadable by other users
+umask 0077
 
 # -*-*- Options -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 SHELLRC_DIR=~/src/dots/shell
@@ -39,7 +44,7 @@ if [ -d "${SHELLRC_DIR}" ] ; then
     elif command -v emerge >/dev/null ; then
             . "${SHELLRC_DIR}/gentoo.shellrc"
         elif command -v dnf >/dev/null ; then
-            . "${SHELLRC_DIR}/redhat.shellrc"
+            . "${SHELLRC_DIR}/fedora.shellrc"
         elif command -v apk >/dev/null ; then
             . "${SHELLRC_DIR}/alpine.shellrc"
         elif command -v freebsd-update >/dev/null ; then
@@ -62,7 +67,7 @@ if [ -d "${SHELLRC_DIR}" ] ; then
 
     . "${SHELLRC_DIR}/builtins.shellrc"
     . "${SHELLRC_DIR}/development.shellrc"
-    . "${SHELLRC_DIR}/doas.shellrc"
+    . "${SHELLRC_DIR}/flatpak.shellrc"
     . "${SHELLRC_DIR}/generic_aliases.shellrc"
     . "${SHELLRC_DIR}/generic_functions.shellrc"
     . "${SHELLRC_DIR}/history.shellrc"

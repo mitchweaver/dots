@@ -1,0 +1,61 @@
+# fedora-specific aliases
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+if type rpm-ostree >/dev/null 2>&1 ; then
+    pkg() {
+        [ "$1" ] || set -- h
+        flag=${1#-}
+        shift
+        case $flag in
+            h)
+                >&2 echo 'pkg: [-a add] [-u update]'
+                ;;
+            a)
+                sudo rpm-ostree install "$@"
+                ;;
+            u)
+                >&2 echo 'Updating flatpak...'
+                flatpak update
+
+                >&2 echo 'Updating rpm-ostree...'
+                sudo rpm-ostree refresh-md
+                sudo rpm-ostree upgrade
+                ;;
+        esac
+    }
+elif type dnf >/dev/null 2>&1 ; then
+    pkg() {
+        [ "$1" ] || set -- h
+        flag=${1#-}
+        shift
+        case $flag in
+            h)
+                >&2 printf '%s\n' \
+                    'pkg: [-a add] [-u update] [-d delete] [-s search] [-i info] [-f file] [-l list]'
+                ;;
+            a)
+                sudo dnf -q upgrade --refresh
+                sudo dnf -q install "$@"
+                ;;
+            u)
+                sudo dnf -q upgrade --refresh
+                sudo dnf -q update "$@"
+                ;;
+            d)
+                sudo dnf -q remove "$@"
+                ;;
+            s)
+                dnf -q search "$@"
+                ;;
+            i)
+                dnf -q info "$@"
+                ;;
+            f)
+                dnf -q provides "$@"
+                ;;
+            l)
+                dnf -q list "$@"
+        esac
+    }
+fi
+
