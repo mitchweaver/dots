@@ -11,7 +11,7 @@
 
 # I hate these stupid dirs and every program that creates them.
 nohup /bin/rmdir Desktop Documents Pictures Public \
-        Templates Videos Music Nextcloud >/dev/null 2>&1 ||:
+        Templates Videos Music Nextcloud JoplinBackup >/dev/null 2>&1 ||:
 
 alias wasteland='v ~/src/dots/shell/wasteland.shellrc'
 
@@ -164,7 +164,14 @@ fi
 alias lxappearance='GDK_BACKEND=x11 lxappearance'
 
 ######## alias fixpulse='/usr/local/bin/pulseaudio --start --log-target=syslog'
-alias nf=neofetch
+
+nf() {
+    if type fastfetch >/dev/null 2>&1 ; then
+        fastfetch
+    elif type neofetch >/dev/null 2>&1 ; then
+        neofetch
+    fi
+}
 
 alias {zramctl,zram}='zramctl --output-all'
 
@@ -198,3 +205,4 @@ alias ytdl-mp3='youtube-dl -x --audio-format mp3'
 kittyfonts() { kitty +list-fonts --psnames | g "$*" ; }
 
 
+alias sensors='sensors | grep Core 2>/dev/null | grep -v rror'
