@@ -1,4 +1,4 @@
-Kinoite Install
+Fedora Kinoite Install
 
 # annoying on boot
 sudo systemctl disable NetworkManager-wait-online.service
@@ -89,6 +89,27 @@ rpm-ostree kargs \
 rpm-ostree kargs \
     --append=snd_hda_intel.dmic_detect=0 \
     --append=snd_sof_intel_hda_common.dmic_num=0
+
+# disable ipv6
+rpm-ostree kargs \
+    --append=ipv6.disable=1
+
+# intel iommu
+rpm-ostree kargs \
+    --append=intel_iommu=on
+
+# misc other security
+# shouldnt cause problems and very minimal if any performance impact
+# any questions on what they do just ask your favorite LLM
+rpm-ostree kargs \
+    --append=page_alloc.shuffle=1 \
+    --append=slab_nomerge \
+	--append=init_on_alloc=1 \
+    --append=init_on_free=1 \
+	--append=page_alloc.shuffle=1 \
+	--append=randomize_kstack_offset=on \
+	--append=vsyscall=none \
+    --append=debugfs=off
 ```
 
 # anything we're deleting

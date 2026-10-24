@@ -47,7 +47,7 @@ alias {lsg,lg}='ls -1 | grep -i'
 
 alias cp='cp -irv'
 alias mv='mv -iv'
-alias {mkdir,mkd,mkdr,mkir}='mkdir -p'
+alias {mkdir,mkd,mkdr,mkir,mdir}='mkdir -p'
 
 alias pk=pkill
 
