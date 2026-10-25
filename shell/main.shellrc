@@ -42,6 +42,8 @@ if [ -d "${SHELLRC_DIR}" ] ; then
         . "${SHELLRC_DIR}/gentoo.shellrc"
     elif command -v dnf >/dev/null ; then
         . "${SHELLRC_DIR}/fedora.shellrc"
+    elif command -v rpm-ostree >/dev/null ; then
+        . "${SHELLRC_DIR}/fedora.shellrc"
     elif command -v apk >/dev/null ; then
         . "${SHELLRC_DIR}/alpine.shellrc"
     elif command -v freebsd-update >/dev/null ; then
