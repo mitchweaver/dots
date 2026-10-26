@@ -42,11 +42,13 @@ v() {
         esac
     # if not provided a file to open, open scratchpad
     elif [ -z "$1" ] ; then
-        set ~/nextcloud/files/scratchpad.md
+        set ~/cloud/files/scratchpad.md
     fi
 
     ${EDITOR:-vi} -n -- "$@"
 }
+
+alias {nvi,nv,vim,nvmi}=v
 
 alias md2html='pandoc -f markdown'
 mdff() {

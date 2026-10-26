@@ -1,5 +1,8 @@
-alias rsync='rsync -avhu --progress --delete --partial --links'
-alias fatsync='rsync -rvhu --progress --delete --partial' # for fat32
+# exclude podman containers in case im syncing my home dir because it will fail
+alias rsync='rsync -avhu --progress --delete --partial --links --exclude=/.local/share/containers'
+
+# for fat32
+alias fatsync='rsync -rvhu --progress --delete --partial'
 
 alias scp='scp -rp'
 
@@ -16,13 +19,13 @@ alias {vssh,vissh}='${EDITOR:-vi} ~/.ssh/config'
 # scan for open ports
 alias portscan='nmap -sT'
 
-# flushdns() {
-#     if command -v resolvectl > /dev/null ; then
-#         resolvectl flush-caches
-#     elif command -v rc-service >/dev/null && command -v dnsmasq >/dev/null ; then
-#         doas rc-service dnsmasq restart
-#     fi
-# }
+flushdns() {
+    if command -v resolvectl > /dev/null ; then
+        resolvectl flush-caches
+    elif command -v rc-service >/dev/null && command -v dnsmasq >/dev/null ; then
+        sudo rc-service dnsmasq restart
+    fi
+}
 
 wtf() {
     w3m -dump https://wtfismyip.com/json | jq -r
@@ -38,11 +41,13 @@ isconnected() {
     fi
 }
 
-# systemd-resolved
-alias resolved-status="systemd-resolve --status"
-alias resolved-statistics="systemd-resolve --statistics"
-alias resolved-write="pkill -USR1 systemd-resolve"
-alias resolved-flush="resolvectl flush-caches"
+if command -v systemctl >/dev/null ; then
+    # systemd-resolved
+    alias resolved-status="systemd-resolve --status"
+    alias resolved-statistics="systemd-resolve --statistics"
+    alias resolved-write="pkill -USR1 systemd-resolve"
+    alias resolved-flush="resolvectl flush-caches"
+fi
 
 dl() {
     if [ "$2" ] ; then
@@ -55,15 +60,19 @@ dl() {
 # ========================================================================
 # WPA_SUPPLICANT
 # ========================================================================
-alias wpscan='doas wpa_cli scan'
+if command -v wpa_supplicant >/dev/null ; then
+    alias wpscan='sudo wpa_cli scan'
+fi
 
 # ========================================================================
 # TOR
 # ========================================================================
-alias torsocks='torsocks -i'
-alias torshell='torsocks -i --shell'
-alias torcheck='curl -x socks5h://localhost:9050 -s https://check.torproject.org | lynx -dump -stdin'
-alias torget='torsocks -i wget'
+if command -v torsocks >/dev/null ; then
+    alias torsocks='torsocks -i'
+    alias torshell='torsocks -i --shell'
+    alias torcheck='curl -x socks5h://localhost:9050 -s https://check.torproject.org | lynx -dump -stdin'
+    alias torget='torsocks -i wget'
+fi
 
 # ========================================================================
 # wireguard

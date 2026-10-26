@@ -16,18 +16,6 @@ rpm-ostree install \
 
 # now reboot
 reboot
-
-# this removes the version-specific string from the packages
-# unsure if this is still needed but saw it from another guide
-# leaving here out of paranoia, can't hurt
-rpm-ostree update \
-    --uninstall $(rpm -q rpmfusion-free-release) \
-    --uninstall $(rpm -q rpmfusion-nonfree-release) \
-    --install rpmfusion-free-release \
-    --install rpmfusion-nonfree-release
-
-# reboot again
-reboot
 ```
 
 ## video accel
@@ -35,7 +23,71 @@ reboot
 ```
 # note: libavcodec === firefox video accel
 rpm-ostree install intel-media-driver libavcodec-freeworld
+```
 
+## NVIDIA (skip if intel / amd)
+```
+# ====== NVIDIA ==================================
+# tell akmods to build open vs proprietary
+echo '%_with_kmod_nvidia_open 1' > /etc/rpm/macros.nvidia-kmod
+
+rpm-ostree install akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-cuda
+
+# blacklist nouveau if it happens to be enabled
+# force enable nvidia modesetting
+rpm-ostree kargs \
+    --append=rd.driver.blacklist=nouveau \
+    --append=modprobe.blacklist=nouveau \
+    --append=nvidia-drm.modeset=1
+
+# reboot and check with
+nvidia-smi
+
+# this should say MIT/GPL if you have open drivers
+modinfo nvidia | grep -i license
+# ====== END NVIDIA ==================================
+```
+
+## anything we're deleting
+
+```
+# fedora specific crap
+rpm-ostree override remove fedora-bookmarks fedora-chromium-config fedora-chromium-config-kde
+
+# virtual machine host support which don't need if this is bare metal
+rpm-ostree override remove open-vm-tools-desktop open-vm-tools qemu-guest-agent spice-vdagent spice-webdavd virtualbox-guest-additions
+
+# KDE specific junk
+rpm-ostree override remove \
+    khelpcenter plasma-welcome plasma-drkonqi kde-partitionmanager kcharselect \
+    plasma-browser-integration plasma-discover-notifier plasma-discover \
+    plasma-discover-rpm-ostree plasma-welcome-fedora plasma-discover-libs \
+    plasma-discover-kns plasma-discover-flatpak
+
+# non-KDE junk that comes with KDE
+rpm-ostree override remove \
+    filelight
+
+# we remove the base firefox as we will flatpak our own later
+rpm-ostree override remove firefox-langpacks firefox
+
+# flatpak uninstalls
+flatpak uninstall -y org.kde.elisa org.kde.kmahjongg org.kde.kmines org.kde.qrca org.kde.skanpage
+```
+
+## installing anything that has to be on host system
+```
+# NOTE: file managers sandbox thumbnailers already, so it will not work inside another container
+# NOTE: aptx = bluetooth audio
+# NOTE: for some reason nmtui isnt included in networkmanager anymore by default
+# NOTE: themes --- easier to get from fedora than manage .icon .theme nonsense
+rpm-ostree install distrobox kitty fastfetch pipewire-codec-aptx \
+	NetworkManager-tui fail2ban ffmpegthumbnailer \
+	materia-kde papirus-icon-theme
+```
+
+## kernel arguments
+```
 # disable nvme power saving (micro stutters on my xps -- unnoticeable minor extra power draw) 
 rpm-ostree kargs \
     --append=nvme_core.default_ps_max_latency_us=0
@@ -79,76 +131,7 @@ rpm-ostree kargs \
     --append=debugfs=off
 ```
 
-## NVIDIA
-```
-# ====== NVIDIA ==================================
-# tools
-rpm-ostree install kmodtool akmods rpmdevtools mock
-
-# make sure you have a public and private key outputted from below
-# if you do not, generate it with kmodgenca --- if fails may need --force
-ls -l /etc/pki/akmods/certs/
-kmodgenca -a
-
-# import the key -- This will ask you for a temporary password that you will enter
-#                   on reboot to enroll the key. Password won't be used ever again.
-mokutil --import /etc/pki/akmods/certs/public_key.der
-
-# docs: https://rpmfusion.org/Howto/NVIDIA#OSTree_.28Silverblue.2FKinoite.2Fetc.29
-git clone https://github.com/CheariX/silverblue-akmods-keys
-cd silverblue-akmods-keys
-bash setup.sh
-rpm-ostree install akmods-keys-0.0.2-8.fc$(rpm -E %fedora).noarch.rpm
-
-# now reboot and follow prompt to enroll the key with "Enroll MOK" option
-# you will enter the password you created during the mokutil step
-
-# now should be able to install
-rpm-ostree install akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-cuda
-
-# blacklist nouveau if it happens to be enabled
-# force enable nvidia modesetting
-rpm-ostree kargs \
-  --append=rd.driver.blacklist=nouveau \
-  --append=modprobe.blacklist=nouveau \
-  --append=nvidia-drm.modeset=1
-# ====== END NVIDIA ==================================
-```
-
-## anything we're deleting
-
-```
-# fedora specific crap
-rpm-ostree override remove fedora-bookmarks fedora-chromium-config fedora-chromium-config-kde
-
-# virtual machine host support which don't need if this is bare metal
-rpm-ostree override remove open-vm-tools-desktop open-vm-tools qemu-guest-agent spice-vdagent spice-webdavd virtualbox-guest-additions
-
-# KDE specific junk
-rpm-ostree override remove \
-    khelpcenter plasma-welcome plasma-drkonqi kde-partitionmanager kcharselect \
-    plasma-browser-integration plasma-discover-notifier plasma-discover \
-    plasma-discover-rpm-ostree plasma-welcome-fedora plasma-discover-libs \
-    plasma-discover-kns plasma-discover-flatpak
-
-# we remove the base firefox as we will flatpak our own later
-rpm-ostree override remove firefox-langpacks firefox
-```
-
-## installing anything that has to be on host system
-
-```
-# NOTE: file managers sandbox thumbnailers already, so it will not work inside another container
-# NOTE: aptx = bluetooth audio
-# NOTE: for some reason nmtui isnt included in networkmanager anymore by default
-# NOTE: themes --- easier to get from fedora than manage .icon .theme nonsense
-rpm-ostree install distrobox kitty pipewire-codec-aptx \
-	NetworkManager-tui fail2ban ffmpegthumbnailer \
-	materia-kde papirus-icon-theme
-```
-
 ## distrobox
-
 ```
 # creating containers
 mkdir -p ~/.distrobox
@@ -176,67 +159,38 @@ EOF
 apk update
 apk upgrade
 
-# ========================================================================
 # META
-# ========================================================================
 apk add docs
 
-# ========================================================================
 # NON-BUSYBOX / GNU
-# ========================================================================
 apk add coreutils binutils findutils grep util-linux gawk iproute2
 
-# ========================================================================
 # SYSTEM UTILS
-# ========================================================================
 apk add bc htop lsof lm-sensors pciutils usbutils smartmontools sysstat upower git
 
-# ========================================================================
 # ARCHIVE
-# ========================================================================
 apk add p7zip unzip zip lz4 xz lzo
 
-# ========================================================================
 # MISC SYSTEM LIBS
-# ========================================================================
 apk add libnotify libsecret py3-numpy py3-scipy nlohmann-json
 
-# ========================================================================
 # NETWORKING
-# ========================================================================
 apk add rsync openresolv netcat-openbsd nmap bind-tools socat ldns wireless-tools speedtest-cli
 
-# ========================================================================
 # SCRIPTING UTILS
-# ========================================================================
 apk add entr detox dos2unix inotify-tools dateutils libqrencode w3m lynx
 
-# ========================================================================
 # TERMINAL USERLAND
-# ========================================================================
 apk add oksh neovim ranger htop translate-shell tree pv progress eza bat py3-pynvim ncdu neofetch
 
-# ========================================================================
 # DEVELOPMENT
-# ========================================================================
 apk add build-base gcc patch musl-dev meson ninja shellcheck jq py3-pylint hugo sassc
 
-# ========================================================================
 # COMMON DEV LIBS
-# ========================================================================
 apk add linux-headers ncurses-dev openssl-dev elfutils-dev
 
-# ========================================================================
 # MEDIA
-# ========================================================================
-apk add ffmpeg imagemagick jpegoptim exiftool cuetools shntool vorbis-tools wavpack
-
-# ========================================================================
-# FILESYSTEM
-# ========================================================================
-############################# apk add samba-client dosfstools exfat-utils cifs-utils ntfs-3g
-
-exit
+apk add ffmpeg imagemagick jpegoptim exiftool cuetools shntool vorbis-tools wavpack mpv yt-dlp
 ```
 
 ## install flatpak apps
@@ -259,7 +213,9 @@ flatpak install -y flathub org.libreoffice.LibreOffice
 
 flatpak install -y flathub md.obsidian.Obsidian
 flatpak install -y flathub net.cozic.joplin_desktop
+flatpak install -y flathub com.super_productivity.SuperProductivity
 flatpak install -y flathub com.bitwarden.desktop
+
 flatpak install -y flathub com.github.tchx84.Flatseal
 flatpak install -y flathub io.github.dweymouth.supersonic
 
@@ -281,7 +237,13 @@ rpm-ostree refresh-md
 rpm-ostree install mullvad-vpn
 ```
 
-# mega.nz
+## tailscale
+```
+ostree remote add tailscale https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+rpm-ostree install tailscale
+```
+
+## mega.nz
 ```
 sudo tee /etc/yum.repos.d/megasync.repo <<EOF
 [MEGAsync]
@@ -293,57 +255,6 @@ enabled=1
 EOF
 
 sudo rpm-ostree install megasync
-```
-
-# WEBULL
-
-```
-mkdir -p ~/.distrobox/homes/webull-ubuntu
-
-# our init hook removes scripts to run commands on the host from within the container
-# I consider these to be security risks and I don't use them anyway
-distrobox create \
-    --name webull-ubuntu \
-    --image ubuntu:latest \
-    --nvidia \
-    --unshare-ipc \
-    --home ~/.distrobox/homes/webull-ubuntu \
-    --init-hooks "umount /usr/bin/distrobox-host-exec 2>/dev/null ; rm /usr/bin/host-spawn /usr/bin/distrobox-host-exec 2>/dev/null ; echo \#\!/bin/sh > /usr/bin/host-spawn ; echo exit\ 1 >> /usr/bin/host-spawn ; chmod 755 /usr/bin/host-spawn"
-
-distrobox enter webull-ubuntu
-
-sudo su
-apt update ; apt upgrade -y
-apt install -y libcurl3t64-gnutls libasound2t64 libnss3
-
-dpkg -i webull.deb
-exit
-distrobox-export --app WebullDesktop
-```
-
-# MotiveWave
-```
-mkdir -p ~/.distrobox/homes/motivewave-ubuntu
-
-# our init hook removes scripts to run commands on the host from within the container
-# I consider these to be security risks and I don't use them anyway
-distrobox create \
-    --name motivewave-ubuntu \
-    --image ubuntu:latest \
-    --nvidia \
-    --unshare-ipc \
-    --home ~/.distrobox/homes/motivewave-ubuntu \
-    --init-hooks "umount /usr/bin/distrobox-host-exec 2>/dev/null ; rm /usr/bin/host-spawn /usr/bin/distrobox-host-exec 2>/dev/null ; echo \#\!/bin/sh > /usr/bin/host-spawn ; echo exit\ 1 >> /usr/bin/host-spawn ; chmod 755 /usr/bin/host-spawn"
-
-distrobox enter motivewave-ubuntu
-
-sudo su
-apt update ; apt upgrade -y
-apt install -y libcurl3t64-gnutls libasound2t64 libnss3
-
-dpkg -i motivewave.deb
-exit
-distrobox-export --app MotiveWave
 ```
 
 # systemd services

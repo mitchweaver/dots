@@ -29,6 +29,7 @@ case $TERM in
             alias fgrep='fgrep --color=auto'
             alias egrep='egrep --color=auto'
         fi
+        unset NO_COLOR
         ;;
     *)
         export NO_COLOR=true

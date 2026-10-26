@@ -15,12 +15,14 @@ if type rpm-ostree >/dev/null 2>&1 ; then
                 ;;
             u)
                 >&2 echo 'Updating flatpak...'
-                flatpak update
+                sudo flatpak update
 
                 >&2 echo 'Updating rpm-ostree...'
                 sudo rpm-ostree refresh-md
                 sudo rpm-ostree upgrade
                 ;;
+            l)
+                rpm -qa | sort
         esac
     }
 elif type dnf >/dev/null 2>&1 ; then
