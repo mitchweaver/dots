@@ -6,6 +6,10 @@ Fedora Kinoite Install
 ```
 rpm-ostree refresh-md
 rpm-ostree upgrade
+
+# important: if there were any kernel updates, you need to reboot or else it will mess up steps below
+#            this is because you will be installing old kernel versions of drivers etc
+reboot
 ```
 
 ## enable repositories
@@ -19,22 +23,19 @@ reboot
 ```
 
 ## video accel
-
 ```
 # note: libavcodec === firefox video accel
 rpm-ostree install intel-media-driver libavcodec-freeworld
 ```
 
-## NVIDIA (skip if intel / amd)
+## NVIDIA (skip if intel / amd  or if you're sticking with nouveau)
 ```
 # ====== NVIDIA ==================================
-# tell akmods to build open vs proprietary
-echo '%_with_kmod_nvidia_open 1' > /etc/rpm/macros.nvidia-kmod
+rpm-ostree install kmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-cuda
 
-rpm-ostree install akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-cuda
+# if you don't see this, then you don't have nvidia set up
+rpm -qa | grep kmod-nvidia
 
-# blacklist nouveau if it happens to be enabled
-# force enable nvidia modesetting
 rpm-ostree kargs \
     --append=rd.driver.blacklist=nouveau \
     --append=modprobe.blacklist=nouveau \
@@ -45,11 +46,16 @@ nvidia-smi
 
 # this should say MIT/GPL if you have open drivers
 modinfo nvidia | grep -i license
+
+###### NOTE ########
+# for encrypted drives, remove from kargs "rhgb quiet" else you will not boot
+# this is because of running into chicken-and-egg problem of the driver being on the encrypted drive
+# but plymouth wants to start to show the decryption gui
+rpm-ostree kargs --editor
 # ====== END NVIDIA ==================================
 ```
 
 ## anything we're deleting
-
 ```
 # fedora specific crap
 rpm-ostree override remove fedora-bookmarks fedora-chromium-config fedora-chromium-config-kde
@@ -67,9 +73,6 @@ rpm-ostree override remove \
 # non-KDE junk that comes with KDE
 rpm-ostree override remove \
     filelight
-
-# we remove the base firefox as we will flatpak our own later
-rpm-ostree override remove firefox-langpacks firefox
 
 # flatpak uninstalls
 flatpak uninstall -y org.kde.elisa org.kde.kmahjongg org.kde.kmines org.kde.qrca org.kde.skanpage
@@ -113,9 +116,10 @@ rpm-ostree kargs \
 rpm-ostree kargs \
     --append=ipv6.disable=1
 
-# intel iommu
+# iommu (specifying both is harmless)
 rpm-ostree kargs \
-    --append=intel_iommu=on
+    --append=intel_iommu=on \
+    --append=amd_iommu=on
 
 # misc other security
 # shouldnt cause problems and very minimal if any performance impact
@@ -125,10 +129,82 @@ rpm-ostree kargs \
     --append=slab_nomerge \
 	--append=init_on_alloc=1 \
     --append=init_on_free=1 \
-	--append=page_alloc.shuffle=1 \
 	--append=randomize_kstack_offset=on \
 	--append=vsyscall=none \
     --append=debugfs=off
+```
+
+## install flatpak apps
+```
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak remote-modify --enable flathub
+
+flatpak install -y flathub io.github.ungoogled_software.ungoogled_chromium
+flatpak install -y flathub org.torproject.torbrowser-launcher
+
+flatpak install -y flathub com.valvesoftware.Steam
+flatpak install -y flathub com.discordapp.Discord
+flatpak install -y flathub com.obsproject.Studio
+flatpak install -y flathub org.shotcut.Shotcut
+flatpak install -y flathub io.mpv.Mpv
+
+flatpak install -y flathub org.gimp.GIMP
+flatpak install -y flathub org.libreoffice.LibreOffice
+
+flatpak install -y flathub md.obsidian.Obsidian
+flatpak install -y flathub net.cozic.joplin_desktop
+flatpak install -y flathub com.super_productivity.SuperProductivity
+flatpak install -y flathub com.bitwarden.desktop
+
+flatpak install -y flathub com.github.tchx84.Flatseal
+flatpak install -y flathub io.github.dweymouth.supersonic
+
+flatpak install -y flathub org.signal.Signal
+flatpak install -y flathub com.getmailspring.Mailspring
+
+flatpak install -y flathub org.wireshark.Wireshark
+
+flatpak install -y flathub com.tradingview.tradingview
+
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install -y flathub org.gtk.Gtk3theme.Materia{,-dark,-light}{,-compact}
+```
+
+## mullvad
+```
+curl -fsSL -o /etc/yum.repos.d/mullvad.repo https://repository.mullvad.net/rpm/stable/mullvad.repo
+rpm-ostree refresh-md
+rpm-ostree install mullvad-vpn
+```
+
+## tailscale
+```
+ostree remote add tailscale https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+rpm-ostree install tailscale
+```
+
+## mega.nz
+```
+tee /etc/yum.repos.d/megasync.repo <<EOF
+[MEGAsync]
+name=MEGAsync
+baseurl=https://mega.nz/linux/repo/Fedora_$(rpm -E %fedora)/
+gpgkey=https://mega.nz/linux/repo/Fedora_$(rpm -E %fedora)/repodata/repomd.xml.key
+gpgcheck=1
+enabled=1
+EOF
+
+rpm-ostree install megasync
+```
+
+# systemd services
+```
+# annoying on boot
+systemctl disable NetworkManager-wait-online.service
+
+# enables
+systemctl enable fail2ban
+systemctl enable mullvad-daemon
 ```
 
 ## distrobox
@@ -191,79 +267,5 @@ apk add linux-headers ncurses-dev openssl-dev elfutils-dev
 
 # MEDIA
 apk add ffmpeg imagemagick jpegoptim exiftool cuetools shntool vorbis-tools wavpack mpv yt-dlp
-```
-
-## install flatpak apps
-```
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak remote-modify --enable flathub
-
-flatpak install -y flathub org.mozilla.firefox
-flatpak install -y flathub io.github.ungoogled_software.ungoogled_chromium
-flatpak install -y flathub org.torproject.torbrowser-launcher
-
-flatpak install -y flathub com.valvesoftware.Steam
-flatpak install -y flathub com.discordapp.Discord
-flatpak install -y flathub com.obsproject.Studio
-flatpak install -y flathub org.shotcut.Shotcut
-flatpak install -y flathub io.mpv.Mpv
-
-flatpak install -y flathub org.gimp.GIMP
-flatpak install -y flathub org.libreoffice.LibreOffice
-
-flatpak install -y flathub md.obsidian.Obsidian
-flatpak install -y flathub net.cozic.joplin_desktop
-flatpak install -y flathub com.super_productivity.SuperProductivity
-flatpak install -y flathub com.bitwarden.desktop
-
-flatpak install -y flathub com.github.tchx84.Flatseal
-flatpak install -y flathub io.github.dweymouth.supersonic
-
-flatpak install -y flathub org.signal.Signal
-flatpak install -y flathub com.getmailspring.Mailspring
-
-flatpak install -y flathub org.wireshark.Wireshark
-
-flatpak install -y flathub com.tradingview.tradingview
-
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install -y flathub org.gtk.Gtk3theme.Materia{,-dark,-light}{,-compact}
-```
-
-## mullvad
-```
-curl -fsSL -o /etc/yum.repos.d/mullvad.repo https://repository.mullvad.net/rpm/stable/mullvad.repo
-rpm-ostree refresh-md
-rpm-ostree install mullvad-vpn
-```
-
-## tailscale
-```
-ostree remote add tailscale https://pkgs.tailscale.com/stable/fedora/tailscale.repo
-rpm-ostree install tailscale
-```
-
-## mega.nz
-```
-sudo tee /etc/yum.repos.d/megasync.repo <<EOF
-[MEGAsync]
-name=MEGAsync
-baseurl=https://mega.nz/linux/repo/Fedora_$(rpm -E %fedora)/
-gpgkey=https://mega.nz/linux/repo/Fedora_$(rpm -E %fedora)/repodata/repomd.xml.key
-gpgcheck=1
-enabled=1
-EOF
-
-sudo rpm-ostree install megasync
-```
-
-# systemd services
-```
-# annoying on boot
-systemctl disable NetworkManager-wait-online.service
-
-# enables
-systemctl enable fail2ban
-systemctl enable mullvad-daemon
 ```
 
