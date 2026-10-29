@@ -166,8 +166,8 @@ flatpak install -y flathub org.wireshark.Wireshark
 
 flatpak install -y flathub com.tradingview.tradingview
 
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install -y flathub org.gtk.Gtk3theme.Materia{,-dark,-light}{,-compact}
+flatpak install -y flathub org.gtk.Gtk3theme.Materia-dark
+flatpak install -y flathub org.gtk.Gtk3theme.Materia-light
 ```
 
 ## mullvad

@@ -1,5 +1,7 @@
-# exclude podman containers in case im syncing my home dir because it will fail
-alias rsync='rsync -avhu --progress --delete --partial --links --exclude=/.local/share/containers'
+alias rsync='rsync -avhu --progress --delete --partial --links'
+
+#####--exclude=/.local/share/containers
+#####--exclude=/var/home/mitch/.var/app/com.valvesoftware.Steam/.local/share/Steam
 
 # for fat32
 alias fatsync='rsync -rvhu --progress --delete --partial'
