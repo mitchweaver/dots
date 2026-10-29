@@ -127,10 +127,10 @@ rpm-ostree kargs \
 rpm-ostree kargs \
     --append=page_alloc.shuffle=1 \
     --append=slab_nomerge \
-	--append=init_on_alloc=1 \
+    --append=init_on_alloc=1 \
     --append=init_on_free=1 \
-	--append=randomize_kstack_offset=on \
-	--append=vsyscall=none \
+    --append=randomize_kstack_offset=on \
+    --append=vsyscall=none \
     --append=debugfs=off
 ```
 
