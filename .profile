@@ -7,10 +7,21 @@ fi
 # ========================================================================
 # PATHS
 # ========================================================================
-export PATH="$HOME/.local/bin:$PATH:/usr/local/bin:/usr/X11R6/bin:/usr/local/sbin:$HOME/.local/go/bin:$HOME/.cargo/bin:$HOME/.npm/bin"
-export MANPATH="${HOME}/.local/share/man:$MANPATH"
+export PATH="$HOME/.local/bin:$PATH:/usr/local/bin:/usr/X11R6/bin:/usr/local/sbin"
+export MANPATH="$HOME/.local/share/man:$MANPATH"
+export PATH="$PATH:$HOME/.local/flatpak-wrappers"
 
-######## export NPM_CONFIG_PREFIX="${HOME}/.npm"
+if [ -d ~/.local/go/bin ] ; then
+    export PATH="$PATH:$HOME/.local/go/bin"
+fi
+
+if [ -d ~/.cargo/bin ] ; then
+    export PATH="$PATH:$HOME/.cargo/bin"
+fi
+
+if [ -d ~/.npm/bin ] ; then
+    export PATH="$PATH:$HOME/.npm/bin"
+fi
 
 if command -v nproc >/dev/null ; then
     export NPROC="$(nproc)"
@@ -109,33 +120,34 @@ export LESSHISTFILE=/dev/null
 # ===================================================
 # create tmp dir
 # ===================================================
-# if [ ! -f /etc/wsl.conf ] ; then
-#     if [ ! -L ~/tmp ] ; then
-#         mv ~/tmp ~/tmp.bk
-#         ln -sf "/tmp/$USER-tmp/tmp" ~/tmp
-#     fi
-#
-#     mkdir -p "/tmp/$USER-tmp/tmp"
-#
-#     rm -r ~/.w3m 2>/dev/null ||:
-#     rm -f ~/.python_history
-#     rm -f ~/.wget-hsts
-#
-#     mkdir -p ~/tmp/.junk/w3m
-#     ln -sf ~/tmp/.junk/w3m ~/.w3m
-#
-#     touch ~/tmp/.junk/python_history
-#     ln -sf ~/tmp/.junk/python_history ~/.python_history
-#
-#     touch ~/tmp/.junk/wget-hsts
-#     ln -sf ~/tmp/.junk/wget-hsts ~/.wget-hsts
-#
-#     rm -f ~/.bash_history ~/.ksh_history
-#     ln -sf ~/tmp/.junk/bash_history ~/.bash_history
-#     ln -sf ~/tmp/.junk/ksh_history ~/.ksh_history
-# else
-#     mkdir -p ~/tmp
-# fi
+# only proceed if we're not on macos or within wsl
+if [ ! -e /etc/wsl.conf ] && [ ! -e /System/Library/CoreServices/SystemVersion.plist ] ; then
+    if [ ! -L ~/tmp ] ; then
+        mv ~/tmp ~/tmp.bk
+        ln -s "/tmp/$USER-tmp/tmp" ~/tmp
+    fi
+
+    mkdir -p "/tmp/$USER-tmp/tmp"
+
+    rm -r ~/.w3m 2>/dev/null ||:
+    rm ~/.python_history
+    rm ~/.wget-hsts
+
+    mkdir -p ~/tmp/.junk/w3m
+    ln -s ~/tmp/.junk/w3m ~/.w3m
+
+    touch ~/tmp/.junk/python_history
+    ln -s ~/tmp/.junk/python_history ~/.python_history
+
+    touch ~/tmp/.junk/wget-hsts
+    ln -s ~/tmp/.junk/wget-hsts ~/.wget-hsts
+
+    rm ~/.bash_history ~/.ksh_history
+    ln -s ~/tmp/.junk/bash_history ~/.bash_history
+    ln -s ~/tmp/.junk/ksh_history ~/.ksh_history
+else
+    mkdir -p ~/tmp
+fi
 
 # ========================================================================
 # FIX PERMISSIONS

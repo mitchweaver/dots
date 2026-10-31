@@ -1,21 +1,20 @@
 # =================================================
 # STARTUP APPS
 # =================================================
-exec background -s
-exec dbus-update-activation-environment --all
+exec dbus-update-activation-environment --systemd --all
+exec dunst
+exec thunar --daemon
+exec waybar >~/.cache/waybar.log 2>&1
 
-exec dbus-launch dunst
-exec dbus-launch thunar --daemon
 exec wl-paste --watch cliphist store
 
+exec background -s
 exec bright -s 50
 exec vol -u
 exec vol -s 50
 
 exec sh ~/.config/sway/gammastep.sh
 exec xbanish -s
-
-exec dbus-launch waybar >~/.cache/waybar.log 2>&1
 
 exec swayidle -w \
          timeout 900 'lock' \
@@ -24,19 +23,15 @@ exec swayidle -w \
          before-sleep 'swaylock -e -f -c 000000'
 
 # exec nextcloud --background
+exec megasync
 
 # ========================================================================
-# Linux Only
 ####### exec pipewire-start-or-restart.sh
-####### exec mullvad-vpn
 ####### exec mailspring --password-store="gnome-libsecret"
 ####### exec bitwarden-desktop-bin
 ####### exec joplin-desktop
-####### exec blueman-applet
-
-# ========================================================================
-# proprietary crap for gaming pc
-# ========================================================================
+exec /opt/Mullvad VPN/mullvad-vpn
+exec blueman-applet
 ######### exec sh ~/bin/misc/steam.sh silent
 ######### exec /usr/bin/discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
@@ -99,8 +94,6 @@ set $down j
 set $up k
 set $right l
 
-set $term kitty
-
 # =================================================
 # GAPS / BORDERS
 # =================================================
@@ -121,29 +114,30 @@ bindsym $mod+shift+g gaps inner current minus 4
 # =================================================
 # SWAYFX SPECIFIC
 # =================================================
-# shadows enable
-# shadows_on_csd enable
+shadows enable
+shadows_on_csd enable
 
 # --- drop shadows
 # shadow_blur_radius 4
 # shadow_offset 16 16
 
 # --- "normal" shadows
-# shadow_blur_radius 11
-# shadow_offset 0 1
+shadow_blur_radius 11
+shadow_offset 0 1
 
 # to show shadow on waybar
 # (only makes sense if always using gaps and no smartgaps)
 ########## layer_effects 'waybar' 'blur enable; shadows enable;'
+layer_effects 'waybar' 'blur enable; shadows disable;'
 
 # for rounded edges
-########## corner_radius 10
+# corner_radius 10
 
 # =================================================
 # Monitor Configuration --- swaymsg -t get_outputs
 # =================================================
 # 4k 160hz 27" lg
-# set $LEFT_MON 'LG Electronics 27GN950 101NTQDE1076'
+set $LEFT_MON 'LG Electronics 27GN950 101NTQDE1076'
 
 # 1080p 390hz 24" acer
 # set $LEFT_MON 'Acer Technologies XV252Q F 11481FF254200'
@@ -153,12 +147,11 @@ bindsym $mod+shift+g gaps inner current minus 4
 
 # output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 1 adaptive_sync off allow_tearing yes
 # output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 2 adaptive_sync off allow_tearing yes
+output $LEFT_MON  resolution 3840x2160@159.975Hz  position 0,0   scale 1.5 adaptive_sync off allow_tearing yes
 
 # output $LEFT_MON resolution 1920x1080@390.297Hz position 0,0   scale 1 adaptive_sync off allow_tearing yes
 # output $RIGHT_MON resolution 1920x1080@165.003Hz position 3840,0 scale 1 adaptive_sync off allow_tearing yes
 
-# xps
-####### set $LAPTOP 'LG Display 0x06B3 Unknown'
 # thinkpad x1cg7
 set $LAPTOP 'AU Optronics 0x573D Unknown'
 
@@ -175,11 +168,19 @@ workspace_auto_back_and_forth no
 # ========================================================================
 # Key binds
 # ========================================================================
-bindsym $mod+Return exec $term
+
+# launch alpine container
+bindsym $mod+Return exec kitty distrobox enter alpine -- /usr/bin/oksh
+# launch host system
+bindsym $mod+Shift+Return exec kitty /bin/bash
+
 bindsym $mod+w exec firefox
 bindsym $mod+e exec thunar
-bindsym $mod+r exec kitty ranger
-bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
+
+bindsym $mod+r exec kitty distrobox enter alpine -- /usr/bin/ranger
+
+#bindsym $mod+p exec menu --wide run -p 'Run:' | xargs swaymsg exec --
+bindsym $mod+p exec rofi -show run
 bindsym $mod+o exec dedit
 ####bindsym $mod+p exec wofi -f -I -m -b -i -G --show run | xargs swaymsg exec --
 
@@ -384,4 +385,7 @@ bindsym --no-warn $mod+Shift+Backspace exec "swaysome move 9"
 
 # Init workspaces for every screen
 exec "swaysome init 1"
+
+# fedora specific stuff needed for systemd session
+include /etc/sway/config.d/*.conf
 

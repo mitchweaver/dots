@@ -1,0 +1,67 @@
+{
+    "layer": "top",
+    "position": "top",
+    "spacing": 0,
+
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["tray", "wireplumber", "network", "clock"],
+
+    "sway/workspaces": {
+        "format": "{name}",
+        "disable-scroll": true,
+        "all-outputs": true,
+        // "persistent-workspaces": {
+        //     "1": [], "2": [], "3": [], "4": [], "5": [],
+        //     "6": [], "7": [], "8": [], "9": [], "10": []
+        // }
+    },
+
+    "sway/mode": {
+        "format": "{}"
+    },
+
+    "sway/window": {
+        "format": "{title}",
+        "max-length": 60,
+        "rewrite": {
+            "(.*) — Mozilla Firefox": "$1",
+            "(.*) - Mozilla Firefox": "$1"
+        }
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+
+    "wireplumber": {
+        "format": "vol: {volume}%",
+        "format-muted": "vol muted",
+        "max-volume": 100,
+        "scroll-step": 5,
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol"
+    },
+
+    "network": {
+        "format-wifi": "net {essid}",
+        "format-ethernet": "ethernet",
+        "format-disconnected": "offline",
+        "format-linked": "net no ip",
+        "tooltip-format": "{ifname}  {ipaddr}/{cidr}",
+        "interval": 10
+    },
+
+    "clock": {
+        "format": "{:%a %d %b %H:%M}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+            "mode": "month",
+            "format": {
+                "today": "<b><u>{}</u></b>"
+            }
+        }
+    }
+}
+

@@ -210,8 +210,8 @@ endif
 " THEME LOADING (must be after end of plug)
 " ========================================================================
 
-" set background=light
-set background=dark
+set background=light
+" set background=dark
 
 " Load colorscheme on windows but just use terminal colors if on linux
 if has('win32')

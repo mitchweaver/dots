@@ -20,8 +20,15 @@ ranger() {
     if [ "$RANGER_LEVEL" ]; then
         exit
     else
-        $(which ranger) "$@"
-        clear
+        if [ -z "$CONTAINER_ID" ]; then
+            PYTHONWARNINGS=ignore::SyntaxWarning /usr/bin/ranger "$@"
+            clear
+        else
+            # distrobox but running ranger on the host OS because its only way to get image previews
+            # warning: major jankery going on here
+            /run/host/usr/bin/distrobox-host-exec sh -c 'sock=$1; dir=$2; shift 2; kitty @ --to "$sock" launch --type=overlay --cwd "$dir" --env PYTHONWARNINGS=ignore::SyntaxWarning /usr/bin/ranger "$@" >/dev/null' \
+                _ "${KITTY_LISTEN_ON:-unix:/tmp/kitty-$KITTY_PID}" "$PWD" "$@"
+        fi
     fi
 }
 unalias r 2>/dev/null
