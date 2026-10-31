@@ -100,12 +100,13 @@ set $right l
 default_border pixel 0
 # gaps inner 0
 # gaps outer 0
-gaps inner 18
+gaps inner 20
 gaps outer 8
 # hide_edge_borders smart
-smart_borders no_gaps
 
-smart_gaps on
+#### smart_borders no_gaps
+
+### smart_gaps on
 # smart_gaps inverse_outer
 
 bindsym $mod+g gaps inner current plus 4

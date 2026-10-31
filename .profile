@@ -120,34 +120,36 @@ export LESSHISTFILE=/dev/null
 # ===================================================
 # create tmp dir
 # ===================================================
-# only proceed if we're not on macos or within wsl
-if [ ! -e /etc/wsl.conf ] && [ ! -e /System/Library/CoreServices/SystemVersion.plist ] ; then
-    if [ ! -L ~/tmp ] ; then
-        mv ~/tmp ~/tmp.bk
-        ln -s "/tmp/$USER-tmp/tmp" ~/tmp
-    fi
+# # only proceed if we're not on macos or within wsl
+# if [ ! -e /etc/wsl.conf ] && [ ! -e /System/Library/CoreServices/SystemVersion.plist ] ; then
+#     if [ ! -L ~/tmp ] ; then
+#         mv ~/tmp ~/tmp.bk
+#         ln -s "/tmp/$USER-tmp/tmp" ~/tmp
+#     fi
 
-    mkdir -p "/tmp/$USER-tmp/tmp"
+#     mkdir -p "/tmp/$USER-tmp/tmp"
 
-    rm -r ~/.w3m 2>/dev/null ||:
-    rm ~/.python_history
-    rm ~/.wget-hsts
+#     rm -r ~/.w3m 2>/dev/null ||:
+#     rm ~/.python_history
+#     rm ~/.wget-hsts
 
-    mkdir -p ~/tmp/.junk/w3m
-    ln -s ~/tmp/.junk/w3m ~/.w3m
+#     mkdir -p ~/tmp/.junk/w3m
+#     ln -s ~/tmp/.junk/w3m ~/.w3m
 
-    touch ~/tmp/.junk/python_history
-    ln -s ~/tmp/.junk/python_history ~/.python_history
+#     touch ~/tmp/.junk/python_history
+#     ln -s ~/tmp/.junk/python_history ~/.python_history
 
-    touch ~/tmp/.junk/wget-hsts
-    ln -s ~/tmp/.junk/wget-hsts ~/.wget-hsts
+#     touch ~/tmp/.junk/wget-hsts
+#     ln -s ~/tmp/.junk/wget-hsts ~/.wget-hsts
 
-    rm ~/.bash_history ~/.ksh_history
-    ln -s ~/tmp/.junk/bash_history ~/.bash_history
-    ln -s ~/tmp/.junk/ksh_history ~/.ksh_history
-else
-    mkdir -p ~/tmp
-fi
+#     rm ~/.bash_history ~/.ksh_history
+#     ln -s ~/tmp/.junk/bash_history ~/.bash_history
+#     ln -s ~/tmp/.junk/ksh_history ~/.ksh_history
+# else
+#     mkdir -p ~/tmp
+# fi
+
+mkdir -p ~/tmp
 
 # ========================================================================
 # FIX PERMISSIONS
