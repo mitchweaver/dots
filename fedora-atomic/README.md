@@ -27,6 +27,14 @@ fwupdmgr get-updates
 fwupdmgr update
 ```
 
+# Intel
+
+```
+# remove the free version and install the proprietary one
+# this is needed for H.264 and HEVC decoding
+rpm-ostree override remove libva-intel-media-driver --install intel-media-driver
+```
+
 ## NVIDIA (skip if intel / amd  or if you're sticking with nouveau)
 ```
 # ====== NVIDIA ==================================
@@ -69,7 +77,7 @@ rpm-ostree override remove \
 
 # ======================== BUDGIE ===============================
 rpm-ostree override remove \
-    ark ark-libs
+    ark ark-libs kate kate-krunner-plugin kate-libs kate-plugins
 # ======================== BUDGIE ===============================
 
 # ======================== GNOME ===============================
