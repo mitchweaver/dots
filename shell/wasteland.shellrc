@@ -11,7 +11,7 @@
 
 # I hate these stupid dirs and every program that creates them.
 nohup /bin/rmdir Desktop Documents Pictures Public \
-        Templates Videos Music Nextcloud JoplinBackup >/dev/null 2>&1 ||:
+        Templates Videos Music Projects Nextcloud JoplinBackup >/dev/null 2>&1 ||:
 
 alias wasteland='v ~/src/dots/shell/wasteland.shellrc'
 
@@ -35,7 +35,7 @@ unalias r 2>/dev/null
 alias r=ranger
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 alias {htop,htpo}='htop -d 10 -s PERCENT_CPU'
-alias hme='htop -u mitch'
+alias hme="htop -u $USER"
 alias hroot='htop -u root'
 alias hf='htop -F'
 alias iotop='iotop -d 1 -o -P'
@@ -161,7 +161,7 @@ pvcp() {
 }
 pvmv() { pvcp "$1" "$2" --delete ; }
 
-alias stop_typing_it_wrong_idiot="su -c faillock --user mitch --reset"
+alias stop_typing_it_wrong_idiot="su -c faillock --user $USER --reset"
 
 if command -v apt > /dev/null ; then
     alias  update='sudo apt update; sudo apt upgrade -y ; sudo apt dist-upgrade -y ; sudo apt clean'

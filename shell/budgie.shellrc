@@ -1,0 +1,32 @@
+# listen budgie devs... I love you but you gotta cut this shit out
+#
+# make an easy way for users to have a labwc rc.xml customizations
+# any change to the desktop settings overwrites this file
+fix_budgie() {
+    LABWC_FILE=~/.config/budgie-desktop/labwc/rc.xml
+
+    # get rid of popup notification when changing workspaces
+    sed -i 's/<popupTime>1000<\/popupTime>/<popupTime>0<\/popupTime>/' "$LABWC_FILE"
+
+    # add allow tearing if not there
+    if ! grep allowTearing "$LABWC_FILE" >/dev/null ; then
+        sed -i 'd/<\/labwc_config>/' "$LABWC_FILE"
+        echo '<core><allowTearing>fullscreen</allowTearing></core>' >> "$LABWC_FILE"
+        echo '</labwc_config>' >> "$LABWC_FILE"
+    fi
+
+    # todo: mouse dragging/resizing with alt
+    #       manually for now
+    #
+###########    # <mouse>
+#    <context name="Frame">
+#        <mousebind button="A-Left" action="Press"><action name="Focus"/><action name="Raise"/></mousebind>
+#        <mousebind button="A-Left" action="Drag"><action name="Move"/></mousebind>
+#        <mousebind button="A-Right" action="Press"><action name="Focus"/><action name="Raise"/></mousebind>
+#        <mousebind button="A-Right" action="Drag"><action name="Resize"/></mousebind>
+#    </context>
+###########    # </mouse>
+}
+
+alias labwc-restart='labwc --reconfigure'
+

@@ -1,6 +1,6 @@
-Fedora Kinoite Install
+# Fedora Silverblue / Kinoite Install
 
-# Fedora Kinoite Install
+Note that due to the nature of immutable OS, this involves many reboots which is annoying
 
 ## upgrade
 ```
@@ -20,12 +20,11 @@ rpm-ostree install \
 
 # now reboot
 reboot
-```
 
-## video accel
-```
-# note: libavcodec === firefox video accel
-rpm-ostree install intel-media-driver libavcodec-freeworld
+# now update firmware if available
+fwupdmgr refresh
+fwupdmgr get-updates
+fwupdmgr update
 ```
 
 ## NVIDIA (skip if intel / amd  or if you're sticking with nouveau)
@@ -33,7 +32,7 @@ rpm-ostree install intel-media-driver libavcodec-freeworld
 # ====== NVIDIA ==================================
 rpm-ostree install kmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-cuda
 
-# if you don't see this, then you don't have nvidia set up
+# reboot -- if you don't see this, then you don't have nvidia set up
 rpm -qa | grep kmod-nvidia
 
 rpm-ostree kargs \
@@ -41,75 +40,115 @@ rpm-ostree kargs \
     --append=modprobe.blacklist=nouveau \
     --append=nvidia-drm.modeset=1
 
+# for encrypted drives, remove from kargs "rhgb" else you will not boot
+# this is because of running into chicken-and-egg problem of the driver being on the encrypted drive
+# but plymouth wants to start to show the decryption gui
+EDITOR=vi rpm-ostree kargs --editor
+
 # reboot and check with
 nvidia-smi
 
 # this should say MIT/GPL if you have open drivers
 modinfo nvidia | grep -i license
-
-###### NOTE ########
-# for encrypted drives, remove from kargs "rhgb quiet" else you will not boot
-# this is because of running into chicken-and-egg problem of the driver being on the encrypted drive
-# but plymouth wants to start to show the decryption gui
-rpm-ostree kargs --editor
 # ====== END NVIDIA ==================================
 ```
 
 ## anything we're deleting
 ```
 # fedora specific crap
-rpm-ostree override remove fedora-bookmarks fedora-chromium-config fedora-chromium-config-kde
+rpm-ostree override remove fedora-bookmarks fedora-chromium-config
 
-# virtual machine host support which don't need if this is bare metal
-rpm-ostree override remove open-vm-tools-desktop open-vm-tools qemu-guest-agent spice-vdagent spice-webdavd virtualbox-guest-additions
+# virtual machine host support which don't need since this is bare metal
+rpm-ostree override remove \
+    open-vm-tools-desktop \
+    open-vm-tools \
+    qemu-guest-agent \
+    spice-vdagent \
+    spice-webdavd \
+    virtualbox-guest-additions
 
+# ======================== BUDGIE ===============================
+rpm-ostree override remove \
+    ark ark-libs
+# ======================== BUDGIE ===============================
+
+# ======================== GNOME ===============================
+rpm-ostree override remove \
+    gnome-tour yelp malcontent-control \
+	gnome-classic-session \
+    gnome-shell-extension-apps-menu \
+    gnome-shell-extension-places-menu \
+    gnome-shell-extension-window-list \
+    gnome-shell-extension-launch-new-instance \
+    gnome-shell-extension-background-logo
+
+flatpak uninstall -y flathub org.fedoraproject.MediaWriter
+flatpak uninstall -y flathub org.gnome.Contacts
+flatpak uninstall -y flathub org.gnome.Maps
+flatpak uninstall -y flathub org.gnome.Calendar
+flatpak uninstall -y flathub org.gnome.Decibels
+flatpak uninstall -y flathub org.gnome.baobab
+flatpak uninstall -y flathub org.gnome.Snapshot
+# ====================== END GNOME ===============================
+
+# ========================= KDE ===============================
 # KDE specific junk
 rpm-ostree override remove \
+    fedora-chromium-config-kde \
     khelpcenter plasma-welcome plasma-drkonqi kde-partitionmanager kcharselect \
     plasma-browser-integration plasma-discover-notifier plasma-discover \
     plasma-discover-rpm-ostree plasma-welcome-fedora plasma-discover-libs \
-    plasma-discover-kns plasma-discover-flatpak
-
-# non-KDE junk that comes with KDE
-rpm-ostree override remove \
-    filelight
+    plasma-discover-kns plasma-discover-flatpak filelight
 
 # flatpak uninstalls
 flatpak uninstall -y org.kde.elisa org.kde.kmahjongg org.kde.kmines org.kde.qrca org.kde.skanpage
+# ====================== END KDE ===============================
 ```
 
 ## installing anything that has to be on host system
 ```
 # NOTE: file managers sandbox thumbnailers already, so it will not work inside another container
-# NOTE: aptx = bluetooth audio
 # NOTE: for some reason nmtui isnt included in networkmanager anymore by default
-# NOTE: themes --- easier to get from fedora than manage .icon .theme nonsense
-rpm-ostree install distrobox kitty fastfetch pipewire-codec-aptx \
-	NetworkManager-tui fail2ban ffmpegthumbnailer \
-	materia-kde papirus-icon-theme
+rpm-ostree install \
+    distrobox kitty kitty-terminfo kitty-kitten ranger fastfetch fail2ban \
+    NetworkManager-tui ffmpegthumbnailer
+
+# ======================== BUDGIE ===============================
+rpm-ostree install \
+    wlr-randr
+# ======================== BUDGIE ===============================
+
+# ================ SWAY =============================================
+curl -Lo /etc/yum.repos.d/swayfx.repo https://copr.fedorainfracloud.org/coprs/swayfx/swayfx/repo/fedora-45/swayfx-swayfx-fedora-45.repo
+rpm-ostree override remove sway --install swayfx
+
+rpm-ostree install gammastep swappy swayimg
+# ================ END SWAY =========================================
+
+# ============== GNOME ===================
+rpm-ostree install gnome-tweaks
+# ========================================
 ```
 
 ## kernel arguments
 ```
-# disable nvme power saving (micro stutters on my xps -- unnoticeable minor extra power draw) 
-rpm-ostree kargs \
-    --append=nvme_core.default_ps_max_latency_us=0
+# disable nvme power saving (micro stutters on some laptops -- minor extra power draw)
+# only enable if you have problems
+####### rpm-ostree kargs --append=nvme_core.default_ps_max_latency_us=0
 
 # misc other kern args
 #      * net.ifnames = keep wlan0 eth0 etc instead of wlpen0erike0re0r0ere stupid names
 #      * watchdog = useless
-#      * zswap = compress ram (might be default on fedora?)
 #      * split_lock_detect = dmesg spam benign errors
 rpm-ostree kargs \
     --append=net.ifnames=0 \
     --append=nowatchdog \
-    --append=zswap.enabled=1 \
-    --append=zswap.compressor=lz4 \
     --append=split_lock_detect=off
 
 # remove kernel modules for internel webcam microphone
 rpm-ostree kargs \
     --append=snd_hda_intel.dmic_detect=0 \
+	--append=snd_sof_intel_hda_generic=0 \
     --append=snd_sof_intel_hda_common.dmic_num=0
 
 # disable ipv6
@@ -127,10 +166,10 @@ rpm-ostree kargs \
 rpm-ostree kargs \
     --append=page_alloc.shuffle=1 \
     --append=slab_nomerge \
-    --append=init_on_alloc=1 \
+	--append=init_on_alloc=1 \
     --append=init_on_free=1 \
-    --append=randomize_kstack_offset=on \
-    --append=vsyscall=none \
+	--append=randomize_kstack_offset=on \
+	--append=vsyscall=none \
     --append=debugfs=off
 ```
 
@@ -166,26 +205,27 @@ flatpak install -y flathub org.wireshark.Wireshark
 
 flatpak install -y flathub com.tradingview.tradingview
 
-flatpak install -y flathub org.gtk.Gtk3theme.Materia-dark
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub org.gtk.Gtk3theme.Materia-light
+flatpak install -y flathub org.gtk.Gtk3theme.Materia-dark
+
+######### IF NVIDIA ##########
+flatpak install -y flathub org.freedesktop.Platform.GL.nvidia-"$(tr . - < /sys/module/nvidia/version)"
+flatpak install -y flathub org.freedesktop.Platform.GL32.nvidia-"$(tr . - < /sys/module/nvidia/version)"
 ```
 
-## mullvad
+## other programs
 ```
+# mullvad
 curl -fsSL -o /etc/yum.repos.d/mullvad.repo https://repository.mullvad.net/rpm/stable/mullvad.repo
-rpm-ostree refresh-md
 rpm-ostree install mullvad-vpn
-```
 
-## tailscale
-```
+# tailscale
 ostree remote add tailscale https://pkgs.tailscale.com/stable/fedora/tailscale.repo
 rpm-ostree install tailscale
-```
 
-## mega.nz
-```
-tee /etc/yum.repos.d/megasync.repo <<EOF
+# mega.nz
+cat > /etc/yum.repos.d/megasync.repo <<EOF
 [MEGAsync]
 name=MEGAsync
 baseurl=https://mega.nz/linux/repo/Fedora_$(rpm -E %fedora)/
@@ -193,7 +233,6 @@ gpgkey=https://mega.nz/linux/repo/Fedora_$(rpm -E %fedora)/repodata/repomd.xml.k
 gpgcheck=1
 enabled=1
 EOF
-
 rpm-ostree install megasync
 ```
 
@@ -254,10 +293,10 @@ apk add libnotify libsecret py3-numpy py3-scipy nlohmann-json
 apk add rsync openresolv netcat-openbsd nmap bind-tools socat ldns wireless-tools speedtest-cli
 
 # SCRIPTING UTILS
-apk add entr detox dos2unix inotify-tools dateutils libqrencode w3m lynx
+apk add entr detox dos2unix inotify-tools dateutils libqrencode w3m w3m-image py3-pillow py3-pillow_heif lynx
 
 # TERMINAL USERLAND
-apk add oksh neovim ranger htop translate-shell tree pv progress eza bat py3-pynvim ncdu neofetch
+apk add oksh neovim ranger htop translate-shell tree pv progress eza bat py3-pynvim ncdu neofetch kitty-terminfo
 
 # DEVELOPMENT
 apk add build-base gcc patch musl-dev meson ninja shellcheck jq py3-pylint hugo sassc
@@ -267,5 +306,9 @@ apk add linux-headers ncurses-dev openssl-dev elfutils-dev
 
 # MEDIA
 apk add ffmpeg imagemagick jpegoptim exiftool cuetools shntool vorbis-tools wavpack mpv yt-dlp
+
+######################## SWAY ####################################
+apk add swaybg swayimg gammastep
+##################################################################
 ```
 

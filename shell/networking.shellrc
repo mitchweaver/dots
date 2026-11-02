@@ -1,8 +1,5 @@
 alias rsync='rsync -avhu --progress --delete --partial --links'
 
-#####--exclude=/.local/share/containers
-#####--exclude=/var/home/mitch/.var/app/com.valvesoftware.Steam/.local/share/Steam
-
 # for fat32
 alias fatsync='rsync -rvhu --progress --delete --partial'
 
@@ -34,8 +31,9 @@ wtf() {
 }
 
 # grab urls of any running processes
-# see: http://github.com/mitchweaver/bin for urls script
-psurls() { ps -auxww | urls ; }
+psurls() {
+    ps -auxww | urls
+}
 
 isconnected() {
     if ifconfig $int | grep 'no network' >/dev/null ; then

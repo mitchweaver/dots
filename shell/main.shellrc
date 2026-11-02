@@ -12,7 +12,12 @@
 #
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
-if [ "$DOT_PROFILE_IMPORTED" != 1 ] ; then
+# fix for atomic distros that have home at /var/home
+# breaks random scripts that might expect a normal /home
+[ "$PWD" -ef "$HOME" ] && cd "$HOME"
+
+# import profile if it wasn't ran already
+if [ -z "$DOT_PROFILE_IMPORTED" ] ; then
     . ~/.profile
 fi
 
@@ -67,6 +72,10 @@ if [ -d "${SHELLRC_DIR}" ] ; then
         . "${SHELLRC_DIR}/zfs.shellrc"
     fi
 
+    if pgrep -x budgie-panel >/dev/null ; then
+        . "${SHELLRC_DIR}/budgie.shellrc"
+    fi
+
     . "${SHELLRC_DIR}/builtins.shellrc"
     . "${SHELLRC_DIR}/development.shellrc"
     . "${SHELLRC_DIR}/flatpak.shellrc"
@@ -77,10 +86,6 @@ if [ -d "${SHELLRC_DIR}" ] ; then
     . "${SHELLRC_DIR}/networking.shellrc"
     . "${SHELLRC_DIR}/options.shellrc"
     . "${SHELLRC_DIR}/prompt.shellrc"
-    . "${SHELLRC_DIR}/templates.shellrc"
     . "${SHELLRC_DIR}/wasteland.shellrc"
-
-    unset SHELLRC_DIR
-    unset DOT_PROFILE_IMPORTED
 fi
 
