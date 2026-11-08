@@ -1,2 +1,32 @@
+# ----- garbage --------------------
 .DS_Store
-.DS_Store
+*~*
+*~
+*.core
+*__pycache__*
+*.out
+*.o
+*.bak
+*.cache
+*.tmp
+*.temp
+*cfg0000*
+*cfg00*
+*cfg00*
+# ----------------------------------
+
+# --------- security -----------------
+*itwarden*
+*.log
+*.key
+*.pem
+*.crt
+*.pub
+*password
+*pass
+*w3m*
+*token*
+*cookie*
+*cache*
+# ----------------------------------
+
