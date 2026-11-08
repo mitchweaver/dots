@@ -18,7 +18,7 @@
 
 # import profile if it wasn't ran already
 if [ -z "$DOT_PROFILE_IMPORTED" ] ; then
-    . ~/.profile
+    [ -f ~/.profile ] && . ~/.profile
 fi
 
 # stop .core file generation
@@ -28,7 +28,7 @@ ulimit -c 0
 umask 0077
 
 # -*-*- Options -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-SHELLRC_DIR=~/src/dots/shell
+SHELLRC_DIR="$HOME/src/dots/shell"
 # PS1_STYLE=pwd-no-prompt  # [user-pwd/user/pwd/user-host-pwd]
 PS1_STYLE=user-host-pwd  # [user-pwd/user/pwd/user-host-pwd]
 # PS1_STYLE=user-pwd       # [user-pwd/user/pwd/user-host-pwd]
@@ -37,55 +37,53 @@ PS1_GIT=true             # [true/false]
 
 HISTORY_STYLE=default      # [default/per-shell]
 export HISTSIZE=300
-export HISTFILE="${HOME}/.ksh_history"
+export HISTFILE="$HOME/.cache/ksh_history"
+[ -d ~/.cache ] || mkdir -p ~/.cache
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-if [ -d "${SHELLRC_DIR}" ] ; then
-    if command -v pkg_add >/dev/null ; then
-        . "${SHELLRC_DIR}/openbsd.shellrc"
+if [ -d "$SHELLRC_DIR" ] ; then
+    if command -v freebsd-update >/dev/null ; then
+        [ -f "$SHELLRC_DIR/freebsd.shellrc" ] && . "$SHELLRC_DIR/freebsd.shellrc"
+    elif command -v pkg_add >/dev/null ; then
+        [ -f "$SHELLRC_DIR/openbsd.shellrc" ] && . "$SHELLRC_DIR/openbsd.shellrc"
     elif command -v emerge >/dev/null ; then
-        . "${SHELLRC_DIR}/gentoo.shellrc"
-    elif command -v dnf >/dev/null ; then
-        . "${SHELLRC_DIR}/fedora.shellrc"
-    elif command -v rpm-ostree >/dev/null ; then
-        . "${SHELLRC_DIR}/fedora.shellrc"
+        [ -f "$SHELLRC_DIR/gentoo.shellrc" ] && . "$SHELLRC_DIR/gentoo.shellrc"
+    elif command -v dnf >/dev/null || command -v rpm-ostree >/dev/null ; then
+        [ -f "$SHELLRC_DIR/fedora.shellrc" ] && . "$SHELLRC_DIR/fedora.shellrc"
     elif command -v apk >/dev/null ; then
-        . "${SHELLRC_DIR}/alpine.shellrc"
-    elif command -v freebsd-update >/dev/null ; then
-        . "${SHELLRC_DIR}/freebsd.shellrc"
+        [ -f "$SHELLRC_DIR/alpine.shellrc" ] && . "$SHELLRC_DIR/alpine.shellrc"
     elif command -v brew >/dev/null ; then
-        . "${SHELLRC_DIR}/macos.shellrc"
+        [ -f "$SHELLRC_DIR/macos.shellrc" ] && . "$SHELLRC_DIR/macos.shellrc"
     fi
 
-    if [ -d /proc ] ; then
-        . "${SHELLRC_DIR}/linux.shellrc"
-        if command -v docker >/dev/null ; then
-            . "${SHELLRC_DIR}/docker.shellrc"
+    if [ -e /proc/sys/kernel/ostype ] ; then
+        if read -r os 2>/dev/null </proc/sys/kernel/ostype && [ "$os" = Linux ] ; then
+            . "$SHELLRC_DIR/linux.shellrc"
         fi
     fi
 
-    if command -v ollama >/dev/null ; then
-        . "${SHELLRC_DIR}/ai.shellrc"
+    if command -v docker >/dev/null ; then
+        [ -f "$SHELLRC_DIR/docker.shellrc" ] && . "$SHELLRC_DIR/docker.shellrc"
     fi
 
     if command -v zfs >/dev/null ; then
-        . "${SHELLRC_DIR}/zfs.shellrc"
+        [ -f "$SHELLRC_DIR/zfs.shellrc" ] && . "$SHELLRC_DIR/zfs.shellrc"
     fi
 
-    if pgrep -x budgie-panel >/dev/null ; then
-        . "${SHELLRC_DIR}/budgie.shellrc"
-    fi
-
-    . "${SHELLRC_DIR}/builtins.shellrc"
-    . "${SHELLRC_DIR}/development.shellrc"
-    . "${SHELLRC_DIR}/flatpak.shellrc"
-    . "${SHELLRC_DIR}/generic_aliases.shellrc"
-    . "${SHELLRC_DIR}/generic_functions.shellrc"
-    . "${SHELLRC_DIR}/history.shellrc"
-    . "${SHELLRC_DIR}/movement.shellrc"
-    . "${SHELLRC_DIR}/networking.shellrc"
-    . "${SHELLRC_DIR}/options.shellrc"
-    . "${SHELLRC_DIR}/prompt.shellrc"
-    . "${SHELLRC_DIR}/wasteland.shellrc"
+    for file in \
+        builtins \
+        development \
+        flatpak \
+        generic_aliases \
+        generic_functions \
+        history \
+        movement \
+        networking \
+        options \
+        prompt \
+        wasteland
+    do
+        [ -f "$SHELLRC_DIR/$file.shellrc" ] && . "$SHELLRC_DIR/$file.shellrc"
+    done
 fi
 
