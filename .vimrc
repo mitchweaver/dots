@@ -162,9 +162,6 @@ Plug 'monaqa/dial.nvim' " C-A/C-X improved
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'isobit/vim-caddyfile'
 
-Plug 'gentoo/gentoo-syntax' " gentoo ebuild syntax
-    set rtp+=/usr/share/vim/vimfiles
-
 Plug 'fladson/vim-kitty'
 
 " I don't care for polyglot's markdown/toml syntaxes

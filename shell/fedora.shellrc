@@ -21,6 +21,9 @@ if type rpm-ostree >/dev/null 2>&1 ; then
                 sudo rpm-ostree refresh-md
                 sudo rpm-ostree upgrade
                 ;;
+            s)
+                rpm-ostree search "$@"
+                ;;
             l)
                 rpm -qa | sort
         esac

@@ -50,12 +50,17 @@ if command -v systemctl >/dev/null ; then
 fi
 
 dl() {
-    if [ "$2" ] ; then
-        wget -nv -c --no-cookies --no-hsts "$1" -O "$2"
-    elif [ "$1" ] ; then
-        wget -nv -c --no-cookies --no-hsts "$1"
+    if command -v wget >/dev/null ; then
+        if [ "$2" ] ; then
+            command wget -nv -c --no-cookies --no-hsts "$1" -O "$2"
+        elif [ "$1" ] ; then
+            command wget -nv -c --no-cookies --no-hsts "$1"
+        fi
+    else
+        >&2 echo 'install wget idiot'
     fi
 }
+alias wget=dl
 
 # ========================================================================
 # WPA_SUPPLICANT
