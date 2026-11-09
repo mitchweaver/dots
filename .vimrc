@@ -17,8 +17,6 @@ if has('mac')
     let g:python3_host_prog = '/usr/bin/python3'
 elseif has('win32')
     let g:python3_host_prog = 'C:\Python314\python.exe'
-elseif has('unix')
-    let g:python3_host_prog = '/usr/bin/python3'
 endif
 
 if exists('g:neovide')

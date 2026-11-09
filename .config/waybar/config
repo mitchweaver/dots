@@ -3,17 +3,13 @@
     "position": "top",
     "height": 34,
 // ==========================================================================
-    "modules-left": ["sway/workspaces", "sway/window"],
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["sway/window"],
     // AVAILABLE: "wlr/taskbar"
 // ==========================================================================
-    "modules-right": ["tray", "idle_inhibitor", "cpu", "network", "battery", "pulseaudio", "custom/clock"],
+    "modules-right": ["tray", "idle_inhibitor", "cpu", "network", "battery", "pulseaudio", "clock"],
     // AVAILABLE: "memory", "cpu", "temperature"
-    // modules-right": ["tray", "network", "battery", "pulseaudio", "custom/clock"],
-// ==========================================================================
-    "custom/clock": {
-        "format": "<span font='Terminess Nerd Font 12'>  {}  </span>",
-        "exec": "while date +'%a %d %I:%M %p' ; do sleep 59 ; done"
-    },
+    // modules-right": ["tray", "network", "battery", "pulseaudio"],
 // ==========================================================================
     "wlr/taskbar": {
         "format": "<span font='Terminess Nerd Font 16'>{app_id}</span>",

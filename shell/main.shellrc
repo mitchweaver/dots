@@ -42,6 +42,7 @@ export HISTFILE="$HOME/.cache/ksh_history"
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 if [ -d "$SHELLRC_DIR" ] ; then
+    # DISTRO SPECIFIC
     if command -v freebsd-update >/dev/null ; then
         [ -f "$SHELLRC_DIR/freebsd.shellrc" ] && . "$SHELLRC_DIR/freebsd.shellrc"
     elif command -v pkg_add >/dev/null ; then
@@ -56,6 +57,7 @@ if [ -d "$SHELLRC_DIR" ] ; then
         [ -f "$SHELLRC_DIR/macos.shellrc" ] && . "$SHELLRC_DIR/macos.shellrc"
     fi
 
+    # LINUX
     if [ -e /proc/sys/kernel/ostype ] ; then
         if read -r os 2>/dev/null </proc/sys/kernel/ostype && [ "$os" = Linux ] ; then
             . "$SHELLRC_DIR/linux.shellrc"

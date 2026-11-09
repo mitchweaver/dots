@@ -50,8 +50,6 @@ alias cp='cp -irv'
 alias mv='mv -iv'
 alias {mkdir,mkd,mkdr,mkir,mdir}='mkdir -p'
 
-alias pk=pkill
-
 alias {x,xx,xxx,q,qq,qqq,lq,:q,:Q,:wq,:w,exi,ex}=exit
 alias {cll,clear,claer,clar,clea,clera,ear,lear,ler}=clear
 alias {cls,csl,cl,lc,clearls}='clear ; ls'

@@ -25,7 +25,7 @@ ranger() {
             # only proceed if on my own machine, probably with kitty
             if [ "$TERM" = xterm-kitty ] ; then
                 if [ -z "$CONTAINER_ID" ]; then
-                    PYTHONWARNINGS=ignore::SyntaxWarning /usr/bin/ranger "$@"
+                    PYTHONWARNINGS=ignore::SyntaxWarning command ranger "$@"
                     clear
                 else
                     # distrobox but running ranger on the host OS because its only way to get image previews
@@ -210,7 +210,7 @@ readlink() { command readlink "${1%/}" ; }
 # because i cant remember these
 alias sway-outputs='swaymsg -t get_outputs'
 alias sway-tree='swaymsg -t get_tree'
-alias sway='exec ~/bin/misc/launch_sway.sh'
+alias sway='sh ~/src/bin/misc/launch_sway.sh'
 alias swaycfg='v ~/.config/sway/config'
 alias waybarcfg='v ~/.config/waybar/config'
 
@@ -220,3 +220,6 @@ kittyfonts() { kitty +list-fonts --psnames | g "$*" ; }
 
 
 alias sensors='sensors | grep Core 2>/dev/null | grep -v rror'
+
+alias bg=background
+

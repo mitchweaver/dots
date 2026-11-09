@@ -27,10 +27,7 @@ if command -v nproc >/dev/null ; then
     export NPROC="$(nproc)"
 fi
 
-# for ksh
-# if [ -f ~/src/dots/shell/main.shellrc ] ; then
-#     export ENV="${HOME}/src/dots/shell/main.shellrc"
-# fi
+export ENV="$HOME/src/dots/shell/main.shellrc"
 
 # ========================================================================
 # OS specific settings
@@ -179,26 +176,19 @@ fi 2>/dev/null
 # ========================================================================
 # wayland crap
 # ========================================================================
-# export MOZ_ENABLE_WAYLAND=1
-# export MOZ_USE_XINPUT2=1
-# export GTK_THEME=Arc-Dark
-# export _JAVA_AWT_WM_NONREPARENTING=1
-#
-# export PATH=$PATH:${HOME}/.local/bin
+export XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=sway
+export QT_QPA_PLATFORM=wayland
+export SDL_VIDEODRIVER=wayland
+export ELECTRON_OZONE_PLATFORM_HINT=wayland
+export MOZ_ENABLE_WAYLAND=1
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 # if command -v cliphist >/dev/null ; then
 #     mkdir -p ~/tmp/.cliphist
 #     chmod -R 0700 ~/tmp/.cliphist
 #     ln -sf ~/tmp/.cliphist ~/.cache/cliphist
 # fi
-
-# macos fix ; fix later
-if command -v brew >/dev/null ; then
-    case $0 in
-        *bash*)
-            source ~/.bashrc
-    esac
-fi
 
 # basic check if we've been run or not
 # see kshrc
