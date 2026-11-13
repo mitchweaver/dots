@@ -15,9 +15,9 @@ Remove-Item "C:\Users\mitch\AppData\Local\nvim" -Recurse
 
 ```
 
-### Create symlink to the nextcloud folder, using administrative powershell:
+### Create symlink to the cloud folder, using administrative powershell:
 ```
-New-Item -ItemType SymbolicLink -Path "C:\Users\mitch\AppData\Local\nvim" -Target "C:\Users\mitch\nextcloud\src\dots\.config\nvim"
+New-Item -ItemType SymbolicLink -Path "C:\Users\mitch\AppData\Local\nvim" -Target "C:\Users\mitch\MEGA\src\dots\.config\nvim"
 
 ```
 
@@ -40,8 +40,10 @@ endif
 ```
 
 ### install python neovim library
+
+in cmd (non-admin):
 ```
-C:\Users\mitch>"C:\Python314\Scripts\pip.exe" install neovim
+pip install neovim
 ```
 
 ### Fetch plugins

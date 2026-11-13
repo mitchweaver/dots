@@ -22,8 +22,8 @@ ranger() {
         if [ "$RANGER_LEVEL" ]; then
             exit
         else
-            # only proceed if on my own machine, probably with kitty
-            if [ "$TERM" = xterm-kitty ] ; then
+            # if we are in distrobox
+            if [ -e /run/host/usr/bin/distrobox-host-exec ] && [ "$TERM" = xterm-kitty ] ; then
                 if [ -z "$CONTAINER_ID" ]; then
                     PYTHONWARNINGS=ignore::SyntaxWarning command ranger "$@"
                     clear
@@ -33,6 +33,8 @@ ranger() {
                     /run/host/usr/bin/distrobox-host-exec sh -c 'sock=$1; dir=$2; shift 2; kitty @ --to "$sock" launch --type=overlay --cwd "$dir" --env PYTHONWARNINGS=ignore::SyntaxWarning /usr/bin/ranger "$@" >/dev/null' \
                         _ "${KITTY_LISTEN_ON:-unix:/tmp/kitty-$KITTY_PID}" "$PWD" "$@"
                 fi
+            else
+                command ranger "$@"
             fi
         fi
     fi

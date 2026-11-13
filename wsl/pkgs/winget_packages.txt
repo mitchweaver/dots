@@ -1,0 +1,49 @@
+winget install
+
+"Firefox Developer Edition (en-US)"
+Valve.Steam
+Discord.Discord
+Bitwarden.Bitwarden
+Foundry376.Mailspring
+OBSProject.OBSStudio
+Meltytech.Shotcut
+Joplin.Joplin
+JohannesMillan.superProductivity
+Neovim.Neovim
+GIMP.GIMP
+CPUID.CPU-Z
+CPUID.HWMonitor
+Mega.MEGASync
+Logitech.GHUB
+Obsidian.Obsidian
+"NVIDIA App"
+AutoHotkey.AutoHotkey
+TheDocumentFoundation.LibreOffice
+Git.Git
+Python.Python.3.14
+MullvadVPN.MullvadVPN
+Dweymouth.Supersonic
+AltSnap.AltSnap
+WiresharkFoundation.Wireshark
+
+=================
+
+optional features:
+* WSL
+* "Virtual Machine Platform"
+
+=====================
+
+explorer:
+* hide extensions for known file types
+* show full path in title bar
+
+
+=====================
+
+FIX NEOVIM / PYTHON
+
+py -3 -m pip install --user --upgrade pynvim
+
+=======================
+

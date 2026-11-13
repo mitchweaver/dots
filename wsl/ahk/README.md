@@ -23,3 +23,10 @@ and put it in the ahk repo
 # = Win
 + = Shift
 ```
+
+## on startup
+
+`win + r` then type `shell:startup`
+right click .ahk files and choose 'create shortcut'
+move shortcuts into the opened folder
+

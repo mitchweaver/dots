@@ -16,7 +16,8 @@ if has('mac')
     " apple silicon
     let g:python3_host_prog = '/usr/bin/python3'
 elseif has('win32')
-    let g:python3_host_prog = 'C:\Python314\python.exe'
+    let g:python3_host_prog = 'C:\Users\mitch\AppData\Local\Python\pythoncore-3.15-64\python.exe'
+       """"""""""   let g:python3_host_prog = 'C:\Users\mitch\AppData\Local\Programs\Python\Python314\python.exe'
 endif
 
 if exists('g:neovide')
@@ -211,7 +212,7 @@ endif
 " Load colorscheme on windows but just use terminal colors if on linux
 if has('win32')
     " colorscheme papercolor
-    colorscheme onehalfdark
+    " colorscheme onehalfdark
     " colorscheme typewriter
     " colorscheme mellow
     " colorscheme everforest
@@ -221,6 +222,11 @@ else
     " make sign column same color as terminal background
     hi signColumn ctermbg=NONE
 endif
+
+" keep swap/undo/backup in ~/.vim this speeds up WSL by lowering file use over 9p
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+set backupdir=~/.vim/backup//
 
 " ========================================================================
 " general
@@ -350,6 +356,13 @@ set shiftround        " tab / shifting moves to closest tabstop
 set autoindent        " match indents on new lines
 set smartindent
 set breakindent       " set indents when wrapped
+
+" ========================================================================
+" add \n EOF to bottom of file if doesn't exist
+set fixendofline
+autocmd BufWritePre * if &modifiable && !&binary && getline('$') !=# '' | call append('$', '') | endif
+" ========================================================================
+
 " darken inactive panes --- taken from xero.nu
 " hi ActiveWindow ctermbg=0 | hi InactiveWindow ctermbg=234
 " set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
