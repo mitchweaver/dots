@@ -25,6 +25,7 @@ MullvadVPN.MullvadVPN
 Dweymouth.Supersonic
 AltSnap.AltSnap
 WiresharkFoundation.Wireshark
+TradingView.TradingViewDesktop
 
 =================
 

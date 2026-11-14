@@ -1,5 +1,6 @@
 [user]
 	name = wvr
+	email = you@example.com
 [pull]
 	rebase = false
 [filter "lfs"]
