@@ -1,0 +1,15 @@
+[Default]
+# save to junk dir, we're using scrap instead to dump to ~/tmp
+save_dir=$HOME/tmp/.junk
+save_filename_format=swappy-%Y%m%d-%H%M%S.png
+
+# hide left panel at start
+show_panel=false
+
+# defaults:
+paint_mode=brush
+line_size=5
+text_size=20
+text_font=sans-serif
+early_exit=false
+fill_shape=false

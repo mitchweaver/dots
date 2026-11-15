@@ -1,6 +1,6 @@
 [user]
 	name = wvr
-	email = mitch@wvr.sh
+	email = you@example.com
 [pull]
 	rebase = false
 [filter "lfs"]
@@ -10,3 +10,5 @@
 	smudge = git-lfs smudge -- %f
 [core]
 	excludesfile = /Users/mitch/.gitignore_global
+	fileMode = false
+

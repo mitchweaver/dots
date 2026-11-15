@@ -1,13 +1,19 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0ffa0110ce647cbb7ebd775f74f367e3297028e2
 # Fedora Silverblue / Kinoite Install
 
 Note that due to the nature of immutable OS, this involves many reboots which is annoying
 
 ## upgrade
 ```
+<<<<<<< HEAD
 # switch to rawhide (testing/beta)
 rpm-ostree rebase fedora:fedora/rawhide/x86_64/onyx
 
+=======
+>>>>>>> 0ffa0110ce647cbb7ebd775f74f367e3297028e2
 rpm-ostree refresh-md
 rpm-ostree upgrade
 
@@ -123,7 +129,11 @@ flatpak uninstall -y org.kde.elisa org.kde.kmahjongg org.kde.kmines org.kde.qrca
 # NOTE: for some reason nmtui isnt included in networkmanager anymore by default
 rpm-ostree install \
     distrobox kitty kitty-terminfo kitty-kitten ranger fastfetch fail2ban \
+<<<<<<< HEAD
     NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld powertop lynis
+=======
+    NetworkManager-tui ffmpegthumbnailer
+>>>>>>> 0ffa0110ce647cbb7ebd775f74f367e3297028e2
 
 # ======================== BUDGIE ===============================
 rpm-ostree install \
@@ -134,7 +144,11 @@ rpm-ostree install \
 curl -Lo /etc/yum.repos.d/swayfx.repo https://copr.fedorainfracloud.org/coprs/swayfx/swayfx/repo/fedora-45/swayfx-swayfx-fedora-45.repo
 rpm-ostree override remove sway --install swayfx
 
+<<<<<<< HEAD
 rpm-ostree install gammastep swappy swayimg copyq
+=======
+rpm-ostree install gammastep swappy swayimg
+>>>>>>> 0ffa0110ce647cbb7ebd775f74f367e3297028e2
 # ================ END SWAY =========================================
 
 # ============== GNOME ===================
@@ -181,7 +195,12 @@ rpm-ostree kargs \
 	--append=init_on_alloc=1 \
     --append=init_on_free=1 \
 	--append=randomize_kstack_offset=on \
+<<<<<<< HEAD
 	--append=vsyscall=none
+=======
+	--append=vsyscall=none \
+    --append=debugfs=off
+>>>>>>> 0ffa0110ce647cbb7ebd775f74f367e3297028e2
 ```
 
 ## install flatpak apps
@@ -216,14 +235,20 @@ flatpak install -y flathub org.wireshark.Wireshark
 
 flatpak install -y flathub com.tradingview.tradingview
 
+<<<<<<< HEAD
 flatpak install -y flathub org.kde.kolourpaint
 
+=======
+>>>>>>> 0ffa0110ce647cbb7ebd775f74f367e3297028e2
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub org.gtk.Gtk3theme.Materia-light
 flatpak install -y flathub org.gtk.Gtk3theme.Materia-dark
 
+<<<<<<< HEAD
 flatpak install -y flathub com.rustdesk.RustDesk
 
+=======
+>>>>>>> 0ffa0110ce647cbb7ebd775f74f367e3297028e2
 ######### IF NVIDIA ##########
 flatpak install -y flathub org.freedesktop.Platform.GL.nvidia-"$(tr . - < /sys/module/nvidia/version)"
 flatpak install -y flathub org.freedesktop.Platform.GL32.nvidia-"$(tr . - < /sys/module/nvidia/version)"
@@ -266,12 +291,23 @@ systemctl enable mullvad-daemon
 # creating containers
 mkdir -p ~/.distrobox
 
+<<<<<<< HEAD
+=======
+# our init hook removes scripts to run commands on the host from within the container
+# I consider these to be security risks and I don't use them anyway
+#
+>>>>>>> 0ffa0110ce647cbb7ebd775f74f367e3297028e2
 # NOTE: if requiring nvidia drivers in the container, need to pass the --nvidia flag
 #       however this wont work for alpine due to glibc/musl
 distrobox create \
     --name alpine \
     --image alpine:latest \
+<<<<<<< HEAD
     --unshare-ipc
+=======
+    --unshare-ipc \
+    --init-hooks "umount /usr/bin/distrobox-host-exec 2>/dev/null ; rm /usr/bin/host-spawn /usr/bin/distrobox-host-exec 2>/dev/null ; echo \#\!/bin/sh > /usr/bin/host-spawn ; echo exit\ 1 >> /usr/bin/host-spawn ; chmod 755 /usr/bin/host-spawn"
+>>>>>>> 0ffa0110ce647cbb7ebd775f74f367e3297028e2
 
 distrobox enter alpine
 sudo su
@@ -322,3 +358,7 @@ apk add ffmpeg imagemagick jpegoptim exiftool cuetools shntool vorbis-tools wavp
 apk add swaybg swayimg gammastep
 ##################################################################
 ```
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0ffa0110ce647cbb7ebd775f74f367e3297028e2
