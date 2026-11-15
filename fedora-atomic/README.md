@@ -1,3 +1,4 @@
+
 # Fedora Silverblue / Kinoite Install
 
 Note that due to the nature of immutable OS, this involves many reboots which is annoying
@@ -321,4 +322,3 @@ apk add ffmpeg imagemagick jpegoptim exiftool cuetools shntool vorbis-tools wavp
 apk add swaybg swayimg gammastep
 ##################################################################
 ```
-
