@@ -1,0 +1,19 @@
+#!/bin/sh
+
+dnf install -y \
+    w3m-img tree bc neovim python3-neovim eza bat ncdu ranger \
+    ShellCheck pylint dos2unix detox jq entr inotify-tools dateutils progress \
+    toilet libqrcodegen openssl
+
+dnf install -y python3-setuptools python3-pip
+
+dnf install -y xxd
+
+dnf install -y rsync socat nmap ldns speedtest-cli
+
+dnf install -y p7zip unzip zip lz4 xz lzo
+
+dnf install -y hugo sassc
+
+dnf install -y ffmpeg yt-dlp ImageMagick exiftool cuetools shntool vorbis-tools wavpack
+

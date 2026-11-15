@@ -53,6 +53,7 @@ alias gsd='_g ${HOME}/src/dots'
 alias gsg='_g ${HOME}/src/gentoo'
 alias gsw='_g ${HOME}/src/website'
 alias gcf='_g ${XDG_CONFIG_HOME}'
+alias gst='_g ${HOME}/src/trading'
 # ========================================================================
 
 Yf() { cp "$@" $XDG_DOCUMENTS_DIR ; }

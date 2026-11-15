@@ -29,6 +29,7 @@ case $TERM in
             alias fgrep='fgrep --color=auto'
             alias egrep='egrep --color=auto'
         fi
+        unset NO_COLOR
         ;;
     *)
         export NO_COLOR=true
@@ -48,8 +49,6 @@ alias {lsg,lg}='ls -1 | grep -i'
 alias cp='cp -irv'
 alias mv='mv -iv'
 alias {mkdir,mkd,mkdr,mkir,mdir}='mkdir -p'
-
-alias pk=pkill
 
 alias {x,xx,xxx,q,qq,qqq,lq,:q,:Q,:wq,:w,exi,ex}=exit
 alias {cll,clear,claer,clar,clea,clera,ear,lear,ler}=clear
