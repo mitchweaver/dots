@@ -180,6 +180,7 @@ flatpak install -y flathub org.shotcut.Shotcut
 flatpak install -y flathub io.mpv.Mpv
 
 flatpak install -y flathub org.gimp.GIMP
+flatpak install -y flathub org.darktable.Darktable
 flatpak install -y flathub org.libreoffice.LibreOffice
 
 flatpak install -y flathub net.cozic.joplin_desktop
@@ -198,6 +199,9 @@ flatpak install -y flathub com.tradingview.tradingview
 
 flatpak install -y flathub org.kde.kolourpaint
 
+######flatpak install flathub net.ankiweb.Anki
+######flatpak install flathub com.github.wwmm.easyeffects
+
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub org.gtk.Gtk3theme.Materia-light
 flatpak install -y flathub org.gtk.Gtk3theme.Materia-dark
@@ -214,13 +218,17 @@ flatpak install -y flathub org.freedesktop.Platform.GL32.nvidia-"$(tr . - < /sys
 
 ## other programs
 ```
+# librewolf
+dnf config-manager addrepo --from-repofile=https://repo.librewolf.net/librewolf.repo
+rpm-ostree install librewolf
+
 # mullvad
 curl -fsSL -o /etc/yum.repos.d/mullvad.repo https://repository.mullvad.net/rpm/stable/mullvad.repo
 rpm-ostree install mullvad-vpn
 
-# tailscale
-ostree remote add tailscale https://pkgs.tailscale.com/stable/fedora/tailscale.repo
-rpm-ostree install tailscale
+################ tailscale
+################ostree remote add tailscale https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+################rpm-ostree install tailscale
 
 # mega.nz
 cat > /etc/yum.repos.d/megasync.repo <<EOF

@@ -1,0 +1,19 @@
+[DEFAULT]
+bantime  = 1h
+findtime = 10m
+maxretry = 5
+
+# increment = progressively longer bans
+bantime.increment = true
+bantime.maxtime   = 1w
+
+# local LAN = 192.168.100.XXX
+# this prevents banning yourself
+ignoreip = 127.0.0.1/8 ::1 192.168.100.0/24
+
+# fedora = systemd
+# if not systemd use /var/log
+backend = systemd
+
+[sshd]
+enabled = true

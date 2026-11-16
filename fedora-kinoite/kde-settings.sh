@@ -92,7 +92,7 @@ balooctl6 disable
 # shortcuts
 # ========================================================================
 # kde uses tabs to delineate, which is super dumb. most human-readable solution I've found is use a variable
-TAB=$(printf '\t')
+# TAB=$(printf '\t')
 
 kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window Close" "Alt+Q,Alt+F4,Close Window"
 
@@ -102,13 +102,13 @@ kwriteconfig6 --file kglobalshortcutsrc --group firefox.desktop --key _launch "A
 
 # kwin
 kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window Maximize" "Meta+Up,none,Maximize Window"
-kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window Minimize" "Meta+Down${TAB}Alt+M,none,Minimize Window"
 kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window Quick Tile Left" "Meta+Left,Meta+Left,Quick Tile Window to the Left"
 kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window Quick Tile Right" "Meta+Right,Meta+Right,Quick Tile Window to the Right"
+# kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window Minimize" "Meta+Down${TAB}Alt+M,none,Minimize Window"
 
 # audio
-kwriteconfig6 --file kglobalshortcutsrc --group kmix --key increase_volume "XF86AudioRaiseVolume${TAB}Alt+',XF86AudioRaiseVolume,Increase Volume"
-kwriteconfig6 --file kglobalshortcutsrc --group kmix --key decrease_volume "XF86AudioLowerVolume${TAB}Alt+;,XF86AudioLowerVolume,Decrease Volume"
+# kwriteconfig6 --file kglobalshortcutsrc --group kmix --key increase_volume "XF86AudioRaiseVolume${TAB}Alt+',XF86AudioRaiseVolume,Increase Volume"
+# kwriteconfig6 --file kglobalshortcutsrc --group kmix --key decrease_volume "XF86AudioLowerVolume${TAB}Alt+;,XF86AudioLowerVolume,Decrease Volume"
 kwriteconfig6 --file kglobalshortcutsrc --group kmix --key mute "XF86AudioMute,XF86AudioMute,Mute"
 
 # krunner
