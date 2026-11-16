@@ -5,9 +5,6 @@ Note that due to the nature of immutable OS, this involves many reboots which is
 
 ## upgrade
 ```
-# switch to rawhide (testing/beta)
-rpm-ostree rebase fedora:fedora/rawhide/x86_64/onyx
-
 rpm-ostree refresh-md
 rpm-ostree upgrade
 
