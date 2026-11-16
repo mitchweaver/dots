@@ -92,7 +92,7 @@ kwriteconfig6 --file kglobalshortcutsrc --group firefox.desktop --key _launch "A
 
 # kwin
 kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window Maximize" "Meta+Up,none,Maximize Window"
-kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window Minimize" "Meta+Down\tAlt+M,none,Minimize Window"
+kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window Minimize" "Meta+Down${TAB}Alt+M,none,Minimize Window"
 kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window Quick Tile Left" "Meta+Left,Meta+Left,Quick Tile Window to the Left"
 kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window Quick Tile Right" "Meta+Right,Meta+Right,Quick Tile Window to the Right"
 
