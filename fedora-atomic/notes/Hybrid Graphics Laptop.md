@@ -1,5 +1,9 @@
 # GPU / Hybrid Graphics (Laptop)
 
+**========================================================================**
+**NOTE: THIS MAY NOT BE NEEDED ANYMORE**
+**========================================================================**
+
 To see which is card0 and which is card1
 
 ```

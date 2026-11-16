@@ -86,9 +86,9 @@ Plug 'svermeulen/vim-yoink'      " emacs killring for vim
 Plug 'dstein64/vim-startuptime'  " useful for debugging slow plugins
 Plug 'chrisbra/unicode.vim'      " easily search and copy unicode chars
 Plug 'ryanoasis/vim-devicons'    " adds icons to plugins
-Plug 'psliwka/vim-smoothie'      " smooth scrolling done right
 Plug 'farmergreg/vim-lastplace'  " remember last place in files
 Plug 'folke/todo-comments.nvim'  " highlight useful things
+""""""""""""""""""""""""" Plug 'psliwka/vim-smoothie'      " smooth scrolling done right
 
 Plug 'unblevable/quick-scope'    " make f F t T ; and , useable 
     " trigger highlight only with 'f' and 'F'
