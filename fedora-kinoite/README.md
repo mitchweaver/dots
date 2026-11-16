@@ -108,6 +108,11 @@ rpm-ostree install \
     distrobox kitty kitty-terminfo kitty-kitten ranger fastfetch fail2ban \
     NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld powertop lynis
 
+# themes
+rpm-ostree install \
+    papirus-icon-theme \
+    reversal-icon-theme
+
 # ================ SWAY =============================================
 curl -Lo /etc/yum.repos.d/swayfx.repo https://copr.fedorainfracloud.org/coprs/swayfx/swayfx/repo/fedora-45/swayfx-swayfx-fedora-45.repo
 rpm-ostree override remove sway --install swayfx
@@ -135,7 +140,9 @@ rpm-ostree kargs \
 rpm-ostree kargs \
     --append=snd_hda_intel.dmic_detect=0 \
     --append=snd_sof_intel_hda_generic=0 \
-    --append=snd_sof_intel_hda_common.dmic_num=0
+    --append=snd_sof_intel_hda_common.dmic_num=0 \
+    --append=snd_intel_dspcfg.dsp_driver=1 \
+    --append=module_blacklist=uvcvideo
 
 # disable ipv6
 rpm-ostree kargs \
@@ -278,7 +285,7 @@ apk add bc htop lsof lm-sensors pciutils usbutils smartmontools sysstat upower g
 apk add p7zip unzip zip lz4 xz lzo
 
 # MISC SYSTEM LIBS
-apk add libnotify libsecret py3-numpy py3-scipy nlohmann-json
+apk add openssl libnotify libsecret py3-numpy py3-scipy nlohmann-json
 
 # NETWORKING
 apk add rsync openresolv netcat-openbsd nmap bind-tools socat ldns wireless-tools speedtest-cli

@@ -80,6 +80,7 @@ if [ -d "$SHELLRC_DIR" ] ; then
         builtins \
         development \
         flatpak \
+        gaming \
         generic_aliases \
         generic_functions \
         history \
