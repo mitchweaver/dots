@@ -1,8 +1,11 @@
 # GPU / Hybrid Graphics (Laptop)
 
-**========================================================================**
-**NOTE: THIS MAY NOT BE NEEDED ANYMORE**
-**========================================================================**
+```
+========================================================================
+NOTE: THIS MAY NOT BE NEEDED ANYMORE
+only follow if you have problems with apps not using the discrete card
+========================================================================
+```
 
 To see which is card0 and which is card1
 

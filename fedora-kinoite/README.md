@@ -79,30 +79,6 @@ rpm-ostree override remove \
     spice-webdavd \
     virtualbox-guest-additions
 
-# ======================== BUDGIE ===============================
-rpm-ostree override remove \
-    ark ark-libs kate kate-krunner-plugin kate-libs kate-plugins
-# ======================== BUDGIE ===============================
-
-# ======================== GNOME ===============================
-rpm-ostree override remove \
-    gnome-tour yelp malcontent-control \
-	gnome-classic-session \
-    gnome-shell-extension-apps-menu \
-    gnome-shell-extension-places-menu \
-    gnome-shell-extension-window-list \
-    gnome-shell-extension-launch-new-instance \
-    gnome-shell-extension-background-logo
-
-flatpak uninstall -y flathub org.fedoraproject.MediaWriter
-flatpak uninstall -y flathub org.gnome.Contacts
-flatpak uninstall -y flathub org.gnome.Maps
-flatpak uninstall -y flathub org.gnome.Calendar
-flatpak uninstall -y flathub org.gnome.Decibels
-flatpak uninstall -y flathub org.gnome.baobab
-flatpak uninstall -y flathub org.gnome.Snapshot
-# ====================== END GNOME ===============================
-
 # ========================= KDE ===============================
 # KDE specific junk
 rpm-ostree override remove \
@@ -125,21 +101,12 @@ rpm-ostree install \
     distrobox kitty kitty-terminfo kitty-kitten ranger fastfetch fail2ban \
     NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld powertop lynis
 
-# ======================== BUDGIE ===============================
-rpm-ostree install \
-    wlr-randr
-# ======================== BUDGIE ===============================
-
 # ================ SWAY =============================================
 curl -Lo /etc/yum.repos.d/swayfx.repo https://copr.fedorainfracloud.org/coprs/swayfx/swayfx/repo/fedora-45/swayfx-swayfx-fedora-45.repo
 rpm-ostree override remove sway --install swayfx
 
 rpm-ostree install gammastep swappy swayimg copyq
 # ================ END SWAY =========================================
-
-# ============== GNOME ===================
-rpm-ostree install gnome-tweaks
-# ========================================
 ```
 
 ## kernel arguments
@@ -160,7 +127,7 @@ rpm-ostree kargs \
 # remove kernel modules for internel webcam microphone
 rpm-ostree kargs \
     --append=snd_hda_intel.dmic_detect=0 \
-	--append=snd_sof_intel_hda_generic=0 \
+    --append=snd_sof_intel_hda_generic=0 \
     --append=snd_sof_intel_hda_common.dmic_num=0
 
 # disable ipv6
@@ -178,10 +145,10 @@ rpm-ostree kargs \
 rpm-ostree kargs \
     --append=page_alloc.shuffle=1 \
     --append=slab_nomerge \
-	--append=init_on_alloc=1 \
+    --append=init_on_alloc=1 \
     --append=init_on_free=1 \
-	--append=randomize_kstack_offset=on \
-	--append=vsyscall=none
+    --append=randomize_kstack_offset=on \
+    --append=vsyscall=none
 ```
 
 ## install flatpak apps

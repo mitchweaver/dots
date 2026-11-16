@@ -60,6 +60,9 @@ kwriteconfig6 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnRight "I
 # screen lock timeout in minutes
 kwriteconfig6 --file kscreenlockerrc --group Daemon --key Timeout 10
 
+# disable auto-mount
+kwriteconfig6 --file kded_device_automounterrc --group Automounter --key AutomountEnabled false
+
 # ========================================================================
 # nightshift - default = 6500
 # ========================================================================
