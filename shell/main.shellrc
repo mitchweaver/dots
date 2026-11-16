@@ -68,6 +68,10 @@ if [ -d "$SHELLRC_DIR" ] ; then
         [ -f "$SHELLRC_DIR/docker.shellrc" ] && . "$SHELLRC_DIR/docker.shellrc"
     fi
 
+    if command -v podman >/dev/null ; then
+        [ -f "$SHELLRC_DIR/podman.shellrc" ] && . "$SHELLRC_DIR/podman.shellrc"
+    fi
+
     if command -v zfs >/dev/null ; then
         [ -f "$SHELLRC_DIR/zfs.shellrc" ] && . "$SHELLRC_DIR/zfs.shellrc"
     fi

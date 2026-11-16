@@ -15,12 +15,19 @@ kwriteconfig6 --file kwinrc --group MouseBindings --key CommandAllModKey Alt
 kwriteconfig6 --file kwinrc --group Desktops --key Number 4
 kwriteconfig6 --file kwinrc --group Desktops --key Rows 1
 
+# only on primary monitor
+kwriteconfig6 --file kwinrc --group Script-virtualdesktopsonlyonprimary --key Enabled true
+
 # ========================================================================
 # effects
 # ========================================================================
 kwriteconfig6 --file kwinrc --group Plugins --key blurEnabled true
-kwriteconfig6 --file kwinrc --group Plugins --key wobblywindowsEnabled true
 kwriteconfig6 --file kwinrc --group Plugins --key shakecursorEnabled false
+kwriteconfig6 --file kwinrc --group Plugins --key wobblywindowsEnabled false
+kwriteconfig6 --file kwinrc --group Effect-wobblywindows --key ResizeWobble false
+
+# slide popups
+kwriteconfig6 --file kwinrc --group Plugins --key slidingpopupsEnabled true
 
 # ========================================================================
 # file management
@@ -62,6 +69,9 @@ kwriteconfig6 --file kscreenlockerrc --group Daemon --key Timeout 10
 
 # disable auto-mount
 kwriteconfig6 --file kded_device_automounterrc --group Automounter --key AutomountEnabled false
+
+# disable user feedback/telemetry
+kwriteconfig6 --file kuserfeedbackrc --group Global --key FeedbackLevel None
 
 # ========================================================================
 # nightshift - default = 6500

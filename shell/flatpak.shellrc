@@ -9,3 +9,7 @@ flatpak-fix-nvidia() {
     flatpak list --runtime --columns=application,version | grep GL.nvidia
 }
 
+
+# list which flatpak apps were manually installed (ie not from distro default)
+alias flatpak-list='flatpak list --app --columns=name,application,origin,installation'
+

@@ -1,0 +1,21 @@
+PODMAN_NUKE() {
+    printf 'This will delete all images and containers, confirm? (y/n): '
+    read -r ans
+    [ "$ans" = y ] && {
+        echo 'REMOVING ALL CONTAINERS AND SETTINGS'
+
+        sudo rm -rf \
+            "$HOME/.local/share/containers/storage" \
+            "/run/user/$(id -u)/containers" \
+            "/run/user/$(id -u)/libpod"
+
+        podman system reset
+
+        echo
+        echo 'Checking health...'
+        podman info >/dev/null && echo OK
+    }
+}
+
+alias podman-fix-sudo='podman exec -u root alpine chmod 4755 /usr/bin/sudo'
+

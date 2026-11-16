@@ -9,7 +9,10 @@ fi
 # ========================================================================
 export PATH="$HOME/.local/bin:$PATH:/usr/local/bin:/usr/X11R6/bin:/usr/local/sbin"
 export MANPATH="$HOME/.local/share/man:$MANPATH"
-export PATH="$PATH:$HOME/.local/flatpak-wrappers"
+
+if [ -d "$HOME/.local/flatpak-wrappers" ] ; then
+    export PATH="$PATH:$HOME/.local/flatpak-wrappers"
+fi
 
 if [ -d ~/.local/go/bin ] ; then
     export PATH="$PATH:$HOME/.local/go/bin"

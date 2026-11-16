@@ -3,6 +3,16 @@
 
 Note that due to the nature of immutable OS, this involves many reboots which is annoying
 
+## user permissions
+
+set up uid/gid to match network shares etc
+
+```
+sudo usermod -u 6969 $USER
+sudo groupmod -g 6969 $USER
+sudo find $HOME -xdev -gid 1000 -exec chgrp -h $USER {} +
+```
+
 ## upgrade
 ```
 rpm-ostree refresh-md
@@ -165,7 +175,6 @@ flatpak install -y flathub io.mpv.Mpv
 flatpak install -y flathub org.gimp.GIMP
 flatpak install -y flathub org.libreoffice.LibreOffice
 
-flatpak install -y flathub md.obsidian.Obsidian
 flatpak install -y flathub net.cozic.joplin_desktop
 flatpak install -y flathub com.super_productivity.SuperProductivity
 flatpak install -y flathub com.bitwarden.desktop
@@ -188,6 +197,8 @@ flatpak install -y flathub org.gtk.Gtk3theme.Materia-dark
 
 flatpak install -y flathub com.rustdesk.RustDesk
 flatpak install -y io.github.pwr_solaar.solaar
+
+###### flatpak install -y flathub md.obsidian.Obsidian
 
 ######### IF NVIDIA ##########
 flatpak install -y flathub org.freedesktop.Platform.GL.nvidia-"$(tr . - < /sys/module/nvidia/version)"
@@ -240,6 +251,10 @@ distrobox create \
 
 distrobox enter alpine
 sudo su
+
+# bind /mnt to the host's /mnt
+rmdir /mnt
+ln -s /run/host/mnt /mnt
 
 # update all containers
 cat > /etc/apk/repositories <<"EOF"
