@@ -1,0 +1,74 @@
+# ================================================================================
+# Only keep this out of inactive if using KDE
+# ================================================================================
+kde-plasma/plasma-meta browser-integration desktop-portal webengine xwayland legacy-systray -colord -crash-handler -discover -firewall -kwallet -oxygen-theme -plymouth -smart -thunderbolt -wallpapers -rdp
+
+kde-plasma/plasma-workspace -appstream -wallpaper-metadata
+dev-qt/qtbase xml libproxy
+
+kde-frameworks/kfilemetadata ffmpeg
+
+media-libs/phonon minimal
+lxqt-base/lxqt-meta minimal -about -archiver -display-manager -filemanager -lximage -processviewer -screenshot -sddm -trash -window-manager -desktop-portal -terminal -sudo -nls
+
+kde-plasma/kwin multimedia lock
+
+app-admin/system-config-printer -keyring
+
+kde-plasma/powerdevil -brightness-control
+
+# have to have this, globally have -speechd and -flite
+dev-qt/qtspeech flite
+
+kde-apps/yakuake absolute-position
+
+# for kweather, no way to disable unfortunately
+dev-qt/qtpositioning geoclue
+
+# =====================================================================
+# MISC
+# =====================================================================
+kde-plasma/kde-cli-tools kdesu
+
+# =====================================================================
+# requires kf6compat
+kde-frameworks/kguiaddons kf6compat
+kde-frameworks/kglobalaccel kf6compat
+kde-frameworks/kio kf6compat
+# =====================================================================
+
+# ====================================================================
+# needs qt5
+# ====================================================================
+sys-auth/polkit-qt qt5
+app-crypt/qca qt5
+
+# ====================================================================
+# NEED POLICYKIT / POLKIT
+# ====================================================================
+kde-frameworks/kauth policykit
+
+# ====================================================================
+# NEED qml
+# ====================================================================
+kde-frameworks/prison qml
+kde-frameworks/kconfig qml
+kde-frameworks/sonnet qml
+dev-qt/qtmultimedia qml
+
+# ====================================================================
+# JUNK
+# ====================================================================
+media-video/vlc -fontconfig
+kde-frameworks/ktexteditor -editorconfig
+
+# =====================================================================
+# NEED INTROSPECTION
+# =====================================================================
+x11-libs/gtk+ introspection
+app-accessibility/at-spi2-core introspection
+x11-libs/gdk-pixbuf introspection
+x11-libs/pango introspection
+media-libs/harfbuzz introspection
+x11-libs/libnotify introspection
+
