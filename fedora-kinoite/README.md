@@ -187,6 +187,7 @@ flatpak install -y flathub org.gtk.Gtk3theme.Materia-light
 flatpak install -y flathub org.gtk.Gtk3theme.Materia-dark
 
 flatpak install -y flathub com.rustdesk.RustDesk
+flatpak install -y io.github.pwr_solaar.solaar
 
 ######### IF NVIDIA ##########
 flatpak install -y flathub org.freedesktop.Platform.GL.nvidia-"$(tr . - < /sys/module/nvidia/version)"
