@@ -57,8 +57,10 @@ done
 # NVIDIA
 # ========================================================================
 if lspci | grep -i nvidia >/dev/null ; then
-    sudo flatpak install -y flathub org.freedesktop.Platform.GL.nvidia-"$(tr . - < /sys/module/nvidia/version)"
-    sudo flatpak install -y flathub org.freedesktop.Platform.GL32.nvidia-"$(tr . - < /sys/module/nvidia/version)"
+    if ! flatpak list | grep -i org.freedesktop.Platform.GL.nvidia >/dev/null ; then
+        sudo flatpak install -y flathub org.freedesktop.Platform.GL.nvidia-"$(tr . - < /sys/module/nvidia/version)"
+        sudo flatpak install -y flathub org.freedesktop.Platform.GL32.nvidia-"$(tr . - < /sys/module/nvidia/version)"
+    fi
 fi
 
 # ========================================================================
