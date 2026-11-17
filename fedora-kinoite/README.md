@@ -97,15 +97,6 @@ rpm-ostree override remove \
     plasma-browser-integration plasma-discover-notifier plasma-discover \
     plasma-discover-rpm-ostree plasma-welcome-fedora plasma-discover-libs \
     plasma-discover-kns plasma-discover-flatpak filelight
-
-# flatpak uninstalls
-flatpak uninstall -y \
-    org.kde.elisa \
-    org.kde.kmahjongg \
-    org.kde.kmines \
-    org.kde.qrca \
-    org.kde.skanpage \
-    org.kde.gwenview
 # ====================== END KDE ===============================
 ```
 
@@ -120,7 +111,8 @@ rpm-ostree install \
 # themes
 rpm-ostree install \
     papirus-icon-theme \
-    reversal-icon-theme
+    reversal-icon-theme \
+    materia-kde
 
 # ================ SWAY =============================================
 curl -Lo /etc/yum.repos.d/swayfx.repo https://copr.fedorainfracloud.org/coprs/swayfx/swayfx/repo/fedora-45/swayfx-swayfx-fedora-45.repo
@@ -172,60 +164,6 @@ rpm-ostree kargs \
     --append=init_on_free=1 \
     --append=randomize_kstack_offset=on \
     --append=vsyscall=none
-```
-
-## install flatpak apps
-```
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak remote-modify --enable flathub
-
-flatpak install -y flathub io.github.ungoogled_software.ungoogled_chromium
-flatpak install -y flathub org.torproject.torbrowser-launcher
-
-flatpak install -y flathub com.valvesoftware.Steam
-flatpak install -y flathub com.discordapp.Discord
-flatpak install -y flathub com.obsproject.Studio
-flatpak install -y flathub org.shotcut.Shotcut
-flatpak install -y flathub io.mpv.Mpv
-
-flatpak install -y flathub org.gimp.GIMP
-flatpak install -y flathub org.darktable.Darktable
-flatpak install -y flathub org.libreoffice.LibreOffice
-
-flatpak install -y flathub net.cozic.joplin_desktop
-flatpak install -y flathub com.super_productivity.SuperProductivity
-flatpak install -y flathub com.bitwarden.desktop
-
-flatpak install -y flathub com.github.tchx84.Flatseal
-flatpak install -y flathub io.github.dweymouth.supersonic
-
-flatpak install -y flathub org.signal.Signal
-flatpak install -y flathub com.getmailspring.Mailspring
-
-flatpak install -y flathub org.wireshark.Wireshark
-flatpak install -y flathub org.gnome.Boxes
-
-flatpak install -y flathub com.tradingview.tradingview
-
-flatpak install -y flathub org.kde.kolourpaint
-
-flatpak install flathub com.interversehq.qView
-
-######flatpak install flathub net.ankiweb.Anki
-######flatpak install flathub com.github.wwmm.easyeffects
-
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install -y flathub org.gtk.Gtk3theme.Materia-light
-flatpak install -y flathub org.gtk.Gtk3theme.Materia-dark
-
-flatpak install -y flathub com.rustdesk.RustDesk
-flatpak install -y io.github.pwr_solaar.solaar
-
-###### flatpak install -y flathub md.obsidian.Obsidian
-
-######### IF NVIDIA ##########
-flatpak install -y flathub org.freedesktop.Platform.GL.nvidia-"$(tr . - < /sys/module/nvidia/version)"
-flatpak install -y flathub org.freedesktop.Platform.GL32.nvidia-"$(tr . - < /sys/module/nvidia/version)"
 ```
 
 ## other programs

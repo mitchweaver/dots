@@ -7,6 +7,9 @@ _ps1_print_host() {
     # check if we're in distrobox, if so print the container name
     if [ "$CONTAINER_ID" ] ; then
         printf '%s' "\[\e[1;34m\]$CONTAINER_ID"
+    # same but if no ID set just print distrobox
+    elif [ -f /run/.containerenv ] ; then
+        printf '%s' "\[\e[1;34m\]distrobox"
     else
         # if we're not in distrobox, print hostname
         if [ -f /etc/hostname ] ; then
