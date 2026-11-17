@@ -99,7 +99,13 @@ rpm-ostree override remove \
     plasma-discover-kns plasma-discover-flatpak filelight
 
 # flatpak uninstalls
-flatpak uninstall -y org.kde.elisa org.kde.kmahjongg org.kde.kmines org.kde.qrca org.kde.skanpage
+flatpak uninstall -y \
+    org.kde.elisa \
+    org.kde.kmahjongg \
+    org.kde.kmines \
+    org.kde.qrca \
+    org.kde.skanpage \
+    org.kde.gwenview
 # ====================== END KDE ===============================
 ```
 
@@ -197,10 +203,13 @@ flatpak install -y flathub org.signal.Signal
 flatpak install -y flathub com.getmailspring.Mailspring
 
 flatpak install -y flathub org.wireshark.Wireshark
+flatpak install -y flathub org.gnome.Boxes
 
 flatpak install -y flathub com.tradingview.tradingview
 
 flatpak install -y flathub org.kde.kolourpaint
+
+flatpak install flathub com.interversehq.qView
 
 ######flatpak install flathub net.ankiweb.Anki
 ######flatpak install flathub com.github.wwmm.easyeffects
@@ -290,7 +299,7 @@ apk add docs
 apk add coreutils binutils findutils grep util-linux gawk iproute2
 
 # SYSTEM UTILS
-apk add bc htop lsof lm-sensors pciutils usbutils smartmontools sysstat upower git
+apk add bc htop gotop lsof lm-sensors pciutils usbutils smartmontools sysstat upower git
 
 # ARCHIVE
 apk add p7zip unzip zip lz4 xz lzo

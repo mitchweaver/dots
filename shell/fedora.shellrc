@@ -14,11 +14,17 @@ if type rpm-ostree >/dev/null 2>&1 ; then
                 sudo rpm-ostree install "$@"
                 ;;
             u)
-                >&2 echo 'Updating flatpak...'
+                echo 'Updating flatpak...'
                 sudo flatpak update
 
-                >&2 echo 'Updating rpm-ostree...'
+                echo 'Updating rpm-ostree...'
                 sudo rpm-ostree refresh-md
+                sudo rpm-ostree upgrade
+                ;;
+            uf)
+                # sometimes above fails for some reason --force usually fixes it
+                echo 'Updating rpm-ostree with --force...'
+                sudo rpm-ostree refresh-md --force
                 sudo rpm-ostree upgrade
                 ;;
             s)
@@ -63,4 +69,10 @@ elif type dnf >/dev/null 2>&1 ; then
         esac
     }
 fi
+
+firmware-update() {
+    sudo fwupdmgr refresh
+    sudo fwupdmgr get-updates
+    sudo fwupdmgr update
+}
 

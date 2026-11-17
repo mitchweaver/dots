@@ -9,7 +9,17 @@ flatpak-fix-nvidia() {
     flatpak list --runtime --columns=application,version | grep GL.nvidia
 }
 
-
 # list which flatpak apps were manually installed (ie not from distro default)
 alias flatpak-list='flatpak list --app --columns=name,application,origin,installation'
+
+# ========================================================================
+# aliases below
+# ========================================================================
+
+# who designed this garbage
+if ! command -v mpv >/dev/null ; then
+    if [ -d ~/.var/app/io.mpv.Mpv ] ; then
+        alias mpv='flatpak run io.mpv.Mpv'
+    fi
+fi
 

@@ -63,15 +63,21 @@ if [ -d "$SHELLRC_DIR" ] ; then
     if [ -e /proc/sys/kernel/ostype ] ; then
         if read -r os 2>/dev/null </proc/sys/kernel/ostype && [ "$os" = Linux ] ; then
             . "$SHELLRC_DIR/linux.shellrc"
+
+            if command -v flatpak >/dev/null ; then
+                [ -f "$SHELLRC_DIR/flatpak.shellrc" ] && . "$SHELLRC_DIR/flatpak.shellrc"
+            fi
+
+            if command -v podman >/dev/null ; then
+                [ -f "$SHELLRC_DIR/podman.shellrc" ] && . "$SHELLRC_DIR/podman.shellrc"
+            fi
+
+            [ -f "$SHELLRC_DIR/gaming.shellrc" ] && . "$SHELLRC_DIR/gaming.shellrc"
         fi
     fi
 
     if command -v docker >/dev/null ; then
         [ -f "$SHELLRC_DIR/docker.shellrc" ] && . "$SHELLRC_DIR/docker.shellrc"
-    fi
-
-    if command -v podman >/dev/null ; then
-        [ -f "$SHELLRC_DIR/podman.shellrc" ] && . "$SHELLRC_DIR/podman.shellrc"
     fi
 
     if command -v zfs >/dev/null ; then
@@ -81,8 +87,6 @@ if [ -d "$SHELLRC_DIR" ] ; then
     for file in \
         builtins \
         development \
-        flatpak \
-        gaming \
         generic_aliases \
         generic_functions \
         history \

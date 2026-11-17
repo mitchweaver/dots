@@ -48,7 +48,7 @@ plasma-apply-cursortheme Breeze_Dark    --size 24 >/dev/null 2>&1
 # keyboard
 # ========================================================================
 kwriteconfig6 --file kcminputrc --group Keyboard --key RepeatDelay 250
-kwriteconfig6 --file kcminputrc --group Keyboard --key RepeatRate 30
+kwriteconfig6 --file kcminputrc --group Keyboard --key RepeatRate 35
 
 # 0=on, 1=off
 kwriteconfig6 --file kcminputrc --group Keyboard --key NumLock 1
