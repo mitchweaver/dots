@@ -79,22 +79,19 @@ export GOPATH="${HOME}/.local/go"
 # ========================================================================
 # MISC SETTINGS
 # ========================================================================
-# for i in nvim vim vi nvi nano ; do
-#     if command -v $i >/dev/null 2>&1 ; then
-#         export EDITOR=$i
-#         break
-#     fi
-# done
-#
-export EDITOR=nvim
-export BROWSER=firefox
+for i in nvim vim vi nvi nano ; do
+    if command -v $i >/dev/null 2>&1 ; then
+        export EDITOR=$i
+        break
+    fi
+done
 
-# for i in librewolf librewolf-bin firefox firefox-bin chromium chromium-bin ; do
-#     if command -v $i >/dev/null ; then
-#         export BROWSER=$i
-#         break
-#     fi
-# done
+for i in librewolf librewolf-bin firefox firefox-bin chromium chromium-bin ; do
+    if command -v $i >/dev/null ; then
+        export BROWSER=$i
+        break
+    fi
+done
 
 #####export MENU_PROG=menu
 ####export XDG_OPEN=opn PLUMBER=opn

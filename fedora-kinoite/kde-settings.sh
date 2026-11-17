@@ -98,7 +98,7 @@ kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window Close" "Alt+Q
 
 # apps
 kwriteconfig6 --file kglobalshortcutsrc --group org.kde.dolphin.desktop --key _launch "Alt+E,none,Dolphin"
-kwriteconfig6 --file kglobalshortcutsrc --group firefox.desktop --key _launch "Alt+W,none,Firefox"
+kwriteconfig6 --file kglobalshortcutsrc --group librewolf.desktop --key _launch "Alt+W,none,Librewolf"
 
 # kwin
 kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window Maximize" "Meta+Up,none,Maximize Window"

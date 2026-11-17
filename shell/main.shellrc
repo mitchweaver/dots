@@ -37,8 +37,10 @@ PS1_GIT=true             # [true/false]
 
 HISTORY_STYLE=default      # [default/per-shell]
 export HISTSIZE=300
-export HISTFILE="$HOME/.cache/ksh_history"
-[ -d ~/.cache ] || mkdir -p ~/.cache
+
+export HISTFILE="$HOME/.ksh_history"
+[ -e "$HISTFILE" ] || touch "$HISTFILE"
+chmod 0600 "$HISTFILE"
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 if [ -d "$SHELLRC_DIR" ] ; then

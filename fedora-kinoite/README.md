@@ -77,6 +77,9 @@ modinfo nvidia | grep -i license
 # fedora specific crap
 rpm-ostree override remove fedora-bookmarks fedora-chromium-config
 
+# remove firefox as we install librewolf later
+rpm-ostree override remove firefox
+
 # virtual machine host support which don't need since this is bare metal
 rpm-ostree override remove \
     open-vm-tools-desktop \
