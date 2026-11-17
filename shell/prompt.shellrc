@@ -4,11 +4,17 @@ _ps1_print_user() {
 }
 
 _ps1_print_host() {
-    if [ -f /etc/hostname ] ; then
-        read -r _hostname < /etc/hostname
-        printf '%s' "\[\e[1;34m\]${_hostname%%.*}"
+    # check if we're in distrobox, if so print the container name
+    if [ "$CONTAINER_ID" ] ; then
+        printf '%s' "\[\e[1;34m\]$CONTAINER_ID"
     else
-        printf '%s' "\[\e[1;34m\]$(/bin/hostname -s)"
+        # if we're not in distrobox, print hostname
+        if [ -f /etc/hostname ] ; then
+            read -r _hostname < /etc/hostname
+            printf '%s' "\[\e[1;34m\]${_hostname%%.*}"
+        else
+            printf '%s' "\[\e[1;34m\]$(/bin/hostname -s)"
+        fi
     fi
 }
 
@@ -111,3 +117,4 @@ _ps1_print() {
 cd .
 
 alias ps1='export PS1="% "'
+
