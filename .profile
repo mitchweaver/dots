@@ -120,7 +120,7 @@ export LESSHISTFILE=/dev/null
 # only proceed if we're not on macos or within wsl
 if [ ! -e /etc/wsl.conf ] && [ ! -e /System/Library/CoreServices/SystemVersion.plist ] ; then
     # and only proceed if we're on my machine
-    if [ -e /etc/THIS_IS_MY_MACHINE ] && [ ! -d ~/tmp ] ; then
+    if [ -e /etc/THIS_IS_MY_MACHINE ] ; then
         mkdir -p "/tmp/$USER-tmp"
 
         if [ ! -e ~/tmp ] ; then

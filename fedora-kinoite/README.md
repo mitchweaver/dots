@@ -106,7 +106,8 @@ rpm-ostree override remove \
 # NOTE: for some reason nmtui isnt included in networkmanager anymore by default
 rpm-ostree install \
     distrobox kitty kitty-terminfo kitty-kitten ranger fastfetch fail2ban \
-    NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld powertop lynis
+    NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld powertop lynis \
+    docker-cli docker-compose
 
 # themes
 rpm-ostree install \
@@ -137,13 +138,12 @@ rpm-ostree kargs \
     --append=nowatchdog \
     --append=split_lock_detect=off
 
-# remove kernel modules for internel webcam microphone
+# disable internal webcam/microphone
 rpm-ostree kargs \
     --append=snd_hda_intel.dmic_detect=0 \
     --append=snd_sof_intel_hda_generic=0 \
     --append=snd_sof_intel_hda_common.dmic_num=0 \
-    --append=snd_intel_dspcfg.dsp_driver=1 \
-    --append=module_blacklist=uvcvideo
+    --append=snd_intel_dspcfg.dsp_driver=1
 
 # disable ipv6
 rpm-ostree kargs \
@@ -163,7 +163,13 @@ rpm-ostree kargs \
     --append=init_on_alloc=1 \
     --append=init_on_free=1 \
     --append=randomize_kstack_offset=on \
-    --append=vsyscall=none
+    --append=vsyscall=none \
+    --append='sysctl.kernel.core_pattern=|/bin/false' \
+    --append='sysctl.fs.suid_dumpable=0'
+
+# module blacklists
+rpm-ostree kargs \
+    --append=module_blacklist="uvcvideo,tipc,rds,sctp,dccp,n_hdlc,ax25,netrom,rose,x25,appletalk,psnap,p8022,p8023,atm,af_802154,decnet,econet,ipx,cramfs,freevxfs,jffs2,hfs,hfsplus,gfs2,ksmbd,vivid,can,firewire_core"
 ```
 
 ## other programs
@@ -252,7 +258,7 @@ apk add rsync openresolv netcat-openbsd nmap bind-tools socat ldns wireless-tool
 apk add entr detox dos2unix inotify-tools dateutils libqrencode w3m w3m-image py3-pillow py3-pillow_heif lynx
 
 # TERMINAL USERLAND
-apk add oksh neovim ranger htop translate-shell tree pv progress eza bat py3-pynvim ncdu neofetch kitty-terminfo
+apk add oksh neovim ranger htop translate-shell tree pv progress eza bat py3-pynvim ncdu pfetch neofetch kitty-terminfo
 
 # DEVELOPMENT
 apk add build-base gcc patch musl-dev meson ninja shellcheck jq py3-pylint hugo sassc
