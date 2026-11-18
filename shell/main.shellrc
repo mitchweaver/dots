@@ -84,6 +84,11 @@ if [ -d "$SHELLRC_DIR" ] ; then
         [ -f "$SHELLRC_DIR/zfs.shellrc" ] && . "$SHELLRC_DIR/zfs.shellrc"
     fi
 
+    # things that only need to be loaded if for sure it's my personal machine
+    if [ -f /etc/THIS_IS_MY_MACHINE ] ; then
+        [ -f "$SHELLRC_DIR/kde.shellrc" ] && . "$SHELLRC_DIR/kde.shellrc"
+    fi
+
     for file in \
         builtins \
         development \

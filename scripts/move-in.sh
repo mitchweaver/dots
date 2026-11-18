@@ -27,3 +27,11 @@ for prog in mpv nvim kitty ranger swayimg ; do
     fi
 done
 
+# easy way to tell if whatever script is on my laptop/desktop
+# or if I'm ssh somewhere and something that shouldn't run won't be run
+if [ ! -f /etc/THIS_IS_MY_MACHINE ] ; then
+    echo 'Installing /etc/THIS_IS_MY_MACHINE ...'
+    sudo touch /etc/THIS_IS_MY_MACHINE
+    sudo chmod 0644 /etc/THIS_IS_MY_MACHINE
+fi
+

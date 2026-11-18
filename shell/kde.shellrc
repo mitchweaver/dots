@@ -1,0 +1,27 @@
+# KDE Plasma specific stuff
+
+# kde clipboard
+#
+# usage: $ kcopy some_text
+# usage: $ cat some_file | kcopy
+#
+if [ "$CONTAINER_ID" ] ; then
+    kcopy() {
+        if [ "$1" ] ; then
+            distrobox-host-exec qdbus-qt6 org.kde.klipper /klipper setClipboardContents "$*"
+        else
+            distrobox-host-exec qdbus-qt6 org.kde.klipper /klipper setClipboardContents "$(cat)"
+        fi
+    }
+else
+    if command -v qdbus-qt6 >/dev/null ; then
+        kcopy() {
+            if [ "$1" ] ; then
+                qdbus-qt6 org.kde.klipper /klipper setClipboardContents "$*"
+            else
+                qdbus-qt6 org.kde.klipper /klipper setClipboardContents "$(cat)"
+            fi
+        }
+    fi
+fi
+
