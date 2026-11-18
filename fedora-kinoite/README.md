@@ -164,12 +164,11 @@ rpm-ostree kargs \
     --append=init_on_free=1 \
     --append=randomize_kstack_offset=on \
     --append=vsyscall=none \
-    --append='sysctl.kernel.core_pattern=|/bin/false' \
     --append='sysctl.fs.suid_dumpable=0'
 
 # module blacklists
 rpm-ostree kargs \
-    --append=module_blacklist="uvcvideo,tipc,rds,sctp,dccp,n_hdlc,ax25,netrom,rose,x25,appletalk,psnap,p8022,p8023,atm,af_802154,decnet,econet,ipx,cramfs,freevxfs,jffs2,hfs,hfsplus,gfs2,ksmbd,vivid,can,firewire_core"
+    --append=module_blacklist="uvcvideo,tipc,rds,sctp,dccp,n_hdlc,ax25,netrom,rose,x25,appletalk,psnap,p8022,p8023,atm,af_802154,cramfs,freevxfs,jffs2,hfs,hfsplus,gfs2,ksmbd,vivid,can,firewire_core"
 ```
 
 ## other programs
