@@ -3,10 +3,12 @@
 CLOUD="$HOME/cloud"
 DOTS="$HOME/src/dots"
 
-# cloud links
-ln -svfn "$CLOUD"/files        ~/files
-ln -svfn "$CLOUD"/images       ~/images
-ln -svfn "$CLOUD"/src          ~/src
+if [ -d ~/cloud ] ; then
+    # cloud links
+    ln -svfn "$CLOUD"/files        ~/files
+    ln -svfn "$CLOUD"/images       ~/images
+    ln -svfn "$CLOUD"/src          ~/src
+fi
 
 # homedir
 ln -svfn "$DOTS/.cvsrc"                  ~/.cvsrc

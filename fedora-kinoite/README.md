@@ -55,9 +55,9 @@ rpm-ostree install kmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-cuda
 rpm -qa | grep kmod-nvidia
 
 rpm-ostree kargs \
-    --append=rd.driver.blacklist=nouveau \
-    --append=modprobe.blacklist=nouveau \
-    --append=nvidia-drm.modeset=1
+    --append-if-missing=rd.driver.blacklist=nouveau \
+    --append-if-missing=modprobe.blacklist=nouveau \
+    --append-if-missing=nvidia-drm.modeset=1
 
 # for encrypted drives, remove from kargs "rhgb" else you will not boot
 # this is because of running into chicken-and-egg problem of the driver being on the encrypted drive
@@ -125,50 +125,31 @@ rpm-ostree install gammastep swappy swayimg copyq
 
 ## kernel arguments
 ```
-# disable nvme power saving (micro stutters on some laptops -- minor extra power draw)
-# only enable if you have problems
-####### rpm-ostree kargs --append=nvme_core.default_ps_max_latency_us=0
-
-# misc other kern args
-#      * net.ifnames = keep wlan0 eth0 etc instead of wlpen0erike0re0r0ere stupid names
-#      * watchdog = useless
-#      * split_lock_detect = dmesg spam benign errors
 rpm-ostree kargs \
-    --append=net.ifnames=0 \
-    --append=nowatchdog \
-    --append=split_lock_detect=off
-
-# disable internal webcam/microphone
-rpm-ostree kargs \
-    --append=snd_hda_intel.dmic_detect=0 \
-    --append=snd_sof_intel_hda_generic=0 \
-    --append=snd_sof_intel_hda_common.dmic_num=0 \
-    --append=snd_intel_dspcfg.dsp_driver=1
-
-# disable ipv6
-rpm-ostree kargs \
-    --append=ipv6.disable=1
-
-# iommu (specifying both is harmless)
-rpm-ostree kargs \
-    --append=intel_iommu=on \
-    --append=amd_iommu=on
-
-# misc other security
-# shouldnt cause problems and very minimal if any performance impact
-# any questions on what they do just ask your favorite LLM
-rpm-ostree kargs \
-    --append=page_alloc.shuffle=1 \
-    --append=slab_nomerge \
-    --append=init_on_alloc=1 \
-    --append=init_on_free=1 \
-    --append=randomize_kstack_offset=on \
-    --append=vsyscall=none \
-    --append='sysctl.fs.suid_dumpable=0'
-
-# module blacklists
-rpm-ostree kargs \
-    --append=module_blacklist="uvcvideo,tipc,rds,sctp,dccp,n_hdlc,ax25,netrom,rose,x25,appletalk,psnap,p8022,p8023,atm,af_802154,cramfs,freevxfs,jffs2,hfs,hfsplus,gfs2,ksmbd,vivid,can,firewire_core"
+    --append-if-missing=net.ifnames=0 \
+    --append-if-missing=ipv6.disable=1 \
+    --append-if-missing=preempt=full \
+    --append-if-missing=nowatchdog \
+    --append-if-missing=nmi_watchdog=0 \
+    --append-if-missing=split_lock_detect=off \
+    --append-if-missing=mitigations=auto \
+    --append-if-missing=snd_hda_intel.dmic_detect=0 \
+    --append-if-missing=snd_sof_intel_hda_generic=0 \
+    --append-if-missing=snd_sof_intel_hda_common.dmic_num=0 \
+    --append-if-missing=snd_intel_dspcfg.dsp_driver=1 \
+    --append-if-missing=intel_iommu=on \
+    --append-if-missing=amd_iommu=on \
+    --append-if-missing=iommu.strict=1 \
+    --append-if-missing=efi=disable_early_pci_dma \
+    --append-if-missing=page_alloc.shuffle=1 \
+    --append-if-missing=slab_nomerge \
+    --append-if-missing=init_on_alloc=1 \
+    --append-if-missing=init_on_free=1 \
+    --append-if-missing=randomize_kstack_offset=on \
+    --append-if-missing=vsyscall=none \
+    --append-if-missing=sysctl.fs.suid_dumpable=0 \
+    --append-if-missing=proc_mem.force_override=ptrace \
+    --append-if-missing=module_blacklist="uvcvideo,intel_ipu6,intel_ipu6_isys,tipc,rds,sctp,n_hdlc,ax25,netrom,rose,x25,appletalk,psnap,p8022,p8023,atm,af_802154,cramfs,freevxfs,jffs2,hfs,hfsplus,gfs2,ksmbd,vivid,can,firewire_core"
 ```
 
 ## other programs

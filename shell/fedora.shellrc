@@ -15,7 +15,7 @@ if type rpm-ostree >/dev/null 2>&1 ; then
                 ;;
             u)
                 echo 'Updating flatpak...'
-                sudo flatpak update
+                sudo flatpak update -y
 
                 echo 'Updating rpm-ostree...'
                 sudo rpm-ostree refresh-md
@@ -78,4 +78,6 @@ firmware-update() {
     sudo fwupdmgr get-updates
     sudo fwupdmgr update
 }
+
+alias kargs-editor='EDITOR=vi sudo rpm-ostree kargs --editor'
 
