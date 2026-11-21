@@ -11,10 +11,13 @@ if [ -d ~/cloud ] ; then
 fi
 
 # homedir
+ln -svfn "$DOTS/.bashrc"                 ~/.bashrc
+ln -svfn "$DOTS/.bash_profile"           ~/.bash_profile
 ln -svfn "$DOTS/.cvsrc"                  ~/.cvsrc
 ln -svfn "$DOTS/.detoxrc"                ~/.detoxrc
 ln -svfn "$DOTS/.gitconfig"              ~/.gitconfig
 ln -svfn "$DOTS/.gitignore_global"       ~/.gitignore_global
+ln -svfn "$DOTS/.gtkrc-2.0"              ~/.gtkrc-2.0
 ln -svfn "$DOTS/.profile"                ~/.profile
 ln -svfn "$DOTS/.pylintrc"               ~/.pylintrc
 ln -svfn "$DOTS/.shellcheckrc"           ~/.shellcheckrc
