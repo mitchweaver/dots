@@ -31,9 +31,9 @@ ln -svfn "$DOTS/.wgetrc"                 ~/.wgetrc
 # ========================================================================
 # ~/.config
 # ========================================================================
-for prog in mpv nvim kitty ranger swayimg kxkbrc ; do
+for prog in mpv nvim kitty ranger swayimg kxkbrc autostart ; do
     if [ ! -L "$HOME/.config/$prog" ] ; then
-        if [ -f "$HOME/.config/$prog" ] ; then
+        if [ -e "$HOME/.config/$prog" ] ; then
             rm -riv "$HOME/.config/$prog"
         fi
 	ln -svn "$DOTS/.config/$prog" "$HOME/.config/$prog"
@@ -51,14 +51,30 @@ for file in \
     powermanagementprofilesrc
 do
     if [ ! -L "$HOME/.config/$file" ] ; then
-        if [ -f "$HOME/.config/$file" ] ; then
+        if [ -e "$HOME/.config/$file" ] ; then
             rm -iv "$HOME/.config/$file"
         fi
 	ln -svn "$DOTS/.config/$file" "$HOME/.config/$file"
     fi
 done
 
+# ========================================================================
+# junk
+# ========================================================================
+mkdir -p ~/.cache
+for crap in htop neofetch ; do
+    if [ ! -L "$HOME/.config/$crap" ] ; then
+        if [ -e "$HOME/.config/$crap" ] ; then
+            rm -riv "$HOME/.config/$crap"
+        fi
+        mkdir -p "$HOME/.cache/$crap"
+	ln -svn "$HOME/.cache/$crap" "$HOME/.config/$crap"
+    fi
+done
 
+# ========================================================================
+# /etc stuff
+# ========================================================================
 # easy way to tell if whatever script is on my laptop/desktop
 # or if I'm ssh somewhere and something that shouldn't run won't be run
 if [ ! -f /etc/THIS_IS_MY_MACHINE ] ; then
