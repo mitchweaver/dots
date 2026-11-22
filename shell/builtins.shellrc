@@ -1,3 +1,5 @@
+#!/usr/bin/env oksh
+
 # override builtin fg, nobody uses this anyway
 # use my fg 'find grep' script instead from environment
 fg(){

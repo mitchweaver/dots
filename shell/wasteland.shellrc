@@ -1,3 +1,5 @@
+#!/usr/bin/env oksh
+#
 #  ______      #  ______       #  ________      #  ______    #
 # /_____/\     # /_____/\      # /_______/\     # /_____/\   #
 # \:::__\/     # \:::_ \ \     # \::: _  \ \    # \:::_ \ \  #
@@ -6,8 +8,11 @@
 #    \:\_\ \ \ #    \ \ `\ \ \ #    \:.\ \  \ \ #    \ \ \   #
 #     \_____\/ #     \_\/ \_\/ #     \__\/\__\/ #     \_\/   #
 #                                                            #
-# All unsorted junk below. Who knows what's in here.         #
-# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+#
+# All unsorted junk below. Who knows what's in here.
+#
+# shellcheck disable=SC2139
+# ========================================================================
 
 # I hate these stupid dirs and every program that creates them.
 nohup /bin/rmdir Desktop Documents Pictures Public \
@@ -112,7 +117,7 @@ jpg-strip() {
 # translate-shell
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 trans() { command trans -no-auto -b "$*" 2>/dev/null ; }
-rtrans() { c=$1 ; shift ; command trans -from en -to $c "$*" 2>/dev/null ; }
+rtrans() { c="$1" ; shift ; command trans -from en -to "$c" "$*" 2>/dev/null ; }
 rde() { rtrans de "$*" ; }
 rja() { rtrans ja "$*" ; }
 rru() { rtrans ru "$*" ; }
@@ -130,22 +135,22 @@ cuesplit() {
     case $1 in
         *h|*help)
             >&2 echo 'usage: cuesplit file.cue file.flac'
-            break
+            return
             ;;
         *.cue)
             ;;
         *)
-            break
+            return
     esac
     case $2 in
         *.flac|*.wav)
             ;;
         *)
-            break
+            return
     esac
     shnsplit -f "$1" -o "flac flac -s -8 -o %f -" "$2" &&
     mv -v "$2" /tmp/ &&
-    cuetag.sh "$1" *.flac
+    cuetag.sh "$1" -- *.flac
 }
 
 alias progress='progress -w -M'

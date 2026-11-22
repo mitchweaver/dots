@@ -1,4 +1,6 @@
-alias mk="make -j${NPROC:-1}"
+#!/usr/bin/env oksh
+
+alias mk="make -j\${NPROC:-1}"
 alias mkc='make clean'
 alias mki='make install'
 alias mku='make uninstall'
@@ -11,20 +13,6 @@ alias py=python3
 
 # activate my PS1 git branch detection after branch switching
 gud() { command gud "$@" ; cd . ; }
-
-scfg() {
-    ${PLUMBER:-${EDITOR:-vi}} ~/src/suckless/$1/cfg/config.h
-}
-
-# watch a file and do an action as its contents changes
-iwaitdo() {
-    file=$1
-    shift
-    [ -f "$file" ] || { >&2 echo "No such file: $file" ; return 1 ; }
-    [   "$1"     ] || { >&2 echo "No action given."    ; return 1 ; }
-
-    while inotifywait -e modify "$file" ; do eval "$*" ; done
-}
 
 # editor wrapper
 v() {
@@ -48,7 +36,18 @@ v() {
     ${EDITOR:-vi} -n -- "$@"
 }
 
+#shellcheck disable=SC2139
 alias {nvi,nv,vim,nvmi}=v
+
+# watch a file and do an action as its contents changes
+iwaitdo() {
+    file=$1
+    shift
+    [ -f "$file" ] || { >&2 echo "No such file: $file" ; return 1 ; }
+    [   "$1"     ] || { >&2 echo "No action given."    ; return 1 ; }
+
+    while inotifywait -e modify "$file" ; do eval "$*" ; done
+}
 
 alias md2html='pandoc -f markdown'
 mdff() {

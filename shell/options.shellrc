@@ -1,3 +1,5 @@
+#!/usr/bin/env oksh
+
 case ${0##*/} in
     *ksh)
         set -o vi-tabcomplete  # vim emulation mode

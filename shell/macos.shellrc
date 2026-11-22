@@ -1,3 +1,5 @@
+#!/usr/bin/env oksh
+
 alias brew=/opt/homebrew/bin/brew
 
 alias bu='brew update ; brew upgrade'

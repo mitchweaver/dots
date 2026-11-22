@@ -1,4 +1,8 @@
+#!/usr/bin/env oksh
+#
 # openbsd-specific aliases
+#
+# shellcheck disable=SC2139
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # stop .core file generation on crashes

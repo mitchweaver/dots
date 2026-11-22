@@ -1,3 +1,8 @@
+#!/usr/bin/env oksh
+#
+# shellcheck disable=SC2139
+#
+
 case $(uname) in
     Darwin)
         if command -v colima >/dev/null ; then
@@ -34,6 +39,7 @@ alias dshell='docker exec -it /bin/sh'
 
 dprune() {
     docker image prune
+    # shellcheck disable=SC2046
     docker volume rm $(docker volume ls -f dangling=true -q)
 }
 
@@ -43,7 +49,7 @@ alias cdown='compose down'
 alias cbuild='compose build'
 
 dbuild() {
-    [ "$1" ] || { >&2 'Usage: dbuild <tag>' ; return 1 ; }
+    [ "$1" ] || { >&2 echo 'Usage: dbuild <tag>' ; return 1 ; }
     docker build --tag "$1" .
 }
 
@@ -52,7 +58,9 @@ docker_remove_networks() {
 }
 
 dockerkillall() {
+    # shellcheck disable=SC2046
     docker stop $(docker ps -a -q)
+    # shellcheck disable=SC2046
     docker rm $(docker ps -a -q)
 }
 
@@ -60,7 +68,9 @@ DOCKER_NUKE() {
     printf 'This will delete all images and containers, confirm? (y/n): '
     read -r ans
     [ "$ans" = y ] && {
+        # shellcheck disable=SC2046
         docker rm $(docker ps -a -q) --force
+        # shellcheck disable=SC2046
         docker rmi $(docker images -q) --force
         docker_remove_networks
     }

@@ -1,3 +1,5 @@
+#!/usr/bin/env oksh
+
 alias csgo='cd /var/home/mitch/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive'
 alias csgo-autoexec='nvim /var/home/mitch/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/autoexec.cfg'
 

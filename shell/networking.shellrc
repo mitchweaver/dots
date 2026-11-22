@@ -1,3 +1,5 @@
+#!/usr/bin/env oksh
+
 alias rsync='rsync -avhu --progress --delete --partial --links'
 
 # for fat32
@@ -13,6 +15,7 @@ alias p1='ping 1.1.1.1'
 
 alias ssh='TERM=xterm-256color ssh'
 
+# shellcheck disable=SC2139
 alias {vssh,vissh}='${EDITOR:-vi} ~/.ssh/config'
 
 # scan for open ports
@@ -34,12 +37,6 @@ wtf() {
 # grab urls of any running processes
 psurls() {
     ps -auxww | urls
-}
-
-isconnected() {
-    if ifconfig $int | grep 'no network' >/dev/null ; then
-        return 1
-    fi
 }
 
 if command -v systemctl >/dev/null ; then

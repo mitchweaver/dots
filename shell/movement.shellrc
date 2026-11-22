@@ -1,3 +1,8 @@
+#!/usr/bin/env oksh
+#
+# shellcheck disable=SC2139
+#
+
 alias {..,cd..}='cd ..'
 alias ...='.. ; ..'
 alias ....='.. ; ...'
@@ -5,10 +10,10 @@ alias ....='.. ; ...'
 # ========================================================================
 # fix for macos right now, figure out how to assign these later
 # mac not reading ~/.profile
-: "${XDG_DOWNLOAD_DIR:="${HOME}/Downloads"}"
-: "${XDG_DESKTOP_DIR:="${HOME}/Desktop"}"
-: "${XDG_DOCUMENTS_DIR:="${HOME}/files"}"
-: "${XDG_PICTURES_DIR:="${HOME}/images"}"
+: "${XDG_DOWNLOAD_DIR:="$HOME/Downloads"}"
+: "${XDG_DESKTOP_DIR:="$HOME/Desktop"}"
+: "${XDG_DOCUMENTS_DIR:="$HOME/files"}"
+: "${XDG_PICTURES_DIR:="$HOME/images"}"
 # ========================================================================
 
 
@@ -23,20 +28,20 @@ done
 _g() {
     _a=$1
     shift
-    cd $_a/"$*"
+    cd "$_a/$*"
     unset _a
 }
 
-alias gf="_g $XDG_DOCUMENTS_DIR"
-alias gi="_g $XDG_PICTURES_DIR"
-alias gm="_g $XDG_MUSIC_DIR"
+alias gf="_g \"$XDG_DOCUMENTS_DIR\""
+alias gi="_g \"$XDG_PICTURES_DIR\""
+alias gm="_g \"$XDG_MUSIC_DIR\""
 alias gn='_g ~/nextcloud'
 alias gg='_g ~/games'
 
-alias gW="_g $XDG_PICTURES_DIR/wallpapers"
+alias gW="_g \"$XDG_PICTURES_DIR/wallpapers\""
 
-alias {gb,gsb}="_g ${HOME}/src/bin"
-alias gs="_g ${HOME}/src"
+alias {gb,gsb}="_g ~/src/bin"
+alias gs="_g ~/src"
 
 alias gt="_g ~/tmp"
 
@@ -45,43 +50,40 @@ alias gM='_g /mnt'
 alias gT="_g /tmp"
 alias gV='_g /var'
 
-# alias gtr="mkdir -p ~/.local/share/Trash/files ; _g ~/.local/share/Trash/files"
+alias gtr="mkdir -p ~/.local/share/Trash/files ; _g ~/.local/share/Trash/files"
 
 # ========================================================================
-alias gss='_g ${HOME}/src/suckless'
-alias gsd='_g ${HOME}/src/dots'
-alias gsg='_g ${HOME}/src/gentoo'
-alias gsw='_g ${HOME}/src/website'
-alias gcf='_g ${XDG_CONFIG_HOME}'
-alias gst='_g ${HOME}/src/trading'
+alias gsd='_g ~/src/dots'
+alias gcf='_g $XDG_CONFIG_HOME'
+alias gst='_g ~/src/trading'
 # ========================================================================
 
-Yf() { cp "$@" $XDG_DOCUMENTS_DIR ; }
-Yi() { cp "$@" $XDG_PICTURES_DIR ; }
-Ym() { cp "$@" $XDG_MUSIC_DIR ; }
-Yvi(){ cp "$@" $XDG_VIDEOS_DIR ; }
-Ys() { cp "$@" ${HOME}/src ; }
+Yf() { cp "$@" "$XDG_DOCUMENTS_DIR" ; }
+Yi() { cp "$@" "$XDG_PICTURES_DIR" ; }
+Ym() { cp "$@" "$XDG_MUSIC_DIR" ; }
+Yvi(){ cp "$@" "$XDG_VIDEOS_DIR" ; }
+Ys() { cp "$@" ~/src ; }
 Yt() { cp "$@" ~/tmp ; }
 YT() { cp "$@" /tmp  ; }
 Yn() { cp "$@" ~/nextcloud ; }
 Yg() { cp "$@" ~/games ; }
 
-mf() { mv "$@" $XDG_DOCUMENTS_DIR ; }
-mi() { mv "$@" $XDG_PICTURES_DIR ; }
-mm() { mv "$@" $XDG_MUSIC_DIR ; }
-mvi(){ mv "$@" $XDG_VIDEOS_DIR ; }
-mW() { mv "$@" $XDG_PICTURES_DIR/wallpapers ; }
-ms() { mv "$@" ${HOME}/src ; }
+mf() { mv "$@" "$XDG_DOCUMENTS_DIR" ; }
+mi() { mv "$@" "$XDG_PICTURES_DIR" ; }
+mm() { mv "$@" "$XDG_MUSIC_DIR" ; }
+mvi(){ mv "$@" "$XDG_VIDEOS_DIR" ; }
+mW() { mv "$@" "$XDG_PICTURES_DIR/wallpapers" ; }
+ms() { mv "$@"  ~/src ; }
 mt() { mv "$@" ~/tmp ; }
 mT() { mv "$@" /tmp  ; }
 mn() { mv "$@" ~/nextcloud ; }
 mg() { mv "$@" ~/games ; }
 
-alias gd='_g ${XDG_DOWNLOAD_DIR}'
-Yd() { cp "$@" "${XDG_DOWNLOAD_DIR}" ; }
-md() { mv "$@" "${XDG_DOWNLOAD_DIR}" ; }
+alias gd="_g \"$XDG_DOWNLOAD_DIR\""
+Yd() { cp "$@" "$XDG_DOWNLOAD_DIR" ; }
+md() { mv "$@" "$XDG_DOWNLOAD_DIR" ; }
 
-alias gD='_g ${XDG_DESKTOP_DIR}'
-YD() { cp "$@" "${XDG_DESKTOP_DIR}" ; }
-mD() { mv "$@" "${XDG_DESKTOP_DIR}" ; }
+alias gD="_g \"$XDG_DESKTOP_DIR\""
+YD() { cp "$@" "$XDG_DESKTOP_DIR" ; }
+mD() { mv "$@" "$XDG_DESKTOP_DIR" ; }
 

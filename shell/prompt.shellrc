@@ -1,3 +1,5 @@
+#!/usr/bin/env oksh
+
 # print username in color palette, one color per character
 _ps1_print_user() {
     printf '%s' "\[\e[1;32m\]$USER"

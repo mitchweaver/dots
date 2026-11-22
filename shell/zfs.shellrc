@@ -1,3 +1,5 @@
+#!/usr/bin/env oksh
+
 alias zdf='zfs list -t all'
 alias zhealth='zpool status -x'
 alias zstat='zpool iostat -v 1'

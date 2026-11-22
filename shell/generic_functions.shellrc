@@ -1,3 +1,5 @@
+#!/usr/bin/env oksh
+#
 # functions that work on any machine with a unix userland
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -40,6 +42,7 @@ vw() { $EDITOR "$(which "${1:-?}")" ; }
 sum() { [ -f "$1" ] && paste -sd+ <"$1" | bc ; }
 
 # search for running process
+# shellcheck disable=2009
 psgrep() {
     ps -auxww | grep -i -- "$*" | grep -iv -- "grep $*"
 }
@@ -99,6 +102,7 @@ text2image() {
 load() {
     if [ -e /proc/loadavg ] ; then
         read -r _load < /proc/loadavg
+        # shellcheck disable=2086
         set -- $_load
         printf '%s %s %s\n' "$1" "$2" "$3"
     fi

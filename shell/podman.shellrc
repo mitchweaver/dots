@@ -1,3 +1,5 @@
+#!/usr/bin/env oksh
+
 PODMAN_NUKE() {
     printf 'This will delete all images and containers, confirm? (y/n): '
     read -r ans
