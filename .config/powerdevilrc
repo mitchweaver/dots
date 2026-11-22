@@ -1,0 +1,16 @@
+[AC][Display]
+DimDisplayIdleTimeoutSec=600
+TurnOffDisplayIdleTimeoutSec=900
+TurnOffDisplayIdleTimeoutWhenLockedSec=120
+
+[AC][Performance]
+PowerProfile=performance
+
+[AC][SuspendAndShutdown]
+AutoSuspendIdleTimeoutSec=1800
+
+[Battery][Performance]
+PowerProfile=balanced
+
+[LowBattery][Performance]
+PowerProfile=power-saver

@@ -1,0 +1,6 @@
+[/var/home/mitch/.local/share/Trash]
+Days=14
+LimitReachedAction=0
+Percent=10
+UseSizeLimit=true
+UseTimeLimit=true

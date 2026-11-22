@@ -1,1 +1,4 @@
 shell/*.shellrc linguist-language=shell
+kglobalshortcutsrc filter=strip-activity
+.config/kglobalshortcutsrc filter=strip-activity
+
