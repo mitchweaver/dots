@@ -105,9 +105,9 @@ rpm-ostree override remove \
 # NOTE: file managers sandbox thumbnailers already, so it will not work inside another container
 # NOTE: for some reason nmtui isnt included in networkmanager anymore by default
 rpm-ostree install \
-    distrobox kitty kitty-terminfo kitty-kitten ranger fastfetch fail2ban \
+    distrobox kitty kitty-terminfo kitty-kitten fastfetch fail2ban \
     NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld powertop lynis \
-    docker-cli docker-compose
+    docker-cli docker-compose clamav clamav-freshclam
 
 # themes
 rpm-ostree install \
@@ -238,7 +238,7 @@ apk add rsync openresolv netcat-openbsd nmap bind-tools socat ldns wireless-tool
 apk add entr detox dos2unix inotify-tools dateutils libqrencode w3m w3m-image py3-pillow py3-pillow_heif lynx
 
 # TERMINAL USERLAND
-apk add oksh neovim ranger htop translate-shell tree pv progress eza bat py3-pynvim ncdu pfetch neofetch kitty-terminfo
+apk add oksh neovim htop translate-shell tree pv progress eza bat py3-pynvim ncdu pfetch neofetch kitty-terminfo
 
 # DEVELOPMENT
 apk add build-base gcc patch musl-dev meson ninja shellcheck jq py3-pylint hugo sassc
@@ -252,5 +252,16 @@ apk add ffmpeg imagemagick jpegoptim exiftool cuetools shntool vorbis-tools wavp
 ######################## SWAY ####################################
 apk add swaybg swayimg gammastep
 ##################################################################
+```
+
+# RANGER
+
+note current releases of ranger are broken with ncurses and maintainer is taking forever to make a new release
+
+```
+cd /tmp
+git clone https://github.com/ranger/ranger
+cd ranger
+sudo make install
 ```
 

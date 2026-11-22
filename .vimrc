@@ -430,8 +430,8 @@ nmap <leader>s :%s//g<Left><Left>
 " notice: capital Wk
 """"""""""""""""""""""""""""""""""""'noremap <leader>W !!sh<cr>
 
-" wrap line to 80char by piping to /usr/bin/fmt
-noremap <F>:.!fmt --width=80<cr>
+" wrap line to 80 chars by piping to /usr/bin/fmt
+nnoremap F :.!fmt --width=80<CR>
 
 " prepend '> ' to lines as if to block quote (useful for mails with mutt)
 """"""""""""""""""""""""""" noremap Q :norm 0i> <esc>$

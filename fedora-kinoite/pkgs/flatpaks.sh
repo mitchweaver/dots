@@ -56,7 +56,7 @@ for app in \
     org.signal.Signal \
     org.torproject.torbrowser-launcher \
     org.wireshark.Wireshark \
-    com.spotify.Client
+    org.fedoraproject.MediaWriter
 do
     if flatpak list | grep -i "$app" >/dev/null ; then
         >&2 printf '[*] %s already installed... skipping...\n' "$app"
