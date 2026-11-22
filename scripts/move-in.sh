@@ -25,9 +25,11 @@ ln -svfn "$DOTS/.vimrc"                  ~/.vimrc
 ln -svfn "$DOTS/.wgetrc"                 ~/.wgetrc
 
 # ~/.config
-for prog in mpv nvim kitty ranger swayimg ; do
+for prog in mpv nvim kitty ranger swayimg kxkbrc ; do
     if [ ! -L "$HOME/.config/$prog" ] ; then
-        rm -rv "$HOME/.config/$prog"
+        if [ -f "$HOME/.config/$prog" ] ; then
+            rm -riv "$HOME/.config/$prog"
+        fi
 	ln -svn "$DOTS/.config/$prog" "$HOME/.config/$prog"
     fi
 done
