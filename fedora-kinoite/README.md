@@ -90,7 +90,7 @@ rpm-ostree override remove \
 # NOTE: file managers sandbox thumbnailers already, so it will not work inside another container
 # NOTE: for some reason nmtui isnt included in networkmanager anymore by default
 rpm-ostree install \
-    distrobox kitty kitty-terminfo kitty-kitten fastfetch fail2ban \
+    distrobox kitty kitty-terminfo kitty-kitten fastfetch htop fail2ban \
     NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld powertop \
     docker-cli docker-compose papirus-icon-theme reversal-icon-theme materia-kde
 ```
@@ -163,6 +163,7 @@ systemctl enable mullvad-daemon
 ```
 
 ## distrobox
+
 ```
 # NOTE: if requiring nvidia drivers in the container, need to pass the --nvidia flag
 #       however this wont work for alpine due to glibc/musl
@@ -172,57 +173,40 @@ distrobox create \
     --unshare-ipc
 
 distrobox enter alpine
-sudo su
+```
 
+```
 # bind /mnt to the host's /mnt
-rmdir /mnt
-ln -s /run/host/mnt /mnt
+sudo rmdir /mnt
+sudo ln -s /run/host/mnt /mnt
 
 # update all containers
-cat > /etc/apk/repositories <<"EOF"
+sudo cat > /etc/apk/repositories <<"EOF"
 https://dl-cdn.alpinelinux.org/alpine/edge/main
 https://dl-cdn.alpinelinux.org/alpine/edge/community
 https://dl-cdn.alpinelinux.org/alpine/edge/testing
 EOF
-apk update
-apk upgrade
 
-# META
-apk add docs
+sudo apk update
+sudo apk upgrade
 
-# NON-BUSYBOX / GNU
-apk add coreutils binutils findutils grep util-linux gawk iproute2
-
-# SYSTEM UTILS
-apk add bc htop gotop lsof lm-sensors pciutils usbutils smartmontools sysstat upower git
-
-# ARCHIVE
-apk add p7zip unzip zip lz4 xz lzo
-
-# MISC SYSTEM LIBS
-apk add openssl libnotify libsecret py3-numpy py3-scipy nlohmann-json
-
-# NETWORKING
-apk add rsync openresolv netcat-openbsd nmap bind-tools socat ldns wireless-tools speedtest-cli
-
-# SCRIPTING UTILS
-apk add entr detox dos2unix inotify-tools dateutils libqrencode w3m w3m-image py3-pillow py3-pillow_heif lynx
-
-# TERMINAL USERLAND
-apk add oksh neovim translate-shell tree pv progress eza bat py3-pynvim ncdu pfetch neofetch kitty-terminfo
-
-# DEVELOPMENT
-apk add build-base gcc patch musl-dev meson ninja shellcheck jq py3-pylint hugo sassc
-
-# COMMON DEV LIBS
-apk add linux-headers ncurses-dev openssl-dev elfutils-dev
-
-# MEDIA
-apk add ffmpeg imagemagick jpegoptim exiftool cuetools shntool vorbis-tools wavpack mpv yt-dlp
-
-######################## SWAY ####################################
-apk add swaybg swayimg gammastep
-##################################################################
+sudo apk add \
+    docs coreutils binutils findutils util-linux pciutils usbutils \
+    grep gawk iproute2 bc htop gotop lsof lm-sensors smartmontools \
+    sysstat upower git \
+    openssl libnotify libsecret nlohmann-json \
+    p7zip unzip zip lz4 xz lzo \
+    rsync openresolv netcat-openbsd nmap bind-tools socat ldns \
+    wireless-tools speedtest-cli \
+    entr detox dos2unix inotify-tools dateutils libqrencode \
+    w3m w3m-image py3-pillow py3-pillow_heif lynx \
+    oksh neovim translate-shell tree pv progress eza bat py3-pynvim ncdu \
+    pfetch neofetch kitty-terminfo \
+    build-base gcc patch musl-dev meson ninja shellcheck jq py3-pylint hugo sassc \
+    linux-headers ncurses-dev openssl-dev elfutils-dev \
+    ffmpeg imagemagick jpegoptim exiftool cuetools shntool vorbis-tools \
+    wavpack mpv yt-dlp \
+    py3-setuptools py3-numpy py3-scipy
 ```
 
 # RANGER

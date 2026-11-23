@@ -233,7 +233,7 @@ alias ytdl-mp3='youtube-dl -x --audio-format mp3'
 kittyfonts() { kitty +list-fonts --psnames | g "$*" ; }
 
 
-alias sensors='sensors | grep Core 2>/dev/null | grep -v rror'
+alias sensors="sensors | grep 'Core ' 2>/dev/null | grep -v rror"
 
 alias bg=background
 
