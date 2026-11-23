@@ -56,12 +56,13 @@ for app in \
     org.signal.Signal \
     org.torproject.torbrowser-launcher \
     org.wireshark.Wireshark \
-    org.fedoraproject.MediaWriter
+    org.fedoraproject.MediaWriter \
+    ai.jan.Jan
 do
     if flatpak list | grep -i "$app" >/dev/null ; then
         >&2 printf '[*] %s already installed... skipping...\n' "$app"
     else
-        sudo flatpak install -y "$app"
+        sudo flatpak install -y --remote flathub "$app"
     fi
 done
 

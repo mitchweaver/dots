@@ -1,4 +1,3 @@
-
 # Fedora Silverblue / Kinoite Install
 
 Note that due to the nature of immutable OS, this involves many reboots which is annoying
@@ -8,23 +7,23 @@ Note that due to the nature of immutable OS, this involves many reboots which is
 set up uid/gid to match network shares etc
 
 ```
+sudo passwd root
+sudo pkill -u $USER
+
+# login as root
 sudo usermod -u 6969 $USER
 sudo groupmod -g 6969 $USER
 sudo find $HOME -xdev -gid 1000 -exec chgrp -h $USER {} +
+
+# redisable root password/login
+sudo passwd -l root
 ```
 
-## upgrade
+## upgrade and enable repositories
 ```
 rpm-ostree refresh-md
 rpm-ostree upgrade
 
-# important: if there were any kernel updates, you need to reboot or else it will mess up steps below
-#            this is because you will be installing old kernel versions of drivers etc
-reboot
-```
-
-## enable repositories
-```
 rpm-ostree install \
   https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
@@ -32,7 +31,7 @@ rpm-ostree install \
 # now reboot
 reboot
 
-# now update firmware if available
+# update firmware if available
 fwupdmgr refresh
 fwupdmgr get-updates
 fwupdmgr update
@@ -74,30 +73,16 @@ modinfo nvidia | grep -i license
 
 ## anything we're deleting
 ```
-# fedora specific crap
-rpm-ostree override remove fedora-bookmarks fedora-chromium-config
-
-# remove firefox as we install librewolf later
-rpm-ostree override remove firefox
-
-# virtual machine host support which don't need since this is bare metal
+# * fedora specific crap
+# * virtual machine host support which don't need since this is bare metal
+# * KDE specific junk
 rpm-ostree override remove \
-    open-vm-tools-desktop \
-    open-vm-tools \
-    qemu-guest-agent \
-    spice-vdagent \
-    spice-webdavd \
-    virtualbox-guest-additions
-
-# ========================= KDE ===============================
-# KDE specific junk
-rpm-ostree override remove \
-    fedora-chromium-config-kde \
-    khelpcenter plasma-welcome plasma-drkonqi kde-partitionmanager kcharselect \
+    fedora-bookmarks fedora-chromium-config firefox \
+    open-vm-tools-desktop open-vm-tools qemu-guest-agent spice-vdagent spice-webdavd virtualbox-guest-additions \
+    fedora-chromium-config-kde khelpcenter plasma-welcome plasma-drkonqi kde-partitionmanager kcharselect \
     plasma-browser-integration plasma-discover-notifier plasma-discover \
     plasma-discover-rpm-ostree plasma-welcome-fedora plasma-discover-libs \
     plasma-discover-kns plasma-discover-flatpak filelight
-# ====================== END KDE ===============================
 ```
 
 ## installing anything that has to be on host system
@@ -106,21 +91,8 @@ rpm-ostree override remove \
 # NOTE: for some reason nmtui isnt included in networkmanager anymore by default
 rpm-ostree install \
     distrobox kitty kitty-terminfo kitty-kitten fastfetch fail2ban \
-    NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld powertop lynis \
-    docker-cli docker-compose clamav clamav-freshclam
-
-# themes
-rpm-ostree install \
-    papirus-icon-theme \
-    reversal-icon-theme \
-    materia-kde
-
-# ================ SWAY =============================================
-curl -Lo /etc/yum.repos.d/swayfx.repo https://copr.fedorainfracloud.org/coprs/swayfx/swayfx/repo/fedora-45/swayfx-swayfx-fedora-45.repo
-rpm-ostree override remove sway --install swayfx
-
-rpm-ostree install gammastep swappy swayimg copyq
-# ================ END SWAY =========================================
+    NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld powertop \
+    docker-cli docker-compose papirus-icon-theme reversal-icon-theme materia-kde
 ```
 
 ## kernel arguments
@@ -155,12 +127,10 @@ rpm-ostree kargs \
 ## other programs
 ```
 # librewolf
-dnf config-manager addrepo --from-repofile=https://repo.librewolf.net/librewolf.repo
-rpm-ostree install librewolf
+curl -fsSL -o /etc/yum.repos.d/librewolf.repo https://repo.librewolf.net/librewolf.repo
 
 # mullvad
 curl -fsSL -o /etc/yum.repos.d/mullvad.repo https://repository.mullvad.net/rpm/stable/mullvad.repo
-rpm-ostree install mullvad-vpn
 
 ################ tailscale
 ################ostree remote add tailscale https://pkgs.tailscale.com/stable/fedora/tailscale.repo
@@ -175,10 +145,14 @@ gpgkey=https://mega.nz/linux/repo/Fedora_$(rpm -E %fedora)/repodata/repomd.xml.k
 gpgcheck=1
 enabled=1
 EOF
-rpm-ostree install megasync
+
+rpm-ostree install megasync mullvad-vpn librewolf
 ```
 
 # systemd services
+
+reboot
+
 ```
 # annoying on boot
 systemctl disable NetworkManager-wait-online.service
@@ -190,9 +164,6 @@ systemctl enable mullvad-daemon
 
 ## distrobox
 ```
-# creating containers
-mkdir -p ~/.distrobox
-
 # NOTE: if requiring nvidia drivers in the container, need to pass the --nvidia flag
 #       however this wont work for alpine due to glibc/musl
 distrobox create \
@@ -238,7 +209,7 @@ apk add rsync openresolv netcat-openbsd nmap bind-tools socat ldns wireless-tool
 apk add entr detox dos2unix inotify-tools dateutils libqrencode w3m w3m-image py3-pillow py3-pillow_heif lynx
 
 # TERMINAL USERLAND
-apk add oksh neovim htop translate-shell tree pv progress eza bat py3-pynvim ncdu pfetch neofetch kitty-terminfo
+apk add oksh neovim translate-shell tree pv progress eza bat py3-pynvim ncdu pfetch neofetch kitty-terminfo
 
 # DEVELOPMENT
 apk add build-base gcc patch musl-dev meson ninja shellcheck jq py3-pylint hugo sassc

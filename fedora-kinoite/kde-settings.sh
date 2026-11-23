@@ -19,6 +19,15 @@ kwriteconfig6 --file kwinrc --group Desktops --key Rows 1
 kwriteconfig6 --file kwinrc --group Script-virtualdesktopsonlyonprimary --key Enabled true
 
 # ========================================================================
+# workspace switcher
+# ========================================================================
+# switch between all active windows with alt+tab, not just what is on current workspace
+kwriteconfig6 --file kwinrc --group TabBox --key DesktopMode 0
+# make alt+tab instant disable fade animation
+kwriteconfig6 --file kwinrc --group Plugins --key fadedesktopEnabled false
+kwriteconfig6 --file kwinrc --group Plugins --key slideEnabled false
+
+# ========================================================================
 # effects
 # ========================================================================
 kwriteconfig6 --file kwinrc --group Plugins --key blurEnabled true

@@ -7,9 +7,19 @@ DOTS="$HOME/src/dots"
 # cloud links
 # ========================================================================
 if [ -d ~/cloud ] ; then
-    ln -svfn "$CLOUD"/files        ~/files
-    ln -svfn "$CLOUD"/images       ~/images
-    ln -svfn "$CLOUD"/src          ~/src
+    ln -svfn "$CLOUD"/files                  ~/files
+    ln -svfn "$CLOUD"/images                 ~/images
+    ln -svfn "$CLOUD"/src                    ~/src
+
+    if [ -d ~/Downloads ] ; then
+        rm -r ~/Downloads
+    fi
+    ln -svfn "$CLOUD"/Downloads              ~/Downloads
+
+    if [ -d ~/Desktop ] ; then
+        rm -r ~/Desktop
+    fi
+    ln -svfn "$CLOUD"/Desktop                ~/Desktop
 fi
 
 # ========================================================================

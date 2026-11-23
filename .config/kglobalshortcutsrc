@@ -6,6 +6,10 @@ Switch to Last-Used Keyboard Layout=Meta+Alt+L,Meta+Alt+L,Switch to Last-Used Ke
 Switch to Next Keyboard Layout=Meta+Alt+K,Meta+Alt+K,Switch to Next Keyboard Layout
 _k_friendly_name=Keyboard Layout Switcher
 
+[com.openwebui.open-webui]
+80EEDAB9CE32F7F9FE66786229F4716D-Ctrl+Shift+O=none,Ctrl+Shift+O,Open WebUI shortcut: Ctrl+Shift+O
+_k_friendly_name=Open WebUI
+
 [kmix]
 _k_friendly_name=Audio Volume
 decrease_microphone_volume=Microphone Volume Down,Microphone Volume Down,Decrease Microphone Volume
@@ -15,7 +19,7 @@ increase_microphone_volume=Microphone Volume Up,Microphone Volume Up,Increase Mi
 increase_volume=Volume Up\tAlt+',Volume Up,Increase Volume
 increase_volume_small=Shift+Volume Up,Shift+Volume Up,Increase Volume by 1%
 mic_mute=Microphone Mute\tMeta+Volume Mute,Microphone Mute\tMeta+Volume Mute,Mute Microphone
-mute=none,Volume Mute,Mute
+mute=XF86AudioMute,XF86AudioMute,Mute
 push_to_talk=none,none,Push to talk
 
 [ksmserver]
@@ -123,7 +127,7 @@ Window Fullscreen=none,none,Make Window Fullscreen
 Window Grow Horizontal=none,none,Expand Window Horizontally
 Window Grow Vertical=none,none,Expand Window Vertically
 Window Lower=none,none,Lower Window
-Window Maximize=Meta+Up,Meta+PgUp,Maximize Window
+Window Maximize=Meta+Up,none,Maximize Window
 Window Maximize Horizontal=none,none,Maximize Window Horizontally
 Window Maximize Vertical=none,none,Maximize Window Vertically
 Window Minimize=Alt+M\tMeta+Down,Meta+PgDown,Minimize Window
@@ -203,32 +207,35 @@ view_zoom_out=Meta+-,Meta+-,Zoom Out
 [kwin][$InverseAction]
 Cycle Overview=Cycle Overview Opposite
 Decrease Opacity=Increase Opacity
-MoveZoomDown=MoveZoomUp
-MoveZoomLeft=MoveZoomRight
-Switch One Desktop Up=Switch One Desktop Down
+MoveZoomRight=MoveZoomLeft
+MoveZoomUp=MoveZoomDown
+Switch One Desktop Down=Switch One Desktop Up
 Switch One Desktop to the Right=Switch One Desktop to the Left
-Switch Window Right=Switch Window Left
+Switch Window Left=Switch Window Right
 Switch Window Up=Switch Window Down
 Switch to Next Desktop=Switch to Previous Desktop
 Switch to Previous Screen=Switch to Next Screen
-Switch to Screen Above=Switch to Screen Below
+Switch to Screen Below=Switch to Screen Above
 Switch to Screen to the Left=Switch to Screen to the Right
 Walk Through Windows (Reverse)=Walk Through Windows
 Walk Through Windows Alternative=Walk Through Windows Alternative (Reverse)
-Walk Through Windows of Current Application (Reverse)=Walk Through Windows of Current Application
-Walk Through Windows of Current Application Alternative=Walk Through Windows of Current Application Alternative (Reverse)
+Walk Through Windows of Current Application=Walk Through Windows of Current Application (Reverse)
+Walk Through Windows of Current Application Alternative (Reverse)=Walk Through Windows of Current Application Alternative
 Window Grow Horizontal=Window Shrink Horizontal
-Window One Desktop Down=Window One Desktop Up
+Window Lower=Window Raise
+Window One Desktop Up=Window One Desktop Down
 Window One Desktop to the Right=Window One Desktop to the Left
-Window One Screen Down=Window One Screen Up
-Window One Screen to the Right=Window One Screen to the Left
-Window Pack Right=Window Pack Left
-Window Pack Up=Window Pack Down
-Window Raise=Window Lower
+Window One Screen Up=Window One Screen Down
+Window One Screen to the Left=Window One Screen to the Right
+Window Pack Down=Window Pack Up
+Window Pack Left=Window Pack Right
 Window Shrink Vertical=Window Grow Vertical
-Window to Previous Desktop=Window to Next Desktop
+Window to Next Desktop=Window to Previous Desktop
 Window to Previous Screen=Window to Next Screen
-view_zoom_out=view_zoom_in
+view_zoom_in=view_zoom_out
+
+[librewolf.desktop]
+_launch=Alt+W,none,Librewolf
 
 [mediacontrol]
 _k_friendly_name=Media Controller
@@ -244,6 +251,12 @@ seekbackwardmedialong=none,none,Media playback seek backward 30s
 seekforwardmedia=Media Fast Forward,Media Fast Forward,Media playback seek forward 5s
 seekforwardmedialong=none,none,Media playback seek forward 30s
 stopmedia=Media Stop,Media Stop,Stop media playback
+
+[org.kde.dolphin.desktop]
+_launch=Alt+E,none,Dolphin
+
+[org.kde.krunner.desktop]
+_launch=Alt+P,none,KRunner
 
 [org_kde_powerdevil]
 Decrease Keyboard Brightness=Keyboard Brightness Down,Keyboard Brightness Down,Decrease Keyboard Brightness
