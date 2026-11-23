@@ -10,6 +10,7 @@
 # ========================================================================
 # swap super and alt as mod key
 kwriteconfig6 --file kwinrc --group MouseBindings --key CommandAllModKey Alt
+kwriteconfig6 --file kwinrc --group MouseBindings --key CommandAllKey Alt
 
 # 4 virtual desktops
 kwriteconfig6 --file kwinrc --group Desktops --key Number 4
@@ -34,6 +35,10 @@ kwriteconfig6 --file kwinrc --group Plugins --key blurEnabled true
 kwriteconfig6 --file kwinrc --group Plugins --key shakecursorEnabled false
 kwriteconfig6 --file kwinrc --group Plugins --key wobblywindowsEnabled false
 kwriteconfig6 --file kwinrc --group Effect-wobblywindows --key ResizeWobble false
+
+# annoying
+kwriteconfig6 --file kwinrc --group Plugins --key shakecursorEnabled false
+qdbus-qt6 org.kde.KWin /Effects org.kde.kwin.Effects.unloadEffect shakecursor
 
 # slide popups
 kwriteconfig6 --file kwinrc --group Plugins --key slidingpopupsEnabled true

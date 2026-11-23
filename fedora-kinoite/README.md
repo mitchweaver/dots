@@ -21,20 +21,20 @@ sudo passwd -l root
 
 ## upgrade and enable repositories
 ```
-rpm-ostree refresh-md
-rpm-ostree upgrade
+sudo rpm-ostree refresh-md
+sudo rpm-ostree upgrade
 
-rpm-ostree install \
+sudo rpm-ostree install \
   https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-# now reboot
-reboot
-
 # update firmware if available
-fwupdmgr refresh
-fwupdmgr get-updates
-fwupdmgr update
+sudo fwupdmgr refresh
+sudo fwupdmgr get-updates
+sudo fwupdmgr update
+
+# now reboot
+sudo reboot
 ```
 
 # Intel
@@ -77,7 +77,7 @@ modinfo nvidia | grep -i license
 # * virtual machine host support which don't need since this is bare metal
 # * KDE specific junk
 rpm-ostree override remove \
-    fedora-bookmarks fedora-chromium-config firefox \
+    fedora-bookmarks fedora-chromium-config firefox firefox-langpacks \
     open-vm-tools-desktop open-vm-tools qemu-guest-agent spice-vdagent spice-webdavd virtualbox-guest-additions \
     fedora-chromium-config-kde khelpcenter plasma-welcome plasma-drkonqi kde-partitionmanager kcharselect \
     plasma-browser-integration plasma-discover-notifier plasma-discover \
@@ -90,9 +90,10 @@ rpm-ostree override remove \
 # NOTE: file managers sandbox thumbnailers already, so it will not work inside another container
 # NOTE: for some reason nmtui isnt included in networkmanager anymore by default
 rpm-ostree install \
-    distrobox kitty kitty-terminfo kitty-kitten fastfetch htop fail2ban \
-    NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld powertop \
-    docker-cli docker-compose papirus-icon-theme reversal-icon-theme materia-kde
+    distrobox kitty kitty-terminfo kitty-kitten fastfetch neovim python3-neovim \
+    htop fail2ban NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld \
+    powertop docker-cli docker-compose lm_sensors \
+    papirus-icon-theme reversal-icon-theme materia-kde
 ```
 
 ## kernel arguments
@@ -176,24 +177,27 @@ distrobox enter alpine
 ```
 
 ```
+sudo su
+
+
 # bind /mnt to the host's /mnt
-sudo rmdir /mnt
-sudo ln -s /run/host/mnt /mnt
+rmdir /mnt
+ln -s /run/host/mnt /mnt
 
 # update all containers
-sudo cat > /etc/apk/repositories <<"EOF"
+cat > /etc/apk/repositories <<"EOF"
 https://dl-cdn.alpinelinux.org/alpine/edge/main
 https://dl-cdn.alpinelinux.org/alpine/edge/community
 https://dl-cdn.alpinelinux.org/alpine/edge/testing
 EOF
 
-sudo apk update
-sudo apk upgrade
+apk update
+apk upgrade
 
-sudo apk add \
+apk add \
     docs coreutils binutils findutils util-linux pciutils usbutils \
-    grep gawk iproute2 bc htop gotop lsof lm-sensors smartmontools \
-    sysstat upower git \
+    grep gawk iproute2 bc htop gotop lsof lm-sensors lm-sensors-detect \
+    smartmontools sysstat upower git \
     openssl libnotify libsecret nlohmann-json \
     p7zip unzip zip lz4 xz lzo \
     rsync openresolv netcat-openbsd nmap bind-tools socat ldns \

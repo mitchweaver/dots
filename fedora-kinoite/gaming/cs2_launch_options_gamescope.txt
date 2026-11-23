@@ -1,0 +1,16 @@
+#
+# gamescope makes the stretched res look less ass on linux
+# can't get it to look as good as on windows but this is much better than native
+#
+
+gamescope -w 1280 -h 960 -W 1920 -H 1080 -S stretch -F nearest -f --force-grab-cursor -r 600 --framerate-limit 600 -- %command% -allow_third_party_software -w 1280 -h 960 -nojoy -novid
+
+# ========================================================================
+# sharpening w/ fsr (alternative to -F nearest)
+#
+# -F fsr --sharpness 2
+#
+# range is from 0-20 with 0 being deepfried super sharp and 20 being blur
+#
+# ========================================================================
+

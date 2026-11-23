@@ -3,3 +3,5 @@
 alias csgo='cd /var/home/mitch/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive'
 alias csgo-autoexec='nvim /var/home/mitch/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/autoexec.cfg'
 
+alias csgo-clear-vulkan='rm -rf ~/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/shadercache/730'
+

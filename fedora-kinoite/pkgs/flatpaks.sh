@@ -62,9 +62,14 @@ do
     if flatpak list | grep -i "$app" >/dev/null ; then
         >&2 printf '[*] %s already installed... skipping...\n' "$app"
     else
-        sudo flatpak install -y --remote flathub "$app"
+        sudo flatpak install -y flathub "$app"
     fi
 done
+
+if ! flatpak list | grep -i gamescope >/dev/null ; then
+    # automatically grab the correct gamescope version that matches steams runtime version
+    sudo flatpak install -y flathub org.freedesktop.Platform.VulkanLayer.gamescope//$(flatpak info --show-runtime com.valvesoftware.Steam | cut -d/ -f3)
+fi
 
 # ========================================================================
 # NVIDIA

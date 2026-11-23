@@ -237,3 +237,5 @@ alias sensors="sensors | grep 'Core ' 2>/dev/null | grep -v rror"
 
 alias bg=background
 
+alias fix-spotify='rm -r ~/.var/app/com.spotify.Client/cache'
+
