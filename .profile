@@ -53,26 +53,32 @@ esac
 # ========================================================================
 # DIRECTORIES
 # ========================================================================
-# export XDG_CONFIG_HOME="${HOME}/.config" \
-#        XDG_DOWNLOAD_DIR="${HOME}/Downloads" \
-#        XDG_DOCUMENTS_DIR="${HOME}/files" \
-#        XDG_PICTURES_DIR="${HOME}/images"
-#
-# export DOWNLOADS="${XDG_DOWNLOAD_DIR}"
-#
-# export XDG_DESKTOP_DIR="${HOME}/desktop"
-# export XDG_DATA_HOME="${HOME}/.local"
-# export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_CONFIG_HOME="${HOME}/.config" \
+       XDG_DOWNLOAD_DIR="${HOME}/Downloads" \
+       XDG_DOCUMENTS_DIR="${HOME}/files" \
+       XDG_PICTURES_DIR="${HOME}/images"
+
+export XDG_DESKTOP_DIR="${HOME}/desktop"
+export XDG_DATA_HOME="${HOME}/.local"
+export XDG_CACHE_HOME="${HOME}/.cache"
+
+chmod 0700 "$XDG_CACHE_HOME"
+chmod 0700 "$XDG_CONFIG_HOME"
+chmod 0700 "$XDG_DATA_HOME"
+chmod 0700 "$XDG_DOCUMENTS_DIR"
+chmod 0700 "$XDG_PICTURES_DIR"
 
 # i dont use these but some programs complain
 # if they can't write to them
-# export XDG_NULL_DIR="/tmp/$USER-tmp/.xdg-$USER-void"
-# mkdir -p "$XDG_NULL_DIR"
-# export XDG_PUBLICSHARE_DIR="$XDG_NULL_DIR" \
-#        XDG_TEMPLATES_DIR="$XDG_NULL_DIR" \
-#        XDG_VIDEOS_DIR="$XDG_NULL_DIR" \
-#        XDG_MUSIC_DIR="$XDG_NULL_DIR"
-#
+export XDG_NULL_DIR="/tmp/$USER-tmp/.xdg-$USER-void"
+mkdir -p "$XDG_NULL_DIR"
+export XDG_PUBLICSHARE_DIR="$XDG_NULL_DIR" \
+       XDG_TEMPLATES_DIR="$XDG_NULL_DIR" \
+       XDG_VIDEOS_DIR="$XDG_NULL_DIR" \
+       XDG_MUSIC_DIR="$XDG_NULL_DIR"
+
+chmod 0700 "$XDG_NULL_DIR"
+
 # hide GOPATH to ~/.local/go instead of ~/go
 export GOPATH="${HOME}/.local/go"
 
@@ -189,10 +195,6 @@ export QT_QPA_PLATFORM=wayland
 export ELECTRON_OZONE_PLATFORM_HINT=wayland
 export MOZ_ENABLE_WAYLAND=1
 export _JAVA_AWT_WM_NONREPARENTING=1
-
-export SDL_VIDEODRIVER=wayland
-export SDL_AUDIO_DRIVER=pipewire
-export vblank_mode=0
 
 # basic check if we've been run or not
 # see kshrc

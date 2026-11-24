@@ -47,7 +47,7 @@ apk add \
     entr detox dos2unix inotify-tools dateutils libqrencode \
     w3m w3m-image py3-pillow py3-pillow_heif lynx \
     oksh neovim translate-shell tree pv progress eza bat py3-pynvim ncdu \
-    pfetch neofetch kitty-terminfo \
+    pfetch fastfetch kitty-terminfo \
     build-base gcc patch musl-dev meson ninja shellcheck jq py3-pylint hugo sassc \
     linux-headers ncurses-dev openssl-dev elfutils-dev \
     ffmpeg imagemagick jpegoptim exiftool cuetools shntool vorbis-tools \

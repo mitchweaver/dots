@@ -42,6 +42,9 @@ sudo reboot
 # remove the free version and install the proprietary one
 # this is needed for H.264 and HEVC decoding
 rpm-ostree override remove libva-intel-media-driver --install intel-media-driver
+
+# install intel_gpu_top
+rpm-ostree install igt-gpu-tools
 ```
 
 ## NVIDIA (skip if intel / amd  or if you're sticking with nouveau)

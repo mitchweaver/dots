@@ -72,12 +72,25 @@ if ! flatpak list | grep -i gamescope >/dev/null ; then
 fi
 
 # ========================================================================
-# NVIDIA
+# VULKAN
 # ========================================================================
+# if nvidia
 if lspci | grep -i nvidia >/dev/null ; then
+    # install nvidia vulkan and automatically detect correct nvidia version
     if ! flatpak list | grep -i org.freedesktop.Platform.GL.nvidia >/dev/null ; then
         sudo flatpak install -y flathub org.freedesktop.Platform.GL.nvidia-"$(tr . - < /sys/module/nvidia/version)"
         sudo flatpak install -y flathub org.freedesktop.Platform.GL32.nvidia-"$(tr . - < /sys/module/nvidia/version)"
+    fi
+else
+    # note: check correct version to install with:
+    # ----- flatpak info com.valvesoftware.Steam | grep -iE 'runtime|sdk'
+
+    # install generic (intel/amd)
+    if ! flatpak list | grep org.freedesktop.Platform.GL32.default >/dev/null ; then
+        sudo flatpak install -y flathub org.freedesktop.Platform.GL32.default
+    fi
+    if ! flatpak list | grep org.freedesktop.Platform.Compat.i386 >/dev/null ; then
+        sudo flatpak install -y flathub org.freedesktop.Platform.Compat.i386
     fi
 fi
 
