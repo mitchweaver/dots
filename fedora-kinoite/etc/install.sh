@@ -25,15 +25,15 @@ sudo udevadm control --reload-rules
 sudo udevadm trigger
 
 # ========================================================================
-# services
+# /etc/rc.local
 # ========================================================================
-for service in fail2ban tlp ; do
-    if sudo systemctl enable "$service" ; then
-        if pgrep -f "$service" >/dev/null ; then
-            sudo systemctl restart "$service"
-        else
-            sudo systemctl start "$service"
-        fi
-    fi
-done
+if [ ! -e /etc/rc.local ] ; then
+    old_dir="$PWD"
+    cd /tmp
+    git clone https://github.com/mitchweaver/rclocal
+    cd rclocal
+    sudo make install
+    cd "$old_dir"
+    sudo install -Dvm 0755 ./rc.local /etc/rc.local
+fi
 

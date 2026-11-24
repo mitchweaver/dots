@@ -21,13 +21,13 @@ IntensityAmount=0
 IntensityEffect=0
 
 [Colors:Button]
-BackgroundAlternate=130,113,64
+BackgroundAlternate=130,111,62
 BackgroundNormal=62,62,62
-DecorationFocus=160,135,65
-DecorationHover=160,135,65
-ForegroundActive=160,135,65
+DecorationFocus=160,133,63
+DecorationHover=160,133,63
+ForegroundActive=160,133,63
 ForegroundInactive=160,160,160
-ForegroundLink=240,203,98
+ForegroundLink=243,202,95
 ForegroundNegative=240,1,1
 ForegroundNeutral=255,221,0
 ForegroundNormal=255,255,255
@@ -35,19 +35,19 @@ ForegroundPositive=128,255,128
 ForegroundVisited=255,102,102
 
 [Colors:Complementary]
-DecorationFocus=160,135,65
-DecorationHover=160,135,65
-ForegroundActive=160,135,65
-ForegroundLink=160,135,65
+DecorationFocus=160,133,63
+DecorationHover=160,133,63
+ForegroundActive=160,133,63
+ForegroundLink=160,133,63
 
 [Colors:Selection]
-BackgroundAlternate=124,106,57
-BackgroundNormal=124,106,57
-DecorationFocus=160,135,65
-DecorationHover=160,135,65
-ForegroundActive=160,135,65
+BackgroundAlternate=124,105,56
+BackgroundNormal=124,105,56
+DecorationFocus=160,133,63
+DecorationHover=160,133,63
+ForegroundActive=160,133,63
 ForegroundInactive=255,255,255
-ForegroundLink=240,203,98
+ForegroundLink=243,202,95
 ForegroundNegative=240,1,1
 ForegroundNeutral=255,221,0
 ForegroundNormal=255,255,255
@@ -57,11 +57,11 @@ ForegroundVisited=255,102,102
 [Colors:Tooltip]
 BackgroundAlternate=0,0,0
 BackgroundNormal=0,0,0
-DecorationFocus=160,135,65
-DecorationHover=160,135,65
-ForegroundActive=160,135,65
+DecorationFocus=160,133,63
+DecorationHover=160,133,63
+ForegroundActive=160,133,63
 ForegroundInactive=225,225,225
-ForegroundLink=160,135,65
+ForegroundLink=160,133,63
 ForegroundNegative=240,1,1
 ForegroundNeutral=255,221,0
 ForegroundNormal=255,255,255
@@ -71,11 +71,11 @@ ForegroundVisited=255,102,102
 [Colors:View]
 BackgroundAlternate=50,50,50
 BackgroundNormal=40,40,40
-DecorationFocus=160,135,65
-DecorationHover=160,135,65
-ForegroundActive=160,135,65
+DecorationFocus=160,133,63
+DecorationHover=160,133,63
+ForegroundActive=160,133,63
 ForegroundInactive=160,160,160
-ForegroundLink=240,203,98
+ForegroundLink=243,202,95
 ForegroundNegative=240,1,1
 ForegroundNeutral=255,221,0
 ForegroundNormal=255,255,255
@@ -85,11 +85,11 @@ ForegroundVisited=255,102,102
 [Colors:Window]
 BackgroundAlternate=49,49,49
 BackgroundNormal=62,62,62
-DecorationFocus=160,135,65
-DecorationHover=160,135,65
-ForegroundActive=160,135,65
+DecorationFocus=160,133,63
+DecorationHover=160,133,63
+ForegroundActive=160,133,63
 ForegroundInactive=160,160,160
-ForegroundLink=240,203,98
+ForegroundLink=243,202,95
 ForegroundNegative=240,1,1
 ForegroundNeutral=255,221,0
 ForegroundNormal=255,255,255
@@ -97,7 +97,7 @@ ForegroundPositive=128,255,128
 ForegroundVisited=255,102,102
 
 [General]
-AccentColor=160,135,65
+AccentColor=160,133,63
 ColorScheme=KvSimplicityDark
 ColorSchemeHash=2df38854023e97bd8ee4c922f72978fd99d9fffd
 LastUsedCustomAccentColor=233,61,88

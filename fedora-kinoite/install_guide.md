@@ -162,6 +162,7 @@ systemctl disable NetworkManager-wait-online.service
 
 # enables
 systemctl enable fail2ban
+systemctl enable tlp
 systemctl enable mullvad-daemon
 ```
 

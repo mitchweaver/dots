@@ -21,6 +21,7 @@ embed-audio/x-scpls=false
 embed-audio/x-vorbis=false
 embed-audio/x-vorbis+ogg=false
 embed-audio/x-wav=false
+embed-image/jpeg=false
 embed-image/png=false
 embed-text/markdown=false
 embed-text/plain=false

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo '/etc/rc.local finished'
+

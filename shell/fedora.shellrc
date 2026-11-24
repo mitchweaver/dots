@@ -32,6 +32,9 @@ if type rpm-ostree >/dev/null 2>&1 ; then
             s)
                 rpm-ostree search "$@"
                 ;;
+            d)
+                sudo rpm-ostree override remove "$@"
+                ;;
             l)
                 rpm -qa | sort
         esac
