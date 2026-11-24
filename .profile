@@ -155,8 +155,6 @@ else
     mkdir -p ~/tmp
 fi
 
-mkdir -p ~/tmp
-
 # ========================================================================
 # FIX PERMISSIONS
 # ========================================================================
@@ -195,13 +193,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export SDL_VIDEODRIVER=wayland
 export SDL_AUDIO_DRIVER=pipewire
 export vblank_mode=0
-
-
-# if command -v cliphist >/dev/null ; then
-#     mkdir -p ~/tmp/.cliphist
-#     chmod -R 0700 ~/tmp/.cliphist
-#     ln -sf ~/tmp/.cliphist ~/.cache/cliphist
-# fi
 
 # basic check if we've been run or not
 # see kshrc

@@ -35,7 +35,6 @@ for app in \
     com.discordapp.Discord \
     com.getmailspring.Mailspring \
     com.github.tchx84.Flatseal \
-    com.github.flxzt.rnote \
     com.interversehq.qView \
     com.obsproject.Studio \
     com.rustdesk.RustDesk \
@@ -50,14 +49,15 @@ for app in \
     org.darktable.Darktable \
     org.gimp.GIMP \
     org.gnome.Boxes \
-    org.kde.kolourpaint \
     org.libreoffice.LibreOffice \
     org.shotcut.Shotcut \
     org.signal.Signal \
     org.torproject.torbrowser-launcher \
     org.wireshark.Wireshark \
     org.fedoraproject.MediaWriter \
-    ai.jan.Jan
+    io.github.focustimerhq.FocusTimer \
+    org.kde.kolourpaint \
+    org.kde.drawy
 do
     if flatpak list | grep -i "$app" >/dev/null ; then
         >&2 printf '[*] %s already installed... skipping...\n' "$app"

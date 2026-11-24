@@ -41,7 +41,7 @@ apk add \
     grep gawk iproute2 bc htop gotop lsof lm-sensors lm-sensors-detect \
     smartmontools sysstat upower git \
     openssl libnotify libsecret nlohmann-json \
-    p7zip unzip zip lz4 xz lzo \
+    p7zip unzip zip lz4 xz lzo gzip pigz \
     rsync openresolv netcat-openbsd nmap bind-tools socat ldns \
     wireless-tools speedtest-cli \
     entr detox dos2unix inotify-tools dateutils libqrencode \

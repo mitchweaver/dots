@@ -19,7 +19,7 @@ increase_microphone_volume=Microphone Volume Up,Microphone Volume Up,Increase Mi
 increase_volume=Volume Up\tAlt+',Volume Up,Increase Volume
 increase_volume_small=Shift+Volume Up,Shift+Volume Up,Increase Volume by 1%
 mic_mute=Microphone Mute\tMeta+Volume Mute,Microphone Mute\tMeta+Volume Mute,Mute Microphone
-mute=,Volume Mute,Mute
+mute=none,Volume Mute,Mute
 push_to_talk=none,none,Push to talk
 
 [ksmserver]
@@ -84,8 +84,8 @@ Switch to Desktop 24=none,none,Switch to Desktop 24
 Switch to Desktop 25=none,none,Switch to Desktop 25
 Switch to Desktop 3=Alt+3,Ctrl+F3\tMeta+F3,Switch to Desktop 3
 Switch to Desktop 4=Alt+4,Ctrl+F4\tMeta+F4,Switch to Desktop 4
-Switch to Desktop 5=none,none,Switch to Desktop 5
-Switch to Desktop 6=none,none,Switch to Desktop 6
+Switch to Desktop 5=Alt+5,none,Switch to Desktop 5
+Switch to Desktop 6=Alt+6,none,Switch to Desktop 6
 Switch to Desktop 7=none,none,Switch to Desktop 7
 Switch to Desktop 8=none,none,Switch to Desktop 8
 Switch to Desktop 9=none,none,Switch to Desktop 9
@@ -181,8 +181,8 @@ Window to Desktop 24=none,none,Window to Desktop 24
 Window to Desktop 25=none,none,Window to Desktop 25
 Window to Desktop 3=Alt+#,none,Window to Desktop 3
 Window to Desktop 4=Alt+$,none,Window to Desktop 4
-Window to Desktop 5=none,none,Window to Desktop 5
-Window to Desktop 6=none,none,Window to Desktop 6
+Window to Desktop 5=Alt+%,none,Window to Desktop 5
+Window to Desktop 6=Alt+^,none,Window to Desktop 6
 Window to Desktop 7=none,none,Window to Desktop 7
 Window to Desktop 8=none,none,Window to Desktop 8
 Window to Desktop 9=none,none,Window to Desktop 9
@@ -205,34 +205,37 @@ view_zoom_in=Meta++\tMeta+=,Meta++\tMeta+=,Zoom In
 view_zoom_out=Meta+-,Meta+-,Zoom Out
 
 [kwin][$InverseAction]
-Cycle Overview=Cycle Overview Opposite
-Increase Opacity=Decrease Opacity
+Cycle Overview Opposite=Cycle Overview
+Decrease Opacity=Increase Opacity
+MoveZoomDown=MoveZoomUp
 MoveZoomLeft=MoveZoomRight
-MoveZoomUp=MoveZoomDown
 Switch One Desktop Down=Switch One Desktop Up
-Switch One Desktop to the Left=Switch One Desktop to the Right
-Switch Window Down=Switch Window Up
-Switch Window Right=Switch Window Left
-Switch to Previous Desktop=Switch to Next Desktop
+Switch One Desktop to the Right=Switch One Desktop to the Left
+Switch Window Left=Switch Window Right
+Switch Window Up=Switch Window Down
+Switch to Next Desktop=Switch to Previous Desktop
 Switch to Previous Screen=Switch to Next Screen
 Switch to Screen Above=Switch to Screen Below
 Switch to Screen to the Left=Switch to Screen to the Right
 Walk Through Windows=Walk Through Windows (Reverse)
 Walk Through Windows Alternative (Reverse)=Walk Through Windows Alternative
-Walk Through Windows of Current Application (Reverse)=Walk Through Windows of Current Application
-Walk Through Windows of Current Application Alternative=Walk Through Windows of Current Application Alternative (Reverse)
+Walk Through Windows of Current Application=Walk Through Windows of Current Application (Reverse)
+Walk Through Windows of Current Application Alternative (Reverse)=Walk Through Windows of Current Application Alternative
 Window Grow Horizontal=Window Shrink Horizontal
 Window Lower=Window Raise
 Window One Desktop Up=Window One Desktop Down
-Window One Desktop to the Right=Window One Desktop to the Left
-Window One Screen Down=Window One Screen Up
+Window One Desktop to the Left=Window One Desktop to the Right
+Window One Screen Up=Window One Screen Down
 Window One Screen to the Right=Window One Screen to the Left
 Window Pack Right=Window Pack Left
 Window Pack Up=Window Pack Down
 Window Shrink Vertical=Window Grow Vertical
 Window to Next Screen=Window to Previous Screen
 Window to Previous Desktop=Window to Next Desktop
-view_zoom_in=view_zoom_out
+view_zoom_out=view_zoom_in
+
+[librewolf.desktop]
+_launch=Alt+W,none,Librewolf
 
 [mediacontrol]
 _k_friendly_name=Media Controller
@@ -248,6 +251,12 @@ seekbackwardmedialong=none,none,Media playback seek backward 30s
 seekforwardmedia=Media Fast Forward,Media Fast Forward,Media playback seek forward 5s
 seekforwardmedialong=none,none,Media playback seek forward 30s
 stopmedia=Media Stop,Media Stop,Stop media playback
+
+[org.kde.dolphin.desktop]
+_launch=Alt+E,none,Dolphin
+
+[org.kde.krunner.desktop]
+_launch=Alt+P,none,KRunner
 
 [org_kde_powerdevil]
 Decrease Keyboard Brightness=Keyboard Brightness Down,Keyboard Brightness Down,Decrease Keyboard Brightness
