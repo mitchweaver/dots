@@ -7,12 +7,14 @@ fg(){
 }
 
 # fuzzy finding cd
-cd() { 
+cd() {
     case $1 in
         \?)
             if [ -f "${XDG_CACHE_HOME:-${HOME}/.cache}"/last_dir ] ; then
                 read -r loc < "${XDG_CACHE_HOME:-${HOME}/.cache}"/last_dir
-                [ "$loc" ] && cd "$loc"
+                if [ -f "$loc" ] ; then
+                    cd "$loc"
+                fi
             fi
             ;;
         *)

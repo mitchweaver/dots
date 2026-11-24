@@ -91,16 +91,17 @@ if [ -d "$SHELLRC_DIR" ] ; then
         [ -f "$SHELLRC_DIR/kde.shellrc" ] && . "$SHELLRC_DIR/kde.shellrc"
     fi
 
+    # note: order somewhat matters
     for file in \
         builtins \
-        development \
+        prompt \
         generic_aliases \
         generic_functions \
+        development \
         history \
         movement \
         networking \
         options \
-        prompt \
         wasteland
     do
         [ -f "$SHELLRC_DIR/$file.shellrc" ] && . "$SHELLRC_DIR/$file.shellrc"

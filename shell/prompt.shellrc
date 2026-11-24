@@ -118,8 +118,8 @@ _ps1_print() {
 # check if we're in ranger
 [ "$RANGER_LEVEL" ] && clear
 
-# this activates our PS1
+# this activates our PS1 (see builtins.shellrc)
 cd .
 
-alias ps1='export PS1="% "'
+alias fix-ps1='export PS1="% "'
 
