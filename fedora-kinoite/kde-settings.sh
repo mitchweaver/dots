@@ -28,6 +28,10 @@ kwriteconfig6 --file kwinrc --group TabBox --key DesktopMode 0
 kwriteconfig6 --file kwinrc --group Plugins --key fadedesktopEnabled false
 kwriteconfig6 --file kwinrc --group Plugins --key slideEnabled false
 
+# animation speed
+# 1.0 = default, 0.0 = disabled, 0.5 = twice as fast
+kwriteconfig6 --file kdeglobals --group KDE --key AnimationDurationFactor 0.8
+
 # ========================================================================
 # effects
 # ========================================================================

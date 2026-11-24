@@ -239,3 +239,14 @@ alias bg=background
 
 alias fix-spotify='rm -r ~/.var/app/com.spotify.Client/cache'
 
+
+# ========================================================================
+alias janfiles='cd /var/home/mitch/.var/app/ai.jan.Jan/data/Jan/data/llamacpp/models'
+# ========================================================================
+
+
+nvidia-vram() {
+    set -- $(nvidia-smi  | grep MiB | head -n 1  | sed 's/.*W//')
+    echo $2/$4
+}
+

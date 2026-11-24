@@ -188,10 +188,14 @@ fi 2>/dev/null
 export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP=sway
 export QT_QPA_PLATFORM=wayland
-export SDL_VIDEODRIVER=wayland
 export ELECTRON_OZONE_PLATFORM_HINT=wayland
 export MOZ_ENABLE_WAYLAND=1
 export _JAVA_AWT_WM_NONREPARENTING=1
+
+export SDL_VIDEODRIVER=wayland
+export SDL_AUDIO_DRIVER=pipewire
+export vblank_mode=0
+
 
 # if command -v cliphist >/dev/null ; then
 #     mkdir -p ~/tmp/.cliphist

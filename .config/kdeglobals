@@ -110,7 +110,7 @@ accentColorFromWallpaper=true
 Theme=Reversal-dark
 
 [KDE]
-AnimationDurationFactor=0.75
+AnimationDurationFactor=0.8
 DndBehavior=MoveIfSameDevice
 LookAndFeelPackage=org.kde.breezedark.desktop
 ShowDeleteCommand=false

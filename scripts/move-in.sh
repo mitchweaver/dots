@@ -58,11 +58,11 @@ for file in \
     kded_device_automounterrc kdeglobals kglobalshortcutsrc kiorc \
     klipperrc kmenueditrc ksplashrc kservicemenurc ktimezonedrc \
     ktrashrc kuserfeedbackrc plasma-localerc powerdevilrc \
-    powermanagementprofilesrc
+    powermanagementprofilesrc baloofilerc user-dirs.dirs user-dirs.locale
 do
     if [ ! -L "$HOME/.config/$file" ] ; then
         if [ -e "$HOME/.config/$file" ] ; then
-            rm -iv "$HOME/.config/$file"
+            rm -riv "$HOME/.config/$file"
         fi
 	ln -svn "$DOTS/.config/$file" "$HOME/.config/$file"
     fi
