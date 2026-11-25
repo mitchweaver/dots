@@ -104,7 +104,10 @@ kwriteconfig6 --file kwinrc --group NightColor --key NightTemperature 6300
 # ========================================================================
 # disable file indexing (kde baloo)
 kwriteconfig6 --file baloofilerc --group "Basic Settings" --key Indexing-Enabled false
+kwriteconfig6 --file krunnerrc --group Plugins --key baloosearchEnabled false
 balooctl6 disable
+pkill baloorunner
+kquitapp6 krunner
 
 # ========================================================================
 # shortcuts

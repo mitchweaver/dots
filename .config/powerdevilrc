@@ -9,8 +9,23 @@ PowerProfile=performance
 [AC][SuspendAndShutdown]
 AutoSuspendIdleTimeoutSec=1800
 
+[Battery][Display]
+DimDisplayIdleTimeoutSec=300
+TurnOffDisplayIdleTimeoutSec=600
+
+[Battery][Keyboard]
+UseProfileSpecificKeyboardBrightness=true
+
 [Battery][Performance]
 PowerProfile=balanced
+
+[LowBattery][Display]
+DimDisplayIdleTimeoutSec=120
+TurnOffDisplayIdleTimeoutSec=300
+
+[LowBattery][Keyboard]
+KeyboardBrightness=20
+UseProfileSpecificKeyboardBrightness=true
 
 [LowBattery][Performance]
 PowerProfile=power-saver

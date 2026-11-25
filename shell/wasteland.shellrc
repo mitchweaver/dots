@@ -195,11 +195,17 @@ alias lxappearance='GDK_BACKEND=x11 lxappearance'
 ######## alias fixpulse='/usr/local/bin/pulseaudio --start --log-target=syslog'
 
 nf() {
-    if type fastfetch >/dev/null 2>&1 ; then
-        fastfetch
-    elif type neofetch >/dev/null 2>&1 ; then
-        neofetch
+    # kinoite logo is so ugly
+    logo=
+    if command -v rpm-ostree >/dev/null ; then
+        logo='--logo fedora'
     fi
+    if type fastfetch >/dev/null 2>&1 ; then
+        fastfetch $logo
+    elif type neofetch >/dev/null 2>&1 ; then
+        neofetch $logo
+    fi
+    unset logo
 }
 alias ff=nf
 

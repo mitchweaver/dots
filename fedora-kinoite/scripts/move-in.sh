@@ -69,6 +69,16 @@ do
 done
 
 # ========================================================================
+# ~/.local/share kde stuff
+# ========================================================================
+if [ -d ~/.local/share/kio ] ; then
+    rm -r ~/.local/share/kio
+fi
+ln -svn "$DOTS/.local/share/kio" ~/.local/share/kio
+# re-add execute bit if somehow got missing
+chmod +x ~/.local/share/kio/servicemenus/symlink-to-desktop.desktop
+
+# ========================================================================
 # junk
 # ========================================================================
 mkdir -p ~/.cache
