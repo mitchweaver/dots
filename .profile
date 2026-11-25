@@ -59,7 +59,7 @@ export XDG_CONFIG_HOME="${HOME}/.config" \
        XDG_PICTURES_DIR="${HOME}/images"
 
 export XDG_DESKTOP_DIR="${HOME}/desktop"
-export XDG_DATA_HOME="${HOME}/.local"
+export XDG_DATA_HOME="${HOME}/.local/share"
 export XDG_CACHE_HOME="${HOME}/.cache"
 
 chmod 0700 "$XDG_CACHE_HOME"

@@ -1,6 +1,12 @@
 #!/bin/sh
 
-HOME_SSID=Weaver
+# edit this to your ssid:
+##### HOME_SSID=XXXXXXXX
+
+if [ ! "$HOME_SSID" ] ; then
+    >&2 echo 'edit HOME_SSID idiot'
+    exit 1
+fi
 
 # set zone for all new wifi ssid going further to be "public"
 # which is more restrictive than "home"

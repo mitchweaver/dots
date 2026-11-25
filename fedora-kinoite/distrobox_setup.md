@@ -1,4 +1,6 @@
-## distrobox
+# distrobox
+
+## Alpine
 
 ### setting up the container
 
@@ -34,11 +36,8 @@ EOF
 
 apk update
 apk upgrade
-```
 
-### packages
-
-```
+# install packages
 apk add \
     docs coreutils binutils findutils util-linux pciutils usbutils \
     grep gawk iproute2 bc htop gotop lsof lm-sensors lm-sensors-detect \
@@ -58,9 +57,9 @@ apk add \
     py3-setuptools py3-numpy py3-scipy
 ```
 
-## misc
+## Ubuntu
 
-# tldraw
+### tldraw
 
 https://github.com/tldraw/tldraw-office/releases
 

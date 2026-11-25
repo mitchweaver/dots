@@ -31,18 +31,21 @@ umask 0077
 
 # -*-*- Options -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 SHELLRC_DIR="$HOME/src/dots/shell"
-# PS1_STYLE=pwd-no-prompt  # [user-pwd/user/pwd/user-host-pwd]
-PS1_STYLE=user-host-pwd  # [user-pwd/user/pwd/user-host-pwd]
-# PS1_STYLE=user-pwd       # [user-pwd/user/pwd/user-host-pwd]
-# PS1_STYLE=pwd            # [user-pwd/user/pwd/user-host-pwd]
-PS1_GIT=true             # [true/false]
+PS1_STYLE=user-host-pwd                      # [user-pwd/user/pwd/user-host-pwd]
+# PS1_STYLE=pwd-no-prompt                    # [user-pwd/user/pwd/user-host-pwd]
+# PS1_STYLE=user-pwd                         # [user-pwd/user/pwd/user-host-pwd]
+# PS1_STYLE=pwd                              # [user-pwd/user/pwd/user-host-pwd]
+PS1_GIT=true                                 # [true/false]
+PS1_PRINT_HOST_DISTRO_IF_NOT_DISTROBOX=true  # [true=yes/false=hostname]
 
 HISTORY_STYLE=default      # [default/per-shell]
 export HISTSIZE=300
 
 export HISTFILE="$HOME/.ksh_history"
-[ -e "$HISTFILE" ] || touch "$HISTFILE"
-chmod 0600 "$HISTFILE"
+if [ ! -e "$HISTFILE" ] ; then
+    touch "$HISTFILE"
+    chmod 0600 "$HISTFILE"
+fi
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 if [ -d "$SHELLRC_DIR" ] ; then

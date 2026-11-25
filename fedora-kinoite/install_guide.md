@@ -161,13 +161,14 @@ reboot
 
 ```
 # annoying on boot
-systemctl disable NetworkManager-wait-online.service
+sudo systemctl disable --now NetworkManager-wait-online.service
 
 # enables
-systemctl enable fail2ban
-systemctl enable tlp
-systemctl enable mullvad-daemon
-systemctl enable docker
+sudo systemctl enable --now fail2ban
+sudo systemctl enable --now tlp
+sudo systemctl enable --now tlp-pd.service
+sudo systemctl enable --now docker
+#### sudo systemctl enable --now mullvad-daemon
 ```
 
 ## disable wake on lan

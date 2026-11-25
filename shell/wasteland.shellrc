@@ -246,7 +246,8 @@ alias janfiles='cd /var/home/mitch/.var/app/ai.jan.Jan/data/Jan/data/llamacpp/mo
 
 
 nvidia-vram() {
+    # shellcheck disable=SC2046
     set -- $(nvidia-smi  | grep MiB | head -n 1  | sed 's/.*W//')
-    echo $2/$4
+    printf '%s\n' "$2/$4"
 }
 

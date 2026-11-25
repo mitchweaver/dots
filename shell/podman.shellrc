@@ -19,5 +19,11 @@ PODMAN_NUKE() {
     }
 }
 
-alias podman-fix-sudo='podman exec -u root alpine chmod 4755 /usr/bin/sudo'
+podman-fix-sudo() {
+    podman exec -u root alpine chown root:root /usr/bin/sudo /etc/sudo.conf
+    podman exec -u root alpine chmod 4755 /usr/bin/sudo
+
+    podman exec -u root ubuntu chown root:root /usr/bin/sudo /etc/sudo.conf
+    podman exec -u root ubuntu chmod 4755 /usr/bin/sudo
+}
 

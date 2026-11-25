@@ -13,12 +13,21 @@ _ps1_print_host() {
     elif [ -f /run/.containerenv ] ; then
         printf '%s' "\[\e[1;34m\]distrobox"
     else
-        # if we're not in distrobox, print hostname
-        if [ -f /etc/hostname ] ; then
-            read -r _hostname < /etc/hostname
-            printf '%s' "\[\e[1;34m\]${_hostname%%.*}"
+        # if we're not in distrobox, print either host distro or hostname depending on setting
+        if [ "$PS1_PRINT_HOST_DISTRO_IF_NOT_DISTROBOX" = true ] ; then
+            if command -v rpm-ostree >/dev/null || command -v dnf >/dev/null ; then
+                printf '%s' "\[\e[1;34m\]fedora"
+            else
+                # fix later
+                printf '%s' "\[\e[1;34m\]host-linux"
+            fi
         else
-            printf '%s' "\[\e[1;34m\]$(/bin/hostname -s)"
+            if [ -f /etc/hostname ] ; then
+                read -r _hostname < /etc/hostname
+                printf '%s' "\[\e[1;34m\]${_hostname%%.*}"
+            else
+                printf '%s' "\[\e[1;34m\]$(/bin/hostname -s)"
+            fi
         fi
     fi
 }
