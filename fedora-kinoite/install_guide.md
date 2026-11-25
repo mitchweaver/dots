@@ -163,12 +163,41 @@ reboot
 # annoying on boot
 sudo systemctl disable --now NetworkManager-wait-online.service
 
-# enables
+# LDAP/kerberos which I don't use
+sudo systemctl disable --now sssd.service
+sudo systemctl disable --now sssd-kcm.socket
+
+# abomination -- thankfully it's not default on fedora, we can disable it
+sudo systemctl disable --now systemd-homed.service
+sudo systemctl disable --now systemd-homed-activate.service
+
+# useless / obsolete stuff I don't know why is still defaulted to running
+sudo systemctl disable --now ModemManager.service
+sudo systemctl disable --now mcelog.service
+
+# smartcard / extended yubikey functions
+# note: this is safe to disable if you just use yubikey for FIDO2/2fa
+sudo systemctl disable --now pcscd.socket
+sudo systemctl disable --now pcscd.service
+
+# installed via btrfs array with btrfs encrpytion so none of these are used
+sudo systemctl disable --now mdmonitor.service
+sudo systemctl disable --now lvm2-lvmpolld.socket
+sudo systemctl disable --now dm-event.socket
+sudo systemctl disable --now lvm2-monitor
+sudo systemctl disable --now raid-check.timer
+sudo systemctl disable --now lvm-devices-import.path
+sudo systemctl disable --now lvm-devices-import.service
+
+# fedora analytics
+sudo systemctl disable --now rpm-ostree-countme.timer
+
+# enables from packages
 sudo systemctl enable --now fail2ban
 sudo systemctl enable --now tlp
 sudo systemctl enable --now tlp-pd.service
 sudo systemctl enable --now docker
-#### sudo systemctl enable --now mullvad-daemon
+sudo systemctl enable --now mullvad-daemon
 ```
 
 ## disable wake on lan
@@ -176,6 +205,25 @@ sudo systemctl enable --now docker
 ```
 sudo ethtool -s eth0 wol d
 sudo ethtool -s wlan0 wol d
+```
+
+## raid0 -> raid1 if needed
+
+if you accidentally striped 2 nvme in the installer...
+(which annoyingly is the default, fedora seems happy to have users lose data)
+and want to convert to raid1 later use this below
+
+note fedora will handle this fine, won't run into any boot issues
+
+```
+# this will start the conversion but warning:
+#
+# !!! DO NOT POWER OFF DEVICE UNTIL THIS FINISHES !!!
+#
+sudo btrfs balance start -dconvert=raid1 /var
+
+# monitor the conversion with
+sudo watch -n 1 btrfs balance status /var
 ```
 
 ## now set up distrobox
