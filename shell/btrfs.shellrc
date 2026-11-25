@@ -1,0 +1,9 @@
+alias btrfs-usage='sudo btrfs filesystem usage /var'
+alias btrfs-subvolumes='sudo btrfs subvolume list /var'
+
+alias btrfs-devices='sudo btrfs filesystem show'
+alias btrfs-device-stats='sudo btrfs device stats /var'
+
+alias btrfs-scrub='sudo btrfs scrub start -B /var'
+alias btrfs-scrub-status='sudo watch -n 1 btrfs scrub status /var'
+
