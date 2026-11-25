@@ -11,8 +11,32 @@ flatpak-fix-nvidia() {
     flatpak list --runtime --columns=application,version | grep GL.nvidia
 }
 
-# list which flatpak apps were manually installed (ie not from distro default)
-alias flatpak-list='flatpak list --app --columns=name,application,origin,installation'
+fp() {
+    [ "$1" ] || set -- -h
+
+    case $1 in
+        h|-h|*help)
+            >&2 echo 'Usage: fl [a] [d] [l] [s]'
+            ;;
+        a|-a|*add)
+            shift
+            sudo flatpak install "$@"
+            ;;
+        d|-d|*delete|*remove)
+            shift
+            sudo flatpak remove "$@"
+            ;;
+        l|-l|*list)
+            # list which flatpak apps were manually installed (ie not from distro default)
+            flatpak list --app --columns=name,application,origin,installation
+            ;;
+        s|-s|*search)
+            shift
+            flatpak search "$@"
+    esac
+}
+
+alias fpg='fp -l | grep -i'
 
 # ========================================================================
 # aliases below

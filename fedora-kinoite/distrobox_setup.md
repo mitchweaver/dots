@@ -5,9 +5,12 @@
 ```
 # NOTE: if requiring nvidia drivers in the container, need to pass the --nvidia flag
 #       however this wont work for alpine due to glibc/musl
+#
+# NOTE2: we resize shm to 2g as the default is about 60mb which is extremely dumb
 distrobox create \
     --name alpine \
     --image alpine:latest \
+    --additional-flags "--shm-size=2g" \
     --unshare-ipc
 
 distrobox enter alpine
@@ -39,7 +42,7 @@ apk upgrade
 apk add \
     docs coreutils binutils findutils util-linux pciutils usbutils \
     grep gawk iproute2 bc htop gotop lsof lm-sensors lm-sensors-detect \
-    smartmontools sysstat upower git \
+    smartmontools sysstat upower git openssh-client ranger \
     openssl libnotify libsecret nlohmann-json \
     p7zip unzip zip lz4 xz lzo gzip pigz \
     rsync openresolv netcat-openbsd nmap bind-tools socat ldns \
@@ -57,14 +60,32 @@ apk add \
 
 ## misc
 
-#### RANGER
+# tldraw
 
-current releases of ranger is broken with ncurses and maintainer is taking forever to make a new release
+https://github.com/tldraw/tldraw-office/releases
 
 ```
-cd /tmp
-git clone https://github.com/ranger/ranger
-cd ranger
-sudo make install
+distrobox create \
+    --name ubuntu \
+    --image ubuntu:latest \
+    --additional-flags "--shm-size=2g" \
+    --unshare-ipc
+
+distrobox enter ubuntu
+
+sudo apt update
+sudo apt upgrade -y
+
+# will fail because of deps - just run apt install -f after
+sudo dpkg -i ./tldraw-office-linux-amd64.deb
+sudo apt install -f -y
+
+# this one isn't in its deps for some reason
+sudo apt install -y libasound2t64
+
+# retry
+sudo dpkg -i ./tldraw-office-linux-amd64.deb
+
+distrobox-export --app tldraw-offline
 ```
 

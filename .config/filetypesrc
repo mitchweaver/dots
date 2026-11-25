@@ -3,6 +3,7 @@ embed-application/json=false
 embed-application/x-docbook+xml=false
 embed-application/x-yaml=false
 embed-application/x-zerosize=false
+embed-application/zip=false
 embed-audio/aac=false
 embed-audio/mp4=false
 embed-audio/mpeg=false

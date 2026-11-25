@@ -173,18 +173,23 @@ fi
 
 if [ -d ~/.ssh ] ; then
     chmod 0700 ~/.ssh
-    chmod 0600 ~/.ssh/id_rsa
-    chmod 0644 ~/.ssh/id_rsa.pub
-    chmod 0600 ~/.ssh/config
-    if [ -f ~/.ssh/authorized_keys ] ; then
-        chmod 0600 ~/.ssh/authorized_keys
-    fi
+
+    [ -f ~/.ssh/config ]     && chmod 0600 ~/.ssh/config
+    [ -f ~/.ssh/id_rsa ]     && chmod 0600 ~/.ssh/id_rsa
+    [ -f ~/.ssh/id_rsa.pub ] && chmod 0644 ~/.ssh/id_rsa.pub
+
+    [ -f ~/.ssh/authorized_keys ] && chmod 0600 ~/.ssh/authorized_keys
+
     # start ssh-agent
     if ! pgrep -u "$USER" -x ssh-agent >/dev/null ; then
         eval "$(ssh-agent -s)" >/dev/null
     fi
-    ssh-add ~/.ssh/id_rsa
-fi 2>/dev/null
+
+    # add key only if not already loaded
+    if [ -f ~/.ssh/id_rsa ] && ! ssh-add -l 2>/dev/null | grep -q "$(ssh-keygen -lf ~/.ssh/id_rsa | awk '{print $2}')" ; then
+        ssh-add ~/.ssh/id_rsa
+    fi
+fi
 
 # ========================================================================
 # wayland crap

@@ -95,8 +95,8 @@ rpm-ostree override remove \
 # NOTE: for some reason nmtui isnt included in networkmanager anymore by default
 rpm-ostree install \
     distrobox kitty kitty-terminfo kitty-kitten fastfetch neovim python3-neovim \
-    htop fail2ban NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld \
-    powertop docker-cli docker-compose lm_sensors tlp \
+    ranger htop fail2ban NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld \
+    powertop docker-cli docker-compose lm_sensors tlp lz4 \
     papirus-icon-theme reversal-icon-theme materia-kde
 ```
 
@@ -167,6 +167,14 @@ systemctl disable NetworkManager-wait-online.service
 systemctl enable fail2ban
 systemctl enable tlp
 systemctl enable mullvad-daemon
+systemctl enable docker
+```
+
+## disable wake on lan
+
+```
+sudo ethtool -s eth0 wol d
+sudo ethtool -s wlan0 wol d
 ```
 
 ## now set up distrobox
