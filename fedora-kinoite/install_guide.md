@@ -95,7 +95,7 @@ rpm-ostree override remove \
 # NOTE: for some reason nmtui isnt included in networkmanager anymore by default
 rpm-ostree install \
     distrobox kitty kitty-terminfo kitty-kitten fastfetch neovim python3-neovim \
-    ranger htop fail2ban NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld \
+    oksh ranger htop fail2ban NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld \
     powertop docker-cli docker-compose lm_sensors tlp lz4 \
     papirus-icon-theme reversal-icon-theme materia-kde
 ```

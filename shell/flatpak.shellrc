@@ -1,8 +1,11 @@
 #!/usr/bin/env oksh
 
-# get driver ver for getting correct flatpak runtime
-alias nvidia-driver-version='nvidia-smi --query-gpu=driver_version --format=csv,noheader'
-alias flatpak-check-nvidia='flatpak list --runtime | grep -i nvidia'
+if command -v nvidia-smi >/dev/null ; then
+    # get driver ver for getting correct flatpak runtime
+    alias nvidia-driver-version='nvidia-smi --query-gpu=driver_version --format=csv,noheader'
+    alias flatpak-check-nvidia='flatpak list --runtime | grep -i nvidia'
+fi
+
 alias flatpak-gl-drivers='flatpak --gl-drivers'
 
 flatpak-fix-nvidia() {

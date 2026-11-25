@@ -21,8 +21,8 @@ sudo install -Dvm 0644 ./udev/rules.d/42-logitech-unify-permissions.rules /etc/u
 # ========================================================================
 # load udev changes
 # ========================================================================
-sudo udevadm control --reload-rules
-sudo udevadm trigger
+# sudo udevadm control --reload-rules
+# sudo udevadm trigger
 
 # ========================================================================
 # /etc/rc.local
@@ -36,4 +36,11 @@ if [ ! -e /etc/rc.local ] ; then
     cd "$old_dir"
     sudo install -Dvm 0755 ./rc.local /etc/rc.local
 fi
+
+# ========================================================================
+# load files and restart services
+# ========================================================================
+sudo systemctl restart tlp
+sudo systemctl restart fail2ban
+sudo sysctl --system
 

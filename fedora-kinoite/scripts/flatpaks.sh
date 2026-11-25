@@ -40,7 +40,6 @@ for app in \
     com.rustdesk.RustDesk \
     com.super_productivity.SuperProductivity \
     com.tradingview.tradingview \
-    com.valvesoftware.Steam \
     io.github.dweymouth.supersonic \
     io.github.pwr_solaar.solaar \
     io.github.ungoogled_software.ungoogled_chromium \
@@ -65,11 +64,6 @@ do
         sudo flatpak install -y flathub "$app"
     fi
 done
-
-if ! flatpak list | grep -i gamescope >/dev/null ; then
-    # automatically grab the correct gamescope version that matches steams runtime version
-    sudo flatpak install -y flathub org.freedesktop.Platform.VulkanLayer.gamescope//$(flatpak info --show-runtime com.valvesoftware.Steam | cut -d/ -f3)
-fi
 
 # ========================================================================
 # VULKAN

@@ -238,22 +238,18 @@ alias ytdl-mp3='youtube-dl -x --audio-format mp3'
 
 kittyfonts() { kitty +list-fonts --psnames | g "$*" ; }
 
-
-alias sensors="sensors | grep 'Core ' 2>/dev/null | grep -v rror"
-
-alias bg=background
+sensors(){
+    watch -n 1 "command sensors | grep 'Core ' 2>/dev/null | grep -v rror | sed 's/(.*//'"
+}
 
 alias fix-spotify='rm -r ~/.var/app/com.spotify.Client/cache'
 
-
-# ========================================================================
-alias janfiles='cd /var/home/mitch/.var/app/ai.jan.Jan/data/Jan/data/llamacpp/models'
-# ========================================================================
-
-
-nvidia-vram() {
-    # shellcheck disable=SC2046
-    set -- $(nvidia-smi  | grep MiB | head -n 1  | sed 's/.*W//')
-    printf '%s\n' "$2/$4"
-}
+if command -v nvidia-smi >/dev/null ; then
+    nvidia-vram() {
+        # shellcheck disable=SC2046
+        set -- $(nvidia-smi  | grep MiB | head -n 1  | sed 's/.*W//')
+        printf '%s\n' "$2/$4"
+    }
+    alias gputemp="nvidia-smi  -q | grep 'GPU Current Temp' | trim"
+fi
 
