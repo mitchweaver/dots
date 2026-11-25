@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Service
+MimeType=all/allfiles;inode/directory;
+Actions=linkToDesktop
+X-KDE-Protocols=file
+
+[Desktop Action linkToDesktop]
+Name=Send to Desktop (symlink)
+Icon=emblem-symbolic-link
+Exec=sh -c 'd=$(xdg-user-dir DESKTOP); [ -d "$d" ] && [ "$d" != "$HOME" ] || exit 1; for f; do [ "$f" = "$d" ] && continue; ln -s -- "$f" "$d/" 2>/dev/null || kdialog --passivepopup "Could not link: $f" 5; done' sh %F
+
