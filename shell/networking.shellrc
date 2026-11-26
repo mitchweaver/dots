@@ -23,10 +23,20 @@ alias ssports='sudo ss -tulpn'
 ####### alias portscan='sudo nmap -sT'
 
 flushdns() {
-    if command -v resolvectl > /dev/null ; then
+    # systemctl
+    if command -v resolvectl >/dev/null && ! pgrep -fa dnsmasq ; then
         resolvectl flush-caches
-    elif command -v rc-service >/dev/null && command -v dnsmasq >/dev/null ; then
-        sudo rc-service dnsmasq restart
+    # dnsmasq
+    elif command -v dnsmasq >/dev/null ; then
+        if command -v rc-service >/dev/null ; then
+            sudo rc-service dnsmasq restart
+        elif command -v systemctl >/dev/null ; then
+            sudo systemctl restart dnsmasq
+            sudo resolvectl flush-caches
+        fi
+    # macos
+    elif commmand -v dscacheutil >/dev/null ; then
+        dscacheutil -flushcache; sudo killall -HUP mDNSResponder
     fi
 }
 
