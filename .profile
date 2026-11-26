@@ -10,9 +10,8 @@ fi
 export PATH="$HOME/.local/bin:$PATH:/usr/local/bin:/usr/X11R6/bin:/usr/local/sbin"
 export MANPATH="$HOME/.local/share/man:$MANPATH"
 
-if [ -d "$HOME/.local/flatpak-wrappers" ] ; then
-    export PATH="$PATH:$HOME/.local/flatpak-wrappers"
-fi
+# hide GOPATH to ~/.local/go instead of ~/go
+export GOPATH="${HOME}/.local/go"
 
 if [ -d ~/.local/go/bin ] ; then
     export PATH="$PATH:$HOME/.local/go/bin"
@@ -53,14 +52,17 @@ esac
 # ========================================================================
 # DIRECTORIES
 # ========================================================================
-export XDG_CONFIG_HOME="${HOME}/.config" \
-       XDG_DOWNLOAD_DIR="${HOME}/Downloads" \
-       XDG_DOCUMENTS_DIR="${HOME}/files" \
-       XDG_PICTURES_DIR="${HOME}/images"
+export XDG_CONFIG_HOME="$HOME/.config" \
+       XDG_DOWNLOAD_DIR="$HOME/downloads" \
+       XDG_DOCUMENTS_DIR="$HOME/files" \
+       XDG_PICTURES_DIR="$HOME/images" \
+       XDG_DESKTOP_DIR="$HOME/desktop" \
+       XDG_MUSIC_DIR="$HOME/music" \
+       XDG_VIDEOS_DIR="$HOME/videos"
 
-export XDG_DESKTOP_DIR="${HOME}/desktop"
-export XDG_DATA_HOME="${HOME}/.local/share"
-export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_DESKTOP_DIR="$HOME/desktop"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
 
 chmod 0700 "$XDG_CACHE_HOME"
 chmod 0700 "$XDG_CONFIG_HOME"
@@ -74,13 +76,8 @@ export XDG_NULL_DIR="/tmp/$USER-tmp/.xdg-$USER-void"
 mkdir -p "$XDG_NULL_DIR"
 export XDG_PUBLICSHARE_DIR="$XDG_NULL_DIR" \
        XDG_TEMPLATES_DIR="$XDG_NULL_DIR" \
-       XDG_VIDEOS_DIR="$XDG_NULL_DIR" \
-       XDG_MUSIC_DIR="$XDG_NULL_DIR"
 
 chmod 0700 "$XDG_NULL_DIR"
-
-# hide GOPATH to ~/.local/go instead of ~/go
-export GOPATH="${HOME}/.local/go"
 
 # ========================================================================
 # MISC SETTINGS
@@ -195,7 +192,6 @@ fi
 # wayland crap
 # ========================================================================
 export XDG_SESSION_TYPE=wayland
-export XDG_CURRENT_DESKTOP=sway
 export QT_QPA_PLATFORM=wayland
 export ELECTRON_OZONE_PLATFORM_HINT=wayland
 export MOZ_ENABLE_WAYLAND=1

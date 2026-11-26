@@ -42,6 +42,23 @@ fp() {
 alias fpg='fp -l | grep -i'
 
 # ========================================================================
+# flatpak
+# ========================================================================
+# ai slop to print what permissions each installed flatpak asks for
+flatpak_print_perms() {
+    for app in $(flatpak list --app --columns=application); do
+        flatpak info -M "$app" | awk -v app="$app" -F= '
+        /^\[Context\]/ {c=1; next}  /^\[/ {c=0}
+        c && $1=="filesystems" {
+        n = split($2, a, ";")
+        for (i=1; i<=n; i++) { p=a[i]; sub(/:.*/, "", p)
+        if (p ~ /^(host|host-os|host-etc|home)$/) hit = hit " " a[i] }
+        if (hit) print app ":" hit
+        }'
+    done
+}
+
+# ========================================================================
 # aliases below
 # ========================================================================
 

@@ -94,3 +94,81 @@ fi
 ######flatpak install flathub com.github.wwmm.easyeffects
 # ========================================================================
 
+# ========================================================================
+# DEFAULT DENY SECURITY
+# ========================================================================
+# blocks "flatpak-spawn --host" (arbitrary command execution)
+sudo flatpak override --no-talk-name=org.freedesktop.Flatpak
+
+# deny all x11/xwayland -- KDE plasma is fully wayland now
+# any apps still using xwayland grant specifically
+sudo flatpak override --nosocket=x11 --socket=fallback-x11
+sudo flatpak override --nodevice=all
+
+# deny filesystem -- use portals / file chooser instead
+sudo flatpak override --nofilesystem=host --nofilesystem=host-os --nofilesystem=host-etc --nofilesystem=home
+
+# credentials
+sudo flatpak override --nosocket=ssh-auth --nosocket=gpg-agent --nosocket=pcsc
+sudo flatpak override --no-talk-name=org.freedesktop.secrets
+
+# ========================================================================
+# OVERRIDES
+# ========================================================================
+# ~/images ~/videos ~/downloads ~/desktop ~/tmp --- READONLY
+for app in \
+    io.mpv.Mpv \
+    com.interversehq.qView
+do
+    sudo flatpak override \
+        --filesystem=xdg-desktop:ro \
+        --filesystem=xdg-videos:ro \
+        --filesystem=xdg-pictures:ro \
+        --filesystem=xdg-download:ro \
+        --filesystem=~/tmp "$app"
+done
+
+# ~/images ~/videos ~/downloads ~/desktop ~/tmp --- READ-WRITE
+for app in \
+    org.darktable.Darktable
+do
+    sudo flatpak override \
+        --filesystem=xdg-desktop:rw \
+        --filesystem=xdg-videos:rw \
+        --filesystem=xdg-pictures:rw \
+        --filesystem=xdg-download:rw \
+        --filesystem=~/tmp:rw "$app"
+done
+
+# ~/obs_output ~/videos ~/images ~/downloads ~/tmp --- READ-WRITE
+for app in \
+    com.obsproject.Studio \
+    org.shotcut.Shotcut
+do
+    sudo flatpak override \
+        --filesystem=~/obs_output:rw \
+        --filesystem=xdg-videos:rw \
+        --filesystem=xdg-music:rw \
+        --filesystem=xdg-pictures:rw \
+        --filesystem=xdg-download:rw \
+        --filesystem=~/tmp:rw "$app"
+done
+
+# ~/files ~/src ~/downloads ~/tmp --- READ-WRITE
+for app in \
+    org.libreoffice.LibreOffice
+do
+    sudo flatpak override \
+        --filesystem=~/src:rw \
+        --filesystem=xdg-documents:rw \
+        --filesystem=xdg-download:rw \
+        --filesystem=~/tmp:rw "$app"
+done
+
+# x11 overrides (note: --device=all needed for gamepad support)
+sudo flatpak override --socket=x11 --device=all com.valvesoftware.Steam
+sudo flatpak override --socket=x11 io.github.dweymouth.supersonic
+
+# ~/downloads
+sudo flatpak override --filesystem=xdg-download:ro org.gnome.Boxes
+
