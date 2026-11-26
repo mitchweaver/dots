@@ -19,7 +19,7 @@ _ps1_print_host() {
                 printf '%s' "\[\e[1;34m\]fedora"
             else
                 # fix later
-                printf '%s' "\[\e[1;34m\]host-linux"
+                printf '%s' "\[\e[1;34m\]$(hostname -s)"
             fi
         else
             if [ -f /etc/hostname ] ; then
