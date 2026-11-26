@@ -64,11 +64,17 @@ export XDG_DESKTOP_DIR="$HOME/desktop"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-chmod 0700 "$XDG_CACHE_HOME"
-chmod 0700 "$XDG_CONFIG_HOME"
-chmod 0700 "$XDG_DATA_HOME"
-chmod 0700 "$XDG_DOCUMENTS_DIR"
-chmod 0700 "$XDG_PICTURES_DIR"
+for xdg_dir in \
+    "$XDG_CACHE_HOME" \
+    "$XDG_CONFIG_HOME" \
+    "$XDG_DATA_HOME" \
+    "$XDG_DOCUMENTS_DIR" \
+    "$XDG_PICTURES_DIR"
+do
+    if [ -e "$xdg_dir" ] ; then
+        chmod 0700 "$xdg_dir"
+    fi
+done
 
 # i dont use these but some programs complain
 # if they can't write to them
