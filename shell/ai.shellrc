@@ -1,0 +1,2 @@
+alias oqwen='ollama run qwen3.8'
+
