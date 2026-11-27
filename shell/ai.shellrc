@@ -1,4 +1,4 @@
 #!/usr/bin/env oksh
 
-alias oqwen='ollama run qwen3.8'
+alias oqwen='ollama run --hidethinking qwen3.8'
 

@@ -11,8 +11,10 @@ if [ -d ~/cloud ] ; then
     ln -svfn "$CLOUD"/downloads              ~/downloads
     ln -svfn "$CLOUD"/files                  ~/files
     ln -svfn "$CLOUD"/images                 ~/images
-    ln -svfn "$CLOUD"/music                  ~/music
     ln -svfn "$CLOUD"/src                    ~/src
+
+    # ln -svfn "$CLOUD"/music                ~/music
+    # ln -svfn "$CLOUD"/videos               ~/videos
 
     if [ -d ~/Downloads ] ; then
         rm -r ~/Downloads
@@ -122,11 +124,11 @@ fi
 # ========================================================================
 if [ -d ~/cloud/opt/themes/Bibata-Cursors ] ; then
     for i in Bibata-Modern-Classic.tar.xz Bibata-Modern-Ice.tar.xz ; do
-        if [ ! -d ~/.local/share/icons/"${i%%.*}" ] ; then
+        if [ ! -d ~/.icons/"${i%%.*}" ] ; then
             echo 'Installing cursors...'
-            mkdir -p ~/.local/share/icons
-            cp ~/cloud/opt/themes/Bibata-Cursors/"$i" ~/.local/share/icons/
-            cd ~/.local/share/icons
+            mkdir -p ~/.icons
+            cp ~/cloud/opt/themes/Bibata-Cursors/"$i" ~/.icons/
+            cd ~/.icons
             tar -xvJf "$i" && rm "$i"
             cd -
         fi

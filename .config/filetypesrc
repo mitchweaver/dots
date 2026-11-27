@@ -27,3 +27,4 @@ embed-image/png=false
 embed-text/markdown=false
 embed-text/plain=false
 embed-text/x-cmake=false
+embed-text/x-shellscript=false

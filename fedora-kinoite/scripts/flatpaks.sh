@@ -44,6 +44,7 @@ for app in \
     io.github.pwr_solaar.solaar \
     io.github.ungoogled_software.ungoogled_chromium \
     io.mpv.Mpv \
+    io.github.celluloid_player.Celluloid \
     net.cozic.joplin_desktop \
     org.darktable.Darktable \
     org.gimp.GIMP \
@@ -118,6 +119,7 @@ sudo flatpak override --no-talk-name=org.freedesktop.secrets
 # ~/images ~/videos ~/downloads ~/desktop ~/tmp --- READONLY
 for app in \
     io.mpv.Mpv \
+    io.github.celluloid_player.Celluloid \
     com.interversehq.qView
 do
     sudo flatpak override \

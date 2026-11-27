@@ -219,3 +219,11 @@ if command -v nvidia-smi >/dev/null ; then
     alias gputemp="nvidia-smi  -q | grep 'GPU Current Temp' | trim"
 fi
 
+alias {wttr,weather}='curl -4 -s https://wttr.is/?1?A?F?q?T | sed \$d'
+
+unziprm() {
+    if [ -f "$1" ] ; then
+        unzip "$1" && rm -v "$1"
+    fi
+}
+

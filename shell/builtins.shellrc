@@ -29,7 +29,7 @@ cd() {
                 builtin cd -- *"$1"  2>/dev/null ||
                 builtin cd -- *"$1"* 2>/dev/null ||
                 for _i in 1 2 3 4 ; do
-                    _cddir="$(find . -type d -maxdepth $_i -iname "*$1*" | head -n 1)"
+                    _cddir="$(find . -type d -maxdepth $_i -iname "*$1*" 2>/dev/null | head -n 1)"
                     if [ -d "$_cddir" ] ; then
                         builtin cd -- "$_cddir"
                         break

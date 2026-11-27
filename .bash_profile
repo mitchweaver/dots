@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
 if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+    source ~/.bashrc
 fi
 

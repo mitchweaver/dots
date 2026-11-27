@@ -49,11 +49,11 @@ iwaitdo() {
     while inotifywait -e modify "$file" ; do eval "$*" ; done
 }
 
-alias md2html='pandoc -f markdown'
-mdff() {
-    if [ -f "$1" ] ; then
-        pandoc -f markdown "$1" > /tmp/out.html &&
-        ${BROWSER:-firefox} /tmp/out.html
-    fi
-}
+# alias md2html='pandoc -f markdown'
+# mdff() {
+#     if [ -f "$1" ] ; then
+#         pandoc -f markdown "$1" > /tmp/out.html &&
+#         ${BROWSER:-firefox} /tmp/out.html
+#     fi
+# }
 

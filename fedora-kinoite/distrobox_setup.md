@@ -54,7 +54,7 @@ apk add \
     linux-headers ncurses-dev openssl-dev elfutils-dev \
     ffmpeg imagemagick jpegoptim exiftool cuetools shntool vorbis-tools \
     wavpack mpv yt-dlp \
-    py3-setuptools py3-numpy py3-scipy
+    py3-setuptools py3-numpy py3-scipy pandoc
 ```
 
 ## Ubuntu

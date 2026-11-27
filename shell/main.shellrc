@@ -57,14 +57,14 @@ fi
 
 if [ -d "$SHELLRC_DIR" ] ; then
     # DISTRO SPECIFIC
-    if command -v freebsd-update >/dev/null ; then
+    if command -v dnf >/dev/null || command -v rpm-ostree >/dev/null ; then
+        [ -f "$SHELLRC_DIR/fedora.shellrc" ] && . "$SHELLRC_DIR/fedora.shellrc"
+    elif command -v freebsd-update >/dev/null ; then
         [ -f "$SHELLRC_DIR/freebsd.shellrc" ] && . "$SHELLRC_DIR/freebsd.shellrc"
     elif command -v pkg_add >/dev/null ; then
         [ -f "$SHELLRC_DIR/openbsd.shellrc" ] && . "$SHELLRC_DIR/openbsd.shellrc"
     elif command -v emerge >/dev/null ; then
         [ -f "$SHELLRC_DIR/gentoo.shellrc" ] && . "$SHELLRC_DIR/gentoo.shellrc"
-    elif command -v dnf >/dev/null || command -v rpm-ostree >/dev/null ; then
-        [ -f "$SHELLRC_DIR/fedora.shellrc" ] && . "$SHELLRC_DIR/fedora.shellrc"
     elif command -v apk >/dev/null ; then
         [ -f "$SHELLRC_DIR/alpine.shellrc" ] && . "$SHELLRC_DIR/alpine.shellrc"
     elif command -v brew >/dev/null ; then
