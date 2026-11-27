@@ -12,7 +12,7 @@ cd() {
         \?)
             if [ -f "${XDG_CACHE_HOME:-${HOME}/.cache}"/last_dir ] ; then
                 read -r loc < "${XDG_CACHE_HOME:-${HOME}/.cache}"/last_dir
-                if [ -f "$loc" ] ; then
+                if [ -d "$loc" ] ; then
                     cd "$loc"
                 fi
             fi

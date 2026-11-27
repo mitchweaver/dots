@@ -9,8 +9,8 @@ if type rpm-ostree >/dev/null 2>&1 ; then
         flag=${1#-}
         shift
         case $flag in
-            h)
-                >&2 echo 'pkg: [-a add] [-u update]'
+            h|help)
+                >&2 echo 'Usage: pkg [s search] [a add] [u update] [d delete] [i info] [l list]'
                 ;;
             a)
                 sudo rpm-ostree install "$@"
@@ -45,9 +45,8 @@ elif type dnf >/dev/null 2>&1 ; then
         flag=${1#-}
         shift
         case $flag in
-            h)
-                >&2 printf '%s\n' \
-                    'pkg: [-a add] [-u update] [-d delete] [-s search] [-i info] [-f file] [-l list]'
+            h|help)
+                >&2 echo 'Usage: pkg [s search] [a add] [u update] [d delete] [i info] [l list]'
                 ;;
             a)
                 sudo dnf -q upgrade --refresh
@@ -76,8 +75,8 @@ elif type dnf >/dev/null 2>&1 ; then
 fi
 
 firmware-update() {
-    sudo fwupdmgr refresh
-    sudo fwupdmgr get-updates
+    sudo fwupdmgr refresh &&
+    sudo fwupdmgr get-updates &&
     sudo fwupdmgr update
 }
 

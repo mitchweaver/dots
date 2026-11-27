@@ -127,8 +127,6 @@ alias vimrc='v ~/.vimrc'
 alias kittycfg='v ~/.config/kitty/kitty.conf'
 alias i3cfg='v ~/.config/i3/config'
 
-alias img2pdf='img2pdf *jpg --output combined.pdf'
-
 alias detox='detox -v'
 
 cuesplit() {
@@ -146,6 +144,7 @@ cuesplit() {
         *.flac|*.wav)
             ;;
         *)
+            echo '$2 is not a flac/wav'
             return
     esac
     shnsplit -f "$1" -o "flac flac -s -8 -o %f -" "$2" &&
@@ -155,44 +154,11 @@ cuesplit() {
 
 alias progress='progress -w -M'
 
-pvcp() {
-    if [ $# -ge 2 ] ; then
-        case $2 in
-            --delete)
-                return 1
-                ;;
-            */)
-                _file="${2%/}/${1##*/}"
-                ;;
-            *)
-                if [ -d "$2" ] ; then
-                    _file="${2%/}/${1##*/}"
-                else
-                    _file="$2"
-                fi
-        esac
-        : > "$_file" || return 1
-    else
-        return 1
-    fi
-    if pv < "$1" > "$_file" ; then
-        if [ "$3" = "--delete" ] ; then
-            rm -f -- "$1"
-        fi
-    fi
-}
-pvmv() { pvcp "$1" "$2" --delete ; }
-
 alias stop_typing_it_wrong_idiot="su -c faillock --user $USER --reset"
 
 if command -v apt > /dev/null ; then
     alias  update='sudo apt update; sudo apt upgrade -y ; sudo apt dist-upgrade -y ; sudo apt clean'
 fi
-
-
-alias lxappearance='GDK_BACKEND=x11 lxappearance'
-
-######## alias fixpulse='/usr/local/bin/pulseaudio --start --log-target=syslog'
 
 nf() {
     # kinoite logo is so ugly
@@ -239,7 +205,7 @@ alias ytdl-mp3='youtube-dl -x --audio-format mp3'
 kittyfonts() { kitty +list-fonts --psnames | g "$*" ; }
 
 sensors(){
-    watch -n 1 "command sensors | grep 'Core ' 2>/dev/null | grep -v rror | sed 's/(.*//'"
+    watch -n 1 "command sensors | grep 'Core ' 2>/dev/null | grep -vE '(E|e)rror' | sed 's/(.*//'"
 }
 
 alias fix-spotify='rm -r ~/.var/app/com.spotify.Client/cache'

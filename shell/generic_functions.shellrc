@@ -51,7 +51,7 @@ alias psg=psgrep
 # moves a file, making dir if needed
 mkmv() {
     usage() {
-        >&2 echo 'Usage: mkvmv [file] [directory]'
+        >&2 echo 'Usage: mkmv [file] [directory]'
         return 1
     }
     case $1 in
@@ -68,13 +68,6 @@ mkmv() {
                     usage
             esac
     esac
-}
-
-# foo/bar.mp4 ---> foo/foo.mp4
-rename_as_parent_dir() {
-    file=${1##*/}
-    dir=${1%/$file}
-    mv -f "$1" "$dir/$dir"
 }
 
 #randint() {

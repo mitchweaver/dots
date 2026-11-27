@@ -37,11 +37,11 @@ alias dlogs='docker logs'
 alias dexec='docker exec'
 alias dshell='docker exec -it /bin/sh'
 
-dprune() {
-    docker image prune
-    # shellcheck disable=SC2046
-    docker volume rm $(docker volume ls -f dangling=true -q)
-}
+# dprune() {
+#     docker image prune
+#     # shellcheck disable=SC2046
+#     docker volume rm $(docker volume ls -f dangling=true -q)
+# }
 
 # compose
 alias cup='compose up --abort-on-container-exit'
@@ -54,7 +54,13 @@ dbuild() {
 }
 
 docker_remove_networks() {
-    docker network ls | awk '$3 == "bridge" && $2 != "bridge" { print $1 }'
+    printf 'This will delete docker networks, confirm? (y/n): '
+    read -r ans
+    if [ "$ans" = y ] ; then
+        docker network ls | \
+        awk '$3 == "bridge" && $2 != "bridge" { print $1 }' | \
+        xargs docker network rm
+    fi
 }
 
 dockerkillall() {
@@ -67,12 +73,12 @@ dockerkillall() {
 DOCKER_NUKE() {
     printf 'This will delete all images and containers, confirm? (y/n): '
     read -r ans
-    [ "$ans" = y ] && {
+    if [ "$ans" = y ] ; then
         # shellcheck disable=SC2046
         docker rm $(docker ps -a -q) --force
         # shellcheck disable=SC2046
         docker rmi $(docker images -q) --force
         docker_remove_networks
-    }
+    fi
 }
 

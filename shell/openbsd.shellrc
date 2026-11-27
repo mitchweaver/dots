@@ -20,9 +20,6 @@ alias pfdump='doas tcpdump -n -e -ttt -r /var/log/pflog' # dump all to stdout
 alias pfdrop='doas tcpdump -nettti pflog0 action drop'   # follow dropped
 alias netstart='doas sh /etc/netstart'
 
-alias reboot='doas reboot'
-alias poweroff='doas halt -p'
-
 alias diskstat='systat iostat'
 alias shred='rm -P'
 
@@ -51,7 +48,7 @@ pkg() {
             doas pkg_add -D snap -Uu "$@"
             ;;
         d)
-            doas pkg_delete "$@"
+            doas pkg_delete "$@" &&
             doas pkg_delete -a
             ;;
         s)

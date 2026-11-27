@@ -64,8 +64,15 @@ fi
 # old X11 stuff
 # ========================================================================
 if command -v xinput >/dev/null ; then
+    alias lxappearance='GDK_BACKEND=x11 lxappearance'
+
     mousexy() {
         while sleep 0.5; do clear ;xinput --query-state 9 | grep -E 'valuator(\[0\]|\[1\])'; done
     }
+
+fi
+
+if command -v pulseaudio >/dev/null ; then
+    alias fixpulse='/usr/local/bin/pulseaudio --start --log-target=syslog'
 fi
 

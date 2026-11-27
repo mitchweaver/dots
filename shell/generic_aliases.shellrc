@@ -71,7 +71,7 @@ alias {ex,exc,except}='grep -v'
 alias {w,whihc,whic}=which
 
 alias ga='grep -i -A 6'
-alias ga='grep -i -B 6'
+alias gb='grep -i -B 6'
 alias ga1='grep -i -A 1'
 alias ga1='grep -i -B 1'
 alias gab='grep -i -A 6 -B 6'
@@ -113,8 +113,6 @@ alias watch='watch -t'
 
 # align file in two columns, spaced out
 alias 2column='column -t -l 2 -o "     "'
-
-hg() { grep "$*" "$HISTFILE" ; }
 
 # if [ -x /usr/bin/doas ] ; then
 #     alias sudo=/usr/bin/doas

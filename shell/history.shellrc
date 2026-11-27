@@ -17,6 +17,8 @@ esac
 hg() {
     if [ "$1" ] ; then
         grep -i "$*" "$HISTFILE" | grep -v '^hg' | head -n 20
+    else
+        tail -n 8 "$HISTFILE"
     fi
 }
 

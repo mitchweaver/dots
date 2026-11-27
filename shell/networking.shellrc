@@ -36,7 +36,7 @@ flushdns() {
             sudo resolvectl flush-caches
         fi
     # macos
-    elif commmand -v dscacheutil >/dev/null ; then
+    elif command -v dscacheutil >/dev/null ; then
         dscacheutil -flushcache; sudo killall -HUP mDNSResponder
     fi
 }

@@ -1,2 +1,4 @@
+#!/usr/bin/env oksh
+
 alias oqwen='ollama run qwen3.8'
 

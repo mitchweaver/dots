@@ -120,8 +120,6 @@ _ps1_print() {
         *)
             printf '%s %s $ ' "$USER" "$PWD"
     esac
-
-    export PS1="$PS1"
 }
 
 # check if we're in ranger

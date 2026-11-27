@@ -5,6 +5,9 @@ pkg() {
     flag=${1#-}
     shift
     case $flag in
+        h|help)
+            >&2 echo 'Usage: pkg [s search] [a add] [u update] [d delete] [i info] [l list]'
+            ;;
         s|search)
             apk search "$@"
             ;;
@@ -24,7 +27,6 @@ pkg() {
             ;;
         l|list)
             cat /etc/apk/world
-            ;;
     esac
 }
 
