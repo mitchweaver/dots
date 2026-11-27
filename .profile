@@ -65,7 +65,6 @@ if [ -e /etc/THIS_IS_MY_MACHINE ] ; then
     export XDG_MUSIC_DIR="$HOME/music"
     export XDG_VIDEOS_DIR="$HOME/videos"
 
-    export XDG_DESKTOP_DIR="$HOME/desktop"
     export XDG_DATA_HOME="$HOME/.local/share"
     export XDG_CACHE_HOME="$HOME/.cache"
 
@@ -155,8 +154,8 @@ if [ ! -e /etc/wsl.conf ] && [ ! -e /System/Library/CoreServices/SystemVersion.p
         fi
 
         rm -r ~/.w3m 2>/dev/null ||:
-        rm ~/.python_history
-        rm ~/.wget-hsts
+        rm ~/.python_history ||:
+        rm ~/.wget-hsts ||:
 
         mkdir -p ~/tmp/.junk/w3m
         ln -s ~/tmp/.junk/w3m ~/.w3m
@@ -167,7 +166,7 @@ if [ ! -e /etc/wsl.conf ] && [ ! -e /System/Library/CoreServices/SystemVersion.p
         touch ~/tmp/.junk/wget-hsts
         ln -s ~/tmp/.junk/wget-hsts ~/.wget-hsts
 
-        rm ~/.bash_history ~/.ksh_history
+        rm ~/.bash_history ~/.ksh_history ||:
         ln -s ~/tmp/.junk/bash_history ~/.bash_history
         ln -s ~/tmp/.junk/ksh_history ~/.ksh_history
 
@@ -181,11 +180,12 @@ fi
 # FIX PERMISSIONS
 # ========================================================================
 if [ -e /etc/THIS_IS_MY_MACHINE ] ; then
-    chmod -R 0700 ~/tmp
+    find ~/tmp -type d ! -perm 0700 -exec chmod 0700 {} +
+    find ~/tmp -type f ! -perm 0600 -exec chmod 0600 {} +
 
     if [ -d ~/.gnupg ] ; then
         chmod 0700 ~/.gnupg
-        chmod 0600 ~/.gnupg/* 2>/dev/null ||:
+        find ~/.gnupg -type f ! -perm 0600 -exec chmod 0600 {} +
     fi
 
     if [ -d ~/.ssh ] ; then
@@ -212,13 +212,17 @@ fi
 # ========================================================================
 # wayland crap
 # ========================================================================
-export XDG_SESSION_TYPE=wayland
-export QT_QPA_PLATFORM=wayland
-export ELECTRON_OZONE_PLATFORM_HINT=wayland
-export MOZ_ENABLE_WAYLAND=1
-export _JAVA_AWT_WM_NONREPARENTING=1
+if command -v wayland-info >/dev/null ; then
+    export XDG_SESSION_TYPE=wayland
+    export QT_QPA_PLATFORM=wayland
+    export ELECTRON_OZONE_PLATFORM_HINT=wayland
+    export MOZ_ENABLE_WAYLAND=1
+    export _JAVA_AWT_WM_NONREPARENTING=1
+fi
 
+# ========================================================================
 # basic check if we've been run or not
 # see kshrc
+# ========================================================================
 export DOT_PROFILE_IMPORTED=1
 
