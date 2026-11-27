@@ -96,7 +96,7 @@ rpm-ostree override remove \
 rpm-ostree install \
     distrobox kitty kitty-terminfo kitty-kitten fastfetch neovim python3-neovim \
     oksh ranger htop fail2ban NetworkManager-tui ffmpegthumbnailer libavcodec-freeworld \
-    powertop docker-cli docker-compose lm_sensors tlp lz4 \
+    powertop docker-cli docker-compose lm_sensors tlp lz4 pigz \
     papirus-icon-theme reversal-icon-theme materia-kde
 ```
 
