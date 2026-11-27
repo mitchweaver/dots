@@ -1,9 +1,10 @@
 #!/usr/bin/env oksh
 
-alias rsync='rsync -avhu --progress --delete --partial --links'
+# excludes here are to stop me from copying podman containers which breaks things
+alias rsync='rsync -avhu --info=progress2 --delete --partial --links --exclude=".local/share/containers" --exclude="/.local/share/containers"'
 
-# for fat32
-alias fatsync='rsync -rvhu --progress --delete --partial'
+############ for fat32
+############ alias fatsync='rsync -rvhu --progress --delete --partial'
 
 alias scp='scp -rp'
 

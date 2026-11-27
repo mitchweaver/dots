@@ -61,22 +61,26 @@ for file in \
     powermanagementprofilesrc baloofilerc user-dirs.dirs user-dirs.locale
 do
     if [ ! -L "$HOME/.config/$file" ] ; then
+        printf '~/.config/%s is not a symlink. Linking to dots...\n' "$file"
         if [ -e "$HOME/.config/$file" ] ; then
-            rm -riv "$HOME/.config/$file"
+            rm -r "$HOME/.config/$file"
         fi
-	ln -svn "$DOTS/.config/$file" "$HOME/.config/$file"
+	ln -sn "$DOTS/.config/$file" "$HOME/.config/$file"
     fi
 done
 
 # ========================================================================
 # ~/.local/share kde stuff
 # ========================================================================
-if [ -d ~/.local/share/kio ] ; then
-    rm -r ~/.local/share/kio
+if [ ! -L ~/.local/share/kio ] ; then
+    echo 'Symlinking kio...'
+    if [ -d ~/.local/share/kio ] ; then
+        rm -r ~/.local/share/kio
+    fi
+    ln -svn "$DOTS/.local/share/kio" ~/.local/share/kio
+    # re-add execute bit if somehow got missing
+    chmod +x ~/.local/share/kio/servicemenus/symlink-to-desktop.desktop
 fi
-ln -svn "$DOTS/.local/share/kio" ~/.local/share/kio
-# re-add execute bit if somehow got missing
-chmod +x ~/.local/share/kio/servicemenus/symlink-to-desktop.desktop
 
 # ========================================================================
 # junk
@@ -84,6 +88,7 @@ chmod +x ~/.local/share/kio/servicemenus/symlink-to-desktop.desktop
 mkdir -p ~/.cache
 for crap in htop neofetch ; do
     if [ ! -L "$HOME/.config/$crap" ] ; then
+        echo 'Symlinking junk...'
         if [ -e "$HOME/.config/$crap" ] ; then
             rm -riv "$HOME/.config/$crap"
         fi
@@ -107,7 +112,35 @@ fi
 # grab vim-plug plugin manager
 # ========================================================================
 if [ ! -e ~/.vim/autoload/plug.vim ] ; then
+    echo 'Installing vim-plug...'
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
+# ========================================================================
+# cursor theme
+# ========================================================================
+if [ -d ~/cloud/opt/themes/Bibata-Cursors ] ; then
+    for i in Bibata-Modern-Classic.tar.xz Bibata-Modern-Ice.tar.xz ; do
+        if [ ! -d ~/.local/share/icons/"${i%%.*}" ] ; then
+            echo 'Installing cursors...'
+            mkdir -p ~/.local/share/icons
+            cp ~/cloud/opt/themes/Bibata-Cursors/"$i" ~/.local/share/icons/
+            cd ~/.local/share/icons
+            tar -xvJf "$i" && rm "$i"
+            cd -
+        fi
+    done
+fi
+
+# ========================================================================
+# wallpaper
+# ========================================================================
+if [ ! -d ~/.local/wallpapers ] ; then
+    echo 'Installing wallpapers...'
+    mkdir -p ~/.local/wallpapers
+    if [ -d ../../res/wallpapers ] ; then
+        cp -rf ../../res/wallpapers/* ~/.local/wallpapers/
+    fi
 fi
 

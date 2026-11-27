@@ -1,14 +1,14 @@
 #!/bin/sh
 
-if [ ! -e ~/.hushlogin ] ; then
-    touch ~/.hushlogin
-fi
-
 # ========================================================================
 # PATHS
 # ========================================================================
-export PATH="$HOME/.local/bin:$PATH:/usr/local/bin:/usr/X11R6/bin:/usr/local/sbin"
+export PATH="$HOME/.local/bin:$PATH:/usr/local/bin:/usr/local/sbin"
 export MANPATH="$HOME/.local/share/man:$MANPATH"
+
+if [ -d /usr/X11R6/bin ] ; then
+    export PATH="$PATH:/usr/X11R6/bin"
+fi
 
 # hide GOPATH to ~/.local/go instead of ~/go
 export GOPATH="${HOME}/.local/go"
@@ -29,7 +29,9 @@ if command -v nproc >/dev/null ; then
     export NPROC="$(nproc)"
 fi
 
-export ENV="$HOME/src/dots/shell/main.shellrc"
+if [ -f "$HOME/src/dots/shell/main.shellrc" ] ; then
+    export ENV="$HOME/src/dots/shell/main.shellrc"
+fi
 
 # ========================================================================
 # OS specific settings
@@ -38,8 +40,10 @@ case $(uname) in
     Linux|FreeBSD)
         export CC="${CC:-gcc}" cc="${cc:-gcc}"
 
-        # cause all newly created files to be unreadable by other users
-        umask 0077
+        if [ -e /etc/THIS_IS_MY_MACHINE ] ; then
+            # cause all newly created files to be unreadable by other users
+            umask 0077
+        fi
         ;;
     OpenBSD)
         export CC="${CC:-clang}" cc="${cc:-clang}"
@@ -52,42 +56,47 @@ esac
 # ========================================================================
 # DIRECTORIES
 # ========================================================================
-export XDG_CONFIG_HOME="$HOME/.config" \
-       XDG_DOWNLOAD_DIR="$HOME/downloads" \
-       XDG_DOCUMENTS_DIR="$HOME/files" \
-       XDG_PICTURES_DIR="$HOME/images" \
-       XDG_DESKTOP_DIR="$HOME/desktop" \
-       XDG_MUSIC_DIR="$HOME/music" \
-       XDG_VIDEOS_DIR="$HOME/videos"
+if [ -e /etc/THIS_IS_MY_MACHINE ] ; then
+    export XDG_CONFIG_HOME="$HOME/.config"
+    export XDG_DOWNLOAD_DIR="$HOME/downloads"
+    export XDG_DOCUMENTS_DIR="$HOME/files"
+    export XDG_PICTURES_DIR="$HOME/images"
+    export XDG_DESKTOP_DIR="$HOME/desktop"
+    export XDG_MUSIC_DIR="$HOME/music"
+    export XDG_VIDEOS_DIR="$HOME/videos"
 
-export XDG_DESKTOP_DIR="$HOME/desktop"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
+    export XDG_DESKTOP_DIR="$HOME/desktop"
+    export XDG_DATA_HOME="$HOME/.local/share"
+    export XDG_CACHE_HOME="$HOME/.cache"
 
-for xdg_dir in \
-    "$XDG_CACHE_HOME" \
-    "$XDG_CONFIG_HOME" \
-    "$XDG_DATA_HOME" \
-    "$XDG_DOCUMENTS_DIR" \
-    "$XDG_PICTURES_DIR"
-do
-    if [ -e "$xdg_dir" ] ; then
-        chmod 0700 "$xdg_dir"
-    fi
-done
+    for xdg_dir in \
+        "$XDG_CACHE_HOME" \
+        "$XDG_CONFIG_HOME" \
+        "$XDG_DATA_HOME" \
+        "$XDG_DOCUMENTS_DIR" \
+        "$XDG_PICTURES_DIR"
+    do
+        if [ -e "$xdg_dir" ] ; then
+            chmod 0700 "$xdg_dir"
+        fi
+    done
 
-# i dont use these but some programs complain
-# if they can't write to them
-export XDG_NULL_DIR="/tmp/$USER-tmp/.xdg-$USER-void"
-mkdir -p "$XDG_NULL_DIR"
-export XDG_PUBLICSHARE_DIR="$XDG_NULL_DIR" \
-       XDG_TEMPLATES_DIR="$XDG_NULL_DIR" \
+    # i dont use these but some programs complain
+    # if they can't write to them
+    export XDG_NULL_DIR="/tmp/$USER-tmp/.xdg-$USER-void"
+    mkdir -p "$XDG_NULL_DIR"
+    export XDG_PUBLICSHARE_DIR="$XDG_NULL_DIR"
+    export XDG_TEMPLATES_DIR="$XDG_NULL_DIR"
 
-chmod 0700 "$XDG_NULL_DIR"
+    chmod 0700 "$XDG_NULL_DIR"
+fi
 
 # ========================================================================
 # MISC SETTINGS
 # ========================================================================
+if [ ! -e ~/.hushlogin ] ; then
+    touch ~/.hushlogin
+fi
 
 if [ -e /etc/THIS_IS_MY_MACHINE ] ; then
     export EDITOR=/usr/bin/nvim
@@ -107,26 +116,30 @@ for i in librewolf librewolf-bin firefox firefox-bin chromium chromium-bin ; do
     fi
 done
 
-#####export MENU_PROG=menu
-####export XDG_OPEN=opn PLUMBER=opn
+if command -v opn >/dev/null ; then
+    export XDG_OPEN=opn
+    export PLUMBER=opn
+fi
 
-export PAGER=less MANPAGER=less
+export PAGER=less
+export MANPAGER=less
 # opts: quiet/raw/squeeze/ignore-case/short-prompt/show-percentage
 export LESS='-QRsim +Gg'
 export LESSHISTFILE=/dev/null
 
-# using en_US.UTF-8 over C causes case-insensitive sorting
-# "C" is supposed to be fastest text parsing
-# up to you whether the benefits outweigh the negatives
-#
-# NOTE: using "C" can cause bugs in terminal programs
-#       that expect certain font features to work
-########## export LC_ALL="C"
-# export LC_ALL="en_US.UTF-8"
-# export LC_CTYPE="$LC_ALL" \
-#        LANG="$LC_ALL" \
-#        LANGUAGE="$LC_ALL" \
-#        LOCALE="$LC_ALL"
+# ===================================================
+# LOCALIZATION
+# ===================================================
+if [ -e /etc/THIS_IS_MY_MACHINE ] ; then
+    # NOTE: en_US.UTF-8 over C causes case-insensitive sorting
+    # NOTE: "C" is supposed to be fastest text parsing up to you whether the benefits outweigh the negatives
+    # NOTE: using "C" can cause bugs in terminal programs that expect certain font features to work
+    export LC_ALL="en_US.UTF-8"
+    export LC_CTYPE="$LC_ALL"
+    export LANG="$LC_ALL"
+    export LANGUAGE="$LC_ALL"
+    export LOCALE="$LC_ALL"
+fi
 
 # ===================================================
 # create tmp dir
@@ -167,30 +180,32 @@ fi
 # ========================================================================
 # FIX PERMISSIONS
 # ========================================================================
-# chmod -R 0700 ~/tmp
+if [ -e /etc/THIS_IS_MY_MACHINE ] ; then
+    chmod -R 0700 ~/tmp
 
-if [ -d ~/.gnupg ] ; then
-    chmod 0700 ~/.gnupg
-    chmod 0600 ~/.gnupg/* 2>/dev/null ||:
-fi
-
-if [ -d ~/.ssh ] ; then
-    chmod 0700 ~/.ssh
-
-    [ -f ~/.ssh/config ]     && chmod 0600 ~/.ssh/config
-    [ -f ~/.ssh/id_rsa ]     && chmod 0600 ~/.ssh/id_rsa
-    [ -f ~/.ssh/id_rsa.pub ] && chmod 0644 ~/.ssh/id_rsa.pub
-
-    [ -f ~/.ssh/authorized_keys ] && chmod 0600 ~/.ssh/authorized_keys
-
-    # start ssh-agent
-    if ! pgrep -u "$USER" -x ssh-agent >/dev/null ; then
-        eval "$(ssh-agent -s)" >/dev/null
+    if [ -d ~/.gnupg ] ; then
+        chmod 0700 ~/.gnupg
+        chmod 0600 ~/.gnupg/* 2>/dev/null ||:
     fi
 
-    # add key only if not already loaded
-    if [ -f ~/.ssh/id_rsa ] && ! ssh-add -l 2>/dev/null | grep -q "$(ssh-keygen -lf ~/.ssh/id_rsa | awk '{print $2}')" ; then
-        ssh-add ~/.ssh/id_rsa
+    if [ -d ~/.ssh ] ; then
+        chmod 0700 ~/.ssh
+
+        [ -f ~/.ssh/config ]     && chmod 0600 ~/.ssh/config
+        [ -f ~/.ssh/id_rsa ]     && chmod 0600 ~/.ssh/id_rsa
+        [ -f ~/.ssh/id_rsa.pub ] && chmod 0644 ~/.ssh/id_rsa.pub
+
+        [ -f ~/.ssh/authorized_keys ] && chmod 0600 ~/.ssh/authorized_keys
+
+        # start ssh-agent
+        if ! pgrep -u "$USER" -x ssh-agent >/dev/null ; then
+            eval "$(ssh-agent -s)" >/dev/null
+        fi
+
+        # add key only if not already loaded
+        if [ -f ~/.ssh/id_rsa ] && ! ssh-add -l 2>/dev/null | grep -q "$(ssh-keygen -lf ~/.ssh/id_rsa | awk '{print $2}')" ; then
+            ssh-add ~/.ssh/id_rsa
+        fi
     fi
 fi
 
