@@ -9,7 +9,7 @@
 ulimit -c 0
 
 # settings $TERM here bugfixes crap with doas
-alias {doas,dosa,daos,sudo}='TERM=vt100 doas'
+alias {doas,dosa,daos,sudo}='TERM=vt100 /usr/sbin/doas'
 
 alias sg='sysctl | grep -i'
 

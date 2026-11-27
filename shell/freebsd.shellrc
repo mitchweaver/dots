@@ -20,9 +20,9 @@ pkg() {
             ;;
         d|delete)
             if [ "$1" ] ; then
-                doas command pkg delete "$@"
+                doas command pkg delete "$@" &&
+                doas command pkg autoremove
             fi
-            doas command pkg autoremove
             ;;
         u|update)
             doas command pkg update

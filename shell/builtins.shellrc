@@ -24,13 +24,13 @@ cd() {
                     set -- "${1%/*}"
                 fi
                 # try any globs of the arg
-                builtin cd --  "$1"  ||
-                builtin cd --  "$1"* ||
-                builtin cd -- *"$1"  ||
-                builtin cd -- *"$1"* ||
+                builtin cd --  "$1"  2>/dev/null ||
+                builtin cd --  "$1"* 2>/dev/null ||
+                builtin cd -- *"$1"  2>/dev/null ||
+                builtin cd -- *"$1"* 2>/dev/null ||
                 for _i in 1 2 3 4 ; do
                     _cddir="$(find . -type d -maxdepth $_i -iname "*$1*" | head -n 1)"
-                    if [ "$_cddir" ] ; then
+                    if [ -d "$_cddir" ] ; then
                         builtin cd -- "$_cddir"
                         break
                     fi
@@ -38,7 +38,7 @@ cd() {
                 unset _i
             else
                 builtin cd -- "${HOME}"
-            fi 2>/dev/null
+            fi
 
             # set our prompt - see prompt.shellrc for more details
             if [ "$RANGER_LEVEL" ] ; then

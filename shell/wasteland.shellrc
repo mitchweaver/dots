@@ -154,7 +154,7 @@ cuesplit() {
 
 alias progress='progress -w -M'
 
-alias stop_typing_it_wrong_idiot="su -c faillock --user $USER --reset"
+alias stop_typing_it_wrong_idiot="su -c 'faillock --user $USER --reset'"
 
 if command -v apt > /dev/null ; then
     alias  update='sudo apt update; sudo apt upgrade -y ; sudo apt dist-upgrade -y ; sudo apt clean'

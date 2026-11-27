@@ -19,7 +19,7 @@ fp() {
 
     case $1 in
         h|-h|*help)
-            >&2 echo 'Usage: fl [a] [d] [l] [s]'
+            >&2 echo 'Usage: fp [a] [d] [l] [s]'
             ;;
         a|-a|*add)
             shift

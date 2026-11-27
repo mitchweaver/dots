@@ -41,9 +41,7 @@ flushdns() {
     fi
 }
 
-wtf() {
-    w3m -dump https://wtfismyip.com/json | jq -r
-}
+alias wtf='w3m -dump https://wtfismyip.com/json | jq -r'
 
 # grab urls of any running processes
 psurls() {

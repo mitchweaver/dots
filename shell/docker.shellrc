@@ -63,12 +63,12 @@ docker_remove_networks() {
     fi
 }
 
-dockerkillall() {
-    # shellcheck disable=SC2046
-    docker stop $(docker ps -a -q)
-    # shellcheck disable=SC2046
-    docker rm $(docker ps -a -q)
-}
+# dockerkillall() {
+#     # shellcheck disable=SC2046
+#     docker stop $(docker ps -a -q)
+#     # shellcheck disable=SC2046
+#     docker rm $(docker ps -a -q)
+# }
 
 DOCKER_NUKE() {
     printf 'This will delete all images and containers, confirm? (y/n): '

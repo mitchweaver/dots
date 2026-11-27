@@ -6,11 +6,15 @@ alias csgo-autoexec='nvim /var/home/mitch/.var/app/com.valvesoftware.Steam/.loca
 alias steam-find-bad-shaders="find ~/.var/app/com.valvesoftware.Steam -type d -path '*shadercache*' 2>/dev/null"
 
 fix-steam-clear-shadercache() {
-    rm -rf ~/.cache/mesa_shader_cache
-    rm -rf ~/.cache/nvidia
-    rm -rf ~/.nv
-    rm -rf ~/.var/app/com.valvesoftware.Steam/cache/mesa_shader_cache*
-    rm -rf ~/.var/app/com.valvesoftware.Steam/.steam/steam/steamapps/shadercache
-    rm -rf ~/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/shadercache/730
+    printf 'This will all shader caches, confirm? (y/n): '
+    read -r ans
+    if [ "$ans" = y ] ; then
+        rm -riv ~/.cache/mesa_shader_cache
+        rm -rifv ~/.cache/nvidia
+        rm -rifv ~/.nv
+        rm -rifv ~/.var/app/com.valvesoftware.Steam/cache/mesa_shader_cache*
+        rm -rifv ~/.var/app/com.valvesoftware.Steam/.steam/steam/steamapps/shadercache
+        rm -rifv ~/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/shadercache/730
+    fi
 }
 

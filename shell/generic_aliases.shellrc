@@ -55,7 +55,7 @@ alias cp='cp -irv'
 alias mv='mv -iv'
 alias {mkdir,mkd,mkdr,mkir,mdir,mkidr}='mkdir -p'
 
-alias {x,xx,xxx,q,qq,qqq,lq,:q,:Q,:wq,:w,exi,ex}=exit
+alias {x,xx,xxx,q,qq,qqq,lq,:q,:Q,:wq,:w,exi}=exit
 alias {cll,clear,claer,clar,clea,clera,ear,lear,ler}=clear
 alias {cls,csl,cl,lc,clearls}='clear ; ls'
 
@@ -66,14 +66,14 @@ alias {pgrpe,pgre}=pgrep
 alias {pg,pgl}='pgrep -fl'
 
 alias {match,include,i,inc}=grep
-alias {ex,exc,except}='grep -v'
+alias {ex,exc,exce,except}='grep -v'
 
 alias {w,whihc,whic}=which
 
 alias ga='grep -i -A 6'
 alias gb='grep -i -B 6'
 alias ga1='grep -i -A 1'
-alias ga1='grep -i -B 1'
+alias gb1='grep -i -B 1'
 alias gab='grep -i -A 6 -B 6'
 alias gab1='grep -i -A 1 -B 1'
 
@@ -102,7 +102,6 @@ alias {t,t10}='tail -n 10'
 alias tf='tail -f'
 
 alias cmd=command
-alias w=which
 alias {dc,ccd}=cd
 
 alias demsg=dmesg
