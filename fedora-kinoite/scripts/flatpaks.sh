@@ -183,8 +183,20 @@ do
         --filesystem=~/tmp:rw "$app"
 done
 
-# x11 overrides (note: --device=all needed for gamepad support)
-sudo flatpak override --socket=x11 --device=all com.valvesoftware.Steam
+# devices overrides --- needed for nvidia NVENC/CUDA
+for app in \
+    com.valvesoftware.Steam \
+    org.shotcut.Shotcut \
+    com.obsproject.Studio \
+    org.darktable.Darktable \
+    io.mpv.Mpv \
+    io.github.celluloid_player.Celluloid \
+    com.discordapp.Discord
+do
+    sudo flatpak override --socket=x11 --device=all "$app"
+done
+
+# idk why is needed? debug later
 sudo flatpak override --socket=x11 io.github.dweymouth.supersonic
 
 # ~/downloads
