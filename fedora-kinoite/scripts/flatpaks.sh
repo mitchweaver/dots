@@ -95,6 +95,21 @@ fi
 ######flatpak install flathub com.github.wwmm.easyeffects
 # ========================================================================
 
+
+# ========================================================================
+# stuff not on flathub
+# ========================================================================
+if curl -s https://api.github.com/repos/alichtman/deadbolt/releases/latest | \
+    grep -iE "https?://.*.deadbolt.*.x86_64.flatpak" | \
+    sed -e 's/.*. "//' -e 's/".*//' | \
+    xargs wget -O /tmp/deadbolt.flatpak
+then
+    if flatpak list | grep org.alichtman.deadbolt >/dev/null ; then
+        sudo flatpak uninstall -y org.alichtman.deadbolt
+    fi
+    sudo flatpak install -y /tmp/deadbolt.flatpak
+fi
+
 # ========================================================================
 # DEFAULT DENY SECURITY
 # ========================================================================
@@ -158,7 +173,8 @@ done
 
 # ~/files ~/src ~/downloads ~/tmp --- READ-WRITE
 for app in \
-    org.libreoffice.LibreOffice
+    org.libreoffice.LibreOffice \
+    org.alichtman.deadbolt
 do
     sudo flatpak override \
         --filesystem=~/src:rw \
